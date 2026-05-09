@@ -1,0 +1,2461 @@
+- '
+
+  '
+- '# 精通 Grunt.js
+
+
+  ![](img/cover.jpeg)
+
+
+  精通 Grunt.js
+
+
+  ![FM-00.jpg](img/00001.jpeg)
+
+
+  詹姆斯·克莱尔
+
+
+  ![FM-01.jpg](img/00002.jpeg)
+
+
+  **精通 Grunt.js**
+
+
+  版权所有 © 2015 詹姆斯·克莱尔
+
+
+  本作品受版权保护。出版方保留所有权利，无论是整体还是部分材料，特别包括翻译权、重印权、插图复用权、朗诵权、广播权、微缩胶片复制权或其他任何物理形式的复制权，以及电子信息存储与检索、电子改编、计算机软件或现在已知或今后开发的类似或不同方法的传输权。法律保留的豁免情形包括与书评或学术分析相关的简短摘录，或专门为在计算机系统上输入和执行而提供、仅供作品购买者独家使用的材料。本出版物或其部分的复制仅在出版方所在地现行版权法条款允许下进行，且使用许可必须始终从
+  Springer 获取。使用许可可通过 Copyright Clearance Center 的 RightsLink 获取。违反行为将根据相应版权法予以起诉。
+
+
+  ISBN-13（平装）：978-1-4842-0014-8
+
+
+  ISBN-13（电子版）：978-1-4842-0013-1
+
+
+  书中可能出现商标名称、标识和图像。对于每个商标名称、标识或图像，我们并非每次都使用商标符号，而仅以编辑方式使用这些名称、标识和图像，以利于商标所有者，且无意侵犯商标权。
+
+
+  本出版物中对商品名称、商标、服务标志及类似术语的使用（即使未明确标识）不应被视为对其是否受专有权利保护的意见表达。
+
+
+  尽管本书中的建议和信息在出版时被认为是真实准确的，但作者、编辑和出版方均不对可能存在的任何错误或遗漏承担法律责任。出版方对本书所载内容不作任何明示或暗示的担保。
+
+
+  董事总经理：韦尔莫德·斯帕尔
+
+
+  首席编辑：路易丝·科里根
+
+
+  技术审校：马特·吉福德
+
+
+  编辑委员会：史蒂夫·安格林、马克·贝克纳、尤安·白金汉、加里·康奈尔、路易丝·科里根、吉姆·德沃尔夫、乔纳森·根尼克、罗伯特·哈钦森、米歇尔·洛曼、詹姆斯·马卡姆、马修·穆迪、杰夫·奥尔森、杰弗里·佩珀、道格拉斯·庞迪克、本·雷诺-克拉克、多米尼克·沙克沙夫特、格温南·斯皮林、马特·韦德、史蒂夫·韦斯
+
+
+  统筹编辑：克里斯汀·里基茨
+
+
+  文字编辑：迈克尔·拉拉基
+
+
+  排版：SPi Global
+
+
+  索引编制：SPi Global
+
+
+  美术设计：SPi Global
+
+
+  全球图书贸易发行由 Springer Science+Business Media New York 负责，地址：233 Spring Street, 6th
+  Floor, New York, NY 10013。电话：1-800-SPRINGER，传真：(201) 348-4505，电子邮件：orders-ny@springer-sbm.com，或访问
+  [www.springeronline.com](http://www.springeronline.com)。Apress Media, LLC 是一家加利福尼亚有限责任公司，其唯一成员（所有者）为
+  Springer Science + Business Media Finance Inc（SSBM Finance Inc）。SSBM Finance Inc
+  是一家特拉华州公司。
+
+
+  如需了解翻译信息，请发送电子邮件至 rights@apress.com，或访问 [www.apress.com](http://www.apress.com)。
+
+
+  Apress 及 friends of ED 图书可批量购买用于学术、企业或促销用途。大多数图书也提供电子版和许可证。如需更多信息，请参考我们的特殊批量销售–电子书许可网页：[www.apress.com/bulk-sales](http://www.apress.com/bulk-sales)。
+
+
+  本书作者引用的任何源代码或其他补充材料可在 [www.apress.com](http://www.apress.com) 上供读者查阅。有关如何找到本书源代码的详细信息，请访问
+  [www.apress.com/source-code/](http://www.apress.com/source-code/)。
+
+
+
+
+  '
+- '# 内容速览
+
+
+  关于作者
+
+
+  关于技术审校
+
+
+  致谢
+
+
+  引言
+
+
+  ![image](img/00003.jpeg) 第 1 章：Grunt 入门
+
+
+  ![image](img/00003.jpeg) 第 2 章：如何在项目中运用 Grunt
+
+
+  ![image](img/00003.jpeg) 第 3 章：将 Grunt 用于 HTML 和 CSS
+
+
+  ![image](img/00003.jpeg) 第 4 章：将 Grunt 用于 JavaScript
+
+
+  ![image](img/00003.jpeg) 第 5 章：将 Grunt 用于图片、SVG 和图标
+
+
+  ![image](img/00003.jpeg) 第 6 章：将 Grunt 用于测试与本地开发
+
+
+  ![image](img/00003.jpeg) 第 7 章：优化 Grunt 工作流程
+
+
+  索引
+
+
+  '
+- '# 目录
+
+
+  关于作者
+
+
+  关于技术审校
+
+
+  致谢
+
+
+  引言
+
+
+  ![image](img/00003.jpeg) 第 1 章：Grunt 入门
+
+
+  我能从 Grunt 中获得什么益处？
+
+
+  持续集成
+
+
+  加速工作流程
+
+
+  每位工匠都需要工具箱
+
+
+  与其他工具的集成
+
+
+  版本管理
+
+
+  可读性
+
+
+  其他替代方案
+
+
+  Ant
+
+
+  Rake
+
+
+  Gulp
+
+
+  小结
+
+
+  ![image](img/00003.jpeg) 第 2 章：如何在项目中运用 Grunt
+
+
+  Node.js
+
+
+  在 Linux 上安装
+
+
+  在 Windows 上安装
+
+
+  在 Mac OS X 上安装
+
+
+  确认安装
+
+
+  npm
+
+
+  查找模块
+
+
+  安装模块
+
+
+  模块
+
+
+  从 `node_modules` 加载模块
+
+
+  定义 Node.js 项目
+
+
+  Grunt
+
+
+  创建一个与 Grunt 配合使用的新项目
+
+
+  为项目添加 Grunt 和插件
+
+
+  配置任务
+
+
+  处理文件
+
+
+  紧凑格式
+
+
+  文件对象格式
+
+
+  文件数组格式
+
+
+  小结
+
+
+  ![image](img/00003.jpeg) 第 3 章：将 Grunt 用于 HTML 和 CSS
+
+
+  演示应用
+
+
+  CSS 预处理
+
+
+  安装 Sass
+
+
+  Sass 简介
+
+
+  变量
+
+
+  嵌套
+
+
+  局部文件与导入
+
+
+  混合宏
+
+
+  扩展/继承
+
+
+  将 Sass 与 Grunt 结合
+
+
+  使用 Grunt 处理前端框架
+
+
+  Bower
+
+
+  将 Bower 与 Grunt 结合
+
+
+  代码检查
+
+
+  为 CSS 设定标准
+
+
+  添加前缀
+
+
+  代码压缩
+
+
+  移除未使用或重复的 CSS
+
+
+  为生产环境打包应用
+
+
+  版本管理
+
+
+  小结
+
+
+  ![image](img/00003.jpeg) 第 4 章：将 Grunt 用于 JavaScript
+
+
+  增强我们的待办事项应用
+
+
+  JavaScript 模块
+
+
+  AMD
+
+
+  CommonJS
+
+
+  结合 `Grunt.js` 与 JavaScript 模块
+
+
+  清理构建过程
+
+
+  JavaScript 模板
+
+
+  JavaScript 代码检查
+
+
+  Modernizr
+
+
+  代码压缩
+
+
+  文档生成
+
+
+  小结
+
+
+
+
+  ## 第 5 章：在 Grunt 中使用图像、SVG 和图标
+
+
+  - 压缩图像
+
+  - 生成响应式图像
+
+  - 使用 Grunt 调整图像大小
+
+  - 使用 srcset 实现响应式图像
+
+  - 生成图像精灵
+
+  - 自动化精灵创建
+
+  - 处理 SVG
+
+  - 压缩 SVG
+
+  - 生成 SVG 精灵
+
+  - 生成图标字体
+
+  - 小结
+
+
+  ## 第 6 章：使用 Grunt 进行测试和本地开发
+
+
+  - 搭建本地服务器
+
+  - 保持服务器运行
+
+  - 自动启动浏览器
+
+  - 记录发送到服务器的请求
+
+  - 利用压缩响应扩展服务器功能
+
+  - 测试
+
+  - 编写第一个测试
+
+  - 修改 Nodeunit 的输出
+
+  - 使用 Grunt 进行测试驱动开发
+
+  - 生成测试夹具
+
+  - 在运行时自动化生成夹具
+
+  - 应用夹具生成功能
+
+  - 在浏览器中进行测试
+
+  - 配置 Karma 测试运行器
+
+  - 修改应用程序以使用 AMD
+
+  - 自动化无障碍测试
+
+  - 将本地服务器暴露给外部世界
+
+  - 性能测试
+
+  - 优化开发环境性能
+
+  - 小结
+
+
+  ## 第 7 章：优化你的 Grunt 工作流
+
+
+  - 衡量性能
+
+  - 加载插件
+
+  - 使用 matchdep 自动化加载
+
+  - 使用 load-grunt-tasks 自动化加载
+
+  - 延迟自动化加载
+
+  - 组织你的 Gruntfile
+
+  - 使用模块
+
+  - 使用分组
+
+  - 提取通用配置选项
+
+  - 并行运行任务
+
+  - 文件变更时自动执行操作
+
+  - 在浏览器中自动重新加载变更
+
+  - 持续集成
+
+  - 小结
+
+
+  索引
+
+
+  '
+- '# 关于作者
+
+
+  **詹姆斯·克莱尔**是英国卡迪夫 BBC 的首席网络开发人员。在 BBC，詹姆斯供职于 BBC 新闻部旗下的 BBC 旅游团队，担任技术负责人，负责在多个平台上交付旅游产品的下一个迭代版本。
+
+
+  在加入 BBC 之前，詹姆斯曾在卡迪夫的软件公司工作，为英国皇家海军、Investec 资产管理公司和 UNISON 等各类客户提供数字解决方案。尽管詹姆斯是一名前端专家，对网络性能充满热情，但他也使用
+  PHP、Scala、Objective C、Java、PHP、Ruby 和 Node 构建过应用程序。他是当地社区的活跃贡献者，常在技术聚会上就云技术、浏览器性能和开发者工具等主题发表演讲。
+
+
+  詹姆斯热爱技术写作，曾合著 Yeoman 项目的第一个 CodeLab，并在 .NET 杂志上发表教程。除了对技术的兴趣，他还喜欢与妻子一起旅行和骑自行车。
+
+
+  '
+- '# 关于技术审校者
+
+
+  **马特·吉福德** 是其自有开发咨询公司 Monkeh Works Ltd 的拥有者和主要负责人。他的工作主要集中在构建移动应用、前端开发、优化工作流程以及使用多种服务器端语言开发全栈
+  Web 应用。
+
+
+  他是一位出版过作品的作者，并在各种会议和用户组中就多种主题进行演讲。他也是社区资源和知识共享的积极倡导者。他是《ColdFusion 中的面向对象编程》和《PhoneGap
+  移动应用开发食谱》的作者，并为国际行业杂志撰写文章和教程。请访问 [www.monkehworks.com](http://www.monkehworks.com)
+  或在 Twitter 上关注 @coldfumonkeh 联系马特。
+
+
+  '
+- '# 致谢
+
+
+  首先，我要感谢 Grunt.js 的创建者 Ben Alman。没有 Ben 的创造，我就没有机会撰写这本书，并希望通过介绍 Grunt 来启发你重新思考自己的开发工作流程。
+
+
+  接下来，我要感谢 Apress 的所有人，感谢他们为这本书的出版所付出的辛勤努力。特别要感谢 Louise Corrigan 与我密切合作，共同完成本书的初始策划并在整个过程中提供建议。如果没有
+  Christine Ricketts，这本书就无法出版，感谢她持续的支持和帮助，确保我始终保持在正轨上。最后但同样重要的是，我感谢 Matt Gifford 对本书进行了详细的技术审校。
+
+
+  最后，如果没有我的妻子 Charlotte 持续的支持和启发，这本书永远不可能完成。我感谢她无尽的支持和理解，让我能够在无数个夜晚挑灯夜战，最终完成本书。
+
+
+  '
+- '# 引言
+
+
+  欢迎阅读《Pro Grunt.js》。本书是为那些有兴趣学习如何使用 Grunt.js 来现代化其开发工作流程的人编写的。Grunt 可用于自动化几乎所有移动和
+  Web 项目中出现的琐碎、重复性任务。开发针对性能进行优化的最佳 Web 应用程序对于为所有人提供良好的用户体验至关重要。我们不能对用户访问我们网站和应用程序所使用的设备和网络做出假设。Grunt
+  可用于确保我们开发的每个项目从一开始就通过定义一组通用任务来融入一系列最佳实践，这些任务将使我们的项目能够被压缩、检查和测试。Grunt 的可扩展性和大量的插件使其成为快速开发一组可跨项目重复使用的工具集的完美工具。
+
+
+  ## 第 1 章
+
+
+  本章介绍 Grunt，概述了使用像 Grunt 这样的任务运行器的好处，最后与其他流行的构建工具进行了比较。
+
+
+  ## 第 2 章
+
+
+  本章讨论 Grunt 的核心概念。还涵盖了在项目上安装 Grunt、任务和文件匹配器。
+
+
+  ## 第 3 章
+
+
+  本章专门介绍用于处理 HTML 和 CSS 的 Grunt 任务。讨论了诸如 Sass 编译、HTML 压缩和 CSS 检查等主题。
+
+
+  ## 第 4 章
+
+
+  本章讨论了一套在使用 JavaScript 时可以使用的 Grunt 任务。涵盖了代码检查、压缩和文档生成。
+
+
+  ## 第 5 章
+
+
+  本章介绍了一套用于处理图像、SVG 和图标 Grunt 插件。涵盖了图像压缩、SVG 压缩和自动化精灵生成。
+
+
+  ## 第 6 章
+
+
+  本章讨论如何搭建一个本地 Node 服务器，以在本地运行由 Grunt 生成的静态网站。本章还使用 Karma 等框架讨论了测试本地 Web 应用程序的主题。
+
+
+  ## 第 7 章
+
+
+  最后一章着眼于如何优化 Grunt 工作流程本身，使其更易于维护和重用。讨论了诸如 Grunt 配置文件、优化插件加载和衡量 Grunt 加载时间等主题。
+
+
+  '
+- '# 第 1 章
+
+
+  ## Grunt 简介
+
+
+
+
+  ### Grunt 入门指南
+
+
+  '
+- '# 引言
+
+
+  那么，你拿起了这本标题略显独特的书，可能想知道什么是 `Grunt`，或者至少想知道过去两年间关于 Grunt 的种种热议究竟为何。简单来说，`Grunt` 是一个
+  JavaScript 任务运行器。其主要目标是自动化重复性任务，将开发人员的时间解放出来，以便专注于他们每天面临的更棘手的问题。
+
+
+  `Grunt` 基于 Node.js 以 JavaScript 编写，通过 `npm` 分发，由 Ben Alman（[`github.com/cowboy`](https://github.com/cowboy)）创建。自面世以来，`Grunt`
+  就提供了一个应用程序编程接口（API），允许开发者扩展并添加自定义任务以适应他们自身的流程。这种高度的可定制性使得 `Grunt` 变得极其流行，并拥有一个不断扩展的庞大生态系统。
+
+
+  作为一个任务运行器，`Grunt` 的核心概念之一是“任务”。每个任务都有一组可调的配置选项来满足你的特定需求。任务也可以有多个版本：例如，一套用于开发环境的配置，另一套用于生产环境。除此之外，`Grunt`
+  还提供了定义自定义任务的能力。自定义任务可以将现有任务组合成一个任务，或添加全新的功能。此外，`Grunt` 拥有文档齐全的 API，使开发者能够在运行时改变其任务运行器的行为。
+
+
+  贯穿全书，我们将使用 `Grunt` 来演示这个小巧但极其强大的工具如何优化你的开发工作流程。`Grunt` 常被描绘成前端工程师的专属工具；然而，我还会演示那些不完全是前端导向的项目如何也能从引入
+  `Grunt` 中获益。
+
+
+  #### 我如何从 Grunt 中获益？
+
+
+  `Grunt` 的主要优势和首要目标之一是自动化。当你现有的工作流程对你来说行之有效时，你可能会质疑为什么需要自动化。我希望这本书能起到鼓励作用，并演示自动化如何能让你更高效。
+
+
+  大多数开发者都熟悉执行代码检查、资源压缩、编译 CSS 等工作流程中所需的任务工具。然而，并非所有开发者都实现了流程自动化。一些团队选择使用持续集成作为构建应用程序和执行发布前检查的节点。这个环境通常由开发团队之外的人员控制，职责落在组织内部的其它部门。
+
+
+  依赖持续集成环境来执行构建任务是很便捷的。作为开发者，你编写代码，推送到中央代码仓库，然后持续集成（CI）服务器处理其余事情。但是，如果你需要在本地重现生产环境中的某个问题，那么这可能不是最快的方式。借助
+  `Grunt` 的强大功能，你可以在本地开发和 CI 环境中轻松使用相同的构建流程，从而缩短在本地构建应用程序生产版本所需的时间。
+
+
+  独立工作或在小团队中工作的开发者，如果选择使用命令行或图形用户界面（GUI）工具，可以通过使用 `Grunt` 来统一他们的构建流程。统一构建流程将简化项目设置和维护，因为只需遵循一个流程即可。
+
+
+  ### 持续集成
+
+
+  如果你不熟悉 CI，这是一种常见的开发实践，即将来自一个团队开发者的代码合并到中央仓库。它通常用于运行单元测试、执行代码分析和自动化部署。大多数现代开源项目使用
+  `TravisCI`（[`travis-ci.org/`](https://travis-ci.org/)），这是一个开源 CI 环境，可以轻松与 GitHub
+  仓库集成。开发社区中其他流行的选择还有 `Hudson` 和 `Jenkins`，`Jenkins` 是 `Hudson` 的一个分支。`Jenkins` 和
+  `Hudson` 都有许多用于集成第三方工具或系统的插件，例如，一个插件可以实现在 GitHub 仓库有更新时触发构建。
+
+
+  #### 加速你的工作流程
+
+
+  有一些出色的工具和集成开发环境（IDE），它们提供了常见任务的工具，例如编译 CSS 和检查 JavaScript 代码，帮助你开发应用程序和网站。然而，这类工具通常需要初始设置，并且也可能导致工作流程脱节。
+
+
+  你可能想知道什么是“脱节的工作流程”。考虑以下场景：你正在开发一个非常简单的单页应用，它包含一组 JavaScript 文件、一个 CSS 预处理器和一些图片。在你发布应用程序之前，你必须进行
+  JavaScript 代码检查、编译 CSS 以及压缩图片。针对这些问题中的每一个，你都可以从现有的众多工具中进行选择，例如 `JSHint`、`LESS` 编译器
+  和 `pngquant`。你的 IDE 很可能会检查你的 JavaScript 代码并编译 LESS；但是，你还得切换到命令行去运行 `pngquant`。
+
+
+  在开发过程中，在浏览器、编辑器和命令行界面之间来回切换会让你分心，无法专注于必须解决的关键问题。`Grunt` 可以为你提供一个统一这些任务的解决方案。此外，`Grunt`
+  还能自动化这些任务，以便你可以专注于应用程序中特有的问题。
+
+
+  #### 每个工匠都需要一个工具带
+
+
+  不可否认，前端 Web 开发的技艺在过去几年发生了翻天覆地的变化。过去需要花费大量宝贵开发时间来解决浏览器兼容性问题的日子一去不复返了，因为开发者现在可以访问一套丰富的工具来处理此类琐事。利用这些工具，开发者可以将时间投入到解决应用程序中更复杂的问题上。解决日常任务的框架的出现，例如
+  `Bootstrap` 和 `AngularJS`，使开发者能够通过他们的应用程序提供增强的体验。
+
+
+  越来越多的用户通过移动设备访问应用程序，并期望 Web 应用程序能提供与原生移动应用程序相同的体验。来自移动设备的应用流量激增，也迫使开发者重新思考他们如何设计应用程序，从而增加了更多的复杂性。为了应对这种情况，开发者必须构建一套可反复使用的可靠工具。
+
+
+  `Grunt` 应当成为你工具带中的主要工具之一。由于 `Grunt` 的模块化特性，很容易构建一份可在多个项目中使用的任务配方手册。每个任务专注于解决一个特定问题，并且很容易跨项目混合搭配配置，为每种场景构建一套强大的工具集。
+
+
+  #### 与其他工具集成
+
+
+
+
+  ### 改进的前端工作流
+
+
+  不可否认，过去两年间前端工程师可用的工具已经取得了巨大进步。由社区大力开发的一个特定项目是 `Yeoman`。`Yeoman` 被定义为一种工作流而非框架，它包含三个关键组件：`Yo`、`Grunt`
+  和 `Bower`。`Grunt` 是 `Yeoman` 项目中的关键角色，正如本书后续所示，将 `Yo` 和 `Grunt` 结合使用，能够快速搭建包含自动化构建流程的项目。
+
+
+  #### 版本控制
+
+
+  使用 `Grunt` 的另一个关键优势在于，你的任务及其配置都会进行版本控制。由于项目中的 `Grunt` 任务是通过 `npm` 安装的，因此可以轻松地通过
+  `npm` 本身进行管理。除此之外，配置的变更对整个团队清晰可见，因为它们与项目一同进行版本控制。这构建了一套整个团队都能学习、开发并从中受益的工具集。
+
+
+  ![Image](img/00006.jpeg) **注意** `npm` 是一个 JavaScript 包管理器，允许开发者轻松共享和重用 JavaScript
+  模块。`npm` 负责处理包的版本控制、依赖关系和发布。每个包都有一个在名为 `package.json` 的 JSON 配置文件中定义的元数据，其中包含名称、描述、版本、作者和依赖关系等信息。
+
+
+  #### 可读性
+
+
+  另一个促进 `Grunt` 快速普及的因素是其可读性。`Grunt` 的任务配置是一个简单的 JSON 配置对象，使其具有高度的可读性和可理解性。
+
+
+  `Grunt` 还推广了“不要重复自己”（DRY）的开发技巧，因为任务可以使用变量作为其配置的一部分。正如你将在本书后续内容中看到的那样，这也提高了任务配置的可读性。
+
+
+  拥有一个可读性强的任务运行器的另一个好处是，能够显著缩短新团队成员掌握构建流程工作原理所需的时间。
+
+
+  #### 替代方案
+
+
+  需要认识到，`Grunt` 并非首个用于自动化开发者工作流的任务运行器。有许多替代方案；然而，`Grunt` 凭借其庞大的生态系统、简洁性和速度，在其中脱颖而出。在深入探讨
+  `Grunt` 之前，我们将简要介绍几个流行的替代方案。
+
+
+  ##### Ant
+
+
+  正式名称为 `Apache Ant`，“Ant”是一个基于 Java 的构建工具。任务不是使用 JavaScript 指定的，而是在项目中的 XML 文件中定义。`Ant`
+  附带超过 100 个内置任务，例如文件拼接、gzip 压缩文件以及替换文件中的内容。然而，这些任务更偏向于 Java 项目的构建流程。例如，如果你想支持 JavaScript
+  的 linting 检查，你必须包含一个新任务。要添加此类任务，`Ant` 要求将新任务编译成 JAR 文件，并从 XML 配置中引用。对于不熟悉 Java 的人来说，刚开始时这可能会有些令人生畏。如果你的项目在构建流程中不需要
+  Java，那么 `Grunt` 可能是更好的选择，因为引入 Java 会给项目增加不必要的依赖。
+
+
+  你可能会考虑选择 `Grunt` 而非 `Ant`，原因在于其使用的配置格式：JSON 而非 XML。阅读 `Ant` 的构建文件感觉有点臃肿，并且无法一目了然地看清构建流程如何整合，而
+  `Grunt` 的 JSON 更为精简，并且任务可以组合成逻辑名称。
+
+
+  ##### Rake
+
+
+  `Rake` 是 Ruby 社区对 Make 文件的回应。`Rake` 允许开发者使用 Ruby 语法定义任务。任何使用过 `Ruby on Rails` 框架的人应该对
+  `Rake` 相当熟悉，因为它被用作执行诸如创建数据库、运行测试和编译静态资源等任务的首选工具。
+
+
+  `Rake` 没有任务配置的概念。相反，它选择定义并执行 Ruby 代码的任务来实现目标。例如，没有可用的配方或插件仓库来执行常见任务。如果你想拼接和 lint
+  检查你的 JavaScript，你必须从头开始编写你自己的任务，然后才能使用它。这显然会增加你开始项目的成本，因为 `Rake` 没有提供任何立即可用的东西。你需要确保你的任务高度可配置，以增加跨项目的重用性。
+
+
+  `Grunt` 通过提供广泛的插件选择来解决必须“重新发明轮子”的问题。此外，`Grunt` 还通过提供丰富的 API 来支持任务配置，从而推广了“配置优于代码”的概念。
+
+
+  ##### Gulp
+
+
+  `Gulp` 是一个相对较新的工具，与 `Grunt` 一样，也基于 JavaScript。`Grunt` 和 `Gulp` 的另一个相似之处是基于模块的架构，并通过使用
+  `npm` 作为依赖管理器来驱动。`Gulp` 与 `Grunt` 一样易于上手；然而，可以说 `Gulp` 的任务定义更为简洁，因为任务是用代码而非配置来表达的。
+
+
+  已经有多篇博客文章将 `Grunt` 和 `Gulp` 进行对比。然而，也有相反的观点认为，这两个工具可以共存，因为它们在实现共同目标的方式上存在差异。`Gulp`
+  比 `Grunt` 更快，但由于其使用了 Node 流，入门门槛稍高。
+
+
+  ![Image](img/00006.jpeg) **注意** `Grunt` 组合任务的方式是一个任务的输出会产生一个临时文件，该文件由下一个任务拾取进行处理。`Gulp`
+  不会产生这些临时文件；文件在各个任务之间通过管道传输。
+
+
+  ### 总结
+
+
+  在本章中，你已经对 `Grunt` 是什么以及项目如何从使用它中获益有了基本了解。你还探讨了 `Grunt` 与现有类似替代方案的比较。本书将帮助你理解如何在项目中设置和使用
+  `Grunt`，使你能够快速地 lint 检查、测试和优化你的应用程序。
+
+
+  '
+- '# 第 2 章
+
+
+  ![image](img/00005.jpeg)
+
+
+  '
+- "# 如何在项目中使用 Grunt\n\n在上一章中，你简要了解了 `Grunt` 以及在项目中使用 `Grunt` 的好处。本章将更详细地介绍 `Grunt`、如何安装\
+  \ `Grunt`，以及如何在你的项目中使用 `Grunt`。在了解 `Grunt` 本身之前，充分理解 `Node.js` 非常重要。`Grunt` 构建在\
+  \ `Node.js` 之上，因此，充分理解 `Node.js` 以及模块在 `Node.js` 中的运作方式，将使学习和理解 `Grunt` 变得更加容易。\n\
+  \n### Node.js\n\n`Node.js` 是一个应用程序平台，允许开发者实现构建在 Chrome 的 JavaScript 引擎 V8 之上的事件驱动应用程序。正如你们中许多人知道的那样，JavaScript\
+  \ 最初是一种客户端语言；它被用来实现交互式界面。`Node.js` 将 JavaScript 用作服务器端的脚本语言，并通过非阻塞 I/O 操作实现高可扩展性。为了实现非阻塞\
+  \ I/O 操作，`Node.js` 应用程序使用异步执行，而传统上，应用程序按给定顺序执行代码。非阻塞 I/O 是一个过程，允许在等待一个耗时的 I/O 操作响应时继续执行其他处理。例如，如果一个\
+  \ `Node.js` 应用程序向远程 HTTP 服务发送请求以获取数据，它不会在等待响应后再处理其他请求。在请求发送到远程 HTTP 服务后，`Node.js`\
+  \ 应用程序将继续处理其他请求，直到远程 HTTP 服务响应后，才返回到原始例程。这种在等待 I/O 操作时继续处理其他请求的能力可以显著提升性能。\n\n\n\
+  \n#### Node.js 简介\n\n`Node.js` 由 Ryan Dahl 于 2009 年创建。他的灵感来自于那些会持续轮询服务器以获取更新的网站。Dahl\
+  \ 希望创建一个事件驱动的框架，允许服务器将数据推送到浏览器，而不是通过持续轮询来获取数据。\n\n`Node.js` 在多个平台上均可使用：Linux、Windows\
+  \ 和 Mac OS X。每个平台的安装过程都相对简单，你必须在能够使用 `Grunt` 之前安装好 `Node.js`。\n\n#### 在 Linux 上安装\n\
+  \n`Node.js` 可以从其源码下载，但也可以通过大多数流行的包管理器（如 `yum` 和 `aptitude`）获取。例如，在 Ubuntu 12.04\
+  \ 及更高版本上，可以使用以下命令安装 `Node.js`：\n\n```\nsudo yum apt-get install Node.js\n```\n\n\
+  关于在你的 Linux 发行版上安装 `Node.js` 的更多具体细节，请参考官方文档（[`github.com/joyent/node/wiki/Installing-Node.js-via-package-manager`](https://github.com/joyent/node/wiki/Installing-Node.js-via-package-manager)）。\n\
+  \n#### 在 Windows 上安装\n\n对于使用 Windows 的读者，请前往 [`nodejs.org/`](http://nodejs.org/)\
+  \ 并下载 Windows 安装程序。完成安装过程后，`Node.js` 即可使用。\n\n#### 在 Mac OS X 上安装\n\n在 Mac OS X\
+  \ 上，可以从 [`nodejs.org`](http://nodejs.org) 获取官方安装程序；不过，你也可以选择从你偏好的包管理器安装最新版本。`Node.js`\
+  \ 在 Mac OS X 平台上的大多数流行包管理器中均可使用。\n\n要使用 `Homebrew` 安装 `Node.js`，请使用以下命令：\n\n```\n\
+  brew install node\n```\n\n或者，要使用 `MacPorts` 安装 `Node.js`，请使用以下命令：\n\n```\nsudo port\
+  \ install Node.js\n```\n\n#### 确认安装\n\n完成上述安装步骤后，`Node.js` 即可使用。作为安装的一部分，包管理器 `npm`\
+  \ 现在也被安装了。在 `Node.js` 版本 0.6.3 之前，`npm` 是单独安装的。要确认 `node` 和 `npm` 是否可用，请打开终端（或 Windows\
+  \ 中的命令提示符），然后输入以下命令：\n\n```\nnode --version\nnpm –version\n```\n\n你应该会看到与图 2-1 中所示类似版本号的输出，具体取决于各自的环境。\n\
+  \n在本书的剩余部分，我们将使用 `Node.js` 版本 0.10.26 和 `npm` 版本 1.4.3，如图 2-1 所示。\n\n![9781484200148_Fig02-01.jpg](img/00007.jpeg)\n\
+  \n图 2-1. 检查已安装的 `node` 和 `npm` 版本\n\n### npm\n\n`npm` 提供了一种便捷的方式来跨多个项目创建、共享和安装 `Node.js`\
+  \ 包。这些包会被发布到一个中央 `npm` 注册表，允许全球的开发者在其自身项目中安装并重用这些包。`npm` 提供了一种标准方法来定义易于跨项目重用的 JavaScript\
+  \ 包。每个包都有一个名称、描述、作者以及一组依赖项。\n\n正如前一章所述，`Grunt` 采用了基于插件的架构，允许开发者在不同项目之间混合搭配任务。为了实现这种极高的灵活性，`Grunt`\
+  \ 利用了 `Node.js` 和 `npm` 提供的现有模块化机制。每个 `Grunt` 插件都是一个可以使用 `npm` 安装的 `Node.js` 包。\n\
+  \n`npm` 允许开发者定义一个包的依赖项。当其他人安装一个包时，`npm` 会管理该包的安装及其依赖项，因此你无需为此操心。\n\n在首次了解 `Grunt`\
+  \ 之前，我将介绍 `Node.js` 和 `npm` 的两个关键特性，我们在安装和使用 `Grunt` 时会用到它们。\n\n#### 查找模块\n\n`npm`\
+  \ 允许开发者搜索所有 `Node.js` 包的注册表。针对注册表的搜索可以接受一个或多个搜索词。搜索词也可以是正则表达式，这些正则表达式以 `/` 开头。\n\
+  \n要搜索一个包，请打开命令行或命令提示符并输入：\n\n```\nnpm search grunt\n```\n\n\n\n此命令将返回所有在标题、描述、作者和/或标签中包含单词\
+  \ `grunt` 的 Node.js 包。你将在本章后面了解如何为包定义这些元数据。搜索结果应类似于**图 2-2** 所示，其中搜索词会被高亮显示。\n\n\
+  ![9781484200148_Fig02-02.jpg](img/00008.jpeg)\n\n**图 2-2**. 使用 `npm` 搜索 Node 包\n\
+  \n首次对仓库运行 `npm search` 时，会构建一个本地索引。该本地索引包含对所搜索仓库中所有包的引用。本地索引旨在加速后续搜索，但如果你在小网络环境下运行搜索命令，可能需要一些时间。\n\
+  \n搜索结果会分别以列的形式返回模块名称和描述。如果针对特定包作者进行搜索，还会显示作者列。例如，搜索 `jrcryer`\n\n```\nnpm search\
+  \ jrcryer\n```\n\n将返回我编写的所有插件（参见**图 2-3**）。\n\n![9781484200148_Fig02-03.jpg](img/00009.jpeg)\n\
+  \n**图 2-3**. 按作者搜索 Node 包\n\n寻找 Grunt 插件最快的方法是搜索标签 `gruntplugin`。这是建议插件作者与他们的插件关联的标签。此标签可与其他限定词结合使用，以返回特定任务的插件。例如，要搜索与\
+  \ PHP 相关的 Grunt 插件，可以执行以下搜索：\n\n```\nnpm search gruntplugin php\n```\n\n一旦找到你需要的包，就必须安装它。你将在下一节了解\
+  \ `npm` 如何让这一过程变得简单。\n\n#### 安装模块\n\n`npm` 提供了一种非常简单的方法，可以从以下位置安装 Node.js 包：\n\n\
+  *   使用包名从注册表安装\n*   从本地存储的 tarball 文件安装\n*   从 tarball URL 安装\n*   从文件夹安装\n*   例如，要安装流行的\
+  \ Node.js HTTP 客户端 `request`，请使用以下命令：\n\n```\nnpm install request\n```\n\n这会将 `request`\
+  \ 包安装到当前目录下的 `node_modules` 文件夹中。在 `node_modules` 文件夹中，`npm` 还会安装 `request` 所依赖的包。作为安装过程的一部分，`npm`\
+  \ 会列出它尝试安装的所有包。当安装 `request` 时，你的命令行界面应类似于 **图 2-4** 中的输出。\n\n![9781484200148_Fig02-04.jpg](img/00010.jpeg)\n\
+  \n**图 2-4**. 使用 `npm` 安装名为 `request` 的包\n\n#### 模块\n\n如上图所示，使用 `npm` 发现和安装新包相对容易。在开始探索\
+  \ Grunt 的使用之前，理解 Node.js 模块的构成至关重要。\n\nNode.js 模块系统是 CommonJS 模块系统的一种实现。CommonJS\
+  \ 规范旨在解决如何编写 JavaScript 模块以提高互操作性的问题。它旨在填补 JavaScript 目前尚未解决的空白，允许开发者创建定义清晰的模块，这些模块可以跨项目共享。\n\
+  \n从最简单的形式来看，模块就是一个 JavaScript 文件。Node.js 为开发者提供了将一个文件中定义的 JavaScript 包含到另一个文件中并使用其功能的能力。最简单的模块如下所示：\n\
+  \n```\nexports.test = \"value\";\n```\n\n可以将上述内容保存到名为 `something.js` 的文件中，它为 `test`\
+  \ 模块定义了一个单一属性。然后可以像下面这样复用：\n\n```\nvar mod = require('./something');\nconsole.log(mod.test);\n\
+  ```\n\n在上面的代码示例中，我们包含了 `something` 模块，并在本地将其引用为 `mod`。然后，我们可以通过在 `mod` 上引用 `test`\
+  \ 属性，在应用程序中使用该属性。上述应用程序将把字符串值输出到命令行。\n\n如你所见，模块内部有一个名为 `exports` 的 JavaScript 对象。当\
+  \ Node.js 加载一个模块时，它会创建一个新的上下文并注入 `exports` 对象。然后，`exports` 对象作为 `require` 调用的一部分被返回。为了将任何功能公开为\
+  \ Node.js 模块的一部分，可以将属性分配给 `exports` 对象。我们再来看另一个示例（**代码清单 2-1**），其中有一个暴露函数的模块。\n\n\
+  ***代码清单 2-1***. 作为 Node.js 模块的一部分导出函数\n\n```\nexports.add = function(a, b) {\n \
+  \ return a + b;\n};\n```\n\n将上述模块保存为 `something.js` 后，可以像下面这样使用（**代码清单 2-2**）：\n\
+  \n***代码清单 2-2***. 从导入的模块调用函数\n\n```\nvar simple = require('./something');\nconsole.log(simple.add(1,2));\n\
+  ```\n\n运行此应用程序将在命令行输出 `3`。\n\n使用模块还提供了在模块内部隐藏复杂功能实现的能力，同时为模块用户提供简化的接口。下面（**代码清单\
+  \ 2-3**）是一个向模块用户隐藏 `display` 属性的模块。\n\n***代码清单 2-3***. 演示私有变量的 Node.js 模块\n\n```\n\
+  var display = false;\n\nmodule.exports = {\n  isHidden: function() {\n     return\
+  \ display === false;\n  },\n  hide: function() {\n     display = false;\n  },\n\
+  \  show: function() {\n     display = true;\n  }\n};\n```\n\n在上面的例子中，该模块允许用户通过 `hide`\
+  \ 和 `show` 方法来操作 `display` 属性。\n\n此时，你可能在想这与 Grunt 有何关系。如前所述，Grunt 插件就是 Node.js\
+  \ 包。Grunt 插件通常由一个或多个模块组成，并且通常依赖其他 Node.js 包来实现其目标。深入了解 Node.js、其模块系统以及其运作方式，将为你项目中使用\
+  \ Grunt 打下坚实的基础。到目前为止，你已经了解了如何加载相对于当前模块的模块。这些被称为文件模块。除了文件模块，还可以从 `node_modules`\
+  \ 目录加载模块。`node_modules` 是当你运行 `npm install` 命令时，`npm` 将创建并安装项目依赖项的目录。让我们快速看一个示例。\n\
+  \n##### 从 `node_modules` 加载模块\n\n在我们的示例中，我们将再次安装名为 `request` 的 Node.js 包，使用以下命令：\n\
+  \n```\nnpm install request\n```\n\n一旦 `npm` 完成安装，你会注意到当前文件夹中创建了一个新文件夹（参见**图 2-5**）。如果你打开\
+  \ `node_modules` 文件夹，你会看到另一个与已安装的 Node.js 包名称匹配的文件夹。`request` 文件夹包含了 `request` 包的内容。\n\
+  \n![9781484200148_Fig02-05.jpg](img/00011.jpeg)\n\n**图 2-5**. 本地安装包时创建的 `node_modules`\
+  \ 目录\n\n现在包已安装，它就可以在我们的项目中使用。下面（**代码清单 2-4**）是一个示例应用程序，它加载 `request` 模块并使用它向 `'http://www.guardian.co.uk'`\
+  \ 发起请求。\n\n***代码清单 2-4***. 加载并使用 `request` 模块\n\n```\nvar request = require('request');\n\
+  \nrequest.get('http://www.guardian.co.uk', function(error, response, body) {\n \
+  \ if (!error && response.statusCode == 200) {\n    console.log(body);\n  }\n});\n\
+  ```\n\n上述示例应用程序可以保存为 `index.js`，放在 `node_modules` 目录旁边。然后可以在命令行中运行它，如下所示：\n\n```\n\
+  node index.js\n```\n\n\n\n以上内容将输出*卫报*首页的 HTML 内容（见图 2-6）。在应用程序的第一行，我们引入了`request`包，并用变量名`request`存储了对它的引用。这使得我们可以在自己的应用程序中使用该包中定义的函数。在本例中，我们使用了`request`包提供的`get`方法，该方法允许我们向提供的\
+  \ URL 发送一个 HTTP GET 请求。\n\n![9781484200148_Fig02-06.jpg](img/00012.jpeg)\n\n图 2-6：示例应用程序从*卫报*网站输出的\
+  \ HTML\n\n这里需要注意的重要一点是，在`require`的开头没有`/`、`../`、`\"`或`./`。如果传递给`require`的模块标识符不是一个核心\
+  \ Node.js 模块，并且不以`/`、`../`或`./`开头，Node.js 将尝试从当前模块的父目录加载模块，并在其后添加`node_modules`。如果在该目录中未找到模块，它会继续向上寻找其父目录，以此类推。\n\
+  \n例如，如果我们的应用程序位于`/Users/james/projects/progrunt/index.js`，Node.js 将尝试在以下位置加载`request`包：\n\
+  \n* `/Users/james/projects/progrunt/node_modules/request`\n* `/Users/james/projects/node_modules/request`\n\
+  * `/Users/james/node_modules/request`\n* `/Users/node_modules/request`\n* `/node_modules/request`\n\
+  \n这允许应用程序定位其依赖项，从而避免冲突（见图 2-7）。\n\n![9781484200148_Fig02-07.jpg](img/00013.jpeg)\n\
+  \n图 2-7：当运行`require('request')`时，`index.js`从`request`目录加载\n\n眼尖的读者可能已经注意到，在前面的例子中，我们加载的是文件，但`request`却是从一个目录加载的。Node.js\
+  \ 也支持从文件夹加载模块。Node.js 将尝试根据以下规则从文件夹加载模块：\n\n* 从文件夹内`package.json`中的`main`属性\n* `index.js`文件\n\
+  * `index.node`文件\n\n在我们的例子中，`request`包同时满足了第一条规则和第二条规则。\n\n至此，我们介绍了 Node.js 加载包的各种方法。理解每种方法都很重要，因为你将在本书的后续部分用到它们。接下来，我们将研究如何为你的\
+  \ Node.js 项目定义属性和依赖项。同样，这也是一个需要理解的重要部分，因为在项目中使用 Grunt 时你将用到相同的技术。\n\n#### 定义 Node.js\
+  \ 项目\n\nNode.js 提供了一种便捷的方法来定义包的元数据。这些元数据在通过`npm`搜索包时使用，同时也会在`npm`网站（[www.npmjs.org](http://www.npmjs.org)）上显示，以便开发者了解包的功能和用法。此外，元数据还允许开发者定义开发该包所需的依赖项以及运行该包所需的依赖项。\n\
+  \n包元数据必须包含以下内容：\n\n* 包名称\n* 包的当前版本\n* 包的作者，包括其电子邮件地址\n\n除了这些必填属性外，元数据还可以包含以下内容：\n\
+  \n* 包描述\n* 关键字\n* 许可证\n* 贡献者列表\n* 仓库——指向包源代码控制仓库的 URL\n* 开发依赖项——开发该包所需的依赖项\n* 依赖项——运行该包所需的依赖项\n\
+  * 引擎——支持的 Node.js 版本\n\n包的元数据保存在模块根目录下名为`package.json`的文件中。在前面的示例中，`package.json`文件会与`index.js`文件位于同一目录。下面是一个示例`package.json`（见代码清单\
+  \ 2-5）：\n\n***代码清单 2-5***：用于定义包元数据的示例`package.json`文件\n\n```json\n{\n  \"name\"\
+  : \"grunt-pagespeed\",\n  \"version\": \"0.1.2\",\n  \"description\": \"Grunt plugin\
+  \ for running Google PageSpeed Insights.\",\n  \"homepage\": \"https://github.com/jrcryer/grunt-pagespeed\"\
+  ,\n  \"author\": {\n    \"name\": \"James Cryer\",\n    \"email\": \"chat@jamescryer.com\"\
+  ,\n    \"url\": \"http://www.jamescryer.com/\"\n  },\n  \"repository\": {\n    \"\
+  type\": \"git\",\n    \"url\": \"git://github.com/jrcryer/grunt-pagespeed.git\"\n\
+  \  },\n  \"contributors\": [],\n  \"main\": \"Gruntfile.coffee\",\n  \"engines\"\
+  : {\n    \"node\": \">=0.8.0\"\n  },\n  \"devDependencies\": {\n    \"grunt\": \"\
+  ~0.4.1\"\n  },\n  \"dependencies\": {\n    \"googleapis\": \"~0.6.1\"\n  },\n  \"\
+  keywords\": [\n    \"gruntplugin\",\n    \"pagespeed\",\n    \"insights\",\n   \
+  \ \"grunt\",\n    \"performance\"\n  ]\n}\n```\n\n以上是我用于对网站运行`pagespeed insights`的\
+  \ Grunt 插件的`package.json`文件副本。前面示例中需要注意的重要属性是`devDependencies`和`dependencies`。这些属性允许我们定义项目所需的其他\
+  \ Node.js 包。在本章后面，你将看到 Grunt 插件的依赖项是如何在此处体现的。\n\n`npm`提供了一个用于快速启动项目的便捷命令。它会询问一系列问题，并根据你的回答生成一个`package.json`文件。让我们回顾一下之前的示例，并为该项目生成一个`package.json`。首先，确保你位于项目的根文件夹（包含`index.js`的文件夹）中，然后运行以下命令：\n\
+  \n```\nnpm init\n```\n\n随后，`npm`会提示你回答一系列问题（见图 2-8）。\n\n![9781484200148_Fig02-08.jpg](img/00014.jpeg)\n\
+  \n图 2-8：示例应用程序从*卫报*网站输出的 HTML\n\n`npm`会显示即将生成的`package.json`，并询问是否正确。如果你选择“是”，你会发现在项目根目录下现在有了一个`package.json`文件。你可能还注意到，`npm`足够智能，可以检测到我们已经安装了`request`，并将其添加到生成的`package.json`文件中。\n\
+  \n一旦`package.json`文件被添加到项目中，安装包时你需要添加一个额外的标志，以确保`npm`更新`package.json`。例如，如果我们想为项目添加一个流行的单元测试框架`nodeunit`，我们需要运行以下命令：\n\
+  \n```\nnpm install nodeunit --save\n```\n\n`--save`标志告诉`npm`我们希望将此包添加为依赖项。或者，我们可以使用`--save-dev`将包添加到开发依赖项中。运行上述命令后，`package.json`文件应该类似于下面的代码清单\
+  \ 2-6：\n\n***代码清单 2-6***：安装`nodeunit`后的`package.json`\n\n```json\n{\n  \"name\"\
+  : \"guardian-grabber\",\n  \"version\": \"0.0.1\",\n  \"description\": \"\",\n \
+  \ \"main\": \"index.js\",\n  \"dependencies\": {\n    \"request\": \"~2.34.0\",\n\
+  \    \"nodeunit\": \"⁰.8.6\"\n  },\n  \"devDependencies\": {},\n  \"scripts\": {\n\
+  \    \"test\": \"echo \\\"Error: no test specified\\\" && exit 1\"\n  },\n  \"author\"\
+  : \"James Cryer\",\n  \"license\": \"ISC\"\n}\n```\n\n现在我们已经明确了什么是 Node.js 包，以及如何在自己的项目中搜索和安装它们，接下来我们可以进入\
+  \ Grunt 本身。\n\n### Grunt\n\n如前所述，Grunt 插件是 Node.js 包。但是，我还没提到 Grunt 本身也是一个 Node.js\
+  \ 包。在本书中，我们将使用 Grunt 0.4.x 版本。注意 Grunt 的版本很重要，因为 0.3.x 和 0.4.x 版本之间有一些重大的变化。最大的变化是将\
+  \ Grunt 包拆分为三个独立的包：\n\n* `grunt-cli`\n* `grunt`\n* `grunt-init`\n\n这一设计决策背后的原因稍后将会明确。首先，让我们通过运行以下命令来安装第一个包`grunt-cli`：\n\
+  \n```\nnpm install -g grunt-cli\n```\n\n\n\n这将全局安装 `Grunt` 命令行界面。安装后，`grunt` 命令将在你的命令行（适用于\
+  \ OS X、*nix 或 BSD 等系统）或 Windows 命令提示符中可用。根据你的配置，上述命令可能需要在相应平台上使用 `sudo` 或以管理员身份运行。\n\
+  \n一旦 `grunt-cli` 安装完成，你应该能够运行以下命令：\n\n```\ngrunt –version\n```\n\n之后，你将会看到与图 2-9\
+  \ 中类似的输出。\n\n![9781484200148_Fig02-09.jpg](img/00015.jpeg)\n\n图 2-9。命令行中的 Grunt\
+  \ 版本输出\n\n`Grunt` 命令行界面本身并不是一个任务运行器；它负责运行每个项目中安装的本地版本的 `Grunt`。这减少了全局安装任务运行器的需要，并允许项目在需要时安装不同版本的\
+  \ `Grunt`。\n\n在项目中使用 `Grunt` 的下一步是安装第二个 `Grunt` 包，名为 `grunt`。\n\n#### 创建一个使用 Grunt\
+  \ 的新项目\n\n要在项目中使用 `Grunt`，需要两个特定的文件：\n\n*   `package.json`\n*   `Gruntfile`\n\n\
+  我们在探索 Node.js 模块时已经见过 `package.json` 文件。此文件将包含对 `grunt` 本身以及项目所需相关插件的开发依赖项。\n\n\
+  `Gruntfile`，无论是 `Gruntfile.js` 还是 `Gruntfile.coffee`，都是包含任务配置和/或自定义任务定义的文件。\n\n\
+  #### 向项目添加 Grunt 和插件\n\n如前所述，可以使用 `npm init` 来添加 `package.json` 文件。`Grunt` 也提供了一种替代方法，即使用\
+  \ `grunt-init` 通过 `Grunt` 来搭建项目脚手架，我们将在本书后面部分介绍该方法。首先，让我们复用 `npm init` 命令来生成一个 `package.json`\
+  \ 文件，如清单 2-7 所示。\n\n***清单 2-7***。示例 `package.json` 文件\n\n```\n{\n  \"name\": \"\
+  grunt-file-example\",\n  \"version\": \"0.0.1\",\n  \"description\": \"\",\n  \"\
+  main\": \"index.js\",\n  \"scripts\": {\n    \"test\": \"echo \\\"Error: no test\
+  \ specified\\\" && exit 1\"\n  },\n  \"author\": \"James\",\n  \"license\": \"ISC\"\
+  \n}\n```\n\n现在要将 `Grunt` 添加到项目中，请在项目的根文件夹中运行以下命令：\n\n```\nnpm install grunt --save-dev\n\
+  ```\n\n这会将最新稳定版的 `Grunt` 添加到你的项目，并应在你的 `package.json` 中存储一个引用，现在看起来像清单 2-8。\n\n\
+  ***清单 2-8***。添加了 Grunt 依赖项后更新的 `package.json`\n\n```\n{\n  \"name\": \"grunt-file-example\"\
+  ,\n  \"version\": \"0.0.1\",\n  \"description\": \"\",\n  \"main\": \"index.js\"\
+  ,\n  \"scripts\": {\n    \"test\": \"echo \\\"Error: no test specified\\\" && exit\
+  \ 1\"\n  },\n  \"author\": \"James\",\n  \"license\": \"ISC\",\n  \"devDependencies\"\
+  : {\n    \"grunt\": \"⁰.4.3\"\n  }\n}\n```\n\n注意：`devDependencies` 已添加到文件末尾，并且引用了\
+  \ `grunt`。如果你按如下方式重新运行 `grunt` 命令，输出将显示 `grunt-cli` 和 `Grunt` 包的版本（参见图 2-10）：\n\n\
+  ```\ngrunt –version\n```\n\n![9781484200148_Fig02-10.jpg](img/00016.jpeg)\n\n图 2-10。命令行中的\
+  \ Grunt 版本输出\n\n此时，如果你在项目中不带任何其他标志运行 `grunt` 命令，你将看到一个错误。此错误提示你无法找到 `Gruntfile`。\n\
+  \n在项目的根目录中创建一个新文件，并将其命名为 `Gruntfile.js`。这将创建一个 JavaScript 的 `Gruntfile`；但是，如果你想改用\
+  \ CoffeeScript，请将文件保存为 `Gruntfile.coffee`。本书中的所有 `Gruntfile` 都将使用 JavaScript；不过，我建议你尝试使用\
+  \ CoffeeScript 编写你的 `Gruntfile`。就这项特定任务而言，我个人更偏爱 CoffeeScript 而非 JavaScript，因为它提供了更清晰、更易读的配置文件。\n\
+  \n一个 `Gruntfile` 包含以下部分：\n\n*   模块导出，有时也称为“包装器”函数\n*   项目和任务配置\n*   加载 Grunt 插件和任务\n\
+  *   自定义任务\n\n让我们将上述内容添加到我们的 `Gruntfile.js` 文件中。首先，我们必须将模块的导出语句添加到 `Gruntfile` 中（参见清单\
+  \ 2-9）。\n\n***清单 2-9***。`Gruntfile.js` 的开头\n\n```\nmodule.exports = function(grunt)\
+  \ {\n\n};\n```\n\n我希望这看起来让你熟悉，因为它遵循了 Node.js 模块使用的相同模式。需要注意的是，我们从 `Gruntfile` 中导出的函数期望接收一个参数，我们将其命名为\
+  \ `grunt`。这个 `grunt` 变量将允许我们访问 `Gruntfile` 中的 `Grunt` API。这对配置我们的任务运行器和定义自定义任务至关重要。\n\
+  \n接下来，我们必须添加我们的项目配置和任务。由于这是我们的第一个 `Grunt` 项目，我们将从简单的开始，添加一个用于连接文件的任务。修改后的 `Gruntfile`\
+  \ 及其添加的配置如下（清单 2-10）：\n\n***清单 2-10***。将 `grunt-concat` 添加到 `Gruntfile.js`\n\n```\n\
+  module.exports = function(grunt) {\n\n// Project configuration.\n  grunt.initConfig({\n\
+      pkg: grunt.file.readJSON('package.json'),\n\nconcat: {\n      options: {\n        separator:\
+  \ ';',\n      },\n      dist: {\n        src: ['src/fileA.js', 'src/fileB.js'],\n\
+          dest: 'dist/built.js',\n      }\n    }\n});\n};\n```\n\n如你所见，文件中添加了相当多的行。第一个新行是对\
+  \ `grunt.initConfig` 的调用。此函数初始化当前项目的配置，并期望向其传递一个配置对象。配置对象实际上就是一个普通的 JavaScript 对象。几乎你编写的每个\
+  \ `Gruntfile` 都会包含对此函数的调用。\n\n接下来，我们来检查传递给 `initConfig` 调用的配置对象。它有两个顶级属性：`pkg` 和\
+  \ `concat`。第一个属性 `pkg` 存储了对项目 `package.json` 内容的引用。有时在 `Gruntfile` 中使用我们项目定义中的属性会很有用。我们将在本书后面探讨如何使用这些属性。第二个属性\
+  \ `concat` 是我们的第一个任务配置。\n\n我们在这个第一个项目中要使用的 `Grunt` 插件是 `grunt-contrib-concat`。该插件定义了一个名为\
+  \ `concat` 的任务，因此我们可以通过使用相同的键来定义此任务的配置。`concat` 内定义的下两个关键属性是 `options` 和 `dist`。`options`\
+  \ 允许我们作为开发者覆盖插件作者提供的默认值。在我们的示例中，我们通过指定字符 `;` 来覆盖 `separator` 选项的默认值。`dist` 属性被称为*目标*。目标允许我们在多个上下文中配置给定的任务，并为每个上下文提供替代选项。在我们的第一个示例中，我们的目标用于定义任务的输入和输出文件。该任务将在\
+  \ `src/` 文件夹中查找两个文件：`fileA.js` 和 `fileB.js`。它们将被合并，输出将存储在 `dist/built.js` 中。\n\n\
+  目前，我们的 `Gruntfile` 是无效的，因为我们还没有加载插件。加载插件很简单，因为 `Grunt` 提供了一个易于使用的 API 来加载每个任务。通过添加以下内容来更新我们的\
+  \ `Gruntfile`（清单 2-11）：\n\n***清单 2-11***。将 `loadNpmTasks` 添加到文件中以加载插件\n\n```\nmodule.exports\
+  \ = function(grunt) {\n\n// Project configuration.\n  grunt.initConfig({\n    pkg:\
+  \ grunt.file.readJSON('package.json'),\n\nconcat: {\n      options: {\n        separator:\
+  \ ';',\n      },\n      dist: {\n        src: ['src/fileA.js', 'src/fileB.js'],\n\
+          dest: 'dist/built.js',\n      }\n    }\n  });\n\n// Load the plugin that\
+  \ provides the \"concat\" task.\n  grunt.loadNpmTasks('grunt-contrib-concat');\n\
+  };\n```\n\n\n\n添加的代码行调用了 `loadNpmTasks` 函数。该函数负责从特定插件加载任务，并且需要将插件名称作为参数传递给它。\n\n\
+  在尝试运行 `Gruntfile` 之前，我们还需要在其中添加最后一条语句。直接在 `loadNpmTasks` 调用之后添加以下代码行（清单 2-12）。\n\
+  \n***清单 2-12***. 定义当 Grunt 在没有指定任务名称的情况下运行时所要执行的默认任务\n\n```\n// Default task(s).\n\
+  grunt.registerTask('default', ['concat']);\n```\n\n这最后一行代码定义了一个默认任务，当有人在我们的项目中运行\
+  \ `grunt` 命令且未传递任何其他值时，该任务就会按照定义执行。如果我们的 `node_modules` 文件夹中缺少相关插件，Grunt 将无法正常运行，如图\
+  \ 2-11 所示。\n\n![9781484200148_Fig02-11.jpg](img/00017.jpeg)\n\nFigure 2-11. Grunt\
+  \ 无法运行\n\n至此，我们完成了第一个完整的 `Gruntfile`。保存文件并返回命令行。在根文件夹中，运行 `grunt` 会返回错误，因为我们尚未安装\
+  \ `grunt-contrib-concat` 插件。要将此插件添加到项目中，请运行以下命令：\n\n```\nnpm install grunt-contrib-concat\
+  \ --save-dev\n```\n\n请注意，我们的插件是一个 Node.js 包，并且我们还将依赖关系保存到了 `package.json` 中（通过在\
+  \ `install` 命令中传递 `--save-dev`）。重新运行 `grunt` 命令现在会返回成功消息。然而，由于我们的源文件还不存在，`dist`\
+  \ 文件夹中的输出文件 `built.js` 目前是空的。\n\n在项目中创建一个名为 `src` 的新文件夹。在此文件夹内，创建 `fileA.js` 和 `fileB.js`。在每个文件中，分别放入两段不同的内容（建议我分别放入“A”和“B”）。重新运行\
+  \ `grunt` 任务后，`built.js` 文件现在应包含 `fileA.js` 和 `fileB.js` 的内容，并用 `;` 合并和分隔（参见图 2-12）。\n\
+  \n![9781484200148_Fig02-12.jpg](img/00018.jpeg)\n\nFigure 2-12. 合并后的输出\n\n因此，我们已在项目上成功安装、配置并运行了\
+  \ Grunt。在探索 Grunt 优化工作流程的各种方法之前，了解 Grunt 背后的关键概念非常重要。让我们从配置任务开始。\n\n#### 配置任务\n\n\
+  如前所述，任务的配置包含在项目的 `Gruntfile` 中。在此 `Gruntfile` 内部，配置通过 `grunt.initConfig` 方法传递给 Grunt。传递给\
+  \ `grunt.initConfig` 的大部分配置将位于以任务命名的属性下，但也可以包含任意数据。如果配置中的属性与任务名称冲突，则这些属性会被忽略。\n\n\
+  由于 `Gruntfile` 是 JavaScript（或者如果你选择的话，也可以是 CoffeeScript）文件，配置并不严格局限于 JSON。这使得任务配置非常强大，因为它可以通过编程方式生成。为了阐明这一原理，让我们重新审视第一个\
+  \ `Gruntfile`，并将文件位置指定为配置的一部分（参见清单 2-13）。\n\n***清单 2-13***. 在 Gruntfile 中使用变量\n\n\
+  ```\nmodule.exports = function(grunt) {\n\nvar app_files = ['src/fileA.js', 'src/fileB.js'],\n\
+  \         output = 'dist/built.js';\n\n// Project configuration.\n  grunt.initConfig({\n\
+  \    pkg: grunt.file.readJSON('package.json'),\n\nconcat: {\n      options: {\n\
+  \        separator: ';',\n      },\n      dist: {\n        src: app_files,\n   \
+  \     dest: output\n      }\n    }\n  });\n\n// Load the plugin that provides the\
+  \ \"concat\" task.\n  grunt.loadNpmTasks('grunt-contrib-concat');\n};\n```\n\n在上面的\
+  \ `Gruntfile` 中，我们将源文件和输出文件的定义分别移到了任意属性 `app_files` 和 `output` 中。随后，我们更新了任务配置来使用这些属性。\n\
+  \n当运行 `grunt` 时，它会扫描配置对象，寻找与任务名称匹配的属性。此配置将被应用到任务提供的默认配置之上。任务还允许指定多个配置；每组配置被称为一个目标（`target`）。每个目标都有一个任意名称。以下\
+  \ `Gruntfile`（清单 2-14）扩展了我们之前的版本，添加了一个名为 `test` 的额外目标。\n\n***清单 2-14***. 多目标允许我们从同一个\
+  \ Gruntfile 以多种方式配置任务\n\n```\nmodule.exports = function(grunt) {\n\nvar app_files\
+  \ = ['src/fileA.js', 'src/fileB.js'],\n         output = 'dist/built.js',\n    test_output\
+  \ = 'test/built.js';\n\n// Project configuration.\n  grunt.initConfig({\n    pkg:\
+  \ grunt.file.readJSON('package.json'),\n\nconcat: {\n      options: {\n        separator:\
+  \ ';',\n      },\n      dist: {\n        src: app_files,\n        dest: output\n\
+  \      },\n      test: {\n        src: app_files,\n        dest: test_output\n \
+  \     }\n    }\n  });\n\n// Load the plugin that provides the \"concat\" task.\n\
+  \  grunt.loadNpmTasks('grunt-contrib-concat');\n};\n```\n\n有了额外的目标，我们将合并后的文件输出到一个新的位置，即\
+  \ `test` 文件夹。Grunt 提供了运行特定目标或所有目标的能力。要运行特定目标，可以使用以下命令：\n\n```\ngrunt concat:test\n\
+  ```\n\n上述命令将仅运行名为 `concat` 的任务中名为 `test` 的目标。要运行给定任务的所有目标，可以省略目标名称，如下面的代码所示。运行该命令将依次执行\
+  \ `dist` 和 `test` 目标。\n\n```\ngrunt concat\n```\n\n这会遍历每个目标并依次执行它们。上述命令的输出可以在图 2-13\
+  \ 中看到。\n\n![9781484200148_Fig02-13.jpg](img/00019.jpeg)\n\nFigure 2-13. 运行多个目标时的输出\n\
+  \n在任务配置中，可以指定 `options` 参数来覆盖任务设置的默认值。这些选项可以被目标级别的选项覆盖。目标级别选项由目标内的 `options` 属性定义。在以下示例（清单\
+  \ 2-15）中，我们的 `Gruntfile` 已被修改，以更改 `test` 目标的分隔符。\n\n***清单 2-15***. 使用选项的示例\n\n```\n\
+  module.exports = function(grunt) {\n\nvar app_files = ['src/fileA.js', 'src/fileB.js'],\n\
+  \         output = 'dist/built.js',\n    test_output = 'test/built.js';\n\n// Project\
+  \ configuration.\n  grunt.initConfig({\n    pkg: grunt.file.readJSON('package.json'),\n\
+  \nconcat: {\n      options: {\n        separator: ';',\n      },\n      dist: {\n\
+  \        src: app_files,\n        dest: output\n      },\n      test: {\n      \
+  \  options: {\n          separator: ' ',\n        },\n        src: app_files,\n\
+  \        dest: test_output\n      }\n    }\n  });\n\n// Load the plugin that provides\
+  \ the \"concat\" task.\n  grunt.loadNpmTasks('grunt-contrib-concat');\n};\n```\n\
+  \n上述配置将用值 `;` 覆盖由 `concat` 任务为所有目标设置的默认分隔符。此外，`test` 目标覆盖了此设置，并指定分隔符为单个空格。\n\n本章的最后一部分涵盖了\
+  \ Grunt 为选择每个任务的输入和输出文件提供的各种选项。\n\n#### 使用文件\n\nGrunt 提供了一个丰富且强大的 API，用于选择任务将要操作的文件。有多种方法可以为每个任务声明源文件和目标文件的映射，每种方法在复杂性和灵活性方面各有不同。\n\
+  \n##### 紧凑格式\n\n\n\n##### 紧凑文件格式\n\n紧凑文件格式通常用于只读任务。由于它接受单一的源文件到目标文件的映射，因此`src`属性不需要对应的`dest`属性。它适用于对一组文件执行操作并报告这些文件状态的任务。此类任务的一个例子是单元测试运行器，它针对一组测试用例执行操作并报告每个测试的结果。\n\
+  \n以下是使用`grunt-mocha-test`插件的紧凑文件格式示例（清单 2-16）。对于不熟悉 Mocha（[`mochajs.org/`](http://mochajs.org/)）的读者，它是一个\
+  \ JavaScript 测试运行器。\n\n***清单 2-16***. 使用紧凑文件格式运行 Mocha 测试\n\n```\nmodule.exports\
+  \ = function(grunt) {\n\ngrunt.initConfig({\n    // 配置一个 mochaTest 任务\n    mochaTest:\
+  \ {\n      test: {\n        options: {\n          reporter: 'spec'\n        },\n\
+  \        src: ['test/**/*.js']\n      }\n    }\n  });\n\n// 添加 grunt-mocha-test\
+  \ 任务。\n  grunt.loadNpmTasks('grunt-mocha-test');\n  grunt.registerTask('default',\
+  \ 'mochaTest');\n\n};\n```\n\n上述`Gruntfile`加载了`grunt-mocha-test`插件，并用它来处理`test`文件夹中所有扩展名为`.js`的文件。为了匹配`test`目录内的所有文件，我们使用了通配符模式。该模式将匹配顶级`test`目录及其任何子目录中的所有文件。如果我们只想匹配顶级`test`文件夹内的文件，我们可以将模式简化为`*.js`。这里需要注意的重点是缺少`dest`属性，因为任务不会输出到文件。\n\
+  \n##### 文件对象格式\n\n文件对象格式允许定义多个源文件到目标文件的映射。文件对象格式将映射声明为一个 JavaScript 对象，其中目标文件作为属性键，而值可以是一个或多个源文件。由于每个映射本质上以“目标”文件为键，因此一个目标可以包含多个映射。当你希望将一组文件合并成单个文件时（例如在拼接\
+  \ JavaScript 文件的情况下），通常会使用这种格式。\n\n以下`Gruntfile`（清单 2-17）演示了文件对象格式的使用。\n\n***清单\
+  \ 2-17***. 使用文件对象格式拼接文件\n\n```\nmodule.exports = function(grunt) {\n\n// 项目配置。\n\
+  \  grunt.initConfig({\n    pkg: grunt.file.readJSON('package.json'),\n\nconcat:\
+  \ {\n      options: {\n        separator: ';',\n      },\n      dist: {\n      \
+  \  files: {\n          'build/app.js': ['src/fileA.js', 'src/fileB.js']\n      \
+  \  }\n      }\n    }\n  });\n\n// 加载提供\"concat\"任务的插件。\n  grunt.loadNpmTasks('grunt-contrib-concat');\n\
+  };\n```\n\n上述`Gruntfile`重访了我们之前的例子，但不同之处在于，它将目标文件定义为属性名本身，而不是定义`src`和`dest`属性。\n\
+  \n##### 文件数组格式\n\n文件数组格式扩展了紧凑格式，允许每个目标包含多个源文件到目标文件的映射。它不是使用单一的`src`和`dest`属性，而是将文件声明为一个`files`属性，该属性的值是紧凑格式的数组。以下示例（清单\
+  \ 2-18）修改了我们现有的例子，将 CSS 拼接功能添加到了同一个目标中。\n\n***清单 2-18***. 使用文件数组格式将多个文件拼接在一起\n\n\
+  ```\nmodule.exports = function(grunt) {\n\n// 项目配置。\n  grunt.initConfig({\n    pkg:\
+  \ grunt.file.readJSON('package.json'),\n\nconcat: {\n      options: {\n        separator:\
+  \ ';',\n      },\n      dist: {\n        files: [\n          {src: ['src/fileA.js',\
+  \ 'src/fileB.js'], dest: 'build/app.js'},\n          {src: ['src/stylesA.css', 'src/stylesB.css'],\
+  \ dest: 'build/app.css'}\n        ]\n      }\n    }\n  });\n\n// 加载提供\"concat\"\
+  任务的插件。\n  grunt.loadNpmTasks('grunt-contrib-concat');\n};\n```\n\n在上例中，`src`和`dest`属性已被替换为`files`属性。`files`属性被赋予一个对象数组。每个对象都有`src`和`dest`属性，从而可以声明多个源文件到目标文件的映射。`dist`目标的输出将是`build/app.js`和`build/app.css`。\n\
+  \n### 总结\n\n在本章中，你已开始探索如何将 Grunt 引入项目。首先，你熟悉了 Node 和 npm，因为它们是理解 Grunt 及其插件生态系统工作原理的基础。本章其余部分讨论了在项目中安装\
+  \ Grunt、安装第一个任务以及如何为任务提供所需配置的方法。最后，介绍了 Grunt 提供的灵活 API，用于在项目中模式匹配文件，从而为任务定义输入和输出。\n\
+  \n下一章将开始探讨使用 Grunt 自动化处理与 HTML 和 CSS 相关的常见任务的实际用例。\n\n"
+- '# 第 3 章
+
+
+  ![image](img/00005.jpeg)
+
+
+  '
+- "# 将 Grunt 与 HTML 和 CSS 结合使用\n\n在上一章中，我们探讨了如何引导项目使用 Grunt，以及如何在项目中安装和配置任务。接下来，我们将介绍多种有用的插件，它们可以在处理\
+  \ Web 基础——HTML 和 CSS——时帮助我们优化工作流程。本章涵盖的主题包括 CSS 预处理、简化第三方依赖的安装，以及优化内容以进行公开发布。\n\n\
+  在探索可用于自动化处理 HTML 和 CSS 的任务之前，让我先介绍一个项目，我们将用它来演示所有可用的优秀插件。\n\n### 演示应用\n\n在本书余下部分，我们将介绍多种免费的\
+  \ Grunt 插件，供你在未来的项目中使用。为了帮助演示每一种插件，我们将开发一个应用程序。这个应用程序将是一个简单的 Node 应用程序，允许用户在浏览器中维护一个简单的待办事项列表。如果你对\
+  \ Node 不太熟悉，也不必担心，因为我们只会使用 Node 来运行一个非常简单的 Web 服务器。\n\n该应用程序的绝大部分将涉及 HTML、CSS 和\
+  \ JavaScript。首先，让我们使用一个精简版的 HTML5 boilerplate HTML（参见清单 3-1）。\n\n***清单 3-1***. 待办事项列表应用的\
+  \ HTML 模板\n\n```\n<!DOCTYPE html>\n<html class=\"no-js\">\n <head>\n  <meta charset=\"\
+  utf-8\">\n  <meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\">\n  <title>Pro\
+  \ Grunt.js: 待办事项列表</title>\n  <meta name=\"description\" content=\"\">\n  <meta\
+  \ name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n\n<link rel=\"\
+  stylesheet\" href=\"css/main.css\">\n </head>\n <body>\n  <!--[if lt IE 8]>\n  \
+  \ <p class=\"browsehappy\">你正在使用一个<strong>过时</strong>的浏览器。请<a href=\"http://browsehappy.com/\"\
+  >升级你的浏览器</a>以提升体验。</p>\n  <![endif]-->\n\n<!-- 在此处添加你的网站或应用内容 -->\n  <h1>Pro Grunt.js</h1>\n\
+  \  <h2>待办事项列表</h2>\n\n<script src=\"//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js\"\
+  ></script>\n  <script>window.jQuery || document.write('<script src=\"js/vendor/jquery-1.11.0.min.js\"\
+  ><\\/script>')</script>\n  <script src=\"js/main.js\"></script>\n </body>\n</html>\n\
+  ```\n\n从清单 3-1 可以看出，目前这个 HTML 文档非常小巧。`head`元素中包含了一个 CSS 文件；`body`标签末尾引入了 jQuery\
+  \ 和`main.js` JavaScript 文件。现在不必担心 CSS 和 JavaScript 文件，这些将在本书后面部分介绍。首先，让我们看看 Grunt\
+  \ 如何帮助我们生成、检查（lint）和压缩 CSS 文件。\n\n#### CSS 预处理\n\n\n\n#### CSS 预处理\n\n`CSS 预处理`是一项相对较新的技术，其存在时间大约只有过去五年。在这五年间，它迅速被开发者采用，主要原因是它解决了使用\
+  \ CSS 时的一些痛点。目前，主要有三种 CSS 预处理器可用：LESS（[`lesscss.org`](http://lesscss.org)）、Sass（[`sass-lang.com`](http://sass-lang.com)）和\
+  \ Stylus（[www.stylus.com](http://www.stylus.com)）。CSS 预处理器越来越流行，以至于浏览器厂商已开始在其开发者工具中提供支持。\n\
+  \nCSS 预处理器通常对 CSS 进行扩展，提供诸如定义变量和嵌套选择器等新功能。这通常会带来更清晰、更易于维护的 CSS。为便于演示，本书将使用 Sass。要使用\
+  \ Sass，你必须安装 Ruby 语言。\n\n#### 安装 Sass\n\n要安装 Sass，你需要在你的机器上安装 Ruby。成功安装后，即可通过命令行或命令提示符使用\
+  \ Ruby。\n\n##### 在 Linux 上安装 Ruby\n\n在 Linux 上安装 Ruby，最好通过你的发行版包管理器或诸如 `rbenv` 或\
+  \ `rvm` 之类的工具来安装。\n\n##### 在 Windows 上安装 Ruby\n\n在 Windows 上，Ruby 有一个一键安装程序。安装完成后，即可在命令提示符下使用\
+  \ Ruby。\n\n##### 在 Mac OS X 上安装 Ruby\n\nMac OS X 预装了 Ruby；但安装的版本取决于你运行的 Mac OS X\
+  \ 版本。Mountain Lion 随附版本 1.8.7，而 Mavericks 则随附 Ruby 2.0.0。\n\n在使用 Sass 时，我建议运行 2.0.0\
+  \ 版本。对于使用 Mountain Lion 或更早版本的读者，我建议使用 `rbenv` 来安装和维护你的 Ruby 安装。\n\n#### 检查你的 Ruby\
+  \ 安装\n\n安装 Ruby 后，你应该能够从命令行或命令提示符运行 Ruby 命令。清单 3-2 演示了如何检查你安装的 Ruby 版本。\n\n***清单\
+  \ 3-2***。检查已安装的 Ruby 版本\n\n```\nruby --version\n```\n\n该命令应输出类似于图 3-1 所示的内容。\n\n\
+  ![9781484200148_Fig03-01.jpg](img/00020.jpeg)\n\n图 3-1。当前安装的 Ruby 版本\n\n如果你没有看到与上述类似的输出，我建议仔细检查你所运行平台的安装步骤。要开始使用\
+  \ Sass，下一步是安装 gem。与 Node 类似，Ruby 有一个名为 Ruby Gems 的包管理系统，每个 Ruby 包都打包为一个 gem。清单 3-3\
+  \ 演示了如何从命令行或命令提示符安装 Sass，并随后检查已安装的 Sass 版本。\n\n***清单 3-3***。安装 Sass Gem\n\n```\n\
+  gem install sass\nsass --version\n```\n\n如果 Sass 安装成功，将打印类似 `Sass 3.3.3 (Maptastic\
+  \ Maple)` 的输出。现在我们已安装 Sass，让我们简要了解一下它的主要特性，然后再了解 Grunt 如何在使用 Sass 时帮助我们。\n\n####\
+  \ Sass 简介\n\n如前所述，Sass 是一种 CSS 预处理器。你可能想知道这意味着什么。简单来说，Sass 接收一些输入，对其执行处理，然后输出 CSS。通过此过程，输入可以是\
+  \ SCSS 或 Sass 文件。SCSS 是 Sass 3 的主要语法，也是本书将要用到的。Sass 是一种稍旧的、受 HAML 启发的语法，其编译规则更为严格。\n\
+  \nSCSS（也称为 Sassy CSS）是 CSS3 的超集，这意味着任何 CSS3 样式表都是有效的 SCSS 样式表。SCSS 文件的扩展名为 `.scss`。清单\
+  \ 3-4 演示了如何使用 Sass 从命令行将 SCSS 文件编译为 CSS。\n\n***清单 3-4***。使用 Sass 将 SCSS 文件编译为 CSS\n\
+  \n```\nsass input.scss output.css\n```\n\n运行清单 3-4 中的命令将输出一个包含 SCSS 文件 `input.scss`\
+  \ 中所有样式的 CSS 文件。命令行工具 `sass` 也可以传递多个标志来修改生成的 CSS 文件。我们将在本章后面介绍其中一些标志。在此之前，我们先探讨\
+  \ Sass 中能提高 CSS 文件可维护性和可读性的特性。\n\n##### 变量\n\n对于具有 JavaScript 或 Ruby 等语言编程经验的读者来说，变量应该很熟悉。变量提供了一种存储值的方法，以便我们稍后重用。变量还为引用此值提供了一个方便且易于记忆的名称。在\
+  \ Sass 中，变量可用于存储 CSS 属性值。清单 3-5 演示了我们如何存储颜色的十六进制值，以便在 SCSS 文件中稍后使用。\n\n***清单 3-5***。用于存储颜色值的变量\n\
+  \n```\n$primary-color: #A2A2A2;\n$background-color: #C3C3C3;\n\nbody {\n    color:\
+  \ $primary-color;\n    background: $background-color;\n}\n```\n\n变量以 `$` 开头，后跟变量名。变量的值出现在\
+  \ `:` 之后。在我们的示例中，仅使用变量来存储颜色值，但变量也可以存储任何 CSS 属性的值。当 Sass 进行处理时，变量会被替换为变量值，但变量定义不会被替换。清单\
+  \ 3-6 显示了上述示例处理后的结果。\n\n***清单 3-6***。处理清单 3-5 中 SCSS 文件后输出的 CSS\n\n```\nbody {\n\
+  \    color: #A2A2A2;\n    background: #C3C3C3;\n}\n```\n\n##### 嵌套\n\n另一个强大的功能是能够嵌套选择器，这允许\
+  \ CSS 作者嵌套其 CSS 选择器以匹配 HTML 的视觉表示。清单 3-7 演示了如何使用嵌套使 CSS 更具可读性和可维护性。\n\n***清单 3-7***。使用嵌套选择器\n\
+  \n```\nheader {\n    width: 936px;\n    padding: 12px;\n\n    h1 {\n        font-size:\
+  \ 2.4em;\n        line-height: 1em;\n        margin: 0 0 12px;\n    }\n\n    nav\
+  \ {\n        padding: 12px;\n    }\n}\n```\n\n请注意 `h1` 和 `nav` 选择器是如何嵌套在 `header`\
+  \ 选择器中的。当 Sass 处理 SCSS 文件时，它会展开嵌套的选择器以生成更复杂的选择器。清单 3-7 中 SCSS 文件的输出如清单 3-8 所示。\n\
+  \n***清单 3-8***。嵌套选择器的输出\n\n```\nheader {\n    width: 936px;\n    padding: 12px;\n\
+  }\n\nheader h1 {\n    font-size: 2.4em;\n    line-height: 1em;\n    margin: 0 0\
+  \ 12px;\n}\n\nheader nav {\n    padding: 12px;\n}\n```\n\n除了嵌套选择器之外，还有一个更高级的功能可用于组合嵌套的伪类选择器（如清单\
+  \ 3-9 所示）。\n\n***清单 3-9***。伪类选择器与嵌套选择器的组合\n\n```\na {\n    text-decoration: none;\n\
+  \n    &:hover,\n    &:focus {\n        text-decoration: underline;\n    }\n}\n```\n\
+  \n请注意清单 3-9 中 & 符号（`&`）的使用。这会导致当前选择器被附加到父选择器上，在我们的示例中，父选择器是 `a`。我们示例的输出如清单 3-10\
+  \ 所示，生成了选择器 `a:hover, a:focus`。\n\n***清单 3-10***。使用 `&` 附加伪类选择器\n\n```\na {\n  \
+  \  text-decoration: none;\n}\n\na:hover, a:focus {\n    text-decoration: underline;\n\
+  }\n```\n\n##### 局部文件和导入\n\n\n\n##### Partials（局部文件）\n\nPartials（局部文件）允许开发者创建包含 CSS\
+  \ 片段（snippet）的 SCSS 文件。这些片段可以被包含到其他 SCSS 文件中。将其他片段包含到其他 SCSS 文件中的能力，极大地提高了所编写 SCSS\
+  \ 的可重用性，因为你可以选择要包含哪些 partials（局部文件）。Partials（局部文件）有一个文件命名约定，即它们必须以**下划线**开头。这告诉\
+  \ Sass 该文件不直接生成输出。例如，用于头部模块的 partial 可能被命名为 `_header.scss`。\n\n要将 partials（局部文件）包含在一个文件中，必须使用\
+  \ `@import` 指令。Imports（导入）与 partials（局部文件）结合使用，可以将 CSS 拆分成更易于管理和阅读的块。列表 3-11 演示了如何使用\
+  \ `@import` 指令。\n\n***列表 3-11***. 使用 `@import` 指令将多个文件与 Sass 合并\n\n```\n// _reset.scss\n\
+  \nhtml, body, ul, ol, h1, h2, h3, h4, h5, h5, p {\n    margin: 0;\n    padding:\
+  \ 0;\n}\n\n// _header.scss\n\nheader {\n    h1 {\n        font-size: 2em;\n    \
+  \    margin: 12px 0;\n    }\n}\n\n// main.scss\n\n@import 'reset';\n@import 'header';\n\
+  \nbody {\n    color: #A2A2A2;\n    background: #C3C3C3;\n}\n```\n\n在列表 3-11 中，共有三个文件：`_reset.scss`、`_header.scss`\
+  \ 和 `main.scss`。`main.scss` 文件导入了 `_reset.scss` 和 `_header.scss` 文件的内容。需要注意的是，在使用\
+  \ `@import` 指令时，必须包含文件扩展名 `.scss`。当 Sass 处理 `main.scss` 时，它将生成一个文件，而不是三个文件。不要将 Sass\
+  \ 中的 `@import` 指令与 CSS 中的 `@import` 指令混淆。它们提供的功能非常不同。使用 Sass 中的 `@import` 指令时，文件的内容会合并到导入该\
+  \ partial 的文件中。而使用 CSS imports 时，每个文件保持独立，浏览器会为每个文件进行单独的 HTTP 调用。列表 3-12 显示了编译 `main.scss`\
+  \ 文件后的输出结果。\n\n***列表 3-12***. 使用 Imports 和 Partials 编译 Sass 的输出\n\n```\nhtml, body,\
+  \ ul, ol, h1, h2, h3, h4, h5, h5, p {\n    margin: 0;\n    padding: 0;\n}\n\nheader\
+  \ {\n    h1 {\n        font-size: 2em;\n        margin: 12px 0;\n    }\n}\n\nbody\
+  \ {\n    color: #A2A2A2;\n    background: #C3C3C3;\n}\n```\n\n##### Mixins（混合器）\n\
+  \nMixins（混合器）提供了一种便捷的方法来重用 CSS，允许你定义一组选择器或属性，并在不进行复制粘贴的情况下多次重用它们。除此之外，mixins 还可以接受参数，这样每次使用时，都可以稍作修改以满足特定需求。Mixins\
+  \ 的主要优势在于提高了可维护性，因为如果以后需要更新 CSS，只需在一个地方进行修改即可。Mixins 的一个常见用途是处理浏览器前缀。你可以将所有浏览器厂商的特定实现捕获到一个单一的\
+  \ mixin 中，而不必每次都重复定义它们。这意味着，如果浏览器厂商更改了其实现，你只需要修改 mixin，其余的 CSS 输出将随更改而更新。列表 3-13\
+  \ 演示了这样一个关于 CSS3 属性 `border-radius` 的示例。\n\n***列表 3-13***. 为 CSS3 属性 `border-radius`\
+  \ 定义一个 Sass 的 Mixin\n\n```\n@mixin border-radius($radius) {\n    -webkit-border-radius:\
+  \ $radius;\n    -moz-border-radius: $radius;\n    -ms-border-radius: $radius;\n\
+  \    border-radius: $radius;\n}\n\n.panel {\n    @include border-radius(4px);\n\
+  }\n\n.login-box {\n    @include border-radius(10px);\n}\n```\n\n在列表 3-13 中，我们定义了一个名为\
+  \ `border-radius` 的 mixin，然后通过将其应用于类选择器 `.panel` 来使用该 mixin。Mixin 以指令 `@mixin` 开头，后跟名称和一组参数。在我们的示例中，有一个参数\
+  \ `radius`，它是一个 Sass 变量，因此以 `$` 开头。在这个 mixin 中使用参数允许我们传入要应用于选择器的半径值。要使用一个 mixin，需要使用\
+  \ `@include` 指令。`@include` 后跟 mixin 的名称和一组参数（如果需要的话）。列表 3-14 展示了列表 3-13 中 Sass 代码的输出结果。\n\
+  \n***列表 3-14***. 使用 Mixins 的 CSS 输出\n\n```\n.panel {\n    -webkit-border-radius:\
+  \ 4px;\n    -moz-border-radius: 4px;\n    -ms-border-radius: 4px;\n    border-radius:\
+  \ 4px;\n}\n\n.login-box {\n  -webkit-border-radius: 10px;\n  -moz-border-radius:\
+  \ 10px;\n  -ms-border-radius: 10px;\n  border-radius: 10px;\n}\n```\n\n需要注意的是，mixin\
+  \ 本身不会输出到 CSS 中，只有使用 mixin 的地方（即它被包含的地方）才会输出。\n\n##### Extend/Inheritance（扩展/继承）\n\
+  \n在本介绍中，我们要看的最后一个 Sass 特性是继承。继承允许你保持 CSS 的**DRY**。对于那些不熟悉 DRY 原则的人来说，它代表“不要重复自己”（Don't\
+  \ Repeat Yourself），旨在减少重复。Sass 通过指令 `@extend` 提供了保持 CSS DRY 的能力。列表 3-15 演示了如何使用\
+  \ `@extend`。\n\n***列表 3-15***. 使用 `@extend` 保持 CSS 输出的 DRY 原则\n\n```\n.notice {\n\
+  \    border: 1px solid #FBCE2D;\n    padding: 8px;\n}\n\n.alert {\n    @extend .notice;\n\
+  \    border-color: #F0F0F0;\n}\n```\n\n在列表 3-15 中，我们定义了类选择器 `.notice` 和 `.alert`。`@extend`\
+  \ 指令被用作 `.alert` 属性定义的一部分，后面跟着我们想要扩展的选择器名称。在 CSS 生成过程中，`.notice` 和 `.alert` 选择器被合并到一个规则中。这可以在列表\
+  \ 3-16 中看到。\n\n***列表 3-16***. 使用 `@extend` 的输出\n\n```\n.notice, .alert {\n    border:\
+  \ 1px solid #FBCE2D;\n    padding: 8px;\n}\n\n.alert {\n    border-color: #F0F0F0;\n\
+  }\n```\n\n既然我们已经了解了 Sass 在简化大型复杂样式表工作方面所能提供的强大功能，那么让我们看看 Grunt 如何帮助我们加速工作流程。\n\n\
+  ##### Sass with Grunt（Sass 与 Grunt 的结合）\n\n要使用 Grunt 编译 Sass 文件，可以使用一个名为 `grunt-contrib-sass`\
+  \ 的 Grunt 插件。以“grunt-contrib”开头的插件是 Grunt 核心团队官方支持的插件。要安装此插件，请遵循上一章介绍的相同步骤。（见列表\
+  \ 3-17）。\n\n***列表 3-17***. 安装 `grunt-contrib-sass`\n\n```\nnpm install grunt-contrib-sass\
+  \ --save-dev\n```\n\n至此，`grunt-contrib-sass` 已添加到我们的项目中，并且依赖项也已添加到我们的 `package.json`\
+  \ 文件中。接下来，我们必须将该任务添加到我们的 `Gruntfile` 中。列表 3-18 演示了我们的 `Gruntfile`，其中配置了新添加的插件来编译我们的\
+  \ Sass。\n\n***列表 3-18***. 配置了 `grunt-contrib-sass` 的 Gruntfile\n\n```\n/*global\
+  \ module:false*/\nmodule.exports = function(grunt) {\n\n// Project configuration.\n\
+  \  grunt.initConfig({\n\n// Task configuration.\n    sass: {\n      dist: {\n  \
+  \      options: {\n          style: 'expanded'\n        },\n        files: {\n \
+  \         'css/main.css': 'build/styles/main.scss'\n        }\n      }\n    }\n\
+  \  });\n\n// These plugins provide necessary tasks.\n  grunt.loadNpmTasks('grunt-contrib-sass');\n\
+  \n// Default task.\n  grunt.registerTask('default', ['sass']);\n};\n```\n\n\n好的，这是根据您的要求和示例格式翻译的中文版本。\n\
+  \n\n在 `Listing 3-18` 中，`Gruntfile` 看起来与上一章使用的非常相似。`grunt-contrib-sass` 任务在文件末尾加载，而\
+  \ `sass` 任务被设置为默认任务。`Gruntfile` 的其余部分由该任务的配置组成。我们添加了一个名为 `dist` 的目标，并在其中设置了一个选项\
+  \ `style`。`grunt-contrib-sass` 任务封装了 `Sass` 命令，并公开了 `Sass` 命令接受的一些用于改变 CSS 输出的标志。\n\
+  \n`style` 选项会修改输出 CSS 的格式。该选项有四个可能的值：`nested`、`expanded`、`compact` 和 `compressed`。默认值是\
+  \ `nested`，它会对 CSS 进行缩进，类似于 Sass 文件。`expanded` 值最为冗长，看起来类似于手写 CSS。在本地处理棘手的 CSS 问题时，这种样式非常有用。`compact`\
+  \ 和 `compressed` 样式，顾名思义，是更小的格式。`compact` 样式将每个选择器及其所有 CSS 属性和值输出在一行中。`compressed`\
+  \ 样式输出最小化的内容。除了每个选择器所需的空格之外，所有空白字符都被删除。使用 `compressed` 样式，所有选择器都出现在同一行，这非常适合在您的在线网站上使用。除了样式选项之外，`grunt-contrib-sass`\
+  \ 还提供了在 CSS 输出中输出源代码行号的选项，既可以缓存编译后的 sass，也可以生成 source map。我将在本书后面（作为高级主题的一部分）介绍\
+  \ source map。\n\n我们的 Sass `Gruntfile` 配置的最后一部分定义了要使用的文件。在这种情况下，我们选择使用文件对象格式来配置任务使用哪些文件。如您所见，我们在\
+  \ `build/styles` 路径下使用了 SCSS 文件 `main.scss`。需要注意的是，这是相对于 `Gruntfile` 的路径。让我们来试运行我们的\
+  \ `Gruntfile`。打开命令行并导航到项目空间。此时运行 `Grunt` 应该会输出类似于 `Figure 3-2` 所示的内容。\n\n![9781484200148_Fig03-02.jpg](img/00021.jpeg)\n\
+  \n`Figure 3-2.` 由于缺少源文件而失败的 Sass Grunt 配置\n\n如您所见，`Grunt` 执行失败，并显示一条错误消息，告知我们无法找到源文件。请添加\
+  \ `styles` 文件夹。此文件夹应位于 `build` 文件夹内。现在重新运行 `Grunt`，应该会成功完成，并显示消息 “File css/main.css\
+  \ created.”。如果您打开应用程序文件夹，您现在应该会看到一个 `css` 文件夹被创建，并且其中包含 `main.css`。`Listing 3-19`\
+  \ 说明了此阶段的项目结构。\n\n`***Listing 3-19***`. 我们的演示应用的 `main.scss`\n\n```\n$primary-color:\
+  \ #a2a2a2;\n\nbody {\n  color: $primary-color;\n}\n```\n\n在这个阶段，我们的待办事项应用程序看起来非常基础——只有一个标题。让我们开始增加一些功能，并通过引入一些库来美化样式。在下一节中，您将看到\
+  \ `Grunt` 如何帮助简化将库导入到我们项目中的过程。\n\n#### 使用 Grunt 处理前端框架\n\n在过去的几年里，对 Web 应用程序的需求不断增加，要求它们提供与原生应用程序相同的丰富沉浸式体验。为了满足这一需求，Web\
+  \ 应用程序变得越来越复杂。随着复杂性的增加，我们看到了强大的前端框架的出现，以帮助开发人员快速为这些 Web 应用程序原型设计和交付新功能。这带来了一个新的挑战：作为开发人员，我们如何安装和管理这些依赖关系。像\
+  \ Ruby 和 Java 这样的后端技术，有依赖管理器工具来解决这个问题已经有一段时间了。值得庆幸的是，现在也有针对前端库的解决方案，形式是来自 Twitter\
+  \ 的名为 `Bower` 的工具。在探讨如何将 `Bower` 与 `Grunt` 集成之前，让我们先了解更多关于 `Bower` 本身的信息。\n\n#####\
+  \ Bower\n\n`Bower` 是一个为 Web 构建的包管理器，旨在解决前端包管理的问题。`Bower` 与 `npm` 一样，不会全局安装包；相反，包被隔离到本地项目中。如果您必须在多个项目之间工作并且不想共享依赖关系，这非常有用。包通过\
+  \ `Git` 安装；然而，每个包的内容可能会有所不同，因为 `Bower` 不规定一个包应该包含什么。例如，一个包可能包含 JavaScript 或 CSS，或者就此而言的任何其他类型的资源。\n\
+  \n##### 安装 Bower\n\n`Bower` 与 `npm` 一样，依赖于 Node。`Listing 3-20` 演示了如何安装 `Bower`。在这一点上，您应该对此感到相当熟悉。\n\
+  \n`***Listing 3-20***`. 安装 Bower\n\n```\nnpm install -g bower\n```\n\n请注意，我们使用 `-g`\
+  \ 标志来安装 `Bower`，因为 `Bower` 是通过命令行访问的。安装过程完成后，`Bower` 现在应该可以通过命令行使用。要检查其是否可用，您可以运行\
+  \ `Listing 3-21` 中显示的命令。\n\n`***Listing 3-21***`. 检查已安装的 Bower 版本\n\n```\nbower\
+  \ --version\n```\n\n除了安装 `Bower`，您还必须安装 `Git`。`Git` 网站为每个平台提供了一些很好的安装说明（[`git-scm.com/book/en/Getting-Started-Installing-Git`](http://git-scm.com/book/en/Getting-Started-Installing-Git)）。\n\
+  \n##### 使用 Bower\n\n`Bower` 有一套非常简单的命令来管理依赖关系。这些命令包括安装、搜索和卸载包。`Bower` 有几种安装包的方法。首先，`Bower`\
+  \ 可以读取一个称为 `bower.json` 的配置文件。`bower.json` 类似于 `package.json`，因为它定义了一个项目的前端依赖关系，而\
+  \ `package.json` 则定义一个项目的 Node 依赖关系。`Listing 3-22` 提供了一个 `bower.json` 示例以及使用 `bower.json`\
+  \ 安装依赖关系所需的命令。\n\n`***Listing 3-22***`. `bower.json` 和安装依赖关系\n\n```\n// bower.json\n\
+  {\n  \"name\": \"todo-app\",\n  \"dependencies\": {\n    \"jquery\": \"~2.1.0\"\n\
+  \  }\n}\n\nbower install\n```\n\n将上述文件保存在项目根目录后，运行 `bower install` 命令。这将在本地或远程查找\
+  \ `jQuery`。一旦找到，该包就会被下载并安装到一个名为 `bower_components` 的文件夹中。在 `bower_components` 文件夹中，每个包都包含在其各自的文件夹中。我们很快就会看到如何控制\
+  \ `Bower` 用于安装包的文件夹。在此之前，让我们继续了解安装包的各种方法。`Listing 3-23` 演示了如何通过传递包名称并将依赖关系自动保存到\
+  \ `bower.json` 文件中来安装一个包。\n\n`***Listing 3-23***`. `bower.json` 和安装依赖关系\n\n```\n\
+  bower install backbone -S\n```\n\n\n\n这将把流行的 JavaScript MVC 框架 `Backbone.js` ([`backbonejs.org/`](http://backbonejs.org/))\
+  \ 安装到 `bower_components` 文件夹中。由于 `Backbone.js` 包定义了对 `Underscore.js` 库的依赖，`Bower`\
+  \ 也会在单个命令中为我们安装它。清单 3-24 展示了在 清单 3-23 中的命令成功执行后的 `bower.json` 文件。\n\n***清单 3-24***.\
+  \ 安装 Backbone.js 后的 bower.json\n\n```\n{\n  \"name\": \"todo-app\",\n  \"dependencies\"\
+  : {\n    \"jquery\": \"~2.1.0\",\n    \"backbone\": \"~1.1.2\"\n  }\n}\n```\n\n\
+  在前面的例子中，`Bower` 包是通过包名安装的。但是，这可以替换为 Git 仓库、SVN 仓库、zip 文件或 tar 文件的 URL。\n\n除了安装包，`Bower`\
+  \ 还提供了通过命令行搜索包的功能。图 3-3 展示了对 `Twitter Bootstrap` 的搜索示例。匹配结果包含包名和包的可用 URL。\n\n![9781484200148_Fig03-03.jpg](img/00022.jpeg)\n\
+  \n图 3-3. 使用 Bower 搜索前端包\n\n如前所述，`Bower` 安装包的文件夹可以通过 `.bowerrc` 文件中的设置来控制。清单 3-25\
+  \ 通过显示 `.bowerrc` 文件的内容来演示如何修改文件夹。`.bowerrc` 文件应保存在项目的根目录中，与 `bower.json` 文件一起。\n\
+  \n***清单 3-25***. 将 Bower 包安装到特定文件夹的 bowerrc 文件\n\n```\n{\n  \"directory\": \"build/bower_components\"\
+  \n}\n```\n\n运行 `bower install` 命令不会导致组件被安装到 `build` 文件夹中。\n\n这就结束了关于 `Bower` 的简要介绍。它是一个非常强大的工具，在处理大量前端框架时会很有帮助。接下来，你将看到如何结合使用\
+  \ `Grunt` 和 `Bower`，在 `Bower` 组件安装后自动化地将它们插入到我们的页面中。\n\n#### Bower 与 Grunt\n\n没有\
+  \ `Grunt` 的 `Bower` 已经是一个很出色的工具，但当它们一起使用时，可以显著减少搭建前端依赖所需的时间。连接 `Bower` 和 `Grunt`\
+  \ 的插件叫做 `grunt-bower-install`。`grunt-bower-install` 插件可用于自动注入由 `Bower` 安装到 HTML\
+  \ 中的前端 JavaScript 和 CSS 文件。为了实现这一点，`grunt-bower-install` 依赖于一个 Node 模块 `wiredep`。当\
+  \ `wiredep` 运行于你的源文件时，它会查找 HTML 中的特殊注释。如果找到注释，它会将相关的标签注入到 HTML 中。\n\n首先，让我们更新 `Gruntfile.js`\
+  \ 以使用这个新插件。不要忘记你也需要安装这个插件。清单 3-26 展示了添加了该任务后的更新版 `Gruntfile` 文件。\n\n***清单 3-26***.\
+  \ 将 Bower 包安装到特定文件夹的 bowerrc 文件\n\n```\n/*global module:false*/\nmodule.exports\
+  \ = function(grunt) {\n\n// Project configuration.\n  grunt.initConfig({\n    //\
+  \ Task configuration.\n    ...\n\nbowerInstall: {\n      dist: {\n        src: ['*.html'],\n\
+          dependencies: true,\n        devDependencies: true,\n        exclude: []\n\
+        }\n    }\n  });\n\n// These plugins provide necessary tasks.\n  grunt.loadNpmTasks('grunt-contrib-sass');\n\
+    grunt.loadNpmTasks('grunt-bower-install');\n\n// Default task.\n  grunt.registerTask('default',\
+  \ ['sass', 'bower-install']);\n};\n```\n\n清单 3-26 引入了一个新任务 `bowerInstall`，其目标是 `dist`。这个目标有几个选项，第一个是\
+  \ `src`。`grunt-bower-install` 插件会更新 HTML；因此它不需要目标文件。接下来的两个选项决定了哪些依赖应该被注入到 HTML 中。`Dependencies`\
+  \ 是生产和开发依赖，而 `devDependencies` 则仅与开发所需的 `Bower` 包相关。最后一个选项是 `exclude`，在我们的例子中是空的，但可以用来排除特定库，使其不被插件处理。该插件还有许多其他可用选项，包括向\
+  \ Sass 文件注入导入语句的能力。\n\n在项目上运行该任务之前，还有最后一步：更新 HTML。清单 3-27 包含了我们在本章开头首次看到的 HTML 文件，但已从页脚中移除了\
+  \ `jQuery`。取而代之的是添加了一条新的注释，供 `wiredep` 在处理 HTML 文件时使用。\n\n***清单 3-27***. 支持 grunt-bower-install\
+  \ 插件的 HTML 修改\n\n```\n<!doctype html>\n<html class=\"no-js\">\n<head>\n<meta charset=\"\
+  utf-8\">\n<meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\">\n<title>Pro\
+  \ Grunt.js: Todo List</title>\n<meta name=\"description\" content=\"\">\n<meta name=\"\
+  viewport\" content=\"width=device-width, initial-scale=1\">\n\n<!-- bower:css -->\n\
+  <!-- endbower -->\n<link rel=\"stylesheet\" href=\"css/main.css\">\n\n</head>\n\
+  <body>\n    <!--[if lt IE 8]>\n    <p class=\"browsehappy\">You are using an <strong>outdated</strong>\
+  \ browser. Please <a href=\"http://browsehappy.com/\">upgrade your browser</a> to\
+  \ improve your experience.</p>\n    <![endif]-->\n\n<!-- Add your site or application\
+  \ content here -->\n   <h1>Pro Grunt.js</h1>\n   <h2>Todo List</h2>\n\n<!-- bower:js\
+  \ -->\n   <!-- endbower -->\n   <script src=\"js/main.js\"></script>\n</body>\n\
+  </html>\n```\n\n在 `body` 末尾的最后一个 `script` 标签之前添加的注释，是 `wiredep` 用来将 `Bower` 组件的引用注入到输出\
+  \ HTML 文件中的占位符。要运行该任务，请使用 清单 3-28 中所示的命令。\n\n***清单 3-28***. 运行 grunt-bower-install\n\
+  \n```\ngrunt bowerInstall\n```\n\n当任务运行时，它会通知其在运行时更新了哪些文件。在我们的示例中，这应该是 `index.html`\
+  \ 文件。任务完成后，如果你打开 `index.html` 文件，你会发现对 `jQuery`、`Backbone.js` 和 `Underscore.js`\
+  \ 的引用已被添加到 `bower:js` 注释之间。清单 3-29 包含了任务运行后的 HTML 片段。\n\n***清单 3-29***. Grunt 任务执行后的\
+  \ index.html 片段\n\n```\n<!-- bower:js -->\n<script src=\"build/bower_components/jquery/dist/jquery.js\"\
+  ></script>\n<script src=\"build/bower_components/underscore/underscore.js\"></script>\n\
+  <script src=\"build/bower_components/backbone/backbone.js\"></script>\n<!-- endbower\
+  \ -->\n```\n\n目前看来，这或许没什么用，但想象一个场景：你在三个月后回到一个项目中。你有一个想要在项目中使用的新的框架。只需两个命令就能将其下载并注入到你的页面中。\n\
+  \n#### 代码检查\n\n到目前为止，我们已经看到了如何生成 CSS 和导入第三方库。这两个任务都会生成一些输出或修改项目中的某个文件。在本节中，你将看到\
+  \ `Grunt` 如何提供工具来验证我们的 HTML 和 CSS，使其遵循一套通用的规则。\n\n\n\n##### 为团队制定 CSS 标准\n\n尽管开发者社区普遍认为，随着浏览器厂商在官方标准最终确定前就努力实现最新特性（这可能会使验证复杂化），HTML\
+  \ 验证已失去一些相关性，但这不应阻止团队为 HTML 和 CSS 设定一个基线标准。拥有完善标准的团队能更快地让新成员上手，因为他们有了一套可遵循的规则，且当前的\
+  \ HTML 和 CSS 也遵循着相似的模式。\n\n#### 为你的 CSS 设定标准\n\n让我们介绍来自 Twitter 团队的另一个工具 `RECESS`。`RECESS`\
+  \ 是一个 Node 命令行工具，它可以检查（lint）或从 LESS 文件构建你的 CSS。`RECESS` 会检查你的 CSS，确保样式整洁一致。在执行检查时，它会应用一系列规则检查你的\
+  \ CSS。以下是这些规则的列表：\n\n-   **无 ID**：CSS 不应包含 ID 选择器。\n-   **无 JS 前缀**：CSS 不应包含以 `.js-`\
+  \ 开头的类选择器。\n-   **选择器不过度限定**：CSS 不应包含过度限定的选择器，例如 `div#home.page`。\n-   **无下划线**：CSS\
+  \ 类选择器的名称不应包含下划线。\n-   **无通配选择器**：CSS 不应包含 `*` 选择器。\n-   **无带单位的零值**：CSS 不应包含带有单位的零值属性。例如，`padding:\
+  \ 0px;` 是无效的，而应使用 `padding: 0`。\n-   **严格的属性顺序**：CSS 应遵循 `RECESS` 的属性顺序规则。\n\n`RECESS`\
+  \ 可作为独立的 Node 命令行类工具使用。不过，已经有一个 Grunt 插件包装了该 Node 工具，使得 CSS 检查可以自动化。该 Grunt 插件的名称是\
+  \ `grunt-recess`。列表 3-30 展示了修改后的项目 Gruntfile，其中包含了 `RECESS`。\n\n***列表 3-30***. 修改后的\
+  \ Gruntfile，包含 RECESS\n\n```javascript\n/*global module:false*/\nmodule.exports\
+  \ = function(grunt) {\n\n// Project configuration.\n  grunt.initConfig({\n    //\
+  \ Task configuration.\n    ...\n    recess: {\n      dist: {\n        options: {\n\
+  \          compile: false,\n          noIDs: true\n        },\n        files: {\n\
+  \          'src': 'css/main.css',\n      }\n    }\n  });\n\n// These plugins provide\
+  \ necessary tasks.\n  grunt.loadNpmTasks('grunt-bower-install');\n  grunt.loadNpmTasks('grunt-contrib-sass');\n\
+  \  grunt.loadNpmTasks('grunt-recess');\n\n// Default task.\n  grunt.registerTask('default',\
+  \ ['sass', 'bower-install', 'recess']);\n\n};\n```\n\n在上面的 Gruntfile 中，我们添加了 `RECESS`\
+  \ 任务并附带了一些新配置。为了与其他任务保持一致，我们定义了一个目标 `dist`。对于这个目标，我们将 `compile` 选项设置为 `false`。`RECESS`\
+  \ 能够编译 LESS 和 CSS，并按照其规则重组规则。由于我们通过 Sass 生成 CSS，因此将此选项设置为 `false`。另一个设置的选项是 `noIDs`。这对应于\
+  \ `RECESS` 应用的一组规则。将 `noIDs` 设置为 `true` 将导致 `RECESS` 在 CSS 包含 ID 选择器时报告无效 CSS。这在图\
+  \ 3-4 中展示。\n\n![9781484200148_Fig03-04.jpg](img/00023.jpeg)\n\n图 3-4. 由于 ID 选择器导致的\
+  \ RECESS 任务失败\n\n其余的配置定义了我们要 `RECESS` 处理的文件。由于此任务不生成文件输出，我们只需定义源文件，不需要目标文件。添加此任务后，每次运行\
+  \ `grunt` 命令时，我们的 Sass 将被编译，CSS 输出到 `css/main.css`。之后，`RECESS` 将处理我们的 CSS，以确保其整洁一致。\n\
+  \n目前，`RECESS` 任务只寻找单个 CSS 文件。然而，Grunt 能够在文件路径中使用通配符来匹配多个文件。列表 3-31 演示了如何在文件路径中使用通配符。\n\
+  \n***列表 3-31***. 使用通配符匹配多个 CSS 文件\n\n```javascript\nrecess: {\n  dist: {\n    options:\
+  \ {\n      compile: false,\n      noIDs: true\n    },\n    files: {\n      'src':\
+  \ 'css/**/*.css',\n  }\n}\n```\n\n通过做出列表 3-31 中概述的这一小改动，我们可以向 `css` 文件夹添加更多 CSS\
+  \ 文件。除了向 `css` 文件夹添加额外的 CSS 文件外，我们还可以添加包含 CSS 文件的文件夹，Grunt 也将处理这些文件。\n\n我希望，在这一点上，你能开始看到我们如何将不同的任务组合在一起，为整个团队创建一个可重复的流程。\n\
+  \n#### 前缀（Prefixing）\n\n目前，我们已经拥有一个可重复且可靠的 CSS 生成和检查流程。接下来，我们将探讨如何利用 Grunt 来消除为\
+  \ CSS 添加前缀的需求。\n\nCSS 前缀由浏览器厂商引入，旨在让前端工程师能够使用 W3C 标准尚未最终确定的涌现特性。例如，当浏览器厂商最初引入 CSS\
+  \ 渐变时，标准仍在变化中，且实现方式各不相同。每个浏览器厂商允许开发者通过为 CSS 属性添加前缀，使用自己特定的实现来应用相同的视觉效果。列表 3-32 演示了\
+  \ CSS3 渐变的 CSS 前缀。\n\n***列表 3-32***. CSS 前缀\n\n```css\n.super-gradient {\n    background:\
+  \ #7abcff;\n    background: -moz-linear-gradient(-45deg,  #7abcff 0%, #60abf8 44%,\
+  \ #4096ee 100%);\n    background: -webkit-gradient(linear, left top, right bottom,\
+  \ color-stop(0%,#7abcff),\n    color-stop(44%,#60abf8), color-stop(100%,#4096ee));\n\
+  \    background: -webkit-linear-gradient(-45deg,  #7abcff 0%,#60abf8 44%,#4096ee\
+  \ 100%);\n    background: -o-linear-gradient(-45deg,  #7abcff 0%,#60abf8 44%,#4096ee\
+  \ 100%);\n    background: -ms-linear-gradient(-45deg,  #7abcff 0%,#60abf8 44%,#4096ee\
+  \ 100%);\n    background: linear-gradient(135deg,  #7abcff 0%,#60abf8 44%,#4096ee\
+  \ 100%);\n}\n```\n\n列表 3-32 演示了线性 CSS 渐变的不同实现，特别是 FireFox（以 `-moz` 为前缀）和 webkit（以\
+  \ `-webkit` 为前缀）之间的差异。你可能已经注意到，上述 CSS 中存在大量重复。社区中的一些开发者反对使用前缀，因为它们会导致 CSS 臃肿，因为每个属性都必须为每个浏览器重复，这很容易使网站所需的\
+  \ CSS 变得臃肿。\n\n为了解决重复这一首要问题，有一个名为 `autoprefixer` 的工具。你可以通过其名称猜到它的功能，但为了澄清，`autoprefixer`\
+  \ 解析 CSS，并使用来自流行网站 Can I Use（http://caniuse.com/）的值，为 CSS 规则添加特定于厂商的前缀。`Autoprefixer`\
+  \ 是一个 Node 应用程序，可以使用 `npm` 安装，或集成到其他 Node 应用程序中以编程方式使用。列表 3-33 展示了如何在命令行中使用 `autoprefixer`。\n\
+  \n***列表 3-33***. 命令行中的 Autoprefixer\n\n```bash\nautoprefixer styles/main.css\n```\n\
+  \n前面的命令将解析 CSS 样式表，并将特定于厂商的前缀添加到同一文件中。列表 3-34 中的示例展示了使用 `autoprefixer` 前后的对比。\n\n\
+  ***列表 3-34***. 使用 Autoprefixer 时 CSS 的前后对比\n\n```css\n/* Before */\n\nh1 {\n  box-sizing:\
+  \ border-box;\n}\n\n/* After */\n\nh1 {\n  -webkit-box-sizing: border-box;\n  -moz-box-sizing:\
+  \ border-box;\n  box-sizing: border-box;\n}\n```\n\n\n\n从清单 3-34 可以看出，`autoprefixer`可以节省大量时间，因为它会自动添加供应商特定的规则。使用`autoprefixer`的另一个好处是减少了学习每个供应商对新功能具体实现的需求。除了这两个好处外，`autoprefixer`会保持最新状态，因为它使用的是\"\
+  Can I Use\"网站，从而减少了跟踪浏览器实现变化的需求。接下来，我们将看看一个可以自动为 CSS 添加前缀的插件。\n\n有一个 Grunt 插件封装了\
+  \ Node 模块，可以通过 Grunt 运行`autoprefixer`。该插件名为`grunt-autoprefixer`。清单 3-35 展示了`Gruntfile`中的新任务。\n\
+  \n**清单 3-35**. Grunt 任务\n\n```\n/*global module:false*/\nmodule.exports = function(grunt)\
+  \ {\n\n// Project configuration.\n  grunt.initConfig({\n  ...\n    autoprefixer:\
+  \ {\n      dist: {\n        options: {\n           diff: true\n        },\n    \
+  \    src: 'css/main.css',\n      },\n    }\n  });\n\n// These plugins provide necessary\
+  \ tasks.\n  grunt.loadNpmTasks('grunt-contrib-sass');\n  grunt.loadNpmTasks('grunt-bower-install');\n\
+  \  grunt.loadNpmTasks('grunt-recess');\n  grunt.loadNpmTasks('grunt-autoprefixer');\n\
+  \n// Default task.\n  grunt.registerTask('default', ['sass', 'bowerInstall', 'recess',\
+  \ 'autoprefixer']);\n\n};\n```\n\n安装 Grunt 插件`grunt-autoprefixer`并将上述`Gruntfile`应用到项目后，自动添加前缀的过程就自动化了。每次运行\
+  \ Grunt 时，生成的 CSS 都会被解析并传递给`autoprefixer`以添加供应商特定的前缀。在我们的配置中，我们还定义了`diff`选项并将其设置为`true`。当`autoprefixer`修改\
+  \ CSS 时，可以指示它生成一个补丁文件，其中包含源 CSS 与`autoprefixer`生成的 CSS 之间的差异。除此之外，`autoprefixer`可以配置为在生成供应商前缀时针对特定浏览器。这些选项可以通过`options`传递给\
+  \ Grunt 任务。\n\n如前所述，添加前缀有时会不受欢迎，因为它可能导致 CSS 臃肿。在下一节中，我们将研究能够自动压缩 HTML 和 CSS 以提升项目性能的\
+  \ Grunt 任务。\n\n#### 压缩\n\nWeb 应用程序的性能应该是每个开发人员都关心的问题。作为开发人员，你有责任尽最大努力优化应用程序。影响 Web\
+  \ 应用程序加载性能的关键因素之一是页面中资源的大小。例如，大型 CSS 或 JavaScript 文件可能导致性能不佳，因为浏览器下载它们需要更长时间，最终可能阻塞浏览器初始渲染页面。因此，应用程序的开发人员有责任确保其实际系统中交付的资源是经过优化的。\n\
+  \n压缩的目标始终是保留代码的操作特性，同时减少其总体字节占用。在此上下文中，压缩 HTML 和 CSS 意味着通过去除不必要的内容来减少每个资源的大小。如果查看\
+  \ CSS，可以通过多种修改来减小其大小。\n\n- 删除注释\n- 删除空白\n- 删除声明块中的最后一个分号\n- 删除多余的分号\n- 归约零值\n- 去除浮点数值的前导零\n\
+  - 压缩颜色\n- 将`none`转换为零值\n\n幸运的是，多年来已有工具可以自动化这一过程。一个由 Yahoo!开发的流行工具是`YUICompressor`。`YUICompressor`是一个基于\
+  \ Rhino JavaScript 引擎的 Java 工具。不过，`YUICompressor`有一个 Node 移植版本，称为`mincss`。它作为一个\
+  \ Node 模块提供，而不是命令行工具，因此可以集成到你的 Node 应用程序中。\n\n核心 Grunt 团队开发了一个执行类似压缩的 Grunt 任务。然而，这个任务并没有封装`mincss`模块；而是使用了`CleanCSS`。与`mincss`不同，`CleanCSS`提供了一个用于压缩\
+  \ CSS 的命令行接口和一个 Node 模块。这个 Grunt 插件叫做`grunt-contrib-cssmin`。让我们更新项目以包含此插件。清单 3-36\
+  \ 演示了更新后的`Gruntfile`。\n\n**清单 3-36**. 包含`grunt-contrib-cssmin`配置的`Gruntfile`\n\n\
+  ```\n/*global module:false*/\nmodule.exports = function(grunt) {\n\n// Project configuration.\n\
+  \  grunt.initConfig({\n    // Task configuration.\n    ...\n    cssmin: {\n    \
+  \  dist: {\n        files: {\n          'dist/css/main.css': 'css/main.css'\n  \
+  \      }\n      }\n    }\n  });\n\n// These plugins provide necessary tasks.\n \
+  \ grunt.loadNpmTasks('grunt-contrib-sass');\n  grunt.loadNpmTasks('grunt-bower-install');\n\
+  \  grunt.loadNpmTasks('grunt-recess');\n  grunt.loadNpmTasks('grunt-autoprefixer');\n\
+  \  grunt.loadNpmTasks('grunt-contrib-cssmin');\n\n// Default task.\n  grunt.registerTask('default',\
+  \ [\n    'sass',\n    'bowerInstall',\n    'recess',\n    'autoprefixer',\n    'cssmin'\n\
+  \  ]);\n};\n```\n\n与我们之前的配置相比，这里应该没有太大不同。我们添加了`grunt-contrib-cssmin`插件来加载，并将`cssmin`添加到默认任务中。`cssmin`本身的配置声明了一个名为`dist`的目标，它使用`css/main.css`文件（来自`sass`任务的输出）并将压缩后的\
+  \ CSS 输出到新位置`dist/css/main.css`。图 3-5 显示了当前项目运行默认任务的情况。`grunt-contrib-cssmin`插件的输出是最后一个，并且很有帮助地报告了压缩前后\
+  \ CSS 的大小差异。此外，可以配置`grunt-contrib-cssmin`来报告使用 gzip 结合压缩时的大小。为了优化 CSS 的交付，最好使用 gzip\
+  \ 压缩提供内容。\n\n内容的 gzip 压缩通常在 Web 服务器级别处理，因为并非所有客户端都接受 gzip 压缩的内容。大多数现代 Web 服务器支持启用\
+  \ gzip 的指令。在这些服务器的配置中，必须根据内容类型定义哪些文件应被压缩。对于 CSS，你需要为`text/css`启用它。一旦添加，如果客户端请求 CSS\
+  \ 时带有`Content-Encoding`头设置为`gzip`，那么 Web 服务器将在发送给客户端之前使用 gzip 压缩 CSS。\n\n![9781484200148_Fig03-05.jpg](img/00024.jpeg)\n\
+  \n图 3-5. Grunt 默认任务运行多个任务\n\n在进入下一个主题之前，让我们看看我们之前定义规则的 CSS 前后对比。为了可读性，空白没有被去除，但实际上，压缩后的\
+  \ CSS 输出会出现在单行上，并尽可能去除所有空白。清单 3-37 演示了一个已压缩的 CSS 文件。输出 CSS 中的第一个修改是针对`body`选择器的声明。`body`的`color`已通过将颜色从`#333333`更新为`#333`来压缩。第二个修改是去除了`border-top`声明末尾的多余分号。接下来的更新是从输出中删除了注释。在处理复杂\
+  \ CSS 样式表时，注释可以是一个很好的沟通工具。然而，在生产环境中使用 CSS 时，这并不是必需的，去除注释可以减少 CSS 样式表的最终大小。`paragraph`选择器的声明演示了零值的压缩；段落的`padding`从`0px\
+  \ 0px`简化为`0`。浮点数值也被修改，去除了小数点前出现的`0`。对 CSS 的最后修改是去除了每个声明块中的最后一个分号。\n\n\n\n##### 移除未使用或重复的\
+  \ CSS\n\n在发布项目前，还有一个优秀的工具可用于优化 CSS。这个名为 `UnCSS` 的工具用于从样式表中移除未使用的 CSS。`UnCSS` 提供了命令行工具和可集成到现有应用的\
+  \ `Node` 模块。为了分析样式表，`UnCSS` 会执行以下流程：\n\n1.  `PhantomJS`（一个无头浏览器）加载 HTML 文件，并执行其中的\
+  \ JavaScript。\n2.  从生成的 HTML 中提取已使用的样式表。\n3.  使用 `Node` 模块 `css-parse` 将样式表合并并解析规则。\n\
+  4.  使用 `document.querySelector` 过滤出 HTML 中未使用的选择器。\n5.  将剩余的规则转换回 CSS。\n\n***列表\
+  \ 3-37***. 使用 `grunt-contrib-cssmin` 前后的 CSS 对比\n\n```\n/* 之前 */\n\nbody {\n  color:\
+  \ #333333;\n  border-top: 2px solid #2a2a2a;;\n}\n\n/* 某些注释 */\np {\n  margin: 0px\
+  \ 0px;\n  padding: 0.333em 0.6em;\n}\n\nh1 {\n  -webkit-transition: -webkit-transform\
+  \ 1s;\n  transition: transform 1s;\n}\n\n/* 之后 */\n\nbody{color:#333;border-top:2px\
+  \ solid #2a2a2a}\n\np{margin:0;padding:.333em .6em}\n\nh1{-webkit-transition:-webkit-transform\
+  \ 1s;transition:transform 1s}\n```\n\n`UnCSS` 的局限性之一是需要静态 HTML 文件。显然，并非所有 Web 应用都由一组\
+  \ HTML 文件构建而成。对此有一个解决方案：开发一个**模式库**。模式库最好被描述为一种沟通工具，团队可以通过它在应用或网站中迭代 UI 元素。模式库由可在应用中使用的\
+  \ UI 组件组成。每个组件都包含示例 HTML 和 CSS。由于模式库包含了最终构建应用所需的所有 HTML 和 CSS，它提供了一组页面，这些页面应包含你的\
+  \ CSS 中定义的所有选择器。如果任何 CSS 在这些页面中显示为未使用，那么你的应用就不需要它。MailChimp 的 UX 团队制作了一个优秀的模式库，你可以通过\
+  \ [`ux.mailchimp.com/patterns/`](http://ux.mailchimp.com/patterns/) 在线查看。\n\n`Addy\
+  \ Osmani` 编写了一个封装了 `UnCSS` 的 `Grunt` 插件，允许用户将 `UnCSS` 集成到他们的构建流程中。在该 `Grunt` 插件的文档中，`Addy`\
+  \ 指出像 `Twitter Bootstrap` 和 `TopCoat` 这样的框架被广泛使用。然而，在大多数网站中，这些大型框架只使用了其中的 10%。列表\
+  \ 3-38 包含了 `grunt-uncss` 的配置。`uncss` 任务的配置与我们之前看到的其他任务略有不同，因为源文件类型与目标文件类型不同。`uncss`\
+  \ 任务接收一个 HTML 文件数组作为输入，输出是一个单一的 CSS 文件。你可能想知道，如果你的 HTML 文件引用了多个 CSS 文件会发生什么。由于 CSS\
+  \ 被 `UnCSS` 标记化，在其流程的第 5 阶段，所有 CSS 会被转换回 CSS 并合并到一个全局样式表中。因此，如果你正在使用像 `Bootstrap`\
+  \ 这样的 CSS 框架，所有来自 `Bootstrap` 的未使用 CSS 都会被移除，并与你的应用代码合并。这是两全其美的做法：你既能使用强大的 CSS 框架来启动项目，又能保持应用\
+  \ CSS 的精简。\n\n让我们更新应用以包含 `Bootstrap`，来演示此解决方案的灵活性。要在项目中包含 `Bootstrap`，我们可以使用 `Bower`。列表\
+  \ 3-38 显示了用于安装 `Bootstrap` 的命令。安装 `Bootstrap` 后，运行 `Grunt` 将执行我们的 `bowerInstall`\
+  \ 任务，该任务会自动将 `Twitter Bootstrap` 注入到 HTML 文档的 `<head>` 中。如列表 3-39 所示。\n\n***列表 3-38***.\
+  \ 配置了 `uncss` 任务的 Gruntfile\n\n```\n...\n    cssmin: {\n      dist: {\n        options:\
+  \ {\n          report: 'gzip'\n        },\n        files: {\n          'dist/css/main.css':\
+  \ 'dist/css/main.css'\n        }\n      }\n    },\n\nuncss: {\n      dist: {\n \
+  \       files: {\n          'dist/css/main.css': ['index.html']\n        }\n   \
+  \   }\n    }\n  });\n\n// 这些插件提供了必要的任务。\n  ...\n  grunt.loadNpmTasks('grunt-uncss');\n\
+  \n// 默认任务。\n  grunt.registerTask('default', [\n    'sass',\n    'bowerInstall',\n\
+  \    'recess',\n    'autoprefixer',\n    'uncss',\n    'cssmin'\n  ]);\n};\n```\n\
+  \n***列表 3-39***. 使用 `Bower` 安装 `Twitter Bootstrap`\n\n```\nbower install  bootstrap\
+  \ –-save-dev\n```\n\n现在 `Bootstrap` 已安装到我们的应用中，如果重新运行 `grunt` 任务，你应该会注意到 CSS 文件大小的变化。之前，我们的\
+  \ CSS 只有几个字节。现在，CSS 的初始大小跃升至约 120KB。在 `UnCSS` 处理完我们的 CSS 后，大小从 120KB 显著减小到 2.39KB。`dist/css/main.css`\
+  \ 中的 CSS 输出包含了 `Bootstrap` 的 CSS 和我们应用的 CSS，合并为一个文件。这是另一个巨大的性能胜利，因为我们应该努力减少页面中 CSS\
+  \ 文件的数量。通常，每个页面的请求越少越好。由于建立新连接时的延迟成本，更少的请求通常能提升性能。这对于使用较慢网络连接访问网站的移动设备尤其重要。如需更深入地学习和研究浏览器性能，我推荐阅读\
+  \ Ilya Grigorik 的《高性能浏览器网络》（O'Reilly Media, 2013）。\n\n正如你在列表 3-40 中看到的，我们的 `index.html`\
+  \ 文件目前仍然引用着未优化的 CSS 文件。理想情况下，在将应用发布给公众之前，我们希望将引用更新为优化的 CSS 文件。幸运的是，`Grunt` 也可以帮助完成这项任务。让我们看看怎么做。\n\
+  \n***列表 3-40***. 自动更新并注入 `Bootstrap` 后的 HTML `<head>` 部分\n\n```\n<head>\n<meta charset=\"\
+  utf-8\">\n<meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\">\n<title>Pro\
+  \ Grunt.js: Todo List</title>\n<meta name=\"description\" content=\"\">\n<meta name=\"\
+  viewport\" content=\"width=device-width, initial-scale=1\">\n\n<!-- bower:css -->\n\
+  <link rel=\"stylesheet\" href=\"build/bower_components/bootstrap/dist/css/bootstrap.css\"\
+  \ />\n<!-- endbower -->\n<link rel=\"stylesheet\" href=\"css/main.css\">\n</head>\n\
+  ```\n\n#### 为生产环境打包你的应用\n\n如前一节所述，我们现在有了优化的 CSS 文件，但它并未在当前项目中使用。由于 `Grunt` 的工作原则是多个任务协作处理一组文件，每个任务修改文件并产生输出供下一个任务使用，因此我们必须引入一个任务，用优化后的\
+  \ CSS 的引用更新我们的 HTML，这与我们的 `bowerInstall` 任务将 `Bower` 组件的引用注入项目的方式类似。\n\n`Yeoman`\
+  \ 团队创建了一个解决此问题的插件，名为 `grunt-usemin`。这个插件与我们之前遇到的略有不同。它引入了两个任务：`useminPrepare` 和\
+  \ `usemin`。\n\n`useminPrepare` 任务应用于准备文件，以便 `usemin` 任务更新你的 HTML 文件，使其包含对静态资源（如\
+  \ CSS）的正确引用。`Grunt-usemin` 与 `grunt-bower-install` 类似，它使用 HTML 中的特殊 HTML 注释来巧妙地替换文件引用。`grunt-usemin`\
+  \ 插件还为我们的项目带来了一些“魔法”，因为它会自动生成我们任务的配置，例如合并和压缩任务。因此，我们可以从 `Gruntfile` 中移除 `cssmin`\
+  \ 配置，因为 `usemin` 会为我们自动生成。\n\n列表 3-41 展示了 HTML 为支持 `usemin` 所需的修改，特别是为了支持重写资源名称而添加的区块。\n\
+  \n\n***清单 3-41***. 为 `usemin` 添加了额外区块的修改版 `index.html`\n\n```\n<head>\n<meta charset=\"\
+  utf-8\">\n<meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\">\n<title>Pro\
+  \ Grunt.js: Todo List</title>\n<meta name=\"description\" content=\"\">\n<meta name=\"\
+  viewport\" content=\"width=device-width, initial-scale=1\">\n\n<!-- build:css css/main.css\
+  \ -->\n<!-- bower:css -->\n<link rel=\"stylesheet\" href=\"build/bower_components/bootstrap/dist/css/bootstrap.css\"\
+  \ />\n<!-- endbower -->\n<link rel=\"stylesheet\" href=\"css/main.css\">\n<!-- endbuild\
+  \ -->\n</head>\n```\n\n现在我们已经准备好与 `usemin` 配合使用的 HTML 文件，接下来需要在 `Gruntfile` 中配置\
+  \ `useminPrepare` 和 `usemin` 任务。清单 3-42 展示了 `usemin` 任务的输出，最值得注意的是重写后的路径，用于支持新的优化\
+  \ CSS。\n\n***清单 3-42***. 添加了 `useminPrepare` 和 `usemin` 的 `Gruntfile`\n\n```\ncopy:\
+  \ {\n    dist: {\n      expand: true,\n      cwd: 'app/',\n      src: 'index.html',\n\
+  \      dest: 'dist/'\n    }\n  },\n\nuseminPrepare: {\n    dist: {\n      src: 'app/index.html',\n\
+  \      dest: 'dist/'\n    }\n  },\n\nusemin: {\n    html: 'dist/index.html'\n  }\n\
+  \n// 默认任务。\ngrunt.registerTask('default', [\n  'useminPrepare',\n  'sass',\n  'bowerInstall',\n\
+  \  'autoprefixer',\n  'recess',\n  'uncss',\n  'usemin'\n]);\n```\n\n如你所见，`useminPrepare`\
+  \ 和 `usemin` 本身的实际配置相当精简。我们告诉 `usemin` 用于准备的 HTML 文件位置，以及后续要由 `usemin` 处理的文件位置。目前，我们的\
+  \ `dist` 文件夹中还没有 `index.html` 文件；因此，我们需要引入一个新的 Grunt 插件，名为 `grunt-contrib-copy`。该插件用于在项目内部将文件或文件夹从一个位置复制到另一个位置。在我们的项目中，我们将使用\
+  \ `grunt-contrib-copy` 将 `index.html` 文件从 `app/index.html` 复制到 `dist/index.html`。然后，该文件将由\
+  \ `usemin` 处理，以更新对优化后 CSS 的引用。在 `dist` 文件夹中拥有 `index.html` 文件，使我们能够在构建包含正确引用了优化\
+  \ CSS 的发布版本之前，先使用应用的开发副本进行本地工作。清单 3-43 包含了 `grunt-contrib-copy` 的配置。\n\n***清单 3-43***.\
+  \ `<head>` 元素已被修改为包含对优化后 CSS 的引用\n\n```\n<head>\n<meta charset=\"utf-8\">\n<meta\
+  \ http-equiv=\"X-UA-Compatible\" content=\"IE=edge\">\n<title>Pro Grunt.js: Todo\
+  \ List</title>\n<meta name=\"description\" content=\"\">\n<meta name=\"viewport\"\
+  \ content=\"width=device-width, initial-scale=1\">\n<link rel=\"stylesheet\" href=\"\
+  css/main.css\">\n</head>\n```\n\n如你所见，`index.html` 现在包含了对优化后 CSS 的引用，已准备好部署到生产环境。在下一节中，我们将探讨静态资源优化缓存的资源版本控制，以及\
+  \ Grunt 如何在这一过程中为我们提供帮助。\n\n#### 版本控制\n\n在本章的最后一节中，我们将了解如何使用 Grunt 进一步提升生产环境代码的性能。本节将探讨如何交付带版本号的资源。交付带版本号的资源的主要原因是能够为我们的静态资源安全地设置遥远的未来缓存头。设置遥远的未来缓存头可以提高性能，因为客户端可以缓存你的资源副本，从而避免每次加载页面时都必须返回服务器重新请求资源。通常，我们会为\
+  \ CSS、Web 字体和 JavaScript 等资源设置一个遥远的未来过期头。有关过期头配置的 Web 服务器示例，请查看 HTML5 Boilerplate\
+  \ 的 `.htaccess` 文件。这为使用 Apache Web 服务器的用户提供了一个很好的起点，它将大多数静态资源的过期时间设置为从它们被访问之时起的一个月后。\n\
+  \n如前所述，Grunt 可以帮助通过设置遥远的未来缓存头来交付静态资源。简单地发送一个遥远的未来日期作为过期头可能存在风险。对该资源的任何更新都不会被客户端获取，直到缓存过期并且客户端从服务器重新请求该资源为止。解决这个问题有几种方法。一种流行的方法是为资源的\
+  \ URL 添加一个缓存破坏器。当资源本身发生变化时，缓存破坏器会更新，强制客户端从服务器重新请求该资源。清单 3-44 显示了一个附加了缓存破坏器的 CSS\
+  \ 文件的示例 URL。\n\n***清单 3-44***. 附加了缓存破坏器的 CSS 示例 URL\n\n```\nhttp://mysite.com/styles/app.css?c=20140303\n\
+  ```\n\n不幸的是，某些代理服务器默认配置为不缓存包含查询字符串的 URL。因此，我们需要一种替代方法。清单 3-45 展示了这两种方法。\n\n***清单\
+  \ 3-45***. 替代资源版本控制方法\n\n```\nhttp://mysite.com/0.1.0/styles/app.css\nhttp://mysite.com/styles/app.0.1.0.css\n\
+  ```\n\n第一种方法是将版本号插入到资源的路径中。这也是 BBC 当前对其资源进行版本控制所采用的方法。例如，BBC 主页有以下引用：[`static.bbci.co.uk/h4clock/0.69.3/style/h4clock.css`](http://static.bbci.co.uk/h4clock/0.69.3/style/h4clock.css)。在此例中，版本号为\
+  \ `0.69.3`。另一种方法，即将版本号包含在资源文件名中，是 jQuery 在其 CDN 上提供 jQuery 服务时所使用的方式。例如，在撰写本文时，最新版\
+  \ jQuery 的 URL 是 [`code.jquery.com/jquery-1.11.0.min.js`](http://code.jquery.com/jquery-1.11.0.min.js)。\n\
+  \n有一个名为 `grunt-rev` 的 Grunt 插件可用于执行资源版本化生产。`grunt-rev` 插件基于文件内容生成一个哈希值。它提供了多种生成哈希值的算法，例如\
+  \ `md5` 和 `sha256`。为文件生成的哈希值会被注入到文件扩展名之前。除此之外，`grunt-rev` 可以与上一节介绍的 `usemin` 插件完美配合。清单\
+  \ 3-46 展示了这两个文件的最新配置。\n\n***清单 3-46***. 静态资源版本控制的配置\n\n```\nrev: {\n  dist: {\n\
+  \    src: 'dist/css/main.css'\n  }\n}\n```\n\n如你所见，作为早期任务的一部分在临时文件夹中生成的 CSS，现在被\
+  \ `rev` 任务获取并放入 `dist/css` 文件夹。完成后，`usemin` 会修改 `dist` 文件夹中的 `index.html` 文件，使其包含指向新版化\
+  \ CSS 的路径。在这种情况下，使用哈希代替时间戳的好处是，哈希只应在文件内容本身发生更改时才改变。当有多个团队生成相同的静态资源时，这一点尤为重要。你只希望当文件内容发生真正更改时，资源名称才发生变化。\n\
+  \n### 总结\n\n在本章中，我们探讨了在使用 HTML 和 CSS 时，如何使用 Grunt 来简化我们的开发工作流。我们从 CSS 预处理器的简要介绍以及\
+  \ Grunt 如何帮助我们编译 CSS 开始。之后，我们转向 Bower，一个强大的前端依赖管理器，它可以与 Grunt 集成，使我们在项目中轻松管理前端库。本章的剩余部分介绍了一些可用于优化\
+  \ HTML 和 CSS 的插件，以便将其发布到公共网络。\n\n在下一章中，我们将继续了解 Grunt 在应对前端技术时如何提供帮助，届时你将发现一套强大的插件，用于辅助\
+  \ JavaScript 开发。\n\n"
+- "# 第 4 章\n\n![image](img/00005.jpeg)\n\n## 使用 Grunt 处理 JavaScript\n\n```markdown\n\
+  \n### Grunt 与 JavaScript 模块化开发\n\n至此，我已经介绍了如何在一个项目上设置`Grunt`，并且你已经看到了它在处理 CSS 和\
+  \ HTML 时的作用。接下来，我们将开始探索在 JavaScript 开发中使用`Grunt`的好处。正如最初介绍`Grunt`时提到的，它是基于`Node.js`平台（一个\
+  \ JavaScript 引擎）编写的。这一事实使得`Grunt`成为处理 JavaScript 工作时的完美工具，因为开发者可以利用现有的`Node.js`模块快速处理插件以扩展他们的工作流程。在本章中，我将介绍`Grunt`如何帮助进行\
+  \ JavaScript 模板化、处理 JavaScript 模块以及自动化测试。首先，我将概述我们计划如何扩展待办事项列表应用，并使用`Grunt`来自动化我们的工作流程和构建过程。\n\
+  \n#### 增强我们的待办事项列表应用\n\n目前，我们的待办事项列表应用仍然非常基础。我们已经有了一个完全使用`Grunt`构建的 HTML 和 CSS 大纲。在本章中，我们将继续在此基础上进行构建，使用`Grunt`添加一个由流行的\
+  \ JavaScript 框架`BackBone.js`驱动的丰富用户界面。此外，我们将研究如何测试我们的应用、生成文档，以及通过 lint 和压缩 JavaScript\
+  \ 来为生产环境构建我们的应用。\n\n首先，让我们使用`Bower`安装`Backbone.js`。图 4-1 演示了通过`Bower`安装`Backbone`的过程。\n\
+  \n![9781484200148_Fig04-01.jpg](img/00025.jpeg)\n\n图 4-1 安装`Backbone.js`也会导致安装`underscore.js`，因为`Backbone`依赖于这个库。\n\
+  \n接下来，我们需要更新我们的应用。运行`Grunt`将更新项目根目录下的`index.html`文件，以包含对`Backbone.js`和`underscore.js`的引用。\n\
+  \n`Backbone.js`提供了一种 MV* 架构，允许开发者将应用逻辑划分为逻辑部分。它松散地遵循了许多现代 Web 应用框架（如 Ruby on Rails）所遵循的相同模式。这将使我们能够以模块化的方式开发待办事项应用：一个模块负责存储数据，另一个负责展示数据，再另一个负责控制应用流程。这很好地引出了`Grunt.js`如何帮助我们使用模块开发\
+  \ JavaScript 应用并优化它们以便交付到生产环境的话题。\n\n#### JavaScript 模块\n\n使用不同模块开发应用的好处是众所周知的。模块化软件通常能提高可维护性，因为每个模块被设计为执行单一任务，并且可以与系统的其他部分解耦。此外，模块有助于封装功能，对模块用户隐藏实现细节。这使得修改模块内部结构变得更容易，而不会影响系统的其他部分。\n\
+  \n大多数现代编程语言原生支持分发和导入模块，但遗憾的是，当前版本的 JavaScript 并不支持。然而，ECMAScript 6（也称为`Harmony`或`ES6`），即下一版本的\
+  \ JavaScript，将支持将模块导入到我们的 JavaScript 应用中。虽然本文编写时浏览器还不支持 ES6 模块加载，但我们仍然可以使用框架和工具来开始在\
+  \ JavaScript 应用中使用模块。\n\n除了 ES6 定义的模块格式外，目前还有两种其他流行的格式：AMD 和 CommonJS。在了解`Grunt.js`如何帮助我们利用\
+  \ JavaScript 应用中模块的强大功能之前，让我们先简要了解一下每种格式。\n\n##### AMD\n\nAMD 代表 *Asynchronous Module\
+  \ Definition*（异步模块定义），旨在让 JavaScript 开发者现在就能在浏览器中使用模块。AMD 源于 Dojo 框架在使用 XHR + eval\
+  \ 过程中的实际经验，并试图避免这些方法的弱点。AMD 格式规定了如何定义模块以及要异步加载的依赖关系。\n\n与传统的网页 JavaScript 方法相比，AMD\
+  \ 提供了许多优势。不再需要多个`script`标签和拥挤的全局命名空间，而是使用一个单一的 JavaScript 应用文件，所有其他模块都异步加载。每个模块封装了自己的功能，并且必须显式地返回一个接口供其他模块使用。\n\
+  \n定义和使用 AMD 模块时有两个基本概念。第一个是`define`函数。`define`函数提供了一种命名模块、声明依赖关系和模块实现的方法。清单 4-1\
+  \ 展示了一个非常基础的 AMD 模块，它返回两个属性：`keys`和`cities`。清单 4-1 演示了 AMD 模块的一些基本方面。`define`函数用于定义我们的模块，它接受三个参数：模块名称、模块依赖关系以及包含模块实现的回调函数。在这个例子中，我们将模块命名为`simpleModule`，并定义了对`underscore`框架的单一依赖。最后一个参数是模块的实现。需要注意的是，`underscore`作为参数传递给了我们的回调函数，以便在模块中使用它。通过允许依赖项被传递到模块的作用域内，就不需要将模块分配给全局命名空间。这减少了模块之间副作用的风险，因为每个模块只访问其作用域内的变量。\n\
+  \n***清单 4-1*** 一个基础的 AMD 模块\n\n```\ndefine(\n  'simpleModule',\n  ['/underscore'],\n\
+  \  function(_) {\n\nvar places = {\n      'nyc': 'New York',\n      'lon': 'London'\n\
+  \    };\n\nreturn {\n        keys: _.keys(places),\n        cities: _.values(places).sort()\n\
+  \    };\n});\n```\n\n在清单 4-1 中，返回了一个包含两个值`keys`和`cities`的对象。然而，AMD 并没有规定模块必须返回的类型。例如，模块可以返回一个单一的值，或者一个可以稍后执行的函数。在结束对定义\
+  \ AMD 模块的介绍之前，重要的是要注意最佳实践是不命名模块，并且每个 AMD 模块都应该定义在自己的文件中。通过应用这两个原则，模块的可移植性会提高，其他开发者可以将模块移动到不同的路径，从而为模块赋予不同的名称/ID。\n\
+  \n现在我们有了一个定义的模块，我们需要一种方法将它包含在我们的应用中，以便可以使用它。AMD 模块的另一个基本概念是`require`函数。`require`函数用于加载模块。清单\
+  \ 4-2 演示了一个加载并使用清单 4-1 中定义的模块的小型 JavaScript 应用。\n\n***清单 4-2*** 使用`require`加载和使用其他模块\n\
+  \n```\ndefine(['jquery'], function($) {\n  require(['data/cities'], function(data)\
+  \ {\n    $('#cities').text(data.cities.join(', '));\n  });\n});\n```\n\n在清单 4-2\
+  \ 中，我们首次看到`require`函数的使用。在这个特定的例子中，我们是在一个新模块的作用域内使用`require`。该模块依赖于`jQuery`，然后使用`require`函数加载我们在清单\
+  \ 4-1 中定义的模块。到目前为止，我们还没有探讨模块 ID 的话题。在清单 4-2 中，我们使用模块 ID `data/cities`加载了（在清单 4-1\
+  \ 中定义的）模块。模块 ID 可以被视为相当于文件夹路径。为了帮助说明这一点，图 4-2 展示了一个文件夹结构，代表了清单 4-2 中的例子。\n\n![9781484200148_Fig04-02.jpg](img/00026.jpeg)\n\
+  \n```\n\n\n图 4-2. 清单 4-1 和 4-2 中的示例演示了模块 ID\n\n在清单 4-2 的示例中，我们使用了模块 ID `data/cities`，这与图\
+  \ 4-2 中突出显示的文件夹结构相匹配。模块 ID 中的`data`部分代表文件夹，而`cities`部分则代表文件`cities.js`。\n\n到目前为止，我已经讨论了关于\
+  \ AMD 模块的核心概念，但还没有讨论实际的模块加载。有两个流行的 JavaScript 框架实现了 AMD 模块加载：`require.js`和`curl.js`。在本书的剩余部分，我们将使用`require.js`来加载\
+  \ AMD 模块。可以使用 Bower 将`require.js`添加到项目中，如图 4-3 所示。\n\n![9781484200148_Fig04-03.jpg](img/00027.jpeg)\n\
+  \n图 4-3. 使用 Bower 将 require.js 添加到项目中\n\n在项目上运行`grunt`之后，`require.js`现在应该已被加载到我们的示例应用程序中。在研究如何将`require.js`完全集成到项目之前，让我们先探索另一种\
+  \ JavaScript 模块化格式：CommonJS。\n\n##### CommonJS\n\nCommonJS 是另一种 JavaScript 模块化格式，旨在通过指定一个用于声明服务端模块的简单\
+  \ API，来标准化模块和包。CommonJS 规范不涉及 IO 和文件系统等更广泛的问题。在第 2 章首次介绍 Node.js 模块时，已经讨论过 CommonJS。CommonJS\
+  \ 模块的结构比 AMD 模块更简单，因为它没有包装函数。相反，功能通过一个`exports`变量提供给依赖代码。要使用一个模块，可以使用`require()`函数；然而，由于模块不是异步加载的，它们会立即返回。清单\
+  \ 4-3 演示了清单 4-1 中模块的 CommonJS 实现。\n\n***清单 4-3***. 简单地点模块的 CommonJS 实现\n\n```\n\
+  var _ = require('underscore');\n\nvar places = {\n  \"nyc\": \"New York\",\n  \"\
+  lon\": \"London\"\n};\n\nexports.data = {\n  keys: _.keys(places),\n  cities: _.values(places).sort()\n\
+  };\n```\n\n清单 4-3 中的模块提供了与清单 4-1 中定义的模块相同的功能。此实现的关键区别在于我们如何定义依赖关系和暴露模块功能。依赖关系通过使用`require()`函数加载，而功能则通过使用`exports`变量暴露，该变量在模块被包含到应用程序中时会被注入。\
+  \ 清单 4-4 演示了我们这个非常简单的 CommonJS 模块的用法。\n\n***清单 4-4***. 演示 CommonJS 模块的用法\n\n```\n\
+  'use strict';\n\nvar data = require('./data/cities').data;\nconsole.log(data.cities.join(',\
+  \ '));\n```\n\n如前所述，CommonJS 旨在用于服务端，而非浏览器中。因此，清单 4-4 只是将城市列表输出到控制台，而不是将它们插入到页面中。然而，这两个模块提供的实际功能是相同的。在我们开始探索如何在\
+  \ Grunt.js 工作流中使用 AMD 模块之前，需要注意的是，现在有一个新的通用模块加载器——称为 Browserify——可用。Browserify 允许您开发\
+  \ CommonJS 模块，然后将它们打包成一个单独的 JavaScript 文件加载到浏览器中。这带来了额外的好处：无需修改即可在服务器端和客户端使用相同的\
+  \ JavaScript。Browserify 还构思了转换器，允许将 CommonJS 和 AMD 模块加载到同一个应用程序中。虽然混合使用不同模块格式来开发应用程序是一种好做法，但如果您最喜欢的\
+  \ JavaScript 前端框架仅作为 AMD 模块发布，这会非常方便。\n\n#### 结合 Grunt.js 和 JavaScript 模块\n\n现在让我们修改我们的应用程序，使其在开发过程中使用`require.js`来加载\
+  \ JavaScript 模块。这使我们能够以模块化的功能来开发应用程序，鼓励我们不要在模块之间混合职责，从而基本上实现一组更松散耦合的模块。如清单 4-5 所示，我们的应用程序包含了\
+  \ jQuery、Bootstrap、Underscore.js、Backbone.js 和`require.js`。\n\n***清单 4-5***. 当前应用程序中的\
+  \ JavaScript 包含项\n\n```\n<!-- build:js js/app.js -->\n<!-- bower:js -->\n<script\
+  \ src=\"bower_components/jquery/dist/jquery.js\"></script>\n<script src=\"bower_components/bootstrap/dist/js/bootstrap.js\"\
+  ></script>\n<script src=\"bower_components/underscore/underscore.js\"></script>\n\
+  <script src=\"bower_components/backbone/backbone.js\"></script>\n<script src=\"\
+  bower_components/requirejs/require.js\"></script>\n<!-- endbower -->\n<script src=\"\
+  js/main.js\"></script>\n<!-- endbuild -->\n```\n\n虽然这在开发中很有效，但稍后当我们打算将 JavaScript\
+  \ 编译成一个单独的文件以供发布时，可能会遇到一些问题，因为目标库可能与`require.js`使用的库冲突。为了解决这个问题，可以修改 JavaScript\
+  \ 包含项，以使用一个名为`grunt-bower-requirejs`的新 Grunt 插件。`grunt-bower-requirejs`插件类似于`grunt-bower-install`，它会读取你的\
+  \ Bower 组件，并将它们与你的`require.js`路径配置合并。清单 4-6 演示了修改后的`index.html`文件，其中包含使用`grunt-bower-install`插件所需的配置。\n\
+  \n***清单 4-6***. 修改后的 index.html 以支持 require.js\n\n```\n<!-- build:js js/main.js\
+  \ -->\n  <script src=\"bower_components/requirejs/require.js\"></script>\n  <script\
+  \ src=\"js/paths.js\"></script>\n  <script src=\"js/main.js\"></script>\n<!-- endbuild\
+  \ -->\n```\n\n在清单 4-6 中，`index.html`已被修改，移除了`grunt-bower-install`配置。取而代之的是引入了三个\
+  \ script 标签。第一个包含了`require.js`库本身；第二个是一个包含`require.js`路径配置的 JavaScript 文件；最后一个 script\
+  \ 标签加载我们的应用程序。`path.js`文件被`grunt-bower-requirejs`插件用于合并我们的 Bower 组件。清单 4-7 演示了在运行`grunt-bower-requirejs`之前的`path.js`文件。开始时，该文件只需要使用一个空配置对象调用`requirejs.config()`方法。\n\
+  \n***清单 4-7***. 运行 grunt-bower-requirejs 之前的 path.js 文件\n\n```\nrequirejs.config({});\n\
+  ```\n\n\n\n接下来，我们的`Gruntfile.js`必须被修改以支持新的`grunt-bower-requirejs`插件。清单 4-8 演示了添加到`Gruntfile.js`中以支持该新插件的配置。\n\
+  \n**清单 4-8**. 用于`grunt-bower-requirejs`的配置，以使用 Bower 组件维护`require.js`路径\n\n```\n\
+  bower: {\n    dist: {\n      rjsConfig: 'app/js/paths.js',\n      options: {\n \
+  \       baseUrl: 'app/'\n      }\n    }\n}\n```\n\n第一个选项定义了我们的`require.js`配置文件的路径。这将是任务运行时将修改的文件。第二个选项`baseUrl`定义了所有路径的前置\
+  \ URL。当您希望将模块移动到同一项目中的新位置时，例如，在为生产环境构建应用程序时，这非常有用。运行`bower`任务现在应该会修改`path.js`以匹配清单\
+  \ 4-9。这将允许我们在 AMD 模块中使用 Bower 组件。\n\n**清单 4-9**. 配置并运行`grunt-bower-requirejs`后的`path.js`\n\
+  \n```\nrequirejs.config({\n  paths: {\n    backbone: \"bower_components/backbone/backbone\"\
+  ,\n    bootstrap: \"bower_components/bootstrap/dist/js/bootstrap\",\n    jquery:\
+  \ \"bower_components/jquery/dist/jquery\",\n    requirejs: \"bower_components/requirejs/require\"\
+  ,\n    underscore: \"bower_components/underscore/underscore\"\n  },\n  packages:\
+  \ [\n\n]\n});\n```\n\n`index.html`文件中包含的第三个脚本将是我们的主应用程序 JavaScript 模块。这将是加载其他模块和初始化应用程序的起点。清单\
+  \ 4-10 演示了`main.js`文件。\n\n**清单 4-10**. 包含我们初始化代码的`main.js`文件\n\n```\nrequire(['js/app'],\
+  \ function(app) {\n  $(function() {\n    app.init();\n  });\n});\n```\n\n清单 4-10\
+  \ 使用`require`加载名为`js/app`的模块。加载后，使用 jQuery 的`isReady`缩写，然后期望`js/app`模块返回一个`init`函数。清单\
+  \ 4-11 定义了模块`js/app`，我们的第一个 AMD 模块。\n\n**清单 4-11**. 用作应用程序代码起点的应用模块\n\n```\ndefine(function()\
+  \ {\n\nvar initialize = function() {\n    console.log('app.init');\n  };\n\nreturn\
+  \ {\n    init: initialize\n  };\n});\n```\n\n清单 4-11 定义了一个简单的 AMD 模块，目前不依赖于任何其他模块。它定义了一个名为`initialize`的私有方法，并通过`return`语句将其作为`init`函数暴露给模块的用户。如果您现在在您喜欢的浏览器中加载应用程序，您应该会在控制台中看到“app.init”打印出来，如图\
+  \ 4-4 所示。\n\n![9781484200148_Fig04-04.jpg](img/00028.jpeg)\n\n**图 4-4**. 使用`require.js`加载应用模块的演示\n\
+  \n既然我们已经确认应用程序正在加载 AMD 模块，让我们为待办事项应用程序添加一些骨架代码。清单 4-12 列出了组成完整待办事项应用程序的几个新模块。\n\n\
+  **清单 4-12**. 构成完整应用程序的 AMD 模块\n\n```\n// js/app.js\n\ndefine([\n  'js/collections/todos',\n\
+  \  'js/views/form',\n  'js/views/todo-item'\n  ], function(Collection, FormView,\
+  \ TodoView) {\n\nvar initialize = function() {\n    console.log('app.init');\n \
+  \   var todos = new Collection();\n    new FormView().render();\n    new TodoView(todos).render();\n\
+  \  };\n\nreturn {\n    init: initialize\n  };\n});\n\n// js/collections/todos.js\n\
+  \ndefine(['backbone', 'js/models/todo'], function(Backbone, Todo) {\n  return Backbone.Collection.extend({\n\
+  \    model: Todo\n  });\n});\n\n// js/models/todo.js\n\ndefine(['backbone'], function(Backbone)\
+  \ {\n  return Backbone.Model.extend({\n\n});\n});\n\n// js/views/form.js\n\ndefine(['backbone'],\
+  \ function(Backbone) {\n  return Backbone.View.extend({\n\ntagName: 'div',\n\nclassName:\
+  \ 'todo-form',\n\nrender: function() {\n\n}\n  });\n});\n\n// js/views/todo-item.js\n\
+  \ndefine(['backbone'], function(Backbone) {\n  return Backbone.View.extend({\n\n\
+  tagName: 'li',\n\nclassName: 'todo-item',\n\nrender: function() {\n\n}\n  });\n\
+  });\n```\n\n清单 4-12 添加了四个新的 AMD 模块：一个 Backbone 集合、一个模型和两个视图。目前，应用程序功能不多，因为我们还没有为\
+  \ Backbone 视图定义要渲染的模板。然而，它确实建立了应用程序结构，我们可以开始基于此改进工作流程。在当前状态下，向应用程序添加新模块相对容易：创建一个新文件，然后添加对它的引用。但是，我们没有优化生产环境中\
+  \ JavaScript 代码的流程。让我们更新`Gruntfile`以优化出现在`dist`文件夹中的 JavaScript。\n\n首先，让我们引入一个新的`Grunt.js`插件来将我们的`require.js`模块编译到单个文件中。如前一章所述，在生产环境中，您希望尽量减少\
+  \ HTTP 调用次数，这意味着更少的资源。在我们的特定示例中，如果我们能够在生产环境中合并 JavaScript 文件，我们将把连接数从 11 个减少到 1\
+  \ 个。我们将使用的`Grunt.js`插件称为`grunt-contrib-requirejs`。该插件可用于自动化运行`require.js`优化器。`require.js`优化器旨在解析使用\
+  \ AMD 模块的 JavaScript 应用程序，并将这些模块合并到单个文件中。除此之外，优化器还可以使用名为`Uglify`的库来压缩合并后的 JavaScript。清单\
+  \ 4-13 演示了`grunt-contrib-requirejs`的配置。\n\n**清单 4-13**. 添加`grunt-contrib-requirejs`配置\n\
+  \n```\nrequirejs: {\n  dist: {\n    options: {\n      baseUrl: 'app/',\n      name:\
+  \ '../.tmp/concat/js/main',\n      out: 'dist/js/main.js',\n      optimize: 'uglify2',\n\
+  \      paths: {\n        backbone: 'bower_components/backbone/backbone',\n     \
+  \   bootstrap: 'bower_components/bootstrap/dist/js/bootstrap',\n        jquery:\
+  \ 'bower_components/jquery/dist/jquery',\n        requirejs: 'bower_components/requirejs/require',\n\
+  \        underscore: 'bower_components/underscore/underscore',\n        handlebars:\
+  \ 'bower_components/handlebars/handlebars'\n      }\n    }\n  }\n},\n```\n\n新配置设置了一些选项。首先，`baseUrl`设置与应用程序路径匹配，因为我们的应用程序位于`app`文件夹内。这使得`require.js`优化器能够正确找到\
+  \ AMD 模块。下一个配置选项`main`告诉优化器哪个主文件是应用程序的起点。这指向`.tmp`目录，因为我们想要将 AMD 模块与作为`usemin`插件一部分生成的合并\
+  \ JavaScript 结合起来。因此，`requirejs`任务必须在`concat`任务完成后运行。`out`选项，如您所料，指定了任务的输出应放置的位置。最后，该任务提供了指定应用哪种优化的能力。在我们的配置中，我们选择了`UglifyJS2`。要禁用优化，可以传递`none`值。\n\
+  \n将此配置添加到您的`Gruntfile.js`文件后，您还需要将此任务添加到默认任务中。清单 4-14 显示了更新后的默认任务。\n\n**清单 4-14**.\
+  \ 修改后的默认任务，包含`grunt-contrib-requirejs`\n\n```\ngrunt.loadNpmTasks('grunt-contrib-requirejs');\n\
+  \n// Default task.\ngrunt.registerTask('default', [\n  'useminPrepare',\n  'sass',\n\
+  \  'bowerInstall',\n  'autoprefixer',\n  'recess',\n  'uncss',\n  'copy',\n  'cssmin',\n\
+  \  'concat',\n  'requirejs',\n  'rev',\n  'usemin'\n]);\n```\n\n\n\n#### 注意任务顺序\n\
+  \n必须注意任务的执行顺序。我们必须将`requirejs`任务放在`concat`之后，以确保在运行`requirejs`任务之前，我们的应用程序文件已经拼接完成并放入`.tmp`文件夹。现在，新任务已加载，并且`requirejs`任务已添加到默认任务中，运行`grunt`应该会生成`js/main.js`文件。\n\
+  \n在进入下一个主题之前，我们需要进一步优化输出到`dist`文件夹的 JavaScript 文件。我们还必须修改`grunt-rev`任务，使其包含我们的 JavaScript\
+  \ 文件。这是一个小改动，用于确保`dist`目标与清单 4-15 中的目标一致。\n\n***清单 4-15***。更新`grunt-rev`以包含 JavaScript，确保缓存有效\n\
+  \n```\nrev: {\n  dist: {\n    src: ['dist/css/main.css', 'dist/js/main.js']\n  }\n\
+  },\n```\n\n#### 清理构建过程\n\n随着构建过程的增加，可能会有一些构建产物残留下来。一个常见的例子是，一个临时文件在压缩之前，但在合并过程中生成之后。这些文件通常是无害的，因为它们通常不会出现在生产代码中。然而，最佳实践要求确保每次构建都是干净的。我们可以引入一个任务来解决这个问题，我们将添加的是`grunt-contrib-clean`。`grunt-contrib-clean`插件可用于删除特定文件或递归清理目录。清单\
+  \ 4-16 展示了用于待办事项应用的配置。\n\n***清单 4-16***。`grunt-contrib-clean`的配置\n\n```\nclean:\
+  \ {\n  tmp: {\n    src: ['.tmp', '.sass-cache', 'dist', 'app/js/template.js']\n\
+    }\n}\n```\n\n清单 4-16 中概述的配置将简单地删除`.tmp`、`.sass-cache`和`dist`文件夹。这三个文件夹都是在构建过程中生成的，因此删除它们无害。最好将`clean`任务添加到默认任务中（参见清单\
+  \ 4-17），这样每次运行`grunt`时都会清理应用程序。最佳实践建议它应该是第一个运行的任务，以确保每次构建在运行前都处于原始状态。如果`clean`只被添加到构建过程的末尾，那么之前失败的构建可能会污染新的构建。\n\
+  \n***清单 4-17***。修改后的默认任务示例\n\n```\n// Default task.\ngrunt.registerTask('default',\
+  \ [\n  'clean',\n  'useminPrepare',\n  'sass',\n  'bowerInstall',\n  'autoprefixer',\n\
+    'recess',\n  ....\n]);\n```\n\n#### JavaScript 模板\n\n随着我们的 AMD 模块作为工作流的一部分被集成，让我们将注意力转向待办事项应用的实现。在本节中，我们将探讨\
+  \ JavaScript 模板库的使用，以及如何使用 Grunt 自动化这些模板的生成并将其集成到工作流中。\n\n对于具有丰富用户界面的现代 Web 应用程序，将应用程序划分为执行特定任务的模块非常重要，如前一节所述。这导致了遵循模型-视图-控制器（MVC）常见设计模式的前端框架的迅速涌现。\n\
+  \n在 MVC 设计模式中，应用程序模块被分为三个关注点。模型包含应用程序的状态；视图是该状态的表示；控制器编排从视图触发的动作，以修改模型中的状态，并通知视图状态的变化。在大多数现代框架中，视图是通过使用模板引擎生成的。通常，像`Backbone`这样的框架并不指定要使用的模板引擎，而是允许开发者选择最适合其需求的引擎。\n\
+  \nJavaScript 有大量的模板引擎可用，它们提供了诸如局部模板和助手函数等强大功能。每个引擎的能力各不相同，从最简单的形式（如`underscore.js`的`template`函数）到功能更丰富的函数（如`handlebars.js`）。在我们的大多数示例中，我们将使用`handlebars.js`，并将其集成到待办事项应用的`Grunt.js`工作流中。在更新`Grunt`工作流之前，让我们探讨一下在使用\
+  \ JavaScript 模板时可以应用的各种实现策略。\n\n第一种技术也是三种中最简单的一种，是根本不使用模板引擎，而是以编程方式构建视图。清单 4-18\
+  \ 演示了使用`jQuery`创建一个`<h1>`元素，并将一个局部变量赋值为其文本，从而构建一个`Backbone`视图。在这个简单的例子中，解决方案可能看起来足够，但是当视图变得更复杂并且我们必须遍历大量元素时，这种方法很快就会失效。\n\
+  \n***清单 4-18***。使用`Backbone.js`的简单视图渲染\n\n```\ndefine(['backbone'], function(Backbone)\
+  \ {\n  return Backbone.View.extend({\n\ntagName: 'div',\n\nclassName: 'todo-form',\n\
+  \nrender: function() {\n      var title = \"Hello World!\";\n      this.$el.html(\n\
+          $('<h1 />').text(title)\n      );\n    }\n  });\n});\n```\n\n下一种方法是使用内联模板，其中模板字符串存储在一个局部变量中，然后传递给模板引擎。在清单\
+  \ 4-19 中，使用了`underscore.js`的`template`函数来演示内联模板的使用。\n\n***清单 4-19***。使用`underscore.js`的`template`函数进行内联模板\n\
+  \n```\ndefine(['backbone'], function(Backbone) {\n  return Backbone.View.extend({\n\
+  \ntagName: 'div',\n\nclassName: 'todo-form',\n\ntemplate: _.template('<h1><%= title\
+  \ %></h1>'),\n\nrender: function() {\n      var title = \"Hello World!\";\n      this.$el.html(\n\
+          this.template({title: title})\n      );\n    }\n  });\n});\n```\n\n这种方法存在与第一种方法相同的问题：当模板简单时，内联模板运行良好。如果我们将清单\
+  \ 4-19 中的示例扩展为具有迭代循环的多行模板，它将很快变得难以维护。\n\n第三种方法通过提高可维护性，解决了前两种方法带来的问题。模板存储在 DOM 内的`<script>`标签中。每个模板都有一个唯一的\
+  \ ID，以便可以从 DOM 中选择它，然后将其内容传递给模板引擎。清单 4-20 演示了如何从 DOM 加载模板并将其传递给`underscore.js`的`template`函数。\n\
+  \n***清单 4-20***。从 DOM 加载模板\n\n```\n// index.html\n\n<script type=\"text/template\"\
+  \ id=\"title-tmpl\">\n  <h1><%= title %></h1>\n</script>\n\n// view.js\n\ndefine(['backbone',\
+  \ 'underscore'], function(Backbone, _) {\n  return Backbone.View.extend({\n\ntagName:\
+  \ 'div',\n\nclassName: 'todo-form',\n\ntemplate: _.template(document.getElementById('title-tmpl').innerHTML),\n\
+  \nrender: function() {\n      var title = \"Hello World!\";\n      this.$el.html(\n\
+          this.template({title: title})\n      );\n    }\n  });\n});\n```\n\n\n\n\
+  该解决方案与前两个方案的关键区别在于加载模板内容的方法。模板不再存储在 JavaScript 应用程序代码中，而是迁移到了 DOM 中。通过使用`document.getElementById`将模板内容传递给模板函数来加载模板内容。这解决了维护更复杂模板的问题，因为模板的可读性大大提高，其标签可以像其他任何\
+  \ HTML 模板一样进行编辑。然而，这种方法也带来了一个问题：每个模板都需要一个额外的脚本标签，这会使页面变得臃肿。如果你只有少数几个模板，这可能不是问题，但模板数量会迅速增加，从而引发新的可维护性问题。这引出了我们的最终解决方案，该方案使用\
+  \ Grunt 来改善 JavaScript 模板的可维护性和可读性。\n\n在这种最终方法中，我们将使用一个 Grunt 插件将模板预编译成单个 JavaScript\
+  \ 模板（JST）文件。需要注意的是，在这个解决方案中，我们将从`underscore.js`模板切换到`handlebars.js`。然而，在开始编写模板之前，我们必须先在`Grunt.js`文件中添加一个新插件。本解决方案中使用的插件是`grunt-contrib-handlebars`。清单\
+  \ 4-21 显示了用于生成 JST 文件的配置。\n\n**清单 4-21**. Grunt 对 `grunt-contrib-handlebars` 的配置\n\
+  \n```\nhandlebars: {\n    dist: {\n      options: {\n        namespace: 'JST',\n\
+  \        amd: true\n      },\n      files: {\n        'app/js/template.js': ['build/templates/**/*.hbs']\n\
+  \      }\n    }\n  },\n```\n\n上述配置将加载`build/templates`文件夹中的所有模板，并将它们编译成一个 AMD 模块，输出到`app/js/template.js`。然后，通过将模板模块作为依赖项添加，可以在我们的\
+  \ AMD 模块中使用这些模板。清单 4-22 演示了更新后使用新模板模块的视图。\n\n**清单 4-22**. 在视图模块中使用模板模块\n\n```\n\
+  define(['backbone', 'js/template'], function(Backbone, Template) {\n  return Backbone.View.extend({\n\
+  \ntagName: 'div',\n\nclassName: 'todo-form',\n\ntemplate: Template[\"build/templates/form.hbs\"\
+  ],\n\nrender: function() {\n      var title = \"Hello World!\";\n      this.$el.html(\n\
+  \        this.template({title: title})\n      );\n    }\n  });\n});\n```\n\n清单 4-20\
+  \ 和 4-22 之间的主要区别在于将模板从 HTML 中移除。这带来了两个好处：首先，它减少了需要管理 HTML 中哪些模板的问题。对于具有许多模板且每个页面都需要这些模板的复杂应用程序来说，这是一个问题。将模板从\
+  \ HTML 中移除也减少了初始页面加载的数据量，这对加载时性能很有好处。模板被编译到 JavaScript 应用程序代码中并在生产环境中压缩，这进一步提高了性能。第二个好处是，通过将每个单独的模板放在一个单独的文件中，实现了分离。这使维护更加容易，因为你可以专注于一个特定的模板，而不必担心影响其他模板。清单\
+  \ 4-23 显示了一个示例模板。\n\n**清单 4-23**. 保存在 `build/templates/form.hbs` 中的示例模板\n\n```\n\
+  <h1>{{title}}</h1>\n```\n\n要在项目中使用`handlebars`，我们还必须使用`bower`添加它。添加后，`grunt-bower-requirejs`会包含非\
+  \ AMD 版本的`handlebars`库。因此，我们必须添加一个`shim`，以便`require.js`将其导出为全局变量。清单 4-24 演示了添加到`paths.js`和`Gruntfile.js`中的`shim`。\n\
+  \n**清单 4-24**. 修改后的 `handlebar.js` 配置\n\n```\n// paths.js\nrequirejs.config({\n\
+  \  shim: {\n    handlebars: {\n      exports: 'Handlebars'\n    }\n  },\n  paths:\
+  \ {\n    backbone: 'bower_components/backbone/backbone',\n    bootstrap: 'bower_components/bootstrap/dist/js/bootstrap',\n\
+  \    jquery: 'bower_components/jquery/dist/jquery',\n    requirejs: 'bower_components/requirejs/require',\n\
+  \    underscore: 'bower_components/underscore/underscore',\n    handlebars: 'bower_components/handlebars/handlebars'\n\
+  \  },\n  packages: [\n\n]\n});\n\n// Gruntfile.js\n\nrequirejs: {\n      dist: {\n\
+  \        options: {\n          baseUrl: 'app',\n          name: '../.tmp/concat/js/main',\n\
+  \          out: 'dist/js/main.js',\n          optimize: 'uglify2',\n          mainConfig:\
+  \ 'app/js/paths.js',\n          shim: {\n            handlebars: {\n           \
+  \   exports: 'Handlebars'\n            }\n          },\n          paths: {\n   \
+  \         backbone: 'bower_components/backbone/backbone',\n            bootstrap:\
+  \ 'bower_components/bootstrap/dist/js/bootstrap',\n            jquery: 'bower_components/jquery/dist/jquery',\n\
+  \            requirejs: 'bower_components/requirejs/require',\n            underscore:\
+  \ 'bower_components/underscore/underscore',\n            handlebars: 'bower_components/handlebars/handlebars'\n\
+  \          }\n        }\n      }\n    },\n```\n\n本节关于 JavaScript 模板化的内容到此结束。你已经了解了如何创建、编译和优化用于生产环境的模板。我介绍了`handlebars.js`的使用；然而，还有许多其他可用的模板化选项。另一个流行的模板引擎是\
+  \ `Jade`，通常与 `Express` 框架一起使用。\n\n#### JavaScript 代码检查\n\n在上一章中，我讨论了使用 RECESS（一个来自\
+  \ Twitter 的 CSS 检查工具）来确保项目中的 CSS 符合一组样式规则并检测常见错误。在本节中，我们将探讨如何将 JSHint 与 Grunt 结合使用，以自动化\
+  \ JavaScript 代码检查过程。JSHint 是一个社区驱动的代码质量工具，用于检测 JavaScript 应用程序中的错误和潜在问题。它帮助团队标准化其\
+  \ JavaScript 编码风格。JSHint 是 JSLint 的一个分支，比其父项目更少一些“固执己见”。JSHint 还为开发者提供设置标志以启用和禁用某些规则的能力。自\
+  \ 2011 年发布以来，JSHint 已被 Facebook、Twitter 和 jQuery 等公司的工程师采用。\n\n幸运的是，有一个现有的插件可以将\
+  \ JSHint 集成到我们的 Grunt 工作流中。这个名为`grunt-contrib-plugin`的插件是核心插件之一。清单 4-25 演示了为 JSHint\
+  \ 配置的更新后的`Gruntfile.js`。\n\n**清单 4-25**. JSHint 的配置\n\n```\njshint: {\n  dist: {\n\
+  \    src: ['Gruntfile.js', 'app/js/**/*.js']\n  }\n}\n\n// These plugins provide\
+  \ necessary tasks.\ngrunt.loadNpmTasks('grunt-contrib-jshint');\n\n// Default task.\n\
+  grunt.registerTask('default', [\n  'clean',\n  'useminPrepare',\n  'sass',\n  'bowerInstall',\n\
+  \  'autoprefixer',\n  'jshint',\n  'handlebars',\n  'recess',\n  'uncss',\n  'copy',\n\
+  \  'cssmin',\n  'concat',\n  'requirejs',\n  'rev',\n  'usemin'\n]);\n```\n\n如清单\
+  \ 4-25 所示，将 JSHint 集成到现有工作流中非常简单。`grunt-contrib-jshint`插件只需要一组要分析的源文件。注意任务运行的顺序很重要，`jshint`在`handlebars`任务之前执行，因为`handlebars`任务的输出不会通过所有\
+  \ JSHint 规则。图 4-5 显示了一个示例 Grunt 配置，其中`jshint`和`handlebars`任务的顺序被颠倒了。\n\n![9781484200148_Fig04-05.jpg](img/00029.jpeg)\n\
+  \n图 4-5. 颠倒任务顺序会导致错误\n\n\n\n\n在某些应用中，你可能希望对通过 `bower` 引入的 JavaScript 进行 lint 检查。这可能会产生如图\
+  \ 4-5 所示的错误，这些问题可以通过修改 `JSHint` 所应用的规则来解决。在与 `Grunt` 集成的过程中，有三种方法可以修改 `JSHint` 应用的规则集。第一种方法是通过\
+  \ `Grunt` 配置项应用配置；第二种是使用 `.jshintrc` 文件；最后一种是在 `package.json` 中定义规则集。当需要为不同的源文件通过规则集应用配置时，第一种方法非常有用。例如，你可以为你的应用程序代码应用一套规则，而为其他人开发的库应用另一套规则。清单\
+  \ 4-26 展示了第一种方法。\n\n***清单 4-26***. 包含配置项的配置\n\n```\njshint: {\n  dist: {\n    src:\
+  \ ['Gruntfile.js', 'app/js/**/*.js']\n  },\n  bower: {\n    options: {\n      \"\
+  eqnull\": true,\n      \"eqeqeq\": true,\n      \"laxbreak\": true,\n    },\n  \
+  \  src: ['app/bower_components/handlebars/handlebars.js']\n  }\n}\n```\n\n在 清单 4-26\
+  \ 中，`Grunt` 配置已扩展以涵盖由 `bower` 引入的 `handlebars` 库。由于 `handlebars` 无法通过所有 `JSHint`\
+  \ 规则，因此添加了配置项以放宽某些规则。在本例中，关于空值相等、三等号和换行符的规则已被抑制。 图 4-6 展示了如果这些特定规则未被抑制时，上述任务产生的输出。\n\
+  \n![9781484200148_Fig04-06.jpg](img/00030.jpeg)\n\n图 4-6. Handlebars 未通过 JSHint\
+  \ 规则检查\n\n另一种放宽 `JSHint` 规则的方法是应用全局运行时配置。这需要在你的项目根目录下创建一个新文件。该文件应命名为 `.jshintrc`，其内容应格式化为有效的\
+  \ JSON。该 JSON 对象应包含一组需要被抑制的规则。清单 4-27 中给出了一个示例。为了让 `JSHint` 使用此文件，`Grunt` 配置需要一个额外的配置项设置。这个配置项是\
+  \ `jshintrc`，它可以设置为 `true` 或者一个指向 `jshintrc` 文件的路径。如果你同时在 `Grunt` 文件和 `.jshintrc`\
+  \ 文件中设置了配置项，规则集不会合并，而是会使用 `jshintrc` 文件配置来代替 `Gruntfile` 中的配置。\n\n***清单 4-27***.\
+  \ JSHint 运行时配置\n\n```\n{\n  \"eqnull\": true,\n  \"eqeqeq\": true,\n  \"laxbreak\"\
+  : true\n}\n```\n\n最后一种方法与使用 `.jshintrc` 文件类似。对规则集的修改在项目的 `package.json` 中的 `jshintConfig`\
+  \ 属性下声明。\n\n#### Modernizr\n\n`Modernizr` 是一个用 JavaScript 编写的流行的特性检测库，用于确定浏览器支持\
+  \ HTML5 和 CSS3 规范中的哪些特性。它在开发社区中变得非常流行，因为它允许设计师和开发者利用最新的 Web 技术，同时确保使用落后浏览器的用户也能保持良好的体验。`Modernizr`\
+  \ 是一个可以加入你工具箱的优秀工具，尤其是在实现渐进增强时。\n\n`Modernizr` 在页面内快速运行，生成一个 JavaScript 对象，并向页面的\
+  \ HTML 元素添加类，这些类在你的 CSS 中充当钩子。清单 4-28 演示了生成的 JavaScript 对象的使用，而清单 4-29 展示了 `Modernizr`\
+  \ 如何向 HTML 元素添加 CSS 类。\n\n***清单 4-28***. 使用 Modernizr JavaScript 检测 localStorage\n\
+  \n```\nif (Modernizr.localstorage) {\n  // 使用 localstorage\n} else {\n  // 使用替代存储\n\
+  }\n```\n\n***清单 4-29***. Modernizr 修改 HTML 元素，在 CSS 中提供方便的钩子\n\n```\n<html lang=\"\
+  en\" class=\"js no-touch postmessage history multiplebgs boxshadow opacity cssanimations\
+  \ csscolumns cssgradients csstransforms csstransitions fontface localstorage sessionstorage\
+  \ svg inlinesvg no-blobbuilder blob bloburls download formdata\">\n```\n\n`Modernizr`\
+  \ 团队开发了一个 `Grunt` 插件，其功能与其 `Modulizr` 相似。`grunt-modernizr` 插件会处理你的 JavaScript、CSS\
+  \ 和 SCSS 文件，为你的项目构建一个优化版本。优化版本的 `Modernizr` 将只包含你项目中使用的特性的测试。这有助于减少应用程序生产版本中使用的\
+  \ JavaScript 的总大小，从而缩短页面加载时间。清单 4-30 展示了为 `grunt-modernizr` 插件修改后的 `Gruntfile` 配置。\n\
+  \n***清单 4-30***. grunt-modernizr 的 Gruntfile 配置\n\n```\nmodernizr: {\n   dist: {\n\
+  \     devFile : \"remote\",\n     outputFile : \"app/js/modernizr.js\",\n     extra\
+  \ : {\n       shiv : true,\n       load : false,\n       cssclasses : true\n   \
+  \  },\n     uglify : true,\n     parseFiles : true,\n     files : {\n       src:\
+  \ [\"build/styles/**/*.scss\", \"app/js/**/*.js\"]\n     }\n   }\n }\n```\n\n`grunt-modernizr`\
+  \ 插件需要一个开发版本的 `Modernizr` 来生成优化版本。在清单 4-30 中，`devFile` 选项被设置为 `remote`。此选项用于防止任务运行时出现误报。例如，如果你在本地安装了某个版本的\
+  \ `Modernizr` 并运行该任务，则该文件有可能被该任务处理，从而导致生成了未优化的 `Modernizr` 版本。下一个选项 `outputFile`\
+  \ 告诉任务优化后的 `Modernizr` 版本应输出到何处。接下来的选项标记为 `extra`，它关联到 `Modernizr` 下载页面上可用的附加功能。清单\
+  \ 4-30 中的配置包含了 `html5shiv` 以及向 HTML 元素添加 CSS 类的支持，同时明确排除了 `Modernizr.load`（这是一个资源加载器）。`parseFiles`\
+  \ 选项与 `files` 选项结合使用，配置该任务以爬取项目中引用 `Modernizr` 特性的文件。清单 4-31 包含了一段 JavaScript 代码片段，这将导致该任务包含对浏览器是否支持\
+  \ `localStorage` 的测试。\n\n***清单 4-31***. 将触发浏览器包含 Modernizr 对 localStorage 测试的 JavaScript\
+  \ 代码片段\n\n```\nif (Modernizr.localstorage) {\n  var item = localStorage.getItem(\"\
+  favourite\");\n}\n```\n\n下一个示例，清单 4-32，演示了该任务如何解析 SCSS 文件，以确定优化版 `Modernizr` 需要检测哪些特性。\n\
+  \n***清单 4-32***. 包含与 Modernizr 中类名相匹配的 CSS 类的 SCSS 文件\n\n```\n.profile {\n  .boxshadow\
+  \ {\n    box-shadow: 0px 0px 10px 1px rgba(0, 0, 0, 0.5);\n  }\n}\n```\n\n下次运行该任务时，它会在\
+  \ SCSS 文件中找到 `boxshadow` 类，并包含对盒阴影的测试。\n\n#### 代码压缩\n\n到目前为止，本章我们重点讨论了优化 JavaScript\
+  \ 代码，以确保我们的应用程序没有错误并进行压缩。由于使用了 `usemin`，我们不需要显式配置压缩任务，因为 `usemin` 会自动使用 `Uglify`\
+  \ 来压缩和混淆 JavaScript。我们将简要地看一下如何配置 `Grunt`（不使用 `usemin` 任务）来压缩 JavaScript 文件。\n\n\
+  存在许多用于压缩 JavaScript 的插件。为简单起见，我们将重点介绍使用 `Uglify` 来压缩并随后混淆我们的 JavaScript。有一个核心插件可用于将\
+  \ `Uglify` 集成到 `Grunt` 工作流中。清单 4-33 包含了 `grunt-contrib-uglify` 插件的示例配置。\n\n\n\n\n\
+  ##### `grunt-contrib-uglify` 配置\n\n***清单 4-33***. `grunt-contrib-uglify` 配置\n\n\
+  ```\nuglify: {\n  options: {\n    report: 'gzip'\n  },\n  dist: {\n    files: {\n\
+  \      'dist/js/main.js': ['app/js/main.js']\n    }\n  }\n}\n```\n\n清单 4-33 中的配置相当简单；它设置了任务生成的报告（涉及大小、节省空间），以及要操作的文件。`report`\
+  \ 选项决定了任务的输出。将该选项设置为 `gzip` 会打印一个额外的大小，该大小表示输出 JavaScript 若经过 gzip 压缩后的大小。除了上述内容，在生产应用程序中合并多个文件也是个好主意。同样，这个任务也可以通过之前的\
+  \ `usemin` 任务来执行。通过合并文件，压缩率应该会更高。另外，还有一个核心插件可用来执行此任务：`grunt-contrib-concat` 插件可用于将多个文件合并成一个文件。清单\
+  \ 4-34 展示了该任务的示例配置。\n\n##### `grunt-contrib-concat` 配置\n\n***清单 4-34***. `grunt-contrib-concat`\
+  \ 配置\n\n```\nconcat: {\n  dist: {\n    files: {\n      'dist/js/main.js': ['app/js/**/*.js']\n\
+  \    }\n  }\n}\n```\n\n上述配置将合并所有 JavaScript 文件，然后将输出存储到 `dist` 文件夹。在这个阶段，最好对 `concat`\
+  \ 任务输出的文件运行 `uglify` 任务。\n\n##### 文档生成\n\n在最后这一节，我们将简要探讨如何使用 Grunt 来自动化生成 JavaScript\
+  \ 应用程序的文档。如果你正在开发供其他开发者使用的库，自动化生成文档非常重要。没有自动化，维护一套完整的文档会变得困难，并且可能导致其他开发者在尝试复用 JavaScript\
+  \ 库时很快感到沮丧。有一个插件可用于生成文档，即 `grunt-jsdoc`。该插件提供了一个 `jsdoc` 任务，能够生成 HTML 格式的文档。清单 4-35\
+  \ 包含了为项目生成文档的示例配置。\n\n##### 生成 HTML 文档的 `grunt-jsdoc` 配置\n\n***清单 4-35***. 用于生成\
+  \ HTML 文档的 `grunt-jsdoc` 配置\n\n```\njsdoc : {\n  dist : {\n    src: ['app/js/**/*.js'],\n\
+  \    options: {\n      destination: 'doc'\n    }\n  }\n}\n```\n\n清单 4-35 非常简单：它定义了要解析文档的所有\
+  \ JavaScript 文件的源，以及一个配置输出目录（文档将在此创建）的选项。要生成文档，需要向我们的 JavaScript 模块中添加注解。清单 4-36\
+  \ 展示了更新了用于生成文档的注解后的待办事项模型。\n\n##### 带有 JSDoc 注解的待办事项模型（修改版）\n\n***清单 4-36***. 带有\
+  \ JSDoc 注解的修改后的待办事项模型\n\n```\n/**\n * @name Todo\n * @classdesc Todo Model\n * @author\
+  \ James Cryer\n * @exports Backbone.Model\n */\ndefine(['backbone'], function(Backbone)\
+  \ {\n  return Backbone.Model.extend({\n\n});\n});\n```\n\n清单 4-36 并未提供所有可用注解的详尽列表。除了模块，模块内的单个函数也可以被注解。图\
+  \ 4-7 展示了为 清单 4-36 中的模块自动生成的文档。\n\n![9781484200148_Fig04-07.jpg](img/00031.jpeg)\n\
+  \n图 4-7. 使用 Grunt 自动生成的 JSDoc 文档\n\n### 总结\n\n在本章中，我介绍了 Grunt 如何通过使用 JavaScript\
+  \ 模块和模板来优化我们的 JavaScript 工作流。在讨论过程中，我们探讨了与性能相关的话题，以及确保生产版本的 JavaScript 代码经过优化以便交付给用户。除了这些话题，还介绍了其他工具，例如\
+  \ `JSHint` 和 `Modernizr`，以进一步增强 JavaScript 开发工作流。最后，我以对复杂 JavaScript 应用程序自动生成文档的简要讨论作为结束。\n\
+  \n下一章将关注页面可视化元素的工作流，探讨使用 Grunt 来自动化处理图像、Web 字体和 SVG 相关的任务。\n\n## 第 5 章\n\n![image](img/00005.jpeg)\n\
+  \n"
+- "# 使用 Grunt 处理图像、SVG 和图标\n\n到目前为止，我们已经探索了如何使用 Grunt 来优化处理 HTML、CSS 和 JavaScript。接下来，我们将发现如何将\
+  \ Grunt 用于 Web 开发的另一个基本任务：生成视觉资源。自移动革命开始以来，随着 Flash 的衰落和高密度像素显示屏的出现，为生产环境准备视觉资源变得越来越复杂。在本章中，我们将使用\
+  \ Grunt 来优化图像，为不同设备生成多个版本，并压缩 SVG 文件。和往常一样，使用 Grunt 会产生一套强大的工具，可以用于多个项目。\n\n###\
+  \ 压缩图像\n\n本章我们将讨论的第一个话题是图像优化。在本节中，我们将探讨如何使用 Grunt 来优化图像，使其可供在我们的应用中使用。图像优化是提高现代\
+  \ Web 应用加载时性能的重要组成部分，因为图像通常占据页面总大小的重要部分。优化可以在不牺牲图像质量的前提下，减小图像的文件大小。\n\n在 Web 应用中使用图像时，需要考虑多种因素。你需要回答的首要问题是：哪种格式适合你的图像？需要考虑两种格式：矢量图和光栅图。我将在本章后面更深入地讨论矢量图像，届时会回顾如何使用\
+  \ `SVG`（可缩放矢量图形）与 Grunt 配合。`SVG` 是一种矢量格式，可用于生成高度可缩放的图像，而文件大小不会增加。首先，我将重点介绍光栅图像。\n\
+  \n光栅图像在 Web 上的使用更为传统，这主要得益于浏览器厂商的支持。光栅图像可以提供多种格式，例如 `GIF`、`PNG` 或 `JPEG`。由于光栅图像的数据以像素网格的形式存储，它们不具备可缩放图像格式的特性。随着图像尺寸的增加，文件大小也会增加。每种光栅图像格式通常用于特定目的。如\
+  \ Google 的 Web 基础（[`developers.google.com/web/fundamentals/media/images/optimize-images-for-performance`](https://developers.google.com/web/fundamentals/media/images/optimize-images-for-performance)）所述，`JPEG`\
+  \ 图像通常用于摄影，而 `PNG` 用于纯色图形，例如标志。\n\n正如本书中反复提到的，在开发现代 Web 应用时，加载时性能对于应用的成功至关重要，因为用户对页面加载时间有感知。因此，我们必须努力提供最增强的体验，同时优化页面使其快速加载。由于图像在一般用户体验中扮演着重要角色，我们在开发应用时还必须考虑如何优化这些资源。此处的优化意味着在保证图像质量的前提下，减小图像的文件大小。光栅图像的文件大小可以通过使用应用了无损和有损压缩的工具进行显著缩减。\n\
+  \n\n\n#### 无损压缩与有损压缩\n\n无损压缩得名于其能完全还原原始文件，不会丢失任何数据。它基于将文件分割成更小部分进行传输或存储的原理。有损压缩则采用不同的原则：在压缩过程中会移除图像数据，输出结果无法用来重建原始文件。`Grunt`\
+  \ 可自动在应用中使用这些压缩文件，并报告每张图像的文件大小缩减百分比。\n\n本节我们将介绍一个新插件：`grunt-contrib-imagemin`。该插件支持压缩\
+  \ GIF、JPEG、PNG 和 SVG 格式。目前我们将先探索其在光栅图像中的应用。首先将新插件添加到项目中（见列表 5-1）。\n\n***列表 5-1***。使用\
+  \ `npm` 将 `grunt-contrib-imagemin` 添加到 `package.json`\n\n```\nnpm install grunt-contrib-imagemin\
+  \ –-save-dev\n```\n\n插件安装到项目后，接下来需要配置插件以查找图像并进行优化。列表 5-2 展示了新添插件的 `Gruntfile` 配置示例。\n\
+  \n***列表 5-2***。`grunt-contrib-imagemin` 的 `Gruntfile` 配置\n\n```\n...\nimagemin:\
+  \ {\n  app: {\n    options: {\n      optimizationLevel: 6,\n      progressive: true,\n\
+  \      use: [pngquant()]\n    },\n    files: [{\n      expand: true,\n      cwd:\
+  \ 'src/',\n      src: ['**/*.{png,jpg,gif}'],\n      dest: 'dist/'\n    }]\n  }\n\
+  }\n...\n```\n\n列表 5-2 中配置的选项将优化级别设为 6，JPEG 压缩转为渐进式，最后使用名为 `pngquant` 的插件。我们逐一分析这些选项。\n\
+  \n我们将 `optimizationLevel` 选项设为 6。该选项控制压缩 PNG 图像 IDAT 块时运行的尝试次数，这主要是插件内置的 PNG 压缩工具\
+  \ `optipng` 的功能。IDAT 块本质上是 PNG 文件的图像数据。尝试次数越多，压缩耗时越长，因为 `optipng` 需要更多努力来寻找最优方案。每次尝试都会运用一系列压缩技术来减小文件大小，且不影响图像质量。该选项接受\
+  \ 0 到 7 的值：0 表示不对文件进行压缩，7 表示将运行 240 次尝试来缩小图像尺寸。\n\n`progressive` 选项影响 `grunt-contrib-imagemin`\
+  \ 使用的 JPEG 压缩工具 `jpegtran` 的工作方式。该选项可启用或禁用。当设为 `true` 启用时，生成的 JPEG 文件将采用渐进式 JPEG\
+  \ 格式。顾名思义，渐进式 JPEG 会逐步渲染：最初显示低质量版本，随着网络传输更多数据，图像质量逐渐提升。研究显示（[`calendar.perfplanet.com/2012/progressive-jpegs-a-new-best-practice/`](http://calendar.perfplanet.com/2012/progressive-jpegs-a-new-best-practice/)），若原始图像大于约\
+  \ 30KB，渐进式 JPEG 还能获得更好的压缩率。\n\n我们来看最后一个选项 `use`。该选项允许配置 `grunt-contrib-imagemin`\
+  \ 使用其他 `imagemin` 插件。`Grunt-contrib-imagemin` 封装了 NodeJS 模块 `imagemin`，因此任何 `imagemin`\
+  \ 插件都可用于此。总计有十个插件可与 `imagemin` 配合使用，每个插件都让 `grunt-contrib-imagemin` 能够运用一系列压缩工具。在我们的示例中，配置了\
+  \ `grunt-contrib-imagemin` 使用 `pngquant`。\n\n在进入本章下一主题前，我们先查看 `grunt-contrib-imagemin`\
+  \ 的示例输出（见图 5-1）。为此，我们向项目添加两张新图像：一张是 JPEG 格式的大型背景图，另一张是 PNG 格式的删除图标。\n\n![9781484200148_Fig05-01.jpg](img/00032.jpeg)\n\
+  \n图 5-1。`grunt-contrib-imagemin` 示例输出\n\n如 图 5-1 所示，`grunt-contrib-imagemin` 会列出所有处理的文件。针对每个文件，输出文件来源、总节省空间及缩减百分比。最后汇总处理的文件总数与总缩减量。虽然图像压缩是应用构建流程的重要部分，但它无法解决响应式网站的图片适配问题。下一节我们将使用\
+  \ `Grunt` 来准备针对不同断点优化的图像。\n\n### 生成响应式图像\n\n如前所述，移动设备的使用增长惊人。这带来了新挑战，因为移动设备通常比人们访问网络应用的传统设备拥有更小的屏幕。因此，我们需要一种解决方案来让图像适配不同设备。自\
+  \ Ethan Marcotte 所著《响应式 Web 设计》（A Book Apart，2011 年）推广后，广泛采用的一种方法在列表 5-3 中进行了概述。\n\
+  \n***列表 5-3***。使用 `max-width` 确保图像在填充可用容器宽度时保持宽高比\n\n```\n.container > img {\n  max-width:\
+  \ 100%;\n}\n```\n\n列表 5-3 中的 CSS 确保图像填充 class 属性为 `.container` 的元素内的可用宽度。使用 `max-width`\
+  \ 属性还能在图像填充可用宽度时保持宽高比。这可以配合 CSS3 标准中引入的媒体查询，针对不同设备类别以不同宽度渲染图像。列表 5-4 演示了使用媒体查询调整图像宽度。\n\
+  \n***列表 5-4***。使用媒体查询优化图像显示\n\n```\n.container > img {\n  max-width: 100%;\n}\n\n\
+  @media screen and (min-width: 400px) {\n  .container {\n    width: 368px;\n  }\n\
+  }\n\n@media screen and (min-width: 768px) {\n  .container {\n    width: 416px;\n\
+    }\n}\n```\n\n列表 5-4 首先将 class 属性为 `container` 元素内的图像设置为拉伸至可用宽度。接着应用媒体查询：首先针对显示宽度为\
+  \ 400px 及以上的设备，将图像约束为 368px；最后针对显示宽度为 768px 及以上的设备，将图像宽度增加至 416px。\n\n此方案在大多数场景下效果良好，但存在两个缺点。第一个问题是不同设备网络接入的差异。例如，有些移动设备可能通过\
+  \ 3G 连接访问应用，而其他人则使用光纤宽带连接的台式机。为保证桌面端体验，必须使用大图提供高分辨率图像。但在移动设备上，显示尺寸更小，因此可缩小图像以降低页面加载量。第二个问题是性能影响。目前，浏览器执行图像缩放仍是高开销操作。图像越大，为移动显示缩小图像的代价越高。\n\
+  \n#### 使用 Grunt 调整图像尺寸\n\n\n\n让我们先解决第二个问题：消除浏览器为适应设备宽度而调整图片大小的需求。为了解决这个问题，我们将以多种断点生成图片。然后可以为每个设备使用最合适的图片。每次需要发布新内容时生成多个图片成本高昂且是重复性任务，因此非常适合集成到`Grunt`工作流中。让我们引入一个新插件：`grunt-responsive-images`。这个插件封装了图像处理工具`GraphicsMagick`和`ImageMagick`，并允许指定一组尺寸来调整原始图片的大小。清单\
+  \ 5-5 演示了该插件的安装。\n\n***清单 5-5***。安装`grunt-responsive-images`\n\n```\nnpm install\
+  \ --save-dev grunt-responsive-images\n```\n\n在可以使用该插件之前，必须安装`GraphicsMagick`或`ImageMagick`。在我们的示例中，我们将使用`GraphicsMagick`。要安装`GraphicsMagick`，请访问`GraphicsMagick`下载页面（[`sourceforge.net/projects/graphicsmagick/files/graphicsmagick/`](http://sourceforge.net/projects/graphicsmagick/files/graphicsmagick/)），Mac\
+  \ 以外的所有平台均适用。Mac 用户可以使用`Homebrew`安装`GraphicsMagick`，如清单 5-6 所示。\n\n***清单 5-6***。使用`Homebrew`安装`GraphicsMagick`\n\
+  \n```\nbrew install GraphicsMagick\n```\n\n接下来，必须将插件的配置添加到项目中。清单 5-7 演示了项目的示例配置。\n\
+  \n***清单 5-7***。`grunt-responsive-images`的`Grunt`配置\n\n```\nresponsive_images: {\n\
+  \  dest: {\n    options: {\n      sizes: [{\n        width: 320,\n        height:\
+  \ 240\n      },{\n        name: 'large',\n        width: 640\n      },{\n      \
+  \  name: \"large\",\n        width: 1024,\n        suffix: \"_x2\",\n        quality:\
+  \ 60\n      }]\n    },\n    files: [{\n      expand: true,\n      src: ['img/**.{jpg,gif,png}'],\n\
+  \      cwd: 'app/',\n      dest: 'dist/'\n    }]\n  }\n}\n...\ngrunt.loadNpmTasks('grunt-responsive-images');\n\
+  ```\n\n`grunt-responsive-images`是一个非常灵活的插件，它为您提供了对输出图片的大量控制。让我们分解清单 5-7 中的配置，解释每个选项的作用。首先，我们定义`options`，它是一个`sizes`数组。每个`sizes`至少定义一个输出图片的维度，并将为传递给插件的每个图片生成一个此尺寸的新图片。\n\
+  \n第一个`sizes`是最简单的示例。我们仅定义图片的高度和宽度。这将生成一个具有这些尺寸的新图片，文件名后附加上新的图片尺寸。第二个`sizes`选项定义单一维度，即宽度。此配置将在保持宽高比的同时将图片调整为指定维度。这第二组配置引入了一个新选项：`name`。`name`选项将用作图片后缀的一部分。在我们的示例中，新图片文件名将包含原始图片名称和`name`后缀。例如，`background-large.jpg`。最后的配置引入了两个新选项：`suffix`和`quality`。`suffix`选项允许在文件名和`name`参数后附加额外的后缀。清单\
+  \ 5-7 中的示例可能生成最终名称为`background-large_x2.jpg`的图片。`quality`参数指作为插件一部分生成的 JPEG 图片的质量。它接受\
+  \ 1 到 100 之间的值，其中 100 将生成最佳质量的图片。\n\n除了这些选项，我们还为我们的目标定义了一个`files`配置。这是标准的`Grunt`文件数组格式，它将找到`/app/img`目录下的所有图片，将这些图片传递给插件，并将输出存储在`/dist/img`中。\n\
+  \n`grunt-responsive-image`插件还允许在配置中定义以下内容：\n\n*   `rename`：这提供了替换图片原始文件名的能力，同时保留其后缀。\n\
+  *   `aspectRatio`：此选项默认保持。将其设置为`false`则不保持宽高比。\n*   `gravity`：在图片裁剪过程中，此选项控制图片的放置位置。默认设置为`center`。它接受所有方位点的值（例如，`northwest`，`north`，`northeast`等）。\n\
+  *   `upscale`：这决定如果目标尺寸大于原始图片，是否应放大图片。\n*   `separator`：这是用于文件名和后缀之间的字符。\n*   `units`：这提供了像素、百分比和倍数单位及其表示之间的映射。默认情况下，此选项设置为`{\
+  \ percentage: 'pc', pixel: '', multiply: 'x' }`。\n\n在继续讨论如何在应用程序中使用这些新生成的图片之前，我们将快速查看插件的输出，如图\
+  \ 5-2 和图 5-3 所示。\n\n![9781484200148_Fig05-02.jpg](img/00033.jpeg)\n\n图 5-2. `grunt-responsive-images`的示例输出\n\
+  \n![9781484200148_Fig05-03.jpg](img/00034.jpeg)\n\n图 5-3. `grunt-responsive-images`生成的图片\n\
+  \n如图 5-2 所示，该插件会为每个尺寸配置输出生成的文件数量。在我们的配置中，有三组不同的图片。这生成了三行输出，对于每组尺寸选项，插件生成了两个图片。图\
+  \ 5-3 显示了根据清单 5-6 中的配置生成并在图 5-2 中列出的图片。两张源图片`background.jpg`和`delete.png`由插件转换，为每张图片额外生成三张图片。现在我们有一系列图片，必须将它们应用到相关设备。\n\
+  \n背景图片可以很容易地使用 CSS 应用。我们可以使用媒体查询针对不同宽度的设备。清单 5-8 演示了为不同类别的设备应用多个版本背景图片的示例。\n\n***清单\
+  \ 5-8***。使用媒体查询应用响应式图片\n\n```\nbody {\n    background: url(../img/background-320x240.jpg);\n\
+  }\n\n@media screen and (min-width: 600px) {\n    body {\n        background: url(../img/background-large.jpg);\n\
+  \    }\n}\n```\n\n### 使用`srcset`的响应式图片\n\n这种解决方案对背景图片效果很好，但不能解决内容中图片的问题。在撰写本文时，`srcset`属性仅在最新版本的\
+  \ Firefox、Chrome、Safari 和 Opera 中受支持。`srcset`属性允许开发者为不同的设备属性定义多个图片来源。清单 5-9 演示了一个示例。\n\
+  \n***清单 5-9***。使用`srcset`定义不同图片\n\n```\n<img alt=\"Cool Apps\" src=\"del1x.jpg\"\
+  \ srcset=\"del1x.jpg 1x, del2x.jpg 2x, del4x.jpg 4x\">\n```\n\n`srcset`属性规范已被`picture`元素规范取代，后者定义了`picture`元素并扩展了原始的`srcset`属性。该规范详细描述了一组更丰富的属性，可用于针对特定设备，其方式类似于我们针对特定设备使用\
+  \ CSS 的方式。在撰写本文时，`picture`元素（见清单 5-10）仅在最新版本的 Chrome 和 Firefox 中受支持。\n\n***清单 5-10***。`picture`元素\n\
+  \n\n```html\n<picture>\n   <source media=\"(min-width: 64em)\" src=\"high-res.jpg\"\
+  >\n   <source media=\"(min-width: 37.5em)\" src=\"med-res.jpg\">\n   <source src=\"\
+  low-res.jpg\">\n   <img src=\"fallback.jpg\" alt=\"此图片在不支持的浏览器上加载。\">\n   <p>无障碍文本。</p>\n\
+  </picture>\n```\n\n为了在旧版浏览器中实现类似的解决方案，我建议先提供最低质量的图片，然后通过 JavaScript 解决方案渐进式地增强用户体验。其中一个方案是由\
+  \ BBC 响应式新闻团队开发的 `Imager.js`（<https://github.com/BBC-News/Imager.js/>）。\n\n`Imager.js`\
+  \ 简化了处理响应式图片的工作流程，并防止浏览器下载多张重复图片。它通过使用带有图片源数据属性的元素来替换原有的图片元素。这些元素会交由 `Image.js`\
+  \ 处理，然后根据可用的图片宽度进行定义，同时还能定义像素密度。之后，`Image.js` 会在页面上运行，将这些元素替换为最适合当前页面的图片元素。清单 5-11\
+  \ 展示了 `Image.js` 运行前的 HTML 代码，而清单 5-12 则展示了 `Imager.js` 对页面 HTML 的影响。\n\n***清单 5-11***.\
+  \ Image.js 运行前的 HTML 代码\n\n```\n<div style=\"width: 240px\">\n    <div class=\"\
+  delayed-image-load\" data-src=\"http://placehold.it/{width}\" data-alt=\"替代文本\"\
+  ></div>\n</div>\n\n<script>\n    new Imager({ availableWidths: [200, 260, 320, 600]\
+  \ });\n</script>\n```\n\n***清单 5-12***. Image.js 修改页面后的 HTML 代码\n\n```\n<div style=\"\
+  width: 240px\">\n    <img src=\"http://placehold.it/260\" data-src=\"http://placehold.it/{width}\"\
+  \ \nalt=\"替代文本\" class=\"image-replace\">\n</div>\n\n<script>\n    new Imager({\
+  \ availableWidths: [200, 260, 320, 600] });\n</script>\n```\n\n如清单 5-12 所示，`Image.js`\
+  \ 修改了原始的 `div` 元素，将其替换为一个新的 `img` 元素。从可用的尺寸数组中，`Image.js` 为当前设备选择了 260。它会将占位符 `{width}`\
+  \ 替换为选中的宽度，然后将其设置为新图片元素的 `src` 属性。由于图片也采用了懒加载，页面的初始渲染时间也应得到改善。\n\n关于响应式图片的内容到此结束。接下来，我将介绍一个能生成图片精灵（Image\
+  \ Sprites）的新插件。\n\n### 制作图片精灵\n\n这是我们探索使用 Grunt 为现代 Web 应用自动化图片优化的最后一个部分。图片精灵是一种性能优化技术，旨在减少渲染页面时发出的\
+  \ HTTP 请求数量。图片精灵将多个小图片合并成一张大图。虽然这不一定能减少页面消耗的带宽总量，但可以提升页面的加载性能。从同一域名请求多张图片可能导致页面加载时间的瓶颈，因为部分浏览器对同一域名的并发请求数有限制。例如，Internet\
+  \ Explorer 10 将单个域名的并行下载数限制为 8 个。因此，如果页面上有很多图标，可能会导致某些图标的下载时间超出预期。创建图片精灵有助于解决这个问题，因为只需要为精灵图发起一次请求，而不是每张图片都请求一次。\n\
+  \n生成精灵图最简单但最耗时的方法是手工操作。这意味着打开你最喜欢的图片编辑软件，将所有图标导入其中，仔细地将每张图片相邻放置，然后将新生成的精灵图导出为优化后的图片。手工制作完精灵图后，你还需要编写\
+  \ CSS 来正确定位精灵图，以便在正确的元素中只显示一个图标。每次为网站添加新图标或 Logo 时，你都必须重新打开精灵图并修改 CSS。显然，这并不理想，并且会带来大量的维护开销。如果你还想为具有更高像素密度显示器的设备制作视网膜精灵图，维护工作量还会翻倍。\n\
+  \n第二种方法是使用免费的在线工具，例如 [www.spritebox.net](http://www.spritebox.net)，它提供了上传和创建精灵图的便捷方式。这些在线工具比之前描述的手动方法更强大，因为它们通常会生成\
+  \ CSS、LESS 或 SASS，方便集成到你的应用中。使用这些工具的主要缺点是需要联网才能使用，并且它们不能与你的工作流程无缝集成。如果你需要离线工作，就必须等到恢复联网后才能更新你的图片和精灵图。此外，由于图片是在线生成的，一旦你将新的精灵图复制到项目中，还需要对其进行优化。\n\
+  \n#### 自动化创建精灵图\n\n如上所述，前面的方法远非完美，但其中一些缺点可以通过使用 `Grunt` 来解决。使用 `Grunt` 生成精灵图的好处是使过程可重复且可复用。除此之外，大多数为精灵图生成而开发的\
+  \ `Grunt` 插件都可以离线运行。`Grunt` 有许多可用的精灵图生成插件。我将重点介绍其中一个，名为 `grunt-spritesmith`。这个插件拥有丰富的选项，可以完全控制生成的精灵图，并且还提供了为大多数主流\
+  \ CSS 预处理器输出 CSS 的选项。清单 5-13 演示了如何将 `grunt-spritesmith` 安装到你的项目中。\n\n***清单 5-13***.\
+  \ 安装 grunt-spritesmith\n\n```\nnpm install  grunt-spritesmith --save-dev\n```\n\n\
+  该插件基于精灵引擎（sprite engine）运行。精灵引擎是一个外部的图片处理工具，插件使用它来处理精灵图。在撰写本文时，该插件支持 `pngsmith`、`phantomjs`、`canvas`\
+  \ 和 `GraphicsMagick` 作为精灵引擎。精灵引擎的选择会影响插件的能力。例如，使用 `pngsmith` 会阻止插件处理非 png 格式的图片。虽然\
+  \ `canvas` 在处理超过 100 个精灵图时性能最佳，但它仅支持 Linux 平台。在我们的示例中，我们将使用能够处理所有图片格式的 `phantomjs`。\n\
+  \n让我们开始探索使用 `grunt-spritesmith` 生成精灵图时可用的选项。清单 5-14 提供了一个示例配置，我们将对其进行详细说明。\n\n***清单\
+  \ 5-14***. grunt-spritesmith 配置\n\n```\nsprite: {\n    app: {\n      src: ['build/icons/**.png'],\n\
+  \      destImg: 'app/img/sprite.png',\n      destCSS: 'build/styles/_sprite.scss',\n\
+  \      imgPath: '../img',\n      algorithm: 'top-down',\n      padding: 35,\n  \
+  \    engine: 'phantomjs',\n      cssFormat: 'scss'\n    }\n  }\n```\n\n  \n如列表 5-14\
+  \ 所示，`grunt-spritesmith`为生成适合特定用例的精灵图提供了极大的灵活性。我将回顾列表 5-14 中定义的每个选项，并解释每个选项对输出的精灵图和\
+  \ CSS 的影响。第一个选项仅用于定义哪些文件应包含在精灵图中。在示例中，我们在`build`文件夹中添加了一个包含所有图标的新文件夹。下一个选项`destImg`决定了生成的精灵图的位置和文件名。第三个选项决定了插件生成的\
+  \ CSS 的位置和文件名。在我们的示例中，我们希望生成`SCSS`以集成到现有的`SCSS`工作流程中。`imgPath`选项控制生成的 CSS 中出现的图像路径。如果你的路径与构建路径不同，这会非常有用。在我们的案例中，`CSS`和图像在构建文件夹中的位置不同；因此，我们指定了图像路径，以便图像能够正确加载。`algorithm`选项控制图像在生成的精灵图中的布局方式。此选项允许图像从上到下、从左到右或沿对角线添加。这在处理响应式解决方案时特别有用，因为图像可能需要以特定方式布局以支持不同的设备宽度。与`algorithm`选项一样，`padding`选项也控制图像在精灵图中的布局。顾名思义，`padding`控制每个图标周围的填充量。在我们的示例中，我们选择为每个图标添加`35px`的填充。当你有需要应用背景图像的大元素，并且必须确保只有一个图标显示为背景图像图标时，这很有用。如前所述，`grunt-spritesmith`将图像创建委托给第三方图像工具。`engine`选项控制用于生成精灵图的工具。在列表\
+  \ 5-14 中，`phantomjs`被用作创建精灵图的工具。`grunt-spritesmith`最强大的功能之一是能够以所选格式输出`CSS`。在我们的示例中，我们指定了`SCSS`；但是，该插件支持`LESS`、`SASS`、`Stylus`和`CSS`输出。\n\
+  \n列表 5-14 中的配置输出两个资源：精灵图文件和`SCSS`文件。图 5-4 展示了项目目录中的输出文件。\n\n![9781484200148_Fig05-04.jpg](img/00035.jpeg)\n\
+  \n图 5-4。`grunt-spritesmith`插件输出的精灵图和`SCSS`文件\n\n使用`grunt-spritesmith`为精灵表生成`SCSS`的另一个好处是它生成了一组丰富的`mixin`。列表\
+  \ 5-15 提供了从上述示例生成的完整`SCSS`文件示例。\n\n***列表 5-15***。`grunt-spritesmith`输出的`SCSS`示例\n\
+  \n```\n$upload-x: 0px;\n$upload-y: 1443px;\n$upload-offset-x: 0px;\n$upload-offset-y:\
+  \ -1443px;\n$upload-width: 76px;\n$upload-height: 76px;\n$upload-total-width: 76px;\n\
+  $upload-total-height: 1741px;\n$upload-image: '../img';\n$upload: 0px 1443px 0px\
+  \ -1443px 76px 76px 76px 1741px '../img';\n\n@mixin sprite-width($sprite) {\n  width:\
+  \ nth($sprite, 5);\n}\n\n@mixin sprite-height($sprite) {\n  height: nth($sprite,\
+  \ 6);\n}\n\n@mixin sprite-position($sprite) {\n  $sprite-offset-x: nth($sprite,\
+  \ 3);\n  $sprite-offset-y: nth($sprite, 4);\n  background-position: $sprite-offset-x\
+  \  $sprite-offset-y;\n}\n\n@mixin sprite-image($sprite) {\n  $sprite-image: nth($sprite,\
+  \ 9);\n  background-image: url(#{$sprite-image});\n}\n\n@mixin sprite($sprite) {\n\
+  \  @include sprite-image($sprite);\n  @include sprite-position($sprite);\n  @include\
+  \ sprite-width($sprite);\n  @include sprite-height($sprite);\n}\n```\n\n对于添加到精灵表的每个图像，`grunt-spritesmith`会生成许多以文件名开头的变量。每个变量都包含图像的属性，例如，在精灵表中的`x`坐标。这些变量被组合起来，并由生成的`mixin`使用。该插件还会生成四个`mixin`。前四个是便捷`mixin`，由主`mixin`\
+  \ `sprite`使用。`sprite` `mixin`是实际用于生成包含图标或图像作为背景的`CSS`输出的`mixin`。列表 5-16 演示了如何使用`sprite`\
+  \ `mixin`将上传图标添加到我们的`CSS`输出中。\n\n***列表 5-16***。使用`grunt-spritesmith`在`CSS`中生成图标\n\
+  \n```\n.icon-upload {\n  @include sprite-width($icon-upload);\n}\n```\n\n各种变量的创建与`grunt-spritesmith`生成的`mixin`相结合，使得维护精灵表变得异常容易。精灵表本身的任何更改对`SCSS`都是透明的，因为变量值的更改不需要在`SCSS`中进行任何更新。此外，精灵表和`SCSS`可以传递给其他`Grunt`任务，从而实现诸如代码检查和压缩等任务。\n\
+  \n### 使用 SVG\n\n本章的第一部分致力于优化 Web 的光栅图像。在余下的章节中，我将重点优化处理`SVG`文件的工作流程。`SVG`非常适合生成可缩放且可使用`CSS`设置样式的轻量级图标。`SVG`是一种基于`XML`的文件格式，适用于生成二维图形，其中元素用于定义路径、形状和多边形。列表\
+  \ 5-17 演示了一个基本的`SVG`文件，图 5-5 展示了该`SVG`文件的视觉效果。\n\n***列表 5-17***。`SVG`文档示例\n\n```\n\
+  <?xml version=\"1.0\" standalone=\"no\"?>\n<!DOCTYPE svg PUBLIC \"-//W3C//DTD SVG\
+  \ 1.1//EN\" \"http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd\">\n<svg xmlns=\"\
+  http://www.w3.org/2000/svg\" width=\"39\" height=\"32\" viewBox=\"0 0 39 32\">\n\
+  \    <!-- tick icon -->\n    <path d=\"M15.815 32l23.475-28.046-4.695-3.954-19.521\
+  \ 23.228-11.12-9.266-1.954 10.695z\"/>\n</svg>\n```\n\n![9781484200148_Fig05-05.jpg](img/00036.jpeg)\n\
+  \n图 5-5。列表 5-17 输出的`SVG`视觉效果\n\n除了基本的二维图形外，`JavaScript`和`CSS`也可以与`SVG`一起使用来制作动画。这并非`SVG`成为理想图标格式的唯一特性。使用`SVG`作为图标的主要优势在于它们体积轻量，并且可以在不影响图像质量的情况下轻松缩放。过去几年中，`SVG`文件的使用有所增加，这主要是由人们通过各种设备访问\
+  \ Web 的趋势推动的。由于`SVG`的文件大小通常小于光栅图像，并且如前所述易于缩放，这解决了为高像素密度显示器设备渲染清晰图像的问题。然而，与所有页面资源一样，应谨慎考虑，以避免使页面臃肿、增加页面重量并导致不良的用户体验。`Grunt`通过提供自动化优化`SVG`文件的工具，有助于降低这种风险。\n\
+  \n#### 压缩 SVG\n\n\n\n与 CSS 和 JavaScript 一样，SVG 文件也可以被压缩。这主要源于一个事实：与其他基于文本的文件格式一样，可以去除不必要的内容和空格。如果你从流行的图形软件包中导出\
+  \ SVG 图像，这一点尤其适用。幸运的是，`Grunt` 有一个可用于优化 SVG 文件的插件，并能在你的应用程序中直接使用。我现在要介绍的插件叫做 `grunt-svgmin`。`grunt-svgmin`\
+  \ 封装了 Node.js 库 `SVGO`，这是一个 SVG 优化器。`SVGO` 将执行诸如删除空属性、注释、文档类型声明以及将样式转换为属性等优化操作。Listing\
+  \ 5-18 展示了一个 `grunt-svgmin` 的示例配置。\n\n***Listing 5-18***. `grunt-svgmin` 配置\n\n\
+  ```\nsvgmin: {\n    app: {\n      options: {\n        plugins: [\n          { removeViewBox:\
+  \ true },\n          { removeUselessStrokeAndFill: true }\n        ]\n      },\n\
+  \      files: [{\n        expand: true,\n        cwd: 'build/svg',\n        src:\
+  \ ['**/*.svg'],\n        dest: 'app/img/',\n        ext: '.min.svg'\n      }]\n\
+  \    }\n  }\n```\n\nListing 5-18 中展示的配置演示了在项目中优化 SVG 文件所需的最简单配置。这里定义了两个选项：`removeViewBox`\
+  \ 和 `removeUselessStrokeAndFill`。第一个选项会从根 `<svg>` 元素中移除 `viewBox` 属性。第二个选项会移除那些\
+  \ `stroke-width` 属性设置为 `0` 或 `none` 的描边。如果 SVG 包含 `fill` 属性设置为 `none` 且 `opacity`\
+  \ 设置为 `0` 的元素，则 `fill-opacity` 会被移除。此外，`grunt-svgmin` 还会从 SVG 中移除空格、注释和文档类型声明。Listing\
+  \ 5-19 展示了一个示例输入 SVG 文件，优化后的版本见 Listing 5-20。\n\n***Listing 5-19***. 优化前的 SVG 文件\n\
+  \n```\n<?xml version=\"1.0\" standalone=\"no\"?>\n<!DOCTYPE svg PUBLIC \"-//W3C//DTD\
+  \ SVG 1.1//EN\" \"http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd\">\n<svg xmlns=\"\
+  http://www.w3.org/2000/svg\" width=\"39\" height=\"32\" viewBox=\"0 0 39 32\">\n\
+  \  <!-- tick icon -->\n  <path stroke=\"0\" stroke-width=\"0\" fill=\"none\" fill-opacity=\"\
+  0\" d=\"M15.815 32l23.475-28.046-4.695-3.954-19.521 23.228-11.12-9.266-1.954 10.695z\"\
+  />\n</svg>\n```\n\n***Listing 5-20***. 经 `grunt-svgmin` 优化后的 SVG 文件\n\n```\n<svg\
+  \ xmlns=\"http://www.w3.org/2000/svg\" width=\"39\" height=\"32\"><path d=\"M15.815\
+  \ 32L39.29 3.954 34.595 0l-19.52 23.228-11.12-9.266L2 24.657z\" fill=\"none\"/></svg>\n\
+  ```\n\n与其他压缩插件一样，`grunt-svgmin` 插件会在压缩后输出文件大小的缩减百分比。Figure 5-6 展示了该插件的一个示例输出。\n\n\
+  ![9781484200148_Fig05-06.jpg](img/00037.jpeg)\n\nFigure 5-6. `grunt-svgmin` 的示例输出\n\
+  \n### 生成 SVG Sprites\n\nSVG 图像可以通过多种方式包含在页面中，包括使用 `<object>` 元素、`<iframe>` 标签、`<img>`\
+  \ 标签，或者将内容直接嵌入文档。除这些方法外，SVG 文件也可以在 CSS 中被引用为背景。与所有页面资源一样，我们必须尽量减少下载整个页面所需的请求数量。这个规则同样适用于\
+  \ SVG 文件。想象一个页面，其菜单系统包含大量图标。如果菜单中的每个图标都通过 `<img>` 元素引用一个 SVG 文件，或者使用 CSS `background`\
+  \ 属性来应用，这可能会产生许多不必要的请求。与光栅图像一样，我们可以将多个 SVG 文件合并成一个单一文件，并应用它来代替单个文件。这样做的好处是所有图像只需一次\
+  \ HTTP 请求，并且这个 SVG Sprite 可以使用 gzip 进行压缩，从而进一步减少带宽消耗。为了实现这些改进，我们可以引入一个名为 `grunt-svg-sprite`\
+  \ 的新插件。Listing 5-21 展示了 `grunt-svg-sprite` 的一些示例配置。\n\n***Listing 5-21***. `grunt-svg-sprite`\
+  \ 配置\n\n```\nsvgsprite: {\n  app : {\n    options: {\n      render: {\n        scss:\
+  \ {\n          dest: '../../build/styles/_font.scss'\n        },\n        css: false\n\
+  \      },\n      spritedir: '',\n      padding: 35,\n      layout: 'vertical'\n\
+  \    },\n    src: 'build/svg/',\n    dest: 'app/img/'\n  }\n}\n```\n\nListing 5-21\
+  \ 中概述的配置将生成一个 SVG Sprite 和一个配套的 SCSS 文件。为了实现这一点，`render` 选项被设置为包含 SCSS 文件的目标路径。需要注意的是，此路径是相对于由\
+  \ `dest` 选项定义的目标目录的。另外，要禁用 CSS 输出，需要将 `css` 选项设置为 `false`。定义的下一个选项是 `spritedir`，它阻止\
+  \ sprite 被放置在一个专用文件夹中。在我们的示例中，生成的 sprite 将输出在 `dest` 文件夹的根目录下。`padding` 选项与 `grunt-spritesmith`\
+  \ 的 `padding` 选项相同，它控制每个图标周围的间距。提供的最后一个选项是 `layout`，它控制每个图标在 SVG Sprite 中的布局方式。它接受\
+  \ `vertical`、`horizontal` 或 `diagonal` 这几个值。\n\n通过将导入语句添加到 `main.scss` 文件的顶部，可以轻松地将\
+  \ SVG Sprite 集成到我们现有的 SASS 工作流中，如 Listing 5-22 所示。\n\n***Listing 5-22***. 将 SVG\
+  \ Sprite 添加到 SASS 文件\n\n```\n@import 'font';\n```\n\n编译后的 CSS 现在将包含新的 CSS 选择器，每个选择器对应\
+  \ sprite 中包含的一个图标。要使用这些图标之一，我们可以创建 HTML，如 Listing 5-23 所示。\n\n***Listing 5-23***.\
+  \ 演示如何使用 SVG Sprite\n\n```\n<div class=\"svg-circle\"></div>\n```\n\nListing 5-23\
+  \ 中的 HTML 会将 CSS `background` 属性应用于 `div` 元素，该元素会渲染出与原始 `circle.svg` 文件相对应的图标。\n\
+  \n### 生成图标字体\n\n\n\n在结束本章之前，我们将探究如何使用 `Grunt` 生成网页字体，以支持 Internet Explorer 9 及更高版本的可缩放图标。图标字体已成为为页面应用图标的一种流行方式，它既适用于标准像素密度屏幕，也适用于更高像素密度的显示器。有许多网站提供免费资源，例如\
+  \ `Font Awesome`；然而，选择大型图标字体可能会对用户体验产生负面影响，因为图标可能需要很长时间下载，而整份字体中只有一小部分被使用。最佳方法是创建一种仅包含应用程序或网站将使用的图标，从而节省宝贵的带宽。`Grunt`\
+  \ 有一个插件可用于从一系列 `SVG` 文件创建字体。该插件名为 `grunt-webfont`。清单 5-24 演示了 `grunt-webfont` 的示例配置。\n\
+  \n***清单 5-24***. `grunt-webfont` 配置\n\n```\nwebfont: {\n  icons: {\n    options:\
+  \ {\n      font: 'custom',\n      stylesheet: 'scss',\n      relativeFontPath: '../fonts',\n\
+  \      htmlDemo: false\n    },\n    destCss: 'build/styles/',\n    src: 'build/svg/**/*.svg',\n\
+  \    dest: 'app/fonts'\n  }\n}\n```\n\n清单 5-24 中的配置定义了许多选项，类似于 `grunt-spritesmith`，因为\
+  \ `grunt-webfont` 能够以几乎相同的方式生成 `CSS`、`SCSS` 或 `LESS`。第一个选项定义要生成的字体名称。其次，生成的 `CSS`\
+  \ 类型由 `stylesheet` 选项控制。此选项接受 `css`、`less`、`sass` 和 `scss` 值。下一个选项 `relativeFontPath`\
+  \ 控制 `CSS` 输出中定义的字体路径。默认情况下，`grunt-webfont` 会生成一个用于加载字体的演示 `HTML` 文件。将此选项设置为 `false`\
+  \ 可阻止生成 `HTML` 演示文件。`CSS` 的位置可以通过设置 `destCss` 选项来控制。`destCss` 选项接受生成的 `CSS` 文件放置的目录。我们配置中的最后两个选项决定哪些\
+  \ `SVG` 文件包含在我们的字体中，以及生成的字体的放置位置。\n\n当插件创建字体时，它会输出已为给定字体选择的字形数量。如图 5-7 所示。\n\n![9781484200148_Fig05-07.jpg](img/00038.jpeg)\n\
+  \n图 5-7. `grunt-webfont` 示例输出\n\n### 总结\n\n在本章中，我介绍了如何利用 `Grunt` 来执行生成网站优化视觉资源的重复且耗时的任务。在本章前半部分，我们了解了各种用于处理栅格图像的插件，然后转向了基于矢量的图形，如\
+  \ `SVG`。本章重点讨论了通过合并和压缩视觉资源来减轻页面重量，旨在提升生产环境中应用程序的性能。\n\n下一章将重点介绍使用 `Grunt` 创建一个用于在本地查看和测试应用程序的\
+  \ `Web` 服务器。\n\n"
+- "# 第 6 章\n\n![image](img/00005.jpeg)\n\n## 使用 Grunt 进行测试和本地开发\n\n在前几章中，我们专注于如何自动化构建过程，以优化我们的资源并确保它们达到特定的质量标准。在本章中，我们将重点介绍使用\
+  \ `Grunt` 设置本地 `Web` 服务器。设置完成后，我们将探索使用本地 `Web` 服务器在无头浏览器和实际浏览器中执行测试。为了进一步确保我们正在构建的软件符合现代开发的最佳实践，我们将把开发环境暴露到互联网上，从而让我们能够自动化运行性能测试。\n\
+  \n### 设置本地服务器\n\n由于 `Grunt` 是构建在 `npm` 环境之上的，设置本地 `Web` 服务器非常简单，因为有众多可用的 `npm` 包可以用于创建它们。更简单的是，有许多\
+  \ `Grunt` 插件可以自动化启动本地 `Web` 服务器。有一些插件可以启动服务器，使用流行的 `Web` 框架，如 `Flash (Python)`、`Sinatra\
+  \ (Ruby)` 和 `Express (Node)`。在本章中，我们将使用 `grunt-contrib-connect`。这个插件封装了 `npm` 包\
+  \ `connect` 和 `connect-livereload`，为静态发布提供了一个多功能的本地开发环境。在此上下文中，静态发布指的是将资源动态生成为静态文件，以便在开发或生产环境中使用的过程。\n\
+  \n首先，我们必须将 `grunt-contrib-connect` 添加到我们的项目中。与所有 `Grunt` 插件一样，这只需一个简单的 `npm install`\
+  \ 命令，如清单 6-1 所示。\n\n***清单 6-1***. 安装 `grunt-contrib-connect`\n\n```\nnpm install\
+  \ grunt-contrib-connect --save-dev\n```\n\n一旦插件成功添加到项目后，我们接下来通过在 `Gruntfile.js`\
+  \ 文件中定义配置来配置我们的本地 Web 服务器。清单 6-2 提供了设置一个简单 `HTTP` 服务器的示例配置。我们将在本章后面探讨设置 `HTTPS`\
+  \ 服务器。清单 6-2 中的配置将启动一个运行在 `8000` 端口、响应任何主机名、根目录为应用程序文件夹 `app` 的本地 `Web` 服务器。要启动\
+  \ Web 服务器，你必须运行 `grunt`，如清单 6-3 所示，并且你应该在终端中看到与图 6-1 类似的输出。如果你现在打开浏览器并尝试访问配置在 `8000`\
+  \ 端口上的 Web 服务器（访问 `http://localhost:8000`），你会发现 Web 服务器不可用。你可能已经注意到，一旦 Web 服务器启动，`Grunt`\
+  \ 就会退出。当 `Grunt` 退出时，`connect` Web 服务器也会关闭。`grunt-contrib-connect` 可以与其他插件（如 `grunt-contrib-jasmine`）结合使用，以自动化运行测试。测试运行完毕后，Web\
+  \ 服务器可以关闭。然而，在本地开发或在浏览器中调试问题时，保持 Web 服务器运行会很方便。我们现在将更新配置，以允许我们持续运行服务器。\n\n***清单\
+  \ 6-2***. 配置 `Connect` 以运行本地 `Web` 服务器\n\n```\nconnect: {\n    server: {\n     \
+  \ options: {\n        port: 8000,\n        protocol: 'http',\n        hostname:\
+  \ '*',\n        base: './app'\n      }\n    }\n  }\n```\n\n![9781484200148_Fig06-01.jpg](img/00039.jpeg)\n\
+  \n图 6-1. 连接、启动和停止本地 `Web` 服务器\n\n***清单 6-3***. 使用 `grunt-contrib-connect` 启动一个 `Web`\
+  \ 服务器\n\n```\ngrunt connect:server\n```\n\n#### 保持服务器运行\n\n为了允许我们运行一个不会立即退出的服务器，我们必须修改配置以包含\
+  \ `keepalive` 选项。在清单 6-4 中，我们为另一个可用于本地开发的 `Web` 服务器定义了一个额外配置。\n\n***清单 6-4***. 配置\
+  \ `connect` 以运行一个用于开发的本地 `Web` 服务器\n\n```\nconnect: {\n    dev: {\n      options:\
+  \ {\n        port: 8001,\n        protocol: 'http',\n        hostname: '*',\n  \
+  \      base: './app',\n        keepalive: true\n      }\n    }\n  }\n```\n\n\n\n\
+  运行上述任务应产生如图 6-2 所示的输出。需要注意的是，在我们的第二个 Web 服务器中，我们将其配置为在 8001 端口上运行。这将使我们稍后能够在 8000\
+  \ 端口对我们的服务器运行测试，同时让我们的开发服务器继续运行。正如预期的那样，如果你尝试将两个 Web 服务器绑定到同一个端口号，第二个服务器将无法启动（图\
+  \ 6-3）。这一点在后面当文件发生变化时、测试在后台运行的情况下需要牢记。\n\n![9781484200148_Fig06-02.jpg](img/00040.jpeg)\n\
+  \n图 6-2。无限期运行本地 Web 服务器\n\n![9781484200148_Fig06-03.jpg](img/00041.jpeg)\n\n图 6-3。尝试在同一个端口号上运行两个\
+  \ Web 服务器\n\n如果你现在在浏览器中访问 `http://localhost:8001`，应该能看到我们的应用程序正在运行。要停止 Web 服务器，我们必须按下\
+  \ `Ctrl+C`。\n\n一种常见的开发模式是使用一个名为 `serve` 的 Grunt 任务来设置开发服务器。这是 Yeoman 团队采用的模式，并且可以在许多项目生成器（例如\
+  \ Backbone.js）中找到。`serve` 任务通常构建所有开发资源，启动一个 Web 服务器，然后为应用程序打开一个浏览器。代码清单 6-5 包含了一个示例\
+  \ `serve` 任务的配置。\n\n代码清单 6-5 中定义的任务为了演示目的略显冗长。随着项目的发展，最好开始将任务分解成组，这样可以让其他团队成员了解构建的每个阶段完成的功能，而无需了解每个单独阶段的细节。我们将在下一章探讨如何优化你的构建过程。\n\
+  \n***代码清单 6-5***。用于构建和启动开发环境的示例 `serve` 任务\n\n```\ngrunt.registerTask('serve', [\n\
+    'clean',\n  'useminPrepare',\n  'sass',\n  'bowerInstall',\n  'autoprefixer',\n\
+      'jshint',\n  'modernizr',\n  'handlebars',\n  'imagemin',\n  'uncss',\n  'copy',\n\
+    'cssmin',\n  'concat',\n  'requirejs',\n  'rev',\n  'usemin',\n  'connect:dev'\n\
+  ]);\n```\n\n### 自动启动浏览器\n\n代码清单 6-5 中定义的任务缺少的一个步骤是自动打开浏览器。这可以通过使用 `grunt-open` 或\
+  \ `grunt-contrib-connect` 来实现。对于我们当前的工作流程，我们将保持简单，并使用 `grunt-contrib-connect`。随着我们工作流程的进阶，我们将改用\
+  \ `grunt-open`。\n\n代码清单 6-6 为我们的开发服务器提供了一个更新的配置，该配置将在 Web 服务器启动后自动打开我们的应用程序。\n\n\
+  ***代码清单 6-6***。使用 `grunt-contrib-connect` 在 Web 服务器启动后启动浏览器\n\n```\nconnect: {\n\
+    dev: {\n    options: {\n      port: 8001,\n      protocol: 'http',\n      hostname:\
+  \ '*',\n      base: './app',\n      keepalive: true,\n      open: true\n    }\n\
+    }\n}\n```\n\n添加 `open` 选项并将其值设置为 `true` 将导致你的默认浏览器在 Web 服务器启动后立即自动打开你的应用程序。\n\n\
+  ### 记录发送到服务器的请求\n\n使用当前的配置，我们无法看到发送到 Web 服务器的请求，因为日志记录默认未启用。在本地开发期间，查看哪些请求已成功、HTTP\
+  \ 响应码以及生成响应所需的时间会非常方便。幸运的是，`grunt-contrib-connect` 具备此功能。要启用日志记录，我们必须将 `debug` 选项设置为\
+  \ `true`，如代码清单 6-7 所示。图 6-4 展示了我们应用程序初始页面加载时的示例输出。\n\n***代码清单 6-7***。向开发服务器配置添加\
+  \ `debug` 选项\n\n```\ndev: {\n  options: {\n    port: 8001,\n    protocol: 'http',\n\
+      hostname: '*',\n    base: './app',\n    keepalive: true,\n    open: true,\n\
+      debug: true\n  }\n}\n```\n\n![9781484200148_Fig06-04.jpg](img/00042.jpeg)\n\n\
+  图 6-4。`grunt-contrib-connect` 记录发送到 Web 服务器的请求\n\n### 使用压缩响应扩展我们的服务器\n\n现在我们已经让\
+  \ Web 服务器运行起来，并且自动打开和记录每个发送到终端的请求，让我们探索如何用新功能扩展我们的 Web 服务器。由于 `grunt-contrib-connect`\
+  \ 封装了 Node 模块 `connect`（在撰写本文时为 2.x 版本），我们可以使用所有可用的中间件插件来扩展我们的 connect 服务器（[`github.com/senchalabs/connect/wiki`](https://github.com/senchalabs/connect/wiki)）。有适用于\
+  \ BasicAuth、OAuth 和缓存等功能的中间件。在我们的示例中，我们将使用其中一个内置的中间件功能：压缩。这将动态提供 gzip 压缩内容，前提是客户端在请求中发送了正确的头部信息。由于\
+  \ `grunt-contrib-connect` 封装的是 `connect` 的 2.x 版本，压缩中间件是 `connect` 的一部分。在最新版本的 `connect`\
+  \ 中，核心中间件功能已经迁移到它们自己的模块中。\n\n代码清单 6-8 修改了我们现有的开发 Web 服务器配置，以支持服务器响应的压缩。\n\n***代码清单\
+  \ 6-8***。添加中间件以支持压缩\n\n```\ndev: {\n  options: {\n    port: 8001,\n    protocol:\
+  \ 'http',\n    hostname: '*',\n    base: './app',\n    keepalive: true,\n    open:\
+  \ true,\n    debug: true,\n    middleware: function(connect, options, middlewares)\
+  \ {\n      middlewares.unshift(connect.compress());\n      return middlewares;\n\
+      }\n  }\n}\n```\n\n要添加中间件，我们定义一个 `middleware` 选项，并提供一个函数，该函数通过添加内置的 `compress`\
+  \ 中间件来修改现有的中间件模块集合。发送到 Web 服务器的每个请求现在都将经过此中间件。\n\n在 Web 服务器添加了新的中间件之后，我们应该确认响应在被请求时是否被压缩。要测试此功能是否按预期工作，我们可以使用命令行工具\
+  \ `curl` 来返回每个请求的字节数。图 6-5 演示了两个用于测试响应大小的 `curl` 命令。第一个 `curl` 命令没有发送 `Accept-Encoding:\
+  \ gzip,deflate` 头部，响应未被压缩。第二个 `curl` 命令在请求中添加了 `Accept-Encoding` 头部，Web 服务器正确响应了压缩后的内容。\n\
+  \n![9781484200148_Fig06-05.jpg](img/00043.jpeg)\n\n图 6-5。测试我们的中间件是否已按预期加载\n\n至此，我们已经拥有了一个健壮的本地开发服务器和另一个准备好与测试运行器集成的测试服务器。我们能够在本地运行我们的应用程序，甚至像在生产环境中那样压缩响应。在下一章中，我将介绍当磁盘上的文件被修改时，如何自动在浏览器中重新加载资源，而无需手动重新加载或刷新浏览器。接下来，我们将开始以多种方式自动化测试我们的应用程序：单元测试、集成测试、无障碍测试和性能测试。\n\
+  \n### 测试\n\n除了运行本地开发服务器，我们还可以使用 Grunt 来自动化运行测试。拥有一套良好的应用程序测试套件的好处毋庸置疑。测试可以帮助防止问题发布到生产环境，作为团队成员之间的沟通工具，降低对复杂应用程序进行更改时的风险，并且它们是可重复的。一套自动化测试套件还可以显著减少验证一个需要在多个设备上运行的应用程序所需的时间，因为测试套件可以在多个设备上并行运行。这对于响应式\
+  \ Web 应用程序尤其重要。\n\n\n\nGrunt 可以自动化从单元测试到系统测试各个级别的测试工作。在接下来的几节中，我们将探索如何设置 Grunt 任务来运行单元测试、在不同浏览器中运行测试、验证应用程序的无障碍性，并最终进行性能测试。\n\
+  \n#### 编写第一个测试\n\n让我们从最基本的单元测试开始，踏上使用 Grunt 自动化各种应用程序测试的旅程。市面上有多种测试框架可供选择。在本例中，我们将使用\
+  \ `nodeunit`。`Nodeunit` 是一个简单但健壮的测试框架，它支持异步运行测试，并支持多种报告格式。有一个名为 `grunt-contrib-nodeunit`\
+  \ 的 Grunt 插件可以封装 `nodeunit` 包。清单 6-9 展示了如何将该插件添加到项目中。\n\n***清单 6-9***. 安装 `grunt-contrib-nodeunit`\n\
+  \n```\nnpm install --save-dev grunt-contrib-nodeunit\n```\n\n接下来，需要将任务配置添加到我们的 `Gruntfile.js`\
+  \ 文件中（见清单 6-10）。\n\n***清单 6-10***. `grunt-contrib-nodeunit` 的配置\n\n```\nnodeunit:\
+  \ {\n    all: ['test/*_test.js'],\n    options: {\n      reporter: 'junit',\n      reporterOptions:\
+  \ {\n        output: 'out'\n      }\n    }\n  }\n```\n\n清单 6-10 中的配置定义了一个目标，该目标将查找\
+  \ `test` 文件夹中所有以 `test.js` 结尾的文件。例如，如果 `item_test.js`、`list_test.js` 和 `user_test.js`\
+  \ 文件存在于 `test` 文件夹中，则它们都将匹配该模式。此外，还设置了其他配置选项，用于配置测试运行器的输出。在这个实例中，测试运行器被配置为使用 JUnit\
+  \ 格式化程序输出结果，并且输出结果应存储在 `out` 目录中。\n\n如果现在运行该任务，由于当前没有 `test` 文件夹或任何已编写的测试，我们将得到类似于图\
+  \ 6-6 所示的输出。接下来，我们将创建一个简单的 JavaScript 模块，用于表示待办事项列表中的一个项目。清单 6-11 包含了该待办事项模块的定义，该模块扩展了\
+  \ `Backbone.Model` 模块。\n\n![9781484200148_Fig06-06.jpg](img/00044.jpeg)\n\n图 6-6.\
+  \ 在未定义任何测试的情况下运行 `grunt-contrib-nodeunit`\n\n***清单 6-11***. 表示待办事项的简单 JavaScript\
+  \ 模块\n\n```\n/**\n  *\n  * @name Todo\n  * @classdesc Todo Model\n  * @author James\
+  \ Cryer\n  * @exports Backbone.Model\n  */\n'use strict';\n\nvar Backbone = require('backbone');\n\
+  \nmodule.exports = Backbone.Model.extend({\n  defaults: {\n    'title': '',\n    'date':\
+  \ '19/02/2015',\n    'complete': false\n  },\n\ncomplete: function () {\n    this.set('complete',\
+  \ true);\n  }\n});\n```\n\n`Todo` 模块定义了一组默认属性：`title`、`date` 和 `complete` 状态。此外，还定义了一个用于将\
+  \ `Todo` 模块实例标记为已完成的函数。`Backbone.Model` 模块使得为 `Todo` 模块的每个实例轻松定义属性默认值成为可能。\n\n`complete`\
+  \ 函数使用 `Backbone.Model` 提供的 `set()` 函数来修改 `Todo` 模块实例的属性。清单 6-12 提供了一个如何在应用程序中使用这个简单模块的示例。这个简单的示例创建了一个\
+  \ `Todo` 模块的新实例，并传入了 `title` 和必须完成的 `date`。创建待办事项后，我们将其设置为已完成。目前，除非我们在浏览器中运行它，否则我们没有办法验证新的\
+  \ `Todo` 模块是否按预期工作。现在，让我们结合使用 `nodeunit` 和 `grunt-contrib-nodeunit` 来编写一个测试，这样每次我们对模块进行更改时都可以运行它。\n\
+  \n***清单 6-12***. 使用 `Todo` 模块的示例\n\n```\ndefine([\n  'js/model/todo'\n], function\
+  \ (Todo) {\n  var todo = new Todo({\n    'title': 'buy groceries',\n    'date':\
+  \ '20/02/2015'\n  });\n  todo.complete();\n});\n```\n\n为了创建我们的第一个测试，我们必须首先在应用程序的根目录下创建一个新文件夹。在测试文件夹中创建一个与应用程序代码相匹配的镜像结构通常非常有用。为了保持测试文件夹结构与应用程序文件夹同步，最好在新创建的\
+  \ `test` 文件夹内创建一个 `models` 文件夹。在 `models` 文件夹中，我们将为 `Todo` 模块创建第一组测试。该文件应命名为 `todo_test.js`，以便与我们在\
+  \ Grunt 配置中定义的模式相匹配。清单 6-13 包含了测试模块的内容。\n\n***清单 6-13***. 第一个测试：确认 `Todo` 模块按预期工作\n\
+  \n```\n'use strict';\n\nexports.todo = {\n      setUp: function (done) {\n        var\
+  \ Todo = require('../../app/js/models/todo');\n\nthis.todo = new Todo({\n          'title':\
+  \ 'Test Item',\n          'date': '24/02/2014'\n        });\n        done();\n      },\n\
+        item_has_a_title: function (test) {\n        test.equal(this.todo.get('title'),\
+  \ 'Test Item');\n        test.done();\n      },\n      item_is_not_complete: function\
+  \ (test) {\n        test.equal(this.todo.get('complete'), false);\n        test.done();\n\
+        },\n      item_can_be_completed: function (test) {\n        this.todo.complete();\n\
+          test.ok(this.todo.get('complete'));\n        test.done();\n      }\n    };\n\
+  ```\n\n清单 6-13 中显示的测试模块总共包含三个测试：确保项目有标题、确保项目默认未完成、以及确保项目可以被标记为已完成。如果你现在运行 `nodeunit`\
+  \ 任务，如图 6-7 所示，你将看到总共执行了三个断言。断言不应与测试混淆；每个测试可以有多个断言。通常认为每个测试只做一个断言是最佳实践；然而，这并不是一个金科玉律，而更像是一个原则，旨在鼓励编写仅测试系统一小部分的测试。例如，在我们的测试模块中，我们将检查调用\
+  \ `complete` 函数后 `complete` 属性是否被设置为 `true` 的测试拆分开来。我们本可以将此测试与之前检查 `complete` 属性值是否为\
+  \ `false` 的测试合并。然而，通过拆分这些测试，如果默认值发生更改或者 `complete` 函数出现故障，将更容易发现问题的原因。\n\n![9781484200148_Fig06-07.jpg](img/00045.jpeg)\n\
+  \n图 6-7. 使用 grunt 运行 `nodeunit` 测试\n\n#### 修改 Nodeunit 的输出\n\n`grunt-contrib-nodeunit`\
+  \ 的输出非常简洁，仅显示测试总体是否通过、运行的断言数量以及完成测试所花费的时间。由于我们当前选择了 JUnit 报告器，该插件还会输出包含测试结果的文件的位置。清单\
+  \ 6-14 包含了在项目上运行 `grunt-contrib-nodeunit` 生成的输出。\n\n***清单 6-14***. 来自 `grunt-contrib-nodeunit`\
+  \ 的 JUnit 报告器输出示例\n\n```\n<?xml version=\"1.0\" encoding=\"UTF-8\" ?>\n<testsuite\
+  \ name=\"todo_test.js\"\n           errors=\"0\"\n           failures=\"0\"\n          \
+  \ tests=\"3\">\n  <testcase name=\"todo - item_has_a_title\"></testcase>\n  <testcase\
+  \ name=\"todo - item_is_not_complete\"></testcase>\n  <testcase name=\"todo - item_can_be_completed\"\
+  ></testcase>\n</testsuite>\n```\n\n运行该插件生成的输出可以在持续集成环境中使用。我们将在本章后面探讨如何设置这样的环境。\n\
+  \n### 使用 Grunt 进行测试驱动开发\n\n\n\n#### 测试驱动开发与测试夹具\n\n现在我们已经编写了第一批测试，让我们探讨一下为 `Todo`\
+  \ 模块添加新功能会变得多么容易。在本节中，我们将探索一种测试方法：先编写自动化测试，再编写少量代码来通过测试。一旦测试通过，我们就可以自由地重构实现以满足开发标准。这个过程被称为测试驱动开发，通常简称为\
+  \ `TDD`。例如，让我们添加撤销完成待办事项的功能。清单 6-15 演示了新添加的用于将项目标记为未完成的函数。\n\n***清单 6-15***. 一个表示待办事项的简单\
+  \ JavaScript 模块\n\n```\n/**\n  *\n  * @name Todo\n  * @classdesc Todo 模型\n  * @author\
+  \ James Cryer\n  * @exports Backbone.Model\n  */\n'use strict';\n\nvar Backbone\
+  \ = require('backbone');\n\nmodule.exports = Backbone.Model.extend({\n  defaults:\
+  \ {\n    'title': '',\n    'date': '19/02/2015',\n    'complete': false\n  },\n\n\
+  complete: function () {\n    this.set('complete', true);\n  },\n\nundo: function\
+  \ () {\n    this.set('complete', true);\n  }\n});\n```\n\n接下来，我们必须添加一个测试来验证 `undo`\
+  \ 函数是否按预期工作，如清单 6-16 所示。\n\n***清单 6-16***. 更新测试模块以验证 `undo` 函数是否符合预期\n\n```\n'use\
+  \ strict';\n\nexports.todo = {\n  setUp: function (done) {\n    var Todo = require('../../app/js/models/todo');\n\
+  \nthis.todo = new Todo({\n      'title': 'Test Item',\n      'date': '24/02/2014'\n\
+  \    });\n    done();\n  },\n  ...\n\nitem_can_be_marked_as_incomplete: function\
+  \ (test) {\n    this.todo.complete();\n    this.todo.undo();\n    test.equal(this.todo.get('complete'),\
+  \ false);\n    test.done();\n  }\n};\n```\n\n重新运行测试应该会导致失败，因为当前 `undo` 函数中存在缺陷。目前，它将\
+  \ `complete` 属性设置为 `true`，而本应设置为 `false`。图 6-8 显示了重新运行测试的输出，其中包含失败的测试。\n\n![9781484200148_Fig06-08.jpg](img/00046.jpeg)\n\
+  \n图 6-8. `grunt-contrib-nodeunit` 报告测试失败\n\n如果你打开该插件生成的测试结果文件，它会提供更详细的失败原因输出。或者，如果你想在控制台中查看输出，默认的\
+  \ reporter 会输出 `nodeunit` 产生的所有错误，如图 6-9 所示。\n\n![9781484200148_Fig06-09.jpg](img/00047.jpeg)\n\
+  \n图 6-9. 失败的测试输出到控制台\n\n失败的测试所生成的输出信息量很大，它提供了测试失败的文件、测试名称、失败原因以及行号，这进一步支持了最小化测试数量的原则。简洁的测试通常更容易理解和追溯失败原因。在我们的示例中，失败的原因仅仅是将值设置为\
+  \ `true` 而不是 `false`。如果按照清单 6-17 更新 `undo` 函数，所有测试将再次通过。\n\n***清单 6-17***. 修改后的\
+  \ `undo` 函数以解决测试失败问题\n\n```\n...\n\nundo: function () {\n  this.set('complete',\
+  \ false);\n}\n...\n```\n\n在编写测试时，使用测试数据通常很有用，这样可以方便地在运行测试时修改应用程序的状态。在下一节中，我们将探讨如何在运行测试之前使用\
+  \ `Grunt` 生成或修改测试夹具。\n\n#### 生成夹具\n\n如上一节所示，拥有一套每次更改应用程序时都能自动运行的测试套件非常强大，这对于大型、复杂的应用程序尤其有用，因为手动测试所需的时间远大于运行一套自动化测试所需的时间。然而，随着应用程序复杂性的增加，你很可能会想要测试应用程序可以转换和不可以转换的各种状态。这时，一组测试夹具就会很有帮助，因为它允许你根据加载到应用程序中的数据快速切换应用程序上下文。\n\
+  \n顾名思义，夹具通常是已知且预定义的。但是，有时你可能需要部分动态的夹具，例如，你想要验证应用程序是否能正确响应未来的日期。如果你有一个固定日期，那么要么必须确保应用程序配置为在给定的时间段内运行，要么修改你的文本夹具以确保它们的日期总是在将来。\n\
+  \n让我们从前一节的示例进行扩展，为我们的 `Todo` 模块添加一个新函数。该函数将判断待办事项的日期是否已过，本质上允许我们找出所有已过期的待办事项。清单\
+  \ 6-18 包含了修改后的 `Todo` 模块，其中添加了 `hasExpired` 函数。\n\n***清单 6-18***. 修改后的 `Todo` 模块，能够检查项目是否已过期\n\
+  \n```\nmodule.exports = Backbone.Model.extend({\n  defaults: {\n    'title': '',\n\
+  \    'date': '19/02/2015',\n    'complete': false\n  },\n\ncomplete: function ()\
+  \ {\n    this.set('complete', true);\n  },\n\nundo: function () {\n    this.set('complete',\
+  \ false);\n  },\n\nhasExpired: function () {\n    return new Date(this.get('date'))\
+  \ < new Date();\n  }\n});\n```\n\n接下来，我们必须添加一个测试来确保我们的新函数按预期工作。清单 6-19 包含了修改后的测试模块，其中添加了对\
+  \ `hasExpired` 函数的测试。\n\n***清单 6-19***. 测试模块，包含针对过期功能的附加测试\n\n```\nexports.todo\
+  \ = {\n  setUp: function (done) {\n    var Todo = require('../../app/js/models/todo');\n\
+  \nthis.todo = new Todo({\n      'title': 'Test Item',\n      'date': '24/02/2014'\n\
+  \    });\n    done();\n  },\n  ...\n  item_has_expired: function (test) {\n    this.todo.set('date',\
+  \ '2011-05-26T07:56:00.123Z');\n    test.ok(this.todo.hasExpired());\n    test.done();\n\
+  \  }\n};\n```\n\n在最新的测试中，我们用一个新的过去日期更新了我们的 `todo` 实例，并验证了当我们在实例上调用 `hasExpired`\
+  \ 时，返回值是 `true`。这看起来问题不大，因为测试总会通过。想象一个场景，我们想要开始处理多个待办事项以形成一个待办事项列表。在这组待办事项中，我们希望能够过滤出所有活跃的、尚未过期的项目。在这样的测试中，我们必须确保始终有一些未过期的项目可用，同时，由于有多个实例，我们不希望用大量数据使测试模块变得臃肿。在这样的场景下，最好的方法是创建一个包含测试数据的外部文件，并在运行测试时加载数据。这引出了一个新的问题，因为我们的测试文件包含静态数据，而我们必须确保测试数据是动态的。\n\
+  \n### 在运行时自动化生成夹具\n\n`Grunt` 可用于在每次测试运行前自动生成动态测试数据。为此，我们可以使用另一个名为 `grunt-text-replace`\
+  \ 的 `Grunt` 插件。顾名思义，`Grunt-text-replace` 允许你配置该插件以替换文件中的文本模式，并将结果输出到另一个位置。首先，让我们安装该插件，如清单\
+  \ 6-20 所示。\n\n\n\n### 安装`grunt-text-replace`\n\n***清单 6-20***. 安装`grunt-text-replace`\n\
+  \n```\nnpm install –save-dev grunt-text-replace\n```\n\n在配置任务之前，我们先生成静态测试数据并将其保存到`build`文件夹中。在应用的`build`文件夹内，创建一个名为`fixtures`的新文件夹。在新`fixtures`文件夹中，我们可以创建一个名为`todo.json`的文件来存放待办事项的测试数据。清单\
+  \ 6-21 包含了测试数据，其中所有需要未来日期的条目都将`FUTURE_DATE`作为占位符。现在，我们已经有了基本的文本测试数据，接下来可以配置`grunt-text-replace`来生成每次运行测试时使用的测试数据。\n\
+  \n#### 待办事项的测试数据\n\n***清单 6-21***. 待办事项的测试数据\n\n```\n[\n  {\n    \"title\": \"Past\
+  \ Item\",\n    \"date\": \"2011-05-26T07:56:00.123Z\"\n  },\n  {\n    \"title\"\
+  : \"Future item 1\",\n    \"date\": \"FUTURE_DATE\"\n  },\n  {\n    \"title\": \"\
+  Future item 2\",\n    \"date\": \"FUTURE_DATE\"\n  }\n]\n```\n\n### 配置`grunt-text-replace`以动态生成测试日期\n\
+  \n清单 6-22 包含了`grunt-text-replace`的任务配置。该配置包含源文件夹、目标文件夹以及一个替换数组。该插件支持简单的文本替换、正则表达式替换，或者像本例中一样，使用函数来替换源文件中的文本。替换完成后，修改后的文本将输出到目标文件夹，并保留与原文件相同的文件名。在我们的示例中，文件从`build/fixtures`读取，然后写入`tests/fixtures`。\n\
+  \n***清单 6-22***. 配置`grunt-text-replace`以动态生成测试日期\n\n```\nreplace: {\n  fixtures:\
+  \ {\n    src: ['build/fixtures/*.json'],\n    dest: 'tests/fixtures/',\n    replacements:\
+  \ [{\n      from: 'FUTURE_DATE',\n      to: function () {\n        var today = new\
+  \ Date();\n        return new Date(today.getFullYear() + 1, today.getMonth(), today.getDate())\n\
+  \      }\n    }]\n  }\n}\n```\n\n现在，`grunt-text-replace`已经配置了目标和任务，我们可以像使用其他任何`grunt`插件一样，通过`grunt-cli`的`npm`包来运行它。不幸的是，`grunt-text-replace`默认不会提供关于读取或写入文件的任何反馈。要查看运行任务时哪些文件被写入，可以使用\
+  \ Grunt 的`verbose`标志，如清单 6-23 所示。使用`verbose`标志将生成类似于图 6-10 的输出。\n\n![9781484200148_Fig06-10.jpg](img/00048.jpeg)\n\
+  \n图 6-10. 启用`verbose`标志运行`grunt-text-replace`的示例输出\n\n***清单 6-23***. 使用`verbose`标志输出`grunt-text-replace`生成的文件\n\
+  \n```\ngrunt replace –v\n```\n\n#### 应用动态数据生成\n\n现在我们已经拥有一组动态测试数据，接下来可以编写一个模块来处理待办事项列表。我们将使用\
+  \ Backbone 库中的一个模块——`Collection`。`Collection`提供了一种方便的方式来处理一个或多个模型，追踪一组项目中的变化，并对这些项目应用函数。清单\
+  \ 6-24 包含了一个新的待办事项集合的完整可运行示例。\n\n#### 用于处理多个待办事项的 Backbone 集合\n\n***清单 6-24***.\
+  \ 用于处理多个待办事项的 Backbone 集合\n\n```\n'use strict';\n\nvar _ = require('underscore');\n\
+  var Todo = require('../models/todo');\nvar Backbone = require('backbone');\n\nmodule.exports\
+  \ = Backbone.Collection.extend({\n\nmodel: Todo,\n\nactiveItems: function () {\n\
+  \    return _.filter(this.models, function(item) { return !item.hasExpired(); });\n\
+  \  },\n\nexpiredItems: function () {\n    return _.filter(this.models, function(item)\
+  \ { return item.hasExpired(); });\n  }\n});\n```\n\n如清单 6-24 所示，我们的集合期望接收一个`Todo`模块的实例作为模型。该集合还包含两个用于过滤集合的函数：第一个用于查找所有活跃项目，第二个用于查找集合中所有已过期的项目。为了验证函数是否按预期工作，我们可以在`tests/collections`中创建一个新的测试模块。与我们的第一个测试一样，该文件的名称应与被测试的模块相同，但以`_test`作为后缀。\n\
+  \n#### 待办事项集合的测试模块\n\n清单 6-25 包含了`todos_test.js`的内容，即对我们集合的测试。该集合有三个测试：一个用于确认集合使用了正确的模型，另一个用于验证我们可以按活跃项目过滤集合，最后一个用于过滤集合中的过期项目。测试模块的一个重要部分是突出显示在每个测试之前执行的`setUp`函数。该函数用于加载测试数据。请注意，我们从`tests`文件夹内加载测试数据文件，因此使用的是由`grunt-text-replace`生成的数据。这些数据随后被加载到待办事项集合中，然后在每个测试中使用。\n\
+  \n***清单 6-25***. 待办事项集合的测试模块\n\n```\n'use strict';\n\nexports.todos = {\n  setUp:\
+  \ function (done) {\n    var data = require('../fixtures/todos');\n    var Todos\
+  \ = require('../../app/js/collections/todos');\n\nthis.todos = new Todos(data);\n\
+  \    done();\n  },\n\ncollection_has_model_of_todo: function (test) {\n    var Todo\
+  \ = require('../../app/js/models/todo');\n    test.equal(this.todos.model, Todo);\n\
+  \    test.done();\n  },\n\ncollection_can_filter_active_items: function (test) {\n\
+  \    test.equal(this.todos.activeItems().length, 2);\n    test.done();\n  },\n\n\
+  collection_can_filter_expired_items: function (test) {\n    test.equal(this.todos.expiredItems().length,\
+  \ 1);\n    test.done();\n  }\n};\n```\n\n运行`grunt-contrib-nodeunit`任务应生成与图 6-11\
+  \ 相同的输出。\n\n![9781484200148_Fig06-11.jpg](img/00049.jpeg)\n\n图 6-11. 同时运行集合和模型测试的`grunt-contrib-nodeunit`\n\
+  \n将一套测试与一组通过时间动态修改的可靠测试数据相结合，会变得非常宝贵，尤其是在时间紧迫、错误容易潜入项目的情况下。除了单元级别的测试，我们还可以开始探索更高级别的测试。我们可以在浏览器中测试应用——实际上，可以在多个浏览器中测试。在下一节中，我将介绍一个新的\
+  \ Grunt 插件，它可以帮助我们自动化这一过程。\n\n### 在浏览器中测试\n\n对更高级、性能更佳的 Web 应用的需求日益增长。作为开发者，我们通过在浏览器中构建高度交互和复杂的应用来回应这一需求。页面通常运行着大量的\
+  \ JavaScript 代码。到目前为止，我们进行的测试都完全在 Node 环境中运行。在本节中，我们将编写可以在浏览器中运行的测试。这将确保我们的生产代码能够在最接近用户最终使用环境的环境中运行。借助自动化工具的强大功能，我们可以在多个浏览器中运行测试，这有助于验证应用的稳定性。\n\
+  \n\n```markdown\n\n### 使用 Karma 测试运行器\n\n在本节中，我们将探索使用一个名为 `Karma` 的新测试运行器。流行前端框架\
+  \ `AngularJS` 背后的团队开发了 `Karma`。`Karma` 项目旨在使测试驱动开发更简单、更快速，同时允许开发人员在真实的浏览器中运行测试。`Karma`\
+  \ 可用于在本地开发和持续集成环境中运行测试。`Karma` 不是一个测试框架，而是一个测试运行器，因此它可以轻松地与流行的 `JavaScript` 测试框架（如\
+  \ `Jasmine`、`Mocha` 等）集成。在撰写本文时，`Karma` 支持在以下浏览器中运行测试：`Chrome`、`Firefox`、`Safari`、`PhantomJS`、`Opera`、`IE`、`BrowserStack`\
+  \ 等。`Karma` 的核心团队还开发了一个 `Grunt` 插件，用于轻松地将 `Karma` 与你的构建流程集成。该插件名为`grunt-karma`。\n\
+  \n#### 配置 Karma 测试运行器\n\n首先，让我们安装 `grunt` 插件并将其添加到我们的项目中。清单 6-26 演示了如何安装新插件，清单 6-27\
+  \ 包含了要添加到`Gruntfile.js`中的配置。\n\n***清单 6-26***. 安装`grunt-karma`\n\n```\nnpm install\
+  \ --save-dev grunt-karma\n```\n\n***清单 6-27***. `grunt-karma`的 Grunt 配置\n\n```\n\
+  karma: {\n  all: {\n    configFile: 'tests/karma.conf.js'\n  }\n}\n```\n\n`grunt-karma`插件允许你选择如何定义任务配置。它允许你定义一个配置文件或作为\
+  \ Grunt 选项的特定配置。在我们的配置中，如清单 6-27 所示，我们选择使用配置文件。也可以通过指定目标中的选项来覆盖配置文件。例如，你可以在配置文件中定义通用配置，并在持续集成环境中运行测试时覆盖特定配置。清单\
+  \ 6-28 包含了将保存在`karma.conf.js`文件中的配置。\n\n***清单 6-28***. Karma 配置文件\n\n```\n'use strict';\n\
+  \nmodule.exports = function(config) {\n  config.set({\n    files: [\n      'tests/main.js',\n\
+  \      {pattern: 'app/js/**/*.js', included: false},\n      {pattern: 'tests/specs/**/*.js',\
+  \ included: false},\n      {pattern: 'tests/fixtures/**/*.js', included: false}\n\
+  \    ],\n    basePath: '../',\n    frameworks: ['jasmine', 'requirejs'],\n    reporters:\
+  \ ['progress'],\n\nrunnerPort: 9000,\n    singleRun: false,\n    browsers: ['PhantomJS',\
+  \ 'Firefox'],\n    logLevel: 'ERROR'\n  });\n};\n```\n\n配置文件包含要加载到浏览器中的文件设置，以及用于解析文件的基础路径。下一个配置指定了要使用的测试框架以及如何报告测试结果。最后一组选项配置\
+  \ `Karma` 在端口 9000 上运行本地 Web 服务器，并在 `PhantomJS` 和 `Firefox` 浏览器中运行测试。\n\n在使用 `Karma`\
+  \ 运行测试之前，我们必须安装额外的 `npm` 包，其中包含让 `Karma` 与我们选择的浏览器和测试框架集成的插件。清单 6-29 包含了成功运行 `Karma`\
+  \ 之前需要安装的所有包。\n\n***清单 6-29***. 安装额外插件以支持我们的 Karma 测试\n\n```\nnpm install --save-dev\
+  \ karma-jasmine karma-requirejs karma-phantomjs-launcher karma-firefox-launcher\n\
+  ```\n\n如果我们现在尝试运行`grunt-karma`任务，我们应该会看到一个浏览器窗口启动，并加载一个类似于图 6-12 所示的页面。接下来，我们必须添加一个额外的文件来配置我们的测试运行器以与\
+  \ `RequireJS` 配合使用，从而提供将应用程序和测试模块作为 AMD 模块加载的能力。清单 6-30 演示了新文件`test/main.js`。当 `Karma`\
+  \ 加载页面时，该文件将首先被加载。它负责配置 `RequireJS` 以拥有正确的路径。因此，当一个模块请求它依赖的另一个模块时，`RequireJS` 知道正确的\
+  \ `require` 路径。\n\n![9781484200148_Fig06-12.jpg](img/00050.jpeg)\n\n图 6-12. 在浏览器中启动\
+  \ Karma\n\n***清单 6-30***. 支持使用 Karma 的 RequireJS 和 AMD 模块的配置\n\n```\nvar allTestFiles\
+  \ = [];\nvar TEST_REGEXP = /(spec|test)\\.js$/i;\n\nvar pathToModule = function(path)\
+  \ {\n  return path.replace(/^\\/base\\//, '').replace(/\\.js$/, '');\n};\n\nObject.keys(window.__karma__.files).forEach(function(file)\
+  \ {\n  if (TEST_REGEXP.test(file)) {\n    // Normalize paths to RequireJS module\
+  \ names.\n    allTestFiles.push(pathToModule(file));\n  }\n});\n\nrequire.config({\n\
+  \  // Karma serves files under /base, which is the basePath from your config file\n\
+  \  baseUrl: '/base',\n\n// dynamically load all test files\n  deps: allTestFiles,\n\
+  \n// we have to kickoff jasmine, as it is asynchronous\n  callback: window.__karma__.start,\n\
+  \npaths: {\n    'jquery': 'app/bower_components/jquery/dist/jquery',\n    'backbone':\
+  \ 'app/bower_components/backbone/backbone',\n    'underscore': 'app/bower_components/underscore/underscore',\n\
+  \    'fixtures': 'test/fixtures'\n  }\n});\n```\n\n#### 修改我们的应用程序以使用 AMD\n\n既然我们已经有了支持运行测试的配置，我们应该能够开始编写和运行测试了。重新运行\
+  \ `grunt` 任务，然后点击页面右上角的 `Debug` 按钮，应该可以让你检查测试文件是否按预期加载。图 6-13 说明了此时你将看到的示例调试页面。现在测试运行器已在浏览器中正确加载，你应该会在控制台中注意到一条消息，表明没有测试被跳过。此时，是时候开始添加测试来验证我们的应用程序是否按预期工作了。我们将重新审视上一节中为\
+  \ Todo 模块编写的测试。这一次，Todo 模块将被封装为一个 AMD 模块。完成的模块如清单 6-31 所示。\n\n![9781484200148_Fig06-13.jpg](img/00051.jpeg)\n\
+  \n图 6-13. 在浏览器中调试 Karma 测试\n\n清单 6-31 和 6-32 包含了待办事项项及其关联的测试。这些实现与上一节所示的类似。这些文件的唯一区别在于它们是\
+  \ AMD 模块，并且使用 `Jasmine` 测试框架而不是 `nodeunit`。再次运行测试将导致所有三个测试通过。`Karma` 会将测试结果输出到控制台，如果你选择在浏览器中调试测试，也会输出到浏览器中。图\
+  \ 6-14 包含了控制台中`grunt-karma`的输出。你可能已经注意到，当你对应用程序或测试文件进行更改时，`grunt-karma` 将自动重新运行测试。每次\
+  \ `Karma` 运行时，它都会在配置中包含的所有浏览器中运行测试，并报告任何给定浏览器中的错误（参见图 6-15）。\n\n***清单 6-31***. 作为\
+  \ AMD 模块封装的 Todo 模块\n\n```\ndefine(['backbone'], function(Backbone) {\n  'use strict';\n\
+  \nreturn Backbone.Model.extend({\n    defaults: {\n      'title': '',\n      'date':\
+  \ '19/02/2015',\n      'complete': false\n    },\n\ncomplete: function () {\n  \
+  \    this.set('complete', true);\n    }\n  });\n});\n```\n\n```\n\n\n***清单 6-32***.\
+  \ 待办事项的 Jasmine 测试\n\n```\ndefine([\n  'app/js/models/todo'\n], function(Todo) {\n\
+  \ndescribe('A todo item', function() {\n    'use strict';\n\nvar todo;\n\nbeforeEach(function()\
+  \ {\n      todo = new Todo({\n        'title': 'Test Item',\n        'date': '24/02/2014'\n\
+  \      });\n    });\n\nit('should have a title', function() {\n      expect(todo.get('title')).toBe('Test\
+  \ Item');\n    });\n\nit('should not be complete', function() {\n      expect(todo.get('complete')).toBe(false);\n\
+  \    });\n\nit('should be marked as completed', function() {\n      todo.complete();\n\
+  \      expect(todo.get('complete')).toBe(true);\n    });\n\n});\n});\n```\n\n![9781484200148_Fig06-14.jpg](img/00052.jpeg)\n\
+  \n图 6-14. 控制台中 `grunt-karma` 的输出\n\n![9781484200148_Fig06-15.jpg](img/00053.jpeg)\n\
+  \n图 6-15. Karma 调试视图中的控制台输出，包含每个测试的名称及其通过状态\n\n在我们的示例中，我们仅仅是初步探索了 Karma 在测试应用程序方面的强大能力。在实际应用中，Karma\
+  \ 能够在一秒钟内在每个浏览器中运行数百个测试。你也可以选择在你用户使用的所有主流浏览器中运行所有测试。\n\n在下一章中，当我们为项目搭建持续集成环境时，我们将再次讨论\
+  \ `grunt-karma`。我们将探讨如何在虚拟化环境中的多个浏览器中运行测试。\n\n### 自动化可访问性测试\n\n任何 Web 应用测试策略的另一个关键组成部分应该是可访问性测试。进行可访问性测试是为了确保所有访问你应用程序或网站的用户都能获得良好的体验，并且不会受到限制，无法访问应用功能或网站内容。人们常犯的一个错误是，认为可访问性测试只关乎验证网站是否对视力较差或完全失明的用户友好。可访问性的范畴远不止于此，还有更多的检查项需要执行，以确保网站或应用是易于访问的。在本节中，我们将探讨如何使用工具来自动化检测\
+  \ Web 应用中的可访问性问题。为了执行测试，我们将使用 Chrome 无障碍工具来验证我们的应用或页面。幸运的是，已经有一个封装了 `npm` `a11y`\
+  \ 包的 `grunt` 插件可供使用。\n\n首先，我们需要将 `grunt-a11y` 插件添加到项目中。清单 6-33 展示了安装过程。\n\n***清单\
+  \ 6-33***. 安装 `grunt-a11y`\n\n```\nnpm install --save-dev grunt-a11y\n```\n\n现在，我们的\
+  \ `grunt` 工作流程中已经可以使用 `a11y` 了，接下来我们需要配置该插件，如清单 6-34 所示。\n\n***清单 6-34***. 配置 `grunt-ally`\
+  \ 为我们的应用程序运行可访问性测试\n\n```\na11y: {\n  live: {\n    options: {\n      urls: ['www.twitter.com']\n\
+  \    }\n  }\n}\n```\n\n如清单 6-34 所示，该插件可以通过一系列 URL 进行简单配置。在我们的示例中，我们将 URL 硬编码到了 `Gruntfile`\
+  \ 中，但在大型应用的构建过程中，这应该被推入一个配置文件，并在构建时加载。这意味着 URL 更易于维护，并且可以在任务之间共享。我们将在下一章进一步探讨这一点。\n\
+  \n除了 `urls` 选项外，`grunt-a11y` 插件还接受另一个选项，允许插件在检测到所测试 URL 存在可访问性问题时抛出错误。如果你希望将这些测试作为持续集成环境的一部分，并且希望在可访问性测试失败时导致构建失败，那么这个选项就变得非常重要。图\
+  \ 6-16 展示了该插件的示例输出。\n\n![9781484200148_Fig06-16.jpg](img/00054.jpeg)\n\n图 6-16.\
+  \ 运行 `grunt-a11y` 的示例输出\n\n`grunt-a11y` 插件会报告缺少标签、ARIA 属性、元数据或元素对比度低等问题。这并不能替代使用其他工具套件进行的实际可访问性测试。但是，该插件可以作为一种辅助工具，帮助确保应用程序中维护了可访问性的基线标准。\n\
+  \n### 将本地服务器暴露给外部世界\n\n在本地开发应用程序时，能够与他人分享和展示你的工作进行中状态总是很方便的。此外，第三方工具有时也需要能够在开放的\
+  \ Web 上查看你的应用程序，才能有效地工作。像 Google PageSpeed Insights 或 WebPagetest 这样的工具就是如此，它们可以用来分析应用程序的网络性能。幸运的是，有一个名为\
+  \ `ngrok` 的工具，它允许你通过一个公共 URL 将本地开发环境安全地暴露到网络上。在本节中，我们将探讨如何配置我们的 `Grunt` 工作流程，以便轻松地暴露我们的应用程序。\n\
+  \n`ngrok` 可以从 [`ngrok.com`](https://ngrok.com) 下载二进制文件，也可以作为 Node 模块使用，这意味着我们可以轻松地将其集成到我们的\
+  \ `Grunt` 工作流程中。首先，我们通过使用 `npm` 安装包来将 `ngrok` 包含到我们的项目中，如清单 6-35 所示。\n\n***清单 6-35***.\
+  \ 安装 `ngrok`\n\n```\nnpm install ngrok --save-dev\n```\n\n为了在我们的 `Grunt` 工作流程中使用\
+  \ `ngrok`，我们将在 `Gruntfile` 中注册一个任务。我们的新任务 `ngrok` 是异步的，因为它会向 `ngrok` API 发送请求，为我们的应用程序请求一个公共\
+  \ URL。我们将应用程序配置为在开发期间本地运行在端口 `8000` 上，因此我们将端口号 `8000` 传递给对 `ngrok` 的调用。`ngrok` 库会返回一个错误和/或一个公共\
+  \ URL。一旦返回 URL，我们就可以修改其他 `Grunt` 任务的配置，使其针对我们的公共 URL 运行。例如，我们可以修改 `grunt-a11y` 任务中的\
+  \ URL，使其针对本地开发环境而不是生产环境运行。清单 6-36 展示了完整的自定义任务。\n\n***清单 6-36***. 用于运行 `ngrok` 的自定义\
+  \ Grunt 任务\n\n```\nvar ngrok = require ('ngrok');\n\nmodule.exports = function (grunt)\
+  \ {\n\ngrunt.registerTask('ngrok', 'Running ngrok', function () {\n    var done\
+  \ = this.async();\n    var port = 8000;\n\nngrok.connect(port, function (err, url)\
+  \ {\n      if (err !== null) {\n        grunt.fail.fatal(err);\n        return done();\n\
+  \      }\n      grunt.log.write(url);\n      done();\n    });\n  });\n\n// Register\
+  \ default tasks\n  grunt.registerTask('default', ['ngrok']);\n};\n```\n\n如果你在需要代理的公司网络内工作，那么你很可能可以将\
+  \ `ngrok` 与其他 `Grunt` 插件结合使用，以便在代理环境下运行它们。在下一节中，我们将暴露我们的应用程序，以便能够对我们的网站进行性能测试。\n\
+  \n### 性能测试\n\n在本章的最后一节，我们将探讨可用于自动化性能测试的工具。我们将特别关注网络性能，评估我们的应用程序在网络传输方面的优化程度。有许多很棒的工具可以用来执行这类测试。我们将重点介绍两个插件：`grunt-pagespeed`\
+  \ 和 `grunt-perfbudget`。\n\n\n\n#### Grunt-pagespeed 与 Grunt-perfbudget\n\n`Grunt-pagespeed`\
+  \ 封装了 Node 模块 `PSI`。`PSI` 是 *PageSpeed Insights* 的缩写。PageSpeed Insights 是 Google\
+  \ 的一款产品，允许开发者通过浏览器中的表单、API 或浏览器插件来运行性能测试。Node 模块直接与 API 交互。该 API 接受多个参数，但主要是网站的\
+  \ URL。API 随后获取 URL，向其发出请求，并对页面生成的请求（例如，CSS 的请求）执行分析。分析会应用一系列规则来确定页面的整体性能，并返回一个介于\
+  \ 0 到 100 之间的分数，其中 100 表示性能最佳。`grunt-pagespeed` 模块允许你定义一个阈值，该阈值必须在每次运行性能测试时达到。如果未达到阈值，该插件将抛出错误。如果你希望在发布到生产环境之前，将性能测试作为构建过程的一部分来运行以验证性能，这将特别有用。该插件还支持多种输出格式，包括\
+  \ `TAP` 和 `JSON`。\n\n`Grunt-perfbudget` 与另一个名为 WebPagetest 的类似 PageSpeed Insights\
+  \ 的性能工具交互。与 PageSpeed Insights 一样，WebPagetest 可以通过多种方式使用：通过网络表单、API 或在自己的安装上运行。Grunt\
+  \ 插件使用公共 API；但是，它可以配置为针对 WebPagetest 的本地安装运行。`Grunt-perfbudget` 与 `grunt-pagespeed`\
+  \ 不同，因为它允许你为每个指标（例如，请求数量）定义性能阈值。\n\n让我们开始同时安装这两个插件（参见清单 6-37）。\n\n***清单 6-37***.\
+  \ 安装 `grunt-pagespeed` 和 `grunt-perfbudget`\n\n```\nnpm install grunt-pagespeed\
+  \ grunt-perfbudget --save-dev\n```\n\n现在两个插件都已可用，我们必须对它们进行配置。我们将从 `grunt-pagespeed`\
+  \ 开始，其配置如清单 6-38 所示。\n\n***清单 6-38***. `grunt-pagespeed` 配置\n\n```\npagespeed: {\n\
+  \  options: {\n    nokey: true,\n    url: \"https://developers.google.com\"\n  },\n\
+  \  prod: {\n    options: {\n      locale: \"en_GB\",\n      strategy: \"desktop\"\
+  ,\n      threshold: 80\n    }\n  }\n}\n```\n\n`Grunt-pagespeed` 允许你定义多个参数，这些参数将修改对所提供的\
+  \ URL 运行的测试。在我们的示例中，我们正在测试单个 URL：`https://developers.google.com`；但是，该插件支持针对多个 URL\
+  \ 运行测试，每个 URL 都会对照定义的阈值进行检查。除了 `url` 选项外，还有用于设置预期策略和 API 密钥的选项。`strategy` 决定对给定\
+  \ URL 执行的分析类型。它可以是 `mobile` 或 `desktop`。`API key` 是通过 Google APIs 控制台获得的密钥。然而，按照我们的配置，Google\
+  \ 提供了无需密钥即可使用 PageSpeed Insights 的功能。这会限制你对 API 的使用，如果你打算在生产环境或正式构建过程中使用 PageSpeed\
+  \ Insights，那么我建议设置一个 API 密钥。在我们的示例中，我们还将阈值设置为 80，这意味着如果我们的整体性能分数低于 80，将会抛出一个错误。\n\
+  \n图 6-17 显示了使用上述配置运行 Grunt 插件的示例输出。如您所见，整体分数、策略和 URL 都定义在输出的顶部。此外，还给出了每条规则的明细，以及按类型分组的静态资源大小的相关值。\n\
+  \n![9781484200148_Fig06-17.jpg](img/00055.jpeg)\n\n图 6-17. `grunt-pagespeed` 的示例输出\n\
+  \n### 性能开发环境\n\n如您所见，当长期在项目上工作时，这可能非常有用。它可以帮助您跟踪出现的任何性能问题，并确保您的应用程序在每个版本中都达到基准。如果您在一个有许多开发人员的项目上工作，且每个版本都添加新的前端依赖项，这将特别有用。另外值得注意的是，`grunt-pagespeed`\
+  \ 可以与 `ngrok` 结合使用，在将应用程序发布到公共 URL 之前测试您的本地开发环境。清单 6-39 通过再次使用上一节中的 `ngrok` 任务，演示了如何实现这一点。\n\
+  \n***清单 6-39***. 使用 `ngrok` 和 `grunt-pagespeed` 进行本地性能测试的自定义任务\n\n```\ngrunt.registerTask('ngrok',\
+  \ 'Running ngrok', function () {\n  var done = this.async();\n  var port = 8000;\n\
+  \nngrok.connect(port, function (err, url) {\n    if (err !== null) {\n      grunt.fail.fatal(err);\n\
+  \      return done();\n    }\n    grunt.config.set('pagespeed.options.url', url);\n\
+  \    grunt.task.run('pagespeed');\n    done();\n  });\n});\n```\n\n关键的修改在于传递给 `connect`\
+  \ 函数的回调中。在最后几行，我们使用 `grunt.config` API 在执行 `pagespeed` 任务之前设置了 `grunt-pagespeed`\
+  \ URL 的值。然后，`pagespeed` 任务将使用从 `ngrok` 服务返回的 URL 运行。\n\n接下来，我们将把 `grunt-perfbudget`\
+  \ 集成到项目中。这与 `grunt-pagespeed` 略有不同，因为我们可以对照 WebPagetest 的响应中的每个指标来定义阈值。清单 6-40 包含用于测试我们应用程序的示例配置。\n\
+  \n***清单 6-40***. `grunt-perfbudget` 的配置\n\n```\nperfbudget: {\n  default: {\n  \
+  \  options: {\n      url: 'https://developers.google.com',\n      key: 'API_KEY_HERE',\n\
+  \      budget: {\n        visualComplete: '4000',\n        SpeedIndex: '1500'\n\
+  \      }\n    }\n  }\n}\n```\n\n运行上述配置将输出测试的 URL、所选预算的分数以及预算是否达标。图 6-18 显示了 `grunt-perfbudget`\
+  \ 的示例输出。与 `grunt-pagespeed` 一样，如果某个特定预算未达标，将会抛出一个错误。\n\n![9781484200148_Fig06-18.jpg](img/00056.jpeg)\n\
+  \n图 6-18. `grunt-perfbudget` 的输出\n\n与 `grunt-pagespeed` 一样，`grunt-perfbudget` 可以与\
+  \ `ngrok` 结合使用来测试本地开发环境，如果您希望在发布应用程序之前开始分析页面性能。为了简化对大量 URL 的测试，这两个插件都可以与 `grunt-text-replace`\
+  \ 结合使用，以动态生成一组 URL。例如，如果您想测试不同的环境，并且每个环境中的路径相同，则可以动态写入域名或子域名，同时只需维护一个 URL 列表。\n\n\
+  ### 总结\n\n在本章中，我们探讨了如何使用 Grunt 来辅助搭建本地开发环境、设置测试环境以及在本地开发环境中对我们的应用程序执行基准测试。我们还探讨了编写测试的好处，以及如何在各种浏览器上运行这些测试。最后，我们介绍了一些工具，这些工具可以帮助验证，当我们将更改引入应用程序时，不会同时引入性能瓶颈。\n\
+  \n此时，我们的 `Gruntfile` 变得臃肿且难以管理，存在大量重复。除了庞大的 `Gruntfile`，每次运行 Grunt 时（即使只运行单个任务），我们都会加载大量插件。在最后一章中，我们将研究一些工具和技术，以使我们的\
+  \ Grunt 工作流本身更加优化。最终目标是拥有一个精简且易于理解的构建过程，团队中的任何人都可以轻松使用。\n\n"
+- "# 第 7 章\n\n![image](img/00005.jpeg)\n\n## 优化您的 Grunt 工作流\n\n\n\n### 优化 Grunt 工作流程\n\
+  \n在前面的章节中，我们集中讨论了自动化构建过程以优化资源并确保它们符合特定质量标准。在本章中，我们将专注于优化 `Grunt` 工作流程本身。随着项目的增长，除非注意提高可维护性，否则项目通常会变得难以维护。你的\
+  \ `Grunt` 工作流程也不例外。当你在项目中使用 `Grunt` 执行更多任务时，你可能会开始觉得 `Gruntfile` 变得有点笨重。在接下来的几个小节中，我将介绍一些技术，以确保随着项目的增长，你的\
+  \ `Grunt` 任务仍然易于理解和快速运行。\n\n#### 测量性能\n\n与所有类型的性能优化一样，最好先了解问题并收集统计数据来测量和分析所做的任何更改，以确保做出正确的更改。就\
+  \ `Grunt` 而言，了解每个任务运行所需的时间以及构建的整体性能是有益的。这将确保我们可以减少构建应用程序所需的时间，并识别构建中现有或新出现的问题。构建过程的性能与你的应用程序同样重要。在这种情况下，我们作为开发人员就是用户，但同样的可用性基本原则同样适用。例如，如果我们的构建过程耗时超过一秒，我们的注意力很可能会转移到另一个任务上。\n\
+  \n如果你打算将 `Grunt` 作为构建工具引入开发团队，性能将是团队成员可能提出疑问的问题之一。在本节中，我们将介绍一种机制，让你能够展示构建的性能，并在项目增长时持续监控构建过程。\n\
+  \n插件 `time-grunt` 将允许我们测量构建的性能。`time-grunt` 显示 `grunt` 任务的已用执行时间，并且与我们到目前为止使用的所有插件不同。`time-grunt`\
+  \ 不会引入新任务；相反，它会挂接到 `Grunt` 进程来测量已用执行时间。*清单 7-1* 演示了如何将 `time-grunt` 添加到项目中。\n\n\
+  *清单 7-1*. 将 `time-grunt` 添加到项目\n\n```\nnpm install time-grunt --save-dev\n```\n\n\
+  现在插件已添加到项目中，我们必须更新 `Gruntfile` 以确保 `time-grunt` 挂接到我们的构建过程。*清单 7-2* 演示了如何将 `time-grunt`\
+  \ 添加到我们的 `Gruntfile`。在这种情况下，我们将其添加到了 `Gruntfile` 的顶部。*清单 7-2* 的重要部分是将 `Grunt` 对象传递给\
+  \ `time-grunt` 插件，因为这允许它挂接到 `grunt.log` 调用，从而针对我们的构建生成时间测量结果。为了测量已用时间，`time-grunt`\
+  \ 使用了另一个名为 `hooker` 的 `npm` 模块。`hooker` 模块使用一种称为猴子补丁（`monkey patching`）的方法来修改被修补的原始对象的运行时。对于\
+  \ `time-grunt`，使用了预钩子（`pre-hook`），因此每次调用 `grunt.log` 都会在 `time-grunt` 插件内执行一个函数，从而允许它测量给定任务开始和结束之间的时间差。\n\
+  \n*清单 7-2*. 将 `time-grunt` 添加到我们的 `Gruntfile`\n\n```\n'use strict';\n\nmodule.exports\
+  \ = function(grunt) {\n\n// 加载 time-grunt 以测量性能\n  require('time-grunt')(grunt);\n\
+  \n};\n```\n\n现在 `time-grunt` 已添加到我们的 `Gruntfile`，运行我们的构建应该会生成类似于 图 7-1 所示的输出。当 `Grunt`\
+  \ 完成最后一个任务时，`time-grunt` 将输出每个任务运行所花费的时间、运行所花费的时间百分比以及每个任务所花费时间的可视化表示。`time-grunt`\
+  \ 的最终输出是所有任务完成所花费的总时间。目前，我们的任务总共需要 11 秒才能完成。在本章的其余部分，我们将研究减少构建过程执行时间和提高 `Grunt`\
+  \ 工作流程可维护性的技术。\n\n![9781484200148_Fig07-01.jpg](img/00057.jpeg)\n\n图 7-1. 最后一个任务结束时\
+  \ `time-grunt` 的输出\n\n在开始讨论如何改进加载 `Grunt` 插件的方法之前，重要的是要注意，即使 `Grunt` 因致命错误而停止，`time-grunt`\
+  \ 仍会输出结果。图 7-2 显示了一个示例输出，其中 `grunt-contrib-jshint` 抛出了致命错误，因为在应用程序的 JavaScript 中发现了一个错误。\n\
+  \n![9781484200148_Fig07-02.jpg](img/00058.jpeg)\n\n图 7-2. 即使 `Grunt` 未执行所有预期任务，`time-grunt`\
+  \ 也会输出\n\n#### 加载插件\n\n在本章的第一节中，我们发现了当前总构建时间需要 11 秒。加载插件目前占我们某个任务每次运行总时间的大约 3 秒。在本节中，我们将研究几种加载任务的方法。在修改我们的\
+  \ `Gruntfile` 以通过替代方法加载插件之前，让我们重新审视一下我们当前是如何将插件加载到 `Grunt` 工作流程中的。目前，我们在 `Gruntfile`\
+  \ 中单独加载插件，如 *清单 7-3* 所示。\n\n*清单 7-3*. 单独加载 `Grunt` 插件\n\n```\ngrunt.loadNpmTasks('grunt-contrib-sass');\n\
+  grunt.loadNpmTasks('grunt-bower-install');\ngrunt.loadNpmTasks('grunt-recess');\n\
+  grunt.loadNpmTasks('grunt-autoprefixer');\ngrunt.loadNpmTasks('grunt-contrib-cssmin');\n\
+  grunt.loadNpmTasks('grunt-contrib-concat');\ngrunt.loadNpmTasks('grunt-contrib-jshint');\n\
+  grunt.loadNpmTasks('grunt-contrib-requirejs');\ngrunt.loadNpmTasks('grunt-contrib-handlebars');\n\
+  grunt.loadNpmTasks('grunt-contrib-uglify');\ngrunt.loadNpmTasks('grunt-modernizr');\n\
+  grunt.loadNpmTasks('grunt-bower-requirejs');\ngrunt.loadNpmTasks('grunt-uncss');\n\
+  grunt.loadNpmTasks('grunt-contrib-copy');\ngrunt.loadNpmTasks('grunt-usemin');\n\
+  ```\n\n每次我们想在 `Gruntfile` 中使用插件时添加它的过程会很快变得成本高昂且容易出错。人们常犯的一个错误是在为插件定义配置后忘记调用 `grunt.loadNpmTasks`。图\
+  \ 7-3 显示了一个示例，其中正在运行 `grunt-modernizr`，但该插件尚未在 `Gruntfile` 中加载。\n\n![9781484200148_Fig07-03.jpg](img/00059.jpeg)\n\
+  \n图 7-3. 尝试从未加载的插件运行任务\n\n##### 使用 `matchdep` 自动化加载\n\n单独加载插件可能会占用 `Gruntfile` 的很大一部分。为了解决这个问题，让我们探索自动加载\
+  \ `Gruntfile` 中的任务。我们将使用的第一个模块是 `matchdep`，它能够按名称过滤依赖项。`matchdep` 将允许我们使用 `minimatch`\
+  \ 库支持的模式来过滤从 `package.json` 加载的包。如果你还记得，`minimatch` 也被 `Grunt` 用于文件模式匹配。因此，如果你对\
+  \ `Grunt` 的文件匹配感到满意，使用 `matchdep` 也应该易于理解。*清单 7-4* 将模块添加到我们的项目中。\n\n*清单 7-4*. 将\
+  \ `node-matchdep` 添加到我们的项目\n\n```\nnpm install --save-dev matchdep\n```\n\n\n\n\
+  现在模块已添加到项目中，我们可以在 Gruntfile 中使用它，如***列表 7-5*** 所示。\n\n***列表 7-5***. 使用 `matchdep`\
+  \ 加载 Grunt 任务\n\n```\n'use strict';\n\nmodule.exports = function(grunt) {\n\n//\
+  \ 加载 time-grunt 以测量性能\n  require('time-grunt')(grunt);\n\n// 加载所有 grunt 任务\n  require('matchdep').filterDev('grunt-*').forEach(grunt.loadNpmTasks);\n\
+  };\n```\n\n***列表 7-5*** 中的 `Gruntfile` 新增了一行代码，该行负责将 `matchdep` 模块集成到 `Gruntfile`\
+  \ 中，然后使用它加载 Grunt 插件。`matchdep` 模块提供了多个用于过滤 Node 依赖项的函数。在示例中，我们使用了 `filterDev` 函数，该函数会在最近的\
+  \ `package.json` 中查找 `devDependencies`，然后应用过滤器。`matchdep` 提供的每个函数都会将依赖项作为字符串数组返回。在***列表\
+  \ 7-5*** 中，我们获取依赖项数组，逐个遍历，并将其传递给 `grunt.loadNpmTasks`。这最后一步确保加载了所有 Grunt 插件。我们还可以指定只加载由\
+  \ Grunt 核心团队生成的所有插件。***列表 7-6*** 演示了如何针对 Grunt 插件的一个子集进行加载。\n\n***列表 7-6***. 仅加载\
+  \ Grunt 核心团队生成的 Grunt 插件\n\n```\n// 加载所有 grunt 任务\nrequire('matchdep').filterDev('grunt-contrib-*').forEach(grunt.loadNpmTasks);\n\
+  ```\n\n除了按名称定位依赖项外，`matchdep` 还允许指定包含依赖项的文件位置。***列表 7-7*** 提供了一个包含此功能的示例。\n\n***列表\
+  \ 7-7***. 从其他位置加载依赖项\n\n```\n// 从另一个 json 文件加载所有 grunt 任务\nrequire('matchdep').filterAll('grunt-*',\
+  \ './build/tasks.json').forEach(grunt.loadNpmTasks);\n```\n\n在上述示例中，我们指定了加载依赖项的位置。***列表\
+  \ 7-8*** 包含了***列表 7-7*** 中使用的 `tasks.json`。\n\n***列表 7-8***. 示例依赖项文件：`tasks.json`\n\
+  \n```\n{\n  \"devDependencies\": {\n    \"grunt\": \"⁰.4.5\",\n    \"grunt-a11y\"\
+  : \"0.1.0\",\n    \"grunt-autoprefixer\": \"².0.0\",\n    \"grunt-bower-install\"\
+  : \"¹.4.0\",\n    \"grunt-bower-requirejs\": \"⁰.11.0\",\n    \"grunt-contrib-clean\"\
+  : \"⁰.5.0\"\n  }\n}\n```\n\n***列表 7-8*** 包含了一个较小的项目依赖项子集。如果你现在运行 `grunt-contrib-clean`，该任务仍将成功执行；但如果你尝试运行\
+  \ `grunt-contrib-jshint`，则会抛出错误，因为该插件未被加载。能够加载不同的依赖项非常有用。例如，它提供了根据某个选项加载不同依赖项集合的能力。***列表\
+  \ 7-9*** 演示了如何使用这样的选项来切换使用的依赖项文件。***列表 7-9*** 加载了一个名为 `deploy` 的选项，该选项可以在运行时作为参数传递给\
+  \ Grunt。如果设置了该选项，则使用 `./build/tasks.json` 文件；否则加载 `package.json`。这可以在部署时减少加载依赖项所花费的时间，同时允许本地开发环境运行更复杂的任务集。***列表\
+  \ 7-10*** 包含一个如何向 `grunt` 传递选项的示例。如果设置了该选项，它会返回 `true`；否则返回 `false`。\n\n***列表 7-9***.\
+  \ 在加载时修改依赖项\n\n```\nmodule.exports = function(grunt) {\n\nvar deploy  = grunt.option('deploy');\n\
+  \  var depFile = deploy ? './build/tasks.json' : './package.json';\n\n// 加载 time-grunt\
+  \ 以测量性能\n  require('time-grunt')(grunt);\n\n// 加载依赖项\n  require('matchdep').filterDev('grunt-*',\
+  \ depFile).forEach(grunt.loadNpmTasks);\n\n};\n```\n\n\n***Listing 7-10***. 使用 Grunt\
+  \ 的布尔选项，本例中选项为 `deploy`\n\n```sh\ngrunt clean --deploy\n```\n\n`Grunt` 允许你指定一个选项值，而不是使用布尔选项。例如，可以使用一个选项来指定环境。***Listing\
+  \ 7-11*** 和 ***Listing 7-12*** 包含了使用环境选项来切换加载哪个依赖文件的示例。这提供了一种灵活的解决方案，因为只需创建一个新文件，然后更新传递给\
+  \ `Grunt` 的环境选项，即可快速添加新环境。如果你为开发、持续集成、测试和生产环境制定了不同的构建方案，这将非常有用。\n\n***Listing 7-11***.\
+  \ 使用选项切换加载哪个依赖文件的 Grunt 配置\n\n```js\nmodule.exports = function(grunt) {\n\nvar env\
+  \ = grunt.option('environment') || 'dev';\n\n// Load time-grunt to measure performance\n\
+  \  require('time-grunt')(grunt);\n\n// Load dependencies\n  require('matchdep').filterDev('grunt-*',\
+  \ './build/' + env + '.json').forEach(grunt.loadNpmTasks);\n\n};\n```\n\n***Listing\
+  \ 7-12***. 使用指定值的 Grunt 选项\n\n```sh\ngrunt build --environment=test\n```\n\n#####\
+  \ 使用 `load-grunt-tasks` 自动化加载\n\n`matchdep` 并非唯一可用于自动化加载 `Grunt` 插件的插件。另一个用于加载 `Grunt`\
+  \ 插件的流行插件是 `load-grunt-tasks`。这两个插件类似，但 `load-grunt-tasks` 提供了一种更简洁的方法来加载 `Grunt`\
+  \ 插件。***Listing 7-13*** 演示了使用 `load-grunt-tasks` 加载 `Grunt` 插件的最基本方法。\n\n***Listing\
+  \ 7-13***. 使用 `load-grunt-tasks` 加载 Grunt 插件\n\n```js\nmodule.exports = function(grunt)\
+  \ {\n  require('load-grunt-tasks')(grunt);\n};\n```\n\n如 ***Listing 7-13*** 所示，与\
+  \ `matchdep` 模块相比，使用 `load-grunt-tasks` 加载 `Grunt` 插件所需的代码量更少。`Load-grunt-tasks`\
+  \ 也支持 `matchdep` 所支持的同系列强大选项，以实现更高级的用法。***Listing 7-14*** 包含了一个示例，演示如何使用 `load-grunt-tasks`\
+  \ 基于传递给 `Grunt` 的选项来加载依赖，这与 ***Listing 7-11*** 中使用 `matchdep` 所演示的加载过程相同。\n\n***Listing\
+  \ 7-14***. 使用选项修改使用 `load-grunt-tasks` 加载的依赖\n\n```js\nmodule.exports = function(grunt)\
+  \ {\n\nvar env = grunt.option('environment') || 'dev';\n\n// Load dependencies\n\
+  \  require('load-grunt-tasks')(grunt, {\n    pattern: 'grunt-*',\n    config: './build/'\
+  \ + env + '.json'\n  });\n\n};\n```\n\n`load-grunt-tasks` 接收三个选项：`pattern`、`config`\
+  \ 和 `scope`。`pattern` 选项允许我们通过名称过滤要加载的插件，就像我们之前用 `matchdep` 做的那样。`config` 选项允许你指定要加载哪个\
+  \ JSON 依赖文件。`scope` 选项用于指定你希望在哪种类型的依赖中搜索插件。`scope` 选项允许以下值：`dependencies`、`devDependencies`、`peerDependencies`\
+  \ 和 `bundledDependencies`。\n\n##### 延迟自动化加载\n\n自动化加载任务的能力不仅简化了向 `Gruntfile` 添加新插件的过程，还让我们能够轻松优化插件的加载。我们现在可以决定在特定时间点加载哪些插件。我们可以将特定插件的加载延迟到某个任务运行时进行。***Listing\
+  \ 7-15*** 包含了一个示例，在该示例中，我们直到自定义的图像任务运行时才加载 `grunt-contrib-imagemin` 和 `grunt-spritesmith`。\n\
+  \n***Listing 7-15***. 延迟加载开销大的插件直到它们被使用\n\n```js\nmodule.exports = function(grunt)\
+  \ {\n\nvar env = grunt.option('environment') || 'dev';\n\nrequire('load-grunt-tasks')(grunt,\
+  \ {\n    pattern: ['grunt-*', '!grunt-contrib-imagemin', '!grunt-spritesmith'],\n\
+  \    config: './build/' + env + '.json'\n  });\n\ngrunt.registerTask('images', [],\
+  \ function () {\n    require('load-grunt-tasks')(grunt, { config: './build/images.json'\
+  \ });\n    grunt.task.run('imagemin', 'sprite');\n  });\n\n};\n```\n\n***Listing\
+  \ 7-15*** 中有两个根本性的变化。第一个是传递给第一个 `load-grunt-tasks` 调用的 `pattern` 经过了修改，排除了 `grunt-contrib-imagemin`\
+  \ 和 `grunt-spritesmith` 插件。第二个变化是定义了一个名为 `images` 的新任务。在该任务的主体内部，我们在告诉 `grunt` 运行\
+  \ `imagemin` 和 `sprite` 任务之前，使用 `load-grunt-tasks` 来加载定义在另一个文件中的图像依赖。这种方法会将 `grunt-contrib-imagemin`\
+  \ 和 `grunt-spritesmith` 的加载延迟到我们运行 `images` 任务时。将插件的加载延迟到需要时，可以减少运行所有其他任务所花费的时间。\n\
+  \n在本节中，我们开始通过自动化加载插件、根据选项切换加载的插件以及将插件加载延迟到需要时，来改进我们加载任务的方式。***Figure 7-4*** 显示了从主任务中移除\
+  \ `grunt-contrib-imagemin` 后我们应用的输出。我们的总时间从 11 秒下降到了 9.1 秒。时间的减少并不是特别显著，但演示了如何开始减少你的构建时间。在本章中，我们将通过加入更多优化构建过程的技巧来继续减少时间。\n\
+  \n![9781484200148_Fig07-04.jpg](img/00060.jpeg)\n\n***Figure 7-4***. 更改后总运行时间的减少\n\
+  \n#### 组织你的 Gruntfile\n\n在上一节中，我们优化了如何将插件加载到我们的 `Grunt` 工作流中，并且在此过程中，我们从 `Gruntfile`\
+  \ 中移除了 30 行代码。在本节中，我们将从 `Gruntfile` 中移除大约 300 行代码，同时探索以改进的方式管理任务配置的方法。上一节减少了 `Grunt`\
+  \ 任务运行所花费的额外时间。本节的目标是使我们的任务配置更易于维护。改进维护的第一步是将我们的任务配置提取到更易于管理的模块中。第二步是将所有硬编码的路径从\
+  \ `Grunt` 配置中提取到配置对象中，从而更容易在任务之间共享配置。\n\n##### 使用模块\n\n为了进行首次改进，我们将把整个配置从 `Gruntfile`\
+  \ 中移出，放入每个任务各自的独立模块中。为了实现这一点，我们将使用 `Grunt` API 的一部分，通过单个 API 调用来加载我们的配置。***Listing\
+  \ 7-16*** 包含了更新后的 `Gruntfile`，它通过使用 `grunt.task.loadTasks` 利用 `Grunt` API 来简化我们的\
+  \ `Gruntfile`。使用 `grunt.task.loadTasks` 将加载提供的文件夹路径中的所有文件。在我们的示例中，我们将文件夹指定为 `tasks`，因此\
+  \ `Grunt` 将尝试加载相对于 `Gruntfile` 的 `tasks` 文件夹内的文件。需要注意的是，我们不再调用 `grunt.initConfig`\
+  \ 了。\n\n***Listing 7-16***. 从主 Gruntfile 中移除任务配置\n\n```js\nmodule.exports = function(grunt)\
+  \ {\n\n// Measure performance\n  require('time-grunt')(grunt);\n\n// Load main tasks\n\
+  \  require('load-grunt-tasks')(grunt, {\n    pattern: ['grunt-*', '!grunt-contrib-imagemin',\
+  \ '!grunt-spritesmith']\n  });\n\n// Custom task for images\n  grunt.registerTask('images',\
+  \ [], function () {\n    require('load-grunt-tasks')(grunt, { config: './build/images.json'\
+  \ });\n    grunt.task.run('imagemin', 'sprite');\n  });\n\n// Load configuration\n\
+  \  grunt.task.loadTasks('tasks');\n};\n```\n\n\n`Listing 7-17`包含`tasks`目录中某个文件的内容。在`Listing\
+  \ 7-17`中，我们使用`Grunt`对象通过 API 调用`grunt.config`为每个任务单独添加配置。`grunt.initConfig`与`grunt.config`的接口不同。`grunt.config`的第一个参数是要更新的属性字符串，第二个参数是与该属性关联的值。在新的设置中，每个任务的配置都存储在单独的文件中。这有助于维护配置，因为每个模块都专注于配置单个任务。将配置任务的职责分散到多个文件中还能提高可读性，并使新团队成员更容易清晰地看到每个任务的配置位置。以前，新团队成员需要翻阅数百行代码来找出负责给定任务的配置部分。在新创建的模块中，配置通常少于\
+  \ 20 行。`Figure 7-5`是`tasks`文件夹中包含的文件的截图。\n\n**`Listing 7-17`**：来自`tasks`文件夹的 Grunt\
+  \ 模块示例\n\n```\n'use strict';\n\nmodule.exports = function (grunt) {\n  grunt.config(\n\
+  \    'jshint', {\n    options: {\n      jshintrc: true\n    },\n    dist: {\n  \
+  \    src: ['Gruntfile.js', 'app/js/**/*.js']\n    },\n    bower: {\n      src: ['app/bower_components/handlebars/handlebars.js']\n\
+  \    }\n  });\n};\n```\n\n![9781484200148_Fig07-05.jpg](img/00061.jpeg)\n\n**`Figure\
+  \ 7-5`**：`tasks`文件夹中保存的所有模块\n\n##### 使用分组\n\n目前，我们仍然在主`Gruntfile`中定义了默认任务，这是一个庞大的任务列表。下一个针对\
+  \ Grunt 工作流的优化是开始将任务分组为逻辑组。这开始为我们的任务运行器添加我们自己的语言，这将帮助我们向团队中的其他人传达构建思路。此外，它允许我们定位特定的一组任务而无需运行所有任务。由于我们已经将任务配置移到了单独的模块中，我们将在`task`文件夹内创建新的模块来保存我们的自定义任务。新创建的模块将命名为`aliases.js`，因为它将包含其他任务的别名。`Listing\
+  \ 7-18`显示了新创建模块的内容。\n\n**`Listing 7-18`**：将任务分组为逻辑组以简化任务\n\n```\n'use strict';\n\
+  \nmodule.exports = function (grunt) {\n\ngrunt.registerTask('prepare', ['clean',\
+  \ 'useminPrepare']);\n  grunt.registerTask('css', ['sass', 'autoprefixer', 'uncss']);\n\
+  \  grunt.registerTask('dependencies', ['bowerInstall']);\n  grunt.registerTask('js',\
+  \ ['jshint', 'handlebars']);\n  grunt.registerTask('minify', ['copy', 'cssmin',\
+  \ 'concat', 'rev', 'requirejs', 'usemin']);\n  grunt.registerTask('build', ['prepare',\
+  \ 'dependencies', 'css', 'js', 'minify']);\n\ngrunt.registerTask('default', ['build',\
+  \ 'connect:server']);\n  grunt.registerTask('serve', ['build', 'connect:dev']);\n\
+  \n};\n```\n\n`Listing 7-18`中的模块定义了许多新任务。每个任务执行一个或多个其他任务。通过分组任务，我们可以开始为特定任务构建更灵活的任务运行器。在我们的示例中，我们有一个通用的`build`任务，用于准备开发和发布环境的应用程序。通过定义一个`build`任务，我们可以通过简单地更改最后运行的任务来轻松加载应用程序进行测试或开发。现在我们有一套基本的构建应用程序的步骤，添加新任务变得轻而易举。例如，让我们添加一个测试任务，如`Listing\
+  \ 7-19`所示。\n\n**`Listing 7-19`**：通过基本的构建步骤，添加新任务要容易得多\n\n```\ngrunt.register('test',\
+  \ ['build', 'karma']);\n```\n\n\n\n#### 提取通用配置选项\n\n我们可以对 Grunt 配置进行的最终优化是从每个任务配置中提取通用配置选项。例如，与其对分发文件夹的路径进行硬编码，不如遵循“不要重复自己”的原则，在配置中定义一次并重复使用。由于\
+  \ Grunt 允许我们在任务配置中定义变量，因此我们可以实现这一点。清单 7-20 包含了 `grunt-contrib-cssmin` 的修改后配置。\n\n\
+  ***清单 7-20***. Grunt 插件配置中的变量使用\n\n```\n'use strict';\n\nmodule.exports = function\
+  \ (grunt) {\n  grunt.config(\n    'cssmin', {\n    dist: {\n      options: {\n \
+  \       report: 'gzip'\n      },\n      files: {\n        '<%= paths.css.dest %>main.css':\
+  \ '<%= paths.css.src %>main.css'\n      }\n    }\n  });\n};\n```\n\n通过将任务配置与源文件夹和目标文件夹等通用路径分离，我们减少了任务的脆弱性，甚至提高了跨项目的复用性。要使用这种方法，我们必须先在\
+  \ Grunt 配置中定义这些变量。清单 7-21 包含了一个可以添加到 `tasks` 文件夹的新模块。这个模块将被称为 `config.js`。\n\n***清单\
+  \ 7-21***. 示例配置模块\n\n```\n'use strict';\n\nmodule.exports = function (grunt) {\n\
+  \  grunt.config.merge({\n    paths: {\n      css: {\n        src: 'app/css/',\n\
+  \        dest: 'dest/css/'\n      }\n    }\n  });\n};\n```\n\n该配置模块定义了一组键/值对，这些键/值对随后可以在我们的\
+  \ Grunt 任务配置中使用。清单 7-21 展示了项目所需整体配置中一个非常小的子集。它可以扩展以包含诸如本地开发使用的端口号等属性。正如前一节所讨论的，我们也可以使用\
+  \ `grunt options` 根据环境切换配置，例如，当本地开发环境与持续集成环境的路径不同时。另一个基于环境配置的好用例是测试运行器。在本地，为了速度和效率，您可能选择仅在无头浏览器中运行测试。然而，在测试环境中，您可能希望针对多个浏览器运行测试。\n\
+  \n至此，我们对 Grunt 配置优化的讨论告一段落。在此过程结束时，我们的 `Gruntfile` 已缩减到 22 行，并且每个任务配置现在都由一个单独的模块管理，通过共享通用路径，我们可以轻松更新项目结构。接下来，我们将继续探索减少\
+  \ Grunt 任务运行器运行时间的方法。\n\n#### 并行运行任务\n\n在上一节中，我们开始将任务分组为逻辑组，这是泛化任务运行器并在团队中进行沟通的一个好方法。将任务分组并未减少总时间，但它确实使我们接下来的优化变得稍微容易一些。在本节中，我们将探索并行运行任务。由于\
+  \ Grunt 是一个基于文件的任务运行器，一个任务输出的文件将成为下一个任务的输入，这在试图并行化构建的某些部分时会带来问题。例如，在 SASS 编译完成并输出之前，我们无法运行\
+  \ CSS 压缩过程。然而，我们构建过程的某些部分是可以并行化的，例如，CSS 任务可以与 JavaScript 任务同时运行。\n\n为了实现任务的并行运行，我们必须向项目引入一个新的插件。用于并行化构建的插件称为\
+  \ `grunt-concurrent`。清单 7-22 展示了如何将该插件包含到项目中。\n\n***清单 7-22***. 添加 `grunt-concurrent`\
+  \ 到项目\n\n```\nnpm install --save-dev grunt-concurrent\n```\n\n现在插件已添加到项目中，我们必须定义配置。为此，我们在\
+  \ `tasks` 文件夹中创建一个新的配置文件（参见 清单 7-23）。\n\n***清单 7-23***. `grunt-concurrent` 的配置\n\
+  \n```\n'use strict';\n\nmodule.exports = function (grunt) {\n  grunt.config(\n \
+  \   'concurrent', {\n    assets: ['css', 'js']\n  });\n};\n```\n\n清单 7-23 中定义的配置很简单，它定义了一组并发的任务。赋给\
+  \ `assets` 属性的值是一个要并发运行的任务数组。要并行运行这些任务，您可以像使用任何其他任务一样使用 Grunt。并发任务也可以包含在其他任务中，从而允许顺序任务和并发任务混合使用。清单\
+  \ 7-24 包含了一个更新后的别名模块版本，用于新的并发任务。\n\n***清单 7-24***. 在别名模块中使用 `grunt-concurrent`\n\
+  \n```\nmodule.exports = function (grunt) {\n\ngrunt.registerTask('prepare', ['clean',\
+  \ 'useminPrepare']);\n  grunt.registerTask('css', ['sass', 'autoprefixer', 'uncss']);\n\
+  \  grunt.registerTask('dependencies', ['bowerInstall']);\n  grunt.registerTask('js',\
+  \ ['jshint', 'handlebars']);\n  grunt.registerTask('minify', ['copy', 'cssmin',\
+  \ 'concat', 'requirejs', 'rev', 'usemin']);\n  grunt.registerTask('build', ['prepare',\
+  \ 'dependencies', 'concurrent:assets', 'minify']);\n  grunt.registerTask('default',\
+  \ ['build', 'connect:server']);\n  grunt.registerTask('serve', ['build', 'connect:dev']);\n\
+  \  grunt.registerTask('test', ['build', 'karma']);\n};\n```\n\n清单 7-24 中的 `build`\
+  \ 任务已更新，现在可以并行运行我们的 CSS 和 JavaScript 任务。运行我们的默认任务应该可以让我们衡量是否有任何性能提升。图 7-6 包含了一个示例输出，结果可能令人惊讶，总体时间反而增加了——这并非预期效果。要分析问题的根本原因，可以使用\
+  \ `verbose` 标志来了解性能下降的原因。在这种情况下，性能下降可归因于使用 `grunt-concurrent` 时 Grunt 任务被第二次加载。要解决此问题，最好回顾初始部分使用的技术，并审查哪些模块应作为主运行器的一部分加载，哪些是为并发任务加载的。\n\
+  \n![9781484200148_Fig07-06.jpg](img/00062.jpeg)\n\n图 7-6. 使用 `grunt-concurrent`\
+  \ 导致的性能下降\n\n#### 在文件变更时运行任务\n\n在我们优化 Grunt 工作流的进一步尝试中，接下来要探索的方法是使用一个名为 `grunt-newer`\
+  \ 的新插件。`grunt-newer` 插件旨在通过仅在任务的源文件发生更改时才执行任务，来减少 Grunt 必须执行的工作量。该插件本身不需要任何额外配置。相反，要利用其功能，应在任务名称前加上前缀\
+  \ `newer:`。清单 7-25 演示了如何将该插件添加到项目中。\n\n***清单 7-25***. 添加 `grunt-newer` 到项目\n\n```\n\
+  npm install --save-dev grunt-newer\n```\n\n要在我们的项目中使用该插件，我们必须使用新的前缀更新别名模块。清单 7-26\
+  \ 提供了支持此功能的示例配置。\n\n***清单 7-26***. 使用 `grunt-newer` 的修改后配置\n\n```\n'use strict';\n\
+  \nmodule.exports = function (grunt) {\n```\n\n\n\n`grunt.registerTask('prepare',\
+  \ ['clean', 'useminPrepare']);`\n`grunt.registerTask('css', ['newer:sass', 'newer:autoprefixer',\
+  \ 'newer:uncss']);`\n`grunt.registerTask('dependencies', ['bowerInstall']);`\n`grunt.registerTask('js',\
+  \ ['newer:jshint', 'handlebars']);`\n`grunt.registerTask('minify', ['copy', 'cssmin',\
+  \ 'newer:concat', 'requirejs', 'rev', 'usemin']);`\n`grunt.registerTask('build',\
+  \ ['prepare', 'dependencies', 'css', 'js', 'minify']);`\n`grunt.registerTask('build:concurrent',\
+  \ ['prepare', 'dependencies', 'concurrent:assets', 'minify']);`\n\n`grunt.registerTask('default',\
+  \ ['build', 'connect:server']);`\n`grunt.registerTask('serve', ['build', 'connect:dev']);`\n\
+  `grunt.registerTask('test', ['build', 'karma']);`\n\n现在配置已更新为使用 `grunt-newer`，连续运行\
+  \ `build` 任务应该会获得更快的第二次运行速度，因为第一次运行的输出已被缓存。但是，如果某个任务依赖的文件发生了更改，则不会使用缓存。图 7-7 展示了我们任务两次运行的时间对比。左侧是第一次运行，右侧是缓存运行的结果。\n\
+  \n![9781484200148_Fig07-07.jpg](img/00063.jpeg)\n\n图 7-7. 测量 `grunt-newer` 带来的性能提升（右侧为缓存运行）\n\
+  \n### 在浏览器中自动重新加载更改\n\n本章所做的更改提高了 Grunt 工作流的速度和可维护性。在本节中，我们将探讨另一种技术，以加快 Grunt 任务的反馈速度。为此，我们将\
+  \ `grunt-contrib-watch` 与即时重载功能结合使用，以在浏览器中自动重新加载资源。这并不会降低 Grunt 任务的整体性能，但会带来感知上的性能提升，因为我们将根据正在更改的文件来定位要运行哪些任务。插件\
+  \ `grunt-contrib-watch` 可用于监视一组文件，并在这些文件发生更改时运行一组任务。代码清单 7-27 演示了如何将该插件添加到项目中。\n\
+  \n**代码清单 7-27**. 将 `grunt-contrib-watch` 添加到项目\n\n```\nnpm install --save-dev grunt-contrib-watch\n\
+  ```\n\n接下来，必须将新插件的配置添加到项目中。为此，我们在 `tasks` 文件夹中添加一个名为 `watch.js` 的文件（见代码清单 7-28）。\n\
+  \n**代码清单 7-28**. `grunt-contrib-watch` 自动运行配置\n\n```\n'use strict';\n\nmodule.exports\
+  \ = function (grunt) {\n  grunt.config(\n    'watch', {\n    css: {\n      files:\
+  \ ['<%= paths.sass.src %>**/*.scss'],\n      tasks: ['css'],\n      options: {\n\
+  \        livereload: true\n      }\n    }\n  });\n};\n```\n\n代码清单 7-28 包含了新插件的配置。`grunt-contrib-watch`\
+  \ 的每个目标都接受两个选项：`files` 和 `tasks`。`files` 选项是一个或多个要监视的文件模式。这些模式由 `minimatch` 库支持，如本章前面所述。下一个选项是\
+  \ `tasks` 选项。它指定当匹配 `files` 选项模式的文件之一发生更改时应运行哪些任务。在我们的示例中，我们添加了 `livereload` 并将其值设置为\
+  \ `true`。如果我们希望每次进行更改时都在浏览器中自动重新加载 CSS，那么这个最终选项非常重要。为了将其完全集成到我们的应用任务运行器中，我们必须修改别名模块。修改后的配置显示在代码清单\
+  \ 7-29 中，方法是将 `watch` 任务放置在开发服务器启动之后。但是，如果你现在运行任务，`watch` 任务将永远不会运行，因为 `connect`\
+  \ 永远不会退出。因此，Grunt 永远不会运行新任务。为了解决这个问题，我们需要进行最后一项更改，即从配置中移除 `keepalive` 选项。`keepalive`\
+  \ 选项最初用于确保本地开发服务器不会关闭。由于新的 `watch` 任务不会退出，它会持续监听被监视文件之一的更改，然后触发关联的作业运行。一旦从 `grunt-contrib-connect`\
+  \ 中移除 `keepalive` 选项，运行默认任务应该会生成如图 7-8 所示的输出。如图 7-8 所示，除非强制 Grunt 退出，否则它将不会退出，因为\
+  \ `grunt-contrib-watch` 不会退出，除非被强制终止。\n\n**代码清单 7-29**. 更新后的别名模块，在 `grunt-contrib-connect`\
+  \ 之后包含 `grunt-contrib-watch`\n\n```\n'use strict';\n\nmodule.exports = function\
+  \ (grunt) {\n\ngrunt.registerTask('prepare', ['clean', 'useminPrepare']);\n  grunt.registerTask('css',\
+  \ ['newer:sass', 'newer:autoprefixer', 'newer:uncss']);\n  grunt.registerTask('dependencies',\
+  \ ['bowerInstall']);\n  grunt.registerTask('js', ['newer:jshint', 'handlebars']);\n\
+  \  grunt.registerTask('minify', ['copy', 'cssmin', 'newer:concat', 'requirejs',\
+  \ 'rev', 'usemin']);\n  grunt.registerTask('build', ['prepare', 'dependencies',\
+  \ 'css', 'js', 'minify']);\n\ngrunt.registerTask('default', ['build', 'connect:server',\
+  \ 'watch']);\n  grunt.registerTask('serve', ['build', 'connect:dev']);\n  grunt.registerTask('test',\
+  \ ['build', 'karma']);\n\n};\n```\n\n![9781484200148_Fig07-08.jpg](img/00064.jpeg)\n\
+  \n图 7-8. 默认任务运行后永不退出，因为 `grunt-contrib-watch` 正在监听更改\n\n编辑应用程序中的某个 SASS 文件将触发 `grunt-contrib-watch`\
+  \ 执行操作。如图 7-9 所示。当 `main.scss` 文件发生更改时，关联的任务会运行。接下来，我们必须使用 `grunt-contrib-watch`\
+  \ 的 `livereload` 功能，在浏览器中自动重新加载 CSS。通过将 `livereload` 选项设置为 `true`，`grunt-contrib-watch`\
+  \ 将启动一个小的 HTTP 服务器，当文件发生更改时，它会向任何正在监听更改的客户端发出事件。让我们的设置完全正常工作的下一步是将 JavaScript 注入到我们的网页中，以监听由\
+  \ `grunt-contrib-watch` 创建的 `livereload` 服务器发出的更改。为此，我们可以使用针对 Firefox 和 Chrome 的\
+  \ `livereload` 插件。Chrome 插件可从 Chrome 网上应用店获取，安装后只需单击一个按钮即可将 JavaScript 注入页面。图 7-10\
+  \ 显示了 Chrome 浏览器中的该按钮。需要注意的是，在单击按钮启用 LiveReload 之前，`livereload` 服务器必须可用。\n\n![9781484200148_Fig07-09.jpg](img/00065.jpeg)\n\
+  \n图 7-9. 由于文件更改，`grunt-contrib-watch` 运行已注册任务时的输出\n\n![9781484200148_Fig07-10.jpg](img/00066.jpeg)\n\
+  \n\n\n#### 7-10. LiveReload 按钮：在应用程序中启用 LiveReload\n\n在浏览器中自动重新加载资产的能力非常强大。它可以减少你离开最喜爱的文本编辑器的需求，因为浏览器会在后台持续刷新自身，从而使你能够即时看到更改的结果。如本节开头所述，`grunt-contrib-watch`\
+  \ 并不会缩短我们任务的执行时间，但通过自动加载刷新后的资产，它能够加快我们的工作流程。\n\n### 持续集成\n\n目前，我们通过缩短执行时间缩减了 Grunt\
+  \ 任务的反馈循环，并缩短了更改在浏览器中生效所需的时间。接下来，我将介绍改善 Grunt 工作流程的最后一步。在本书中，我提到了持续集成的使用。在本节中，我们将把它引入到工作流程中。虽然严格来说，它并非\
+  \ Grunt 工作流程的一部分，但它可以——并且应当——成为你开发工作流程的一部分。有许多可用的持续集成解决方案，包括 `Jenkins`、`AppVeyor`\
+  \ 和 `Travis`。我们将重点介绍 `Travis CI`，因为它为开源项目提供了免费的开放源代码构建环境。\n\n与 `Travis CI` 集成的最简单方法之一是将你的项目托管在\
+  \ `github.com` 上。该网站为开源项目提供免费托管。`GitHub` 允许你定义一个提交后钩子，该钩子将在 `Travis CI` 上触发应用程序的构建。图\
+  \ 7-11 显示了来自 `travis.org` 的一个屏幕。此屏幕允许你切换哪些仓库应在 `Travis CI` 上进行构建。\n\n![9781484200148_Fig07-11.jpg](img/00067.jpeg)\n\
+  \n#### 7-11. 将 Travis CI 与 GitHub 仓库集成\n\n将仓库切换为“开启”。现在，服务已添加到 `GitHub` 仓库，我们需要在项目中添加一个文件来测试\
+  \ `Travis CI`，指定要在其上测试项目的构建环境，并确定需要运行哪些命令来构建和测试我们的应用程序。此文件是一个 `YAML` 文件，存储在项目的根目录中，名为\
+  \ `.travis.yml`。清单 7-30 包含了 `.travis.yml` 的内容。\n\n#### 清单 7-30. Travis CI 的 `.travis.yml`\
+  \ 配置\n\n```\nlanguage: node_js\nnode_js:\n  - \"0.10\"\n\naddons:\n  firefox: \"\
+  17.0\"\n\nbefore_script:\n  - npm install -g bower grunt-cli\n  - bower install\n\
+  \  - export DISPLAY=:99.0\n  - sh -e /etc/init.d/xvfb start\n```\n\n`.travis.yml`\
+  \ 配置为我们的项目定义了许多属性。首先，定义了 `Node` 的语言，因为我们将在 `Node` 环境中运行应用程序。接下来，我们指定要运行的 `Node`\
+  \ 版本。在此示例中，我们选择了最新的稳定版本 `0.10`。下一行定义了 `Firefox` 浏览器版本 `17.0` 的附加组件。我们将使用 `Firefox`\
+  \ 在持续集成环境中运行测试。再下一组选项定义了一组在安装应用程序之前要运行的命令。第一行安装了用于构建应用程序的 `bower` 和 `grunt-cli`\
+  \ `Node` 模块。下一行用于安装我们应用程序的前端组件。第三行和第四行用于配置一个名为 `PhantomJS` 的无头浏览器。\n\n现在我们已经完成了\
+  \ `Travis CI` 的集成，每次推送到 `GitHub` 的提交都会在 `Travis CI` 上触发一次构建，如果构建失败，你将收到通知。为了确保测试成功运行，我们必须确保我们的\
+  \ `package.json` 文件包含正确的测试命令。清单 7-31 包含了修改后的 `package.json`。\n\n#### 清单 7-31. 将\
+  \ Grunt 测试添加到我们的 `package.json`\n\n```\n{\n  \"engines\": {\n    \"node\": \">=\
+  \ 0.10.0\"\n  },\n  \"devDependencies\": {\n    ...\n  },\n  \"scripts\": {\n  \
+  \  \"test\": \"grunt test\"\n  }\n}\n```\n\n\n\n##### `package.json` 中最重要的部分是文件的\
+  \ `scripts` 节。Travis CI 在构建应用程序时会运行测试脚本。因此，运行正确的 Grunt 任务至关重要。经过这最后的修改，我们的项目现在已准备好部署到\
+  \ Travis CI 上。每次你对项目进行修改时，你都能确信自己没有在多个环境中破坏项目。\n\n### 总结\n\n在整本书中，我们一直专注于通过持续添加\
+  \ Grunt 任务来解决每个 Web 项目中常见的普遍问题，从而优化我们的应用程序开发者工作流程。在本章中，我们借机审查了我们的 Grunt 实现，它已经变得臃肿且笨拙。我们引入了许多技术来将\
+  \ Grunt 的执行时间缩短几秒钟，并改进了任务配置的结构，使我们的项目处于一种能够适应下一系列挑战的状态。\n\n至此，我们通过 Grunt 的旅程就结束了。我希望你觉得这本书很有帮助，并且它教会了你使用\
+  \ Grunt 来改进工作流程的新颖有趣的方法。在这个不断发布新软件功能成为常态的苛求世界中，我们必须通过使用能够自动化和简化任务的工具来帮助自己，以便我们能够专注于更困难的问题。Grunt\
+  \ 是一个强大且灵活的工具，可用于自动化任意数量的任务，如果当前没有满足你特定需求的插件，那么 Grunt 提供的丰富 API 也会让编写插件变得简单。\n\n\
+  ## 索引\n\n![images](img/00006.jpeg)  A\n\n异步模块定义 (AMD)\n\n优势\n\n完整应用程序\n\ndefine\
+  \ 函数\n\n文件夹结构\n\njs/app\n\nrequire 函数\n\nrequire.js\n\n![images](img/00006.jpeg)  B\n\
+  \nBower\n\n依赖管理\n\n前端包搜索\n\ngrunt-bower-install 插件\n\n安装\n\nJavaScript MVC 框架 Backbone.js\n\
+  \nbower.json 配置文件\n\n![images](img/00006.jpeg)  C, D\n\nCommonJS 规范\n\n持续集成 (CI)\n\
+  \nCSS 预处理\n\n扩展/继承\n\ngrunt-contrib-sass\n\nmixins\n\n嵌套\n\n局部文件和导入\n\nSass 安装\n\
+  \n定义\n\nRuby 安装\n\n变量\n\n![images](img/00006.jpeg)  E, F\n\nECMAScript 6/ES6。*参见*\
+  \ Harmony\n\n![images](img/00006.jpeg)  G\n\nGrunt\n\nApache Ant\n\n优势\n\nBower\n\
+  \n依赖管理\n\n前端包搜索\n\ngrunt-bower-install 插件\n\n安装\n\nJavaScript MVC 框架 Backbone.js\n\
+  \n紧凑文件格式\n\n配置模块\n\n持续集成\n\n脱节的工作流程\n\n文档\n\n文件对象格式\n\n文件数组格式\n\n分组\n\ngrunt-concurrent\n\
+  \ngrunt-contrib-clean\n\ngrunt-contrib-cssmin\n\ngrunt-contrib-watch\n\n附加\n\n配置\n\
+  \n\n\n"
+- "# \n\n默认任务运行\n\n文件和任务\n\nLiveReload\n\n输出\n\n更新后的别名模块\n\nGruntfile.js 文件\n\n命令行\n\
+  \n合并\n\n配置\n\ndist 属性\n\n执行\n\nloadNpmTasks 函数\n\n模块导出\n\n输出\n\ngrunt.initConfig\
+  \ 方法\n\napp_files 和 output 属性\n\noptions 属性\n\n输出\n\ntest 文件夹\n\n变量\n\ngrunt-newer\n\
+  \nGulp\n\nHTML 模板\n\nJSHint\n\n错误\n\ngrunt-contrib 插件\n\nhandlebars\n\njshintrc\
+  \ 文件\n\n选项\n\n加载插件\n\n延迟加载\n\ngrunt-modernizr\n\nload-grunt-tasks\n\nmatchdep\n\n\
+  代码压缩\n\nModernizr\n\n修改后的默认任务\n\n模块\n\nAMD (*参见* 异步模块定义 (AMD))\n\napp.init\n\nCommonJS\n\
+  \nES6\n\n功能\n\ngrunt-bower-requirejs\n\ngrunt-contrib-requirejs\n\ngrunt-rev\n\n\
+  Harmony\n\nmain.js 文件\n\n可维护性\n\nrequire.js, index.html 文件\n\nNode.js 包\n\ngrunt-cli\n\
+  \ngrunt-init\n\nHTTP 服务\n\nLinux 安装\n\nMac OS X 安装\n\n必需属性\n\n元数据\n\n模块 (*参见* Node.js\
+  \ 模块系统)\n\n非阻塞 I/O\n\npackage.json 文件\n\n版本与 npm\n\nWindows 安装\n\npackage.json 文件\n\
+  \n添加前缀\n\nRake\n\n可读性\n\nRECESS\n\n任务\n\n模板化\n\nBackbone.js\n\ndocument.getElementById\n\
+  \nDOM\n\n特性\n\ngrunt-contrib-handlebars\n\nhandlebar.js\n\nMVC\n\nunderscore.js\n\
+  \n视图模块\n\ntime-grunt\n\n待办事项列表应用\n\n工具集\n\nUnCSS\n\nuseminPrepare 任务\n\n版本控制\n\n\
+  Grunt-contrib-sass 插件\n\n![images](img/00006.jpeg)  H\n\nHarmony\n\n![images](img/00006.jpeg)\
+  \  I\n\n图标字体\n\n配置\n\n输出\n\n图片优化\n\ngrunt-contrib-imagemin\n\n加载性能\n\n无损压缩\n\noptimizationLevel\
+  \ 选项\n\nprogressive 选项\n\n光栅图像\n\n\n\n响应式图片\n\n配置\n\nGraphicsMagick\n\n高度和宽度\n\n\
+  安装\n\nmax-width 属性\n\n媒体查询\n\n移动设备\n\nname 选项\n\n输出\n\nsrcset 属性\n\nsuffix 和 quality\
+  \ 选项\n\n精灵图（Sprites）\n\nalgorithm 选项\n\nCSS 输出\n\ndestImg 选项\n\ngrunt-spritesmith\
+  \ 安装\n\ngrunt-spritesmith 配置\n\nimgPath 选项\n\n在线工具\n\nSCSS 文件输出\n\n耗时的方法\n\nuse\
+  \ 选项\n\n矢量格式\n\n![images](img/00006.jpeg) J, K\n\nJavaScript 模板（JST）\n\n![images](img/00006.jpeg)\
+  \ L\n\nloadNpmTasks 函数\n\n本地 Web 服务器\n\nAMD 模块\n\n自动化可访问性测试\n\n浏览器启动\n\n压缩中间件\n\n\
+  配置\n\n执行\n\n测试固件\n\n自动化\n\nBackbone 集合\n\ngrunt-contrib-nodeunit 任务\n\n修改后的测试模块\n\
+  \n修改后的 Todo 模块\n\ntodos_test.js\n\ngrunt-contrib-connect 插件\n\ngrunt-pagespeed\n\
+  \n配置\n\n定义\n\n安装\n\nngrok 任务\n\n输出\n\nURL\n\nWebPagetest\n\ngrunt-perfbudget\n\n\
+  配置\n\n安装\n\n输出\n\nKarma 测试运行器\n\nGruntfile.js\n\ngrunt-karma\n\nkarma.conf.js\n\n\
+  test/main.js\n\n记录请求\n\nngrok\n\nserve 任务\n\n测试\n\ngrunt-contrib-nodeunit\n\nnodeunit\
+  \ 任务\n\nTDD\n\nTodo 模块\n\n![images](img/00006.jpeg) M\n\nmixin border-radius\n\n\
+  模型-视图-控制器（MVC）\n\n![images](img/00006.jpeg) N, O\n\nNode.js 模块系统\n\n命令提示符\n\ndisplay\
+  \ 属性\n\nexports 对象\n\nGuardian 主页\n\nindex.js\n\n安装\n\n模块系统\n\nNode.js 模块文件夹\n\n\
+  npm 搜索\n\n插件\n\nrequest 包\n\n规则\n\nsomething.js 文件\n\n![images](img/00006.jpeg)\
+  \ P, Q\n\nPageSpeed Insights（PSI）\n\n![images](img/00006.jpeg) R\n\nRECESS\n\n![images](img/00006.jpeg)\
+  \ S\n\nsrcset 属性\n\nSVG 文件\n\ngrunt-svgmin\n\ngrunt-svg-sprite\n\n视觉效果\n\n![images](img/00006.jpeg)\
+  \ T\n\n测试驱动开发（TDD）\n\nTodo 模块\n\nTravis CI\n\n![images](img/00006.jpeg) U, V, W,\
+  \ X, Y, Z\n\nUglify\n"
