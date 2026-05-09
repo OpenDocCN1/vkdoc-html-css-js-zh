@@ -1,0 +1,2921 @@
+- '
+
+  '
+- "# 使用 Node.js 进行响应式编程\n\n费尔南多·多利奥\n\n文中作者引用的任何源代码或其他补充材料，读者均可访问 [`www.apress.com`](http://www.apress.com)\
+  \ 获取。有关如何找到本书源代码的详细信息，请访问 [`www.apress.com/source-code/`](http://www.apress.com/source-code/)。读者还可以在\
+  \ SpringerLink 上每个章节的“补充材料”部分访问源代码。\n\nISBN 978-1-4842-2151-8  \ne-ISBN 978-1-4842-2152-5\
+  \  \nDOI 10.1007/978-1-4842-2152-5  \n国会图书馆控制号：2016961432  \n\n© 费尔南多·多利奥 2016 \
+  \ \n标准 Apress  \n\n本作品受版权保护。出版商保留所有权利，无论涉及材料的全部或部分，特别是翻译权、重印权、插图复用权、朗诵权、广播权、缩微胶片复制权或任何其他物理形式的复制权，以及信息存储和检索、电子改编、计算机软件或现在已知或以后开发的类似或不同方法的传输权。\n\
+  \n本书中可能出现商标名称、标识和图像。我们在编辑过程中仅在有利于商标所有者的前提下使用这些名称、标识和图像，而不对每个出现的商标名称、标识或图像都使用商标符号，并且无意侵犯商标权。本出版物中对商品名称、商标、服务标志和类似术语的使用（即使未明确标识）不应被视为对其是否受所有权保护的立场表达。\n\
+  \n尽管本书中的建议和信息在出版时被认为是真实准确的，但作者、编辑和出版商均不对可能出现的任何错误或遗漏承担法律责任。出版商对本材料内容不作任何明示或暗示的保证。\n\
+  \n采用无酸纸印刷\n\n本书通过 Springer Science+Business Media New York 在全球图书贸易中分销，地址：233 Spring\
+  \ Street, 6th Floor, New York, NY 10013。电话：1-800-SPRINGER，传真：(201) 348-4505，电子邮件：orders-ny@springer-sbm.com，或访问\
+  \ www.springer.com。\n\nApress Media, LLC 是一家加利福尼亚有限责任公司，其唯一成员（所有者）是 Springer Science\
+  \ + Business Media Finance Inc (SSBM Finance Inc)。SSBM Finance Inc 是一家特拉华州公司。\n\n\
+  献给我亲爱的妻子和孩子们，没有你们，这本书绝不会问世……谢谢你们！\n\n## 引言\n\n响应式编程无疑是当下的趋势，许多前端开发者开始重视它，因为他们工作的性质（基于事件的\
+  \ JavaScript）与之非常契合。网络上针对前端环境的相关文章很多，但遗憾的是，后端领域却没有得到同等的关注。\n\n得益于 Node.js，我们现在在服务器端拥有了一个非常相似的环境，这使得开发者能够以前端开发者在日常工作中使用该技术时的相同方式，来思考响应式编程（甚至函数式响应式编程）。\n\
+  \n本书对 Node.js 开发者（甚至是其他后端开发者）来说会很有趣，因为它将为他们提供一种新的、不同的方法来解决日常遇到的问题。\n\n那么，请坐好，放松心情，享受这本书吧！\n\
+  \n## 致谢\n\n我要感谢参与本项目并担任出色技术审校的菲尔·纳什，他的宝贵反馈对本书的创作至关重要。\n\n我还要感谢 Apress 编辑团队的其他成员，他们的指导帮助我完成了本书的写作过程。\n\
+  \n\n\n"
+- "# 目录\n\n第 1 章：响应式编程 101 1  \n定义响应式编程 1  \n响应式编程的起源 1  \n数据流入门 2  \n数据流与响应式编程的关联\
+  \ 3  \n响应式编程有何用途？ 4  \n响应式模式与观察者模式 7  \n响应式编程的类型 8  \n函数式响应式编程 8  \n面向对象响应式编程 10\
+  \  \n声明式响应式编程 11  \n响应式编程与传统编程 11  \n本章小结 12  \n\n第 2 章：成为响应式 13  \n首先，关于弹珠图的一点说明\
+  \ 13  \n摆脱传统技术 15  \n示例 #1——常见的回调地狱 15  \n示例 #2——嵌套异步调用 17  \n示例 #3——处理可节流的输入流 19\
+  \  \n本章小结 23  \n\n第 3 章：函数式响应式编程 25  \nJavaScript 中的函数式编程入门 25  \n纯函数 26  \n组合 26\
+  \  \n柯里化函数 28  \n函数式程序员的工具 30  \n声明式编程 37  \n每个 FRP 语言必备的特性 38  \n可观察流 39  \n本章小结\
+  \ 45  \n\n第 4 章：后端响应式编程 47  \n带有 CRUD 端点的 API 47  \n数据模型 48  \n标准实现 49  \n函数式响应式实现\
+  \ 52  \n结论 59  \n登录服务 59  \n什么是 JSON Web 令牌？ 59  \n回到代码 61  \n响应式方法 63  \n结论 66\
+  \  \n本章小结 66  \n\n第 5 章：走进 Node.js 67  \n事件发射器与事件流 67  \n事件发射器 67  \n流 69  \nNode.js\
+  \ 中的异步编程 75  \n异步进阶 77  \n异步 I/O 80  \n异步事件流 81  \n通过(Through) 82  \n映射(Map) 82\
+  \  \n拆分(Split) 83  \n连接(Join) 83  \n合并(Merge) 84  \n可读(Readable) 84  \n结论 85  \n\
+  本章小结 85  \n\n第 6 章：技术全景概览 87  \nJavaScript 响应式扩展：RxJS 87  \n许可协议 87  \n兼容性 88  \n\
+  代码示例 88  \nBacon.js 89  \n许可协议 89  \n兼容性 90  \n代码示例 90  \nHighland.js 93  \n许可协议\
+  \ 93  \n兼容性 94  \n代码示例 94  \n关于背压的一点说明 96  \n接受数据丢失 97  \n当数据丢失不可接受时 97  \n结论 98\
+  \  \n本章小结 98  \n\n第 7 章：编写你自己的 FRP 库 99  \n核心部分 99  \n精简部分 109  \n映射、过滤和归约 110 \
+  \ \n获取与更多获取 111  \n拆分数据块 114  \nFlatMap 与情节深化 115  \n处理时间 117  \n本章小结 122  \n\n\
+  第 8 章：实践综述 123  \nNetflix 的案例 123  \n他们的动机 123  \n对并发的需求 125  \n成果 125  \n沃尔玛的案例\
+  \ 125  \n提出的解决方案 127  \n成果 127  \n另一个案例 127  \n服务端 129  \n客户端 134  \n本章小结 137  \n\
+  \n第 9 章：扩展你的响应式编程系统 139  \n扩展 Node.js 139  \n服务器内部扩展 139  \n使用外部工具处理集群需求 141  \n\
+  不使用集群的多进程处理呢？ 142  \n创建响应式系统 147  \n响应式系统 147  \n对错误的弹性处理 147  \n弹性伸缩 148  \n消息驱动\
+  \ 148  \n本章小结 149  \n\n索引 151  \n\n## 内容速览\n\n关于作者 xiii  \n关于技术审校 xv  \n致谢 xvii\
+  \  \n引言 xix  \n\n第 1 章：响应式编程 101 1  \n第 2 章：成为响应式 13  \n第 3 章：函数式响应式编程 25  \n第 4\
+  \ 章：后端响应式编程 47  \n第 5 章：走进 Node.js 67  \n第 6 章：技术全景概览 87  \n第 7 章：编写你自己的 FRP 库 99\
+  \  \n第 8 章：实践综述 123  \n第 9 章：扩展你的响应式编程系统 139  \n\n索引 151  \n\n## 关于作者与技术审校\n\n###\
+  \ 关于作者\n\n### 关于技术审校\n\n\n\n"
+- "# React 式编程入门\n本书的电子补充材料可在本章的在线版本中获取（doi:[10.1007/978-1-4842-2152-5_1](http://dx.doi.org/10.1007/978-1-4842-2152-5_1)），该材料仅供授权用户使用。\n\
+  \nReact 式编程（RP）的概念属于那种“老派新概念”，往往会在一段时间内淡出潮流，然后在几年后，当无人注意时又重新浮出水面。这种现象使得新一代开发者，尤其是那些早期采用者，最初会将其视为需要掌握的革命性新事物。\n\
+  \n但事实是，这一概念并非全新；实际上，你会发现它已经存在了 30 多年。\n\n在本章中，我将介绍 RP 的概念，探讨其诞生背景与创始人，描述它试图解决的问题类型，以及存在的不同风格。到本章结束时，你将掌握开启\
+  \ React 式编程之路所需的所有信息。\n\n## 定义 React 式编程\n要定义 RP，我需要的不仅仅是维基百科的定义，还需要讨论这个术语最初被提及的时间、它试图解决的问题类型，以及现有的不同\
+  \ RP 风格。\n\n### React 式编程的起源\nRP 的概念自 1985 年起就已存在。它由 David Harel 和 Amir Pnueli 在当时的论文《论\
+  \ React 式系统的开发》（可于[`www.wisdom.weizmann.ac.il/~harel/SCANNED.PAPERS/ReactiveSystems.pdf`](http://www.wisdom.weizmann.ac.il/%7Eharel/SCANNED.PAPERS/ReactiveSystems.pdf)获取）中提出。在文中，作者将\
+  \ React 式系统描述为：\n\n> React 式系统……会反复受到外部世界的提示，其作用是持续对外部输入做出响应。\n\n尽管他们对 React 式系统的定义并不局限于软件项目，但本书将聚焦于此，因为这是我们感兴趣的领域。几年后，Gerard\
+  \ Berry 也做了类似的工作，他于 1989 年在论文《实时编程：专用语言还是通用语言》（可于[`https://hal.archives-ouvertes.fr/inria-00075494/document`](https://hal.archives-ouvertes.fr/inria-00075494/document)获取）中，在软件开发背景下扩展了\
+  \ React 式系统的概念：\n\n> 大致区分三种计算机程序是方便的。转换式程序从给定的输入集计算出结果；典型的例子是编译器或数值计算程序。交互式程序以自身速度与用户或其他程序进行交互；从用户角度看，分时系统是交互式的。React\
+  \ 式程序也与环境保持持续交互，但交互速度由环境决定，而非程序本身。交互式程序按自身节奏运行，主要处理通信；而 React 式程序仅在响应外部请求时工作，主要处理精确的中断处理。实时程序通常是\
+  \ React 式程序。然而，也有一些 React 式程序通常不被视为实时程序，例如协议、系统驱动程序或人机界面处理器。所有 React 式程序都需要共同的编程风格。复杂的应用程序通常需要建立这三种程序之间的协作。例如，程序员使用涉及菜单、滚动条和其他\
+  \ React 式设备的人机界面。该 React 式界面允许他告诉交互式操作系统启动转换式计算，如程序编译。\n\n换句话说，RP 描述了一个从外部源接收输入，并以输入到达的速度持续处理这些输入的系统。\n\
+  \n由此，我们还可以推断出实时项目与 RP 之间存在非常紧密的关系，因此在后续章节中，当我们开始构建自己的库时，将牢记这一点。\n\n有趣的是，再补充一点历史背景，React\
+  \ 式系统是围绕数据流设计的，而数据流是另一个“老旧但优秀”的编程范式——这次是来自 20 世纪 60 年代。那么，让我们快速了解一下什么是数据流，以便更好地理解\
+  \ React 式系统是如何构建的，好吗？\n\n### 数据流入门\n与 RP 一样，数据流编程（由 Jack Dennis 及其在麻省理工学院的研究生在 20\
+  \ 世纪 60 年代创建）是众多编程范式中的一种。在这种特定情况下，它的工作原理是将程序建模为操作之间数据流动的有向图。\n\n在这种情况下，图的节点是对数据执行的操作，而执行这些操作所需的全部条件是它们的输入可用。因此，与更经典的编程范式（如顺序编程或过程式编程）相比，提出一个用于并行处理的架构相当简单，因为整个系统中唯一相关的信息就是可用数据（忘记状态维护，只需关注输入和输出数据）。\n\
+  \n数据流程序甚至数据流架构在处理大量信息时非常容易扩展和增长，特别是与那些倾向于一次性完成所有工作而不将工作负载拆分到处理单元（图中的节点）上的传统程序相比。\n\
+  \n简单来说，数据流语言是一种处理信息流（数据）并将其从一条指令发送到另一条指令的语言，它使用流控制语句（如 `if` 语句）来控制该流的实际流向。\n\n以下是一些例子：\n\
+  \n- Unix 管道 ([`https://en.wikipedia.org/wiki/Pipeline_(Unix`](https://en.wikipedia.org/wiki/Pipeline_(Unix)))\n\
+  - LabVIEW ([`www.ni.com/labview/esa/`](http://www.ni.com/labview/esa/))\n- Ptolemy\
+  \ II ([`http://ptolemy.berkeley.edu/ptolemyII/`](http://ptolemy.berkeley.edu/ptolemyII/))\n\
+  - Shake ([`https://en.wikipedia.org/wiki/Shake_(software`](https://en.wikipedia.org/wiki/Shake_(software)))\n\
+  - 以及更多……\n\n> 注意  \n> 这仅仅是对数据流主题的简单介绍。如果你有兴趣了解更多相关内容，我建议你寻找一本更专业的书籍，例如 Matt Carkci\
+  \ 的《数据流与 React 式编程系统：实用指南》（你可以在亚马逊上搜索书名找到它）。\n\n\n\n### 数据流与响应式编程的关系\n\n如我们所见，数据流规定了信息可以在节点间流动，每个节点都是对传输数据执行的一项操作。这种流动是单向的，也就是说，一旦数据到达末端节点，流程就结束了。它可以随另一份数据重新开始，但这并非强制要求。\n\
+  \n另一方面，响应式编程可以被看作数据流的增强版，原因如下：\n\n-   借助 RP，我们获得了事件流的概念，这是一个连续的数据源，我们可以订阅它作为我们操作的源头。\n\
+  -   既然我们有了流，我们也可以对这些流应用转换，本质上是从原始流创建新的流。\n-   我们可以对它们应用的一种特定转换是合并多个流，这是一种强大的操作，允许我们同时处理多个流。\n\
+  -   所以基本上，我们可以说，一个数据流例程就是一个通过某个事件流传入的特定信息片段所发生的情况。\n\n为了完全说清楚这一点，请查看图 1-1，它展示了两个变量相加的简单案例如何被纳入一个带有两个连续数字流的响应式图中。\n\
+  \n![A418015_1_En_1_Fig1_HTML.jpg](img/A418015_1_En_1_Fig1_HTML.jpg)\n\n图 1-1。展示来自两个不同流的值相加的弹珠图\n\
+  \n图 1-1 将每个流上的每个事件显示为一个圆圈，然后对两个流执行合并操作以创建一个新流，每个事件上有一对数字。最后，我们将两个数字相加，只返回一个数字给另一个流。水平线代表时间，你可以清楚地看到数据流图在其中的位置，基本上是垂直切入响应式图的所有层级。\n\
+  \n**注意：** 这个特定例子假设两个流上的所有事件将在完全相同的时间被相加，从而简化了合并任务。\n\n### RP 有什么用？\n\n人们在尝试解释响应式系统如何工作时，给出的经典例子就是电子表格。当前的电子表格软件，如\
+  \ Google Docs、Microsoft Excel 或 LibreOffice，都提供了创建依赖于某些单元格值的公式的能力，类似这样：\n\n```\n\
+  =sum(A1:A20)\n```\n\n这段代码非常容易理解，它将计算从单元格 A1 到 A20（含）所有值的数学总和。这个公式的妙处不在于其结果，而在于我们引用的是参与计算的实际单元格，而不仅仅是它们的值。这实际上意味着我们可以修改这些单元格的内容，最终结果也会相应更新。\n\
+  \n现在让我们将这个概念外推，并将其应用到我们日常选择的编程语言中。我不打算关注我们目前使用的范式——这在当下并不重要。现在假设我们有一些 Node.js 代码。如果你能订阅某个特定变量的变化，比如像下面这样：\n\
+  \n```\nvar myVariable = \"initial value\";\nmyVariable.onchange(function(new_vaule)\
+  \ {\n  //... 做出相应处理\n});\n```\n\n试想一下，如果你具备这种能力，而无需监控变量值的变化并手动执行注册的回调函数，你的代码会变得多么简单。\n\
+  \n现在让我们把前面的例子再推进一步。我们将对特定变量的任何更改视为一个事件，并暂时考虑异步服务调用的任何响应都是接收变量（即保存异步响应的那个变量）的一个变化，这也会把该响应变成一个事件。我们可以注册到这些事件流，并在新数据可用时做出响应。\n\
+  \n对于前端程序员来说，这个范式可能非常熟悉，因为他们在注册鼠标相关事件处理器时（仅举一例），通常会处理这种类型的机制。但这已经是 DOM 内置的功能；其美妙之处在于我们可以为任何类型的服务做到这一点。例如，对于\
+  \ API 调用，我们可以注册一个或多个回调，并让它们在开始返回响应时就处理这些响应。\n\n这同样适用于后端开发者，尽管 Node 开发者并不那么习惯于处理事件（他们有事件，只是在后端不那么常见而已），将每个数据库连接和每个文件读取事件都变成事件流的来源，无疑可以简化代码以及我们处理错误之类事情的方式。\n\
+  \n但等等！还有更多！实际上还有一个。凭借上述特性，各地的响应式库都在对流上的事件应用转换，同时将这些事件视为不可变实体。这实际上意味着我们可以通过混合和链接这些转换来创建新的事件流。\n\
+  \n让我们看一个基本示例。想想之前的前端评论。点击事件流可能是那里最常见的之一。现在，如果你只想捕获左键点击事件，但同时又要为代码的其他部分保留完整的点击事件列表，该怎么办？非常简单，如图\
+  \ 1-2 所示。\n\n![A418015_1_En_1_Fig2_HTML.jpg](img/A418015_1_En_1_Fig2_HTML.jpg)\n\
+  \n图 1-2。展示对鼠标点击执行过滤操作的示例弹珠图\n\n该图展示了随着时间推移（水平线），新事件如何在流上出现，以及对初始流执行的操作（过滤）以便创建一个新流。\n\
+  \n让我们看一个更复杂的例子。假设你有两个按钮，“加”和“减”，并且你希望代码在每次点击“加”按钮时给计数器加 1，每次点击“减”按钮时从同一计数器减 1。图\
+  \ 1-3 说明了这一点。\n\n![A418015_1_En_1_Fig3_HTML.jpg](img/A418015_1_En_1_Fig3_HTML.jpg)\n\
+  \n图 1-3。展示两个流之间合并操作的弹珠图\n\n图 1-3 将实际事件转换为一个数字流（1 或 –1），然后我们将它们合并，创建一个新的流。这个新的“计数器”流返回的每个值将由一个函数处理，该函数只需将返回的值加到屏幕上显示的当前计数器上。简单，却强大。\n\
+  \n所以，基本上，为了总结并以更简洁的方式回答最初的问题，RP 允许你（开发者）轻松处理异步事件流，并将它们转换为新的流。这是一个既可以应用于后端也可以应用于前端的范式。\n\
+  \n\n\n### 响应式 vs. 观察者模式\n\n到目前为止，根据我们所讨论的内容，你可能会认为响应式编程（RP）只是观察者模式的一种实现，使用它就能获得相同的结果。\n\
+  \n事实并非如此。请先考虑一下，我目前并不是特别关注 JavaScript 或任何特定语言，所以首先，当某些语言甚至不支持面向对象编程（OOP）时，你无法真正用\
+  \ OOP 的思维来思考（当然，你可以在没有 OOP 的情况下实现类似的功能，但这不在讨论范围内）。即使语言支持，它们在概念上相似，但并不相同。请查看表 1-1\
+  \ 快速了解。\n\n**表 1-1.** 观察者模式与响应式编程范式的比较\n\n| 观察者模式 | 响应式编程 |\n| --- | --- |\n| 旨在向已注册的观察者报告状态。\
+  \ | 当某个变量的值发生变化时，所有依赖该变量的其他值都会随之更新。 |\n| 作用于整个对象。 | 粒度级别可达到单个原始变量。 |\n| 在被观察对象和观察者之间提供直接通信。换句话说，被观察对象的状态不加任何改变地传递。\
+  \ | 可以对每个传输的事件应用转换，在传输过程中创建新的事件。 |\n\n如果你想的话，可以将 RP 视为比简单的观察者实现更进一步，因为你不仅是在通知感兴趣的观察者，还会通过更新相关元素来自动地进行*响应*（明白我的意思了吗？）。\n\
+  \n## 响应式编程的类型\n\nRP 有几种方法。它们主要取决于你使用的编程语言，并且都能完成任务，因此选择哪种纯粹是个人偏好问题。\n\n本节将介绍目前三种最常见的方法：函数式、面向对象式和声明式。\n\
+  \n### 函数式响应式编程\n\n除了面向对象式 RP（稍后讨论）之外，函数式 RP（FRP）可能是目前最常用的方法。这可能是因为我们已经讨论过的概念（尤其是如何执行流转换）可以映射到函数式方法上。\n\
+  \n更具体地说，FRP 使用函数式编程的基本构建块（如 `map`、`reduce` 和 `filter`）来处理和转换由我们可能正在处理的异步源生成的事件流。\n\
+  \n后续章节会更详细地介绍 FRP。这里我只快速看一个例子，展示这种方法带来的好处。考虑一个通用的微服务架构，包含两个特定的端点：\n\n```\n/users\
+  \ #将返回系统中的用户列表，但只包含最少的数据（仅 id 和全名）\n/users/:id #将返回特定用户的详细信息，可能包括 id、全名、出生日期、地址和电话号码等。\n\
+  ```\n\n当然，这种定义可能不是最聪明的 API 设计，但为了这个示例的目的，我们暂且接受。我想要的是用户列表，但包含每个用户的完整详细信息。\n\n现在，传统的\
+  \ Node.js 方法会是这样：\n\n```\nrequest('/users', function(users) {\nasync.map(users,\
+  \ function(user, done) {\nrequest('/users/' + user.id, function(userData){\nconsole.log(\"\
+  已获取用户数据: \",  user.id);\ndone(null, userData);\n}, function(fullUsers) {\n//将列表返回给客户端\n\
+  });\n}\n});\n```\n\n上面的代码本身并没有什么问题，部分原因是我使用了 `async` 库（可在 [`http://caolan.github.io/async/`](http://caolan.github.io/async/)\
+  \ 获取）。如果没有它，遍历用户以请求其完整数据将意味着更多的代码行数，更糟的是，还会在逻辑中引入更多复杂性。这正是 FRP 如此强大的关键所在——开发者的重点应该放在解决手头的问题上（在本例中，是获取一个完整的用户对象列表），而不是如何解决所用技术带来的问题（在本例中，我们指的是请求的异步性）。\n\
+  \n再说一次，上面的代码没有问题，但请查看图 1-4。\n\n![A418015_1_En_1_Fig4_HTML.jpg](img/A418015_1_En_1_Fig4_HTML.jpg)\n\
+  \n**图 1-4.** 当前示例采用 RP 方法的弹珠图\n\n现在看看下面的代码：\n\n```\nGetUsers()\n.map(function(u)\
+  \ {\nreturn '/users/' + u.id;\n})\n.pipe(getUserDetails)\n.flatMap();\n```\n\n>\
+  \ **注意：** 上面的代码并未引用任何 Node.js 的特定响应式库。其目的是向读者展示使用这种方法所带来的简化。\n\n诚然，代码之所以简化，也是因为我们没有直接调用\
+  \ `request` 函数，但它也更易于阅读和理解。即使我们想在流程中添加额外的步骤，回调函数的缩进级别也能保持整齐。\n\n以下是上述代码逐步发生的事情：\n\
+  \n1.  通过发起请求生成一个用户流，然后返回该用户流。\n2.  我们对流应用一次转换，根据用户对象为每个用户的详细信息端点生成 URL。\n3.  每个\
+  \ URL 都被管道传输到 `getUserDetails` 函数，该函数将依次请求该 URL 的数据并返回信息。此操作可以异步完成，不会增加任何复杂性，但用户的顺序将会丢失。\n\
+  4.  最后，我们展平生成的列表流，得到一个完整的用户对象流。为了本示例的目的，只需假设 `flatMap` 也会将生成的流转换为实际的列表，但这取决于你使用的\
+  \ `flatMap` 实现。一旦我开始实现自定义的 FRP 库，我会对此进行更详细的介绍。\n\n### 面向对象式响应式编程\n\nOORP 指出，对象除了属性和方法之外，还具有*反应*（reactions），当它们依赖的数据发生变化时，这些反应会被重新求值。\n\
+  \n让我们看看我之前提到的例子，两个按钮和一个计数器；在这个例子中，按钮是对象，它们可以对事件（如“点击”事件）做出反应。下面的代码使用了流行的前端库 jQuery\
+  \ 来提供基本的 OORP 功能：\n\n```\n// 根据两个按钮生成的事件流设置“counter”的值\nfunction setCounter() {\n\
+  var value = $(\"#add\").data('values').length - $(\"#substract\").data('values').length;\n\
+  $(\"#counter\").text(value);\n}\n$(\"#substract\").click(function() {\nvar stream\
+  \ = $(this).data('values')\nstream.push(1);\n$(this).data('values', stream);\nsetCounter();\n\
+  });\n$(\"#add\").click(function() {\nvar stream = $(this).data('values')\nstream.push(1);\n\
+  $(this).data('values', stream);\nsetCounter();\n});\n```\n\n> **注意：** 上面的示例明显缺少导入库、设置初始状态等所需的所有样板代码。但这对于阐明\
+  \ OORP 的要点来说并非必需。\n\n在示例代码中，你可以清楚地看到 `#counter` 元素的值直接依赖于添加到 `#add` 按钮和 `#substract`\
+  \ 按钮的数组中（代表流）的值。`setCounter` 函数负责确保这种关系。\n\n我用于示例的语言是 JavaScript，因为它不是纯粹的响应式语言，所以我必须手动处理一些“魔法”。在这种情况下，依赖于流的最终值的更新必须手动完成。话虽如此，另一方面，当点击事件发生时，系统会自动执行反应的重新求值，而这完全是自动为我们完成的。\n\
+  \n\n\n### 声明式响应式编程\n\n声明式响应式编程（DRP）是相较于我们已讨论过的范式的另一种替代范式。毫不意外，它基于声明式编程范式，该范式主张开发者专注于声明程序**要做什么**，而不是**如何做**。\n\
+  \n表 1-2 展示了一个 DRP 的示例。\n\n**表 1-2.** 声明式代码与经典命令式代码的简要对比\n\n| 声明式代码 | 命令式代码 |\n|\
+  \ --- | --- |\n| `var numbers = [1,2,3,4,5,6,7,8,9,0]; var odds = _.filter(numbers,\
+  \ (n) => { return n % 2 === 0; });` | `var numbers = [1,2,3,4,5,6,7,8,9,0]; var\
+  \ odds = []; numbers.forEach(function(n) { if(n % 2 === 0) { odds.push(n); } });`\
+  \ |\n| 在 Prolog 中： `likes(mike, food)` `likes(mike, tv)` `likes(michelle, food)`\
+  \ `?- likes(michelle, tv)` `no.` | 我甚至不想去想它。 |\n\n显然，声明式代码乍一看更容易理解：需要阅读的代码行数少得多，需要理解的逻辑也少得多。其他声明式语言的例子包括\
+  \ Prolog、CSS（虽然它不是编程语言，但它仍然是声明式的），甚至 SQL。谈到 DRP，有人可能会认为前面的例子表明这是所有方法中最纯粹的响应式方法。\n\
+  \n在声明式语言中，你只需要定义构成程序的逻辑规则，编译器就会处理剩下的事情。换句话说，你可以通过简单地声明变量和对象之间的依赖关系来指定它们如何相互依赖，系统会负责监视变化并通知相关方。\n\
+  \n## 响应式编程 vs. 传统编程\n\n至此，我已经介绍了 RP 的起源、主要类型以及它的优势，所以你应该对 RP 与经典编程范式（如命令式和面向对象编程）之间的主要区别有了相当清晰的认识。\n\
+  \n尽管如此，表 1-3 还是列出了这些区别，以防你现在还不太清楚。\n\n**表 1-3.** RP 与传统编程的对比\n\n| 响应式编程 | 传统模型 |\n\
+  | --- | --- |\n| 代码的抽象级别高，允许你专注于核心业务规则。 | 抽象级别较低，因为你还必须处理技术的复杂性。 |\n| 通常开发时间更短，因为你只专注于要解决的问题，这转化为更少的代码行数。\
+  \ | 通常开发时间更长，因为你还需要绕过所选技术的限制，这反过来又需要更多的代码行数。 |\n| 编写的代码描述的是*做什么*而不是*如何做*。这简化了代码，并使维护更加容易。\
+  \ | 编写的代码描述的是*如何做*而不是*做什么*。这给代码增加了额外的复杂性。 |\n| 依赖于其他值的值会自动更新，无需使用任何逻辑。在下面这行代码中，只要\
+  \ `B` 或 `C` 发生变化，`A` 的值就会更新。 `A := B + C` | 值之间不会动态地相互依赖。在下面这行代码中，除非开发者手动更新，否则 `A`\
+  \ 的值不会改变。 `A = B + C` |\n\n**提示**\n\n将 RP 和非 RP 的区别想象成每天开车上班和先自己用零件组装好车再开去上班的区别。\n\
+  \n"
+- '# 总结
+
+
+  第一章涵盖了响应式编程的基本介绍。讨论了它如何起源、存在的不同类型以及它的优势。对比了响应式编程与非响应式编程，以便更好地理解其好处。
+
+
+  在下一章中，我们将继续介绍 RP 的基础知识，不过这次我将讨论开发者在开发响应式系统时需要如何思考。
+
+
+  '
+- '# 2. 成为响应式
+
+
+  既然我已经确立了什么是响应式编程（RP）以及为什么要使用它，那么下一个合乎逻辑的步骤就是开始调整你的思维方式以正确使用它。由于我们在此讨论的是一种新的范式，你不能仅仅用面向对象的思维方式或函数式思维来解决这个响应式问题，你需要开始以响应式的方式思考。
+
+
+  因此，在本章中我将正是做这件事：我将尝试向你展示如何以响应式的方式思考。为了实现这个目标，我将：
+
+
+  *   向你展示一些 Node.js 的问题解决技术及其不足之处。
+
+  *   用 RP 解决这些不足之处。
+
+
+  在本章结束时，你将知道如何进入响应式思维模式。
+
+
+  但请记住，本章提供的 RP 示例暂时不会涉及特定的库，它们将是看起来很像 JavaScript 的伪代码示例。等到你读到第 6 章时，你就可以选择一个特定的库并使用它来编写示例了。
+
+
+  ## 首先，关于弹珠图
+
+
+  或者说，更多的是关于弹珠图。我在第 1 章中使用过它们，但没有真正解释过，但现在我要向你展示几个复杂度逐渐增加的弹珠图，我不妨先介绍一下弹珠图的基础知识，以及它如何帮助你更好地理解响应式数据流。
+
+
+  弹珠图是一种可视化表示响应式数据流的方式。
+
+
+  这句话的基本意思是，借助弹珠图，你拥有一套工具，可以表示数据流在响应式数据流过程中经历的各种转换。
+
+
+  具体来说，我将向你展示我将在整本书中使用的一种弹珠图的小变体；基本思想是一样的，但我会添加一些额外的标准来更好地解释我想要展示的行为。所以闲话少说，让我们看看图
+  2-1，它展示了一个简单弹珠图的基本结构。
+
+
+  ![A418015_1_En_2_Fig1_HTML.jpg](img/A418015_1_En_2_Fig1_HTML.jpg)
+
+
+  **图 2-1.** 弹珠图的基本结构
+
+
+  理解数据流以及对其执行了哪些操作并不难。以下是图中每个数字代表的含义：
+
+
+  1.  从左到右的水平线代表时间。
+
+  2.  水平线上的圆圈是流产生的事件。
+
+  3.  图中央的大方框表示在流上执行的操作。
+
+  4.  上述方框下方的弹珠，是将方框中的操作应用于流中每个事件的结果。
+
+  5.  垂直虚线表示一个弹珠的生命周期。
+
+  6.  最后，倾斜的虚线表示正在执行的外部服务调用。
+
+
+  图 2-1 所示的流非常简单，它只是将流中的每个字符转换为大写版本，但即使执行更复杂的操作也同样简单。假设你想合并两个数字流，然后从中找出最大值，你可以很容易地用图
+  2-2 中的图做到这一点。
+
+
+  ![A418015_1_En_2_Fig2_HTML.jpg](img/A418015_1_En_2_Fig2_HTML.jpg)
+
+
+  **图 2-2.** 展示更复杂操作的弹珠图
+
+
+  我知道图 2-2 中有很多弹珠，但忽略它们，你会看到两个简单的步骤：合并和取最大值——仅此而已。这里唯一需要注意的相关事项是，`max` 函数只会在两个原始流都结束后发出一个值。既然这个问题已经解决了，我们继续进入本章的预期内容吧，好吗？
+
+
+
+
+  ## 摆脱传统技术
+
+
+  在本节中，我将探讨标准 Node.js 开发者在日常工作中需要解决的几种常见“问题”，以及每个问题的标准解决方案。接着，我会分析这些解决方案，最终你会看到响应式方法是否会是一个更好的选择。
+
+
+  ### 示例 #1 – 常见的回调地狱
+
+
+  这个问题没什么特别之处——我们都曾遇到过：当你需要按预设顺序（如果愿意，可以看作是按步骤）执行一系列函数时：
+
+
+  ```
+
+  makeRequest("http://yourserver.com/path/request", function step1(req, resp) {
+
+  processData(resp, function step2(err, processedData) {
+
+  saveData(processedData, function step3(err, model) {
+
+  loadRelatedData(model, function step4(err, relData) {
+
+  model.rel = relData;
+
+  sendResponse(model);
+
+  });
+
+  });
+
+  });
+
+  });
+
+  ```
+
+
+  **注意：** 上面的示例中故意省略了错误处理，因为它对回调地狱的要点没有任何帮助。
+
+
+  前面示例中的代码只展示了 4 层缩进，但如果你不断添加步骤，很容易就会增加到你觉得“太多”的程度。这并非不切实际。如果你使用 Node.js 的时间够长，就会见过这类代码；不管是你自己写的，还是同事写的，但它确实真实存在。
+
+
+  如果你想解决前面提到的问题，有几种选择。你可以使用 `async.js` 模块（可从 [`www.npmjs.com/package/async`](http://www.npmjs.com/package/async)
+  获取），如下所示：
+
+
+  ```
+
+  async.waterfall([
+
+  function(callback) {
+
+  makeRequest("http://youserver.com/path/request", callback);
+
+  },
+
+  function step1(req, resp, callback) {
+
+  processData(resp, callback);
+
+  },
+
+  function step2(err, processedData, callback) {
+
+  saveData(processedData, callback);
+
+  },
+
+  function step3(err, model, callback) {
+
+  loadRelatedData(model, callback);
+
+  },
+
+  function step4(err, relData, callback) {
+
+  model.rel = relData;
+
+  callback(null, model);
+
+  }
+
+  ], function(err, model) {
+
+  sendResponse(model);
+
+  });
+
+  ```
+
+
+  生成的代码成功降低了缩进层级，但可惜的是，行数却增加了。这并没有让阅读和理解变得更容易，因为你必须在脑海中解析 `waterfall` 方法提供的不熟悉的结构。
+
+
+  使用 Promise 的方法会有所帮助，这得益于 Promise 提供的更简洁的语法，但需要手动处理 Promise 的复杂性（过程中的每一步都需要返回一个新的
+  Promise 对象，你还需要包装你的异步函数才能像 Promise 一样使用它们，等等），这会损害代码的可读性。
+
+
+  你需要一种解决方案，它采用类似 Promise 的方式，但能让开发者从这种机制中抽象出来；换句话说，你不应该考虑你正在使用的工具，而只考虑如何最好地使用它。你需要类似这样的东西：
+
+
+  ```
+
+  makeRequest("http://yourserver.com/path/request")
+
+  .pipe(step1)
+
+  .pipe(step2)
+
+  .pipe(step3)
+
+  .pipe(step4)
+
+  ```
+
+
+  是的，如果在其他地方创建函数，然后只传入它们的引用，上面的瀑布式代码也可以看起来很像这个示例。但这不仅仅是代码行数的问题，还关乎可读性和语义。新的示例中没有瀑布式结构，它只是让你将内容从一个函数流式传输到下一个；你不需要考虑
+  Promise 或者数据如何从一个步骤发送到下一个步骤。你只需知道这一切正在发生——这就是我所追求的，也是你应该努力的方向。
+
+
+  现在让我们记住这个基本示例，继续进入更复杂的问题，一切都会慢慢变得清晰。
+
+
+  ### 示例 #2 – 嵌套的异步调用
+
+
+  第 1 章已经简要地提到了这一点，但让我们更详细地再回顾一次。
+
+
+  这个示例的基本场景是：你有一个外部服务请求（比如 HTTP 请求、Socket 调用、数据库查询等），它会返回多个结果，并且对于每个结果，你想执行一系列外部服务请求。基本上，这个示例与前一个类似，但这里不仅是依次执行一个请求，而是要并行执行一批异步调用。众所周知，在
+  Node.js 中，这意味着我们陷入了异步地狱：每个调用都需要在进入下一个任务之前完成，但每个任务都是异步执行的，所以它们都在排队。我们该如何处理呢？
+
+
+  ```
+
+  getUsers(function(usrs) {
+
+  var fullUsrs = [];
+
+  var total = usrs.length;
+
+  if(total == 0) return;
+
+  usrs.forEach(function(usr) {
+
+  if(usr.age > 18) {
+
+  loadExtraData(usr, function(err, fullUsr) {
+
+  getFriends(fullUsr, function(err, friends) {
+
+  fullUsr.friends = friends;
+
+  fullUsrs.push(fullUsr)
+
+  displayUser(fullUsr);
+
+  })
+
+  })
+
+  }
+
+  })
+
+  })
+
+  ```
+
+
+  看一下前面的代码；和通常一样，为了简化而省略了简单的函数。这里有三个执行某种外部服务查询的函数（`getUsers`、`loadExtraData` 和 `getFriends`），其中第一个是最简单的，因为它没有上下文——它只是查询一个服务并返回对象列表。然而，另外两个函数需要对每个对象调用一次，并且由于它们都是异步的，你还需要处理这一部分。此外，它只显示年龄大于
+  18 岁的用户信息，所以还有一个过滤操作；你需要记住这一点。
+
+
+  话虽如此，让我们尝试将前面代码中函数所做的所有内容映射到图 2-3 中，该图展示了如何使用 RP 解决这个示例。
+
+
+  ![A418015_1_En_2_Fig3_HTML.jpg](img/A418015_1_En_2_Fig3_HTML.jpg)
+
+
+  **图 2-3.** 展示当前问题 RP 方法的大理石图
+
+
+  在图 2-3 中，你可以看到代码示例中的每个主要步骤，而无需在脑海中解析代码：
+
+
+  *   由 `getUsers` 函数返回的初始用户流
+
+  *   按年龄对这些项目进行过滤
+
+  *   对每个通过过滤的项目进行异步调用（来自 `loadExtraData` 函数调用）
+
+  *   `map` 步骤对每个项目进行了异步调用，并对该项目进行了修改。这是最后的转换步骤。
+
+
+  如果你回到编写函数式响应式代码的方式，你可能会写出类似下面的代码：
+
+
+  ```
+
+  getUsers()
+
+  .filter(function(usr) { return usr.age > 18 })
+
+  .pipe(loadExtraData)
+
+  .map(getFriends(function(usr, friends) {
+
+  usr.friends = friends;
+
+  return usr;
+
+  }))
+
+  .pipe(displayUser)
+
+  ```
+
+
+  这段代码就像图 2-3 一样，比我们通常考虑的抽象层级高了一级，因为它完全不关注边界情况、`forEach` 块或异步行为；相反，它关注的是手头的整体任务以及图中描述的四个步骤。
+
+
+
+
+  ### 示例 #3 – 处理可节流的输入流
+
+
+  这并非像前两个示例那样可直接替换的简单模式；本示例处理的是输入流中事件发生速度过快、需要进行节流的情况。
+
+
+  为了使问题更具体并提供一个更好的示例，让我们为一个虚构的应用写下用例：
+
+
+  -   你希望应用允许用户输入一个单词或短语，并在用户仍在输入时，查找该字符串的翻译。
+
+  -   你希望该应用是一个命令行下的 Node.js 应用。
+
+  -   由于你需要调用外部服务来提供翻译，你还希望处理通信失败时的重试机制。
+
+
+  基于以上考虑，以下是使用传统命令式非响应式编程时代码的外观：
+
+
+  ```
+
+  var stdin = process.stdin;
+
+  stdin.setRawMode(true);
+
+  stdin.resume();
+
+  var currentWord = '''';
+
+  var retries = 0;
+
+  stdin.on(''data'', function(input) {
+
+  input = input.toString();
+
+  currentWord += input;
+
+  console.log(currentWord) //向用户显示输入内容
+
+  if(input.charCodeAt(0) === 27) process.exit(0); //按 ESC 退出
+
+  if(input.charCodeAt(0) === 13) { //按 ENTER 开始新的输入字符串
+
+  currentWord = "";
+
+  console.log(" ");
+
+  }
+
+  if(currentWord.length > 0) {
+
+  getTranslation(currentWord, retries, callback);
+
+  }
+
+  })
+
+  /**
+
+  处理翻译响应的回调函数
+
+  @err 是错误消息，如果没有错误则为 null
+
+  @trans 是翻译后的字符串
+
+  @attempt 是当前的尝试次数
+
+  @string 是您试图翻译的字符串
+
+  */
+
+  function callback(err, trans, attempt, string) {
+
+  if(err) {
+
+  console.error(err, " - 重试次数: ", attempt);
+
+  if(attempt < 3) {
+
+  return getTranslation(string, attempt + 1, callback);
+
+  } else {
+
+  retries = 0;
+
+  return console.log("致命错误，重试无济于事: ", err)
+
+  }
+
+  }
+
+  console.log("''",trans,"''")
+
+  }
+
+  //下面的伪翻译服务
+
+  var __DICT__ = {
+
+  "hello": "Hola",
+
+  "yes": "Sí",
+
+  "no": "No",
+
+  "i": "Yo",
+
+  "i do not understand":"Yo no comprendo",
+
+  "who": "Quién",
+
+  "why": "Por qué",
+
+  "test": "prueba",
+
+  "who are you": "Quién eres"
+
+  };
+
+  function getTranslation(word, retry, cb) {
+
+  //通过休眠几秒来模拟服务调用
+
+  var high = 5
+
+  var low = 1;
+
+  var sleepTime = Math.random() * (high - low) + low;
+
+  word = word.toLowerCase();
+
+  setTimeout(function() {
+
+  var translation = null;
+
+  if( translation = __DICT__[word]) {
+
+  return cb(null, translation, retry, word);
+
+  } else {
+
+  return cb("未找到: " + word + " 的翻译", null, retry, word);
+
+  }
+
+  }, sleepTime * 1000)
+
+  }
+
+  ```
+
+
+  **注意**
+
+
+  如你所见，我实际上是在伪造外部服务调用，但就本例而言，代码的简洁性有助于我们将注意力集中在关键点上。
+
+
+  仔细看这段代码，我立即想到有几个需要解决的问题：
+
+
+  -   由于应用不会等待按下 ENTER 键，你需要对每次按键作出反应，因此需要避免尝试翻译未完成的单词或短语。所以，你必须以某种方式处理这个问题。
+
+  -   由于持续的输入和外部服务调用的异步特性，你可能会遇到时序问题。如果系统在您输入过程中能够翻译部分短语，并且该响应在最终短语的翻译结果返回之后才到达，那么你最终可能会得到错误的结果。
+
+
+  现在，尽管上述代码在一定程度上确实能工作，但正如你已经看到的，一些怪异之处并未得到处理。这并不是说它无法修复，但要修复它需要付出比我愿意在本例中投入的更多的工作和代码，尤其是因为稍后我将提供一个解决方案，所需编写的代码更少。
+
+
+  那么，让我们看一下图 2-4，然后我将使用函数式响应式伪代码对其进行编码。
+
+
+  ![A418015_1_En_2_Fig4_HTML.jpg](img/A418015_1_En_2_Fig4_HTML.jpg)
+
+
+  图 2-4. 展示翻译问题 RP 方法的弹珠图
+
+
+  在图 2-4 中，您可以看到我们之前提到的问题：
+
+
+  -   对翻译服务的持续请求
+
+  -   由于翻译服务可能的延迟导致的响应顺序错乱
+
+
+  如何解决这些问题？非常简单，使用函数式响应式方法，你可以将最初的按键流转换为更容易处理的形式，然后从那里继续转换流，直到得到可翻译的内容。让我们看代码：
+
+
+  ```
+
+  readInput()
+
+  . throttle(300)
+
+  .scan('''', ''.concat'')
+
+  .flatMapLatest(function(word) {
+
+  return retry(getTranslation(word), 3);
+
+  })
+
+  .pipe(printTranslation)
+
+  ```
+
+
+  这段代码仍未使用任何库，因此保持通用性，我最终会涉及到这一点，别担心。尽管代码应该易于理解，但有些命名可能不够清晰，所以让我们快速过一下上面的六行：
+
+
+  1.  这一行非常清晰。它读取标准输入并创建一个按键流。
+
+  2.  第二行解决了之前的一个问题：通过节流源流中的事件生成，你实际上每 300 毫秒才响应一次事件突发，从而减少了最终发出的翻译请求数量。
+
+  3.  第三行将所有被节流的按键连接成一个单独的字符串，然后可以作为新的事件传递。
+
+  4.  第四行是最难理解的。`flatMap` 将创建一个并行流来处理作为参数传递的函数，而该函数将返回一个新的流。
+
+  5.  在上述函数内部，有`retry`调用，这应该是你所使用的任何库的一部分。如果调用失败，它将返回新的流，并处理 `getTranslation` 调用的重试。
+
+  6.  最后，最后一步将打印翻译结果。这一步非常清晰。
+
+
+  通过查看图 2-5 中的新图表，你可以看到算法变得多么简单。
+
+
+  ![A418015_1_En_2_Fig5_HTML.jpg](img/A418015_1_En_2_Fig5_HTML.jpg)
+
+
+  图 2-5. 使用节流的新 RP 解决方案的弹珠图
+
+
+  快速浏览图表，可以非常直观地看到按键在整个先前提议的数据流中发生了什么。最终，显然假设节流步骤将输入分成两部分，你最终只向翻译服务发起了两次调用，而不是使用原始代码时可能会发生的四次调用，并且由于
+  `flatMapLatest` 函数，只有第二次翻译调用的结果被接受。
+
+
+  诚然，这里实现的功能本可以使用经典的命令式编程来完成，但与这种函数式响应式方法相比，额外的工作和多余的代码行数并不划算。
+
+
+  '
+- '# 总结
+
+
+  本章涵盖了一些你可能感兴趣使用 RP 解决的最常见情况。你看到了它们如何被常规命令式编程处理，如果考虑到每个边缘情况，解决起来有多复杂，以及最后，如果使用 RP
+  方法，它们会变得多么简单。
+
+
+  第 3 章将进一步深入函数式响应式编程。我将介绍 Node.js 中函数式编程的基础知识，然后你将看到这如何应用于 RP（我已经展示了一些例子，但这一次，我将更详细地展开）。
+
+
+
+
+  '
+- "# 3. 函数式响应式编程\n\n在前几章中，我尽量让代码示例独立于其他内容（尤其是响应式代码示例），因此我尚未提及任何特定的库，这也导致你无法直接复制粘贴其中某些代码并运行它们。\n\
+  \n关于前几章，需要注意的一点是，大多数响应式示例都使用了函数式编程的概念（`map`、将函数作为变量传递等），因此本章的主题——函数式响应式编程——对你来说应该并不意外。\n\
+  \n在本章中，你将开始更接近实际编写可运行代码的过程（太好了！），并通过探讨以下主题来实现这一目标：\n\n-   JavaScript 中的函数式编程（FP）入门。我将在此概述函数式编程的相关要点，并尝试快速讲解，通过展示一些代码示例来帮助解释其内部工作原理以及它们如何帮助我们完成任务。\n\
+  -   函数式程序员的主要工具。承接上一点，我将介绍每个函数式程序员都应学会并喜爱的三大工具：`map`、`reduce`和`filter`。\n-   如何处理可观察的事件流。\n\
+  \n## JavaScript 中的函数式编程入门\n\n坦白说，JavaScript 中的函数式编程本身就是一个庞大的话题，我完全可以就此写一整本书。话虽如此，我仍会尝试在本章中对其做一个总结。本章将涵盖函数式编程最重要的部分，而将深奥的理论基本排除在外。如果在本章结束时，你仍想更深入地学习这个主题，请去找一本相关的书（比如\
+  \ Joshua Backfield 的《Becoming Functional》或 Neal Ford 的《Functional Thinking》），它们绝对值得一读。\n\
+  \n言归正传，让我们首先定义一些将在本章中使用的概念：纯函数、组合、柯里化和单子。\n\n**记住**\n\n以下解释将基于 JavaScript 的上下文进行。因此，如果你已经熟悉这些概念更通用的版本，请记住，我为了保持简单易懂，对解释范围做了限制。\n\
+  \n### 纯函数\n\n在函数式编程中，有一个纯函数的概念。考虑到你几乎整个开发生涯都在与函数（或方法）打交道（如果你没有，那我真不知道你在用什么奇怪的语言编程），定义这个概念可能会让你觉得奇怪。\n\
+  \n那么，一个函数要满足什么条件才能被称为纯函数呢？一个纯函数必须符合以下两点：\n\n-   执行时不能产生不可预见的副作用。换句话说，一个函数在每次被调用时，只要传入相同的参数，就必须返回完全相同的结果。\n\
+  -   其内部逻辑只能依赖于它接收的参数。这意味着，即使函数执行没有副作用，它也不能依赖外部值来进行计算，因为这些值可能会改变，从而影响函数的结果，这反过来又违背了上一点。\n\
+  \n表 3-1 展示了一个快速示例。\n\n**表 3-1.** 纯函数与非纯函数示例\n\n| 纯函数 | 非纯函数 |\n| --- | --- |\n|\
+  \ ```function pure(a, b, c, d) {  return a + b + c + d;}``` | ```var sum = 0;function\
+  \ impure(a,b,c,d) {  sum = a + b + c; // 修改了一个外部变量  return a + b + c + d;}``` |\n\
+  | ```function pure(a, b) {  var mult = 2;  return (a+b) * mult;}``` | ```var mult\
+  \ = 2;function impure(a, b) {  return (a+b) * mult;}``` |\n\n表 3-1 中的示例清楚地展示了第一行中非纯函数的不希望的副作用，以及第二行中不希望的外部依赖。在这两种情况下，非纯函数的执行都会产生不期望的结果。\n\
+  \n纯函数的概念相当简单，但对于实现函数式编程至关重要，因此完全理解它非常重要。另外需要补充说明的是，即使这与函数式编程没有直接关系，在你的代码中使用纯函数也能减轻阅读或使用你代码的开发者的认知负担，因为理解函数内部逻辑所需的工作量会大大降低。这类函数的另一个好处是它们更容易测试，因为它们只依赖于输入值。\n\
+  \n\n好的，作为高级文档工程师和翻译员，我将遵循您的注意事项和示例，将给定的英文文本翻译成中文。\n\n\n### 组合\n\n函数组合是函数式编程的另一大支柱，因为它与纯函数一起，为我们开发者提供了创建复杂结构的方法，这些结构能够保持函数式范式所施加的约束。\n\
+  \n从数学的角度来看，函数组合看起来像这样：\n\n```\ncompose(f(x), g(x)) = f(g(x))\n```\n\n现在，如果你把它翻译成\
+  \ JavaScript，组合函数看起来像这样：\n\n```\nvar add10 = function(a) { return a + 10; };\nvar\
+  \ double = function(b) { return b * 2; };\nvar addAndDouble = compose(add10, double);\
+  \ //add10(double(a));\naddAndDouble(10); //returns 40;\n```\n\n这个例子展示了一个非常基础的组合，虽然它确实有助于解释这种操作的基本行为，但让我们看一个更复杂的例子，以便更好地理解它能为我们带来多大的用处。\n\
+  \n为此，假设你正在开发一个待办事项列表应用程序，坦白说，这算是编程界的新版“Hello World”。在这个应用程序中，我们想要获取所有已完成任务的列表，所以使用纯\
+  \ JavaScript，你可以写成这样：\n\n```\nvar doneTasks = tasks.filter(function(t) { return\
+  \ t.done; });\n```\n\n你可以说这是一种函数式方法；毕竟你传入了一个纯函数作为过滤条件，而且它确实工作。但我们还可以做得更好：\n\n```\n\
+  var doneTasks = filter(where({done: true}));\n```\n\n不，我没有忘记 `tasks` 列表，在示例中，`doneTasks`\
+  \ 变量包含的是一个函数，而不是过滤后的实际任务列表，这个函数会在执行时过滤我们作为参数传入的任何任务列表。所以我们实现了可复用性（耶！）。我知道我刚刚提出了两个新函数，并且没有真正解释它们是如何工作的，但这是有原因的：我还没有讨论完你需要用来创建它们的工具。一旦你读完本章的这一部分，你应该就拥有了自己创建它们所需的全部知识。\n\
+  \n话虽如此，这种新方法还有另一个好处：组合能力。假设你还想按用户对该列表进行分组。你可以使用一个给定的 `partition` 函数来分组任务，它的工作方式类似于\
+  \ `compose`，但使用 `Array.prototype.reduce` 方法，它会创建一个由你想要的属性索引的元素字典。\n\n```\nvar groupByUser\
+  \ = partition({prop: 'username'});\nvar groupedTasks = compose(groupByUser, doneTasks);\n\
+  ```\n\n现在，使用两个简单的函数，你创建了第三个更复杂的函数，并且它仍然是纯函数。尽管 `compose` 函数很容易理解，但让我为你展示 `partition`\
+  \ 和 `compose` 两者的实现：\n\n```\nfunction partition(byProp, list) {\nreturn list.reduce(function(dict,\
+  \ curr) {\nvar idxValue = dict[byProp.prop]; //使用我们传入作为参数的属性\nif( !dict[idxValue]\
+  \ ) dict[idxValue] = []; //初始值\ndict[idxValue].push(curr);\nreturn dict;\n},{});\n\
+  }\nfunction compose(fn1, fn2) {\nreturn function() {\nreturn fn1(fn2.call(fn2, arguments));\n\
+  }\n}\n```\n\n现在你看过之后，这个函数其实并不复杂；它需要做的就是理解 `reduce` 函数的工作原理，简单来说，它允许你遍历数组的值并对其应用一个函数，将所有值减少为一个。上面代码中另一个有趣的地方是，它接收两个参数，但在示例中我只传了一个参数，这是怎么回事？！\n\
+  \n现在是开始讨论柯里化函数的最佳时机，那么，让我们开始吧！\n\n### 柯里化函数\n\n请暂时忽略你现在对印度菜的突然渴望（[`https://en.wikipedia.org/wiki/Curry`](https://en.wikipedia.org/wiki/Curry)），因为这和它无关（实际上，它和哈斯凯尔·柯里有关，一位帮助开发了这项技术的数学家）。函数柯里化（通常的称呼），是用少于其需要的参数来调用一个函数，而该函数不会以不可预测的结果运行，相反，它会返回一个预设了给定参数的新函数。\n\
+  \n这有点绕口，让我们看一个非常简单的例子来理清思路：\n\n```\n//简单函数\nfunction add(x, y) { return x+y; }\n\
+  //现在我们柯里化它\nvar curriedAdd  = curry(add);\nvar add100 = curriedAdd(100);\n//现在我们可以简单地...\n\
+  console.log(add100(10)); //输出 110\n```\n\n现在，回到之前的 `partition` 例子，该函数接受两个参数，但我只使用了一个；我传入了想要分组的属性，但没有传入列表，所以我柯里化了这个函数，它相应地返回了一个只需要待分区项目列表的新函数。当然，这在\
+  \ JavaScript 中不会自动发生；为了实现这一点，这里隐含了一个步骤，包括调用一个柯里化函数，就像我在 `add100` 示例中所做的那样。\n\n但是，如果使用得当，函数柯里化可以成为一个很好的工具，帮助你获得更清晰的语法，更具声明性而非命令性。\n\
+  \n让我们看一个经典的例子：从一个用户对象列表中，获取一个用户名列表；实现方法太多，但让我们尽量保持函数式风格，好吗？\n\n```\nvar users =\
+  \ [ {id: 1, name: 'Richard Reed' } , { id: 2, name: 'John Stewart' } ];\nusers.map(function(u)\
+  \ {  return u.name; }); //返回 ['Richard Reed', 'John Stewart']\n```\n\n代码是有效的，但如果你追求声明式而非命令式，那行代码中的函数定义感觉不太对劲。那么，如果你像这样柯里化那个函数呢：\n\
+  \n```\nvar get = curry(function(prop, o) { return o[prop]; });\n```\n\n前面的声明有点棘手。记住，`get`\
+  \ 实际上并不是你想要的函数；相反，你想要的是当用你想要提取属性的项目列表调用 `get` 时返回的那个函数。这样，你就可以将其与 `map`、`reduce`、`compose`\
+  \ 等结合使用。在这个特定情况下，我使用了 `map`，让我们看看现在会是什么样子：\n\n```\nusers.map(get('name'));\n```\n\
+  \n这比之前清晰多了，不是吗？如果你柯里化 `map` 调用，甚至可以更进一步，就像这样：\n\n```\nvar map = curry(function(list,\
+  \ fn) { return list.map(fn); });\n//现在我们能做类似这样的事情：\nvar listOfNames = map(get('name'));\n\
+  ```\n\n而最棒的是？这段代码完全没有引用用户列表。这意味着 `listOfNames` 变量引用了一个函数，你可以在任何地方复用它，甚至可以在需要时与另一个函数组合。\n\
+  \n正如你所见，函数柯里化提供了一种比简单函数更高的灵活性；将其与组合结合起来，你就拥有了一个杀手组合。看看下面的代码，简直优美：\n\n```\n/*\n执行顺序与参数的顺序相反，\n\
+  所以你必须倒着读：\n* 按 id 排序\n* 然后获取项目的名称，并用逗号连接这些名称\n*/\ncompose(\ncompose(join(', '),\
+  \ map(get('name'))),\nsortBy(get('id'))\n);\n```\n\n简单、干净，代码读起来几乎就像注释——忘掉命令式编程吧！\n\
+  \n在我结束这个话题之前，让我们来揭开 `curry` 函数的神秘面纱，好吗？这里有一个适用于前面例子的简单实现：\n\n\n```javascript\nfunction\
+  \ curry() {\n//We transform the arguments object into an array...\nvar arrArguments\
+  \ = [].slice.call(arguments);\nvar fn = arrArguments.splice(0, 1)[0];\nvar headArgs\
+  \ = arrArguments;\nreturn function() { //the curried function\nvar newArgs = headArgs.concat([].slice.call(arguments));\n\
+  return fn.apply(fn, newArgs);\n};\n}\n//Example usage\nfunction sum(a, b) {\nreturn\
+  \ a + b;\n}\nvar sum10 = curry(sum, 10);\nconsole.log(sum10(1));\n```\n\n由于该函数旨在柯里化一个参数数量不限的函数，因此接收的参数列表保持为空，它直接操作`arguments`对象，该对象包含函数接收到的所有参数。它先从列表中取出第一个参数（即你要柯里化的函数），其余参数则是你预先设定的参数。\n\
+  \n该函数还返回一个匿名函数，这个匿名函数将使用正确的参数列表来调用你的实际函数。如你所见，这是一个非常强大的函数，实现却非常简单。\n\n## 函数式编程的工具\n\
+  \n那么，利用组合、纯函数和柯里化能做些什么呢？我来告诉你，你可以创建每一个优秀的函数式程序员必须了解并钟爱的三大主要函数（没错，你可能会爱它们，也可能恨它们，因为即便在不自觉中你也会用到它们）。\n\
+  \n这些函数是 `map`、`filter` 和 `reduce`。让我们更好地了解它们，尽管你可能已经使用过它们，因为它们都是 `Array` 对象的一部分。我将展示它们的工作原理以及你可以用它们做什么。\n\
+  \n### 映射（Map）\n\n我们先从最简单的开始。`map` 函数旨在将某个函数应用于列表中的每一个元素，然后根据执行结果创建一个新的列表。\n\n我先举一个基本例子。假设你有一个整数列表，想要计算每个数的平方根，使用\
+  \ `map` 很简单：\n\n```javascript\nvar numbers = [1, 2, 3, 4, 5, 6];\nvar results =\
+  \ numbers.map(function(i) { return Math.sqrt(i); } );\nconsole.log(results);\n/*\
+  \ Resulting on\n[ 1,\n1.4142135623730951,\n1.7320508075688772,\n2,\n2.23606797749979,\n\
+  2.449489742783178 ]\n*/\n```\n\n这很简单。甚至还可以进一步简化，方法 `Math.sqrt` 接收一个参数并返回一个值，这与你的匿名函数的签名类似，因此你可以直接写成：\n\
+  \n```javascript\nvar numbers = [1, 2, 3, 4, 5, 6];\nvar results = numbers.map(Math.sqrt);\n\
+  console.log(results);\n```\n\n两种情况下结果相同，但第二种写法更易理解，更具声明性。\n\n这里有一个需要注意的地方：应用的函数必须是同步的，你不能像下面这样做：\n\
+  \n```javascript\nvar filenames = ['file1.txt',  'file2.txt' ];\nvar content = filenames.map(fs.readFile);\n\
+  ```\n\n这行不通，因为 `readFile` 方法不返回实际内容，如果你尝试运行前面的代码，最终会得到一个充满 `undefined` 项的数组。这再次说明，我所使用的方法不返回内容；实际上，它什么都不返回。不过别担心，有一种方法可以实现异步\
+  \ `map` 并使用结果数组，只是略有不同。\n\n就像编程世界中的一切事物一样，实现这一点并没有唯一正确的方法。我将展示异步 map 的两种变体：一种使用\
+  \ ECMAScript 6 的 Promise（为什么不呢？），另一种使用经典的回调函数。你可以选择最喜欢的一种来使用。\n\n```javascript\n\
+  //Map using ECMAScript 6 Promises\nfunction promiseMap (list, fn) {\nvar promises\
+  \ = list.map(function(i) {\nvar p = new Promise(function(resolve, reject) {\nfn(i,\
+  \ function(err, result) {\nif(err) return reject(err);\nresolve(result);\n})\n});\n\
+  return p;\n});\nreturn Promise.all(promises);\n}\n```\n\n上述代码做了两件简单的事：首先，它创建了一个\
+  \ Promise 列表，然后返回 `Promise.all` 返回的 Promise，当所有作为参数传入的 Promise 都 resolved 时，这个 Promise\
+  \ 就会 resolved。而\"魔法\"发生在 `map` 循环生成的 Promise 内部，它们执行异步函数 (`fn`)，并根据该函数的结果决定 Promise\
+  \ 是 resolved 还是 rejected，这反过来会影响全局 Promise 的结果。\n\n**注意**\n\n上述代码显然假设你已经知道什么是 `Promise`\
+  \ 以及如何使用它。如果你还不了解，建议你阅读相关资料 ([`https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Promise`](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Promise))。\n\
+  \n以下是如何在代码中使用基于 Promise 的新函数 `promiseMap`：\n\n```javascript\n//Sample code using\
+  \ promise based map function\nvar filenames = ['file1.txt', 'file2.txt'];\npromiseMap(filenames,\
+  \ fs.readFile)\n.then(function(content) {\nconsole.log(\"------- 文件内容 ---------\"\
+  );\ncontent.forEach(function(c) {\nconsole.log(c.toString());\n});\n})\n.catch(function(err)\
+  \ {\nconsole.error(\"读取文件时出错：\", err);\n});\n```\n\n示例代码接收一个字符串列表（文件名），并将 `fs.readFile`\
+  \ 方法应用于每个字符串，即读取每个文件并将其内容放入一个新列表。一旦列表中的所有项目处理完毕，且所有文件都成功读取，最终回调函数就会被调用，它将收到一个包含主函数\
+  \ (`fs.readFile`) 所有执行结果的数组。\n\n另一种在 `map` 调用中处理异步函数的方法是使用回调函数，为此你可以使用我将展示的自定义实现，或者依赖第三方库，比如\
+  \ Async.js ([`https://github.com/caolan/async`](https://github.com/caolan/async))。\n\
+  \n```javascript\n//Map using regular callbacks\nfunction callbackMap (list, fn,\
+  \ done) {\nvar results = [];\nvar counter = 0;\nlist.forEach(function(i) {\nfn(i,\
+  \ function(err, result) {\nif(err) return done(err);\nresults.push(result);\ncounter++;\n\
+  if( counter == list.length ) {\ndone(null, results);\n}\n});\n});\n}\n```\n\n这段代码比基于\
+  \ Promise 的版本更直接；它只是遍历所有项目，应用异步函数，并跟踪已调用回调的次数。一旦达到正确数目（等于列表中的项目数），就调用 `done` 函数并发送结果列表。\n\
+  \n以下是使用该函数的方法：\n\n```javascript\n//Sample code using callback based map function\n\
+  var filenames = ['file1.txt', 'file2.txt'];\ncallbackMap(filenames, fs.readFile,\
+  \ function(err, content) {\nif(err) {\nconsole.error(\"读取文件时出错：\", err);\n} else\
+  \ {\nconsole.log(\"------- 文件内容 ---------\");\ncontent.forEach(function(c) {\nconsole.log(c.toString());\n\
+  });\n}\n});\n```\n\n现在，无需使用 `then` 和 `catch` 设置两个回调函数，而是使用一个匿名函数同时接收错误和结果，这是一种经典的回调模式。\n\
+  \n\n#### Filter\n\n`filter`函数是函数式编程工具箱中另一个简单但强大的工具。其背后的理念很简单：遍历一个列表，对每一项应用一个布尔函数，如果函数返回`TRUE`，则将其添加到返回列表中；否则忽略它，从而过滤初始列表。\n\
+  \n让我们看一个例子来完全理解这个函数背后的理念，该函数已是 Node.js 中`Array`对象的一部分：\n\n```javascript\nvar list\
+  \ = [-4, -3, -2, 0, 2, 3, 4 ];\nvar positives = list.filter(function(nmbr) {  return\
+  \ nmbr > 0; });\nconsole.log(positives); //this will of course print \"[2, 3, 4]\"\
+  \n```\n\n这里的基本理念是：过滤函数需要返回一个值，该值会被视为真值（可转换为布尔值`true`）或假值（可转换为布尔值`false`）。\n\n处理异步函数来执行过滤与你之前看到的`map`非常相似，因此将其作为练习留给你来实现。\n\
+  \n使用柯里化给`filter`的一个有趣用法是定义可复用的过滤器，你只需确保与之前的例子不同，第一个接收的参数是实际的过滤函数：\n\n```javascript\n\
+  /*\nCustom implementation of a simple filter function\n*/\nfunction filter(filterFN,\
+  \ list) {\n    var results = [];\n    list.forEach(function(item) {\n        if(filterFN(item))\
+  \ {\n            results.push(item);\n        }\n    });\n    return results;\n\
+  }\nvar onlyEvenNumbers = curry(filter, function(nmbr) { return nmbr % 2 == 0; });\n\
+  var list1 = [1,2,3,4,5,6,7,8,9,0];\nvar list2 = [-1, -4, -6, 23, 10];\nvar list3\
+  \ = ['string', 'word', 4, 2, Date()];\n// now we can do\nconsole.log(onlyEvenNumbers(list1));\
+  \ //[ 2, 4, 6, 8, 0 ]\nconsole.log(onlyEvenNumbers(list2)); //[ -4, -6, 10 ]\nconsole.log(onlyEvenNumbers(list3));\
+  \ //[ 4, 2 ]\n```\n\n可复用性，再次，耶！`filter` + `curry` 是如此强大的组合。\n\n#### Reduce\n\n最后但同样重要的是`reduce`。这无疑是三者中最复杂的，因为它的逻辑并不那么直观，尽管你即将看到，它只需要你多花点注意力在解释上，仅此而已。\n\
+  \n这个函数将一个操作应用于一个从自定义初始值开始的累积值以及列表中的每一项；该操作的结果用于与下一项结合，依此类推，直到整个列表被归约为单个值。\n\n这比我想象的要复杂一些，所以让我们用代码来解释，代码加上定义应该足以让你上手：\n\
+  \n```javascript\nvar numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9];\nvar sum = numbers.reduce(function\
+  \ add(x, y) { return x + y; }, 0);  //returns 45\n```\n\n足够简单，让我们一步步分析上述代码的执行过程：\n\
+  \n```\nresult = add(0, 1) //this returns 1 obviously\nresult = add(result, 2); //this\
+  \ returns 3\nresult = add(result, 3); //this returns 6\nresult = add(result, 4);\
+  \ //this returns 10\nresult = add(result, 5); //this returns 15\nresult = add(result,\
+  \ 6); //this returns 21\nresult = add(result, 7); //this returns 28\nresult = add(result,\
+  \ 8); //this returns 36\nresult = add(result, 9); //this returns 45, and it's done!\n\
+  ```\n\n注意你是如何从`0`开始的，那是你传递给`reduce`方法的第二个参数，即初始值。但是对列表中的所有数字求和只是一个简单的例子；你可能会发现自己需要执行其他更复杂的任务，`reduce`也能帮上忙！\n\
+  \n```javascript\nvar words = [ 'Hello', ' ', 'world', '!' ];\nvar str = words.reduce(function(currentStr,\
+  \ word) {\n    return currentStr += word;\n}, '');\n```\n\n上述代码展示了`reduce`方法的另一个经典用法。巧合的是，我使用了相同的运算符（`+`），尽管不是数字加法，而是字符串拼接。是的，使用`join`方法有更简单的方式来实现上述功能，但这当然是为了提供一个能做什么的例子。\n\
+  \n最后，让我们看另一个例子，一个扁平化函数；它将接收一个列表的列表，并将它们全部合并成一个单一的一维列表。\n\n```javascript\nvar listOfLists\
+  \ = [ [1, 2, 3], [ 4, 5 ] , [6, 7, 8] ];\nvar flattened = listOfLists.reduce(function(newList,\
+  \ item) {\n    return newList.concat(item);\n}, []);\n```\n\n#### 综合运用\n\n只是为了趣味性，让我们用一个使用了大部分我提到的函数式编程工具的例子来结束这个主题。它可能有助于让你更好地了解它们如何相互配合。\n\
+  \n以下是你要做的：读取一个文本文件的内容，获取每个标准字符的 ASCII 码，最后将所有数字相加得到所有 ASCII 码的总和。为什么要这样做？你听说过这样的谣言吗：字符串”Bill\
+  \ Gates III”转化为 ASCII 然后相加会得到 666？嗯，这是一个相当古老的谣言，所以如果你没听说过也不用担心。你要做的是使用函数式编程来证明或揭穿这个谣言！\n\
+  \n因为这是本章的内容，我也会加入一些响应式编程：不是将文件名硬编码到某个变量中，而是从用户那里获取输入，并使用该字符串作为文件名，将其添加到我们的一个`ObservableStream`中，并设置一个函数链，该链将：\n\
+  \n*   使用输入作为文件名读取文件。\n*   将结果字符串分割成字符数组。\n*   过滤掉不需要的字符。\n*   将每个字符映射到其 ASCII 码。\n\
+  *   将它们加起来。\n*   将结果数字打印到控制台。\n\n代码如下：\n\n```javascript\nvar fs = require(\"fs\"\
+  );\nvar functionalUtils = require(\"./func_utils\");\nvar ObservableStream = require(\"\
+  ./ostream\");\n/*\nUtility functions\n*/\nvar filterUnwantedCharacters = functionalUtils.curry(functionalUtils.filter,\
+  \ function(c) {\n    return /[a-zA-Z0-9 ]/.test(c);\n});\nvar mapToInt = functionalUtils.curry(functionalUtils.map,\
+  \ function(c) {  return c.charCodeAt(0); } );\nvar addUp = functionalUtils.curry(functionalUtils.reduce,\
+  \ function(x, y) { return x + y; });\nvar split = function(str) { return str.toString().split(\"\
+  \"); };\n//streams setup\nvar dataStream = new ObservableStream();\ndataStream.data\n\
+  \    .then(fs.readFile)\n    .then(split)\n    .then(filterUnwantedCharacters)\n\
+  \    .then(mapToInt)\n    .then(addUp)\n    .then(console.log)\n    .catch(function(error)\
+  \ { //Error handling!\n        console.log(\"There was an error: \", error);\n \
+  \   })\nvar filenameStream = new ObservableStream();\nvar filename = \"\";\nfilenameStream.data\n\
+  \    .then(function(chr) {\n        if(chr.charCodeAt(0) != 13) { //if we're not\
+  \ inputing an enter\n            filename += chr;\n        } else {\n          \
+  \  dataStream.add(filename);\n            filename = \"\";\n        }\n    });\n\
+  var stdin = process.stdin ;\nstdin.setRawMode(true);\nstdin.resume();\nstdin.on('data',\
+  \ function(input) {\n    var character = input.toString();\n    console.log(character);\n\
+  \    if(character.charCodeAt(0) === 27) process.exit(0); //exit with ESC\n    filenameStream.add(character);\n\
+  });\n```\n\n你会注意到我引用了两个实际上是自定义的库（`func_utils`和`ostream`），但代码并不在这里，我将在本书后面展示它们的代码；现在，只要知道我们使用的是我已经讨论过的函数就足够了。至于`ObservableStream`对象，暂时不用担心；我很快就会详细讲解它。\n\
+  \n> **注意**\n> \n> 顺便提一下，如果你尝试了本书附带的代码，并使用内容为“Bill Gates III”的文件，你可能会发现这个谣言大错特错。所以，真扫兴，但至少你揭穿了它，同时找到了一些乐趣！\n\
+  \n代码实际上相当直接，但像往常一样，有几个有趣的地方，让我们来逐一讨论。\n\n\n\n### 双流并用而非单流\n\n我使用了两个流，其中一个用于从用户输入中收集文件名。这个流的事件链上只有一个函数。或许我可以用其他方式处理，比如自定义的\
+  \ `concat` 函数，但为了简单起见，当前版本已经足够用了。\n\n一旦这个自定义函数检测到我们按下了 `ENTER` 键，它就会将当前字符串添加到另一个流中，这个流负责处理所有事务并返回神奇的数字。\n\
+  \n对于第二个流，我设置了一个稍长的事件链，旨在逐步处理文件内容并打印最终结果。它们完成了之前提到的所有操作，因此这里无需赘述。\n\n### 将函数全面柯里化\n\
+  \n为了让代码更易读，同时也为了与 Observable Streams 的事件链兼容，我对所有主要函数进行了柯里化。也就是说，过滤、归约和映射这些函数都被柯里化成了简化且定制化的版本。由于\
+  \ `split` 函数只需要一个参数，所以没有对其进行柯里化。\n\n### 可读性大幅提升\n\n代码背后的逻辑非常简单：我只是想读取一个文件，将其内容转换为\
+  \ ASCII 码，并计算出最终的数字。但我不妨挑战一下你，用传统的命令式逻辑来编写这段代码。抛开我一直在谈论的那些工具，在不使用它们的情况下编写代码。你会发现抽象层级降低了，而你自己则不得不去解决一些我甚至无需触及的其他问题。\n\
+  \n这就是声明式编程的魅力所在，我们确实应该更深入地探讨它，那么开始讨论吧。\n\n## 声明式编程\n\n在代码中使用声明式方法的一个直接副作用（正如我无数次提及的那样）是：你可以在程序中编写声明式语句，而不是通常的命令式语句。\n\
+  \n简而言之，使用你上面看到的那些工具，你可以编写描述“你想要完成什么”的代码，而不是像通常学的那样，去告诉编译器/解释器“如何完成”你认为最佳的操作，以达到你想要的结果。\n\
+  \n尽管有些语言是纯粹声明式的，比如 `SQL`、`XSL` 和 `Prolog`，但由于 JavaScript 允许你编写函数式代码，你可以将 JS 视为一种部分描述性的编程语言。这只需要开发者有相应的意愿即可。\n\
+  \n别误会，命令式编程和声明式编程一样，都是有效的代码编写方式。而且，你在入门时首先学到的是命令式编程，这完全合情合理；毕竟，早期的计算机，由于使用的是真空管和非常基础的指令集，开发者被迫以逐步的方式编写程序，精确地告诉计算机如何解决一切问题。\n\
+  \n接下来，让我们看一个例子，了解一下从纯粹（或者说大部分是）命令式的实现转向更具声明式的实现后，代码的可读性能有多大的提升。\n\n```\ngetRemoteData(\"\
+  www.remoteurl.com\", function(err, data) {\nif(err) {\nreturn handleError(err);\n\
+  }\nparseData(data, function(err, items) {\nif(err) {\nreturn handleError(err);\n\
+  }\nvar names = [];\nfor(var i = 0; i < items.length; i++) {\nif(items[i].age > 18)\
+  \ {\nnames.push(items[i].name);\n}\n}\nconsole.log(names.join(\", \"));\n});\n});\n\
+  ```\n\n上面的代码是命令式代码的一个完美示例。你在做的事情如下：\n\n- 在预期出错的地方手动检查错误。\n- 创建一个局部变量，仅仅为了遍历数组中的每个元素。\n\
+  - 创建一个额外的数组，仅仅为了临时存储提取出的对象名称。\n\n代码能正常运行，问题不在于效率低下或可能有 bug。不，这里的主要问题在于：\n\n- 你必须在脑海中解析这段代码。诚然，这个算法并不复杂，但认知负担依然存在——如果你想理解代码试图做什么，你就必须这样做。\n\
+  - 扩展这段代码同样需要你阅读并理解你的改动对整个算法产生的影响。\n\n现在，让我们用声明式的方式来思考。基本上，你需要思考“需要做什么”，而不是直接跳入“如何做”。你想要做的是：\n\
+  \n- 从远程 URL 获取数据。\n- 解析结果。\n- 获取年龄超过 18 岁的对象的名称。\n- 打印出逗号分隔的名称列表。\n\n这就是你希望应用执行的步骤列表，但其中没有任何内容告诉你它具体应该如何执行。这没问题，你不需要知道，因为你已经拥有处理这些“底层”任务的工具了，例如遍历元素、获取对象属性、或串联步骤以避免担心回调，诸如此类的任务还有很多。\n\
+  \n那么，让我们快速看一下如果用声明式方式编写，你的算法会是什么样：\n\n```\ngetRemoteData(\"ww.remoteurl.com\")\n\
+  .then(parseData)        //获取响应对象并返回对象列表\n.then(filter(over18))\n.then(map(get('name')))\
+  \ //获取每个对象的名称\n.then(join(\", \"))       //获取字符串列表并返回一个字符串\n.then(console.log) \
+  \     //最终打印出字符串\n.catch(handleError);    //仅用一行代码处理错误\n```\n\n这段代码结构非常类似 Promise，因此阅读起来非常容易。调用链上的步骤与我们之前描述的步骤几乎完全一致，所以你可以看到我们的代码有多么声明式。\n\
+  \n我使用了一些你已见过的函数式工具，比如 `map` 和 `get`，还有一些新工具，比如 `join`（另一个柯里化函数，它重现了 `String` 对象的\
+  \ `join` 方法），以及将某个函数的结果通过管道传递给另一个函数参数的能力。\n\n在上述流程中添加一个步骤，比用命令式替代方案要容易得多，因为你无需处理任何现有代码。只需确保你添加的函数的输入和输出与调用链中对应位置的类型匹配即可。\n\
+  \n## 每个 FRP 语言必须具备的特性\n\n既然你已经掌握了 FP 的基础知识，并且快速了解了声明式编程，那么你已具备了开始讨论 FRP 所需的工具。\n\
+  \n虽然 JavaScript 并非纯粹的函数式响应式编程语言，而其他语言如 `Haskell` 或 `Elm`（[`http://elm-lang.org`](http://elm-lang.org)）才是，但我将概述任何\
+  \ FRP 语言必须具备的主要特性，然后将其与 JavaScript 进行对比，你将看到如何在你自己喜欢的语言中实现这样的特性。\n\n\n\n### 可观察流\n\
+  \n函数式响应式语言的主要特性应该是具备原生可观察事件流的能力。在第 1 章和第 2 章中，我讨论了这些流的重要性。它们基本上是迈向语言中“响应式”部分的基石。\n\
+  \n这些结构在更新时，你的代码会做出响应，所以它们非常重要，请注意！那么，它们究竟是什么？它们应该是什么样的？解释的方式有很多，但最简单的理解方式是将其视为观察者模式和迭代器模式的组合。\n\
+  \n一方面，观察者模式规定：\n- 与该模式相关的对象有两种类型：Subject（被观察的对象）和 Observer（即对主题更新做出反应的对象）。\n- 主题维护其观察者列表。\n\
+  - 当主题的状态发生变化时，它会通知所有观察者。通常，会执行一个预先定义的方法（通常称为 `notify`）。\n\n现在，让我们看图 3-1，以直观理解观察者模式的样子。\n\
+  \n![A418015_1_En_3_Fig1_HTML.jpg](img/A418015_1_En_3_Fig1_HTML.jpg)\n\n图 3-1. 观察者模式的\
+  \ UML 图（来自维基百科观察者模式页面的公共领域图片）\n\n图 3-1 展示了该模式的经典实现，包括前面提到的 `notify` 方法以及通知观察者的逻辑。这个模式很棒，但它缺少一个细节：当生产者向所有消费者逐个发送事件时，没有明确的方式告知它们事件已经发送完毕。稍后我会再提到这一点。\n\
+  \n现在，与观察者模式相比，迭代器模式要简单得多。在这里，你只是试图将对集合进行遍历的算法与集合的实际实现解耦。主要优点是你可以针对不同类型的集合重用遍历算法。图\
+  \ 3-2 对该模式进行了直观解释。\n\n![A418015_1_En_3_Fig2_HTML.jpg](img/A418015_1_En_3_Fig2_HTML.jpg)\n\
+  \n图 3-2. 迭代器模式的 UML 图\n\n图 3-2 展示了该模式的经典 UML 图。集合（继承自 Aggregate 类）可以创建一个迭代器，该迭代器将提供获取其中某个项以及询问是否还有下一个项的方法。这与刚才看到的观察者模式相比是一个巨大的优势，因为现在你有办法知道列表中是否还有更多项。\n\
+  \n### 观察者 + 迭代器 = ？\n\n那么，为什么我突然提起观察者和迭代器？可观察集合与这两种特定模式有何关系？\n\n你刚才看到，观察者模式与你对可观察集合的期望非常相似，因为生产者实际上负责通知观察者，就像我一直描述的响应式编程的工作方式一样。\n\
+  \n但你也看到，如果你还希望知道更新流的结束，这种模式是不够的。你如何判断被观察的对象何时完成发送更新？\n\n这就是迭代器模式发挥作用的地方。有了它，你可以知道流何时结束，你甚至有一种非常干净（更重要的是标准）的方式从流中获取更新。\n\
+  \n换句话说，可观察流是一个动态更新的集合，具有标准的接口供你对其进行迭代。\n\n那么，让我们看看在像 Elm 这样的函数式响应式语言中，原生可观察流是什么样子的：\n\
+  \n```\nimport Graphics.Element exposing (..)\nimport Mouse\nmain : Signal Element\n\
+  main =\nSignal.map show Mouse.position\n```\n\nElm 的语法可能让你感到陌生，但鉴于代码的声明式特性以及代码片段中极少的代码行数，代码试图实现的想法应该相当明显。\n\
+  \n这段代码（取自 Elm 网站示例 [`http://elm-lang.org/examples/mouse-position`](http://elm-lang.org/examples/mouse-position)）在屏幕上打印鼠标指针位置的坐标，并在每次移动鼠标时更新它。`Mouse.position`\
+  \ 属性实际上是一个可观察流，它被用作 `Signal.map` 方法的输入，该方法将 `show` 函数应用于流的每个新值。正如我所说，超级简单！\n\n如果你想用我一直向你展示的声明式语法在\
+  \ JavaScript 中实现同样的功能，你的 JavaScript 代码会是什么样？大概是这样的：\n\n```\nMouse.getPosition()\n\
+  .then(map(show));\n```\n\n那么，你如何在 JavaScript（更具体地说是使用 Node.js）中实现可观察流？以下是解决该问题的一个基本方法：\n\
+  \n```\nvar EE = require(\"events\");\nvar util = require(\"util\");\nfunction ObservableStream()\
+  \ {\nthis.values = [];\nthis.error_fn = null;\nEE.call(this);\n}\nutil.inherits(ObservableStream,\
+  \ EE);\nObservableStream.prototype.add = function(value) {\nthis.values.push(value);\n\
+  this.emit('data', value);\n};\nObservableStream.prototype.getValues = function(){\n\
+  var self = this;\nvar stream = new Streamable();\nself.on('data', function(v) {\n\
+  stream.emit('trigger', v)\n})\nreturn stream;\n};\n```\n\n前面的代码是开发者应关注的主要类（如果你愿意，可以说是公共类），它提供了进入库核心部分的入口点，即\
+  \ `Streamable` 类（见下文）。这段代码的工作方式很简单：每当有新项添加到内部集合时，就会发出一个 `data` 事件（这就是我使用 `EventEmitter`\
+  \ 模块的原因）。正如你在 `getValues` 方法中看到的，`Streamable` 对象正在监听此事件，并且每次触发该事件时，`streamable`\
+  \ 本身会触发一个新的 `trigger` 事件，以启动转换链。\n\n\n\n"
+- "# JavaScript 响应式编程与 `Streamable` 类\n\n```javascript\nfunction Streamable(triggerCode)\
+  \ {\n  this.events = [];\n  this.idx = 0;\n}\n\nStreamable.prototype.start = function(val)\
+  \ {\n  this.idx = 0;\n  this.next(val);\n};\n\nStreamable.prototype.next = function(val,\
+  \ result) {\n  if (this.idx >= this.events.length) return false;\n  var currentFn\
+  \ = this.events[this.idx];\n  this.idx++;\n  currentFn(val);\n};\n\nStreamable.prototype.catch\
+  \ = function(errfn) {\n  this.error_fn = errfn;\n};\n\nStreamable.prototype.then\
+  \ = function(fn) {\n  var self = this;\n  var newFn = null;\n  if (!fn.__type) {\n\
+  \    if (fn.length > 1) {\n      newFn = function(val) {\n        fn(val, function(err,\
+  \ result) {\n          if (err) return self.error_fn(err);\n          self.next(result);\n\
+  \        });\n      };\n    } else {\n      newFn = function(val) {\n        self.next(fn(val));\n\
+  \      };\n    }\n  } else {\n    if (fn.__type === 'map') {\n      newFn = function(val)\
+  \ {\n        self.next(fn(val));\n      };\n    }\n  }\n  if (newFn) this.events.push(newFn);\n\
+  \  return this;\n};\n```\n\n`Streamable` 类提供了著名的 `then` 方法，传递给它的每个函数都会被包装成另一个函数（该函数负责调用事件链中的下一个函数），并添加到一个列表中。一旦触发\
+  \ `trigger` 事件，该类将遍历该列表并依次调用每个函数。\n\n## 辅助 `map` 函数\n\n```javascript\nfunction map(fn)\
+  \ {\n  var curried = function(val) {\n    return fn(val);\n  };\n  curried.__type\
+  \ = 'map';\n  return curried;\n}\n```\n\n> **注意**：你可能已经注意到错误处理非常简单；当然，这是为了简化。最终的代码将包含所有必要的错误处理。\n\
+  \n## 增强：使用属性定义替代 `getValues` 方法\n\n为了使代码更具声明性，可以用带 `setter` 的属性定义来替代 `getValues`\
+  \ 方法。因此，我们直接移除该方法，并在构造函数中添加以下代码：\n\n```javascript\nfunction ObservableStream() {\n\
+  \  this.values = [];\n  this.error_fn = null;\n  EE.call(this);\n  Object.defineProperty(this,\
+  \ 'data', {\n    get: function() {\n      var self = this;\n      var stream = new\
+  \ Streamable();\n      self.on('data', function(v) {\n        stream.start(v);\n\
+  \      });\n      return stream;\n    }\n  });\n}\n```\n\n现在不再需要 `getValues` 方法，你可以直接使用\
+  \ `data` 属性。\n\n## 使用 `ObservableStream` 的示例\n\n以下示例演示了如何使用上述代码转换和处理 `ObservableStream`：\n\
+  \n```javascript\nvar fs = require(\"fs\");\nvar dataStream = new ObservableStream();\n\
+  \ndataStream.data\n  .then(map(function(x) {\n    return 'filename_' + x + '.txt';\n\
+  \  }))\n  .then(fs.readFile)\n  .then(map(function(x) {\n    return '' + x;\n  }))\n\
+  \  .then(console.log);\n\nvar stdin = process.stdin;\nstdin.setRawMode(true);\n\
+  stdin.resume();\nstdin.on('data', function(input) {\n  var str = input.toString();\n\
+  \  dataStream.add(str);\n  if (str == 'x') {\n    process.exit();\n  }\n});\n```\n\
+  \n上述代码包含两个主要部分。第一部分为 `ObservableStream` 进行设置：实例化它并建立转换链。第二部分代表外部数据源。\n\n我们先介绍第二部分，因为从数据流的角度来看，这里是一切开始的地方。这段代码基本上允许你捕获用户每次按下键盘时触发的事件。利用该事件，将接收到的对象转换为\
+  \ `String` 并添加到自定义集合中。额外的 `if` 语句用于确保可以在需要时停止监听并关闭程序。\n\n这部分代码可以替换为任何其他实现，关键点在于：当数据到来时，你将其添加到可观察集合中。数据从哪里来并不重要。\n\
+  \n现在，回到代码的第一部分，这里设置了处理数据流的函数链。这些函数非常直观，正如本章前面提到的：声明式代码更容易阅读和理解。\n\n处理步骤如下：\n\n1.\
+  \ 使用 `map` 函数将每个按键字符转换为文件名。\n2. 将文件名传递给 `fs.readFile` 方法，读取对应文件。\n3. 将返回的缓冲区转换为实际的\
+  \ `String`。\n4. 最后，将第 3 步的输出（读取的文件内容）传递给最后一步，通过 `console.log` 打印出来。\n\n是的，逻辑非常简单，但它的美妙之处在于你只关注这些逻辑，而不必关心如何读取文件、处理错误等底层细节。\n\
+  \n---\n\n"
+- '# 总结
+
+
+  这一章内容很丰富，涵盖了很多知识点，希望你在阅读过程中也能享受到乐趣！
+
+
+  本章涵盖的主要内容：
+
+
+  - **JavaScript 函数式编程要点**：了解了什么是一段代码被认为是函数式的，学习了主要原则，并掌握了一些函数式程序员必须了解的工具。
+
+  - **声明式编程的优势**：再次回顾了声明式编程相对于传统命令式方法的好处。
+
+  - **可观察流（Observable Streams）**：作为函数式响应式编程库的基石，我向你展示了它们的工作原理，并实现了一个简单的版本。
+
+
+  在下一章中，我将探讨响应式编程如何在后端发挥作用，因为响应式编程通常用于前端开发。
+
+
+  ---
+
+
+  '
+- "# 4. 后端响应式编程\n\n现在你已经了解了相关背景知识，终于到了动手实践的时候了。在本章中，我将分析如何将函数式响应式编程（FRP）的优势应用到后端开发中。\n\
+  \n为此，我将介绍一组后端程序员常见的用例，首先查看常规实现，然后采用 FRP 方式重新实现相同的用例。\n\n由于我没有自己开发或从现有库中选取的 FRP 模块，我将假设已经有一个自定义的\
+  \ FRP 模块可用。这将在两个方面帮助我：\n\n- 为代码提供所需的支持。\n- 帮助定义即将开发的 FRP 模块的 API。目前我假设它已经存在，并且所有需要的函数/方法都可用。\n\
+  \n到本章结束时，你将拥有足够的理由开始在后端代码中使用响应式编程。为此，我将介绍两个非常常见的用例：\n\n- **带 CRUD 端点的简单 API**：我将创建一个简单的\
+  \ API，提供单个端点，包含所有 CRUD（创建、读取、更新和删除）功能。\n- **登录**：将向之前开发的 API 添加一个用于获取认证令牌的端点。\n\n\
+  那么，让我们直接开始吧。\n\n## 带 CRUD 端点的 API\n\n对于任何后端开发者来说，这可能是最常见的用例之一。过去你很可能遇到过至少一两个这样的功能，但我们将完整地查看\
+  \ CRUD 函数集。\n\n显然，有多种实现方式，每种方式都同样有效。为了本示例的目的，让我们定义一些约束条件。\n\n\n\n### 模型\n\n该 API\
+  \ 将处理两个模型，因此也会包含一些处理两者关系的逻辑。具体而言，这两个模型是 `User` 和 `Address`。每个用户将拥有一个地址集合，其结构如下：\n\
+  \n- **用户**\n  - `first_name: String`\n  - `last_name: String`\n  - `birth_date:\
+  \ Date`\n  - `addresses: [ Address ]`\n- **地址**\n  - `street_name: String`\n  -\
+  \ `house_number: Number`\n  - `phone_number: String`\n\n> **提示：** 像 `Id`、创建日期或任何其他必需的通用属性均未列入此列表，并假定由所使用的框架自动添加到模型中。\n\
+  \n#### API 接口\n\n表 4-1 列出了该 API 将配合代码提供的端点。它们主要是提供 RESTful 接口所需的最低限度，用于操作模型所代表的资源。\n\
+  \n**表 4-1.** *正在开发的 API 的端点列表*\n\n| HTTP 方法 | URL | 描述 |\n| --- | --- | --- |\n\
+  | `GET` | `/users/` | 返回用户列表 |\n| `GET` | `/users/:id` | 返回特定用户（由 URL 中的 `id` 参数指定）的信息\
+  \ |\n| `POST` | `/users` | 在数据库中创建新用户 |\n| `POST` | `/users/:id/addresses` | 向指定用户的地址列表中添加一个地址\
+  \ |\n| `PUT` | `/users/:id` | 更新特定用户的信息（注意：这不会更新地址模型的信息） |\n| `DELETE` | `/users/:id`\
+  \ | 从数据库中删除用户（及其关联的地址） |\n\n### 标准实现\n\n为了实现上述规范，我将使用一组标准模块。具体来说，`Express.JS`（可在\
+  \ [`http://expressjs.com/`](http://expressjs.com/) 获取）将是首选的 Web 框架（因为坦率地说，它是 Node.js\
+  \ 领域 Web 框架的事实标准）。我还将使用 `Mongoose`（[`mongoosejs.com/`](http://mongoosejs.com/)）作为存储层的\
+  \ ORM，存储层将基于 `MongoDB`（这仅仅是因为缺乏模式将简化此用例的开发）。\n\n我将代码组织成三个文件：`models-crud-api.js`\
+  \ 将包含两个模式的定义，并导出所有已定义模式的字典；`routes-crud-api.js` 将包含 API 所有端点的定义，并导出用于定义它们的路由对象；最后，`main-crud-api.js`\
+  \ 将仅包含 API 的主代码。\n\n让我们快速看一下代码的大致样子：\n\n**routes-crud-api.js**\n\n```javascript\n\
+  var router = require(\"express\").Router(),\nmodels = require(\"./models-crud-api\"\
+  );\nrouter.get('/', function(req, res, next) {\nmodels.users.find({})\n.populate('addresses')\n\
+  .then(res.json.bind(res))//we make sure the 'this' is correct when the function\
+  \ is called\n.catch(next) ;\n});\nrouter.get('/:id', function(req, res, next) {\n\
+  models.users.findById(req.params.id)\n.populate(\"addresses\")\n.then(function(usr)\
+  \ {\nif(!usr) {\nreturn res.status(404).json({\nerror: true,\nmsg: 'User not found'\n\
+  });\n}\nreturn res.json(usr);\n})\n.catch(next);\n});\nrouter.post('/', function(req,\
+  \ res, next) {\nmodels.users.create(req.body)\n.then(function(usr) {\nres.json(usr);\n\
+  })\n.catch(next);\n});\nrouter.post('/:id/addresses', function(req, res, next){\n\
+  var addressPromise = models.addresses.create(req.body);\nvar userPromise = addressPromise.then(function(address)\
+  \ {\nreturn models.users.findById(req.params.id)\n});\nPromise.all([addressPromise,\
+  \ userPromise], function([address, user]) {\nuser.addresses.push(address._id);\n\
+  return user.save();\n}).then(function(user) {\nreturn res.json(user);\n}).catch(next);\n\
+  });\nrouter.put('/:id', function(req, res, next) {\nmodels.users\n.findByIdAndUpdate(req.params.id,\
+  \ req.body, {new: true}) //{new: true} makes sure the updated document  is returned\n\
+  .then(function(usr) {\nres.json(usr);\n})\n.catch(next);\n});\nrouter.delete('/:id',\
+  \ function(req, res, next) {\nmodels.users\n.findByIdAndRemove(req.params.id)\n\
+  .then(function() {\nres.sendStatus(200);\n})\n.catch(next);\n});\nmodule.exports\
+  \ = router;\n```\n\n从上述代码可以看出，端点的核心逻辑并不复杂；基本上可以将每个端点映射到 `Mongoose` 提供的某个辅助方法，但 `/:id/addresses`\
+  \ 明显是个例外，它需要花一点心思才能理解（先是创建地址，然后更新用户以添加引用，整个过程都使用了 promise 链）。\n\n**models-crud-api.js**\n\
+  \n```javascript\nvar usersSchema = Schema({\nfirst_name: {\ntype: String,\nrequired:\
+  \ true\n},\nlast_name: {\ntype: String,\nrequired: true\n},\nbirth_date: Date,\n\
+  addresses: [\n{\nref: 'Address',\ntype: Schema.Types.ObjectId\n}]\n});\n```\n\n\
+  > **提示：** 尽管普通的 JS 代码约定使用 `camelCase`，但模型中使用的字段却是 `snake_case`，因为这是 `MongoDB` 的默认标准。\n\
+  \n```javascript\nvar usersModel = mongoose.model('User', usersSchema);\nmodule.exports\
+  \ = {\nusers: usersModel,\naddresses: addressModel\n};\n```\n\n实体模式、模型定义以及最终模型字典的导出；其余都是常规代码，没有什么需要特别提及的。\n\
+  \n**main-crud-api.js**\n\n```javascript\nvar express = require(\"express\"),\nbodyParser\
+  \ = require(\"body-parser\"),\nmongoose = require(\"mongoose\"),\nuserRouter = require(\"\
+  ./routes-crud-api\");\nvar app = express();\napp.use(bodyParser.json());\napp.use('/users',\
+  \ userRouter);\n//Generic error handler\napp.use(function(err, req, res, next) {\n\
+  console.error(\"--- Error encountered ---\");\nconsole.error(err);\nres.status(500).json({\n\
+  msg: err,\nerror: true\n});\n});\nmongoose.connect('mongodb://localhost/test-chapter4');\n\
+  var db = mongoose.connection;\ndb.once('open', function() {\nconsole.log(\"Database\
+  \ connection established...\");\napp.listen(3004, function() {\nconsole.log(\"Server\
+  \ started ...\");\n});\n});\n\n本示例的最后一个（实际上是主）文件，以及其中需要提及的两个相关要点，如下所示。\n\n1. 定义了通用错误处理程序；当执行\
+  \ `catch` 语句时，将调用此函数。这很容易测试：只需尝试创建一个未填写 `last_name` 的用户，这将引发验证错误，从而触发 `catch` 子句，进而调用带有错误参数的\
+  \ `next`，最终导致错误处理程序被调用。\n\n2. 最后几行展示了如何仅在数据库连接建立之后（即 `open` 事件所代表的含义），在端口 `3004`\
+  \ 上启动 Web 服务器。这是一种非常标准且安全的初始化应用程序的方式，确保在启动 Web 服务器之前所有服务都已就绪。\n\n### 函数式响应式实现\n\n\
+  这种实现方式应该有所不同，但并非方方面面都不同。我并非试图将 Web 服务器或 ORM 完全重写为响应式；而只是尝试使用这种范式来实现业务逻辑。\n\n在这个特定的例子中，这转化为重写与路由相关的代码，因为这里才是主要逻辑所在。为了做到这一点，我将端点转换为可观察集合，其中每个新请求都是一个被添加的新事件。基于此，我将对该事件应用一系列转换，使其在每个场景下都能按需生成结果。\n\
+  \n\n\n#### 路由器文件\n\n让我们先回顾一下之前的实现中的这个文件；那里编写了所有业务逻辑，同时也是 Express 完成路由匹配的地方。对于本次实现，我将从中移除业务逻辑，仅保留路由匹配，代码如下所示：\n\
+  \n```\nvar collections = require(\"./collections-rfrp  \"),\nrouter = require(\"\
+  express\").Router(),\n_ = require(\"lodash\");\nvar mapping = {\n'/': {\n'get':\
+  \ collections.listUsersCollection,\n'post': collections.newUsersCollection\n},\n\
+  '/:id': {\n'get': collections.getUserDataColection,\n'put': collections.updateUserCollection,\n\
+  'delete': collections.deleteUsersCollection\n},\n'/:id/addresses': {\n'post': collections.newAddressCollection\n\
+  }\n};\n```\n\n这段 JSON 将每个端点映射到不同的可观察集合，而以下代码负责将请求、响应以及每次请求接收到的 `next` 函数添加到对应的集合中。\n\
+  \n```\n//we set up the urls\n_.each(mapping, function (actions, url) {\n_.each(actions,\
+  \ function(collection, method) {\nroutermethod { //this is the code that every route\
+  \ will actually execute\ncollection.add(arguments);  //we pass the arguments object\
+  \ because we want to have access to all three parameters in one\n});\n});\n});\n\
+  module.exports = router;\n```\n\n正如我之前提到的，这段代码非常简单。它实际上并不具备响应式或其他特性，只是负责将新事件添加到对应的集合中。\n\
+  \n#### 新的业务逻辑\n\n从上述代码可以明显看出，每个端点的逻辑都被移到了独立的 `ObservableStream` 对象中，这样你就可以相应地转换这些流。让我们先将每个转换代码与原始实现中对应的代码进行逐一比较。\n\
+  \n##### 列出所有用户\n\n这种情况下的常规代码非常简单。在此例中，你需要执行以下操作：\n\n*   请求所有用户。\n*   填充他们的地址。\n\
+  *   将结果以 JSON 对象形式输出。\n\n图 4-1 展示了如何使用弹珠图设计响应式版本。\n\n![A418015_1_En_4_Fig1_HTML.jpg](img/A418015_1_En_4_Fig1_HTML.jpg)\n\
+  \n图 4-1.\n\n列出用户的响应式版本弹珠图\n\n它从 HTTP 请求流转变为查询对象流，最终成为查询结果流（然后以 JSON 格式输出给 HTTP 客户端）。表\
+  \ 4-2 展示了图 4-1 中图示的实现。\n\n表 4-2.\n\n列出用户代码的逐行对比\n\n| 响应式代码 | 常规实现 |\n| --- | ---\
+  \ |\n| `var list = new oStream();` | `router.get('/', function(req, res, next) {`\
+  \ |\n|     `list.data` |     `models.users.find({})` |\n|     `.setVars({'httpResponse':\
+  \ get(1),` |         `.populate('addresses')` |\n|     `'next': get(2)})` |         `.then(res.json.bind(res))`\
+  \ |\n|     `.then(find({}))` |         `.catch(next);` |\n|     `.then(populate('addresses'))`\
+  \ | `});` |\n|     `.then(execute)` |   |\n|     `.done(toJSONResponse)` |   |\n\
+  |     `.catch(callErrorHandler);` |   |\n\n确实，我们的新版本代码比旧版本多了一些，但这有时是更高抽象级别带来的不可避免的副作用。仅凭这个例子可能很难看出我们方法的好处，所以我们继续往下看。\n\
+  \n> **注意：** 你可能已经注意到，在上面的对比中，响应式代码没有显示与路由器相关的部分，而常规实现中则显示了。这是因为对于应用的响应式版本，我将路由和实际业务逻辑分开了，而在常规版本中，它们是合在一起的。\n\
+  \n辅助函数将在本章后面进一步描述，所以如果你暂时不理解它们的工作原理，不必担心。你很快会明白的。\n\n##### 创建新用户\n\n创建用户是另一个简单的操作，因为它完全依赖于\
+  \ ORM 的方法。不过，我们还是来看看如何设计图 4-2 中的逻辑结构。\n\n![A418015_1_En_4_Fig2_HTML.jpg](img/A418015_1_En_4_Fig2_HTML.jpg)\n\
+  \n图 4-2.\n\n描述创建新用户响应式逻辑的弹珠图\n\n遗憾的是，由于你正在处理一个非响应式的 Web 框架，你必须手动处理请求的参数（这是流程的第一步）。之后，你只需获取请求体，创建并执行\
+  \ `save` 查询，最后返回新用户的 JSON 表示。\n\n现在来看表 4-3 以了解新代码。\n\n表 4-3.\n\n创建新用户所需代码的逐行对比\n\
+  \n| 响应式代码 | 常规代码 |\n| --- | --- |\n| `newUsers.data`     `.setVars({'httpResponse':\
+  \ get(1), 'next': get(2)})`     `.then(get(0))`     `.then(get('body'))`     `.then(models.users.create.bind(models.users))`\
+  \     `.done(toJSONResponse)`     `.catch(callErrorHandler);` | `router.post('/',\
+  \ function(req, res, next) {`     `models.users.create(req.body)`         `.then(function(usr)\
+  \ {`         `res.json(usr);`         `})`         `.catch(next);` `});` |\n\n关于代码需要注意的一点是，由于你在第\
+  \ 4 个 `then` 调用中传递了 Mongoose 的 `create` 方法，你需要正确地将其绑定到模型。否则，该函数将在没有上下文的情况下执行并失败。\n\
+  \n> **注意：** 我将跳过更新用户、删除用户和获取用户数据的方法，因为它们与前面的大致相同。这些方法将作为本书代码包的一部分提供。\n\n\n\n#####\
+  \ 添加新地址\n\n我要回顾的最后一个方法是这个，因为它呈现了额外的复杂性。如果你还记得之前的代码，你需要先创建地址实体，然后以某种方式将其与用户关联。请参阅图\
+  \ 4-3 以了解响应式逻辑的样式。\n\n![A418015_1_En_4_Fig3_HTML.jpg](img/A418015_1_En_4_Fig3_HTML.jpg)\n\
+  \n图 4-3. 新地址端点响应式版本的弹珠图\n\n如果你记得（如果不记得，请往回翻几页），原始代码结合了两个 Promise 来实现其目标。上图展示的是一个步骤更长的解决方案，但也更为直接。如果你仔细观察，这个解决方案相当简单明了。请参阅表\
+  \ 4-4 查看代码对比。\n\n表 4-4. 为用户创建新地址所需代码的并排对比\n\n| 响应式代码 | 常规代码 |\n| --- | --- |\n|\
+  \ `var newAddress = new oStream();` `newAddress.data`     `.setVars({'httpResponse':\
+  \ get(1), 'userId': function(args) { return args[0].params.id}})`     `.then(get(0))`\
+  \     `.then(get('body'))`     `.then(models.addresses.create.bind(models.addresses))`\
+  \     `.then(function(address, done) {`     `models.users.findByIdAndUpdate(this.customVars.userId,\
+  \ {$push: {'addresses': address.id}}, {new: true}, done);`     `})`     `.then(function(usr,\
+  \ done) {`     `models.users.populate(usr, {path: 'addresses'}, done);`     `})`\
+  \     `.done(toJSONResponse)`     `.catch(callErrorHandler );` | `router.post('/:id/addresses',\
+  \ function(req, res, next){` `var addressPromise = models.addresses.create(req.body);`\
+  \ `var userPromise = addressPromise.then(function(address) {` `return models.users.findById(req.params.id)`\
+  \ `});` `Promise.all([addressPromise, userPromise], function([address, user]) {`\
+  \ `user.addresses.push(address._id);` `return user.save();` `}).then(function(user)\
+  \ {` `return res.json(user);` `}).catch(next);` `});` |\n\n这个例子也显示了响应式方法代码行数更多，但如果你看看常规实现，一旦业务逻辑的复杂性增加，就需要额外的工具，要么是\
+  \ Promise（增加了理解其工作原理的复杂性），要么是老式的回调逻辑，并伴有额外的缩进层级。无论哪种方式，响应式方法都保持了对事务的控制，只有一个缩进层级，可能步骤稍多一些；但如果你将逻辑进行外推和规模化扩展，响应式方法就会显得越来越出色。\n\
+  \n### 辅助函数\n\n前面提到的响应式示例引用了一些我尚未展示的辅助函数。我将在这里列出它们的代码，只是为了说明它们大部分都是一行代码。\n\n```\n\
+  var find = function(where, done) {\nreturn function() {\nreturn models.users.find(where,\
+  \ done);\n}\n};\nvar populate = function(what) {\nreturn function(query) {\nreturn\
+  \ query.populate(what);\n};\n};\nvar execute = function(query, done) {\nreturn query.exec(done);\n\
+  };\nvar findById = function(id) {\nreturn models.users.findById(id);\n};\nvar findByIdAndUpdate\
+  \ = function(params, done) {\nreturn models.users.findByIdAndUpdate(params[0], params[1],\
+  \ {new: true} ,done);\n};\nvar findByIdAndDelete = function(id, done) {\nreturn\
+  \ models.users.findByIdAndRemove(id, done);\n};\nvar toJSONResponse = function(data)\
+  \ {\nreturn this.customVars.httpResponse.json(data);\n};\nvar callErrorHandler =\
+  \ function(err) {\nreturn this.customVars.next(err);\n};\n```\n\n这里值得注意的有趣之处在于，其中一些函数是如何从其\
+  \ `this` 对象中提取属性的，尽管该对象从未在任何地方声明。这是因为传递给 `then` 方法的所有函数的上下文，都会被其关联的 `Stream` 的属性所扩展。这意味着如果一个函数没有设置上下文，那么它将是\
+  \ `Stream` 的上下文，这使得访问诸如 `customVars` 之类的属性变得容易，该属性包含了由 `setVars` 声明的额外变量。\n\n##\
+  \ 结论\n\n通过查看之前的代码（或本书提供的完整打包代码），你可以看到使用可观察流来处理 HTTP 传入流量是完全可行的。不仅如此，它还有助于控制代码的复杂性。\n\
+  \n中间件等功能也是可行的。我将在下一个示例中探讨这个问题。\n\n# 登录服务\n\n能够登录到你的应用程序是另一个你可能以前就实现过的功能——事实上，如果你从事应用程序开发已经有一段时间，你已经多次实现过。我将探讨一个特定的例子，即使用\
+  \ JSON Web Token 对 RESTful API 进行身份验证。\n\n通过这种方式，你将能够扩展前面的例子，添加身份验证端点，并最终通过为你为每个集合设置的转换链设置中间件来保护某些端点。\n\
+  \n## 什么是 JSON Web Token？\n\n以防你好奇，让我快速回顾一下什么是 JSON Web Token（JWT）以及它将如何帮助你实现目标。\n\
+  \nJWT ([`http://jwt.io`](http://jwt.io)) 是一个开放标准（你可以在 [`https://tools.ietf.org/html/rfc7519`](https://tools.ietf.org/html/rfc7519)\
+  \ 找到其 RFC），它定义了一种在双方之间安全传输信息的方式。这是通过对传输的数据（在这种情况下，是从客户端发送到服务器的请求）进行数字签名来实现的。数据可以使用\
+  \ HMAC 算法使用密钥短语进行签名，或者使用 RSA 使用私钥/公钥对进行签名。\n\n无论哪种方式，它都允许开发者针对 RESTful 服务验证其请求，因为它不需要他们维护被认证实体的任何状态。为了证实请求的真实性，使用先前在客户端和服务器之间约定的合约对签名令牌进行解码和验证。如果验证成功，则请求有效。\n\
+  \n令牌本身是通过三个简单的步骤计算出来的：\n\n-   设置一个 JSON 头部，其中包含令牌类型（此例中为 JWT）和用于签名令牌的算法，如下例所示。然后将数据编码为\
+  \ base 64。\n\n    ```\n    {\n    \"alg\": \"HS256\",\n    \"typ\": \"JWT\"\n  \
+  \  }\n    ```\n\n-   使用与请求相关的信息创建有效载荷，这通常是与用户相关的信息（因为这是所有请求中的常量部分）。然后使用 base 64\
+  \ 编码此 JSON。\n\n    ```\n    {\n    \"name\": \"John Doe\",\n    \"isAdmin\": true\n\
+  \    }\n    ```\n\n-   最后，通过连接此示例中的两个 base 64 字符串，并使用第一步中定义的算法对其进行签名来创建令牌。生成的令牌看起来像这样：\n\
+  \n    ```\n    eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9 .eyJuYW1lIjoiUFdEIiwiaWF0IjoxNDY0NDQxMTc4LCJleHAiOjE0NjQ1Mjc1Nzh9.oc194WsEKcRe29FuUKS9XdvKpX72nt0NuN5FAUVicW4\n\
+  \    ```\n\n以下是你如何使用 JWT 令牌为你的 API 提供安全性：\n\n-   用户向端点发出未经身份验证的请求，发送其凭据，以便针对系统进行身份验证。\n\
+  -   API 检查凭据，如果有效，则生成一个 JWT 令牌并返回给用户。\n-   然后，用户将在任何后续请求中使用该令牌进行身份验证，而无需重新发送凭据。\n\
+  -   如果系统能够验证令牌的真实性，则执行请求，否则返回错误响应。\n\n图 4-4 展示了在处理 JWT 时客户端和服务器之间的流程。\n\n![A418015_1_En_4_Fig4_HTML.jpg](img/A418015_1_En_4_Fig4_HTML.jpg)\n\
+  \n图 4-4. 认证过程中的客户端-服务器交互\n\n\n\n### 回到代码\n\n让我们回归正轨吧，好吗？现在你已经理解了基于 JWT 的身份验证是如何工作的，接下来看看如何使用\
+  \ `ExpressJS` 在后端通过传统编程方式来实现它。为了生成和验证令牌，你将使用一个名为 `jsonwebtoken` 的 NPM 模块（可在 [`https://www.npmjs.com/package/jsonwebtoken`](https://www.npmjs.com/package/jsonwebtoken)\
+  \ 获取），它提供了所有必需的功能。\n\n在本实现中，我将扩展上一个示例中的代码。我只需要两个方法：一个用于处理新的令牌端点，另一个用于处理每个请求的令牌验证。对于第二个代码块，我将使用一个中间件，因为这是更合理的方式。\n\
+  \n```\nvar router = require(\"express\").Router();\nvar jwt = require(\"jsonwebtoken\"\
+  );\nvar models = require(\"./models-crud-api  \");\nvar SECRET =  'this is a secret\
+  \ phrase';\n//Handle the new endpoint\nrouter.post('/tokens', function(req, res,\
+  \ next) {\nmodels.users.findOne({\nusername: req.body.username,\npassword: req.body.password\n\
+  })\n.then(function(usr) {\nif(!usr) {\nreturn next({error: true, msg: 'User not\
+  \ valid  '});\n}\nvar token = jwt.sign({\nname: usr.first_name,\nbirth_date: usr.birth_date\n\
+  }, SECRET , {\"expiresIn\": \"1 day \"});\nres.json({\ntoken: token\n});\n})\n.catch(next);\n\
+  });\n```\n\n> **注意：** 上述代码以一种非常不安全且低级的方式处理用户身份验证；它只是为了提供一个关于如何进行的示例，但强烈建议你使用适当的身份验证技术（例如对密码加盐）。另外，请记住，要使此代码运行，需要将\
+  \ `username` 和 `password` 属性添加到用户模型中。\n\n```\nfunction check_token checkToken(req,\
+  \ res, next) {\nvar token = req.query.token || req.headers.token;\n//we make sure\
+  \ the url required for requesting a token is not protected\nif(req.url.indexOf(\"\
+  /tokens\") !== -1) return next();\nif(!token) {\nreturn next('No token provided');\n\
+  }\njwt.verify(token, SECRET, function(err, decoded) {\nif(err) {\nreturn next(err);\n\
+  }\nnext();\n});\n}\nmodule.exports = {\nrouter: router,\ncheckToken: checkToken\n\
+  };\n```\n\n在上述代码中，端点函数负责对用户凭证进行简单的验证；如果有效，则签署要返回的令牌。然后，`checkToken` 中间件负责保护各个端点，但\
+  \ `/tokens` 端点除外，因为你在实际从系统获取令牌之前，确实无法发送令牌，对吧？\n\n### 响应式方法\n\n对于这段代码的响应式版本，我将为新端点创建逻辑，这自然会是一组对流进行的转换，我还会向你展示如何将令牌检查作为转换的一部分来实现，而不是使用中间件（在这种情况下，因为我保持了主代码的完整性，所以我可以这样做）。\n\
+  \n```\nnewTokens.data\n.setVars({'httpResponse': get(1)})\n.then(get(0))\n.then(map(function(req)\
+  \ {\nreturn { username: req.body.username, password: req.body.password };\n}))\n\
+  .then(models.users.findOne.bind(models.users))\n.then(filterWithMessage({code: 404,\
+  \ msg: 'Invalid credentials'}, isNotEmpty))\n.then(function(usr) {\nreturn jwt.sign({\n\
+  name: usr.first_name,\nbirth_date: usr.birth_date\n}, SECRET , {\"expiresIn\": \"\
+  1 day \"});\n})\n.then(map(function(t) { return { token: t }; }))\n.done(toJSONResponse)\n\
+  .catch(callErrorHandler);\n```\n\n那么，转换步骤如下：\n\n1. 映射以从请求中获取登录数据。\n2. 然后根据这些信息查找用户。\n\
+  3. 过滤掉那些在上一步中没有返回用户的请求。\n4. 然后使用一个将于一天后过期的令牌来签署请求。\n5. 将返回对象转换为一个仅包含令牌信息的更简单的 json。\n\
+  6. 将响应打印回客户端。\n\n就像我之前所做的那样，我将查看图 4-5 中的弹珠图。\n\n![A418015_1_En_4_Fig5_HTML.jpg](img/A418015_1_En_4_Fig5_HTML.jpg)\n\
+  \n**图 4-5.** 响应式身份验证逻辑的弹珠图\n\n图 4-5 不仅展示了理想路径（所有凭证都有效，且在一系列转换中没有错误），还展示了一些请求将如何被过滤掉，原因是它们没有正确的用户凭证。用于过滤这些请求的函数，实际上是通过一个简单的\
+  \ `filter` 调用，并添加了一些额外的逻辑来实现的：\n\n```\nvar filterWithMessage = function(opts, fn)\
+  \ {\nvar self = this;\nreturn function(data) {\nvar fnFilter = filter(fn );\nif(fnFilter(data)\
+  \ !== null) {\nreturn data;\n} else {\nreturn self\n.customVars\n.httpResponse\n\
+  .status(opts.code)\n.json({error: true, msg: opts.msg});\n}\n};\n}\n```\n\n多亏了我使用的这个小框架（它会修改我在转换链中设置的函数的上下文），我可以像你在之前的\
+  \ `else` 块中看到的那样，直接从这个函数内部将响应发送回客户端。\n\n最后，检查收到的令牌（如果收到了）的实际真实性，可以像我在常规方法中那样做，只需使用一个\
+  \ `Express` 中间件，但我也可以将该逻辑作为几个 `filter` 步骤添加到常规链中，这将使你能够独立于所使用的 Web 框架，并且不依赖于该框架是否具备中间件能力。\n\
+  \n话虽如此，以下是需要添加的代码：\n\n```\nlist.data\n.setVars({'httpResponse': get(1), 'next':\
+  \ get(2)})\n.then(get(0))\n.then(filter(function(req) {\nvar token = req.query.token\
+  \ || (req.body && req.body.token);\nreturn !!token;\n}))\n.then(filter(function(req,\
+  \ done ) {\nvar token = req.query.token || (req.body && req.body.token);\njwt.verify(token,\
+  \ SECRET, done);\n}))\n.then(find({}))\n.then(populate('addresses'))\n.then(execute)\n\
+  .done(toJSONResponse)\n.catch(callErrorHandler);\n```\n\n以下是 `filter` 函数的代码，如你所见，它提供了两种执行方式，具体取决于接收到的参数数量。\n\
+  \n```\nfunction filter(filterFn) {\nvar fn = null;\nif(filterFn.length == 1) {\n\
+  fn = function(val) {\nif(filterFn(val)) {\nreturn val;\n}\nreturn null;\n};\n} else\
+  \ {\nfn = function(val, done) {\nfilterFn(val, function(err) {\nif(err) {\nreturn\
+  \ done(err);\n}\nreturn done();\n});\n};\n}\nfn.__type = 'filter';\nreturn fn;\n\
+  }\n```\n\n响应式示例中加粗的代码是我添加的内容，你可以看到我只是简单地添加了传统方法中中间件里的两个检查：是否提供了令牌，以及令牌是否有效。这里需要注意的是，即使请求可能被过滤掉了，它也需要向客户端提供一个响应，这样请求才能被关闭，并且用户才能理解哪里出了问题。为此，`filter`\
+  \ 函数实际上会调用你通过 `done` 方法设置的函数，这假定它是你希望在每次转换中执行的最后一个函数。\n\n如果这听起来不太好，还有第二种方法，使用我之前做过的类似伪造的\
+  \ `filter`：\n\n```\nlist.data\n.setVars({'httpResponse': get(1), 'next': get(2)})\n\
+  .then(get(0))\n.then(filterWithMessage({code: 401, msg: 'no token provided'}, function(req)\
+  \ {\nvar token = req.query.token || (req.body && req.body.token);\nreturn !!token;\n\
+  }))\n.then(filterWithMessage({code: 401, msg: 'unauthorized request'}, function(req,\
+  \ done) {\nvar token = req.query.token || (req.body && req.body.token);\njwt.verify(token,\
+  \ SECRET, done);\n}))\n.then(find({}))\n.then(populate('addresses'))\n.then(execute)\n\
+  .done(toJSONResponse)\n.catch(callErrorHandler);\n```\n\n\n\n# 总结\n\n这是又一个清晰的示例，展示了代码的声明式特性如何简化其背后的逻辑——特别是对于外部读者，即那些并非作者但需要理解代码的人。中间件的代码虽然简单，但它通过移除`IFs`并将其逻辑转化为两个简单的`filter`语句，使代码更具可读性。仔细想想，当前的方法让你无需真正实现一个中间件，就能创建一个过滤中间件。这难道不棒吗？\n\
+  \n端点逻辑也同样如此——它本身已经足够简单，但经过代码处理后，阅读和理解起来比以前容易得多。\n\n## 本章小结\n\n本章的核心目标是提供实践证据，证明你可以在应用后端使用函数式响应式编程，并且这样做可以改善代码的某些方面，例如可读性和可维护性。\n\
+  \n希望所提供的示例能够阐明这一点，并且你会对这些概念在自己代码中的应用产生兴趣。话虽如此，我仍需在后续章节中讲解实际框架的代码。\n\n至于下一章，我将介绍使用\
+  \ Node.js 构建 FRP 框架的一些优势。\n\n# 5. 进入 Node.js\n\n虽然你已经从实践角度看到了如何在后端应用响应式概念，但我还没有真正讨论为什么使用\
+  \ Node.js 是一个如此好的选择。\n\n在第四章（参见 4）中你已经看了大量代码，而在本章中，我将重点探讨 Node 的理论方面。这意味着我会深入审视诸如`EventEmitters`和`Streams`之类的内容，你将了解异步编程是如何工作的，以及为什么\
+  \ Node.js 在这方面如此出色。最后，我还会涉及之前章节已经部分介绍过的异步事件流。\n\n在本章结束时，你应该能更好地理解 Node 提供的工具，这些工具将帮助你创建我一直承诺的响应式框架。其中一些工具只会被提及，而另一些将在未来章节中使用。\n\
+  \n## 事件发射器与事件流\n\n在本节的这一部分，我将介绍一个有助于你实现目标的工具。`EventEmitter`模块自 Node.js 早期版本起就作为原生模块存在，它允许你使用一个与浏览器端（这里指的是\
+  \ UI 事件）没有本质区别的事件系统来传播消息。\n\n我还将介绍 Node 中的 Streams（流）。与`EventEmitters`类似，流也是 Node.js\
+  \ 的原生模块，它使用了`EventEmitters`中的一些概念，并在此基础上增加了更多神奇的特性，从而提供了一个非常熟悉且有趣的接口来处理数据流。\n\n\
+  ### 事件发射器\n\n关于事件发射器的一个有趣事实是，你可能已经无意中使用过它们。Node 的一些核心功能会扩展该模块，并提供自定义事件供你监听。例如，`process`对象允许你对诸如`uncaughtException`之类的事件做出响应；而由`http`模块的`createServer`方法返回的服务器，则允许你监听名为`request`的特殊事件，诸如此类。\n\
+  \n那么，事件发射器到底是什么？简单来说，这个模块允许你发射事件，但更重要的是，它为开发者提供了一套 API，用于监听、响应甚至发射自定义事件。\n\n以下是关于`EventEmitter`的一些可能有用的特性：\n\
+  \n*   你可以为一个事件设置任意数量的监听器。\n*   当事件被触发时，所有监听器会按照它们被设置的顺序依次被调用。\n*   你可以将监听器设置为每次事件被触发时都执行，或仅在第一次触发时执行。\n\
+  *   基于上一点，有两种方式向事件添加监听器：要么将其追加到列表末尾（使用`on`或`once`方法），要么将其添加到列表开头（使用`prependOnceListener`或`prependListener`方法）。\n\
+  *   监听器函数无需特定的签名即可生效。触发事件时传递给事件的任何参数都会自动传递给该函数，且顺序保持不变。\n*   有一个特殊的 '`error`' 事件，当它被触发且没有任何监听器时，会导致\
+  \ Node 应用程序关闭。\n*   换句话说，通过`EventEmitters`，你可以使用事件来控制逻辑流，就像在前端开发中，你可以将逻辑设置为在页面加载完成后初始化，或者像在点击链接时设置\
+  \ AJAX 请求一样。\n*   特别地，当你有一个异步进程需要在处理过程中多次向客户端回传数据时，这种机制非常有用。\n\n例如，假设有一个函数需要在完成之前发起三个不同的异步请求，并且在处理过程中，它还需要在完成每个内部请求后报告进度。借助`EventEmitters`，你可以轻松实现这一点：通过发射一个客户端可以订阅的自定义`progress`事件。让我们来看一个快速示例：\n\
+  \n```\nvar EventEmitter  = require(\"events\"),\nrequest = require(\"request\"),\n\
+  async = require(\"async\");\nfunction myAsyncEmitter() {}\nmyAsyncEmitter.prototype\
+  \ = new EventEmitter();\nmyAsyncEmitter.prototype.process = function() {\nvar self\
+  \ = this;\nvar doneRequests = 0;\nvar urls = [\n\"http://www.google.com\",\n\"http://www.youtube.com\"\
+  ,\n\"http://www.facebook.com\"\n];\nasync.map(urls, function(url, done) {\nrequest.get(url,\
+  \ function(err, data) {\ndoneRequests++;\nself.emit('progress', (doneRequests /\
+  \ urls.length) * 100);\ndone(err, data.body);\n});\n}, function(err, results) {\n\
+  self.emit('done', results);\n});\n};\nvar AE = new myAsyncEmitter() ;\nAE.on('progress',\
+  \ function(percentage) {\nconsole.log(\"Percentage done: \", percentage, \"%\");\n\
+  });\nAE.once('done', function(data) {\nconsole.log(\"Process over, this is the data:\
+  \ \", data);\n});\nAE.process();\n```\n\n> **注意**  \n> 为了简化代码，我使用了`Async.js`和`Request.js`（可从\
+  \ [`https://github.com/request/request`](https://github.com/request/request) 获取）库来提供辅助函数，帮助你处理异步调用和实际的请求。测试`EventEmitter`本身并不需要它们；这只是为了将重点集中在有趣的部分——也就是本例中的事件发射器。\n\
+  \n上面的代码是我之前提到的概念的一个基本示例：我的自定义发射器继承了 Node 的`Event`模块以获取所需逻辑，然后通过为`progress`和`done`这两个事件设置监听器来使用它。由于我知道`done`事件只会被调用一次，所以我使用`once`方法设置了监听器，当然，也可以使用`on`方法；在这种情况下，两者没有任何区别（这仅仅是为了提高代码可读性而采取的一种措施）。\n\
+  \n\n\n### 流\n\n与事件发射器类似，流是 Node.js 提供的原生构造，常常被开发者忽略或误解。而且就像 `EventEmitters` 一样，你可能已经使用过不止一个流，甚至自己都没注意到。\n\
+  \n因此在本节中，我想深入讲解这个模块，并展示它如何与之前看到的 `EventEmitters` 以及本书的总体目标相关联。希望你能发现我迄今所讲内容与这部分之间的相似之处。\n\
+  \nNode.js 的这个模块提供了四种类型的流：\n\n-   **可读流**：提供从指定源读取数据的 API。\n-   **可写流**：允许你将连续的数据块写入指定目标。\n\
+  -   **双工流**：可读流和可写流的结合，允许你向指定源写入数据和从中读取数据。\n-   **转换流**：一种特殊的双工流，允许你在读取和写入数据时对数据进行转换。\n\
+  \n每种流还有两种模式：一种是 **对象模式**，允许你读取和写入任何 JavaScript 类型（`null` 除外）；另一种是默认模式，流中传输的任何内容都是\
+  \ `String` 或 `Buffer`。如果我没算错的话，我们总共有八种不同的流可供选择，因此我将更深入地探讨每一种流，展示它们提供的 API，以及你需要如何实现每种类型的流。\n\
+  \n#### 可读流\n\n可读流允许你将指定的数据源封装到一个标准 API 中，让你能够通过手动轮询源或被动响应数据到达的方式来消费所提供的信息。\n\n开发者几乎每天都会遇到几种非常常见的可读流，例如：\n\
+  \n-   客户端的 HTTP 响应对象（指任何连接到你的 API 的应用程序）\n-   服务端的 HTTP 请求对象\n-   TCP 套接字\n-   子进程的\
+  \ `stdin` 和 `stderr`\n-   等等。\n\n所有不同类型的流都提供一组方法或事件，我们可以用它们来读取或写入数据。对于可读流，每当有新的数据块（或根据是否处于对象模式，有新的对象可用）时，它会触发\
+  \ `data` 事件，或者你可以将读取器的输出通过管道连接到可写流。后者让你无法控制具体过程，你只需将一个流的输出连接到另一个流的输入，系统就会为你处理其余的事情。\n\
+  \n下面是一个管道连接的简单示例。以下代码将连接三个不同的流：\n\n```javascript\nvar fs = require(\"fs\"),\nzlib\
+  \ = require(\"zlib\");\nvar r = fs.createReadStream('file.txt');\nvar z = zlib.createGzip();\n\
+  var w = fs.createWriteStream('file.txt.gz');\nr.pipe(z).pipe(w);\n```\n\n上面的代码创建了三个不同的流，并在最后一行通过管道将它们连接起来。最终结果是将指定文件压缩并保存到磁盘。\n\
+  \n为了显示不使用管道连接时的等效代码，下面是你可能需要采用的方法：\n\n```javascript\nvar fs = require(\"fs\"),\n\
+  zlib = require(\"zlib\");\nvar r2 = fs.createReadStream('file.txt');\nvar z2 = zlib.createGzip();\n\
+  var w2 = fs.createWriteStream('file.txt.gz');\nw2.on('open', function() {\n  r2.on('data',\
+  \ function(chunk) {\n    console.log(\"data chunk: \", chunk);\n    z2.write(chunk);\n\
+  \  });\n  z2.on('data', function(data) {\n    console.log(\"-- gzip chunk --\");\n\
+  \    w2.write(data);\n  });\n  r2.on('end', function() {\n    z2.end();\n  });\n\
+  \  z2.on('end', function () {\n    w2.end();\n  });\n});\n```\n\n很明显，这段代码更长一些，需要手动处理的事情也更多，但有时这是必要的，即使只是为了像上面的代码一样添加一些调试信息。\n\
+  \n这段代码展示了一个在处理可读流时非常有用的特定事件：`data` 事件。每当有新的数据块可供你的代码消费时，此事件就会被触发。\n\n可读流也可以触发 `readable`\
+  \ 事件，该事件在有数据可读时发生。在这种情况下，消费者必须调用流的 `read` 方法才能获取下一段数据。当你需要对流的行为进行额外控制时，这会非常有用——特别是，前一个事件只会在收到新数据时通知你，而\
+  \ `readable` 事件则允许你在数据可用但实际接收之前决定如何处理（根据你的逻辑，你可以选择读取或忽略它）。\n\n可读流还有其他有用但更简单的事件，例如\
+  \ `end` 事件，用于通知没有更多数据可读；`close` 事件，在不再有事件可触发时触发；以及我已经介绍过的 `error` 事件。\n\n#### 可写流\n\
+  \n对于可写流来说，它们的工作方式与可读流正好相反：它们将数据的目标封装到一个易于使用的容器中。就像任何其他流一样，你可以将其他流通过管道连接到它，也可以手动写入。\n\
+  \n一些常见的可写流包括：\n\n-   `fs` 写入流\n-   `zlib` 流（就像你上面看到的那样）\n-   加密流\n\n使用这些流非常简单。你需要了解的主要方法是：`write`\
+  \ 用于实际发送数据，`end` 用于关闭流。我在前面的代码示例中已经展示了它们的工作原理，所以这里不再赘述。\n\n由于所有流也都是 `EventEmitters`，它们会触发一些特定事件。对于可写流，你应特别注意：\n\
+  \n-   `drain`：当 `stream.write` 调用返回 `false` 后触发此事件。一旦此事件被触发，就可以恢复写入。当写入目标不堪重负，需要一些时间才能发送下一个数据块时，你的流可能会触发此事件。\n\
+  -   `error`：这个事件在所有 `EventEmitters` 中都很常见，因此，无论何时创建流，请务必为此事件设置一个处理程序；否则，如果此错误未被处理，整个应用程序将会崩溃。\n\
+  \n#### 双工流和转换流\n\n这两种类型的流实际上基于前面两种流。双工流是一个（显而易见地）同时实现了可读和可写接口的流（例如一个 TCP 套接字）。\n\
+  \n然后是转换流，它是一种双工流，但不同之处在于它允许你在输入变为输出之前对其进行更改。换句话说，例如，你可以创建一个接收 JavaScript 对象并将 JSON\
+  \ 字符串写入某个存储系统的转换流。\n\n除了显而易见的区别之外，双工流和转换流的主要区别在于，对于双工流，读取和写入事件是并行处理的，也就是相互独立的。写入操作/事件并不依赖于预期先发生的读取事件，因此，如果你正在处理异步进程（在\
+  \ Node.js 中你很可能会这样），请务必考虑这一点。下面我将展示一个具体案例。\n\n\n\n### 编写自定义流\n\n前面的代码展示了如何使用预置的可读流和可写流，但并未演示如何实现自定义流——原因很简单，一旦你理解了流的概念，就会想抓住一切机会使用它们！（至少我是这样的！）\n\
+  \n我在此提供一个非常简单的示例，展示如何创建符合各类流描述的对象。\n\n以下代码将在 HTTP 服务器上建立一个端点，通过一组流来接收数据。它将完成以下操作：\n\
+  \n- 获取请求体并将其转换为 JavaScript 对象\n- 为对象添加一个属性\n- 将对象保存到数据库\n- 将对象转换回字符串\n- 将字符串返回给客户端\n\
+  \n```\nvar  inherits = require(\"util\").inherits;\nvar streams = require(\"stream\"\
+  );\nvar Transform = streams.Transform;\n//Turns the request's body into an object\n\
+  function GetBody() {\nTransform.call(this, {objectMode: true});\n}\ninherits(GetBody,\
+  \ Transform);\nGetBody.prototype._transform = function(obj, encoding, callback)\
+  \ {\nvar str = obj.toString();\ncallback(null, JSON.parse(str));\n};\n//Adds the\
+  \ timestamp value\nfunction AddTimeStamp() {\nTransform.call(this, {objectMode:\
+  \ true});\n}\ninherits(AddTimeStamp, Transform);\nAddTimeStamp.prototype._transform\
+  \ = function(obj, encoding, callback) {\nobj.timestamp = Date.now();\ncallback(null,\
+  \ obj);\n};\n//Turns the object into a string\nfunction ToJSONEncoder() {\nTransform.call(this,\
+  \ {objectMode: true});\n}\ninherits(ToJSONEncoder, Transform);\nToJSONEncoder.prototype._transform\
+  \ = function(obj, encoding, callback) {\ncallback(null, JSON.stringify(obj));\n\
+  };\n//Saves the object into the database\nfunction SaveUserToDB() {\nTransform.call(this,\
+  \ {objectMode: true});\n}\ninherits(SaveUserToDB, Transform);\nSaveUserToDB.prototype._transform\
+  \ = function(obj, encoding, callback) {\nvar self = this;\nUserModel.create(obj,\
+  \ function(err, obj) {\nif(err) {\nreturn callback(err);\n}\nself.push(obj);\ncallback();\n\
+  });\n};\nvar addTimeStamp = new AddTimeStamp();\nvar save = new SaveUserToDB();\n\
+  var getBody = new GetBody();\nvar toJSON = new ToJSONEncoder();\nfunction handleNewUsers(req,\
+  \ res, next) {\nreq\n.pipe(getBody)\n.pipe(addTimeStamp)\n.pipe(save)\n.pipe(toJSON)\n\
+  .pipe(res);\n}\n```\n\n如你所见，通过创建一组`Transform`流，并利用 Node 中`Request`对象默认是`ReadableStream`、`Response`对象默认是`WritableStream`的特性，即可实现上述所有功能。\n\
+  \n如果你想测试这段代码，还需要先设置好前置代码，以下是前置代码（当然，你需要安装 MongoDB、mongoose 和 express 等依赖）：\n\n```\n\
+  var mongoose = require(\"mongoose\");\nvar express = require(\"express\");\n// ---\
+  \ db\nvar Schema = mongoose.Schema;\nvar UserSchema = Schema({\nfull_name: String,\n\
+  birthdate: Date,\nusername: String,\npassword: String,\ntimestamp: Number\n});\n\
+  var UserModel = mongoose.model(\"User\", UserSchema);\nmongoose.connect ('mongodb://localhost/test-streams');\n\
+  //--- http server\nvar app = express();\napp.post('/users', handleNewUsers);\napp.listen(3000,\
+  \ function() {\nconsole.log(\"Ready to roll!\");\n});\n```\n\n这段代码仅负责设置 HTTP 服务器、MongoDB\
+  \ 连接以及定义模型模式。\n\n**注意**\n\n在编写类似上述使用`Request`对象流特性的代码时，请避免使用 Express 的`body-parser`中间件模块（可在[`https://www.npmjs.com/package/body-parser`](https://www.npmjs.com/package/body-parser)获取），因为它会影响功能，导致代码无法正常运行。\n\
+  \n最后，我想提醒你注意`SaveUserToDB`这个流——我最初以为它是一个`Duplex`流。它本应将对象写入数据库，然后在后续的`Read`调用中返回数据。但根据前文对`Duplex`和`Transform`流的描述，由于`Read`和`Write`事件并未关联，会导致`Write`操作未完成时`Read`事件就已触发，导致此时无数据可返回。而将流改为`Transform`流可以解决这个问题。\n\
+  \n`Duplex`流适用的典型场景是某种客户端/服务器连接处理器——这种流允许同时从服务器向客户端写入消息，并在客户端应用中读取服务器接收的消息。\n\n总而言之，当尝试实现自定义流时，表\
+  \ 5-1 将帮助你理解需要实现哪些方法以及何时实现。\n\n**表 5-1.** 快速指南：何时实现何种流\n\n| 操作类型 | 流类型 | 需实现的方法\
+  \ |\n| --- | --- | --- |\n| 仅读取 | Readable | `_read` |\n| 仅写入 | Writable | `_write`\
+  \ |\n| 读取和写入 | Duplex | `_read`, `_write` |\n| 修改写入数据 | Transform | `_transform`\
+  \ |\n\n\n# Node.js 中的异步编程\n\n到目前为止，我几乎在所有地方都谈到了使用异步函数，但并没有真正解释它到底是什么。那么，我们来聊聊这个话题，好吗？\n\
+  \n异步（Async）编程可能是 Node.js 最好，同时也是最令人困惑的特性之一。\n\n简单来说，异步编程意味着，对于你执行的每一个异步函数，它不会在程序流程继续之前返回结果。相反，你需要提供一个回调函数，这个函数会在异步代码执行完毕后被调用。\n\
+  \n图 5-1 展示了一个常规的、非异步的执行流程。\n\n![A418015_1_En_5_Fig1_HTML.jpg](img/A418015_1_En_5_Fig1_HTML.jpg)\n\
+  \n图 5-1.\n\n同步流程的简单示例\n\n图 5-1 展示了一组以同步方式运行的指令。很明显，为了执行 `指令 #4`，它需要等待耗时指令完成，然后等待\
+  \ `指令 #3` 结束。但是，如果 `指令 #4` 和 `指令 #3` 实际上并不相关呢？如果你并不在意 `指令 #3` 和 `指令 #4` 彼此之间执行的先后顺序呢？\n\
+  \n那么，你可以将耗时指令改为异步方式执行，并将 `指令 #3` 作为它的回调函数，这样你就能更早地执行 `指令 #4` 了。\n\n图 5-2 展示了这种做法的样子。\n\
+  \n![A418015_1_En_5_Fig2_HTML.jpg](img/A418015_1_En_5_Fig2_HTML.jpg)\n\n图 5-2.\n\n\
+  异步流程的示例\n\n`指令 #4` 在 `指令 #2` 启动异步耗时指令之后立即执行，而不是等待它完成。\n\n当然，这只是异步编程潜在好处的一个非常简单的例子。而且，并非总是可能采用这种方法。你可以对\
+  \ I/O 密集型函数这样做，因为 Node.js 就是这样处理 I/O 的（别担心，我稍后会讨论这一点），但是 CPU 密集型函数，比如繁重的数值计算，实际上无法以这种方式工作，它们会像同步函数一样阻塞流程，所以在规划代码时请务必考虑到这一点。\n\
+  \n最后，和数字世界中的大多数事物一样，没有什么是无需代价的，额外的好处也带来一个糟糕的权衡：调试异步代码可能非常让人头疼。\n\n开发者习惯于按照编写代码的顺序方式来思考代码，因此调试非顺序执行的代码对新手来说可能很困难。\n\
+  \n例如，让我们看看同一段代码的同步和异步编写方式：\n\n同步版本：\n\n```\nvar fs = require(\"fs\");\nconsole.log(\"\
+  即将读取文件... \");\nvar content = fFs.readFileSync(\"/路径/到/文件\");\nconsole.log(\"文件内容:\
+  \ \", content);\n```\n\n异步版本（含一个常见错误）：\n\n```\nvar fs = require(\"fs\");\nconsole.log(\"\
+  即将读取文件...\");\nvar content = \"\";\nfs.readFile(\"/路径/到/文件\", function(err, data)\
+  \ {\ncontent = data;\n});\nconsole.log(\"文件内容: \", content);\n```\n\n如果你还没猜到，第二段代码会输出：\n\
+  \n```\n文件内容:\n```\n\n其原因与前文中的流程图直接相关。图 5-3 展示了有问题的异步版本发生了什么。\n\n![A418015_1_En_5_Fig3_HTML.jpg](img/A418015_1_En_5_Fig3_HTML.jpg)\n\
+  \n图 5-3.\n\n一个典型的异步编程错误\n\n通过图 5-3 可以很清楚地看到为什么文件内容没有被写入，因为回调函数是在最后一行 `console.log`\
+  \ 之后才执行的。这是新手开发者常犯的错误，不仅限于 Node.js，更具体来说，在前端 AJAX 调用中也经常出现。他们的代码设置方式导致他们试图在异步调用实际结束之前使用其返回的内容。\n\
+  \n因此，为了完成这个示例，让我们看看代码应该如何编写才能正常工作：\n\n```\nvar fs = require(\"fs\");\nconsole.log(\"\
+  即将读取文件...\");\nvar content = \"\";\nfs.readFile(\"/路径/到/文件\", function(err, data)\
+  \ {\ncontent = data;\nconsole.log(\"文件内容: \", content);\n});\n```\n\n很简单，只需将最后的\
+  \ `console.log` 行移到回调函数中，这样就能确保 `content` 变量被正确设置了。\n\n## 异步进阶\n\n异步编程不仅仅是确保你正确设置了回调函数，它还允许一些有趣的流程控制模式，这些模式可用于提高应用程序的效率。\n\
+  \n让我们看看两种不同且非常有用的异步编程流程控制模式：并行流程和串行流程。\n\n\n\n# 并行流程\n\n并行流程的核心思想是：程序可以并行运行一组不相关的任务，但只有在所有任务都执行完毕后，才会调用提供的回调函数（以收集它们的集体输出结果）。\n\
+  \n基本上，这就是我要表达的意思：\n\n```\n// functionX 符号是对各个独立函数的引用\nparallel([function1, function2,\
+  \ function3, function4], function(data) {\n/// 等它们全部完成后，对合并后的输出进行处理\n})\n```\n\n\
+  为了知道每个函数何时执行完毕，它们需要用操作结果来执行一个回调函数。回调将是它们收到的唯一参数，所以让我们看看这个`parallel`函数：\n\n```\n\
+  function parallel(funcs, callback) {\nvar results = [],\ncallsToCallback = 0;\n\
+  funcs.forEach(function(fn) { // 遍历所有函数\nfn(done);\n});\nfunction done(data) { //\
+  \ 函数执行完毕时会调用这个函数，并将结果传递到这里\nresults.push(data);\nif(++callsToCallback == funcs.length)\
+  \ {\ncallback(results);\n}\n}\n}\n```\n\n**注意：** 由于在`parallel`执行期间调用的函数具有异步特性，最终回调中结果的顺序无法保证。某些在开始时执行的异步函数，可能比后面执行的函数返回结果所需的时间更长。需要额外的代码来确保最终结果列表是有序的。\n\
+  \n前面的实现是我试图演示的一个非常简单的版本，但它完成了任务：它以类似并行的方式运行一组函数（你会看到，由于 Node.js 运行在单线程中，真正的并行是不可能的，所以这是我们能达到的最接近的结果）。\n\
+  \n这种控制流在处理对外部服务的调用时特别有用。\n\n让我们看一个实际示例：假设你的程序需要执行多个操作，这些操作虽然彼此不相关，但都需要在用户看到结果之前完成。例如，从数据库加载书籍列表，查询外部服务获取本周新书的消息，并将请求记录到文件中。如果你按顺序执行所有这些任务，等待一个完成后再运行下一个，那么用户很可能会遇到响应延迟，因为执行所需的总时间将是所有单个时间的总和。\n\
+  \n但如果可以并行执行所有这些任务，那么总时间实际上就等于执行最慢的那个任务所用的时间。\n\n让我们看看这两种情况：\n\n**串行方式（耗时更长）**\n\n\
+  ```\n//请求处理代码...\n//假设 \"db\" 已经初始化，并提供了数据库接口\ndb.query(\"books\", {limit:1000,\
+  \ page: 1}, function(books) {\nservices.bookNews.getThisWeeksNews(function(news)\
+  \ {\nservices.logging.logRequest(request, function() { //没有返回值，但我们需要调用它，以便知道日志记录完成\n\
+  response.render({listOfBooks: books, bookNews: news})\n})\n})\n})\n```\n\n**并行方式（耗时更少）**\n\
+  \n```\n//请求处理代码...\nparallel([\nfunction(callback) { db.query(\"books\", {limit:\
+  \ 1000, page: 1}, callback) }),\nfunction(callback) { services.bookNews.getThisWeeksNews(callback)\
+  \ }),\nfunction(callback) { services.logRequest(request, callback) })\n], function(data)\
+  \ {\nvar books = findData('books', data)\nvar news = findData('news', data)\nresponse.render({listOfBooks:\
+  \ books, bookNews: news})\n})\n```\n\n前面的代码展示了每种方法的外观。`findData`函数简单地查找`data`数组，并根据项目结构返回所需的对象（第一个参数）。在这个`parallel`的实现中，它之所以必要，是因为（正如我之前提到的）你无法确定函数完成并返回结果的顺序。\n\
+  \n除了代码将获得明显的速度提升之外，它也更易于阅读，并且更容易向并行流程中添加新任务：只需在数组中添加一个新项即可。\n\n# 串行流程\n\n串行流程提供了一种简单的方法来指定需要按特定顺序执行的函数列表。这种解决方案不像之前那样提供速度提升，但它确实提供了编写此类代码并保持其整洁的能力，从而远离通常所说的“回调地狱”。\n\
+  \n让我们看看我们想要实现的目标：\n\n```\nserial([\nfunction1, function2, function3\n], function(data)\
+  \ {\n//对合并后的结果进行处理\n});\n```\n\n而不是像这样：\n\n```\nfunction1(function(data1)  {\nfunction2(function(data2)\
+  \ {\nfunction3(function(data3) {\n//对所有输出进行处理\n}\n}\n}\n```\n\n你可以看到，如果函数数量持续增长，第二段代码会变得难以管理。因此，串行方法将帮助你保持代码的组织性和可读性。\n\
+  \n让我们看看`serial`函数的一个可能实现：\n\n```\nfunction serial(functions, done) {\nvar fn = functions.shift();\
+  \ // 从列表中取出第一个函数\nvar results = [];\nfn(next);\nfunction next(result) {\nresults.push(result);\
+  \ // 保存结果，以便在不再有函数需要执行时传递给最终回调。\nvar nextFn = functions.shift();\nif (nextFn) nextFn(next);\n\
+  else done(results);\n}\n}\n```\n\n这些函数还有更多变体，例如使用错误参数自动处理错误，或者在并行流程中限制并发函数的数量。\n\
+  \n总而言之，异步编程是 Node.js 开发者生活中不可或缺的一部分。所有操作都利用了 Node 的异步 I/O（我稍后将讨论这一点），因此理解它的工作原理以及如何利用它的强大功能，无疑会对你设计响应式库有所帮助。\n\
+  \n有关一个功能完备且经过测试、专注于异步编程的库，请查看 ASYNC.JS（可在 [`github.com/caolan/async`](https://github.com/caolan/async)\
+  \ 获取）。\n\n## 异步 I/O\n\n异步编程的一个特定案例涉及 Node.js 提供的这个非常有趣的特性：异步 I/O。\n\n此特性与 Node.js\
+  \ 的内部架构高度相关。正如我之前所说，Node 不提供多线程；它实际上在单个线程内运行，该线程内部运行着一个事件循环（见图 5-4）。\n\n![A418015_1_En_5_Fig4_HTML.jpg](img/A418015_1_En_5_Fig4_HTML.jpg)\n\
+  \n**图 5-4.** 展示事件循环如何工作以提供异步 I/O 的示意图\n\n简而言之，Node.js 的设计理念是：I/O 操作是每个操作的实际瓶颈，而不是处理能力。因此，node\
+  \ 进程接收到的每个请求都将在事件循环内工作，直到发现一个 I/O 操作。当这种情况发生时，回调将被注册到一个单独的队列中，而主程序的流程将继续。一旦 I/O\
+  \ 操作完成，回调将被触发，其内部的代码将被执行。\n\n\n\n# 异步事件流\n\n标题也可以是“异步事件的流”。无论如何，本章这一节的目标是将我目前讨论的所有内容串联起来。\n\
+  \n在第 3 章中，我展示了一些处理这类情况的基础代码，它们确实能工作。但由于 Node 已经提供了原生流，因此有必要概述所有选项，这样在后续章节中，你可以从这些不同的选项中汲取灵感，创建出优秀的库。\n\
+  \n为了演示，我将使用一个名为`event-stream`的外部模块（可在[`https://www.npmjs.com/package/event-stream`](https://www.npmjs.com/package/event-stream)获取）。但别担心，它的一切基础都是\
+  \ Node 的内置流，因此其原理依然适用。\n\n该库本质上提供了一套辅助方法，让你能够操作和处理流，而这些流又可以轻松地处理异步任务。如果你还记得前几页的内容，`SaveUserToDB`流无法被设置为`Duplex`流，相反，由于对数据库的异步调用，我不得不使用`Transform`流。\n\
+  \n借助`event-stream`模块，修复这个问题不仅简单，而且实际上有几种方法可以实现。让我们先看看该库提供的所有辅助方法。\n\n## `through`\n\
+  \n该方法是对之前问题的解决方案。它创建了一个`Duplex`流，我们可以控制其中的数据流，从而让你将异步过程转化为同步过程。它接受两个可选参数：一个`write`函数和一个`end`函数。你会注意到没有`read`方法，这是因为它是一种特殊的`Duplex`，具有预定义的`read`方法。它会重新发射你在`write`方法中通过`data`事件发射的任何内容。\n\
+  \n让我演示一下。以下是`SaveUserToDB`流的重写方式：\n\n```javascript\nvar es = require(\"event-stream\"\
+  );\nvar save = es.through(function write(data) {\nvar self = this;\nthis.pause();\n\
+  //You need to pause the stream, to make sure the saving operation is done\nUserModel.create(data,\
+  \ function(err, obj) {\nif(err) {\nreturn self.emit('error', err);\n}\nself.resume();\n\
+  //you can then resume the stream and emit the new object\nself.emit('data', obj);\n\
+  });\n}, function end() {\nthis.emit('end');\n});\n```\n\n## `map`\n\n该方法接受两个参数：实际数据和必须在函数末尾调用的回调函数。\n\
+  \n我在前一章已经介绍了`map`函数的作用，因此在这种情况下，只需理解这个特定的`map`是一个自定义的`through`函数，它会重新发射你作为接收回调函数第二个参数传递的任何内容。了解这一点后，你可以再次重新实现`SaveUserToDB`流，如下所示：\n\
+  \n```javascript\nvar es = require(\"event-stream\");\nvar save = es.map(function(data,\
+  \ callback) {\nvar self = this;\nUserModel.create(data, function(err, obj) {\nif(err)\
+  \ {\n//the first argument of the callback is the error returned\nreturn callback(err);\n\
+  }\ncallback(null, obj);\n});\n});\n```\n\n## `split`\n\n该方法的工作方式与`String#split`方法类似，但其默认值是换行符，而不是空字符串。它不是分割单个字符串，而是将一个流分解并重新组装，以便结果分割的每个部分都是一个数据块。\n\
+  \n一个简单的例子是，如果你想处理文本文件中的每个单词，可以这样做：\n\n```javascript\nvar es = require(\"event-stream\"\
+  );\nvar fs = require(\"fs\");\nfs.createReadStream('myfile.txt')\n.pipe(es.split('\
+  \ '))\n.pipe(es.map(function(word, cb) {\ncb(null, word.toUpperCase());\n});\n```\n\
+  \n显然，你不需要仅仅为了将文档分割成单词而这样做，但这仍然可以作为示例。\n\n## `join`\n\n这个方法有点令人困惑，因为名称暗示它是`split`的反向操作，可以撤销你对它所做的任何操作。\n\
+  \n该方法在每个发出的数据块后添加一个分隔符（它接受的唯一属性）。因此，实际上，对于每一块数据，它会发射两个新块：分隔符和实际数据。所以你可以这样做：\n\n\
+  ```javascript\nvar es = require(\"event-stream\");\nvar fs = require(\"fs\");\n\
+  var writer = fs.createWriteStream('./output-join.txt');\nfs.createReadStream('./event-stream-join.js')\n\
+  .pipe(es.split(\" \"))\n.pipe(es.map(function(str, done) {\ndone(null, str.toUpperCase());\n\
+  }))\n.pipe(es.join(\"\\n\"))\n.pipe(writer);\n```\n\n实际上，上面的代码将文本文件分割成单词，将每个单词转换为大写，然后将每个单词保存到文件中，但末尾带有一个换行符。\n\
+  \n**提示**\n\n如果在`join`方法中传入一个`String`而不是函数，那么该函数将在流结束时被调用，它接收的唯一参数将是所有连接成单个`String`的数据块列表。\n\
+  \n## `merge`\n\n该方法负责合并多个流。这意味着它将合并每个传入流的结果数据，一旦所有流都发出了`end`事件，它就会结束。\n\n一个简单的例子如下：\n\
+  \n```javascript\nvar es = require(\"event-stream\");\nvar fs = require(\"fs\");\n\
+  es.merge([\nfs.createReadStream('input1.txt'),\nfs.createReadStream('input2.txt')\n\
+  ]).pipe(fs.createWriteStream('output.log'));\n```\n\n注意，合并的流之间不保证顺序，因此保存的数据不会先包含一个文件的内容，然后再包含第二个文件的内容。两个文件的内容可能交织在一起（取决于每个文件内容的长度）。\n\
+  \n## `readable`\n\n正如方法名称所示，它创建一个`Readable`流，该流与一个异步函数配合作为数据源。换句话说，接收的函数（接受的唯一参数）接受两个参数：一个计数器和一个回调。该函数必须始终调用回调以推进数据流，并且只能调用一次；后续调用将无效。\n\
+  \n然而，它可以在一次调用中使用`data`事件发射多个数据块。以下是你的`read`函数的基本结构：\n\n```javascript\nvar es = require(\"\
+  event-stream\");\nes.readable(function(count, callback) {\nif(hasEnded) { //for\
+  \ some reason the stream is no longer reading\nthis.emit('end');\n}\n//... your\
+  \ code here\nthis.emit('data', chunk); //you can do this as many times as you need\
+  \ to.\ncallback();\n});\n```\n\n**注意**\n\n在前面的代码示例中，变量`hasEnded`仅仅是某种指示流已结束的逻辑条件的占位符。你需要将其替换为对业务逻辑有意义的任何内容。\n\
+  \n该模块还提供了其他方法，如`duplex`、`child`、`wait`、`parse`等，但主要方法就是上面这些。如果你想了解更多，可以查看该模块 npm\
+  \ 页面上的完整文档（可在[`https://www.npmjs.com/package/event-stream`](https://www.npmjs.com/package/event-stream)获取）。\n\
+  \n## 结论\n\n正如你所见，该模块提供的辅助方法与第 3 章中描述的方法非常相似，但同时也有所不同，因为它们是创建新的流，而不是修改流经某个流的数据。\n\
+  \n这个模块和之前讨论的可观察流（Observable Streams）将用于创建本书响应式库的最终版本。\n\n\n\n# 总结\n\n希望本章能让你对 Node.js\
+  \ 中一个常被误解且常被遗忘的特性有所了解。\n\n内置流将成为在后端处理响应式代码的绝佳工具，正如你在前几章中所见。所以现在你知道了如何使用它们，就可以开始自己动手实践了！\n\
+  \n下一章将涵盖目前专门处理 JavaScript（尤其是 Node.js）中响应式编程的主要库。\n\n**脚注**  \n\\[1\\] （当然，这只是一个粗略的近似，因为要得到精确的数字，还需要考虑并行函数所增加的时间。）\n\
+  \n# 6. 领域概览\n\n到目前为止，我在本书中介绍了什么是响应式编程（RP）、它在后端的巨大价值，以及 Node.js 为何与其如此契合。我甚至进一步展示了一些实现响应式后端的代码方案。\n\
+  \n在本章中，在深入探讨如何创建本书的响应式库之前，我想先回顾一下目前已有的库。有些库并非专为 Node.js 设计，而有些则是。但重要的是，它们全都是 JavaScript，尽管它们无法完全按原样在后端使用，但你仍可能从中学到东西。\n\
+  \n到本章结束时，你应该已掌握所有必要知识，可以开始动手编写即将介绍的响应式库的代码了。\n\n## 针对 JavaScript 的响应式扩展：RxJS\n\n\
+  也被称为针对 JavaScript 的响应式扩展（请查阅 [`http://reactivex.io/`](http://reactivex.io/)），`RxJS`\
+  \ 在撰写本文时已发布至 4.0 版本，是目前最流行的响应式库之一。\n\n该项目由微软积极开发，但背后也有一个庞大的开源社区协助改进该库。若你对此感兴趣，他们提供了一个\
+  \ Wiki 页面（可在 [`https://github.com/Reactive-Extensions/RxJS/wiki/Contributions`](https://github.com/Reactive-Extensions/RxJS/wiki/Contributions)\
+  \ 找到）。但请注意，根据目前情况来看，他们似乎是唯一有权决定哪些功能适合“产品”、哪些不适合的群体，因此欢迎提交错误修复和文档改进；然而，新功能在考虑之前必须经过讨论。这可能是因为\
+  \ Rx 是一套基于相同原则的多语言库集合，为其中一个库添加新功能就意味着要为其他所有库也添加同样的功能。\n\n由如此大型的组织支持还有一个好处，那就是这个库拥有海量的文档资源。我指的不只是在线教程，还有许多相关的书籍和工作坊。你可以从他们的\
+  \ GitHub 页面（[`https://github.com/Reactive-Extensions/RxJS#resources`](https://github.com/Reactive-Extensions/RxJS#resources)）获取完整的资源列表。\n\
+  \n## 许可证\n\n该库采用 Apache 许可证 2.0 版（[`http://www.apache.org/licenses/LICENSE-2.0`](http://www.apache.org/licenses/LICENSE-2.0)）进行分发。这基本上意味着你可以将其用于商业产品而无需担心，也可以修改和分发它，但如果你这样做，你必须附上你所做的更改列表以及许可证的副本。总而言之，只要遵守一些基本规则，你几乎可以自由地用它做任何你想做的事。\n\
+  \n## 兼容性\n\n`RxJS` 兼容所有主流浏览器，甚至包括一些相当古老的版本——具体来说，是 Internet Explorer 6+、Firefox\
+  \ 1.0+ 和 Chrome 4+。希望你没有真正使用这些过时的浏览器版本，但以防万一。\n\n令人惊讶的是，该库也与 Node.js 兼容，支持 0.4 及以上版本，因此我将展示的代码示例将直接在\
+  \ Node 中进行测试（呜呼！）。\n\n## 代码示例\n\n关于这些示例，由于它实际上与 Node 兼容，我将使用 Node 来运行它们。第一个代码示例非常基础，帮助你入门。\n\
+  \n**注意**  \n要在 Node 中使用 `RxJS`，你需要使用经典的 `npm install` 命令安装 `rx` 包和 `node-rx` 绑定：`$\
+  \ npm install rx` 和 `$ npm install node-rx`。\n\n```javascript\nvar rx = require(\"\
+  rx\");\nvar rxnode = require(\"rx-node\") ;\nvar subscription = rxnode.fromReadableStream(process.stdin);\n\
+  subscription.filter(function(line) {\nvar matches = line.toString().match(/[a]{1}/g);\n\
+  return matches !== null && matches.length > 5;\n})\n.subscribe(function (x) {\n\
+  console.log(x.toString());\n});\n```\n\n如你所见，Node.js 绑定与 Node 的流兼容（如果你想知道更多相关信息，请查看第\
+  \ 5 章）。在这个例子中，我只是简单地使用了 `stdin` 流，在设置了一个简单的过滤函数之后，我就可以订阅它了。换句话说，这段代码允许你输入一个句子，一旦你按下回车键（这会触发\
+  \ `stdin` 流的 `data` 事件），它就会统计句子中字母 A 的数量。如果数量大于 5，它会再次打印该行；否则什么也不做。\n\n代码可能很简单，但足以让你入门。基本上你总是遵循相同的模式：\n\
+  \n* 找到一个要使用的流。\n* 为流的数据配置一组转换/操作。\n* 最后，订阅该流，并将一个最终要使用的函数传递给它，该函数将接收通过 `data` 事件发送的数据块的最终版本。\n\
+  \n**提示**  \n如果你使用的是带有自定义事件的自定义流，你可以在实际流之后，将 `end` 事件名称和 `data` 事件名称（按此顺序）传递给 `fromStream`\
+  \ 方法。\n\n我们再来看一个例子。这是对第 5 章中一个例子的重写，该脚本会将文件作为流读取，并将其拆分为单词，将这些单词全部转换成大写字母，然后每个单词单独打印在一行上。\n\
+  \n```javascript\nvar rx = require(\"rx\");\nvar noderx = require(\"rx-node\");\n\
+  var fs = require(\"fs\");\nvar stream = noderx.fromStream(fs.createReadStream('./test-rxjs2.js'));\n\
+  stream\n.flatMap(function(s){ return s.toString().split(\" \")  })\n.map(function(str)\
+  \ {\nreturn str.toUpperCase();\n})\n.subscribe(function(b) {\nconsole.log(b.toString());\n\
+  });\n```\n\n因为 `RxJs` 没有像 `event-stream` 模块（还记得 `split` 方法吗？）提供的那些辅助方法，为了拆分行并使单词成为流中新的数据块，我使用了\
+  \ `flatMap` 方法。这个方法会获取其函数返回的值（可能是一个 Observable 或可以变成 Observable 的东西，在这个例子中是一个数组），将其展平，并返回一个发出这些新数据项的流。\n\
+  \n\n\n# Bacon.js\n\n`Bacon.js` 是一个用于在 JavaScript 中实现函数式响应式编程的优秀小型库。在撰写本文时，其版本为 `0.7.84`\
+  \ 。尽管这个版本号可能会让你产生误解（毕竟它还没到 1.0 版本），但它已经存在超过 3 年，并且相当流行。根据 NPM 的统计数据，它每月被下载超过 14,000\
+  \ 次，并且在 Github (`https://github.com/baconjs/bacon.js`) 上拥有超过 5,000 颗星。\n\n虽然没有明确指出该库的主要作者是谁，但经过一番挖掘，似乎是\
+  \ **Juha Paananen** 先生。你可以在 Github (`https://github.com/orgs/baconjs/people`) 上找到活跃贡献者列表。其文档似乎相当全面；他们列出了相当多的资源，比如教程，甚至还有一个视频示例\
+  \ (`https://github.com/baconjs/bacon.js/wiki/Documentation`)。\n\n最后，如果你觉得需要提问，他们有一个活跃的\
+  \ Google Group (`https://groups.google.com/forum/?fromgroups#!forum/baconjs`) 和\
+  \ Gitter (`https://gitter.im/baconjs/bacon.js`) 上的一个活跃聊天室可供使用。\n\n## 许可证\n\n对于 `Bacon.js`\
+  \ 来说，其许可证是现有最宽松的许可证之一：MIT 许可证。它基本上规定，只要你恰当地添加版权声明和许可证副本，你就可以对它做几乎任何事情。\n\n## 兼容性\n\
+  \n根据作者的说法，该库不会真正扰乱语言中现有对象的原型，除两个特定情况外：\n\n-   在浏览器环境中，它会将 `Bacon` 对象添加到 `window`\
+  \ 实例中。\n-   如果定义了 `jQuery`，它会将 `asEventStream` 方法添加到其中。\n\n考虑到这一点，该库应该与你项目中使用的其他任何库都相当兼容。\n\
+  \n至于浏览器和 Node 的版本兼容性，它已经在所有现代版本的主流浏览器上测试过（如 Bacon 的 readme 文件所述），并且因为不使用任何依赖于浏览器的功能，所以它与所有这些浏览器都能协同工作。对于\
+  \ Node 也是如此，因为它不依赖任何实际的浏览器功能，这个库是纯 JavaScript 的，这也使其与 Node 兼容。\n\n## 代码示例\n\n对于\
+  \ `Bacon.js`，你不需要额外的带有 `Node.js` 绑定的库，因为正如我之前提到的，这个库是 100% 与环境无关的 JavaScript。话虽如此，这里有一个简单的例子展示了从自定义事件创建新流是多么容易：\n\
+  \n```\nvar bacon = require(\"baconjs\");\nvar fs = require(\"fs\");\nprocess.stdin.resume();\n\
+  process.stdin.setEncoding('utf8');\nvar util = require('util');\nfunction readFilenames(sink)\
+  \ {\nprocess.stdin.on('data', function (text) {\nsink(text.trim());\n});\n}\n//从自定义函数创建一个新的\
+  \ EventStream\nvar filenames = bacon.fromBinder(readFilenames);\nfilenames.onValue(function(name)\
+  \ { //接入流以了解发生了什么\nconsole.log(\"-- 新文件名: \", name, \" --\");\n})\nvar names = filenames.scan([],\
+  \ function(acc, name) { //每次获取 2 个文件名\nreturn acc.length === 2 ? [name] : acc.concat(name);\n\
+  });\nvar groupfilenames = names.filter(function(acc) { //一旦有 2 个，就继续；否则，在此停止\nreturn\
+  \ acc.length === 2;\n})\n.flatMap(bacon.fromArray); //将新数组转换为流\ngroupfilenames.onValue(function(fnames)\
+  \ {\nconsole.log('[', fnames, ']');\n});\ngroupfilenames.flatMap(function(name)\
+  \ {\nreturn bacon.fromNodeCallback(fs.readFile, name);\n});\n.onValue(function(content)\
+  \ {\n//打印出文件的内容\nconsole.log(content.toString());\n});\n```\n\n提示\n\n在你的 `Node.js`\
+  \ 项目中安装 `Bacon.js` 非常简单。你只需要执行以下命令：`$ npm install baconjs`\n\n前面的代码让用户输入两个文件名，然后将这些名称转换为这些文件的实际内容。这一切都是通过一系列转换实现的：\n\
+  \n-   使用 `fromBinder` 方法创建一个流，这样每次用户按下 ENTER 键时，就会发出一个新的数据块（一个新的文件名）。\n-   然后使用\
+  \ `scan` 方法，我将数据块分组，每两个一组。\n-   通过过滤掉少于两个元素的组，我实质上阻止了数据在流中的流动，直到每个组都有两个文件名。\n- \
+  \  第一个 `flatMap` 方法与 `fromArray` 的结果结合使用，会将每个数组转换为一个新的流，该流会发出文件名，当然，这个新流的事件数量是有限的（只有两个！）。\n\
+  -   最后，第二个 `flatMap` 方法会将 `fs.readFile` 方法的异步回调转换为一个流，使你能够在该流中读取每个文件的内容。\n\n为了让你看到每一步的含义，我添加了到\
+  \ `onValue` 方法的中间调用。图 6-1 展示了脚本的输出，并向你展示每个流如何受到应用于其上的转换的影响。\n\n![A418015_1_En_6_Fig1_HTML.jpg](img/A418015_1_En_6_Fig1_HTML.jpg)\n\
+  \n图 6-1. 执行前面代码的输出\n\n图 6-1 展示了执行脚本的输出。你可以看到用户输入文件名的地方，以及中间和之后发生的情况。\n\n在离开这个库之前，让我们再看一个例子。下面的代码展示了获取一个单一的共同数据源，将其分割成多个流，然后将它们合并在一起是多么容易。\n\
+  \n```\nvar fs = require(\"fs\");\nvar bacon = require(\"baconjs\");\nvar freadStream\
+  \ = fs.createReadStream(\"file3.txt\");\nfunction readFile(sink) {\nfreadStream.on('data',\
+  \ function(chunk) {\nsink(chunk);\n});\n}\nvar fstream = bacon.fromBinder(readFile);\n\
+  var charStream = fstream.map(function(chunk) {\nreturn chunk.toString().split(\"\
+  \");\n}).flatMap(bacon.fromArray);\nvar onlyNumbers = charStream.filter(function(v)\
+  \ {\nreturn !isNaN(+v);\n});\nvar onlyChars = charStream.filter(function(v) {\n\
+  return isNaN(+v);\n});\nvar all = onlyNumbers.merge(onlyChars);\nonlyNumbers\n.onValue(function(n)\
+  \ {\nconsole.log(\"#\", n);\n});\nonlyChars\n.onValue(function(c) {\nconsole.log(\"\
+  '\", c, \"'\");\n});\nall\n.scan([], function(acc, c) {\nreturn acc.concat(c);\n\
+  })\n.onValue(function(a) {\nconsole.log(\"-\", a, \"-\");\n});\n```\n\n代码非常简单，但此例中重要的在于其背后的潜力。你可以单独转换每个流，然后将它们合并回来。在前面的代码中，合并实际上是在一个数组中完成的，因此结果将是一个不断增长的值的数组。图\
+  \ 6-2 展示了执行输出。\n\n![A418015_1_En_6_Fig2_HTML.jpg](img/A418015_1_En_6_Fig2_HTML.jpg)\n\
+  \n图 6-2. 执行前面代码的输出\n\n\n\n# Highland.js\n\n该库（[`http://highlandjs.org`](http://highlandjs.org)）是一个更通用的工具模块，由\
+  \ Caolan McMahon（[`https://twitter.com/caolan`](https://twitter.com/caolan)）创建，在某些方面与\
+  \ UnderscoreJS（[`http://underscorejs.org/`](http://underscorejs.org/)）和 AsyncJS（[`http://caolan.github.io/async/`](http://caolan.github.io/async/)，同样由他创建）类似，但建立在类似\
+  \ Node 的流（streams）之上，这使其能够轻松处理同步和异步代码。\n\n该库宣传的主要特性之一是所谓的“背压”（back pressure），它对于无法暂停的流非常有用。通常，当消费流的客户端无法处理更多数据时，它会暂停流，直到准备就绪。当源流无法暂停时，Highland\
+  \ 会为你缓冲数据，直到你准备好恢复常规操作。\n\n就文档而言，Highland 可能是这里讨论的库中最薄弱的。虽然其官网有一个非常全面的帮助部分，但他们并未列出教程、视频甚至书籍等外部资源，而是需要你自行浏览互联网寻找。唯一的问题是你永远不知道这些资源是否是最新的。\n\
+  \n## 许可证\n\n与 RxJS 一样，HighlandJS 的许可证是 Apache 2.0，因此你可以自由地使用该库，只需添加你所做的更改列表（如有），并附上许可证副本即可。\n\
+  \n## 兼容性\n\n没有具体说明该库是否像之前那些库一样兼容旧版浏览器；仅说明它能在浏览器中运行，并且其安装中包含一个 browserify 就绪的库版本。它也兼容\
+  \ Node.js，这才是对你我真正重要的（同样，没有提到具体的 Node 版本，但假设它能在现代 Node 版本上运行）。\n\n## 代码示例\n\nHighland.js\
+  \ 宣传的主要特性之一是，你可以让同一版本的代码同时适用于同步和异步数据源，从而简化开发。\n\n在下面的示例中，我将演示这一点；首先，我将使用一个简单的数组作为流构造函数的源，然后将其切换为磁盘上的文件，你将看到其余代码保持不变：\n\
+  \n```\nvar HL = require(\"highland\");\nvar source = ['value1', 'value2', 'value3'];\n\
+  HL(source).map(function(v) {\nconsole.log(\"Calls++\");\nreturn v.toUpperCase();\n\
+  });\n```\n\n提示\n\n要安装 HighlandJS，只需使用 npm 命令：`$ npm install highland`\n\n现在，如果你继续执行上述代码，有趣的事情会发生：什么也不会发生。你看，前面的例子演示了\
+  \ Highland.js 宣传的另一特性，即流的惰性求值。该库不会立即开始从流中拉取数据；而是让你定义对流施加转换的意图，然后你可以告诉它开始消费该流。\n\n\
+  有几个方法可以做到这一点。实际上，它们是：`each`、`done`、`apply`、`toArray`、`pipe` 和 `resume`。\n\n以下是相同的代码，但添加了额外的方法调用，告诉\
+  \ HighlandJS 实际开始消费流：\n\n```\nvar HL = require(\"highland\");\nvar source = ['value1',\
+  \ 'value2', 'value3'];\nHL(source).map(function(v) {\nconsole.log(\"Calls++\");\n\
+  return v.toUpperCase();\n}).toArray(function(arr) {\nconsole.log(arr);\n});\n```\n\
+  \n上述代码的输出如下：\n\n```\nCalls++\nCalls++\nCalls++\n[ 'VALUE1', 'VALUE2', 'VALUE3' ]\n\
+  ```\n\n如你所见，这次由于添加了 `toArray` 调用，源流被正确地消费了。\n\n现在让我们看看如果我想要使用文件而非简单数组作为源会发生什么。\n\
+  \n```\nvar HL = require(\"highland\");\nvar fs = require(\"fs\");\nfunction getData(fname)\
+  \ {\nreturn function(push, next) {\nfs.readFile(fname, function(err, data) {\nif(err)\
+  \ push(err);\nelse {\nvar lines = data.toString().split(\"\\n\");\nlines.forEach(function(l)\
+  \ {\npush(null, l);\n});\npush(null, HL.nil);//HL.nil 表示流的结束\nnext();\n}\n});\n\
+  };\n}\nHL(getData('./file4.txt')).map(function(v) {\nconsole.log(\"Calls++\");\n\
+  return v.toUpperCase();\n}).toArray(function(arr) {\nconsole.log(arr);\n});\n```\n\
+  \n如你所见，流的消费调用保持不变，但流的源现在是异步读取的文件。\n\n错误处理也非常简单；如果文件路径错误，前面的代码会失败，但使用 `errors` 方法，你可以从流中提取错误并创建一个新流，然后执行错误处理函数，如下所示：\n\
+  \n```\nHL(getData('./file42.txt')).map(function(v) {\nconsole.log(\"Calls++\");\n\
+  return v.toUpperCase();\n})\n.errors(function(err, push) {\nif(err.code == 'ENOENT')\
+  \ { //如果文件未找到，简单地返回空字符串，以便代码不受影响\npush(null, '');\n} else {\npush(err);\n}\n})\n\
+  .toArray(function(arr) {\nconsole.log(arr);\n});\n```\n\n继续文件读取的主题，让我们看另一个示例，类似于我之前用\
+  \ Bacon.js 展示的。这次，我将有一个文件名数组，代码将获取这些文件名，读取每个文件，并返回其内容：\n\n```\nvar HL = require(\"\
+  highland\");\nvar fs = require(\"fs\");\nvar readFile = HL.wrapCallback(fs.readFile);\n\
+  var filenames = HL(['file1.txt', 'file2.txt', 'file3.txt']);\nfilenames\n.map(readFile)\n\
+  .parallel(10) // 一次最多读取 10 个文件\n.each(function(x) {\nconsole.log(\"---\");\nconsole.log(x.toString());\n\
+  console.log(\"---\");\n});\n```\n\n现在，对于上述代码，需要注意的是，直到 `parallel` 方法调用之前，流还没有被消费，这意味着你仍然可以在\
+  \ `each` 方法调用之前添加更多转换，但 `each` 方法开始消费流，从而一次拉取一个值，之后再添加新的转换是不可能的。实际上，在 `each` 之后唯一可以调用的方法是\
+  \ `done`。\n\n# 关于背压的一点说明\n\n这个术语之前被提到过几次，并且附带了简短的解释，但事实上，背压对于基于流的流程来说是一个相当相关的术语，因为你的库是否为其实现策略将影响所支持的用例。\n\
+  \n具体来说，背压是库应对快速生产者（fast producer）的能力，即当由于某种原因，消费者处理数据块的速度比流本身生成数据块的速度慢时。\n\n基本上有两种方式处理这种情况：要么接受数据丢失，只处理你能处理的部分；要么不能承受数据丢失，因此以某种方式缓冲数据。每种方法都有不同的策略，如下所述。\n\
+  \n## 接受数据丢失\n\n以下是当接受数据丢失时，可用于处理频繁数据生产者的三种不同策略。\n\n### 反抖动流（Debouncing）\n\n此技术基于原始流创建一个新流，但仅当原始流在给定的时间跨度内没有发出事件时，新流才会发出数据。基本上，反抖动操作会过滤掉源流中紧接着另一个事件发出的事件。\n\
+  \n### 采样流（Sampling）\n\n这种方法非常直接：在给定的时间跨度内，它会发出源流最新发出的事件作为新事件。当然，两个采样事件之间发出的任何事件都会被忽略。\n\
+  \n\n\n#### 暂停流\n\n此方法仅需将源流暂停指定时长，随后恢复运行。暂停期间源流发出的所有数据都将被丢弃。\n\n### 当数据不容丢失时\n\n\
+  以下三种策略针对数据极其宝贵、无法容忍因生产者过载而丢失数据的场景。\n\n#### 缓冲\n\n若有必要，可通过多种方式缓冲原始流的事件：例如，可设置最大事件缓冲数量，待缓冲满后一次性推送至下游；亦可设定缓冲时间，时间结束后强制将缓冲数据全部推送至下游。\n\
+  \n#### 缓冲暂停\n\n与前述暂停技术类似，但不会丢弃暂停期间源流发出的数据，而是将其缓冲起来。恢复运行后，缓冲事件将逐一触发，使代码仿佛从未发生过中断。\n\
+  \n#### 可控流\n\n最后，此技术将流天然的推送机制（即生产者向消费者推送事件）转变为拉取机制：消费者可在指定时间间隔内按需拉取事件，从而从消费者视角完全掌控数据流。\n\
+  \n# 总结\n\n我本可继续为所有审查的库添加更多代码示例，但本章的核心目标是展示当前 Node.js 函数式响应式编程（FRP）库领域的主流实现方式。\n\n\
+  同时，本章也为后续章节奠定基础——在第 7 章中，我将开始填充本书开发的 FRP 库的代码。\n\n表 6-1 总结了本章涉及的库的特征。\n\n**表 6-1.**\
+  \ 本章讨论的三个库的优缺点对比\n\n| 库/模块 | 优点 | 缺点 |\n| --- | --- | --- |\n| RxJS | • 文档极为完善<br>•\
+  \ 兼容性极佳<br>• API 成熟度高，辅助方法丰富<br>• 与其他 Rx* 产品共享 API，便于技术迁移<br>• 被 Netflix、Microsoft、GitHub\
+  \ 等大公司采用<br>• 支持背压 | • 非专为 Node.js 设计，需额外安装模块<br>• 因背后大型团队限制，新功能扩展自由度较低<br>• 设计思路偏向\
+  \ C# 或 Java，API 存在对象嵌套（如 `RX.Obsevable.case`） |\n| Bacon.js | • API 优秀且辅助方法丰富<br>•\
+  \ API 更简洁，专为 JavaScript 设计<br>• 原生支持 Node.js<br>• 官网提供丰富的示例与教程 | • 不支持背压 |\n| Highland.js\
+  \ | • 支持背压<br>• 占用空间小<br>• 专为 Node.js 设计<br>• 基于 Node 流实现 | • 可用的文档较少<br>• 可用的辅助方法较少\
+  \ |\n\n**注意** 本章涉及的三个库都非常优秀，使用它们几乎不存在明显缺陷。但为了便于对比，我会将相对不理想的特性列为“缺点”。\n\n## 小结\n\n\
+  现在，你应当已充分理解每个函数式响应式库应具备的关键特性，同时也接触到该领域其他开发者的大量参考成果。\n\n接下来要做的是，受本书已覆盖内容的启发，向你展示一种类似的实现方法——这应能让你直观理解此类库的内部运作机制；理想情况下，通过这种方式，你还能进一步领悟响应式编程的核心原理。\n\
+  \n那么，让我们进入下一章，共同为 Node.js 编写一个全新的 FRP 库吧。\n\n# 7. 编写你自己的 FRP 库\n\n你终于来到了将一切（或者说几乎所有内容）付诸实践的章节。在本章中，我将综合考虑之前讨论的所有内容：函数式编程、响应式编程、Node.js（显而易见！）以及现有库提供的示例，并以此为基础编写一个全新的\
+  \ Node FRP 库的第一个版本。\n\n本章的目的并非超越之前介绍的那些已发布模块，而是从内部视角展示创建类似库的过程。换言之，理解事物的运作方式将帮助你掌握相关概念——即使本章提供的实现与已审查的库并不完全相同（确实不同），你仍能观察到解决实现相关问题的可行方案。\n\
+  \n到本章结束时，你将清楚了解如何实现一个函数式响应式库，以及如何将其发布到 Node 的 `npm` 公共注册表。\n\n首先，让我们讨论我将编写的库的类型。如前所述，这个库显然会借鉴上一章讨论的三个库（即：RxJS、Bacon.js\
+  \ 和 Highland.js）。\n\n由于实现过程可能需要数月之久，更不用说实际代码审查了，因此这个新库将仅包含执行常见响应式操作所需的最基本功能，例如：转换队列、流合并、以及防抖等简单时间函数。\n\
+  \n即便如此，它也应提供足够的基础框架，供你在此基础上进行试验和扩展，以创建符合特定需求的个性化版本。\n\n接下来我将描述该库的内部架构——我巧妙地将其命名为\
+  \ R-CheeseJS（是不是很妙？）。你将看到我实际上遵循了一种极其简单且易于扩展的架构，同样是为了便于你根据需要轻松添加更多功能。你可以随书获取 R-Cheese\
+  \ 的代码，或从 GitHub（地址：[`https://github.com/deleteman/r-cheese`](https://github.com/deleteman/r-cheese)）下载。\n\
+  \nR-Cheese 的代码分为两个文件：一个用于主库（其中仅包含少量公共方法），另一个用于工具函数（这将是主要亮点，包含你最常用的功能）。\n\n\n\n#\
+  \ 大奶酪\n\n主库（你始终需要使用的那个）被设计为基于 Node.js 流（stream）运行，这简化了事情，因为我无需模拟流的运作方式（例如基于时间的事件、数据传输等），Node\
+  \ 本身已经为我完成了这些工作。因此，这个库所做的是提供一个更简洁的接口来与 Node 流交互，同时也提供了简单的方法来转换流经其中的数据。\n\n从用户角度来看，你需要关注的主要方法有：\n\
+  \n*   `fromStream`：此方法会从一个常规的 Node.js 流创建一个奶酪流（该流上的每一个 `data` 事件都会写入内部的奶酪流）。\n*\
+  \   `fromArray`：同样，此方法会从一个普通的 Array 对象创建一个新的奶酪流。数组项将每 100 毫秒（默认值）或按照作为第二个可选参数提供的延迟时间间隔被发出。\n\
+  *   `fromFn`：`fromXXX`系列方法中的最后一个。此方法会根据一个函数的返回值来创建一个新的奶酪流。其工作原理与前一个类似，但让你对发出什么内容以及何时发出有更多控制。此方法接收一个可选的第二个参数来设置发出值的延迟，与上述类似（但默认值为\
+  \ 0 毫秒，因为你也可以在函数内部定义时间。作为发射器传入的函数将接收一个单一函数作为参数，每当需要发出一个新值时，都必须调用该参数函数）。\n*   `merge`：此方法会将当前的内部流与作为参数传入的任何其他流合并。结果数据块的顺序仅由不同\
+  \ `data` 事件的时间决定。\n*   `then`：此方法仅作为语法糖，允许你对流经管道的数据块进行链式转换。每次调用仅接收一个函数。\n*   `onError`：与上述方法类似，但它设置了一条特殊的转换链，仅当某个转换发出错误时（无论是通过抛出异常还是向其回调传递错误参数）才会执行。\n\
+  *   `each`：最后，这应该是每个转换链上调用的最后一个方法。它启动流的执行直到调用此方法为止，并接收一个最终函数，该函数将在转换链结束时以最终的返回值被调用。\n\
+  \n现在我们来看几个上述方法的示例，然后我会向你展示它们的代码。第一个示例展示了如何使用 `fromStream` 方法与现有的 Node.js 流进行交互：\n\
+  \n```\nvar Cheese  = require(\"./cheese\").Cheese;\nvar fs = require(\"fs\");\n\
+  var ch = new Cheese();\nvar chStream = ch.fromStream(fs.createReadStream('./test-cheese1.js'));\n\
+  chStream\n.each(function(content) {\nconsole.log(content.toString());\n});\n```\n\
+  \n如你所见，上面的例子非常简单，但它展示了 `fromStream` 方法以及 `each` 方法的强制用法——没有 `each` 方法，文件读取将永远不会开始。你可以通过在调用\
+  \ `each` 之前使用 `then` 方法轻松添加一些转换，如下所示：\n\n```\n// 重写前一个例子的最后几行\nchStream\n.then(function(chunk)\
+  \ {\nreturn chunk.toString().toUpperCase();\n})\n.each(function(content) {\nconsole.log(content.toString());\n\
+  });\n```\n\n默认情况下，你可以向 `then` 方法传递任何函数，它会检查该函数是接收一个参数（假定为同步函数）还是两个参数（假定为异步函数），并相应地执行。\n\
+  \n现在让我们来看最后一个例子，分别展示有无错误处理的情况：\n\n```\nvar Cheese = require(\"r-cheese\").Cheese;\n\
+  var fs = require(\"fs\");\nvar flatMap = require(\"r-cheese\").Utils.flatMap;\n\
+  var ch = new Cheese();\nvar filenames = ['./test-cheese1.js', './test-cheese23.js'];\n\
+  ch.fromArray(filenames)\n.then(flatMap(function(name) {\nreturn fs.createReadStream(name.toString());\n\
+  }))\n.each(function(content) {\nconsole.log(content.toString());\n});\n```\n\n暂时忽略\
+  \ `flatMap` 函数的使用（我稍后会介绍），上述代码简单地获取了一个文件路径列表，并将其转换为每个元素的实际文件内容。它最终还会输出这些内容。现在，如果其中一个文件路径包含拼写错误，你最终会在屏幕上看到一个未处理的异常，因为\
+  \ `fs.createReadStream` 这行代码会产生一个 `error` 事件，而你没有处理该事件的逻辑。事实上，由于 Node.js 处理错误事件的方式，并且因为你没有监听它，你的脚本将会被终止（我之前在某一章中提到过，还记得吗？）\n\
+  \n你可以轻松地通过使用 `onError` 方法来添加错误处理来解决这个问题，如下所示：\n\n```\nch.fromArray(filenames)\n\
+  .then(flatMap(function(name) {\nreturn fs.createReadStream(name.toString())\n}))\n\
+  .onError(function(e) {\nconsole.trace(e);\n})\n.each(function(cnt) {\nconsole.log(cnt.toString());\n\
+  });\n```\n\n这样，你就安全地处理了错误事件，你的脚本不会被提前终止，并且你可以完全控制如何处理该错误。\n\n**注意**\n\n产生错误的数据块将不会被后续的任何转换处理，但后续的数据块将照常通过整个链（前提是它们本身也不产生错误）。\n\
+  \n现在，让我们来看看主库的代码，好吗？\n\n```\nvar Streams = require(\"stream\");\nvar inherits =\
+  \ require(\"util\").inherits;\nvar Transform = Streams.Transform;\nfunction OutputStream()\
+  \ {\nTransform.call(this);\n}\ninherits(OutputStream, Transform);\nOutputStream.prototype._transform\
+  \ = function(chunk, encoding, callback) {\ncallback(null, chunk);\n}\nvar DEFAULT_ARRAY_DELAY\
+  \ = 100; //毫秒\nvar DEFAULT_FN_DELAY = 0; //毫秒\n```\n\n前面的几行代码仅仅是定义了我们的内部流，以及一些下面会用到的默认值。\n\
+  \n```\nfunction Cheese(stream, transformations) {\nthis._stream = stream || null;\n\
+  this._stream_ended = false;\nthis._outputStream = new OutputStream();\nif(this._stream\
+  \ !== null) {\nthis.fromStream(stream)\n}\nthis._transformations = transformations\
+  \ || [];\nthis._error_transformations = [];\nthis._source_name = null;\nthis._source_interval\
+  \ = null;\nthis._source_interval_delay = null;\nthis._source_interval_origin = null;\n\
+  }\nCheese.prototype.fromStream = function(stream) {\nvar self = this;\nthis._stream\
+  \ = stream;\nthis._source_name = 'stream';\nthis._stream.on('data', function(d)\
+  \ {\nself._writeToOutput(d);\n});\nreturn this;\n};\nCheese.prototype.fromFn = function(fn,\
+  \ delay) {\nif(typeof delay == 'undefined') {\ndelay = DEFAULT_FN_DELAY;\n}\nthis._source_name\
+  \ = 'fn';\nthis._source_interval_delay = delay;\nthis._source_interval_origin =\
+  \ fn;\nreturn this;\n};\nCheese.prototype.fromArray = function(arr, delay) {\nif(typeof\
+  \ delay == 'undefined') {\ndelay = DEFAULT_ARRAY_DELAY;\n}\nthis._source_name =\
+  \ 'array';\nthis._source_interval_delay = delay;\nthis._source_interval_origin =\
+  \ arr;\nreturn this;\n};\n```\n\n前面的三个方法设置了事件收集的方式，取决于数据源（数组、函数或流）。请注意，这些方法仅在正确的变量上设置正确的值，只有当调用\
+  \ `each` 方法时，实际的（定时器）间隔才会启动（见下文）。\n\n```\nCheese.prototype._writeToOutput = function(val)\
+  \ {\nif(!this._stream_ended) {\nif(val !== null) {\nval = val.toString();\n}\nthis._outputStream.write(val);\n\
+  }\n}\n```\n\n\n\n之前的方法将所有写入操作集中到内部流上，请记住，整个库的基本职责是处理数据流并对其进行转换，最终写入到内部流中，而此方法正是负责这最后一步的。\n\
+  \n一旦库开始从设定的数据源拉取数据，每个数据块都会经过通过`then`方法设定的转换链。以下方法负责执行这些转换，将其应用于数据，并将结果传递给链中的下一个方法。它们是同一概念的不同变体，具体取决于正在执行的辅助转换函数的类型，需要不同的参数（甚至行为）。有一个名为`_execute_normal`的默认方法，用于处理简单函数（即自定义转换函数，而非库提供的函数）。如果你正在扩展此库并添加新的转换，可以依赖`_execute_normal`方法，或在此处添加新的特定处理器。以下按不特定顺序列出这些方法：\n\
+  \n```\nCheese.prototype._execute_filter = function(idx, value, handler, transforms)\
+  \ {\nvar self = this;\ntransformsidx {\nif(!err && !!resp === true) {\nif(transforms.length\
+  \ > idx + 1) {\nself._execute(++idx, value, handler, transforms);\n} else {\nhandler(value);\n\
+  }\n}\n});\n};\nCheese.prototype._execute_normal = function(idx, value, handler,\
+  \ transforms) {\nvar self = this;\nif(transforms.length == 0) {\nreturn handler(value);\n\
+  }\nvar fn = transforms[idx];\nif(fn.length == 2) {\n//检查函数接收的参数数量\nfn(value, function(err,\
+  \ resp ) {\nif(err) {\nreturn self._execute(0, err, handler, self._error_transformations);\n\
+  }\nif(transforms.length > idx + 1) {\nself._execute(++idx, resp, handler, transforms);\n\
+  } else {\nhandler(resp);\n}\n});\n} else {\ntry {\nvar resp = fn(value);\nif(transforms.length\
+  \ > idx + 1) {\nself._execute(++idx, resp, handler, transforms);\n} else {\nif(handler)\
+  \ {\nhandler(resp);\n}\n}\n} catch (err ) {\nself._execute(0, err, handler, self._error_transformations);\n\
+  }\n}\n};\n```\n\n上述函数允许执行同步或异步的自定义转换，并妥善处理其错误。为清晰起见，如果自定义转换只接收一个参数（你可以通过查询函数的`length`属性获知），我假设此函数是同步的，因为它只接收要转换的值；但如果它接收两个参数，那么我假设第二个参数是回调函数，并且它是一个异步函数（定义超过两个参数的自定义转换没有意义，因为库无法知道要传递什么给额外的参数）。\n\
+  \n错误处理通过以下方式进行：对于同步函数，捕获异常；对于异步版本，检查回调中的错误，然后将错误传递给错误转换链。\n\n```\nCheese.prototype._execute_reduce\
+  \ = function(idx, value, handler, transforms) {\nvar self = this;\ntransformsidx\
+  \ {\nif(transforms.length > idx + 1) {\nself._execute(++idx, resp, handler, transforms);\n\
+  } else {\nhandler(resp);\n}\n});\n};\n```\n\n`reduce`辅助函数（我将在本章后面展示）的工作原理是，将同一转换应用于流中的所有值，直到流结束，然后发出最终值。为了知道流何时结束，该函数需要实际的流对象，这就是上述方法将其作为第一个参数传递给函数的原因。\n\
+  \n`split`函数是一个非常简单的同步函数，因此以下方法通过调用链中的下一步来执行它。\n\n```\nCheese.prototype._execute_split\
+  \ = function(idx, value, handler, transforms) {\nvar self = this;\nvar parts = transformsidx;\n\
+  if(transforms.length > idx + 1) {\nself._execute(++idx, parts, handler, transforms);\n\
+  } else {\nhandler(parts);\n}\n};\nCheese.prototype._execute_flatmap = function(idx,\
+  \ value, handler, transforms) {\nvar self = this;\ntransformsidx {\nif(err) {\n\
+  return self._execute(0, err, handler, self._error_transformations);\n}\nif(transforms.length\
+  \ > idx + 1) {\nself._execute(++idx, resp, handler, transforms);\n} else {\nhandler(resp);\n\
+  }\n});\n};\n```\n\n`flatMap`转换从其接收的函数的结果创建一个新流，因此为了在新流上保持相同的错误链，我将其传递给`flatMap`函数，稍后你将看到，该函数会获取错误处理链并将其添加到新流中。这样，如果在执行`flatMap`之后出现问题，错误仍能得到正确处理。\n\
+  \n对于 take 相关的辅助函数（take、takeUntil 和 takeWhile），我需要一种从辅助函数内部发出内部流结束信号的方法，这就解释了我需要访问流对象的原因，也就是为什么我在以下方法中将其作为参数传递。\n\
+  \n```\nCheese.prototype._execute_take_transform = function(idx, value, handler,\
+  \ transforms) {\nvar self = this;\ntransformsidx {\nif(err) {\nreturn self._execute(0,\
+  \ err, handler, self._error_transformations);\n}\nif(transforms.length > idx + 1)\
+  \ {\nself._execute(++idx, resp, handler, transforms);\n} else {\nhandler(resp);\n\
+  }\n});\n};\nCheese.prototype._execute_debounce_throttle = function(idx, value, handler,\
+  \ transforms) {\nvar self = this;\ntransformsidx {\nif(transforms.length > idx +\
+  \ 1) {\nself._execute(++idx, value, handler, transforms);\n} else {\nhandler(value);\n\
+  }\n});\n};\n```\n\n最后，这一批方法中的最后一个负责执行`debounce`和`throttle`辅助函数。这些函数非常特殊，因为它们需要处理修改事件的时间，本质上是修改原始数据源。这就是为什么我将`this`对象作为第一个参数传递；通过访问整个`Cheese`对象，辅助函数可以覆盖数据发射的方式（稍后向您展示该代码时，您将看到更多细节）。\n\
+  \n```\nCheese.prototype._execute = function(idx, value, handler, transforms) {\n\
+  var fnType = transforms[idx]  ? transforms[idx].__fn_type : null;\nvar execs = {\n\
+  'filter': this._execute_filter.bind(this),\n'reduce': this._execute_reduce.bind(this),\n\
+  'split': this._execute_split.bind(this),\n'take': this._execute_take_transform.bind(this),\
+  \ //负责处理所有 3 种类型的 take\n'debounce': this._execute_debounce_throttle.bind(this),\n\
+  'throttle': this._execute_debounce_throttle.bind(this),\n'flatMap': this._execute_flatmap.bind(this)\n\
+  };\nif(execs[fnType]) {\nexecsfnType;\n} else {\nthis._execute_normal(idx, value,\
+  \ handler, transforms);\n}\n};\n```\n\n上述方法负责选择正确的辅助方法，以执行转换链当前位置的辅助函数。基本上，库提供的每个辅助函数（您很快就会看到）都有一个`__fn_type`属性，该属性标识了辅助函数的类型（例如，`map`函数对应\"\
+  `map`\"，所有不同的`take`函数对应\"`take`\"等）。因此，`_execute`方法可以使用该属性来选择要使用的正确辅助方法，或者默认使用能够处理通用转换函数的方法。\n\
+  \n以下方法通过订阅`data`事件并将每个数据块写入内部流（即所有数据写入的公共流），来处理将新流合并到当前流中的操作。\n\n\n\n`Cheese.prototype.merge\
+  \ = function(newStream) {\nvar self = this;\nnewStream.on('data', function(d) {\n\
+  self._writeToOutput(d);\n});\nreturn this;\n}\nCheese.prototype.each = function(handler)\
+  \ {\nvar self = this;\nvar index = 0;\n//我们需要在此处创建一个新的转换列表，以便当触发'data'事件时，只有当前的转换列表\n\
+  //会被该处理器执行\nvar transforms = this._transformations.map(function(t) {\nif(t.newInstance)\
+  \ {\nreturn t.newInstance();\n}\nreturn t;\n});\n//启动转换链\nthis._outputStream.on('data',\
+  \ function(d) {\nself._execute(index, d, handler, transforms);\n});\nthis._outputStream.on('finish',\
+  \ function() {\nself._endSource();\n});\nif(this._source_name == 'fn' && !this._source_interval)\
+  \ {\nself._source_interval = setInterval(function() {\nself._source_interval_origin(function(value)\
+  \ {\nif(value === null) {\nreturn self._endSource();\n}\nself._writeToOutput(value);\n\
+  })\n}, self._source_interval_delay);\n}\nif(this._source_name == 'array' && !this._source_interval)\
+  \ {\nthis._source_interval = setInterval(function() {\nif(self._source_interval_origin.length\
+  \ > 0) {\nself._writeToOutput(self._source_interval_origin.shift());\n} else {\n\
+  self._endSource();\n}\n}, this._source_interval_delay);\n}\n};\n```\n\n从开发者的角度来看，前一个方法承担了一个简单的职责，但如你所见，它在内部处理了好几项任务：\n\
+  \n- 它会创建调用时点转换列表的一份副本。这样你就可以在流的不同位置调用它，以便在数据转换过程中做出部分响应（在上一章讨论 Bacon.js 库时，我展示过类似的例子）。\n\
+  - 它还负责启动转换链。在此之前你一直在设置转换，但直到该方法被调用时，数据才会在链中流动。\n- 它确保在流结束时调用`_endSource`方法（若你将函数作为数据源，这一点尤其有用）。\n\
+  - 最后，它为从非流数据源（如函数和数组）拉取数据创建所需的定时器。\n\n另外，请注意为数组源设置的定时器会在没有更多待发射元素时调用`_endSource`，而为函数源设置的定时器则不会。这意味着函数必须写入一个`null`值来通知数据已全部发送完毕。\n\
+  \n下面这三个方法简短易懂，但为了完整性，我快速过一遍：\n\n- `_endSource`：该方法根据数据源类型以适当方式结束数据源。对于基于定时器的数据源，它会清除定时器；对于流，它会结束流。若后续添加更多类型的数据源，则需扩展此方法。\n\
+  - `then`：简单的方法，将转换添加到列表中并返回对象自身，以保持链式调用。\n- `onError`：该方法设置错误处理链并向其中添加函数。如果数据源是流，它还会订阅`error`事件，从而确保应用不会被\
+  \ Node.js 意外终止。\n\n```\nCheese.prototype._endSource = function() {\nthis._stream_ended\
+  \ = true;\nswitch(this._source_name) {\ncase 'stream':\nthis._stream.end();\nbreak;\n\
+  case 'array':\ncase 'fn':\nthis._outputStream.end();\nclearInterval(this._source_interval);\n\
+  break;\n}\n};\nCheese.prototype.then = function(fn) {\nthis._transformations.push(fn);\n\
+  return this;\n};\nCheese.prototype.onError = function(fn) {\nvar self = this;\n\
+  //如果是 fromStream 的情况，首次设置错误处理器时，确保\n//正确处理 error 事件\nif(this._error_transformations.length\
+  \ == 0 && this._source_name == 'stream') {\nthis._stream.on('error', function(err)\
+  \ {\nself._execute(0, err, null, self._error_transformations);\n});\n}\nthis._error_transformations.push(fn);\n\
+  return this;\n};\nmodule.exports = Cheese;\n```\n\n至此，主库的分析结束。接下来让我展示辅助函数的代码，这些内容读起来也颇有启发。\n\
+  \n## Little Cheese 小芝士\n\nR-Cheese 的第一个版本总共提供了九个转换函数，并将它们作为独立函数导出，以简化添加新函数的任务：只需将新函数添加到`utils.js`文件并导出即可。\n\
+  \n尽管导出的转换函数彼此差异很大，但定义它们的函数结构始终相同，它们基本遵循以下模板：\n\n```\nfunction transformation([params])\
+  \ {\nvar _fn = function([params]) {\n//你的代码写在这里\n};\n_fn.__fn_type = '[函数类型标识符]';\n\
+  _fn.newInstance = function() {\n//你的代码写在这里\n};\nreturn _fn;\n}\n```\n\n每个转换函数实际上都是执行实际工作的函数的包装器。由于\
+  \ JavaScript 中的函数也是对象，我可以为它们添加一些属性，主要是`__fn_type`（一个标识转换类型的字符串，正如你之前所见，主库代码中的`_execute`方法会用到它）和`newInstance`方法（它基本上应该返回转换的一个新实例，你可以在主库的`each`方法中找到它的用法）。\n\
+  \n现在让我逐一介绍内置于代码中的每个转换函数。其中一些在前几章已经讨论过，另一些可能对你来说是新的，希望通过解释和代码，你能轻松理解它们。\n\n## Map、Filter\
+  \ 和 Reduce\n\n这三个是最常见的转换，我在前几章也已经介绍过，所以没什么特别需要补充的了。因此，我直接展示它们的实现：\n\n```\nfunction\
+  \ map(fn) {\nvar _fn = function(value, done){\nfn(value, done); //此版本的 map 函数是异步的，因此需要回调函数\n\
+  };\n_fn.__fn_type = 'map';\n_fn.newInstance = function() {\nreturn map(fn);\n};\n\
+  return _fn;\n}\nfunction filter(fn) {\nvar _fn = function(value, done) {\nfn(value,\
+  \ done);\n};\n_fn.__fn_type = 'filter';\n_fn.newInstance = function() {\nreturn\
+  \ filter(fn);\n};\nreturn _fn;\n}\nfunction reduce(init, fn) {\nvar accu = init;\n\
+  var listenerSet = false;\nvar _fn = function(stream, value, done) {\naccu = fn(accu\
+  \ , value);\nif(!listenerSet) {\nstream.on('end', function() {\ndone(accu );\n});\n\
+  listenerSet = true;\n}\n};\n_fn.__fn_type = 'reduce';\n_fn.newInstance = function()\
+  \ {\nreturn reduce(init, fn);\n};\nreturn _fn;\n}\n```\n\n如你所见，所有三个函数都遵循我之前展示的模板。第一个`map`函数其实没太大玄机，它是这些函数中最简单的一个，本质上只是语法糖，因为它所做的就是执行作为参数传入的函数。由于主库中的`_execute_normal`方法，执行`map`或直接将匿名函数传递给`then`方法效果相同。\n\
+  \n`filter`函数也非常简单，事实上它的代码几乎与`map`完全一样，唯一的区别是函数类型标识符不同，这反过来告诉主库如何解释该函数的输出以及如何处理它。\n\
+  \n最后，`reduce`函数（在其他库中也被称为`scan`）会按照传入函数指定的方式累积数据块，并在流结束时发射累积结果。正如你所见，这就是该函数需要将流作为参数传入的原因——它需要订阅内部流的`end`事件。\n\
+  \n\n\n"
+- '# 不断取用
+
+
+  此处提供了 `take` 函数的三种变体。第一种是简单的 `take` 函数，它会从数据流中接受固定数量的数据块，然后终止数据流。第二种是 `takeUntil`
+  函数，它会从数据源中接受数据块，直到作为参数传入的函数所定义的条件满足为止（基本上，当该函数返回 `true` 时）。最后是 `takeWhile`，它与 `takeUntil`
+  非常相似，但条件正好相反：只要条件满足，它就会接受数据块，此后，数据将无法通过此节点。
+
+
+  首先，让我们看看它们的代码：
+
+
+  ```
+
+  function take(number) {
+
+  var counter = 0;
+
+  var max = number;
+
+  var _fn = function(stream, value, done) {
+
+  counter++;
+
+  if(counter == max) {
+
+  stream.end();
+
+  }
+
+  return done(null, value);
+
+  };
+
+  _fn.__fn_type = ''take'';
+
+  _fn.newInstance = function() {
+
+  return take(number);
+
+  };
+
+  return _fn;
+
+  }
+
+  function takeUntil(condition) {
+
+  var _fn = function(stream, value, done) {
+
+  if(condition.length === 1) {
+
+  if(condition(value)) {
+
+  return stream.end();
+
+  }
+
+  return done(null, value);
+
+  } else {
+
+  condition(value, function(err, resp) {
+
+  if(!!resp === true) {
+
+  return stream.end();
+
+  }
+
+  return done(err, value);
+
+  });
+
+  }
+
+  };
+
+  _fn.__fn_type = ''take'';
+
+  _fn.newInstance = function() {
+
+  return takeUntil(condition);
+
+  };
+
+  return _fn;
+
+  }
+
+  function takeWhile(condition) {
+
+  var _fn = function(stream, value, done) {
+
+  if(condition.length === 1) {
+
+  if(!condition(value)) {
+
+  return stream.end();
+
+  }
+
+  return done(null, value);
+
+  } else {
+
+  condition(value, function(err, resp) {
+
+  if(!!resp === false) {
+
+  return stream.end();
+
+  }
+
+  return done(err, value);
+
+  });
+
+  }
+
+  };
+
+  _fn.__fn_type = ''take'';
+
+  _fn.newInstance = function() {
+
+  return takeWhile(condition);
+
+  };
+
+  return _fn;
+
+  }
+
+  ```
+
+
+  它们的代码彼此非常相似，甚至共享同一个函数类型标识符，因为主库可以用相同的方式处理这三种函数。最后，`takeUntil` 和 `takeWhile` 都接受异步和同步函数作为决定何时停止的条件。图
+  7-1 给出了这三种变体行为方式的示例。
+
+
+  ![A418015_1_En_7_Fig1_HTML.jpg](img/A418015_1_En_7_Fig1_HTML.jpg)
+
+
+  **图 7-1.** 大理石图展示了三种 `take` 方法之间的差异
+
+
+  让我们快速查看一下这些方法的代码示例：
+
+
+  ```
+
+  var cheese = require("./cheese").Cheese;
+
+  var _ = require("lodash");
+
+  var take = require("./cheese").Utils.take;
+
+  var takeUntil = require("./cheese").Utils.takeUntil;
+
+  var takeWhile = require("./cheese").Utils.takeWhile;
+
+  var ch = new cheese();
+
+  var ch1 = new cheese();
+
+  var ch2 = new cheese();
+
+  ch.fromArray(_.range(100)).then(take(10)).each(function(v) {
+
+  console.log("Ch: ", v.toString());
+
+  });
+
+  ch1.fromArray(_.range(100)).then(takeWhile(function(v) {
+
+  // the value needs to be coerced into an integer, because all data that flows through
+  the stream is casted into a String .
+
+  return +v  10;
+
+  }))
+
+  .each(function(v) {
+
+  console.log("Ch2: ", v.toString());
+
+  })
+
+  ```
+
+
+  正如你可能已经猜到的那样，这三种变体都做着同样的事情：只取数据流的前 10 个元素，然后关闭它。
+
+
+  '
+- '# 拆分数据块
+
+
+  这个函数相当直接，没什么好说的。它只是对数据执行 `map` 然后在其中进行字符串 `split` 的一种快捷方式。默认情况下，它会根据单个字符组成的数组来拆分字符串，除非你向它传递一个分隔符字符串。
+
+
+  此函数的结果是一个值数组，恰好可以通过 `flatMap` 转换成一个新的数据流。
+
+
+  以下是此转换函数的代码：
+
+
+  ```
+
+  function split(separator) {
+
+  var _fn = function(value) {
+
+  return value.toString().split(separator || "");
+
+  }
+
+  _fn.__fn_type = ''split'';
+
+  _fn.newInstance = function() {
+
+  return _fn;
+
+  }
+
+  return _fn;
+
+  }
+
+  ```
+
+
+  现在，让我们看看这个关于 `split` 和 `flatMap` 一起使用的示例：
+
+
+  ```
+
+  var cheese = require("./cheese").Cheese;
+
+  var flatMap = require("./cheese").Utils.flatMap;
+
+  var split = require("./cheese").Utils.split;
+
+  var ch = new cheese();
+
+  var words = ["test", "goodbye"];
+
+  ch.fromArray(words)
+
+  .then(split())
+
+  .then(flatMap(function(arr) {
+
+  return arr
+
+  }))
+
+  .onError(function(e) {
+
+  console.trace(e)
+
+  })
+
+  .each(function(cnt) {
+
+  console.log("Ch: ", cnt.toString());
+
+  });
+
+  ```
+
+
+  上面代码的输出可能并非你想象的那样。请查看图 7-2 的截图：
+
+
+  ![A418015_1_En_7_Fig2_HTML.jpg](img/A418015_1_En_7_Fig2_HTML.jpg)
+
+
+  **图 7-2.** 上述代码的混合输出
+
+
+  因为 `flatMap` 函数实际上创建了两个不同的数据流（分别来自 `split` 返回的每个数组），所以最终会得到两个并行工作的源数据流，就好像它们被合并成了一个。这就是某些字母混合在一起，而不是一个接一个单词出现的原因。
+
+
+
+
+  ### FlatMap 与错综复杂的情节
+
+
+  这是本代码中提供的三种最复杂的转换中的第一种，后两种处理时间问题，但这里的情况并非如此。
+
+
+  我一直在本章的几个示例中使用这种转换，但没有深入细节，所以你可能已经猜到了这个函数的作用，或者你可能像我第一次读到它时一样感到困惑，所以让我尽可能简单地解释一下。
+
+
+  `flatMap` 函数能够从它接收到的函数的返回值中创建一个新的流。这个返回值应该是库知道如何用作流数据源的东西，即：
+
+
+  -   另一个流（查看 `flatMap` 返回执行 `fs.createReadStream` 的结果流的示例）。
+
+  -   一个数组（查看之前展示的示例）。
+
+  -   一个函数，当然，该函数必须符合 `fromFn` 所期望的必需行为。
+
+
+  如果使用得当，这种转换为你的流提供了极大的灵活性。查看图 7-3 了解其工作原理。
+
+
+  ![A418015_1_En_7_Fig3_HTML.jpg](img/A418015_1_En_7_Fig3_HTML.jpg)
+
+
+  **图 7-3.** 一个弹珠图，展示了 `flatMap` 如何转换流的简化版本
+
+
+  图 7-3 以图形方式阐述了我上面解释的内容：对于传递给 `flatMap` 的函数返回的每个可观察元素，该转换如何返回一个新流，以及这些结果流如何实际上并行工作并混合它们的值（就像之前的
+  `split` 示例一样）。
+
+
+  此转换的代码如下所示（此函数还允许开发者使用同步和异步函数作为 `flatMap` 的参数）：
+
+
+  ```
+
+  function flatMap(fn) {
+
+  var _fn;
+
+  var observable;
+
+  var newStream = null;
+
+  function setEachEvent(stream, observable, error_transforms, done) {
+
+  if(Array.isArray(observable)) {
+
+  stream.fromArray(observable)
+
+  } else if(typeof observable === ''function'') {
+
+  stream.fromFn(observable);
+
+  } else if(observable instanceof _streams) {
+
+  stream.fromStream(observable);
+
+  }
+
+  error_transforms.forEach(function(et) {
+
+  stream.onError(et);
+
+  })
+
+  //对于 newStream 发出的每个项
+
+  //将其插入原始流中
+
+  //**放在正确的位置**
+
+  stream.each(function(v) {
+
+  done(null, v);
+
+  });
+
+  }
+
+  if(fn.length == 1) {
+
+  _fn = function(value, error_transforms, done) {
+
+  newStream = new Cheese();
+
+  try {
+
+  observable = fn(value);
+
+  } catch (e) {
+
+  return done(e);
+
+  }
+
+  setEachEvent(newStream, observable, error_transforms, done);
+
+  };
+
+  } else {
+
+  _fn = function(value, error_transforms, done) {
+
+  newStream = new Cheese();
+
+  fn(value, function(err, observable) {
+
+  if(err) {
+
+  return done(err);
+
+  }
+
+  setEachEvent(newStream, observable, error_transforms, done);
+
+  });
+
+  };
+
+  }
+
+  _fn.__fn_type = ''flatMap'';
+
+  _fn.newInstance = function() {
+
+  return flatMap(fn);
+
+  }
+
+  return _fn;
+
+  }
+
+  ```
+
+
+  从字面上看，这个转换是从传入函数的结果输出中创建一个新的流。`done` 回调是连接回原始转换链的纽带，`_fn` 函数也接收错误转换链，以确保新流知晓它（这样，如果新流上发生错误，相同的错误转换链将以对开发者透明的方式应用）。
+
+
+  ### 处理时间
+
+
+  最后两个转换处理流中事件的时间安排，因为有时开发者需要的不是处理接收到的每一个数据块，实际上，其中一些事件可能是重复的，特别是如果它们是用户生成的事件（在后端不适用，但前端的点击事件在这里是一个非常常见的例子）。
+
+
+  这就是为什么提供了两个转换来处理这种情况（尽管存在更多转换，如果需要也可以轻松添加）：`debounce` 和 `throttle`。尽管乍一看它们似乎在执行相同的操作，但它们的行为并不完全相同，如果在应该使用另一个时使用了这一个，结果可能是不可预测的。
+
+
+  让我们先从 `debounce` 开始，其背后的思想是，给定一个事件流，你想要移除那些由于某种原因时间间隔太近的事件，因此你可以设置一个延迟时间，并告诉转换使用该延迟对事件进行
+  `debounce`。让我们先看图 7-4，然后我会进一步解释：
+
+
+  ![A418015_1_En_7_Fig4_HTML.jpg](img/A418015_1_En_7_Fig4_HTML.jpg)
+
+
+  **图 7-4.** `debounce` 函数的弹珠图
+
+
+  所以，再次，给定一个事件流，基于一个时间延迟对其进行去抖，意味着仅在过去 [延迟] 时间段内没有再收到其他事件时，才发出最后收到的事件。在图 7-4 的示意图中，输入被去抖了
+  3 毫秒，这意味着在一个值被接收后，如果在那 3 毫秒内没有收到其他值，它将被发出，否则将被忽略。这就是为什么值 2、3、4 和 5 被忽略，而 6 被发出的原因。
+
+
+  现在，另一方面，节流一个流是相似的，但又有所不同。它的意思是，每次延迟时间到了就会发出一个事件，如果中间发生了多个事件，只有最后一个事件会被发出，其余的被忽略。图
+  7-5 显示了节流的示意图：
+
+
+  ![A418015_1_En_7_Fig5_HTML.jpg](img/A418015_1_En_7_Fig5_HTML.jpg)
+
+
+  **图 7-5.** `throttle` 转换的弹珠图
+
+
+  使用相同的源流和相同的时间延迟，你可以看到结果与前一个有何不同，在这种情况下，值 2 和 5 也被发出，因为它们是在 3 毫秒间隔内收到的最后一个值。
+
+
+  以下是两个代码示例，展示了如何在你的代码中使用 `throttle` 和 `debounce`（这些是虚构的示例，没有实际应用，但你会在后续章节中了解到，别担心）：
+
+
+  ```
+
+  var cheese = require("r-cheese").Cheese;
+
+  var ch = new cheese();
+
+  var debounce = require("r-cheese").Utils.debounce;
+
+  var source = [
+
+  //v 是要发出的值，d 是发出它之前等待的延迟。
+
+  {v: "hola", d: 10},
+
+  {v: "adios", d: 1},
+
+  {v: "goodbye", d: 1},
+
+  {v: "hello", d: 5}];
+
+  var lastTimestamp = 0;
+
+  var index = 0;
+
+  ch.fromFn(function(push) {
+
+  if(Date.now() - lastTimestamp > source[index].d) {
+
+  console.log("Pushing value: ", source[index].v)
+
+  push(source[index].v)
+
+  lastTimestamp = Date.now();
+
+  index++;
+
+  }
+
+  if(index == source.length) {
+
+  push(null);
+
+  }
+
+  }).then(debounce(5)).each(function(n) {
+
+  console.log("::Received value: ", n.toString());
+
+  });
+
+  ```
+
+
+  上面 `debounce` 函数的示例将在不同时间点发出一系列值，去抖设置为 5 毫秒，输出如图 7-6 所示：
+
+
+  ![A418015_1_En_7_Fig6_HTML.jpg](img/A418015_1_En_7_Fig6_HTML.jpg)
+
+
+  **图 7-6.** `debounce` 示例的输出
+
+
+  至于 `throttle` 函数，示例如下：
+
+
+
+
+  ```javascript
+
+  var cheese = require("r-cheese").Cheese;
+
+  var ch = new cheese();
+
+  var throttle = require("r-cheese").Utils.throttle;
+
+  var source = [
+
+  {v: "hola", d: 1},
+
+  {v: "adios", d: 3000},
+
+  {v: "goodbye", d: 1000},
+
+  {v: "hello", d: 2000},
+
+  {v: null, d: 1000}];
+
+  var lastTimestamp = 0;
+
+  var index = 0;
+
+  ch.fromFn(function(push) {
+
+  if(Date.now() - lastTimestamp > source[index].d) {
+
+  console.log("Pushing value: ", source[index].v)
+
+  push(source[index].v)
+
+  lastTimestamp = Date.now();
+
+  index++;
+
+  }
+
+  }).then(throttle(2500)).each(function(n) {
+
+  console.log("::Received value: ", n.toString());
+
+  });
+
+  ```
+
+
+  上述示例与防抖示例的机制相同，只是这次时间间隔更长，以便正确演示节流的效果。在该示例中，我以 2.5 秒为间隔对数据进行节流，因此，如图 7-7 所示输出结果：
+
+
+  ![A418015_1_En_7_Fig7_HTML.jpg](img/A418015_1_En_7_Fig7_HTML.jpg)
+
+
+  图 7-7。
+
+
+  节流示例的输出
+
+
+  数据写入流的时间点用虚线标记，如您所见，节流间隔的时间点用实线标记，并且如预期所示，只有两个值最终通过，其余值均被忽略。
+
+
+  现在您已经了解了它们两者的使用方法，让我展示它们的实现：
+
+
+  ```
+
+  function debounce(delay) {
+
+  var lastTimestamp = null;
+
+  var debounced = false;
+
+  var listeners = [];
+
+  var _fn = function(cheese, value, index, handler, transforms, done) {
+
+  var now = null;
+
+  if(debounced) {
+
+  return done(cheese._outputStream);
+
+  }
+
+  /*
+
+  移除输出流上的所有活跃监听器
+
+  */
+
+  listeners = cheese._outputStream.listeners(''data'');
+
+  listeners.map(function(fn) {
+
+  cheese._outputStream.removeListener(''data'', fn);
+
+  });
+
+  /*
+
+  覆盖输出流上''data''事件的主监听器。
+
+  这样我们就可以控制何时真正开始转换以及何时忽略数据
+
+  */
+
+  cheese._outputStream.on(''data'', function(v) {
+
+  now = Date.now();
+
+  if(!lastTimestamp) {
+
+  lastTimestamp = Date.now();
+
+  }
+
+  if(now - lastTimestamp > delay) {
+
+  cheese._execute(index, v, handler, transforms);
+
+  }
+
+  lastTimestamp = now;
+
+  });
+
+  debounced = true;
+
+  return done(cheese._outputStream);
+
+  };
+
+  _fn.__fn_type = ''debounce'';
+
+  _fn.newInstance = function() {
+
+  return debounce(delay);
+
+  };
+
+  return _fn;
+
+  }
+
+  function throttle(delay) {
+
+  var throttled = false;
+
+  var listeners = [];
+
+  var bufferedValue = null;
+
+  var interval = null;
+
+  var _fn = function(cheese, value, index, handler, transforms, done) {
+
+  if(throttled) {
+
+  return done(cheese._outputStream);
+
+  }
+
+  listeners = cheese._outputStream.listeners(''data'');
+
+  listeners.forEach(function(fn) {
+
+  cheese._outputStream.removeListener(''data'', fn);
+
+  });
+
+  bufferedValue = value;
+
+  //缓冲流发出的最后一个值，直到合适的时机将其传递
+
+  cheese._outputStream.on(''data'', function(v) {
+
+  bufferedValue = v;
+
+  });
+
+  if(!interval) { //当第一个事件到达时启动间隔
+
+  interval =  setInterval(function() {
+
+  if(bufferedValue !== null) {
+
+  cheese._execute(index, bufferedValue, handler, transforms);
+
+  bufferedValue = null;
+
+  }
+
+  }, delay);
+
+  }
+
+  //确保在完成时清除活跃的间隔
+
+  cheese._outputStream.on(''finish'', function() {
+
+  clearInterval(interval);
+
+  })
+
+  throttled = true;
+
+  };
+
+  _fn.__fn_type = ''throttle'';
+
+  _fn.newInstance = function() {
+
+  return throttle(delay);
+
+  };
+
+  return _fn;
+
+  }
+
+  ```
+
+
+  尽管行为相似，但它们的实现却大相径庭，正如您所见，`debounce` 需要非常关注时间点，而 `throttle` 则只是设置一个间隔并缓冲接收到的最后一个值，直到间隔触发。其余的逻辑不言自明，在您看过
+  marble 图和示例之后，我几乎无需再多做解释。
+
+
+  '
+- '# 警告
+
+
+  Node.js 中创建的间隔在时间精度上并非超级精确，当您设置一个间隔每 X 毫秒执行一个函数时，它实际上至少每 X 毫秒执行一次。这意味着 Node.js 会尽力遵守设定的时间，但唯一确定的是函数不会提前执行。当您的间隔时间足够长时，不会出现问题，但如果您处理的是非常短的时间限制（如
+  10 毫秒或更少），则可能会遇到时间问题。
+
+
+  '
+- '# 总结
+
+
+  希望本章能让您获得最后的洞见，以充分理解并在 Node.js 中采用函数式响应式编程。
+
+
+  本章描述的库是您创建自己的 FRP 库的框架，您可以根据需要添加额外的转换。这些转换大多会是现有转换的变体，或许还有一些新的，但您应该拥有实现这一切所需的一切。
+
+
+  现在您已经拥有了这个库，在下一章中，我将分析一些后端 FRP 的示例，包括他人完成的示例，以及一个使用 R-CheeseJS 解决的具体案例。
+
+
+  '
+- "# 8. 实践概览\n\n迄今为止，本书已向您介绍了关于函数式响应式编程（FRP）的所有理论。您还拥有一个可运行的 FRP 库实现可供实践，因此您可能会想：还有什么呢？\n\
+  \n本章中，我将介绍一些现实世界公司采用响应式方式的示例，并尝试分析他们的原因和结果。请注意，尽管这些公司未必专门为此目的使用 Node.js，但响应式范式仍然适用，您可以将相关情况推广到实际场景中。\n\
+  \n最后，因为我知道您想要更多代码，我将通过创建一个可用的应用程序（考虑到您将从本书阅读代码的限制，并且我不想让您感到厌烦）来展示更多代码，该应用程序基于 R-Cheese\
+  \ 库运行。\n\n## Netflix 的案例\n\nNetflix 可能是目前全球最热门的公司之一，哪怕仅仅是因为其品牌在有互联网的地方几乎家喻户晓。但并非所有人都经常想到的是，Netflix\
+  \ 同样也是一家优秀的 IT 公司！\n\n由于其流媒体业务所带来的技术挑战，Netflix 不断被迫突破其使用的技术边界。多年来，他们一直是企业级 Node.js\
+  \ 的主要倡导者之一。而最近，他们又在前端和后端都推行函数式响应式方法。由于他们慷慨地在技术博客（[`techblog.netflix.com`](http://techblog.netflix.com)）上分享了经验，我现在可以对此进行介绍。\n\
+  \n\n\n### 他们的动机\n\nNetflix 后端最初的架构基于一系列 RESTful API，这些 API 提供了一个通用平台，供其多个客户端应用程序依赖。这是它的优点，但缺点在于，由于它是通用的且旨在服务差异巨大的客户端，每个服务只会返回客户端功能所需数据的一部分。\n\
+  \n随着用户数量增长，这种机制最终失控，因为每个客户端加载单个页面需要发起太多请求，而每个请求都会在网络延迟中增加额外耗时（这不仅影响页面加载时间，也影响内部服务通信）。最终，他们决定采用不同的方案。图\
+  \ 8-1 直观展示了该问题。\n\n![A418015_1_En_8_Fig1_HTML.jpg](img/A418015_1_En_8_Fig1_HTML.jpg)\n\
+  \n图 8-1. 原 Netflix 架构机制示意图\n\n图 8-1 展示了经典 RESTful API 架构的基本思路。该图表示单个客户端为某个功能发起的请求。渲染单个页面可能需要多条信息，因此会发起多个请求，这反过来又为每个请求增加了网络延迟。你可以看到这种情况如何失控。\n\
+  \n取而代之的是，他们决定转变思路，将创建所需数据集所需的逻辑迁移到后端，从而将客户端的任务简化为单个请求（并消除了因网络延迟造成的几乎所有额外时间）。图 8-2\
+  \ 展示了这一变化如何影响其后端。\n\n![A418015_1_En_8_Fig2_HTML.jpg](img/A418015_1_En_8_Fig2_HTML.jpg)\n\
+  \n图 8-2. 客户端请求更少的新架构\n\n现在，所有关于信息收集及如何整合信息的重要逻辑都已移回 API 的代码中，将图 8-1 中的五个请求减少为一个，本质上将整个过程的网络延迟成本降低到单个请求的水平。\n\
+  \n作为此变更的一部分，并且为了真正实现性能提升，他们还决定采用并发编程，同时将线程安全和并行执行实现中固有的复杂逻辑从客户端开发体验中剥离。基本上，他们需要为在其\
+  \ API 上进行开发的工程师提供一种方法，使其能够获得并发编程的全部能力，而无需处理通常伴随而来的繁琐事务。就在那时，他们采用了响应式编程。\n\n### 并发性的需求\n\
+  \n后端并发执行对于实现他们寻求的性能提升至关重要，因为否则单个“大型”客户端请求就无法真正与同一客户端使用旧 API 机制发起的多个“小型”请求竞争，原因很简单：得益于\
+  \ Web 服务器提供的并发性，这些小请求会并行执行。\n\n考虑到这一点，Netflix 的精英们评估了所有选项（考虑到他们只使用 Java）。回调和 Future\
+  \ 都不够好；这两种技术都承诺，如果逻辑过于复杂，会很快变得难以控制。\n\n但是，当他们评估响应式编程模型时，他们意识到这将提供他们所需的并发性，并为开发者提供一个易于使用和易于理解的模型，而正如我之前所说，这反过来将有助于缩短开发周期。正如你可能猜到的，缩短上市时间对大多数人来说是一个巨大的优势。\n\
+  \n仔细想想，响应式模型基于推送而非拉取，简化了从外部服务并发获取数据的任务，尤其是在微服务架构中（这将是理想情况）。开发者无需担心线程或类似结构，因为平台会处理这些；同时从多个来源获取数据只需订阅它们并等待它们推送数据回来。\n\
+  \n为实现这一目标，Netflix 的开发者将微软创建的 `RxJS` 库（我在第 6 章中介绍过）移植到 JVM 上，创建了 `RxJava` (`https://github.com/ReactiveX/RxJava`)。它可以与运行在\
+  \ JVM 上的多种语言协同工作，如 Scala、Groovy 和 Clojure。\n\n### 成果\n\nNetflix 在其技术博客中报告称，得益于这些变更以及在后端采用响应式编程，他们的开发者能够成功利用并发编程，而无需应对其常见的典型问题。\n\
+  \n### 沃尔玛案例\n\n这个案例具体涉及沃尔玛加拿大分公司，它是沃尔玛的子公司，也是该国最大的零售商之一。在这个特定案例中，早在 2012 年，由于互联网的持续增长以及每天连接网络的新设备，他们的架构开始力不从心，流量峰值开始影响他们，导致用户无法访问其在线商店（参见下方图\
+  \ 8-3 中的示例），并造成销售损失。像黑色星期五 (`https://en.wikipedia.org/wiki/Black_Friday_%5Bshopping`)\
+  \ 和网络星期一 (`https://en.wikipedia.org/wiki/Cyber_Monday`) 这样的日子不再是机遇，反而变成了问题（参见下方图\
+  \ 8-4 中关于 2012 年高峰期流量的图表），因此他们必须采取行动。\n\n![A418015_1_En_8_Fig4_HTML.jpg](img/A418015_1_En_8_Fig4_HTML.jpg)\n\
+  \n图 8-4. 高峰期流量增长图表\n\n![A418015_1_En_8_Fig3_HTML.jpg](img/A418015_1_En_8_Fig3_HTML.jpg)\n\
+  \n图 8-3. 关于 2012 年沃尔玛在线能力状态的推文截图\n\n当时，他们的系统基于 Oracle ATG，这需要一个专门的开发团队，并且上市时间太长。其扩展能力也非常有限。总而言之，他们需要改变视角，并且为了能够良好地扩展，他们需要一个全新的事件驱动架构。\n\
+  \n\n\n### 拟议解决方案\n\n为实现这一目标，他们需要做出 180 度的大转弯，于是开始研究各种方案，最终胜出的是`Scala`（[`www.scala-lang.org/`](http://www.scala-lang.org/)）、`Akka`（[`akka.io/`](http://akka.io/)）和`Play`（[`www.playframework.com/`](https://www.playframework.com/)）的组合。这套技术栈运行在`JVM`上，因此为公司提供了良好的迁移计划，使他们能够在迁移过程中逐步引导开发者熟悉该技术栈，而不是一次全部切换，从而避免了相应麻烦。\n\
+  \nWeb 框架（`Play`）使他们能够根据需求轻松地上下扩展 Web 服务器。它还能帮助他们充分利用多核架构，处理比旧技术栈庞大得多的并发用户量。使用`Play`的团队开发速度比遗留系统团队快两到三倍。\n\
+  \n借助`Scala`和`Akka`，他们能够创建基于微服务的、消息驱动的响应式后端架构。\n\n采用响应式架构的优势之一是简化了编程任务；缩短的上市时间使他们能够像`Netflix`那样更快地推出功能。\n\
+  \n事实证明，响应式方法非常适合微服务架构，因为你可以将响应式编程的优势转化为架构特性，即最终具备以下特点：\n\n*   `responsive`：意味着系统会在可能的情况下及时做出响应。\n\
+  *   `resilient`：系统无论发生什么情况都能保持响应。组件之间相互隔离，在出现故障时提供故障隔离。\n*   `message-driven`：整个系统依赖组件之间的异步消息传递。这使得组件也能将故障作为消息传递。\n\
+  *   `elastic`：系统能够根据不同的工作负载保持响应。\n\n### 成果\n\n在以上变更上线后的 4 周内，`Walmart.ca`报告了以下成果：\n\
+  \n*   转化率提升了 20%\n*   移动端订单增长了 98%\n*   客户页面加载时间减少了 36%\n*   最重要的是，在`黑色星期五`等流量高峰日期间，没有出现任何停机\n\
+  \n## 再谈一个案例\n\n作为最后一个研究案例，我们不打算看另一个成功案例，而是自己动手构建一个小型概念验证，如何？当然，我会使用`R-CheeseJS`，向你展示一个纯粹的`Node.js`应用程序。它应该能结合上一章的代码，为你提供关于编程响应式系统的更多实践见解。\n\
+  \n我打算构建的这个小`PoC`是一个聊天应用。它规模很小，但功能应该足够完善，让它变得有趣。\n\n它将有一个服务器来集中处理所有通信，以及一个可以根据需要多次运行的客户端应用。客户端和服务器将通过套接字通信（我将使用`socket.io`来处理相关代码，可在[`www.npmjs.com/package/socket.io`](https://www.npmjs.com/package/socket.io)找到），而客户端之间的通信将通过服务器进行。\n\
+  \n聊天应用非常适合采用响应式方法，因为有很多机会可以对不同事件做出响应，例如接收消息、用户登录和退出，甚至客户端向服务器发送的自定义命令。在这个特定示例中，应用将会：\n\
+  \n*   允许任何客户端连接到服务器并与其他用户交谈。\n*   每次新登录操作都会通知所有已连接的客户端。\n*   每个客户端都能发送消息，这些消息将广播给所有其他客户端。\n\
+  *   每个客户端都可以发送命令来列出所有已登录用户，从而获取所有参与者的列表。\n*   每个客户端都可以发送退出命令，从而有效结束与聊天服务器的连接。\n\
+  *   每当客户端断开连接时，所有其他客户端都会收到该事件的通知。\n*   如果聊天服务器关闭，所有客户端都会优雅地处理该事件。\n\n本示例使用的模块列表非常精简。我尽量保持这种状态，以展示该方法以及语言本身的能力：\n\
+  \n*   `express.js`（[`www.npmjs.com/package/express`](https://www.npmjs.com/package/express)）仅用于启动服务器，不做他用。\n\
+  *   `socket.io`用于创建聊天服务器并处理所有与套接字相关的任务。\n*   `socket.io-client`（[`www.npmjs.com/package/socket.io-client`](https://www.npmjs.com/package/socket.io-client)）提供了创建`socket.io`命令行客户端的能力，而无需\
+  \ Web 浏览器（此应用 100%基于命令行）。\n*   最后，`winston`（[`www.npmjs.com/package/winston`](https://www.npmjs.com/package/winston)）用于简化控制台上的日志记录和消息格式化。\n\
+  \n**注意**\n\n列表中未列出的另一个依赖项是上一章中介绍的库：`rCheese`。\n\n图 8-5 展示了使用聊天服务器（屏幕上半部分）与两个客户端（屏幕下半部分）交互的输出截图。现在让我们看看代码，了解如何在`Node.js`中使用`rCheese`实现这一功能。\n\
+  \n![A418015_1_En_8_Fig5_HTML.jpg](img/A418015_1_En_8_Fig5_HTML.jpg)\n\n**图 8-5.**\
+  \ 两个客户端与聊天服务器交互的截图\n\n\n\n### 服务器端\n\n根据先前的功能列表，聊天服务器可以使用四个流：一个处理登录行为，另一个处理接收到的新消息，第三个处理客户端接收到的命令。此外还增加了一个最终流来处理退出命令。由于这需要几个步骤，现在我们来看一下代码：\n\
+  \n> **注意**：正如你即将看到的，当通过 Cheese 流传输对象时，这些对象需要被序列化和反序列化。这是因为该模块使用的内部流并未设置为对象模式，因此所有内容都必须是字符串。\n\
+  \n服务器的入口点如下：\n\n```javascript\nvar app = require('express')();\nvar http = require('http').Server(app);\n\
+  var io = require('socket.io')(http);\nvar rCheese = require(\"../cheese\");\nvar\
+  \ logger = require(\"./logger\");\nvar Cheese = rCheese.Cheese;\nvar map     = rCheese.Utils.map,\n\
+  filter  = rCheese.Utils.filter;\nio.on('connection', function(socket){\nsocket.on('login',\
+  \ function(data) {\nvar username = data.username;\n_USERS[username] = setupStreams(username,\
+  \ socket);\n});\n});\n```\n\n> **注意**：虽然我将使用 Winston 来处理所有日志需求，但我会创建一个自定义日志记录器来处理颜色和不同的日志级别，因此所有这些代码都将放在\
+  \ `logger.js` 文件中。\n\n接下来是 `setupStreams` 函数，正如你可能已经猜到的，它会为每个登录聊天服务器的新用户设置三个主要流。这是整个应用中最大的函数，仅仅是因为所有三个流的流程都在这里定义：\n\
+  \n```javascript\nfunction setupStreams(usrname, socket) {\nvar msgs = new Cheese();\n\
+  var logins = new Cheese();\nvar commands = new Cheese();\nvar msgsListener = false;\n\
+  var cmdListener = false;\n//== 新消息流\n// 它简单地广播所有发送的消息，只要它们具备所需的属性\nmsgs.fromFn(function(push)\
+  \ {\nif(!msgsListener) {\nmsgsListener = true;\nlogger.debug(\"新消息监听器已设置...\");\n\
+  socket.on('new_msg', function(msg) {\nif(msg.username == usrname) {\npush(JSON.stringify(msg));\
+  \ // 序列化对象\n}\n});\n}\n})\n.then(filter(function(m, done) {\nvar mObj = JSON.parse(m.toString());\n\
+  done(null, mObj.msg != '' && mObj.msg != null && mObj.date != null && mObj.username\
+  \ != null);\n}))\n.each(function(obj) {\n// 反序列化对象\nlogger.debug(\"正在发送新消息: \",\
+  \ obj.toString());\nsocket.broadcast.emit('new_msg', JSON.parse(obj.toString()));\n\
+  });\n//== 命令流\ncommands.fromFn(function(push) {\nif(!cmdListener) {\ncmdListener\
+  \ = true;\nlogger.debug(\"新命令监听器已设置...\");\nsocket.on('new_cmd', function(cmd) {\n\
+  console.log(\"收到新命令: \", cmd.username, usrname);\nif(cmd.username == usrname) {\n\
+  push(JSON.stringify(cmd));\n}\n})\n}\n})\n.then(executeCommand)\n.then(filter(function(v,\
+  \ done) {\ndone(null, v != null);\n}))\n.onError(function(err) { // 格式化错误消息以便发送回客户端\n\
+  return JSON.stringify({msg: err.message, date: new Date()});\n})\n.each(sendBackResponse(socket));\n\
+  //== 登录流\nlogins.fromArray([usrname])\n.then(map(function(username, done) { // 将用户名转换为发送给所有人的消息\n\
+  var newObj = JSON.stringify ({msg: [username, '刚刚登录了。'].join(' '), date: new Date()});\n\
+  done(null, newObj);\n}))\n.each(function(obj) {\nlogger.info(\"用户已登录，广播消息已发送\");\n\
+  socket.broadcast.emit('system_msg', JSON.parse(obj.toString()));\n});\nreturn {\n\
+  socket: socket,\nmsgs: msgs,\nlogins: logins,\ncommands: commands\n};\n}\n```\n\n\
+  正如你所见，前三个流都在这里：`logins`、`commands` 和 `msgs`。对于 `commands` 和 `msgs`，我使用了相同的技术将数据推入其中，并为\
+  \ socket 的相应事件设置了一个监听器。这些监听器需要通过逻辑检查以确保只设置一次，因为（你可能记得也可能不记得）传递给 `fromFn` 的函数每隔几毫秒就会被查询一次。\n\
+  \n创建的第一个流用于处理来自客户端的新消息，它的职责仅仅是接收事件并将其广播给所有客户端。但由于这很简单，我还增加了一个前置验证步骤，过滤掉那些缺少必要字段的消息。\n\
+  \n命令流也非常简单：获取命令对象，执行它，如果命令返回一个对象，则将其发送回客户端；否则，直接将其过滤掉。下面是两个命令的代码。其中一个会返回需要发送回客户端的响应，另一个则不会。这个流还会处理错误，特别是“未知命令”错误，这是一个很容易触发的错误。\n\
+  \n最后，登录流被创建来处理客户端的登录消息——正是这个消息触发了该函数的调用。因此，我没有使用 socket 监听器，而是使用了 `fromArray` 方法，传入一个仅包含一项的数组，即登录事件中接收到的数据。这个流会处理该事件，然后终止。有人可能会争论在这种情况下使用流的好处，但尽管对于单个事件来说不需要响应式代码，但这里的代码和逻辑清晰且易于理解，所以我认为这样做是值得的。\n\
+  \n现在让我展示服务器代码中最后相关的一部分：命令的实现。\n\n```javascript\nfunction executeCommand(cmd) {\n\
+  var cmdObj = JSON.parse(cmd.toString());\nvar commands = {\nlistUsers: listUsersCommand,\n\
+  exit: closeConnection\n};\nif(!commands[cmdObj.cmd]) {\nthrow new Error(\"错误：未知命令\"\
+  );\n} else {\nvar result = commandscmdObj.cmd;\nreturn (result !== null) ? JSON.stringify(result)\
+  \ : null;\n}\n}\n```\n\n上述函数负责触发所有命令的执行，实际上非常简单。如你所见，只支持两个命令，否则会抛出一个错误（该错误会被 rCheese\
+  \ 模块捕获）。\n\nEXIT 命令是这两个命令中第一个也是最复杂的一个。其背后的逻辑可以分为几个步骤：\n\n- 通知所有用户有人离开了聊天室。\n- 结束客户端与服务器之间的连接。\n\
+  - 从内存中的已连接用户列表中移除该用户。\n- 最后，在服务器控制台上打印一条日志消息。\n\n现在，根据我之前向你展示的关于声明式编程的内容，我将这四个步骤转化成了一个流——再次强调，这是一个只包含单一事件的流。\n\
+  \n\n\n```javascript\n// EXIT 命令主函数\nfunction closeConnection(cmd) {\n  var exitStream\
+  \ = new Cheese();\n  exitStream\n    .fromArray([JSON.stringify(cmd)])\n    .then(notifyUsers)\n\
+  \    .then(disconnect)\n    .then(removeUser)\n    .each(function(obj) {\n     \
+  \ obj = JSON.parse(obj.toString());\n      logger.info(\"用户 '\" + obj.username +\
+  \ \"' 已关闭连接\");\n    });\n  return null;\n}\n\n// 通知所有用户有人离开了聊天室\nfunction notifyUsers(cmd)\
+  \ {\n  var cmdObj = JSON.parse(cmd.toString());\n  var socket = _USERS[cmdObj.username].socket;\n\
+  \  if(!socket) throw new Error(\"找不到用户套接字: \", cmdObj.username);\n  socket.broadcast.emit('system_msg',\
+  \ {\n    msg: [cmdObj.username, '已离开聊天室'].join(\" \"),\n    date: new Date()\n \
+  \ });\n  return cmd;\n}\n\n// 关闭想要离开的客户端与服务器之间的连接\nfunction disconnect(cmd) {\n\
+  \  var cmdObj = JSON.parse(cmd.toString());\n  var socket = _USERS[cmdObj.username].socket;\n\
+  \  if(!socket) throw new Error(\"找不到用户套接字: \", cmdObj.username);\n  socket.disconnect();\n\
+  \  return cmd;\n}\n\n// 从已连接用户列表中移除该用户并释放其内存\nfunction removeUser(cmd) {\n  var\
+  \ cmdObj = JSON.parse(cmd.toString());\n  delete _USERS[cmdObj.username];\n  return\
+  \ cmd;\n}\n```\n\n这里的辅助函数规模都很小，无论是在代码行数还是逻辑复杂度上。它们各自专注于做好一件事，不涉及其他，因此整体而言，认知负荷（借用前一章提到的一个术语）相当低。只需阅读步骤列表，就能为每一步找到一个对应的函数。你可以调整它们的顺序或添加新的函数。这就像改变主流的流程一样简单，其他什么也不用做。\n\
+  \n最后，另一个支持的命令，即已连接用户列表，非常容易理解，因为它归结为一个非常简单的函数。这个命令与前一个命令的主要区别不在于复杂度，而在于其结果。退出命令做了很多事情，但它不会向客户端发送任何内容。而这个命令，它所做的一切就是向客户端发送数据。如果你回头看一下命令流的代码，你会发现过滤器步骤会让这个命令通过，并最终通过套接字连接发送回去。\n\
+  \n```\n///=== 列出用户命令辅助函数\nfunction listUsersCommand(cmd) {\n  return {\n    msg:\
+  \ [\"当前聊天室中的用户有:\", Object.keys(_USERS).join(\", \")].join(\" \"),\n    date: new\
+  \ Date()\n  };\n}\n```\n\n## 客户端\n\n本示例中的客户端应用程序也将非常简单。它允许用户登录聊天室、发送消息和命令，同时也能接收来自服务器的消息（如果你愿意，也可以称之为系统消息），其中包含错误通知、命令响应等——基本上就是任何非来自其他客户端的消息。\n\
+  \n为了实现上述功能，这次我使用了三个流。一个流负责处理用户输入，这些输入将转换为发送到服务器的消息和命令。另一个流用于处理系统消息，还有一个流用于处理其他用户发送的消息。\n\
+  \n输入流很有意思，因为在 Node.js 中，标准输入被表示为一个流，因此你可以从中创建一个 Cheese 流，这极大地简化了从用户收集输入的过程（这原本可能有些复杂）。代码如下：\n\
+  \n`client.js`\n\n```\nvar rChees  = require(\"../cheese\");\nvar Cheese  = rChees.Cheese;\n\
+  var Utils   = rChees.Utils;\nvar logger  = require(\"./logger\");\nvar map     =\
+  \ Utils.map,\n    reduce  = Utils.reduce,\n    takeUntil = Utils.takeUntil,\n  \
+  \  take    = Utils.take\n\nvar socket = require('socket.io-client')('http://localhost:3000');\n\
+  var _USERNAME = null;\n\nprocess.stdin.resume();\nprocess.stdin.setEncoding('utf8');\n\
+  \nvar userLoggedIn = false;\n\nvar input = new Cheese(); //从 stdin 获取用户输入\n\nconsole.log(\"\
+  请输入您的用户名: \");\n\nsocket.on('connect', function(){\n  input\n    .fromStream(process.stdin)\n\
+  \    .then(trim)\n    .then(map(toObject))\n    .onError(function(err) {\n     \
+  \ console.trace(\"错误:\" , err)\n    })\n    .each(send);\n});\n```\n\n基本上，在连接到聊天服务器之后，会立即开始监听\
+  \ stdin 事件，幸运的是，当按下 ENTER 键时会触发这些事件。因此，这个流接收到的每个数据块都是用户输入的一行内容。之后，你会修剪它，将其转换为聊天服务器能够识别的对象格式，然后发送出去。`toObject`\
+  \ 函数也是一个有趣的函数，因为它负责发送正确的数据。这可能是一条简单的消息、一个命令，甚至是通过网络发送的登录操作的输入。\n\n```\n///辅助函数\n\
+  function printMessage(type) {\n  if(!type) type = 'info';\n  return function(str)\
+  \ {\n    loggertype);\n  }\n}\n\nfunction send(str) {\n  var msgObj = MsgParser(JSON.parse(str.toString()),\
+  \ socket)\n  msgObj.send();\n}\n\nfunction toObject(str, done) {\n  str = str.toString();\n\
+  \  var obj = null;\n  if(_USERNAME) {\n    obj = createMsgObj(str, _USERNAME)\n\
+  \  } else {\n    obj = createLoginObj(str);\n  }\n  done(null, JSON.stringify(obj));\n\
+  }\n\nfunction newCommand(str, username) {\n  var parts = str.split(\" \");\n  return\
+  \ {\n    type: 'new_cmd',\n    cmd: parts[0].replace(\"/\", \"\"),\n    args: parts.slice(1),\n\
+  \    username: username,\n    date: new Date()\n  };\n}\n\nfunction createMsgObj(inputStr,\
+  \ username) {\n  if(inputStr.charAt(0) == '/') {\n    return newCommand(inputStr,\
+  \ username);\n  } else {\n    return {\n      type: 'new_msg',\n      msg: inputStr,\n\
+  \      date: new Date(),\n      username: username\n    };\n  }\n}\n\nfunction createLoginObj(newUserName)\
+  \ {\n  _USERNAME = newUserName;\n  return {\n    type: 'login',\n    username: newUserName,\n\
+  \    date: new Date()\n  };\n}\n\n/*\n为 JSON 对象添加一个方法，使其知道如何通过套接字连接发送自身\n*/\nfunction\
+  \ MsgParser(msgObj, socket) {\n  msgObj.send = function() {\n    socket.emit(msgObj.type,\
+  \ msgObj);\n  };\n  return msgObj;\n}\n\nfunction trim(str) {\n  return str.toString().trim();\n\
+  }\n```\n\n同样，一组专注于特定任务的小函数使得在需要时修改和扩展变得非常容易。\n\n另外两个流（系统消息流和用户消息流）非常相似。它们的区别在于数据格式化的方式和打印输出的方式。请看：\n\
+  \n```\nvar newMsgListener = false;\nvar newUserMsgListener = false;\n\nvar rcvdSystemMsgs\
+  \ = new Cheese(); //用于捕获系统通知的流\nvar userMsgs = new Cheese(); //用于捕获其他用户消息的流\n\n\
+  rcvdSystemMsgs\n  .fromFn(newSystemMessage)\n  .then(map(function(msg, done) {\n\
+  \    msg = JSON.parse(msg.toString());\n    done(null, [msg.date, msg.msg].join('::'));\n\
+  \  }))\n  .each(printMessage('system'));\n\nuserMsgs\n  .fromFn(newUserMessage)\n\
+  \  .then(map(function(msg, done) {\n    msg = JSON.parse(msg.toString());\n    done(null,\
+  \ [msg.username, \"(\", msg.date, \") - \", msg.msg].join(' '));\n  }))\n  .each(printMessage());\n\
+  \nfunction newSystemMessage(push) {\n  if(!newMsgListener) {\n    logger.debug(\"\
+  已设置新消息监听器...\")\n    socket.on('system_msg', function(sm) {\n      push(JSON.stringify(sm));\n\
+  \    });\n    newMsgListener = true;\n  }\n}\n\nfunction newUserMessage(push) {\n\
+  \  if(!newUserMsgListener) {\n    logger.debug(\"已设置新用户消息监听器...\")\n    socket.on('new_msg',\
+  \ function(sm) {\n      push(JSON.stringify(sm));\n    });\n    newUserMsgListener\
+  \ = true;\n  }\n}\n```\n\n正如你在前面的代码中所看到的，并没有什么特别之处。使用监听器函数将事件送入每个流，就像在服务器代码中一样，每个流只负责格式化数据并以正确的方式输出。仅此而已！\n\
+  \n为了处理断开连接的事件，使用了以下代码。它只是打印一条消息并关闭应用程序：\n\n```\nsocket.on('disconnect', function(){\n\
+  \  logger.info(\"您与服务器的连接已关闭！再见！\");\n  process.exit(0);\n});\n```\n\n\n\n"
+- '# 总结
+
+
+  好了，你已经快读完这本书了，只剩下最后一章！通过这一章，你不仅了解到基于套接字的响应式代码是可行的，而且看起来很不错，还了解到大公司正在从传统编程范式转向响应式编程范式。这让他们能够缩短开发时间，从而加快产品上市速度，并且为他们提供了创建易于维护、可扩展系统所需的工具。
+
+
+  在下一章也是最后一章中，我将介绍如何构建系统响应式架构的基础知识，同时还会分享一些在扩展 Node.js 应用时会派上用场的技巧。
+
+
+  '
+- "# 9. 扩展你的响应式编程系统\n\n恭喜！你读到了本书的最后一章！到目前为止，你已经掌握了在 Node.js 应用中添加函数式响应逻辑所需的所有必要信息，但事实上，我目前展示的所有示例都经过了简化，以便在书中呈现，让你在阅读代码时不至于感到枯燥。实际的应用——那些已经投入生产、可供最终用户访问的应用——还需要考虑其他因素。在某些情况下，当预期用户数量不断增长时，应用需要能够进行扩展以应对日益增长的需求。\n\
+  \n扩展 Node.js 应用实际上相当简单，特别是如果你提前做好规划，并合理构建系统架构的话。在本章中，我将介绍扩展 Node.js 应用（特别是用 Node.js\
+  \ 编写的响应式系统）的一些基础知识。那么，请继续阅读，享受本书的最后一章吧！\n\n## 扩展 Node.js\n\nNode.js 的单线程架构有时会让人们误以为它无法在单台服务器内进行扩展。但事实上，这种单线程模型反而简化了在单台服务器内进行扩展的任务，让我们来看看这是为什么吧？\n\
+  \n> **注**  \n> 扩展到多台服务器也同样简单，但这并不依赖于线程模型，而是取决于你所做的架构决策。我稍后会谈到这些。\n\n### 在服务器内进行扩展\n\
+  \n扩展的第一阶段发生在服务器内部。默认情况下，如果你的单线程应用是正常运行的（即没有借助任何外部程序，仅使用默认的 Node 解释器），那么无论你的处理器有多强大、有多少个核心，你都只使用了其中一个。\n\
+  \n我知道这很令人震惊！但默认情况下，你并没有充分利用你那强大的处理器。不过别担心！有两种看似不同的方法可以解决这个问题，具体取决于你所处理的应用类型。我之所以说“看似”，是因为这两种方法的核心都是同一个东西：进程。\n\
+  \n基本上，为了在多核处理器计算机上进行扩展，你需要多个进程。就是这样。如果你正在处理一个计算密集型应用，你可能会希望将计算任务分发给不同的工作进程，这些工作进程本质上是并行工作的，并通过某种协议相互通信（别担心，我将在本章后面进一步讨论这一点）。\n\
+  \n另一方面，如果你有一个基本的 Web 服务应用，并且希望确保这些服务能够充分利用整个处理器的性能，那么你可以使用 Node.js 自带的 `cluster`（[`https://nodejs.org/api/cluster.html`](https://nodejs.org/api/cluster.html)\
+  \ ）模块。这个模块可以让你轻松创建应用的多个副本并行运行，每个副本运行在不同的 CPU 核心上。以下是实现这一功能所需的全部代码：\n\n```\nvar cluster\
+  \ = require('cluster');\nvar http = require('http');\nvar numCPUs = require('os').cpus().length;\n\
+  if (cluster.isMaster) {\n// Fork workers.\nfor (var i = 0; i < numCPUs; i++) {\n\
+  cluster.fork();\n}\ncluster.on('exit', function (worker, code, signal) {\nconsole.log(\"\
+  Worker\",worker.process.pid, \"died\");\n});\n} else {\nhttp.createServer(function(req,\
+  \ res){\nres.writeHead(200);\nres.end('hello world\\n');\nprocess.exit(0);\n}).listen(8000,\
+  \ function() {\nconsole.log(\"Server Ready!\")\n});\n}\n```\n\n如果你执行这段代码，当所有服务器启动并运行后，你会看到与\
+  \ CPU 核心数量相同的“Server Ready!”消息副本。如果你访问本地主机的 8000 端口，你会在控制台中看到，每次你点击刷新按钮时，一些工作进程就会终止。\n\
+  \n> **注**  \n> 尽管上述代码确保只生成与 CPU 核心数相同数量的进程，但你可以根据需要更改这个数字。不过，如果设置得过高，当然就会开始出现负面的性能表现。\n\
+  \n除了简单之外，上述代码的一个主要启示是：由于工作进程可以共享 TCP 连接，你只需编写一个服务器代码，无需特别考虑你将要运行的多个实例，然后简单地启动新的工作进程即可。你可以使用上述代码将你已有的\
+  \ API 转换为多进程应用，而且一切仍然可以正常工作！\n\n所有工作进程都由主进程（它们的父进程）管理，主进程负责在所有工作进程之间分配工作负载。在所有操作系统（Windows\
+  \ 除外）中，默认的分配方式是轮询分发负载。在 Windows 系统中，负载平衡则由操作系统本身负责。\n\n\n\n### 使用外部工具满足您的集群需求\n\n\
+  我之前展示的方案确实可行，您可以尝试并查看结果，但如果将其用于实际系统，您可能会开始注意到需要手动处理一些问题，例如：\n\n-   重启已停止的工作进程。如果由于某些原因，您的工作进程开始崩溃，集群模块不会自动为您重启它们，您必须自行处理这些特殊情况。\n\
+  -   弹性伸缩。这一点尤其有趣，特别是当您在按需付费的服务器（如亚马逊云）上运行时。如何根据您的需求优化工作进程数量？\n-   监控问题呢？默认模块不会为您提供开箱即用的检查工作进程状态的功能，但这在生产环境中可能是您需要的。\n\
+  \n因此，为了满足上述需求及更多场景，您可以使用外部工具来简化集群管理过程。具体来说，我将简要介绍一个名为 PM2 的工具（`http://pm2.keymetrics.io/`）。\n\
+  \n首先，PM2 的主要好处是，您无需向现有应用程序添加任何代码，即可使其在同一个进程的多个副本下运行。是的，之前的示例已经表明确实只需要很少的代码，即便如此，PM2\
+  \ 的附加功能也值得您投入时间。那么，安装它只需执行：\n\n```\n$ npm install pm2 -g\n```\n\n要并行启动四个应用实例，只需使用以下命令：\n\
+  \n```\n$ pm2 start app.js -i 4\n```\n\n**提示**  \n如果您希望 PM2 启动与 CPU 核心数相同的工作进程，只需将\
+  \ `4` 替换为 `0`。\n\n图 9-1 显示了启动一个简单的 Web 服务器脚本后，使用 `0` 实例时 PM2 的输出。在我的案例中，我的处理器有 4\
+  \ 个核心，所以列出了 4 个进程。表中的列名不言自明，“监控”列指示当文件发生更改时进程是否会重启，要启用此功能，您需要传入 `--watch` 标志。\n\n\
+  ![A418015_1_En_9_Fig1_HTML.jpg](img/A418015_1_En_9_Fig1_HTML.jpg)\n\n**图 9-1.**\
+  \ 启动后的 PM2\n\n现在，除了清晰的进程列表，您可以放心，如果其中一个进程被终止，PM2 会负责重启它，因此意外崩溃不会持续存在。\n\n您还可以使用\
+  \ `restart` 命令手动重启整个集群：\n\n```\n$ pm2 restart all\n```\n\n更有趣的是，您可以使用 `scale` 命令动态扩展或缩减集群。传入一个数字会将集群扩展（或缩减）到具有该数量进程；在数字前加上\
+  \ `+` 号，则会增加相应数量的进程：\n\n```\n$ pm2 scale webserver +3 # 向集群添加 3 个进程\n$ pm2 scale\
+  \ webserver 1 # 将集群缩减到只有 1 个进程\n```\n\n最后，还有一个非常实用的功能，可以帮助您在生产环境中更新代码。您看，PM2 允许您在不造成任何停机的情况下更新代码。它通过逐个重启进程来实现：等待一个进程完全启动后，再重启下一个，这样集群就会逐步自我更新。为此，您可以使用\
+  \ `reload` 命令或 `gracefulReload` 命令，后者不会强制终止集群进程，而是发送一个关闭信号，允许进程优雅地退出。\n\n```\n$\
+  \ pm2 reload webservice # 强制终止进程\n$ pm2 gracefulReload webservice # 向它们发送关闭信号\n\
+  ```\n\n您可以通过以下代码块捕获该信号，并执行任何所需操作：\n\n```\nprocess.on('message', function(msg) {\n\
+  \  if (msg === 'shutdown') {\n    close_all_connections();\n    delete_cache();\n\
+  \    server.close();\n    process.exit(0);\n  }\n});\n```\n\n如您所见，PM2 可以成为您……生产工具箱中一个非常趁手的工具，它功能强大，实用特性丰富，而且超级易用。但话说回来，它并非解决集群问题的银弹（顺便说一句，从来就没有这种东西），您最终会遇到一些传统集群无法解决的问题，那该怎么办呢？让我们继续探索！\n\
+  \n### 不用集群实现多进程处理怎么样？\n\n那么，当 `cluster` 模块不够用时该怎么办？当解决方案不那么简单时呢？就像我之前提到的，多进程处理仍然是答案，别搞错了。如果您想充分利用您的处理器，就需要将逻辑拆分为多个可以并行运行的\
+  \ Node.js 进程，这能确保您使用所有核心。\n\n基本上，您需要采用微服务方法，将逻辑拆分为可以并行工作的更小部分。换句话说，您的业务逻辑越支持任务并行化，您就越能充分利用该架构。\n\
+  \n这种方法的好处是，如果您的服务器开始出现不足，您可以轻松地迁移到多服务器架构，因为代码结构基本保持不变，您只需要处理服务器间的通信（处理防火墙等网络问题，启用正确的端口等）。\n\
+  \n您大概能想象得到，对于这种特定场景，没有万能的方法。您只需要找到一种方法，将您的逻辑映射到一组并行进程中（从现在起我们称它们为工作进程，因为无论如何它们都在做这件事），如果您能让每个工作进程拥有多个副本，那就更好了。通常，对于这类设置，关键部分不是如何生成新的工作进程，而是如何处理它们之间的通信，因为您很可能会希望它们在不同类型的工作进程之间发送数据，并最终将数据（最终输出）保存到您可以使用的地方。这就是我们要讨论\
+  \ Node.js 中 IPC（进程间通信）最佳方案的话题了。\n\n\n\n"
+- '# 高性能领域中的进程间通信
+
+
+  在选择 `Node.js` 中合适的进程间通信（IPC）方式时，选项繁多，几乎让人眼花缭乱。但好在，在本章中，我讨论的是高度可扩展和高性能的架构，因此高效的 IPC
+  选项范围大大缩小。你看，市面上大多数 IPC 模块都处理直接的进程间通信，有些甚至假设这些进程始终共享同一台服务器。正如我之前所说，实际情况并非总是如此。事实上，如果你真正处理的是一个可扩展的解决方案，你应该将此作为基本假设：你需要多台服务器来处理不同的工作进程。
+
+
+  那么，如果直接的进程间通信行不通，我们还有哪些选择？根据我的经验，使用一个可扩展的解决方案作为数据缓冲区，来在同类工作进程的不同实例之间分配负载，才是正确的做法。原因是：
+
+
+  1.  它允许进程以自己选择的速度在彼此之间传输数据（你可以选择限制其速度，也可以根据可用的工作进程数量全速运行）。
+
+  2.  缓冲区解决方案本身可以扩展，从而无需你为此操心。只需配置好缓冲区的扩展策略，然后坐看其自动运行（大致如此，但你应该明白我的意思，你无需担心数据分片、可用性等问题）。
+
+
+  图 9-2 展示了我刚才所描述内容的一个通用示例。图中描述了三种不同类型的工作进程，其类型表明了它们的主要任务。因此，每个任务都可以被并行化，这在图中也通过同一类型工作进程的多个实例来表示。不同类型之间的通信，正如我提到的，使用某种外部解决方案作为数据缓冲区来进行。因此，将来如果你正确测量了系统性能，就能检测出哪些部分压力过大并进行相应调整。假设客户端请求过多，让你不堪重负，你只需扩展“类型
+  A”的工作进程；系统的其余部分将继续尽可能快地处理数据——当然，除非你的“类型 A”工作进程为“数据缓冲区 #1”生成了过多的数据。在这种情况下，你可以扩展该缓冲区，其余处理过程则保持不变。看出规律了吗？从架构角度来看，扩展变得异常简单，你只需要增加更多的实例。最后，如果你的服务器因实例数量过多而不堪重负，你同样可以简单地添加更多服务器，并将工作进程分布在整个集群中。
+
+
+  ![A418015_1_En_9_Fig2_HTML.jpg](img/A418015_1_En_9_Fig2_HTML.jpg)
+
+
+  图 9-2. 使用数据缓冲区进行多工作进程通信的基本示例
+
+
+  图 9-3 展示了当你扩展了“类型 A”工作进程和“数据缓冲区 #1”后，示例架构的样子。正如我所说，系统的其余部分不受影响。
+
+
+  ![A418015_1_En_9_Fig3_HTML.jpg](img/A418015_1_En_9_Fig3_HTML.jpg)
+
+
+  图 9-3. 前一架构的扩展版本
+
+
+  让我们来看看数据缓冲区技术的一些选择。市面上有很多功能大同小异的方案，因此我们可以将它们分为两类：基于推送的缓冲区和基于拉取的缓冲区。
+
+
+  ## 基于推送的缓冲区
+
+
+  换句话说，就是一旦新数据可用，就立即将其推送给你的工作进程的缓冲区。对于此类缓冲区，消息队列是一个很好的选择。默认情况下，大多数队列都是这样工作的。在这种模型中，有三个基本角色：
+
+
+  *   **发布者**：负责将数据发送到队列中，然后就不再关注后续。
+
+  *   **订阅者**：向队列注册对特定类型消息的兴趣，然后等待这些消息。
+
+  *   **队列本身**：接收来自发布者的消息，并将其转发给第一个可用的订阅者。
+
+
+  这种方法的好处是：
+
+
+  *   发布者只需要知道如何将数据发送到队列，然后就可以放手不管。这简化了处理此过程的开发人员的工作，因为他们无需担心重试、消费者缺失、消息存储等问题。
+
+  *   消费者也能从这种方法的更简单的逻辑中受益，因为他们只需要在队列上注册，然后等待队列将消息推送给他们即可。
+
+  *   最后，队列本身承担了大部分压力。它需要处理消息的入队和出队，需要处理可扩展性、消息的临时存储（以防失败）以及成为一个功能完善、可扩展队列所需的许多其他方面。话虽如此，其妙处在于这一切都有现成的解决方案——除非你自己编写消息队列，否则你很可能会使用常见的队列之一，例如
+  Apache Kafka ([`http://kafka.apache.org/`](http://kafka.apache.org/))、RabbitMQ ([`https://www.rabbitmq.com`](https://www.rabbitmq.com))、Redis
+  的发布/订阅 ([`http://redis.io/`](http://redis.io/)) 等。
+
+
+  根据你的特定需求，你可能会选择其中一种。例如，如果你处理的是巨大的传入流量（比如每秒 10 万次请求），你可能会选择 Kafka；如果你有复杂的消息路由逻辑，你可能会考虑使用
+  RabbitMQ。所以你看，尽管所有这些方案方法相同（我刚刚列举了三种），但它们并非完全相同，因此，花时间了解一下市面上主要的选项可能是明智之举。
+
+
+  为了说明与这些队列交互有多么简单，下面是一个使用 RabbitMQ 的发布者和消费者（订阅者）的简单示例。此示例使用了 `amqp` 模块 ([`https://www.npmjs.com/package/amqp`](https://www.npmjs.com/package/amqp))：
+
+
+  ```
+
+  // == 消费者代码 ==
+
+  var amqp = require(''amqp'');
+
+  var connection = amqp.createConnection({ host: ''localhost'' });
+
+  // 添加此代码以便更好地调试
+
+  connection.on(''error'', function(e) {
+
+  console.log("来自 amqp 的错误: ", e);
+
+  });
+
+  // 等待连接建立完成
+
+  connection.on(''ready'', function () {
+
+  console.log("正在监听消息...");
+
+  connection.queue(''my-queue'', function (q) {
+
+  // 捕获所有消息
+
+  q.bind(''#'');
+
+  // 接收消息
+
+  q.subscribe(function (message) {
+
+  // 将消息打印到标准输出
+
+  console.log(message.data.toString());
+
+  });
+
+  });
+
+  });
+
+  //== 发布者代码 ==
+
+  var amqp = require(''amqp'');
+
+  var connection = amqp.createConnection({ host: ''localhost'' });
+
+  // 添加此代码以便更好地调试
+
+  connection.on(''error'', function(e) {
+
+  console.log("来自 amqp 的错误: ", e);
+
+  });
+
+  // 等待连接建立完成
+
+  connection.on(''ready'', function () {
+
+  // 使用默认的 ''amq.topic'' 交换机
+
+  connection.publish(''my-queue'', ''测试消息'');
+
+  console.log("消息已发送!");
+
+  });
+
+  ```
+
+
+  代码并不复杂。你可以将上述代码分成两个文件，先执行消费者，使其订阅 RabbitMQ，然后执行发布者。发布者会向队列发送一条消息，这条消息将由消费者接收并打印出来。
+
+
+
+
+  '
+- '# 基于拉取的缓冲区
+
+
+  既然推送策略有这么多好处，为什么我们还要反其道而行之呢？首先，如果你的消费者数量太多（具体多少算“太多”取决于你当前使用的队列），中间件（即实际的队列）用于通知它们有新消息的处理过程所花费的时间可能会过长。
+
+
+  此外，这种模型还存在一个问题：当订阅者的消费速率低于发布者的生产速率时，缓冲区可能会耗尽内存或存储，从而引发可能导致整个系统瘫痪的问题（可以想象成拒绝服务攻击）。
+
+
+  如果你不给队列分配“寻找能够处理新消息的消费者”这一职责，而是让消费者按固定时间间隔查询队列并拉取消息，那么上述问题就迎刃而解了。这时，你使用的队列解决方案将同时承受来自消费者和发布者的访问，这意味着流量会增大，因此在扩容时必须考虑到这一点。
+
+
+  拉取模式还给消费者增加了另一层复杂性，因为它们不仅需要查询队列，还必须处理多个消费者同时尝试获取同一条消息时引发的竞态条件。你只希望其中一个消费者实际处理该消息，而其他消费者则转向下一条。
+
+
+  从队列中取出消息、将其标记为已读，或采用任何其他确保只有单个消费者获取消息的技术，都必须是原子性的，也就是说，它必须在一个指令内完成。
+
+
+  尽管与队列解决方案交互的模型不同，但市面上的实际产品差别并不大。大多数消息队列都支持基于拉取的操作，因此 `Kafka`、`RabbitMQ` 等仍然是可选的方案。例如，`Redis`
+  的 `Pub/Sub` 就不支持直接工作，但你可以通过使用列表作为主队列，并为消息设置锁键来轻松解决，以便在将消息取出队列前将其标记为已读。
+
+
+  ## 那么，究竟是拉还是推？
+
+
+  你可能已经猜到，这个问题没有简单的答案。你选择的模型类型完全取决于你的具体用例。希望上述两种描述能给你足够的信息来做出选择，但为了便于回顾：
+
+
+  在以下情况下，你通常会选择基于推送的缓冲区：
+
+
+  -   你需要保持逻辑简单。
+
+  -   你不需要大量消费者并行工作。
+
+  -   你希望在消息到达时立即做出响应。
+
+
+  另一方面，在以下情况下，你更倾向于采用基于拉取的方法：
+
+
+  -   你的系统面临极高的流量。
+
+  -   你希望控制消费消息的速率。
+
+  -   你希望批量处理消息，而不是一条一条地处理。
+
+
+  '
+- '# 创建响应式系统
+
+
+  在这九章中，我介绍了响应式编程的含义，给出了示例，甚至创建了一个让你可以自行实践响应式编程的库。但是，在架构决策方面，如果你想创建响应式系统，有一系列需要考虑的因素。
+
+
+  在本章的最后一节，我将讨论这些因素。响应式系统旨在更加灵活、松耦合且易于扩展（我们之前已经在章节中讨论过一些）。本质上，这些系统更易于开发、具有更高的容错性，并且能够优雅地响应错误。为了实现这一目标，你的系统需要满足以下标准：
+
+
+  ## 响应式系统
+
+
+  响应式系统需要具有响应性，这意味着它们需要始终及时地向用户提供反馈。一致的响应时间是这些系统的要求，这将带来更好的用户体验和错误处理。
+
+
+  为了实现这一点，正如你将看到的，系统必须满足下面列出的要求。因为它需要具有韧性以始终保持响应性，需要具有弹性以始终及时地向最终用户提供反馈，并且需要由消息驱动来实现这一目标。因为正如你现在可能知道的，弹性扩展主要源于基于微服务的架构，而为了在这些服务之间进行通信，你将需要某种消息系统。
+
+
+  ## 错误韧性
+
+
+  响应式系统应该对所有错误都具有韧性。这并不意味着你的系统是 100%无错误的，而是意味着它能够优雅地处理意外错误，而不是失控地崩溃。这反过来有助于确保满足前一个要求，因为任何不具备韧性的系统最终都会在某个时刻变得无响应。
+
+
+  构建一个具有韧性、能够处理各种错误和崩溃的架构并非易事，实际上，需要考虑多个方面，例如：
+
+
+  -   **复制**，用于确保数据和服务的冗余。数据存储是这方面的一个很好的例子，它们通常提供集群模式，这不仅提供了数据冗余，还为每个活动的主服务器添加了备份服务器，通过避免架构中的单点故障来确保服务始终可用。
+
+  -   **包含与隔离**，确保一个组件的故障独立于系统的其余部分，防止简单的错误或未处理的异常引发灾难性的连锁反应——一个系统崩溃导致另一个系统崩溃，最终整个架构无响应。
+
+  -   **以及委派**，确保所有组件可以在彼此之间委派职责（例如错误处理、日志记录等）。
+
+
+  ## 弹性扩展
+
+
+  系统的弹性通常指其通过增加或减少资源使用来处理不同负载量的能力。在本章的第一节中，已经讨论了该主题，并给出了如何设计能够根据需要扩展或缩减且仍保持功能的架构的示例。
+
+
+  根据你的基础设施，用于测量和处理弹性的工具可能有所不同。通常，像亚马逊和微软 Azure 这样的云提供商为你提供了自动执行这些流程的工具，但总会有一些工具可以用来手动执行这些任务。
+
+
+  简而言之，这个要求的要点是：响应式系统应该能够对当前的工作负载做出反应，并相应地调整其可用资源以提供经济高效的性能。这意味着，在不需要资源时进行缩减以节省资源，同时只在需要时进行扩展，以便将这些资源的成本控制在一定预设范围内。
+
+
+  ## 消息驱动
+
+
+  最后，响应式系统应使其组件使用异步消息进行通信，这为实现我列出的大多数需求提供了可能。这甚至允许将错误视为可以从一个组件发送到另一个组件的消息。
+
+
+  正如我之前所说，这一要求是所有其他要求的基石。这种机制为所有服务之间的相互通信提供了必要的基础，这反过来又提供了在不影响进程之间对话能力的情况下不断扩展进程数量的能力，进而意味着你的系统能够在足够短的时间内生成响应并将其发送回最终用户。
+
+
+  总而言之，正如你所见，“响应式系统”这个名称听起来比实际要复杂得多。事实上，这些要求列表只是一系列优秀的设计决策，它们将帮助你的架构提供良好的用户体验，并对用户的输入以及环境的变化做出响应。
+
+
+
+
+  '
+- '# 总结
+
+
+  通过 Node.js 扩展你的应用，并审视一些有趣且能助你构建更优系统的架构决策，是本书最后一块反应式拼图。你已经阅读并理解了它，现在是时候去实践，并将你（希望是）学到的知识应用到代码中了。
+
+
+  只需记住几个要点：
+
+
+  -   响应式编程与函数式编程是绝佳搭档。
+
+  -   在 Node.js 中，响应式编程几乎都与流有关，所以不要畏惧它们，拥抱它们，你会爱上这种感觉！
+
+  -   如果你还没准备好，请接受 Node.js 的异步思维，这能为你省去很多麻烦。
+
+  -   最后，请记住要恰当地将你的系统设计成可并行化和可扩展的组件。
+
+
+  最后，感谢你陪伴我读完这本书，我真诚地希望你发现它既有用又有趣，并且至少有一件你能从中带走的东西。如果真是这样，那么我的工作就算完成了。
+
+
+  '
+- "# 索引\n\n## A\n\n- Akka\n- 异步事件\n- 双工流\n- `event-stream` 模块\n  - `join`\n  - `map`\n\
+  \  - `merge`\n  - 可读流\n  - `SaveUserToDB` 流\n  - `split`\n\n## B, C, D\n\n- 后端 API\n\
+  \  - 函数响应式实现\n  - 登录服务\n  - 回归正轨\n  - JSON Web Token\n  - 响应式方法\n  - 模型\n  - 新业务逻辑\n\
+  \  - 添加新地址\n  - 创建用户\n  - 列出所有用户\n  - 中间件\n  - 路由文件\n  - 标准实现\n- 背压\n  - 缓冲暂停\n\
+  \  - 缓冲\n  - 受控流\n  - 防抖流\n  - 暂停流\n  - 采样\n  - 流\n- Bacon.js\n  - 兼容性\n  - 创建新流\n\
+  \  - 自定义事件\n  - 执行\n  - 许可协议\n  - 转换序列\n  - 流\n- Big Cheese\n  - 实际时间间隔\n  - 转换链\n\
+  \  - `each` 方法\n  - `_endSource`\n  - 错误处理\n  - `flatMap` 函数\n  - `flatMap` 转换\n\
+  \  - `fromArray`\n  - `fromFn`\n  - `fromStream`\n  - `fs.createReadStream`\n  -\
+  \ `line` 辅助函数\n  - 内部流与默认值\n  - 合并\n  - Node.js 流\n  - `onError`\n  - `split` 函数\n\
+  \  - 同步/异步自定义转换任务\n  - `then` 方法\n  - 转换\n\n## E\n\n- `_endSource` 方法\n- 事件发射器\n\
+  - `_execute_normal` 方法\n\n## F\n\n- 函数响应式编程 (FRP)\n  - 客户端\n  - `client.js`\n  -\
+  \ JSON，套接字连接\n  - 监听器函数\n  - Node.js\n  - `toObject` 函数\n  - 客户端与聊天服务器\n  - JavaScript\
+  \ ASCII 码\n  - 组合\n  - 柯里化函数\n  - 声明式编程\n  - `filter` 函数\n  - `map`\n  - 可观察流\n\
+  \  - 纯函数\n  - 可读性\n  - `++`\n  - `reduce`\n  - 工具\n  - 两个流而非一个\n  - 观察者与迭代器\n  -\
+  \ 模块列表\n- R-CheeseJS\n  - 服务器命令流\n  - 声明式编程\n  - 入口点\n  - `EXIT` 命令\n  - 辅助函数\n\
+  \  - `logins` 流\n  - 服务器代码\n  - `setupStreams` 函数\n  - 流\n  - 支持的指令\n\n## G\n\n\
+  - GitHub\n\n## H, I\n\n- Highland.js\n  - 背压\n  - 兼容性\n  - `errors` 方法\n  - 文件读取主题\n\
+  \  - 许可协议\n  - 输出流\n  - 同步和异步数据源\n  - `toArray` 调用\n\n## J, K\n\n- JSON Web Token\
+  \ (JWT)\n\n## L\n\n- Little Cheese\n  - 处理时间\n  - FlatMap 与情节复杂化\n  - map、filter\
+  \ 和 reduce\n  - R-Cheese\n  - 拆分\n  - `take` 函数\n  - 转换\n\n## M\n\n- 多核处理器计算机\n\
+  - 多进程通信\n\n## N\n\n- Netflix\n  - Akka 与 Play\n  - 客户端请求\n  - 并发机制\n  - 微服务架构\n\
+  \  - RESTful APIs\n  - Scala\n  - Walmart\n  - Web 框架\n- Node.js\n  - 异步 I/O\n \
+  \ - 异步编程\n  - 自定义流\n  - 双工流与转换流\n  - 事件发射器\n  - 并行流\n  - 可读流\n  - 串行流\n  - 流\n \
+  \ - 可写流\n\n## O\n\n- 面向对象编程 (OOP)\n\n## P, Q\n\n- PM2\n- 进程间通信\n- 优点与缺点\n\n## R\n\
+  \n- R-CheeseJS\n- 响应式编程 (RP)\n  - 异步服务调用\n  - 后端开发者\n  - 特性\n  - 数据流\n  - 声明式定义\n\
+  \  - 前端程序员\n  - 函数式\n  - 处理可节流的输入流\n  - 弹珠图\n  - 嵌套异步调用\n  - 面向对象响应式 vs.\n  - 观察者模式\n\
+  \  - 实时项目\n  - 常见的回调地狱\n  - 示例弹珠图\n  - 电子表格\n  - 流 vs. 传统编程\n- RxJS\n  - 代码示例\n\
+  \  - 兼容性\n  - 许可协议\n  - 微软\n\n## S, T, U, V\n\n- Scala\n- 扩展 Node.js\n  - 弹性伸缩\n\
+  \  - 外部工具\n  - 高性能 IPC\n  - 消息驱动\n  - 无集群的多进程处理\n  - 基于拉取的缓冲区\n  - 拉/推模式\n  - 基于推送的缓冲区\n\
+  \  - 容错\n  - 响应式系统\n  - 服务器内部扩展\n  - 单线程架构\n  - 简单函数\n- `String#split` 方法\n\n##\
+  \ W, X, Y, Z\n\n- Walmart\n- Web 服务应用\n"

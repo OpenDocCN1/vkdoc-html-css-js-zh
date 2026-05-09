@@ -1,0 +1,1854 @@
+- '
+
+  ![](img/A978-1-4842-2553-0_CoverFigure.jpg)
+
+
+  ![A978-1-4842-2553-0_CoverFigure.jpg](img/A978-1-4842-2553-0_CoverFigure.jpg)
+
+
+  赫曼斯·库马尔与阿卜杜勒·拉赫曼
+
+
+  '
+- "# 使用 Cocos2d-JS 快速开发游戏\n\n使用 JavaScript 进行 2D 游戏开发的端到端指南\n\n![A435521_1_En_BookFrontmatter_Figa_HTML.png](img/A435521_1_En_BookFrontmatter_Figa_HTML.png)\n\
+  \n作者在本书中提及的任何源代码或其他补充材料，读者均可访问 [`www.apress.com`](http://www.apress.com) 获取。关于如何查找本书源代码的详细信息，请访问\
+  \ [`www.apress.com/source-code/`](http://www.apress.com/source-code/)。读者也可通过 SpringerLink\
+  \ 访问每章“补充材料”部分中的源代码。\n\nISBN 978-1-4842-2552-3  \ne-ISBN 978-1-4842-2553-0  \nDOI\
+  \ 10.1007/978-1-4842-2553-0  \n美国国会图书馆控制编号：2016961533\n\n© 赫曼斯·库马尔 2016\n\n本作品受版权保护。出版方保留所有权利，特别是涉及全部或部分材料的翻译、重印、插图复用、朗诵、广播、微缩胶片或其他任何物理形式的复制、信息存储与检索的传输、电子改编、计算机软件，或目前已知或未来开发的任何类似或不同方法的权利。\n\
+  \n本书中可能出现的商标名称、标识和图片。我们在每次出现商标名称、标识或图片时未使用商标符号，仅以编辑方式使用这些名称、标识和图片，以维护商标所有者的权益，无意侵犯商标权。\n\
+  \n本出版物中使用的商品名称、商标、服务标志及类似术语，即使未明确标识，也不应被视为对它们是否受专有权利保护的任何意见表达。\n\n尽管本书中的建议和信息在出版时被认为是真实准确的，但作者、编辑及出版方对可能存在的任何错误或遗漏不承担法律责任。出版方不对本书所含材料提供任何明示或暗示的保证。\n\
+  \n印刷在无酸纸上\n\n全球图书贸易由 Springer Science+Business Media New York 发行，地址：233 Spring Street,\
+  \ 6th Floor, New York, NY 10013。电话：1-800-SPRINGER，传真：(201) 348-4505，电子邮件：orders-ny@springer-sbm.com，或访问\
+  \ www.springeronline.com。Apress Media, LLC 是一家加利福尼亚有限责任公司，其唯一成员（所有者）是 Springer Science\
+  \ + Business Media Finance Inc (SSBM Finance Inc)。SSBM Finance Inc 是一家特拉华州公司。\n\n\
+  ## 致谢\n\n我要感谢我的姐姐普里亚和母亲因德拉尼，她们在任何情况下都支持我。我还要感谢我的父亲克里希纳穆尔蒂。爸爸，记住您很容易——我每天都在做；思念您是一种永不消逝的心痛！\n\
+  \n——赫曼斯·库马尔\n\n没有以下人员的参与和支持，这项工作的完成是不可能的：\n\n致我的朋友赫曼斯·库马尔、我的父亲萨拉姆、母亲巴德鲁尼萨、妻子沙米拉·苏丹娜、儿子优素福·奥马尔，以及所有在道德、经济或物质上给予我无尽支持的亲属、朋友和导师——谢谢你们。\n\
+  \n最重要的是，感谢万能的主，赐予我知识和智慧。\n\n——阿卜杜勒·拉赫曼\n\n```markdown\n# 目录\n\n第 1 章：入门 1  \n1.1\
+  \ 简介 1  \n1.2 环境搭建 1  \n1.2.1 Python 安装 1  \n1.2.2 Cocos Console 配置 2  \n1.3 创建你的第一个应用\
+  \ 2  \n1.3.1 文件夹结构 3  \n1.3.2 `project.json` 的结构 4  \n1.3.3 代码 5  \n1.4 运行 \"Hello\
+  \ World\" 7  \n1.5 本书示例 8  \n1.5.1 运行代码示例 8  \n1.6 原生部署 10  \n1.6.1 Android 设置 10\
+  \  \n1.6.2 iOS 设置 11  \n\n第 2 章：架构概览 13  \n2.1 引擎架构 13  \n2.2 JSB 14  \n2.3 对象层级结构\
+  \ 14  \n2.4 部署选项 15  \n2.4.1 以混合应用部署 15  \n2.4.2 使用 Titanium 部署 15  \n2.4.3 Cocos\
+  \ Console 15  \n\n第 3 章：深入探究精灵 17  \n3.1 简介 17  \n3.2 精灵类 17  \n3.3 单图片精灵 18  \n\
+  3.3.1 帧率显示 20  \n3.4 精灵表精灵 21  \n3.5 精灵帧动画 23  \n3.6 使用 PList 数据的精灵帧动画 26  \n3.7\
+  \ 精灵的纹理缓存 29  \n3.8 精灵的精灵帧缓存 30  \n3.9 精灵批处理 31  \n3.9.1 SpriteBatchNode 31  \n\
+  3.10 分辨率策略 34  \n3.10.1 术语 35  \n3.10.2 预定义的分辨率策略 37  \n3.10.3 如何使用 38  \n3.10.4\
+  \ 自定义分辨率策略 38  \n3.10.5 预定义的容器策略 38  \n3.10.6 预定义的内容策略 38  \n3.10.7 自定义容器策略 39 \
+  \ \n3.10.8 自定义内容策略 39  \n\n第 4 章：处理输入和事件 41  \n4.1 简介 41  \n4.1.1 事件触发 42  \n4.1.2\
+  \ 事件管理器 42  \n4.1.3 事件监听器 42  \n4.2 触摸事件 42  \n4.2.1 单点触摸 42  \n4.2.2 多点触控 44  \n\
+  4.3 鼠标事件 44  \n4.4 键盘事件 46  \n4.5 加速度计事件 47  \n4.6 自定义事件 48  \n\n第 5 章：添加图形用户界面\
+  \ 49  \n5.1 简介 49  \n5.2 标签 49  \n5.2.1 TrueType 字体标签 49  \n5.2.2 位图字体标签 50  \n\
+  5.2.3 示例 50  \n5.3 菜单和菜单项 54  \n5.3.1 MenuItemLabel 54  \n5.3.2 MenuItemImage 54\
+  \  \n5.3.3 示例 54  \n5.4 其他 GUI 元素 57  \n\n第 6 章：动画乐趣 59  \n6.1 简介 59  \n6.2 动作 59\
+  \  \n6.2.1 By 和 To 动作 59  \n6.3 可用动作列表 60  \n6.3.1 移动 60  \n6.3.2 跳跃 60  \n6.3.3\
+  \ 旋转 60  \n6.3.4 缩放 61  \n6.3.5 倾斜 61  \n6.3.6 染色 61  \n6.3.7 贝塞尔曲线 61  \n6.3.8\
+  \ 基数样条 62  \n6.4 缓动 62  \n6.5 序列 64  \n6.5.1 反转序列 64  \n6.5.2 重复序列 64  \n6.5.3 动作结束回调\
+  \ 65  \n6.6 并列动作 65  \n6.7 停止动作 65  \n6.8 精灵帧动画 66  \n6.9 调度器和更新 66  \n\n第 7 章：为你的游戏添加物理效果\
+  \ 69  \n7.1 简介 69  \n7.2 Chipmunk 概览 69  \n7.3 Chipmunk Space 71  \n7.4 Chipmunk\
+  \ Body 72  \n7.5 Chipmunk StaticBody 73  \n7.6 物理调试节点 74  \n7.7 碰撞检测 74  \n7.8 综合运用\
+  \ 74  \n7.9 关节 78  \n7.9.1 销关节 80  \n7.9.2 滑动关节 83  \n7.9.3 枢轴关节 86  \n7.9.4 槽关节\
+  \ 89  \n7.9.5 阻尼弹簧 93  \n7.9.6 阻尼旋转弹簧 96  \n7.9.7 旋转限制关节 99  \n7.9.8 简单马达 102  \n\
+  7.9.9 齿轮关节 105  \n7.9.10 棘轮关节 108  \n\n第 8 章：杂项功能 109  \n8.1 绘制基本形状 109  \n8.2 添加音乐和音效\
+  \ 111  \n8.3 使用自定义着色器 111  \n8.4 运动拖尾效果 113  \n8.5 访问本地存储 115  \n8.6 定时回调 118  \n\
+  8.7 获取当前语言 120  \n8.8 访问系统能力 121  \n8.9 优化 122  \n8.9.1 内存优化 122  \n8.9.2 性能优化 122\
+  \  \n8.9.3 JavaScript 层面 123  \n8.10 结论 123  \n\n索引 125  \n\n# 内容速览\n\n关于作者 xi \
+  \ \n关于技术审校者 xii  \n致谢 xv  \n\n第 1 章：入门 1  \n第 2 章：架构概览 13  \n第 3 章：深入探究精灵 17  \n\
+  第 4 章：处理输入和事件 41  \n第 5 章：添加图形用户界面 49  \n第 6 章：动画乐趣 59  \n第 7 章：为你的游戏添加物理效果 69 \
+  \ \n第 8 章：杂项功能 109  \n索引 125  \n\n# 关于作者及技术审校者\n\n关于作者  \n关于技术审校者  \n```\n\n\n"
+- "# 开始使用\n\n电子补充材料 本章的在线版本 (doi:[10.​1007/​978-1-4842-2553-0_​1](http://dx.doi.org/10.1007/978-1-4842-2553-0_1))\
+  \ 包含补充材料，仅供授权用户获取。\n\n## 引言\n\n早期，制作游戏十分困难，但近年来，大量 2D 和 3D 框架与工具不断发展，简化了游戏开发流程，使开发者能够快速制作出高质量的游戏。`Cocos`\
+  \ 是一款广泛应用于 2D 游戏开发的游戏引擎。多年来，`Cocos` 在开发者中奠定了坚实的基础。市场上许多热门游戏都是使用 `Cocos` 制作的。2010\
+  \ 年，基于 `Cocos2D` 的 C++ 移植版 `Cocos2d-x` 问世，使开发者能够制作跨平台的 2D 游戏。随后，基于 `Cocos2D` 的 JavaScript\
+  \ 移植版 `Cocos2d-js` 推出，使开发者能够制作基于浏览器的游戏，以及使用 `JSB` 的跨平台原生游戏。\n\n`Cocos2D` 凭借其简洁性和丰富的功能，已成为\
+  \ 2D 游戏开发的公认标准。在接下来的章节中，我们将深入探讨 `Cocos2d-js` 框架及其功能。读完本书后，你将扎实掌握 `Cocos2D-js` 框架、最佳实践以及丰富的功能集，从而能够快速开发出精彩纷呈的游戏。\n\
+  \n让我们开始吧！\n\n## 环境搭建\n\n### Python 安装\n\n大多数情况下，你需要使用 `Cocos` 控制台来创建、运行、编译和部署项目。控制台依赖于\
+  \ Python。因此，你首先需要安装 Python。你可以从 Python 官方网站下载：[`https://www.python.org/downloads/`](https://www.python.org/downloads/)。\n\
+  \n如果你在 MacOS X 上开发，系统默认已预装 Python。\n\n### Cocos 控制台设置\n\n对于 `Cocos2d-js`，开发环境实际上是\
+  \ `Cocos` 控制台的一部分。因此，你必须下载 `Cocos2d-x` 完整包；如果你只想针对 Web 进行开发，也可以选择 HTML5 Lite 版本。\n\
+  \n#### 步骤\n\n*   从 [`https://cocos2d-x.org/download`](https://cocos2d-x.org/download)\
+  \ 下载 `cocos2d-x` 完整包。\n*   将 zip 文件解压到本地磁盘。\n*   在 Mac 上打开终端，或在 Windows 上打开命令提示符，并导航到解压后的文件夹。\n\
+  *   运行以下命令：\n\n```\npython setup.py\n```\n\n此命令将设置 `Cocos` 控制台，它会同时使用 Android 和\
+  \ iOS 的环境设置，并更新环境变量。\n\n## 创建你的第一个应用\n\n在你喜欢的位置创建一个单独的文件夹。将你所有的 `Cocos2d-js` 项目都放在一个根文件夹中，这是一个良好的实践。\n\
+  \n打开终端，导航到已创建的文件夹路径，然后执行以下命令：\n\n*   `Cocos2d-js` 项目：\n\n```\ncocos new sampleproject\
+  \ -l js\n```\n\n*   仅包含 Web 引擎的 `Cocos2d-js` 项目：\n\n```\ncocos new sampleproject\
+  \ -l js --no-native\n```\n\n*   在指定目录中创建 `Cocos2d-js` 项目：\n\n```\ncocos new sampleproject\
+  \ -l js -d ./Projects\n```\n\n`sampleproject` 是你的项目名称，`-l js` 指定使用 JavaScript 语言。这将创建一个“Hello\
+  \ World”示例，你可以将其用作游戏的基础。但在此之前，你需要了解 `Cocos2d-js` 遵循的文件夹结构。\n\n### 文件夹结构\n\n当你创建新项目时，`Cocos`\
+  \ 控制台会创建如图 1-1 所示的文件夹结构。\n\n*   `src` - 存放游戏所有 JavaScript 文件的文件夹\n*   `res` - 存放游戏中引用的所有图片和其他资源的文件夹\n\
+  *   `frameworks` - 存放实际 `Cocos2d-js` 引擎、用于原生部署的支持文件、`JSB` 等的文件夹。此外，还有配置文件 `project.json`（作为游戏运行时的主要元配置）和\
+  \ `manifest.webapp`（包含与 Web 相关的配置信息）。\n\n![A435521_1_En_1_Fig1_HTML.jpg](img/A435521_1_En_1_Fig1_HTML.jpg)\n\
+  \n图 1-1. 项目文件夹结构\n\n### `project.json` 的结构\n\n此文件包含你的 `Cocos2d-js` 项目的元信息。让我们看看\
+  \ JSON 结构。\n\n*   `version` - 你的应用版本\n*   `name` - 你的应用名称\n*   `description` - 你的应用描述\n\
+  *   `launch_path` - `Cocos2d-js` 的启动 HTML 文件；当将应用作为 Web 应用部署/调试时，`Cocos` 控制台会使用该文件\n\
+  *   `icons` - 不同尺寸的应用图标；在原生部署时，`Cocos` 控制台会使用该字段\n*   `developer` - 应用开发者的信息\n*\
+  \   `default_locale` - 应用的默认本地化设置；表示默认使用的语言\n*   `orientation` - 支持的屏幕方向\n*   `fullscreen`\
+  \ - 部署到原生平台时使用\n\n```\n{\n  \"version\": \"1.0\",\n  \"name\": \"sampleproject1\"\
+  ,\n  \"description\": \"sampleproject1\",\n  \"launch_path\": \"/index.html\",\n\
+  \  \"icons\": {\n    \"128\": \"/res/icon.png\"\n  },\n  \"developer\": {\n    \"\
+  name\": \"Cocos2d-html5\",\n    \"url\": \"http://cocos2d-x.org/\"\n  },\n  \"default_locale\"\
+  : \"en\",\n  \"installs_allowed_from\": [\n    \"*\"\n  ],\n  \"orientation\": \"\
+  portrait-primary\",\n  \"fullscreen\": \"true\"\n}\n```\n\n\n好的，作为一名高级文档工程师和翻译员，我将严格按照您的要求，完成以下英文文本的翻译工作。\n\
+  \n\n### 1.3.3 代码\n\n如果你打开 `main.js`，你会看到以下代码。\n\n```\n1   cc.game.onStart = function(){\n\
+  2       //如果引用了 loading.js，请将其移除\n3       if(!cc.sys.isNative && document.getElementById(\"\
+  cocosLoading\")) 4\n\n5            document.body.removeChild(document.getElementById(\"\
+  cocosLoading\"));\n\n7       // 传入 true 以启用视网膜显示，默认禁用以提高性能\n8       cc.view.enableRetina(false);\n\
+  9       // 调整视口元数据\n10       cc.view.adjustViewPort(true);\n11       // 设置分辨率策略和设计分辨率尺寸\n\
+  12       cc.view.setDesignResolutionSize(800, 450, cc.ResolutionPolicy.SHOW_ALL);\n\
+  13       // 当浏览器尺寸改变时，游戏将被调整大小\n14       cc.view.resizeWithBrowserSize(true);\n\
+  15       //加载资源\n16       cc.LoaderScene.preload(g_resources, function () {\n17\
+  \           cc.director.runScene(new HelloWorldScene());\n18       }, this);\n19\
+  \   };\n20   cc.game.run();\n```\n\nCocos2d-js 引擎将首先执行 `onStart` 函数，该函数包含了启动游戏的代码。上述代码中涉及一些配置相关的内容，这些将在后续章节中进行解释。现在，我们将重点关注\
+  \ `cc.LoaderScene` 部分。\n\n```\n1   cc.LoaderScene.preload(g_resources, function\
+  \ () {\n2        cc.director.runScene(new HelloWorldScene());\n3   }, this);\n```\n\
+  \n上述代码加载了“Hello World”场景。`cc.director` 是游戏唯一的控制器实例。这个导演的目的是指导游戏的执行，加载和卸载场景，并获取关于游戏执行环境的信息，例如屏幕尺寸等。在这段代码中，导演使用\
+  \ `runScene` 函数来加载 `HelloWorldScene`，该场景在 `preload` 内部被加载。`preload` 将 `g_resources`\
+  \ 中指定的资源加载到 Cocos 缓存中，一旦资源加载完成，就会执行一个回调函数，该函数包含加载 `HelloWorldScene` 的代码。\n\n让我们看看\
+  \ `HelloWorldScene` 和 `HelloWorldLayer`。打开 `src` 文件夹中的 `app.js`。在 `app.js` 的底部，你会看到类似这样的代码：\n\
+  \n```\n1   var HelloWorldScene = cc.Scene.extend({\n2       onEnter:function ()\
+  \ {\n3           this._super();\n4           var layer = new HelloWorldLayer();\n\
+  5           this.addChild(layer);\n6       }\n7   });\n```\n\n通过调用 `onEnter` 函数来告知场景运行，并且\
+  \ `HelloWorldLayer` 作为子节点被注入到场景中。\n\n为了简化问题，我们将修改 `HelloWorldLayer`。\n\n```\n1 \
+  \  var HelloWorldLayer = cc.Layer.extend({\n2       sprite:null,\n3       ctor:function\
+  \ () {\n4           this._super();\n5           var size = cc.winSize;\n6      \
+  \     var helloLabel = new cc.LabelTTF(\"Hello World\", \"Arial\", 38);\n7     \
+  \      // 将标签定位在屏幕中央\n8           helloLabel.x = size.width / 2;\n9           helloLabel.y\
+  \ = size.height / 2 + 200;\n10           // 将标签作为子节点添加到此层\n11           this.addChild(helloLabel,\
+  \ 5);\n\n13           // 添加“HelloWorld”启动画面\n14           this.sprite = new cc.Sprite(res.HelloWorld_png);\n\
+  15           this.sprite.attr({\n16                x: size.width / 2,\n17      \
+  \          y: size.height / 2\n18           });\n19           this.addChild(this.sprite,\
+  \ 0);\n20           return true;\n21       }\n22   });\n```\n\n这一层有两个子节点：一个是 `cc.LabelTTF`，其文本内容为“Hello\
+  \ World”；另一个是 `HelloWorld_png` 精灵。在本书中，我们将使用竖屏分辨率。因此，在 `main.js` 中，你应该将以下这行代码：\n\
+  \n```\n1   //这是横屏\n2   cc.view.setDesignResolutionSize(800, 450, cc.ResolutionPolicy.SHOW_ALL);\n\
+  ```\n\n修改为：\n\n```\n1   //交换宽度和高度，使其变为竖屏\n2   cc.view.setDesignResolutionSize(450,\
+  \ 800, cc.ResolutionPolicy.SHOW_ALL);\n```\n\n宽度和高度已被交换。\n\n## 1.4 运行“Hello World”\n\
+  \n为简单起见，在本书中，我们将在 Web 浏览器中运行所有代码。但是，你也可以选择将其作为原生应用部署到设备上。要运行此示例，请在终端中导航到项目路径，然后输入以下命令：\n\
+  \n```\n1   cocos run -p web\n```\n\n这将在浏览器中启动应用程序；然而，你也可以通过将 `-p param` 改为 `'android'`\
+  \ 或 `'ios'`，在 Android、iOS 或 Windows Phone 上启动该应用程序。你将看到类似图 1-2 所示的内容。\n\n![A435521_1_En_1_Fig2_HTML.jpg](img/A435521_1_En_1_Fig2_HTML.jpg)\n\
+  \n图 1-2.\n\nHello World\n\n## 1.5 本书示例\n\n本书的所有示例代码都可以在 [`https://github.com/nutcrackify/Rapid_Game_Development_Using_Cocos2d-js`](https://github.com/nutcrackify/Rapid_Game_Development_Using_Cocos2d-js)\
+  \ 找到。\n\n### 1.5.1 运行代码示例\n\n有多种方法可以让代码示例运行起来。我们发现以下步骤可以轻松快速地启动示例代码。请在终端中运行以下命令。\n\
+  \n#### 1.5.1.1 步骤\n\n*   创建一个新的 Cocos2d-js 项目：\n\n在终端中导航到项目文件夹：\n\n```\n1   cocos\
+  \ new codeexamples -l js\n```\n\n*   初始化一个空的 `git` 仓库：\n\n```\n1   cd codeexamples\n\
+  ```\n\n*   使用以下任一命令将远程仓库（代码示例仓库）添加到本地 `git` 仓库：\n\n![A435521_1_En_1_Fig3_HTML.jpg](img/A435521_1_En_1_Fig3_HTML.jpg)\n\
+  \n图 1-3.\n\nHello World\n\n*   删除当前文件夹中除 `frameworks/` 文件夹之外的所有文件和文件夹（参见图 1-3）。\n\
+  \n```\n1   git init\n```\n\n*   拉取仓库：\n\n```\n1   (如果你使用 ssh)\n2   git remote add\
+  \ origin git@github.com:nutcrackify/Rapid_Game_Development_Using_Co\\\n3   cos2d-js.git\n\
+  \n5   (如果你使用 https)\n6   git remote add origin https://github.com/nutcrackify/Rapid_Game_Development_Usin\\\
+  \n7   g_Cocos2d-js.git\n```\n\n*   运行示例：\n\n```\n1   git pull origin master\n```\n\
+  \n```\n1   cocos run -p web\n```\n\n## 1.6 原生部署\n\n除了在 Web 上，你也可以将你的 Cocos2d-js\
+  \ 示例部署到原生平台。以下是用于原生部署的命令。\n\n*   `[-h]` 是帮助。\n*   `[-s SRC_DIR]` 表示你的 Cocos2d-js\
+  \ 项目的源文件夹。\n*   `[-q]` 是静默模式。\n*   `[-p PLATFORM]` 表示目标平台（例如，Android、iOS 等）。\n*\
+  \   `[-m MODE]` 表示部署模式（例如，release、debug）。\n\n```\n1   cocos deploy [-h] [-s SRC_DIR]\
+  \ [-q] [-p PLATFORM] [-m MODE]\n```\n\n### 1.6.1 Android 环境搭建\n\n如果你已经有了 Android\
+  \ 环境，或者你不想为 Android 编译和部署，可以跳过此部分。\n\n#### 1.6.1.1 步骤\n\n*   从 [`http://www.oracle.com/technetwork/java/javase/downloads/index.html`](http://www.oracle.com/technetwork/java/javase/downloads/index.html)\
+  \ 安装 JDK。\n*   从 [`https://developer.android.com/sdk/index.html`](https://developer.android.com/sdk/index.html)\
+  \ 下载 Android Studio 或 SDK 及 NDK。\n*   如果你不安装 Android Studio，请解压 SDK。\n*   解压 NDK\
+  \ 并将其放在 SDK 的根目录中，确保 SDK 和 NDK 位于同一个根文件夹下。\n*   从 [`https://ant.apache.org/bindownload.cgi`](https://ant.apache.org/bindownload.cgi)\
+  \ 安装 Apache ant。\n\n在你的本地 Cocos2d-x 安装文件夹中运行以下命令，并提供 Android NDK 和 SDK 路径：\n\n```\n\
+  1   python python.py\n```\n\n要将你的项目部署到 Android，请通过终端在项目文件夹中运行以下命令：\n\n```\n1   cocos\
+  \ deploy -p android -m release\n```\n\n### 1.6.2 iOS 环境搭建\n\n从 OS X 应用商店安装 XCode。使用以下命令进行\
+  \ iOS 部署：\n\n```\n1   cocos deploy -p ios -m release\n```\n\n在下一章中，我们将研究引擎架构，让我们继续前进。\n\
+  \n"
+- '# 2. 架构概述
+
+
+
+
+  ## 2.1 引擎架构
+
+
+  了解`Cocos2d-js`的架构将为您理解整个框架打下坚实的基础。本节不会涉及超出本书范围的详细架构，但我们将涵盖您需要了解的、以便继续学习的必要细节。`Cocos2d-js`是一个纯基于**JavaScript**的游戏框架，运行在浏览器栈上。您可以将其编译为**Web**应用并在任何浏览器上运行；然而，其**API**和对象的层级结构与`Cocos2d-x`相同。因此，借助`JSB`和`SpiderMonkey`，您的**JavaScript**游戏代码可以部署为实际利用`OpenGL/DirectX`核心渲染管线的原生应用。让我们看一下图
+  2-1 中的架构。
+
+
+  ![A435521_1_En_2_Fig1_HTML.jpg](img/A435521_1_En_2_Fig1_HTML.jpg)
+
+
+  图 2-1. `Cocos2d-js` 栈
+
+
+  如您所见，如果您的应用是基于浏览器的，您的**JavaScript**游戏代码将利用`Cocos2d-js`的库，并可以像其他任何**Web**应用一样运行。当您使用`Cocos`控制台将其部署为原生应用时，您的**JavaScript**代码将映射到实际指向原生`Cocos2d-x`的**JavaScript**绑定。您的**JavaScript**代码将由`SpiderMonkey`转换为**C**代码。因此，实际上是`Cocos2d-x`在驱动您的**JavaScript**游戏。
+
+
+  ### 2.2 JSB
+
+
+  如上所述，`JSB`包含`Cocos2d-x`的**JavaScript**和**C++ API**之间的映射，因此当您选择将游戏部署为原生应用时，您所有的**API**使用都会在`SpiderMonkey`的帮助下映射到实际的**C++
+  API**调用。请注意，只有有文档记录的`Cocos2d-js API`才能映射到原生**API**调用。如果您尝试调用任何`Cocos2d-js`内部未文档化的函数，应用在浏览器中会正常运行，但当您将其部署为原生应用时，您可能看不到相同的结果。如果您计划将游戏编译到任何移动平台，强烈建议您始终遵循有文档记录的**API**。
+
+
+  ### 2.3 对象层级结构
+
+
+  `Cocos2d-js`基于面向对象的原则，因此所有涉及的实体都被视为类和对象。请参考图 2-2。
+
+
+  ![A435521_1_En_2_Fig2_HTML.jpg](img/A435521_1_En_2_Fig2_HTML.jpg)
+
+
+  图 2-2. 对象层级结构
+
+
+  `Cocos2d-js`中的每个类，除了一些工具类外，都继承自`cc.Node`，从`Scene`和`Layer`到`Sprites`，所有这些类都是`Node`对象的实例。当您在`Cocos2d-js`中处理任何可见元素时，最顶层的根对象是`cc.Node`。因此，大多数情况下您都在处理一个`Node`对象。派生对象将根据其定义和需求具有自己的行为和重写方法。
+
+
+  ### 2.4 部署选项
+
+
+  由于您使用的是纯**JavaScript**库，因此部署应用的方式比仅仅依赖`Cocos`控制台要多得多。
+
+
+  #### 2.4.1 部署为混合应用
+
+
+  此选项取决于您游戏的性能。如果您的游戏使用了繁重的绘制循环，则不建议使用此选项。
+
+
+  #### 2.4.2 使用 Titanium 部署
+
+
+  此选项将使您能够将应用部署为原生应用，但其可行性可能因您在游戏中的操作而异。
+
+
+  #### 2.4.3 Cocos 控制台
+
+
+  这是我们将应用部署到各种平台的首选方式，但您也可以使用其他`Cocos2d-x`服务，例如`SDKBOX`、`pluginX`等。
+
+
+  '
+- "# 3. 深入了解精灵\n\n## 3.1 简介\n\n精灵是任何**2D**游戏中最核心的部分。在开发**2D**游戏时，您会经常处理这个实体。在`Cocos2d-js`中，这个实体由一个名为`cc.Sprite`的类定义。在本节中，我们将详细探讨这个类，包括它的组织方式、使用方法、如何实现帧动画等。那么，让我们开始吧。\n\
+  \n## 3.2 Sprite 类\n\n在`Cocos2d-js`中，`cc.Sprite`类用于定义游戏中的精灵。该类可以使用图像文件名、初始旋转变换等进行初始化。之后，您可以根据游戏逻辑动态更新其\
+  \ **x,y** 位置。让我们看一下图 3-1 中这个类的组织方式。\n\n![A435521_1_En_3_Fig1_HTML.jpg](img/A435521_1_En_3_Fig1_HTML.jpg)\n\
+  \n图 3-1. Sprite 类\n\n当您观察一个精灵时，它有两个主要部分。一个是纹理，代表图像；另一个是精灵帧，代表纹理图像中当前显示精灵的`rect`（矩形区域）。纹理由\
+  \ `cc.Texture` 表示，精灵帧由 `cc.SpriteFrame` 表示。让我们看几个示例。\n\n## 3.3 单一图像精灵\n\n在 `src`\
+  \ 文件夹中，创建一个名为 `spriteimage.js` 的文件，并复制粘贴以下代码：\n\n```\n1   var SpriteImageLayer =\
+  \ cc.Layer.extend({\n2       sprite:null,\n3       ctor:function () {\n4       \
+  \     this._super();\n\n6            var size = cc.winSize;\n\n8            this.sprite\
+  \ = new cc.Sprite(res.Sprite_Image);\n9            this.sprite.attr({\n10      \
+  \           x: size.width / 2,\n11                 y: size.height / 2\n12      \
+  \      });\n13            this.addChild(this.sprite, 0);\n14            return true;\n\
+  15       }\n16   });\n```\n\n在 `project.json` 中包含这个新文件，并在 `app.js` 中，将场景中现有的 `layer`\
+  \ 实例替换为 `SpriteImageLayer`。\n\n```\n1   var HelloWorldScene = cc.Scene.extend({\n\
+  2       onEnter:function () {\n3           this._super();\n4           //将当前层替换为\
+  \ SpriteImageLayer。\n5           var layer = new SpriteImageLayer();\n6        \
+  \   this.addChild(layer);\n7       }\n8   });\n```\n\n在 `resources.js` 中，需要包含 `Sprite_Image`\
+  \ 属性；您可以使用自己选择的图像。\n\n```\n1   var res = {\n2       .......\n\n4       Sprite_Image:\"\
+  res/sprite_image.png\"\n5   };\n```\n\n我将使用图 3-2 中看到的图像。\n\n![A435521_1_En_3_Fig2_HTML.jpg](img/A435521_1_En_3_Fig2_HTML.jpg)\n\
+  \n图 3-2. `sprite_image.png`\n\n请记住这些运行单独层的步骤，因为我们将为每个示例创建单独的层，并且在后续示例中这些步骤将不再重复。\n\
+  \n如您所见，精灵已经用一个单一图像初始化：\n\n```\n1   this.sprite = new cc.Sprite(res.Sprite_Image);\n\
+  ```\n\n此构造函数将使用 `res.Sprite_Image` 创建一个 `cc.Texture` 实例，并且 `cc.SpriteFrame` 将默认初始化为\
+  \ `rect(0,0,spriteWidth,spriteHeight)` 以显示完整的图像。因此，输出将如图 3-3 所示。\n\n![A435521_1_En_3_Fig3_HTML.jpg](img/A435521_1_En_3_Fig3_HTML.jpg)\n\
+  \n图 3-3. 带单一图像的精灵\n\n### 3.3.1 FPS 显示\n\n左下角的显示称为 **FPS** 显示，它有三个值：\n\n*   绘制调用数\n\
+  *   增量时间\n*   帧率\n\n您可以使用 `project.json` 中的 `showFPS` 标记来控制 **FPS** 显示的可见性。\n\n\
+  #### 3.3.1.1 绘制调用\n\n渲染发生在绘制调用中，场景中的每个节点都有一个关联的绘制调用。随着绘制调用数的增加，增量时间和帧率会下降，这与游戏的性能直接相关。\n\
+  \n#### 3.3.1.2 增量时间\n\n前一帧完成渲染所花费的时间。\n\n#### 3.3.1.3 帧率\n\n表示每秒渲染的帧数。\n\n\n\n###\
+  \ 3.4 使用精灵表的精灵\n\n为减少内存占用，应将所有资源打包到一张精灵表中，并在整个游戏过程中使用该精灵表。对于单个精灵而言，`cc.SpriteFrame`\
+  \ 实例将定义需要显示在 `cc.Sprite` 实例显示帧中的精灵表部分。我将使用图 3-4 中所示的精灵表进行下一个示例。\n\n![A435521_1_En_3_Fig4_HTML.jpg](img/A435521_1_En_3_Fig4_HTML.jpg)\n\
+  \n图 3-4. `sprite_sheet.png`\n\n在 `src` 目录下，创建一个名为 `spritesheet.js` 的文件，并将以下代码复制进去：\n\
+  \n```\n1   var SpriteSheetLayer = cc.Layer.extend({\n2       sprite:null,\n3   \
+  \    ctor:function () {\n5           this._super();\n7           var size = cc.winSize;\n\
+  9           this.sprite = new cc.Sprite(res.Sprite_Sheet,cc.rect(438,93,67,94));\n\
+  10          this.sprite.attr({\n11              x: size.width / 2,\n12         \
+  \     y: size.height / 2\n13          });\n14          this.addChild(this.sprite,\
+  \ 0);\n16          return true;\n17      }\n18  });\n```\n\n按照上一个示例的步骤，将 `SpriteSheetLayer`\
+  \ 包含到 `HelloWorldScene` 中。在 `resource.js` 文件中，创建一个 `Sprite_Sheet` 变量并指定精灵表的文件名。\n\
+  \n如您所见，精灵使用精灵表作为纹理进行初始化，并通过 `rect` 设置需要显示的当前帧。参见图 3-5。\n\n![A435521_1_En_3_Fig5_HTML.jpg](img/A435521_1_En_3_Fig5_HTML.jpg)\n\
+  \n图 3-5. 使用精灵表的精灵\n\n`rect` 坐标对应精灵表中第一行的最后一张图像。\n\n### 3.5 精灵帧动画\n\n如前所述，`cc.SpriteFrame`\
+  \ 负责在 `cc.Sprite` 中显示当前图像。这个精灵帧可以在任意时刻更改，这使我们能够创建基于帧的动画。让我们看一个示例。我将在此示例中使用同一张精灵表。\n\
+  \n在 `src` 目录下，创建一个名为 `spriteanimation.js` 的文件，并将以下代码复制进去：\n\n```\n1   var SpriteAnimationLayer\
+  \ = cc.Layer.extend({\n2       sprite:null,\n3       ctor:function () {\n4     \
+  \      //////////////////////////////\n5          // 1\\. super init first\n6  \
+  \        this._super();\n8          var size = cc.winSize;\n9          //FrameData\n\
+  10          var walk01 = cc.rect(0,0,72,97);\n11          var walk02 = cc.rect(73,0,72,97);\n\
+  12          var walk03 = cc.rect(146,0,72,97);\n13          var walk04 = cc.rect(0,98,72,97);\n\
+  14          var walk05 = cc.rect(73,98,72,97);\n15          var walk06 = cc.rect(146,98,72,97);\n\
+  16          var walk07 = cc.rect(219,0,72,97);\n17          var walk08 = cc.rect(292,0,72,97);\n\
+  18          var walk09 = cc.rect(219,98,72,97);\n19          var walk10 = cc.rect(365,0,72,97);\n\
+  20          var walk11 = cc.rect(292,98,72,97);\n22          var frameDatas=[walk01,walk02,walk03,walk04,walk05,\n\
+  23          walk06,walk07,walk08,walk09,walk10,walk11];\n24          var texture\
+  \ = cc.textureCache.addImage(res.Sprite_Sheet);\n26          //Create SpriteFrame\
+  \ and AnimationFrame with Frame Data\n27          var animFrames=[];\n28       \
+  \   for(var index in frameDatas)\n29          {\n30               var spriteFrame\
+  \ = new cc.SpriteFrame(texture, frameDatas[index]);\n31               var animFrame\
+  \ = new cc.AnimationFrame();\n32               animFrame.initWithSpriteFrame(spriteFrame,\
+  \ 1, null);\n33               animFrames.push(animFrame);\n34          }\n36   \
+  \       //Create an empty sprite\n37          this.sprite = new cc.Sprite();\n38\
+  \          this.sprite.attr({\n39               x: size.width / 2,\n40         \
+  \      y: size.height / 2\n41          });\n43          this.addChild(this.sprite,\
+  \ 0);\n45          var animation = cc.Animation.create(animFrames, 0.08);\n46  \
+  \        var animate = cc.Animate.create(animation);\n48          //Animate the\
+  \ sprite frame on the empty sprite\n49          this.sprite.runAction(animate.repeatForever());\n\
+  51          return true;\n52       }\n53   });\n```\n\n帧动画背后的思路是，我们将在特定的时间间隔内逐帧播放，使其看起来像一个动画序列。在上述代码中，`walk01`\
+  \ 到 `walk11` 表示精灵表中的各帧，使用 `rects` 定义。如果我们将这些帧组合并依次播放，就会看起来像一个行走动画。\n\n`SpriteFrame`\
+  \ 实例使用该帧 `rect` 数组创建（参见图 3-6）：\n\n![A435521_1_En_3_Fig6_HTML.jpg](img/A435521_1_En_3_Fig6_HTML.jpg)\n\
+  \n图 3-6. `SpriteFrame`\n\n```\n1   var texture = cc.textureCache.addImage(res.Sprite_Sheet);\n\
+  2   var animFrames=[];\n3   for(var index in frameDatas)\n4   {\n5       var spriteFrame\
+  \ = new cc.SpriteFrame(texture, frameDatas[index]);\n6       var animFrame = new\
+  \ cc.AnimationFrame();\n7       animFrame.initWithSpriteFrame(spriteFrame, 1, null);\n\
+  8       animFrames.push(animFrame);\n9   }\n```\n\n在这个示例中，我们手动创建 `cc.SpriteFrame`\
+  \ 实例，因此需要一个精灵表的 `texture` 实例。于是我们将精灵表添加到纹理缓存中，该操作会返回 `texture` 实例，可用于创建所有精灵帧。\n\n\
+  最后，用于执行动画的 `cc.Animation` 实例通过 `cc.AnimationFrame` 的图像列表创建，时间间隔设置为 0.08 秒。\n\n输出结果将是一个流畅的行走动画。\n\
+  \n在上述案例中，为了完整理解帧动画，我们手动创建了帧数据，但在实际开发中，精灵表往往是通过像 TexturePack 这样的工具从单个图像生成，同时还会创建关联的数据文件。在\
+  \ Cocos2d 中，这是一个包含与精灵表相关的所有帧数据的 PList 文件。在下一个示例中，我们将看到如何使用 PList 创建帧动画。\n\n\n\n\
+  ### 3.6 使用 PList 数据的精灵帧动画\n\n我们使用`TexturePack`从一个单独的图像创建了相同的精灵表，并生成了`PList`文件。参见图\
+  \ 3-7。\n\n![A435521_1_En_3_Fig7_HTML.jpg](img/A435521_1_En_3_Fig7_HTML.jpg)\n\n\
+  图 3-7. `TexturePack` 生成的精灵表\n\n在生成`PList`时，请确保选择了`Cocos2d`作为数据格式。图 3-8 显示了生成的纹理。\n\
+  \n![A435521_1_En_3_Fig8_HTML.jpg](img/A435521_1_En_3_Fig8_HTML.jpg)\n\n图 3-8. 来自`TexturePack`的精灵表\n\
+  \n你可以在示例项目`res`文件夹中查看`PList`数据文件，该示例项目位于 [`https://github.com/nutcrackify/Rapid_-Game_Development_Using_Cocos2d-js`](https://github.com/nutcrackify/Rapid_-Game_Development_Using_Cocos2d-js)。\n\
+  \n在`src`中，创建一个名为`plistanimation.js`的文件，并将以下代码复制到其中：\n\n```\n1   var PListAnimationLayer\
+  \ = cc.Layer.extend({\n2       sprite:null,\n3       ctor:function () {\n\n5   \
+  \        this._super();\n\n7           var size = cc.winSize;\n\n9           cc.spriteFrameCache.addSpriteFrames(res.Sprite_Sheet1_P,\
+  \ res.Sprite_Shee\\\n10           t1);\n11           //使用帧数据创建 SpriteFrame 和 AnimationFrame\n\
+  12           var animFrames=[];\n13           for(var i=1;i<12;i++)\n14        \
+  \   {\n15                var str = \"p1_walk\" + (i < 10 ? (\"0\" + i) : i) + \"\
+  .png\";\n16                var spriteFrame=cc.spriteFrameCache.getSpriteFrame(str);\n\
+  17                animFrames.push(spriteFrame);\n18           }\n\n20          \
+  \ //创建一个空的精灵\n21           this.sprite = new cc.Sprite();\n22           this.sprite.attr({\n\
+  23                x: size.width / 2,\n24                y: size.height / 2\n25 \
+  \          });\n\n27           this.addChild(this.sprite, 0);\n\n29           var\
+  \ animation = new cc.Animation(animFrames, 0.08);\n30           this.sprite.runAction(cc.animate(animation).repeatForever());\n\
+  \n32           return true;\n33       }\n34   });\n```\n\n在`resource.js`中，使用变量`Sprite_Sheet1_P`和`Sprite_Sheet1`包含`PList`和精灵表文件；两者都已添加到帧缓存中，如下所示：\n\
+  \n```\n1   cc.spriteFrameCache.addSpriteFrames(res.Sprite_Sheet1_P, res.Sprite_Sheet1);\n\
+  ```\n\n基于`PList`数据和精灵表，可以使用`getSpriteFrame`函数创建精灵帧，如下所示：\n\n```\n1   var animFrames=[];\n\
+  2   for(var i=1;i<12;i++)\n3   {\n4       var str = \"p1_walk\" + (i < 10 ? (\"\
+  0\" + i) : i) + \".png\";\n5       var spriteFrame=cc.spriteFrameCache.getSpriteFrame(str);\n\
+  6       animFrames.push(spriteFrame);\n7   }\n```\n\n现在我们有了精灵帧列表，可以使用`cc.Animation`类来制作动画：\n\
+  \n```\n1   var animation = new cc.Animation(animFrames, 0.08);\n2   this.sprite.runAction(cc.animate(animation).repeatForever());\n\
+  ```\n\n这与我们之前使用原始帧数据（不带`PList`）所做的行走动画是相同的。\n\n### 3.7 带有精灵的 TextureCache\n\n纹理缓存是精灵构建的重要组成部分，用于在内存中缓存纹理数据，以便再次引用相同纹理时，可以从缓存中加载。这可以提高游戏的整体性能和内存优化。参见图\
+  \ 3-9。\n\n![A435521_1_En_3_Fig9_HTML.jpg](img/A435521_1_En_3_Fig9_HTML.jpg)\n\n\
+  图 3-9. 纹理缓存精灵\n\n每当你使用图像文件创建一个精灵时，该图像文件会在内部被加载到`TextureCache`中，并且会使用`TextureCache`中的数据创建一个`Texture2D`实例。在前面的代码示例中，你看到了我们如何将精灵表加载到纹理缓存中，并使用它来创建`SpriteFrame`实例。参见图\
+  \ 3-10。\n\n![A435521_1_En_3_Fig10_HTML.jpg](img/A435521_1_En_3_Fig10_HTML.jpg)\n\
+  \n图 3-10. 使用`PNG`的精灵\n\n上图表示使用单个`png`文件的精灵。一旦纹理从资源加载器返回，它就会被缓存到纹理缓存中，然后从缓存数据创建`Texture2D`实例，并被`cc.Sprite`使用。这是`cc.Sprite`的内部实现。\n\
+  \n### 3.8 带有精灵的 SpriteFrameCache\n\n与`TextureCache`类似，`SpriteFrameCache`用于缓存被`cc.Sprite`使用的`SpriteFrame`。如果你有一个精灵表，单个的`SpriteFrames`可以被缓存在`SpriteFrameCache`中，并在以后需要时使用。前面的代码示例和图\
+  \ 3-11 已经说明了这一点。\n\n![A435521_1_En_3_Fig11_HTML.jpg](img/A435521_1_En_3_Fig11_HTML.jpg)\n\
+  \n图 3-11. `SpriteFrameCache`共享`SpriteFrame`\n\n### 3.9 精灵批处理\n\n精灵批处理是一种技术，它通过单次绘制调用来合并多个精灵的渲染，前提是所涉及的精灵使用相同的纹理或纹理表。\n\
+  \n\n\n### 3.9.1 SpriteBatchNode\n\n`cc.SpriteBatchNode` 是一种精灵类，用于将多个精灵合并到一次绘制调用中。让我们看一个例子。\n\
+  \n首先，我们使用相同的精灵表（sprite sheet）和不同的 `SpriteFrame` 矩形创建四个独立的精灵：\n\n```\n1   this.sprite1\
+  \ = new cc.Sprite(res.Sprite_Sheet,cc.rect(438,93,67,94));\n2   this.sprite1.attr({\n\
+  3       x: size.width / 2,\n4       y: size.height / 1.5\n5   });\n\n7   this.sprite2\
+  \ = new cc.Sprite(res.Sprite_Sheet,cc.rect(73,0,72,97));\n8   this.sprite2.attr({\n\
+  9       x: size.width / 2,\n10      y: size.height / 2\n11  });\n\n13  this.sprite3\
+  \ = new cc.Sprite(res.Sprite_Sheet,cc.rect(219,0,72,97));\n14  this.sprite3.attr({\n\
+  15      x: size.width / 2,\n16      y: size.height / 3\n17  });\n\n19  this.sprite4\
+  \ = new cc.Sprite(res.Sprite_Sheet,cc.rect(365,0,72,97));\n20  this.sprite4.attr({\n\
+  21      x: size.width / 2,\n22      y: size.height / 5\n23  });\n```\n\n现在，我们使用相同的精灵表创建一个\
+  \ `SpriteBatchNode` 实例：\n\n```\n1   this.spritebatch=new cc.SpriteBatchNode(res.Sprite_Sheet);\n\
+  ```\n\n让我们将精灵添加到 `SpriteBatchNode` 中：\n\n```\n1   this.spritebatch.addChild(this.sprite1,\
+  \ 0);\n2   this.spritebatch.addChild(this.sprite2, 0);\n3   this.spritebatch.addChild(this.sprite3,\
+  \ 0);\n4   this.spritebatch.addChild(this.sprite4, 0);\n```\n\n最后，将 `spritebatch`\
+  \ 添加到层（layer）中：\n\n```\n1   this.addChild(this.spritebatch);\n```\n\n现在，完整的代码应该如下所示：\n\
+  \n```\n1   var SpriteBatchLayer = BaseSampleLayer.extend({\n2       sprite:null,\n\
+  3       ctor:function () {\n\n5           this._super();\n\n7           var size\
+  \ = cc.winSize;\n\n9           this.sprite1 = new cc.Sprite(res.Sprite_Sheet,cc.rect(438,93,67,94));\n\
+  10          this.sprite1.attr({\n11              x: size.width / 2,\n12        \
+  \      y: size.height / 1.5\n13          });\n\n15          this.sprite2 = new cc.Sprite(res.Sprite_Sheet,cc.rect(73,0,72,97));\n\
+  16          this.sprite2.attr({\n17              x: size.width / 2,\n18        \
+  \      y: size.height / 2\n19          });\n\n21          this.sprite3 = new cc.Sprite(res.Sprite_Sheet,cc.rect(219,0,72,97));\n\
+  22          this.sprite3.attr({\n23              x: size.width / 2,\n24        \
+  \      y: size.height / 3\n25          });\n\n27          this.sprite4 = new cc.Sprite(res.Sprite_Sheet,cc.rect(365,0,72,97));\n\
+  28          this.sprite4.attr({\n29              x: size.width / 2,\n30        \
+  \      y: size.height / 5\n31          });\n32          this.spritebatch=new cc.SpriteBatchNode(res.Sprite_Sheet);\n\
+  \n34          this.spritebatch.addChild(this.sprite1, 0);\n35          this.spritebatch.addChild(this.sprite2,\
+  \ 0);\n36          this.spritebatch.addChild(this.sprite3, 0);\n37          this.spritebatch.addChild(this.sprite4,\
+  \ 0);\n\n39          this.addChild(this.spritebatch);\n\n41          return true;\n\
+  42      }\n43  });\n```\n\n请注意，归属于同一个 `SpriteBatchNode` 的所有精灵必须使用相同的 `texture` 实例；同时，`SpriteBatchNode`\
+  \ 必须包含对该相同纹理的引用。否则，Cocos2d-js 将无法渲染该 `SpriteBatchNode`。\n\n最终输出效果将如图 3-12 所示。\n\n\
+  ![A435521_1_En_3_Fig12_HTML.jpg](img/A435521_1_En_3_Fig12_HTML.jpg)\n\n图 3-12. SpriteBatchNode\
+  \ 渲染效果\n\n然而，原生渲染器支持自动合批（auto batching），这意味着如果你要部署到原生平台，精灵合批功能会自动实现，无需使用 `SpriteBatchNode`。\n\
+  \n## 3.10 分辨率策略\n\n分辨率策略用于让你的游戏适应不同的屏幕分辨率和配置。Cocos2d-js 提供了一系列分辨率策略来实现游戏的适配。如果没有这些策略，你必须根据屏幕分辨率手动缩放游戏内容。\n\
+  \n分辨率策略分为两种：预定义策略和自定义策略。预定义策略由 Cocos2d-js 提供，由容器策略和内容策略的不同组合构成；这些策略同样支持在原生部署中使用。使用自定义策略，你可以通过组合可用的容器和内容策略来定义自己的分辨率策略，但自定义策略仅在\
+  \ Web 部署中支持。让我们来看一下。\n\n### 3.10.1 术语\n\n为了完全理解分辨率策略，你需要了解一些术语。你可能已经知道，你的游戏是托管在基于\
+  \ Web 的 Cocos2d-js 游戏中的一个 Canvas（画布）中。见图 3-13。\n\n![A435521_1_En_3_Fig13_HTML.jpg](img/A435521_1_En_3_Fig13_HTML.jpg)\n\
+  \n图 3-13. 分辨率策略中使用的术语\n\n#### 3.10.1.1 框架 (Frame)\n\n这表示 Canvas 外部的容器，如果你使用 Cocos\
+  \ 控制台生成的默认 `index.html`，它通常是一个 `body` 元素。\n\n#### 3.10.1.2 容器 (Container)\n\nCocos2d-js\
+  \ 将你的 Canvas 包装在一个 `div` 元素中，然后这个包装后的内容又被添加到 `canvas` 的原始容器元素中。\n\n#### 3.10.1.3\
+  \ 内容 (Content)\n\n`canvas` 内部不属于 `dom` 的所有内容。\n\n#### 3.10.1.4 视口 (Viewport)\n\n\
+  `Viewport` 表示 canvas 的世界坐标系矩形；它是 canvas 的像素坐标。\n\n#### 3.10.1.5 信箱模式 (Letter Boxing)\n\
+  \n当容器的宽度与框架匹配但高度不匹配时，就会出现信箱模式（图 3-14）。如果宽高比与框架不匹配，就会发生这种情况，这也取决于你使用的分辨率策略。\n\n![A435521_1_En_3_Fig14_HTML.jpg](img/A435521_1_En_3_Fig14_HTML.jpg)\n\
+  \n图 3-14. 信箱模式\n\n#### 3.10.1.6 柱箱模式 (Pillar Boxing)\n\n当容器的高度与框架的高度匹配但宽度不匹配时，就会出现柱箱模式（见图\
+  \ 3-15）。出现这种情况的原因与信箱模式相同。\n\n![A435521_1_En_3_Fig15_HTML.jpg](img/A435521_1_En_3_Fig15_HTML.jpg)\n\
+  \n图 3-15. 柱箱模式\n\n### 3.10.2 预定义分辨率策略\n\nCocos2d-js 提供了五种预定义策略，我们现在来讨论它们。\n\n####\
+  \ 3.10.2.1 SHOW_ALL (全部显示)\n\n此策略会将容器缩放到容器边界内的最大尺寸；当前场景中的所有内容都将可见。\n\n#### 3.10.2.2\
+  \ NO_BORDER (无边框)\n\n此策略会将容器缩放以填满框架，这样框架内将没有可见区域，同时保持所提供的宽度和高度比例。\n\n#### 3.10.2.3\
+  \ EXACT_FIT (精确适配)\n\n此策略会将容器缩放以适配框架。请注意，所提供的宽度和高度比例将无法保持。\n\n#### 3.10.2.4 FIXED_WIDTH\
+  \ (固定宽度)\n\n此策略会将容器的宽度缩放到与框架宽度匹配，并将高度缩放到与宽高比匹配。如果宽高比不匹配，你可能会看到信箱模式。\n\n#### 3.10.2.5\
+  \ FIXED_HEIGHT (固定高度)\n\n此策略会将容器的高度缩放到与框架高度匹配，并将宽度缩放到与宽高比匹配。如果宽高比不匹配，你可能会看到柱箱模式。\n\
+  \n### 3.10.3 如何使用\n\n在 `main.js` 文件中，有一个 `cc.game.onStart` 回调函数。你需要使用以下代码行来设置分辨率配置文件：\n\
+  \n```\n1   cc.view.setDesignResolutionSize(320, 480, cc.RESOLUTION_POLICY.SHOW_ALL);\n\
+  ```\n\n前两个参数是宽度和高度，即你游戏的宽高比，第三个参数是分辨率策略。\n\n\n\n### 3.10.4 自定义分辨率策略\n\n如我们之前所见，预定义的策略是容器策略与内容策略的组合。例如，`SHOW_ALL`\
+  \ 策略就是`PROPORTION_TO_FRAME` 和 `SHOW_ALL`的组合，具体如下：\n\n```\ncc.RESOLUTION_POLICY.SHOW_ALL\
+  \ = new cc.ResolutionPolicy(cc.ContainerStrategy.PROPORTION_TO_FRAME, cc.ContentStrategy.SHOW_ALL);\n\
+  ```\n\n这就是 `SHOW_ALL` 的内部实现。你可以通过组合预定义的容器策略和内容策略来定义自己的策略。\n\n### 3.10.5 预定义容器策略\n\
+  \n- `cc.ContainerStrategy.EQUAL_TO_FRAME`\n- `cc.ContainerStrategy.PROPORTION_TO_FRAME`\n\
+  - `cc.ContainerStrategy.ORIGINAL_CONTAINER`\n\n### 3.10.6 预定义内容策略\n\n- `cc.ContentStrategy.SHOW_ALL`\n\
+  - `cc.ContentStrategy.NO_BORDER`\n- `cc.ContentStrategy.EXACT_FIT`\n- `cc.ContentStrategy.FIXED_WIDTH`\n\
+  - `cc.ContentStrategy.FIXED_HEIGHT`\n\n你可以创建自己的容器和内容策略；只需使用子类 `cc.ContainerStrategy`\
+  \ 和 `cc.ContentStrategy` 并重写如下所示的方法即可。\n\n### 3.10.7 自定义容器策略\n\n```\nvar CustomContainerStrategy\
+  \ = cc.ContainerStrategy.extend({\n    preApply: function (view) {\n        // 此函数在适配过程之前被调用，\n\
+  \        // 如果不需要，可以移除该函数\n    },\n\n    apply: function (view, designedResolution)\
+  \ {\n        // 应用过程\n    },\n\n    postApply: function (view) {\n        // 此函数在适配过程之后被调用，\n\
+  \        // 如果不需要，可以移除该函数\n    }\n});\n```\n\n### 3.10.8 自定义内容策略\n\n```\nvar CustomContentStrategy\
+  \ = cc.ContentStrategy.extend({\n    preApply: function (view) {\n        // 此函数在适配过程之前被调用，\n\
+  \        // 如果不需要，可以移除该函数\n    },\n\n    apply: function (view, designedResolution)\
+  \ {\n        var containerW = cc.canvas.width, containerH = cc.canvas.height;\n\n\
+  \        // 计算内容大小、X 轴缩放和 Y 轴缩放的过程\n\n        return this._buildResult(containerW,\
+  \ containerH, contentW, contentH, scaleX, scaleY);\n    },\n\n    postApply: function\
+  \ (view) {\n        // 此函数在适配过程之后被调用，\n        // 如果不需要，可以移除该函数\n    }\n});\n```\n\
+  \n必须在这两者中实现 `apply` 函数。你可以访问 frame、容器以及内容的宽度和高度。\n\n"
+- "# 4. 处理输入和事件\n\n## 4.1 引言\n\n处理用户输入是任何游戏的重要组成部分。在 Cocos2d-js 中，用户输入（例如通过触摸、鼠标或键盘）以事件的形式提供。事件机制涉及三个主要部分（见图\
+  \ 4-1）。\n\n![A435521_1_En_4_Fig1_HTML.jpg](img/A435521_1_En_4_Fig1_HTML.jpg)\n\n\
+  图 4-1. Cocos2d-JS 中的事件机制\n\n### 4.1.1 事件触发器\n\n事件触发器是任何事件的源头。当发生触摸或任何其他输入时，Cocos2d-js\
+  \ 系统将触发一个事件作为响应。\n\n### 4.1.2 事件管理器\n\n当任何事件被触发时，事件管理器会收到通知。`EventManager` 是一个单例实例，是\
+  \ Cocos2d-js 系统的一部分；它管理所有事件。\n\n### 4.1.3 事件监听器\n\n这是实际事件处理逻辑所在之处。事件管理器会将事件分派给所有事件监听器，并由事件监听器实例进行处理。\n\
+  \n## 4.2 触摸事件\n\n有两种可用的触摸事件：单点触摸（`cc.EventListener.TOUCH_ONE_BY_ONE`）和多点触摸（`cc.EventListener.TOUCH_ALL_AT_ONCE`）\n\
+  \n### 4.2.1 单点触摸\n\n在 `src` 文件夹中，创建一个名为 `touchevents.js` 的文件，并将以下代码复制进去：\n\n```\n\
+  var TouchEventsLayer = cc.Layer.extend({\n    sprite:null,\n    ctor:function ()\
+  \ {\n        this._super();\n\n        var size = cc.winSize;\n\n        this.sprite\
+  \ = new cc.Sprite(res.Sprite_Image);\n        this.sprite.attr({\n            x:size.width\
+  \ / 2,\n            y:size.height / 2\n        });\n        this.addChild(this.sprite,\
+  \ 0);\n        this.sprite.tag='TouchTarget';\n\n        //创建事件监听器对象\n        var\
+  \ listener = cc.EventListener.create({\n            event: cc.EventListener.TOUCH_ONE_BY_ONE,\n\
+  \            swallowTouches: true,\n\n            onTouchBegan: function (touch,\
+  \ event) {\n                var target = event.getCurrentTarget();\n           \
+  \     var locationInNode = target.convertToNodeSpace(touch.getLocation());\n   \
+  \             var s = target.getContentSize();\n                var rect = cc.rect(0,\
+  \ 0, s.width, s.height);\n\n                //检查点击区域\n                if (cc.rectContainsPoint(rect,\
+  \ locationInNode)) {\n                    cc.log('触摸开始：在精灵内部');\n              \
+  \      //返回 true 以启动 OnTouchMove\n                    return true;\n           \
+  \     }\n                cc.log('触摸开始：在精灵外部');\n                return false;\n\
+  \            },\n            onTouchMoved: function (touch, event) {\n         \
+  \       var target = event.getCurrentTarget();\n                target.setPosition(touch.getLocation());\n\
+  \            },\n            onTouchEnded: function (touch, event) {\n         \
+  \       cc.log('触摸结束');\n            }\n        });\n\n        //将事件监听器添加到精灵\n \
+  \       cc.eventManager.addListener(listener, this.sprite);\n        return true;\n\
+  \    }\n});\n```\n\n在此示例中，精灵可以通过单点触摸进行拖动。事件监听器使用事件名称 `cc.EventListener.TOUCH_ONE_BY_ONE`\
+  \ 创建，并将 `swallowTouches` 设置为 `true`。当多个事件监听器为同一事件名称附加到同一目标时，第一个 `swallowTouches:\
+  \ true` 的监听器将吞噬该事件，并且该事件将不会传递给下一个监听器。\n\n```\ncc.eventManager.addListener(listener,\
+  \ this.sprite);\n```\n\n在这种情况下，即使精灵是目标，屏幕上的每一次点击都会触发触摸事件。为了确认触摸是否发生在精灵内部，编写了以下代码：\n\
+  \n```\nvar target = event.getCurrentTarget();\nvar locationInNode = target.convertToNodeSpace(touch.getLocation());\n\
+  var s = target.getContentSize();\nvar rect = cc.rect(0, 0, s.width, s.height);\n\
+  \n//检查点击区域\nif (cc.rectContainsPoint(rect, locationInNode)) {\n    cc.log('触摸开始：在精灵内部');\n\
+  \    //返回 true 以启动 OnTouchMove\n    return true;\n}\n```\n\n在 `onTouchBegan` 中，检查了触摸是否发生在精灵内部的条件。如果触摸在精灵内部，则返回\
+  \ `true`，以便触摸移动的手势将被定向到 `onTouchMoved` 函数；目标位置会根据触摸移动进行更改。\n\n\n\n### 4.2.2 多点触控\n\
+  \n多点触控事件监听器可以通过事件名称 `cc.EventListener.TOUCH_ALL_AT_ONCE` 创建。请参考以下代码片段：\n\n```\n\
+  1   var listener = cc.EventListener.create({\n2       event: cc.EventListener.TOUCH_ALL_AT_ONCE,\n\
+  3       swallowTouch: true,\n4       onTouchesBegan: function (touches, event) {\n\
+  5           .......\n6       },\n7       onTouchesMoved: function (touches, event)\
+  \ {\n8           .......\n9   },\n10       onTouchesEnded: function (touches, event)\
+  \ {\n11           .......\n12       }\n13   });\n```\n\n因此，多点触控的回调与单点触控不同。它包含 `onTouchesBegan`、`onTouchesMoved`\
+  \ 和 `onTouchesEnded` 函数。`touches` 对象将包含每次触摸的详细信息，并带有触摸 ID。通常情况下，多点触控可用于地图缩放、多指操作控制等场景。\n\
+  \n### 4.3 鼠标事件\n\n与触控事件类似，鼠标事件通过事件名称 `cc.EventListener.MOUSE` 来引用。在 `src` 文件夹中，创建一个名为\
+  \ `mouseevents.js` 的文件，并将以下代码复制进去：\n\n```\n1   var MouseEventsLayer = cc.Layer.extend({\n\
+  2       sprite:null,\n3       ctor:function () {\n4           this._super();\n6\
+  \           var size = cc.winSize;\n8           this.sprite = new cc.Sprite(res.Sprite_Image);\n\
+  9           this.sprite.attr({\n10               x: size.width / 2,\n11        \
+  \       y: size.height / 2\n12           });\n13           this.addChild(this.sprite,\
+  \ 0);\n14           this.sprite.tag='TouchTarget';\n16           //Creating Event\
+  \ Listener Object\n17           var listener = cc.EventListener.create({\n18   \
+  \            event: cc.EventListener.MOUSE,\n19                   swallowTouches:\
+  \ true,\n20                   ismousedown:false,\n21               onMouseDown:\
+  \ function (event) {\n22                   var target = event.getCurrentTarget();\n\
+  23                   var locationInNode = target.convertToNodeSpace(event.getLocation());\n\
+  24                   var s = target.getContentSize();\n25                   var\
+  \ rect = cc.rect(0, 0, s.width, s.height);\n28                               //Check\
+  \ the click area\n29                   if (cc.rectContainsPoint(rect, locationInNode))\
+  \ {\n30                       cc.log('Mouse Down: Inside the sprite');\n31     \
+  \                  this.ismousedown=true;\n32                   }\n33          \
+  \         cc.log('Mouse Down: Outside the sprite');\n34                   return\
+  \ false;\n35               },\n36               onMouseMove: function (event) {\n\
+  37                   if(this.ismousedown)\n38                   {\n39          \
+  \             var target = event.getCurrentTarget();\n40                       target.setPosition(event.getLocation());\n\
+  41                   }\n42               },\n43               onMouseUp: function\
+  \ (event) {\n44                  cc.log('Mouse Up');\n45                  this.ismousedown=false;\n\
+  46               }\n47           });\n49           //Added Event Listener To Sprite\n\
+  50           cc.eventManager.addListener(listener, this.sprite);\n51           return\
+  \ true;\n52       }\n53   });\n```\n\n在这个例子中，精灵同样可以通过鼠标点击来拖动，但触控和鼠标事件处理有一个主要区别。在触控中，`onTouchBegan`\
+  \ 函数必须返回 `true`，才能处理 `onTouchMove`。而在鼠标事件中，`onMouseMove` 不依赖于 `onMouseDown` 的返回值。这两个事件可以同时处理。为了跟踪鼠标是否在精灵内部按下，我们引入了\
+  \ `ismousedown` 标志。当鼠标按下事件发生在精灵内部时，位置将通过 `onMouseMove` 来改变。\n\n### 4.4 键盘事件\n\n\
+  在 `src` 文件夹中，创建一个名为 `keyboardevent.js` 的文件，并将以下代码复制进去：\n\n```\n1   var KeyboardEventsLayer\
+  \ = cc.Layer.extend({\n2       sprite:null,\n3       ctor:function () {\n4     \
+  \      this._super();\n6           var size = cc.winSize;\n7           var KeyCode={\n\
+  8               LEFT:37,\n9               UP:38,\n10               RIGHT:39,\n11\
+  \               DOWN:40\n12           };\n13           var MoveOffSet=20;\n14  \
+  \         this.sprite = new cc.Sprite(res.Sprite_Image);\n15           this.sprite.attr({\n\
+  16               x: size.width / 2,\n17               y: size.height / 2\n18   \
+  \        });\n19           this.addChild(this.sprite, 0);\n20           this.sprite.tag='TouchTarget';\n\
+  22           //Creating Event Listener Object\n23           var listener = cc.EventListener.create({\n\
+  24             event: cc.EventListener.KEYBOARD,\n25                 swallowTouches:\
+  \ true,\n26             onKeyPressed: function (keyCode,event) {\n27           \
+  \     var target = event.getCurrentTarget();\n28                var position=target.getPosition();\n\
+  29                switch(keyCode)\n30                {\n31                   case\
+  \ KeyCode.LEFT:\n32                   position.x-=MoveOffSet;\n33              \
+  \     break;\n35                   case KeyCode.RIGHT:\n36                   position.x+=MoveOffSet;\n\
+  37                   break;\n39                   case KeyCode.UP:\n40         \
+  \          position.y+=MoveOffSet;\n41                   break;\n43            \
+  \       case KeyCode.DOWN:\n44                   position.y-=MoveOffSet;\n45   \
+  \                break;\n46                }\n47                target.setPosition(position);\n\
+  48           },\n49           onKeyReleased: function (event) {\n50            \
+  \  cc.log('Key released');\n51           }\n52        });\n54        //Added Event\
+  \ Listener To Sprite\n55        cc.eventManager.addListener(listener, this.sprite);\n\
+  56        return true;\n57       }\n58   });\n```\n\n在上述代码中，同样的精灵拖动操作是通过上、下、左、右组合键来完成的。系统会检查\
+  \ `onKeyPress` 函数中的键码，如果键码是任何一个箭头键，精灵的 x、y 坐标就会相应地移动。\n\n### 4.5 加速度计事件\n\n加速度计事件通过事件名称\
+  \ `cc.EventListener.ACCELERATION` 来引用。加速度计输入需要通过输入管理器启用，如下所示：\n\n```\n1   cc.inputManager.setAccelerometerEnabled(true);\n\
+  ```\n\n之后，您可以创建一个监听器，并通过 `eventManager` 将其附加到精灵上：\n\n```\n1   cc.eventManager.addListener({\n\
+  2        event: cc.EventListener.ACCELERATION,\n3        callback: function(acc,\
+  \ event){\n4            // Processing logic here\n5        }\n6   }, sprite);\n\
+  ```\n\n### 4.6 自定义事件\n\n除了系统定义的事件之外，我们还可以创建自己的事件。请参见以下代码片段：\n\n```\n1   var listener\
+  \ = cc.EventListener.create({\n2         event: cc.EventListener.CUSTOM,\n3    \
+  \     eventName: \"my_custom_event\",\n4         callback: function(event){\n5 \
+  \            cc.log(\"Custom event 1 received, \" + event.getUserData() + \"times\"\
+  );\n6         }\n7   });\n8   cc.eventManager.addListener(listener, 1);\n```\n\n\
+  这个自定义事件只有一个回调函数，该函数会在事件被触发后被调用：\n\n```\n1   var event = new cc.EventCustom(\"my_custom_event\"\
+  );\n2   event.setUserData(counter.toString());\n3   cc.eventManager.dispatchEvent(event);\n\
+  ```\n\n事件管理器的 `dispatchEvent` 函数用于触发自定义事件。Cocos2d 引擎内部也使用此方法来触发用户输入事件。\n\n"
+- '# 5. 添加图形用户界面
+
+
+  ## 5.1 简介
+
+
+  图形用户界面是任何游戏的重要组成部分。它用于显示抬头显示、分数、所需的文本以及诸如播放和暂停之类的按钮。Cocos2d-js 拥有预定义的节点类型来表示这些图形用户界面元素。让我们逐一了解它们。
+
+
+  ## 5.2 标签
+
+
+  如果您想在游戏中显示任何文本，可以使用 `Label` 对象。Cocos2d-js 提供了两种类型的标签。
+
+
+
+
+  ### 5.2.1 使用 TrueType 字体标签
+
+
+  您可以定义使用自定义 TrueType 字体的标签。通常，这些字体的文件格式为 `.ttf`。在 Cocos2d-js 中，可以使用 `cc.LabelTTF`
+  类来创建此类标签。让我们看一下其语法：
+
+
+  *   `[string] text` - 表示您要显示的文本
+
+  *   `[string] fontName` - 表示已加载的 `.ttf` 字体名称
+
+  *   `[Number] fontSize` - 表示字体大小
+
+  *   `[cc.Size] dimensions` - 表示标签的宽度和高度；若未设置，则会自动计算
+
+  *   `hAlignment` - 表示标签内文本的水平对齐方式，可以是以下值之一：`{cc.TEXT_ALIGNMENT_LEFT | cc.TEXT_ALIGNMENT_CENTER
+  | cc.TEXT_ALIGNMENT_RIGHT}`
+
+  *   `vAlignment` - 表示标签内文本的垂直对齐方式，可以是以下值之一：`{cc.VERTICAL_TEXT_ALIGNMENT_TOP|cc.VERTICAL_TEXT_ALIGNMENT_CENTER|cc.VERTICAL_TEXT_ALIGNMENT_BOTTOM}`
+
+
+  ```
+
+  1   var label= new cc.LabelTTF(text, fontName, fontSize, dimensions, hAlignment,
+  vAlignment);
+
+  ```
+
+
+  所有这些值都可以使用相应的函数集进行动态更改。请参阅文档以获取有关这些函数的更多信息。您将在接下来的章节中看到实际示例。
+
+
+  ### 5.2.2 使用位图字体标签
+
+
+  在位图字体中，每个字符都由一张图像表示。所有字符都应位于一个 png 文件中，而字体信息将存在于一个 `.fnt` 文件中。`cc.LabelBMFont` 类用于表示这种标签类型。让我们看一下其语法：
+
+
+  *   `[string] text` - 表示您要显示的文本
+
+  *   `[fntFile] fntFile` - 表示 `.fnt` 文件名
+
+  *   `[width] width` - 表示标签的宽度
+
+  *   `alignment` – 表示图像标签的水平对齐方式。可以是以下值之一：`{cc.TEXT_ALIGNMENT_LEFT|cc.TEXT_ALIGNMENT_CENTER|cc.TEXT_ALIGNMENT_RIGHT}`
+
+  *   `[cc.point] imageOffset` – 表示图像中心需要对齐的 x,y 偏移点
+
+
+  ```
+
+  1   var label = new cc.LabelBMFont(text, fntFile, width, alignment, imageOffset)
+
+  ```
+
+
+  ### 5.2.3 示例
+
+
+  在 `src` 文件夹中，创建一个名为 `labeldemo.js` 的文件，并将以下代码复制其中：
+
+
+  ```
+
+  1   var LabelDemoLayer = cc.Layer.extend({
+
+  2       sprite:null,
+
+  3       ctor:function () {
+
+  4           this._super();
+
+  5
+
+  6           var size = cc.winSize;
+
+  7
+
+  8           var colorLayer = new cc.LayerColor(cc.color(142,29,42));
+
+  9           this.addChild(colorLayer);
+
+  10
+
+  11           this.Label1 = new cc.LabelTTF(''Default Font Label'','''', 32);
+
+  12           this.Label1.attr({
+
+  13               x: size.width / 2,
+
+  14               y: size.height / 1.3
+
+  15           });
+
+  16           this.addChild(this.Label1);
+
+  17
+
+  18           this.Label2 = new cc.LabelTTF(''Custom Font Label'',''Abduction'',
+  32);
+
+  19           this.Label2.attr({
+
+  20               x: size.width / 2,
+
+  21               y: size.height / 1.5
+
+  22           });
+
+  23           this.addChild(this.Label2);
+
+  24
+
+  25           this.Label3 = new cc.LabelTTF(''Label With Stroke'',''Abduction'',
+  32);
+
+  26           this.Label3.attr({
+
+  27               x: size.width / 2,
+
+  28               y: size.height / 1.9
+
+  29           });
+
+  30           this.Label3.enableStroke(cc.color(0,0,0),10);
+
+  31           this.addChild(this.Label3);
+
+  32
+
+  33           this.Label4 = new cc.LabelTTF(''Label With Shadow'',''Abduction'',
+  32);
+
+  34           this.Label4.attr({
+
+  35               x: size.width / 2,
+
+  36               y: size.height / 2.3
+
+  37           });
+
+  38           this.Label4.enableShadow(cc.color(0,0,0), 50, 50);
+
+  39           this.addChild(this.Label4);
+
+  40
+
+  41           this.Label5 = new cc.LabelBMFont("Bitmap Font", res.BM_Font);
+
+  42           this.Label5.attr({
+
+  43               x: size.width / 2,
+
+  44               y: size.height / 2.9
+
+  45           });
+
+  46           this.addChild(this.Label5);
+
+  47
+
+  48           return true;
+
+  49       }
+
+  50   });
+
+  ```
+
+
+  像往常一样，执行步骤来运行这个层。让我们看看标签是如何使用的。首先，添加了 `cc.LayerColor` 作为子节点来设置背景颜色：
+
+
+  ```
+
+  1   var colorLayer = new cc.LayerColor(cc.color(142,29,42));
+
+  2   this.addChild(colorLayer);
+
+  ```
+
+
+  第一个标签使用文本 `''Default font name''` 创建，并将 `fontname` 指定为空字符串，以便标签回退到系统中的默认字体。
+
+
+  第二个标签使用加载的字体名称创建；在此示例中，我使用了 `Abduction.ttf`，它在 `resource.js` 中定义如下：
+
+
+  ```
+
+  1   var res = {
+
+  2       .....
+
+  3       Custom_TTF:"res/Abduction.ttf",
+
+  4   .....
+
+  5   };
+
+  ```
+
+
+  因此，在应用加载期间，该字体将与 `res` 对象中的其他资源一起加载到内存中：
+
+
+  ```
+
+  1   this.Label2 = new cc.LabelTTF(''Custom Font Label'',''Abduction'', 32);
+
+  2   this.Label2.attr({
+
+  3      x: size.width / 2,
+
+  4      y: size.height / 1.5
+
+  5   });
+
+  6   this.addChild(this.Label2);
+
+  ```
+
+
+  字体名称 `''Abduction''` 在第二个参数中指定。直接在标签中指定字体文件名将不起作用。
+
+
+  第三个标签使用相同的自定义字体 `''Abduction''`，不同之处在于它为标签启用了描边：
+
+
+  ```
+
+  1   this.Label3.enableStroke(cc.color(0,0,0),10);
+
+  ```
+
+
+  第一个参数是描边的颜色，第二个参数是描边大小。
+
+
+  第四个标签使用以下代码创建并启用了阴影：
+
+
+  ```
+
+  1   this.Label4.enableShadow(cc.color(0,0,0), 50, 50);
+
+  ```
+
+
+  这里，第一个参数是阴影的颜色，第二个参数是阴影相对于标签的偏移量，第三个参数是阴影大小。
+
+
+  最后，第五个标签使用位图字体创建：
+
+
+  ```
+
+  1   this.Label5 = new cc.LabelBMFont("Bitmap Font", res.BM_Font);
+
+  2   this.Label5.attr({
+
+  3       x: size.width / 2,
+
+  4       y: size.height / 2.9
+
+  5   });
+
+  6   this.addChild(this.Label5);
+
+  ```
+
+
+  与第二个标签类似，我在 `resource.js` 的第二个参数中直接指定了字体文件名 `BM_Font` 和 `BM_Font_Png`，如下所示：
+
+
+  ```
+
+  1   var res = {
+
+  2       ....
+
+  3       BM_Font:"res/bitmapFontTest.fnt",
+
+  4       BM_Font_Png:"res/bitmapFontTest.png",
+
+  5       ....
+
+  6   };
+
+  ```
+
+
+  如您所见，对于位图字体，相关的 `.png` 文件需要与 `.fnt` 文件一起加载。请参见图 5-1 中的标签示例。
+
+
+  ![A435521_1_En_5_Fig1_HTML.jpg](img/A435521_1_En_5_Fig1_HTML.jpg)
+
+
+  图 5-1 Cocos2d-js 中的标签
+
+
+  ## 5.3 菜单与菜单项
+
+
+  在 Cocos2d-js 中，有一个基于菜单的图形用户界面，由 `cc.Menu` 和 `cc.MenuItem` 定义，其中 `cc.MenuItem` 应是
+  `cc.Menu` 的子节点。`cc.MenuItem` 是一个抽象类，有三种可继承的菜单项类型。
+
+
+  ### 5.3.1 MenuItemLabel（标签菜单项）
+
+
+  任何 `cc.Label` 实例都可以用于此菜单项类型。以下是其语法：
+
+
+  *   `[cc.Label] label` - `cc.Label` 的实例
+
+  *   `[string] selector` - 作为字符串的回调方法名称
+
+  *   `[object] target` - 拥有选择器函数的对象
+
+
+  ```
+
+  1   var menuitemLabel = new cc.MenuItemLabel(label,selector,target);
+
+  ```
+
+
+  ### 5.3.2 MenuItemImage（图像菜单项）
+
+
+  图像可与该菜单项一起使用。以下是其语法：
+
+
+  *   `[string] normalImage` - 表示正常状态的图像文件路径
+
+  *   `[string] selectedImage` - 表示选中状态的图像文件路径
+
+  *   `[string] disabledImage` - 表示禁用状态的图像文件路径
+
+  *   `[string] selector` - 菜单项点击时的回调函数名称
+
+  *   `[object] target` - 拥有选择器回调函数的对象
+
+
+  ```
+
+  1   var menuItem = new cc.MenuItemImage(normalImage, selectedImage, disabledImage,
+  selector, target);
+
+  ```
+
+
+  让我们来看一个示例。
+
+
+
+
+  ### 5.3.3 示例
+
+
+  在 `src` 文件夹中，创建一个名为 `menuitem.js` 的文件，并将以下代码复制到其中：
+
+
+  ```
+
+  1   var MenuDemoLayer = cc.Layer.extend({
+
+  2       sprite:null,
+
+  3       ctor:function () {
+
+  4           this._super();
+
+  6           var size = cc.winSize;
+
+  8           var colorLayer = new cc.LayerColor(cc.color(142,29,42));
+
+  9           this.addChild(colorLayer)
+
+  11           this.Menu=new cc.Menu();
+
+  12           this.Menu.attr({
+
+  13               x: 0,
+
+  14               y: 0
+
+  15           });
+
+  17           //带标签的菜单项
+
+  18           var label=new cc.LabelTTF(''MenuItem with label'',36);
+
+  19           this.MenuItem1 = new cc.MenuItemLabel(label,''onMenuClicked'',this);
+
+  20           this.MenuItem1.attr({
+
+  21               x: size.width / 2,
+
+  22               y: size.height / 1.3
+
+  23           });
+
+  24           this.Menu.addChild(this.MenuItem1);
+
+  26           //带图片的菜单项
+
+  27           this.MenuItem2 = new cc.MenuItemImage(res.MenuItemImage_Normal,res.MenuI\
+
+  28   temImage_Selected,null,''onMenuClicked'',this);
+
+  29           this.MenuItem2.attr({
+
+  30               x: size.width / 2,
+
+  31               y: size.height / 1.8
+
+  32           });
+
+  33           this.Menu.addChild(this.MenuItem2);
+
+  35           this.addChild(this.Menu);
+
+  36           return true;
+
+  37       },
+
+  38       onMenuClicked:function(){
+
+  40       }
+
+  41   });
+
+  ```
+
+
+  首先，在最后一条语句中创建了一个 `cc.Menu` 实例并添加到该层中：
+
+
+  ```
+
+  1   this.Menu=new cc.Menu();
+
+  2   ......
+
+  3   ......
+
+  4   this.addChild(this.Menu);
+
+  ```
+
+
+  之后，创建所有菜单项实例，并将它们作为子节点添加到 `this.Menu` 中。第一个 `menuitem` 是使用 `cc.Label` 实例创建的，如下所示：
+
+
+  ```
+
+  1   var label=new cc.LabelTTF(''MenuItem with label'',36);
+
+  2   this.MenuItem1 = new cc.MenuItemLabel(label,''onMenuClicked'',this);
+
+  ```
+
+
+  随后对其进行定位，并作为子节点添加到 `this.Menu`。第二个 `MenuItemImage` 是使用两张图片创建的：即正常状态和选中状态的图片。参考如下：
+
+
+  ```
+
+  1   this.MenuItem2 = new cc.MenuItemImage(res.MenuItemImage_Normal,res.MenuItemImage\
+
+  2   _Selected,null,''onMenuClicked'',this);
+
+  ```
+
+
+  与之前的示例类似，本层中添加了 `LayerColor`，因此输出结果将如图 5-2 所示。
+
+
+  ![A435521_1_En_5_Fig2_HTML.jpg](img/A435521_1_En_5_Fig2_HTML.jpg)
+
+
+  **图 5-2.** `MenuItem`
+
+
+  ## 5.4 其他 GUI 元素
+
+
+  除了菜单和标签之外，扩展模块中还提供了其他 GUI 元素，例如复选框和按钮。为了使用扩展类，我们需要将扩展模块添加到项目中。在 `project.json` 文件的
+  `modules` 属性中，将 `''extension''` 添加到数组中：
+
+
+  ```
+
+  1   "modules" : ["cocos2d","extensions"],
+
+  ```
+
+
+  这些额外的用户界面元素位于父对象 `ccui` 之下。让我们来看一下。在 `src` 文件夹中，创建一个名为 `otheruidemo.js` 的文件，并将以下代码复制到其中：
+
+
+  ```
+
+  1   var OtherUIDemoLayer = cc.Layer.extend({
+
+  2       sprite:null,
+
+  3       ctor:function () {
+
+  4           this._super();
+
+  6           var size = cc.winSize;
+
+  8           var colorLayer = new cc.LayerColor(cc.color(142,29,42));
+
+  9           this.addChild(colorLayer)
+
+  11           this.uiButton = new ccui.Button(res.ButtonImage,res.ButtonImage_Selected\
+
+  12   );
+
+  13           this.uiButton.attr({
+
+  14               x:size.width/2,
+
+  15               y:size.height/1.3
+
+  16           });
+
+  17           this.addChild(this.uiButton);
+
+  19           this.uiCheckBox = new ccui.CheckBox(res.CheckBox_Normal,res.CheckBox_Sel\
+
+  20           ected);
+
+  21           this.uiCheckBox.attr({
+
+  22               x:size.width/2,
+
+  23               y:size.height/2
+
+  24           });
+
+  25           this.addChild(this.uiCheckBox);
+
+  27           return true;
+
+  28       }
+
+  29   });
+
+  ```
+
+
+  在这段代码中，使用正常和选中状态的图片创建了一个 `button` 实例：
+
+
+  ```
+
+  1   this.uiButton = new ccui.Button(res.ButtonImage,res.ButtonImage_Selected);
+
+  ```
+
+
+  同时，也使用了正常和选中状态的图片创建了一个 `checkBox` 实例：
+
+
+  ```
+
+  1   this.uiCheckBox = new ccui.CheckBox(res.CheckBox_Normal,res.CheckBox_Selected);
+
+  ```
+
+
+  如果运行上述层，输出结果将如图 5-3 所示。
+
+
+  ![A435521_1_En_5_Fig3_HTML.jpg](img/A435521_1_En_5_Fig3_HTML.jpg)
+
+
+  **图 5-3.** 其他 GUI 元素
+
+
+  '
+- "# 6. 动画乐趣\n\n## 6.1 简介\n\n动画对于任何优秀的游戏都至关重要，它能让你的游戏看起来很酷且具有视觉吸引力，并有助于你获取更多用户。一款具有视觉吸引力的游戏本身就是一种营销。花点时间看看\
+  \ Google Play 和 App Store 中收入最高的游戏。顶级游戏使用清晰且细节丰富的动画来改善用户体验并吸引用户。深呼吸，我们将要探讨 Cocos2d-js\
+  \ 中动画系统的细节。让我们开始吧。\n\n## 6.2 动作\n\n动作是 Cocos2d-js 中用于动画化精灵的构造。动作随时间改变精灵的属性，从而使精灵按照我们想要的方式运动。有几种可用的动作类型，用于在精灵上为所有实时场景应用动画。让我们看一个简单的例子：\n\
+  \n```\n1   var action = cc.moveBy(2, cc.p(size.width - 40, size.height - 40));\n\
+  2   this.sprite.runAction(action);\n```\n\n在这个例子中，`action` 对象是使用 `cc.moveBy` 函数创建的。任何动作都可以使用\
+  \ `runAction` 方法在精灵上运行。这个方法实际上属于 `cc.Node`，因此除了精灵之外，我们还可以动画化任何以 `cc.Node` 为父节点或最终父节点（即层、场景等）的对象。基本上，创建动作有两种变体。\n\
+  \n### 6.2.1 By 和 To 动作\n\n前面的代码是 `By` 变体的一个例子。让我们看一下同一个例子的 `To` 变体：\n\n```\n1  \
+  \ var action = cc.moveTo(2, cc.p(size.width - 40, size.height - 40));\n2   this.sprite.runAction(action);\n\
+  ```\n\n`By` 和 `To` 动作之间的唯一区别是：`To` 会将目标属性值动画化为绝对值，而 `By` 会将目标属性值动画化为相对值（例如：如果你有一个精灵位于\
+  \ (10,10) 位置，并且你使用 `moveBy` 动作以 (5,5) 的值对其进行动画化，动画结束后精灵的最终位置将是 (15,15)；如果是 `moveTo`\
+  \ 动作，最终位置将是 (5,5)）。\n\n## 6.3 可用动作列表\n\n以下是你可以应用于任何节点的可用动作列表。列出的组合包括 `By` 和 `To`\
+  \ 变体，你可以使用简单的精灵图片进行尝试。\n\n### 6.3.1 移动\n\n此动作用于动画化任何节点实例的 x,y 位置：\n\n```\n1   var\
+  \ action = cc.moveBy(2, cc.p(size.width - 40, size.height - 40));\n2   var action\
+  \ = cc.moveTo(2, cc.p(size.width - 40, size.height - 40));\n```\n\n第一个参数是持续时间，第二个参数是目标点坐标。\n\
+  \n### 6.3.2 跳跃\n\n此动作用于以抛物线的方式动画化节点的 x,y 位置，使其看起来像是在跳跃：\n\n```\n1   var action =\
+  \ new cc.JumpBy(2, cc.p(300, 0), 50, 4);\n2   var action = new cc.JumpBy(2, 300,\
+  \ 0, 50, 4);\n```\n\n与所有动作一样，第一个参数是持续时间。第二个参数是一个点或数字，表示目标值（可以是 x 或 (x,y)）。如果它是一个点，那么第三个参数被视为高度；如果它是一个数字，那么第三个参数被视为\
+  \ y 值。接下来的两个参数分别表示高度和跳跃次数。因此在这种情况下，(x,y) 和高度分别代表抛物线的宽度和高度。\n\n\n\n### 6.3.3 旋转\n\
+  \n该动作用于通过随时间**旋转**属性来制作节点的旋转动画：\n\n```\n1   var action = new cc.RotateBy(2, 360);\n\
+  2   var action = new cc.RotateTo(2, 360);\n```\n\n第一个参数是持续时间，第二个参数是 `angleX`，表示绕\
+  \ X 轴旋转。第三个参数 `angleY` 是可选的，用于在少数情况下进行 Y 轴旋转。\n\n### 6.3.4 缩放\n\n该动作用于制作节点的缩放动画。它使用节点的\
+  \ `scale` 函数在指定的持续时间内缩放节点：\n\n```\n1   var action = new cc.ScaleTo(2, 0.5, 2);\n\
+  2   var action = new cc.ScaleBy(2, 0.5, 2);\n```\n\n第一个参数是持续时间，第二和第三个参数分别是 sx、sy，即\
+  \ `scaleX` 和 `scaleY` 的值。\n\n### 6.3.5 倾斜\n\n该动作类似于缩放，但它使用 `skewX` 和 `skewY` 的值来制作倾斜动画：\n\
+  \n```\n1   var action = new cc.SkewTo(2, 37.2, -37.2);\n2   var action = new cc.SkewBy(2,\
+  \ 37.2, -37.2);\n```\n\n参数与缩放动作相同。\n\n### 6.3.6 色调\n\n该动作用于制作节点 RGB 通道的动画。此动作仅有\
+  \ `By` 版本：\n\n```\n1   var action = new cc.TintBy(2, -127, -255, -127);\n```\n\n\
+  第一个参数是持续时间，接下来的三个参数分别是 `deltaR`、`deltaB` 和 `deltaG` 的值。\n\n### 6.3.7 贝塞尔曲线\n\n该动作用于让目标对象沿着贝塞尔曲线移动：\n\
+  \n```\n1   var bezier = [cc.p(0, windowSize.height / 2), cc.p(300, -windowSize.height\
+  \ / 2),\\\n2   cc.p(300, 100)];\n3   var bezierForward = new cc.BezierBy(3, bezier);\n\
+  4   var bezierTo = new cc.BezierTo(3, bezier);\n```\n\n第一个参数是持续时间，第二个参数是一个数组，其中包含定义贝塞尔曲线的一系列点。\n\
+  \n### 6.3.8 基数样条\n\n这与贝塞尔曲线类似。目标对象将沿着基数样条曲线移动。通常，当你想模拟精灵在路径数据（即一系列连续点）上移动时，会使用此动作。示例如下：\n\
+  \n```\n1   var action = cc.cardinalSplineTo(3, array, 0);\n2   var action = cc.cardinalSplineTo(3,\
+  \ array, 0);\n```\n\n参数与贝塞尔曲线相同；不过，它还有第三个参数，表示张力或两点之间的权重，并计算从一个点移动到另一个点的持续时间。\n\n\
+  ## 6.4 缓动\n\n默认情况下，所有随时间线性改变节点属性的动作都称为线性插值。这样的动画看起来比较生硬。当你想要为动画添加更生动的效果时，就需要使用缓动函数。参见图\
+  \ 6-1。\n\n![A435521_1_En_6_Fig1_HTML.jpg](img/A435521_1_En_6_Fig1_HTML.jpg)\n\n\
+  图 6-1. 线性与缓动\n\n如图所示，第一张图是线性的，这是所有动作默认使用的模式。另外三张图则展示了不同的缓动函数。在 Cocos2d-js 中，共有超过\
+  \ 26 种缓动类型。对于所有缓动函数，使用方法都是一样的。让我们看一个例子：\n\n```\n1   var easing=cc.easeBackIn();\n\
+  2   //或者\n3   var easing=new cc.EaseBackIn();\n4   action.easing(easing);\n```\n\
+  \n非常简单！在这个例子中，我使用了 `EaseBackIn` 类来创建缓动对象，或者你也可以使用单例 `cc.easeBackIn` 对象来作用于你的动作。我更喜欢前一种方式。让我们看看\
+  \ Cocos2d-js 中可用的缓动函数列表。记住：所有缓动函数的使用方式相同。\n\n*   `cc.EaseBackIn`\n*   `cc.EaseBackInOut`\n\
+  *   `cc.EaseBackOut`\n*   `cc.EaseBezierAction`\n*   `cc.EaseBounce`\n*   `cc.EaseBounceIn`\n\
+  *   `cc.EaseBounceInOut`\n*   `cc.EaseBounceOut`\n*   `cc.EaseCircleActionIn`\n\
+  *   `cc.EaseCircleActionInOut`\n*   `cc.EaseCircleActionOut`\n*   `cc.EaseCubicActionIn`\n\
+  *   `cc.EaseCubicActionInOut`\n*   `cc.EaseCubicActionOut`\n*   `cc.EaseElastic`\n\
+  *   `cc.EaseElasticIn`\n*   `cc.EaseElasticInOut`\n*   `cc.EaseElasticOut`\n*  \
+  \ `cc.EaseExponentialIn`\n*   `cc.EaseExponentialInOut`\n*   `cc.EaseExponentialOut`\n\
+  *   `cc.EaseQuadraticActionIn`\n*   `cc.EaseQuadraticActionInOut`\n*   `cc.EaseQuadraticActionOut`\n\
+  *   `cc.EaseQuarticActionIn`\n*   `cc.EaseQuarticActionInOut`\n*   `cc.EaseQuarticActionOut`\n\
+  *   `cc.EaseQuinticActionIn`\n*   `cc.EaseQuinticActionInOut`\n*   `cc.EaseQuinticActionOut`\n\
+  *   `cc.EaseRateAction`\n*   `cc.EaseIn`\n*   `cc.EaseInOut`\n*   `cc.EaseOut`\n\
+  *   `cc.EaseSineIn`\n*   `cc.EaseSineInOut`\n*   `cc.EaseSineOut`\n\n这个列表能满足你所有的缓动需求。所有这些缓动都派生自基类\
+  \ `cc.ActionEase`。\n\n## 6.5 序列\n\n假设我有两个或更多的动作需要在一个节点上一个接一个地执行。`Sequence` 可以帮助我们实现这一点。让我们看一个例子：\n\
+  \n```\n1   var seq = new cc.Sequence([action1,action2]);\n2   this.sprite.runAction(seq);\n\
+  ```\n\n`cc.Sequence` 接受两种参数类型：一种是动作数组，另一种将在本节稍后讨论。它可以像其他任何动作一样，使用节点的 `runAction`\
+  \ 函数来运行。\n\n### 6.5.1 反转序列\n\n一旦创建了 `sequence` 对象，它就可以被反转并在任何节点上运行，如下所示：\n\n```\n\
+  1   this.sprite.runAction(seq.reverse());\n```\n\n`reverse` 函数会将 `sequence` 中的动作顺序反转，并返回一个新的\
+  \ `sequence` 实例。\n\n### 6.5.2 重复序列\n\n一旦创建了 `sequence` 对象，我们可以将动作重复有限次数，也可以无限重复。示例如下：\n\
+  \n```\n1   //重复序列 5 次\n2   this.sprite.runAction(seq.repeat(5));\n\n4   //永远重复序列\n\
+  5   this.sprite.runAction(seq.repeatForever());\n```\n\n`sequence` 的 `repeat` 和\
+  \ `repeatForever` 函数正是用于此目的。\n\n### 6.5.3 动作结束回调\n\n可以在 `sequence` 对象中为每个动作附加一个\
+  \ `结束回调` 函数。让我们看一个例子：\n\n```\n1   var seq=new cc.Sequence(action1,cc.callFunc(function(){/*action1\
+  \ 结束回调*/}\\\n2   ,this),\n3   action2,cc.callFunc(function(){/*action2 结束回调*/}\\\
+  \n4   ,this));\n```\n\n如前所述，`Sequence` 接受两种参数类型。一种是动作数组，另一种是一系列的动作及其动作结束回调，就像刚刚看到的那样。\n\
+  \n## 6.6 同步执行\n\n在某些情况下，你需要在一个节点上同时执行两个或更多的动作。`cc.Spawn` 就是为此目的而设计的：\n\n```\n1 \
+  \  var spaw=new cc.Spawn([action1,action2]);\n2   this.sprite.runAction(spaw);\n\
+  ```\n\n如你所见，其语法与 `Sequence` 类似。它接受一个动作数组，这些动作将被同时执行。请谨慎同时执行多个动作，如果使用不当，可能会产生奇怪的效果。\n\
+  \n## 6.7 停止一个动作\n\n任何正在运行的动作都可以被停止。节点的 `stopAction` 函数正是用于此目的：\n\n```\n1   sprite.stopAction(action);\n\
+  ```\n\n这会立即停止该动作，无论其状态如何。你可以将其用于用户交互或任何需要立即停止动作的动态触发器。\n\n## 6.8 精灵帧动画\n\n在第 3 章中，我们了解了如何使用精灵表进行精灵帧动画。那一章更侧重于精灵本身，而本节将从动画角度对此进行详细解释。精灵中的每一个图像部分都可以使用带有\
+  \ `rect` 坐标的 `SpriteFrame` 进行分类。`cc.Animation` 类可用于在精灵上执行精灵帧动画序列。让我们看一个例子：\n\n```\n\
+  1   var animation = new cc.Animation(spriteFrames, 0.08);\n2   this.sprite.runAction(cc.animate(animation).repeatForever());\
+  \ //或者也可以使用 new cc.Animat\\\n3   ion(..) 模式。\n```\n\n第一个参数是 `cc.SpriteFrame` 实例的数组，第二个参数是延迟时间。与\
+  \ `Action` 类一样，它也有 `repeat` 和 `repeatForever` 函数。\n\n\n\n### 6.9 调度器与更新\n\n在 Cocos2d-js\
+  \ 中，存在一个更新循环，即主运行循环；每个 `cc.Node` 都能够接收更新通知，但节点必须订阅该通知。这种订阅机制在实现时考虑了性能因素。\n\n在 `cc.Node`\
+  \ 的构造函数中，需要调用以下方法：\n\n```\nthis.scheduleUpdate();\n```\n\n完成此操作后，便可以在其中定义一个名为 `update`\
+  \ 的方法：\n\n```\nupdate:function(dt) {\n\n}\n```\n\n现在，我们使用 `update` 来制作一个动画。首先，按照前面示例所述创建一个图层和演示场景，然后在场景中添加一个精灵：\n\
+  \n```\nthis.sprite = new cc.Sprite(res.Sprite_Image);\nthis.sprite.attr({\n    x:\
+  \ size.width / 2,\n    y: size.height / 2\n});\nthis.addChild(this.sprite, 0);\n\
+  ```\n\n我们打算让这个精灵以乒乓运动的方式从左向右移动。为此，我们需要一个 `seed` 值：\n\n```\nthis.seed=10;\n```\n\n\
+  接着，定义我们的 `update` 方法并让精灵动起来：\n\n```\nupdate:function(dt) {\n  if(this.sprite.getPositionX()>cc.winSize.width){\n\
+  \    this.seed=-10;\n  } else if(this.sprite.getPositionX()<0) {\n    this.seed=10;\n\
+  \  }\n  this.sprite.setPositionX(this.sprite.getPositionX()+this.seed);\n}\n```\n\
+  \n至此，完整的代码应如下所示：\n\n```\nvar SchedulersLayer = BaseSampleLayer.extend({\n    sprite:null,\n\
+  \    ctor:function () {\n        this._super();\n        var size = cc.winSize;\n\
+  \        this.sprite = new cc.Sprite(res.Sprite_Image);\n        this.sprite.attr({\n\
+  \            x: size.width / 2,\n            y: size.height / 2\n        });\n \
+  \       this.seed=10;\n        this.addChild(this.sprite, 0);\n        this.scheduleUpdate();\n\
+  \    },\n    update:function(dt) {\n      if(this.sprite.getPositionX()>cc.winSize.width){\n\
+  \        this.seed=-10;\n      } else if(this.sprite.getPositionX()<0) {\n     \
+  \   this.seed=10;\n      }\n      this.sprite.setPositionX(this.sprite.getPositionX()+this.seed);\n\
+  \    }\n});\n```\n\n输出效果应为一个精灵左右来回重复移动。详见图 6-2。\n\n![A435521_1_En_6_Fig2_HTML.jpg](img/A435521_1_En_6_Fig2_HTML.jpg)\n\
+  \n图 6-2. 调度器与更新\n\n"
+- "# 7. 为你的游戏添加物理效果\n\n## 7.1 简介\n\n在基于物理的游戏中，模拟真实世界的物理效果非常重要。如今市面上有多种物理引擎。对于 Cocos2d-js\
+  \ 来说，最流行的当属 Chipmunk 物理引擎。该引擎最初用 C 语言编写，后来被移植到各种平台。尽管你可以将其他游戏引擎与 Cocos2d-js 配合使用，但我们强烈推荐\
+  \ Chipmunk 引擎。它是 Cocos2d-x 的原生物理引擎。\n\n## 7.2 Chipmunk 概述\n\n物理学的核心在于以正确的方式改变精灵的\
+  \ x、y 坐标和旋转角度，使其看起来像物理模拟。你的游戏世界与物理空间之间有着明确的分离。详见图 7-1。\n\n![A435521_1_En_7_Fig1_HTML.jpg](img/A435521_1_En_7_Fig1_HTML.jpg)\n\
+  \n图 7-1. Cocos2d-js 与 Chipmunk 的关系\n\n所有物理主体及其行为都在 Chipmunk 空间中定义，而来自 Cocos2d-js\
+  \ 图层的精灵则映射到这些主体。物理模拟将在 Chipmunk 空间内基于与对应精灵的关系映射进行。Chipmunk 会根据物理空间中的主体来更新这些精灵的 x、y\
+  \ 坐标和旋转角度。让我们在图 7-2 中了解基础知识。\n\n![A435521_1_En_7_Fig2_HTML.jpg](img/A435521_1_En_7_Fig2_HTML.jpg)\n\
+  \n图 7-2. Chipmunk 概述\n\n物理模拟在 Chipmunk 空间内部进行，物理主体在此被赋予物理属性；这些主体将拥有定义的形状，可以是盒子、圆形或多边形。每个\
+  \ Chipmunk 空间都会有一个默认的 `staticBody` 作为其子对象，添加到该默认主体上的形状不会受物理属性影响，是静态物体，例如墙壁或障碍物等。所有主体都将与\
+  \ `PhysicsSprite` 关联，`PhysicsSprite` 包含你的精灵图像，该精灵的位置和旋转将由与之关联的物理主体决定。在接下来的示例中，我们将创建一个\
+  \ Chipmunk 空间，为四个边界添加墙壁，并向空间中添加两个主体（一个盒子和一个圆形）。然后，我们将观察模拟效果。\n\n## 7.3 Chipmunk\
+  \ 空间\n\n首先，你需要在你的 `project.json` 文件中包含 Chipmunk 模块：\n\n```\n\"modules\" : [\"cocos2d\"\
+  ,....,\"chipmunk\"]\n```\n\n让我们看看如何创建这个空间：\n\n```\ninitPhysics:function() {\n  \
+  \  //初始化空间\n    this.space = new cp.Space();\n\n    //设置重力\n    this.space.gravity\
+  \ = cp.v(0, -800); //地球重力\n    this.space.iterations = 30;\n    this.space.sleepTimeThreshold\
+  \ = Infinity;\n    this.space.collisionSlop = Infinity;\n}\n```\n\n这个 `initPhysics`\
+  \ 函数将被放置在 `layer` 对象内部；也就是说，`initPhysics` 将是 `layer` 对象的属性之一。`cp.Space` 类用于创建空间，同时设置\
+  \ `gravity`、`iterations`、`sleepTimeThreshold` 和 `collisionSlop` 为合适的值。\n\n```\n\
+  update:function (dt) {\n    this.space.step(dt);\n},\n```\n\n物理模拟由 `step` 方法驱动，该方法在\
+  \ `layer` 的 `update` 循环中持续被触发。\n\n## 7.4 Chipmunk 主体\n\n物理对象由主体定义；主体具有形状，并与精灵数据相关联。现在，让我们向已创建的\
+  \ Chipmunk 空间添加一个圆形和一个盒子：\n\n```\naddPhysicsCircle: function() {\n    var width=50,height=50,mass=1;\n\
+  \n    this.phBodyCircle = this.space.addBody(new cp.Body(mass, cp.momentForCircle(mass,0,width*0.5,cc.p(0,0))));\n\
+  \    this.phBodyCircle.setPos(cc.p(cc.winSize.width * 0.5, cc.winSize.height * 0.3));\n\
+  \n    //#4\n    var phShape = this.space.addShape(new cp.CircleShape(this.phBodyCircle,\
+  \ width, cc.p(0, 0)));\n    phShape.setFriction(0);\n    phShape.setElasticity(1);\n\
+  \    phShape.setCollisionType(0);\n},\n\naddPhysicsBox: function() {\n    var width=50,height=50,mass=1;\n\
+  \    this.phBodyBox = this.space.addBody(new cp.Body(mass, cp.momentForBox(mass,\
+  \ width,height)));\n    this.phBodyBox.setPos(cc.p(cc.winSize.width * 0.5, cc.winSize.height\
+  \ * 0.1));\n\n    //#4\n    var phShape = this.space.addShape(new cp.BoxShape(this.phBodyBox,\
+  \ width, height));\n    phShape.setFriction(0);\n    phShape.setElasticity(1);\n\
+  \    phShape.setCollisionType(1);\n}\n```\n\n如你所见，圆形和盒子主体是通过 `cp.Body` 并传入 `mass`\
+  \ 和 `momentum` 对象创建的，并且使用 `cp.CircleShape` 和 `cp.BoxShape` 为每个主体定义了形状。这实际上在物理模拟中扮演着重要角色，基于碰撞的物理运动正是依赖于这些形状对象。\n\
+  \n\n\n### 7.5 Chipmunk 静态刚体\n\nChipmunk 空间会包含一个单独的静态刚体。通常，这个 `staticBody` 用于定义物理边界和静态形状，例如墙壁。\n\
+  \n```\n1   addWallsAndGround: function() {\n2          var leftWall = new cp.SegmentShape(this.space.staticBody,\
+  \ new cp.v(0, 0),\\\n3    new cp.v(0, 1000000), WALLS_WIDTH);\n4          leftWall.setElasticity(WALLS_ELASTICITY);\n\
+  5          leftWall.setFriction(WALLS_FRICTION);\n6          this.space.addStaticShape(leftWall);\n\
+  \n8          var rightWall = new cp.SegmentShape(this.space.staticBody, new cp.v(cc.wi\\\
+  \n9   nSize.width, 1000000), new cp.v(cc.winSize.width, 0), WALLS_WIDTH);\n10  \
+  \        rightWall.setElasticity(WALLS_ELASTICITY);\n11          rightWall.setFriction(WALLS_FRICTION);\n\
+  12          this.space.addStaticShape(rightWall);\n\n14          var bottomWall\
+  \ = new cp.SegmentShape(this.space.staticBody, new cp.v(0, 0\\\n15  ), new cp.v(cc.winSize.width,\
+  \ 0), WALLS_WIDTH);\n16          bottomWall.setElasticity(WALLS_ELASTICITY);\n17\
+  \          bottomWall.setFriction(WALLS_FRICTION);\n18          this.space.addStaticShape(bottomWall);\n\
+  \n20          var upperWall = new cp.SegmentShape(this.space.staticBody, new cp.v(0,\
+  \ cc\\\n21  .winSize.height), new cp.v(cc.winSize.width, cc.winSize.height), WALLS_WIDTH);\n\
+  22          upperWall.setElasticity(WALLS_ELASTICITY);\n23          upperWall.setFriction(WALLS_FRICTION);\n\
+  24          this.space.addStaticShape(upperWall);\n25   }\n```\n\n为了创建边界，Chipmunk\
+  \ 提供了 `cp.SegmentShape`，用于创建顶部、底部、左侧和右侧的墙壁，这些墙壁会被添加到空间的默认静态刚体上，这样重力和其它力就不会影响这个形状。\n\
+  \n### 7.6 物理调试节点\n\n一个物理刚体由包含多边形数据的形状组成。你必须将一个 `PhysicsSprite` 附加到刚体上，才能看到物理刚体的运动；如果没有这样做，你可以通过一个名为\
+  \ `PhysicsDebugNode` 的对象，将其添加到层中，以便在没有精灵的情况下看到多边形。在前面的方形和圆形例子中，`PhysicsSprite` 没有被添加，因此我们将依赖\
+  \ `PhysicsDebugNode`：\n\n```\n1   setupDebugNode : function()\n2   {\n3        \
+  \   this._debugNode = new cc.PhysicsDebugNode(this.space);\n4           this.addChild(\
+  \ this._debugNode );\n5   }\n```\n\n现在，无需添加 `PhysicsSprite`，圆形和方形的多边形数据就会在屏幕上可见。\n\
+  \n### 7.7 碰撞检测\n\nChipmunk 能够检测物理刚体之间的碰撞。每个物理刚体都必须用 `setCollisionType` 进行标记，这样它才能在碰撞检测中被识别：\n\
+  \n```\n1   addCollisionCallBack:function(){\n2           // 0 和 1 是方形和圆形的标记\n3 \
+  \          this.space.addCollisionHandler(0, 1, function(){\n4               cc.log('方形和圆形发生碰撞！');\n\
+  5               return true;\n6           }, null, null, null);\n7   }\n```\n\n\
+  如你所见，`addCollisionHandler` 函数使用了方形和圆形的标记 0 和 1，用于检测这两个物体之间的任何碰撞。\n\n### 7.8 整合所有内容\n\
+  \n最后，是时候将所有内容整合在一起了。在层的构造函数中，包含以下代码：\n\n```\n1   this.initPhysics();\n2   this.setupDebugNode();\n\
+  3   this.addWallsAndGround();\n4   this.addPhysicsCircle();\n5   this.addPhysicsBox();\n\
+  6   this.addCollisionCallBack();\n7   this.scheduleUpdate();\n```\n\n除了 `scheduleUpdate`\
+  \ 之外的所有函数都已经定义好了。`scheduleUpdate` 函数是一个节点函数，它使节点能够包含其 update 方法，以便在绘制循环中触发。最后，你将看到类似以下内容的输出：\n\
+  \n```\n1   var g_groundHeight = 57;\n2   var g_runnerStartX = 80;\n\n4   var WALLS_WIDTH\
+  \ = 5;\n5   var WALLS_ELASTICITY = 1;\n6   var WALLS_FRICTION = 1;\n\n8   var ChipmungDemoLayer\
+  \ = BaseSampleLayer.extend({\n9       sprite:null,\n10       ctor:function () {\n\
+  11           this._super();\n12           this.initPhysics();\n13           this.setupDebugNode();\n\
+  14           this.addWallsAndGround();\n15           this.addPhysicsCircle();\n\
+  16           this.addPhysicsBox();\n17           this.addCollisionCallBack();\n\n\
+  19           this.scheduleUpdate();\n20           return true;\n21       },\n22\
+  \       initPhysics:function() {\n\n24           //初始化空间\n25           this.space\
+  \ = new cp.Space();\n\n27           //设置重力\n28           this.space.gravity = cp.v(0,\
+  \ -800); //地球重力\n29           this.space.iterations = 30;\n30           this.space.sleepTimeThreshold\
+  \ = Infinity;\n31           this.space.collisionSlop = Infinity;\n32       },\n\
+  33       addCollisionCallBack:function(){\n34           // 0 和 1 是方形和圆形的标记\n35 \
+  \          this.space.addCollisionHandler(0, 1, function(){\n36              cc.log('方形和圆形发生碰撞！');\n\
+  37              return true;\n38           }, null, null, null);\n39       },\n\
+  40       update:function (dt) {\n41           this.space.step(dt);\n42       },\n\
+  43       addWallsAndGround: function() {\n44           var leftWall = new cp.SegmentShape(this.space.staticBody,\
+  \ new cp.v(0\\\n45   , 0), new cp.v(0, 1000000), WALLS_WIDTH);\n46             \
+  \  leftWall.setElasticity(WALLS_ELASTICITY);\n47               leftWall.setFriction(WALLS_FRICTION);\n\
+  48               this.space.addStaticShape(leftWall);\n\n50               var rightWall\
+  \ = new cp.SegmentShape(this.space.staticBody, new cp.v(\\\n51   cc.winSize.width,\
+  \ 1000000), new cp.v(cc.winSize.width, 0), WALLS_WIDTH);\n52               rightWall.setElasticity(WALLS_ELASTICITY);\n\
+  53               rightWall.setFriction(WALLS_FRICTION);\n54               this.space.addStaticShape(rightWall);\n\
+  \n56               var bottomWall = new cp.SegmentShape(this.space.staticBody, new\
+  \ cp.v\\\n57   (0, 0), new cp.v(cc.winSize.width, 0), WALLS_WIDTH);\n58        \
+  \       bottomWall.setElasticity(WALLS_ELASTICITY);\n59               bottomWall.setFriction(WALLS_FRICTION);\n\
+  60               this.space.addStaticShape(bottomWall);\n\n62               var\
+  \ upperWall = new cp.SegmentShape(this.space.staticBody, new cp.v(\\\n63   0, cc.winSize.height),\
+  \ new cp.v(cc.winSize.width, cc.winSize.height), WALLS_WIDT\\\n64   H);\n65    \
+  \           upperWall.setElasticity(WALLS_ELASTICITY);\n66               upperWall.setFriction(WALLS_FRICTION);\n\
+  67               this.space.addStaticShape(upperWall);\n\n69       },\n70      \
+  \ setupDebugNode : function()\n71       {\n72           this._debugNode = new cc.PhysicsDebugNode(this.space);\n\
+  73           this.addChild( this._debugNode );\n74       },\n75       addPhysicsCircle:\
+  \ function() {\n76         var width=50,height=50,mass=1;\n\n78         this.phBodyCircle\
+  \ = this.space.addBody(new cp.Body(mass, cp.momentForC\\\n79         ircle(mass,0,width*0.5,cc.p(0,0))));\n\
+  80         this.phBodyCircle.setPos(cc.p(cc.winSize.width * 0.5, cc.winSize.heigh\\\
+  \n81   t * 0.3));\n\n83         //#4\n84         var phShape = this.space.addShape(new\
+  \ cp.CircleShape(this.phBodyCircle\\\n85   , width, cc.p(0, 0)));\n86          \
+  \   phShape.setFriction(0);\n87             phShape.setElasticity(1);\n88      \
+  \       phShape.setCollisionType(0);\n89           },\n\n91           addPhysicsBox:\
+  \ function() {\n92             var width=50,height=50,mass=1;\n93             this.phBodyBox\
+  \ = this.space.addBody(new cp.Body(mass, cp.momentForBox(\\\n94   mass, width,height)));\n\
+  95             this.phBodyBox.setPos(cc.p(cc.winSize.width * 0.5, cc.winSize.height\
+  \ *\\\n96             0.1));\n\n98             //#4\n99            var phShape =\
+  \ this.space.addShape(new cp.BoxShape(this.phBodyBox, widt\\\n100            h,\
+  \ height));\n101             phShape.setFriction(0);\n102             phShape.setElasticity(1);\n\
+  103             phShape.setCollisionType(1);\n104           }\n105   });\n```\n\n\
+  输出结果应如图 7-3 所示。\n\n![A435521_1_En_7_Fig3_HTML.jpg](img/A435521_1_En_7_Fig3_HTML.jpg)\n\
+  \n图 7-3.\n\n物理演示\n\n\n\n### 7.9 关节\n\n关节（Joints）实质上就是将两个物理体通过锚点连接起来，或使其关联某种物理行为。在现实世界中，从手机到汽车，我们所接触的一切事物都是由不同部件通过关节和钉子连接而成的集合体。Chipmunk\
+  \ 物理体也是如此。Chipmunk 提供了多种不同类型的关节，如下所示：\n\n- 销关节（Pin Joint）\n- 滑动关节（Slide Joint）\n\
+  - 枢轴关节（Pivot Joint）\n- 槽型关节（Groove Joint）\n- 阻尼弹簧（Damped Spring）\n- 阻尼旋转弹簧（Damped\
+  \ Rotary Spring）\n- 旋转限位关节（Rotary Limit Joint）\n- 简易马达（Simple Motor）\n- 齿轮关节（Gear\
+  \ Joint）\n- 棘轮关节（Ratchet Joint）\n\n我们将通过示例逐一介绍上述所有关节，但在开始之前，需要先了解一些在所有示例中都会用到的公共函数。让我们来看一下：\n\
+  \n```\n1   addBottomWall: function() {\n2     var bottomWall = new cp.SegmentShape(this.space.staticBody,\
+  \ new cp.v(0, 0),\n3     new cp.v(cc.winSize.width, 0), 5);\n4     bottomWall.setElasticity(1);\n\
+  5     bottomWall.setFriction(1);\n6     this.space.addStaticShape(bottomWall);\n\
+  7   }\n```\n\n该函数用于向 Chipmunk 空间添加底部墙壁，以防止物理体掉落到屏幕下方。该墙壁由 `SegmentShape` 构成，并被添加到\
+  \ Chipmunk 空间的静态体上。\n\n```\n1   addPhysicsCircle: function(pos) {\n2     var width=50,height=50,mass=1;\n\
+  4     var phBodyCircle = this.space.addBody(new cp.Body(mass,\n5     cp.momentForCircle(mass,0,width*0.5,cc.p(0,0))));\n\
+  6     phBodyCircle.setPos(pos);\n8     var phShape = this.space.addShape(new cp.CircleShape(phBodyCircle,\
+  \ width, \\\n9     cc.p(0, 0)));\n10     phShape.setFriction(0);\n11     phShape.setElasticity(1);\n\
+  12     phShape.setCollisionType(0);\n14     return phBodyCircle;\n15  }\n```\n\n\
+  上述函数用于向空间添加一个圆形物理体，并返回该物理体，以便我们为其添加约束。\n\n```\n1   addPhysicsBox: function(pos)\
+  \ {\n2     var width=50,height=50,mass=1;\n3     var phBodyBox = this.space.addBody(new\
+  \ cp.Body(mass,\n4     cp.momentForBox(mass, width,height)));\n5     phBodyBox.setPos(pos);\n\
+  7     var phShape = this.space.addShape(new cp.BoxShape(phBodyBox, width, height\\\
+  \n8   ));\n9     phShape.setFriction(0);\n10     phShape.setElasticity(1);\n11 \
+  \    phShape.setCollisionType(1);\n13     return phBodyBox;\n14  }\n```\n\n该函数用于向空间添加一个盒子形状的物理体，并返回该物理体以用于施加约束。\n\
+  \n```\n1   this.space.addConstraint(constrainObj);\n```\n\n通过约束，我们在空间中的两个物理体之间建立物理关系。所有列出的约束都将使用此方法。我们假定你会为每个关节示例创建单独的层；不过，我们在每个关节示例的末尾都提供了包含该层的完整源代码。下面让我们来了解关节。\n\
+  \n#### 7.9.1 销关节\n\n销关节实质上就是将两个物理体通过各自的锚点连接起来。例如，考虑两个物理体 `bodyA` 和 `bodyB`，以及它们对应的锚点\
+  \ `anchorA` 和 `anchorB`；这些锚点以物理体空间坐标给出。这些锚点之间的距离在关节创建时确定，并在整个空间模拟过程中保持不变。现实世界的例子是：想象一个由活塞驱动的轮子；轮子和活塞通过一根连杆连接，连杆驱动轮子。连杆的长度保持不变。\n\
+  \n让我们来看一个示例。首先，进行初始设置：\n\n```\n1   this.initPhysics();\n2   this.setupDebugNode();\n\
+  3   this.addBottomWall();\n```\n\n在 Chipmunk 空间中，使用前面介绍的方法添加两个物理体：一个盒子和一个圆形：\n\n\
+  ```\n1   var bodyA = this.addPhysicsCircle(cc.p(cc.winSize.width * 0.25,\n2   cc.winSize.height\
+  \ * 0.3));\n4   var bodyB = this.addPhysicsBox(cc.p(cc.winSize.width * 0.75,\n5\
+  \   cc.winSize.height * 0.3));\n```\n\n然后，用销关节连接 `bodyA` 和 `bodyB`，并将其添加到约束中：\n\n\
+  ```\n1   var pinJoint = new cp.PinJoint(bodyA, bodyB, cc.p(50,0), cc.p(25,0));\n\
+  2   this.space.addConstraint(pinJoint);\n```\n\n`PinJoint` 类的构造函数有四个参数：\n\n- `bodyA`\
+  \ - 要连接的第一个物理体\n- `bodyB` - 要连接的第二个物理体\n- `anchorA` - `bodyA` 上的锚点\n- `anchorB`\
+  \ - `bodyB` 上的锚点\n\n完整的层源代码如下所示：\n\n```\n1   var PinJointLayer = BaseSampleLayer.extend({\n\
+  2       sprite:null,\n3       ctor:function () {\n4           this._super();\n5\
+  \           this.initPhysics();\n6           this.setupDebugNode();\n7         \
+  \  this.addBottomWall();\n9           var bodyA = this.addPhysicsCircle(cc.p(cc.winSize.width\
+  \ * 0.25, cc.win\\\n10   Size.height * 0.3));\n11           var bodyB = this.addPhysicsBox(cc.p(cc.winSize.width\
+  \ * 0.75, cc.winSiz\\\n12   e.height * 0.3));\n14           var pinJoint = new cp.PinJoint(bodyA,\
+  \ bodyB, cc.p(50,0), cc.p(25,0));\n15           this.space.addConstraint(pinJoint);\n\
+  17           this.scheduleUpdate();\n18           return true;\n19       },\n20\
+  \       initPhysics:function() {\n21         //初始化空间\n22         this.space = new\
+  \ cp.Space();\n23         //设置重力\n24         this.space.gravity = cp.v(0, -800);\
+  \ //地球重力\n25         this.space.iterations = 30;\n26         this.space.sleepTimeThreshold\
+  \ = Infinity;\n27         this.space.collisionSlop = Infinity;\n28         },\n\
+  30         update:function (dt) {\n31           this.space.step(dt);\n32       \
+  \  },\n33         addBottomWall: function() {\n34           var bottomWall = new\
+  \ cp.SegmentShape(this.space.staticBody,\n35             new cp.v(0, 0), new cp.v(cc.winSize.width,\
+  \ 0), 5);\n36           bottomWall.setElasticity(1);\n37           bottomWall.setFriction(1);\n\
+  38           this.space.addStaticShape(bottomWall);\n39         },\n40         setupDebugNode\
+  \ : function()\n41         {\n42           this._debugNode = new cc.PhysicsDebugNode(this.space);\n\
+  43           this.addChild( this._debugNode );\n44         },\n45         addPhysicsCircle:\
+  \ function(pos) {\n46           var width=50,height=50,mass=1;\n48           var\
+  \ phBodyCircle = this.space.addBody(new cp.Body(mass,\n49             cp.momentForCircle(mass,0,width*0.5,cc.p(0,0))));\n\
+  50           phBodyCircle.setPos(pos);\n52           var phShape = this.space.addShape(new\
+  \ cp.CircleShape(phBodyCircle, wid\\\n53           th, cc.p(0, 0)));\n54       \
+  \    phShape.setFriction(0);\n55           phShape.setElasticity(1);\n56       \
+  \    phShape.setCollisionType(0);\n58           return phBodyCircle;\n59       \
+  \ },\n61        addPhysicsBox: function(pos) {\n62          var width=50,height=50,mass=1;\n\
+  63          var phBodyBox = this.space.addBody(new cp.Body(mass, cp.momentForBox(m\\\
+  \n64   ass, width,height)));\n65             phBodyBox.setPos(pos);\n67        \
+  \     var phShape = this.space.addShape(new cp.BoxShape(phBodyBox, width, he\\\n\
+  68             ight));\n69             phShape.setFriction(0);\n70             phShape.setElasticity(1);\n\
+  71             phShape.setCollisionType(1);\n73             return phBodyBox;\n\
+  74           }\n75   });\n```\n\n你将看到如图 7-4 所示的输出结果。\n\n![A435521_1_En_7_Fig4_HTML.jpg](img/A435521_1_En_7_Fig4_HTML.jpg)\n\
+  \n图 7-4. 销关节\n\n\n\n#### 7.9.2 滑动关节\n\n与销关节类似，两个物理体可以通过锚点以滑动关节连接。唯一的区别在于，根据物理模拟的结果，锚点之间的距离会在指定的最大和最小长度之间变化。也就是说，两个锚点之间的距离可以随时间变化，但不能低于所提及的最小长度，也不能超过所提及的最大长度。\n\
+  \n让我们来看一个示例。首先，初始设置以初始化 Chipmunk 空间和底部墙体，并设置一个调试节点。在此示例中，我们将使用一个圆形以及 Chipmunk 的默认静态体（即背景墙）：\n\
+  \n```\n1   var bodyA = this.addPhysicsCircle(cc.p(cc.winSize.width * 0.5, 0));\n\
+  2   var bodyB=this.space.staticBody;\n```\n\n然后，添加一个连接静态体和圆形的滑动关节：\n\n```\n1   var\
+  \ slideJoint = new cp.SlideJoint(bodyA, bodyB, cc.p(50,0),\n2         cc.p(cc.winSize.width/2,cc.winSize.height),\
+  \ 100, cc.winSize.width/2);\n\n4   this.space.addConstraint(slideJoint);\n```\n\n\
+  除了销关节的参数外，我们还需要指定最小长度、最大长度以及最后两个参数。效果看起来会像一个挂在天花板上的球。以下是该层的完整源代码：\n\n```\n1   var\
+  \ SlideJointLayer = BaseSampleLayer.extend({\n2       sprite:null,\n3       ctor:function\
+  \ () {\n4           this._super();\n5           this.initPhysics();\n6         \
+  \  this.setupDebugNode();\n7           this.addBottomWall();\n\n9           var\
+  \ bodyA = this.addPhysicsCircle(cc.p(cc.winSize.width * 0.5, 0));\n10          \
+  \ var bodyB=this.space.staticBody;\n\n12           var slideJoint = new cp.SlideJoint(bodyA,\
+  \ bodyB, cc.p(50,0),\n13           cc.p(cc.winSize.width/2,cc.winSize.height), 100,\
+  \ cc.winSize.width/2);\n\n15           this.space.addConstraint(slideJoint);\n\n\
+  17           this.scheduleUpdate();\n18           return true;\n19         },\n\
+  20         initPhysics:function() {\n21           //initiate space\n22         \
+  \  this.space = new cp.Space();\n23           //set up the Gravity\n24         \
+  \  this.space.gravity = cp.v(0, -800); //Earth gravity\n25           this.space.iterations\
+  \ = 30;\n26           this.space.sleepTimeThreshold = Infinity;\n27           this.space.collisionSlop\
+  \ = Infinity;\n28         },\n\n30         update:function (dt) {\n31          \
+  \ this.space.step(dt);\n32         },\n33         addBottomWall: function() {\n\
+  34           var bottomWall = new cp.SegmentShape(this.space.staticBody, new cp.v(0\\\
+  \n35           , 0), new cp.v(cc.winSize.width, 0), 5);\n36           bottomWall.setElasticity(1);\n\
+  37           bottomWall.setFriction(1);\n38           this.space.addStaticShape(bottomWall);\n\
+  39         },\n40         setupDebugNode : function()\n41         {\n42        \
+  \   this._debugNode = new cc.PhysicsDebugNode(this.space);\n43           this.addChild(\
+  \ this._debugNode );\n44         },\n45         addPhysicsCircle: function(pos)\
+  \ {\n46           var width=50,height=50,mass=1;\n\n48           var phBodyCircle\
+  \ = this.space.addBody(new cp.Body(mass, cp.momentForCi\\\n49           rcle(mass,0,width*0.5,cc.p(0,0))));\n\
+  50           phBodyCircle.setPos(pos);\n\n52           var phShape = this.space.addShape(new\
+  \ cp.CircleShape(phBodyCircle, wid\\\n53           th, cc.p(0, 0)));\n54       \
+  \    phShape.setFriction(0);\n55           phShape.setElasticity(1);\n56       \
+  \    phShape.setCollisionType(0);\n\n58           return phBodyCircle;\n59     \
+  \    }\n60    });\n```\n\n您将看到如图 7-5 所示的输出。\n\n![A435521_1_En_7_Fig5_HTML.jpg](img/A435521_1_En_7_Fig5_HTML.jpg)\n\
+  \n图 7-5. 滑动关节\n\n#### 7.9.3 枢轴关节\n\n在枢轴关节中，两个物理体通过一个单一的锚点连接。两个体相对于锚点的位置和角度将由体和锚点的初始定位决定。它更像两个销关节：一个位于\
+  \ `bodyA` 的默认锚点和关节锚点之间，另一个位于 `bodyB` 的默认锚点和关节锚点之间。此约束将始终保持。\n\n首先，对 Chipmunk 空间进行初始设置，然后添加圆形和盒子：\n\
+  \n```\n1   var bodyA = this.addPhysicsCircle(cc.p(cc.winSize.width * 0.25,\n2  \
+  \ cc.winSize.height * 0.3));\n\n4   var bodyB = this.addPhysicsBox(cc.p(cc.winSize.width\
+  \ * 0.75,\n5   cc.winSize.height * 0.3));\n```\n\n现在，让我们为这些体添加枢轴约束：\n\n```\n1  \
+  \ var pivotJoint = new cp.PivotJoint(bodyA, bodyB, cc.p(cc.winSize.width * 0.5,\n\
+  2   cc.winSize.height * 0.5));\n\n4   this.space.addConstraint(pivotJoint);\n```\n\
+  \n除了 `bodyA` 和 `bodyB` 之外，它还有一个锚点作为最后一个参数。完整代码应如下所示：\n\n```\n1   var PivotJointLayer\
+  \ = BaseSampleLayer.extend({\n2       sprite:null,\n3       ctor:function () {\n\
+  4           this._super();\n5           this.initPhysics();\n6           this.setupDebugNode();\n\
+  7           this.addBottomWall();\n\n9           var bodyA = this.addPhysicsCircle(cc.p(cc.winSize.width\
+  \ * 0.25, cc.win\\\n10   Size.height * 0.3));\n11           var bodyB = this.addPhysicsBox(cc.p(cc.winSize.width\
+  \ * 0.75, cc.winSiz\\\n12           e.height * 0.3));\n\n14           var pivotJoint\
+  \ = new cp.PivotJoint(bodyA, bodyB, cc.p(cc.winSize.width\\\n15           * 0.5,\
+  \ cc.winSize.height * 0.5));\n16           this.space.addConstraint(pivotJoint);\n\
+  \n18           this.scheduleUpdate();\n19           return true;\n20       },\n\
+  21       initPhysics:function() {\n22         //initiate space\n23         this.space\
+  \ = new cp.Space();\n24         //set up the Gravity\n25         this.space.gravity\
+  \ = cp.v(0, -800); //Earth gravity\n26         this.space.iterations = 30;\n27 \
+  \        this.space.sleepTimeThreshold = Infinity;\n28         this.space.collisionSlop\
+  \ = Infinity;\n29       },\n\n31       update:function (dt) {\n32         this.space.step(dt);\n\
+  33       },\n34       addBottomWall: function() {\n35         var bottomWall = new\
+  \ cp.SegmentShape(this.space.staticBody, new cp.v(0\\\n36         , 0), new cp.v(cc.winSize.width,\
+  \ 0), 5);\n37         bottomWall.setElasticity(1);\n38         bottomWall.setFriction(1);\n\
+  39         this.space.addStaticShape(bottomWall);\n40       },\n41       setupDebugNode\
+  \ : function()\n42       {\n43         this._debugNode = new cc.PhysicsDebugNode(this.space);\n\
+  44         this.addChild( this._debugNode );\n45       },\n46       addPhysicsCircle:\
+  \ function(pos) {\n47         var width=50,height=50,mass=1;\n\n49         var phBodyCircle\
+  \ = this.space.addBody(new cp.Body(mass, cp.momentForCi\\\n50         rcle(mass,0,width*0.5,cc.p(0,0))));\n\
+  51         phBodyCircle.setPos(pos);\n\n53         var phShape = this.space.addShape(new\
+  \ cp.CircleShape(phBodyCircle, wid\\\n54         th, cc.p(0, 0)));\n55         phShape.setFriction(0);\n\
+  56         phShape.setElasticity(1);\n57         phShape.setCollisionType(0);\n\n\
+  59         return phBodyCircle;\n60       },\n\n62       addPhysicsBox: function(pos)\
+  \ {\n63         var width=50,height=50,mass=1;\n64         var phBodyBox = this.space.addBody(new\
+  \ cp.Body(mass, cp.momentForBox(m\\\n65         ass, width,height)));\n66      \
+  \    phBodyBox.setPos(pos);\n\n68          var phShape = this.space.addShape(new\
+  \ cp.BoxShape(phBodyBox, width, he\\\n69          ight));\n70          phShape.setFriction(0);\n\
+  71          phShape.setElasticity(1);\n72          phShape.setCollisionType(1);\n\
+  \n74          return phBodyBox;\n75        }\n76   });\n```\n\n输出将如图 7-6 所示。\n\n\
+  ![A435521_1_En_7_Fig6_HTML.jpg](img/A435521_1_En_7_Fig6_HTML.jpg)\n\n图 7-6. 枢轴关节\n\
+  \n\n\n#### 7.9.4 沟槽关节\n\n在沟槽关节中，世界坐标系下将存在两个沟槽点：`groove_a` 和 `groove_b`。同时还有 `bodyB`，它通过锚点连接到沟槽关节，并在\
+  \ `groove_a` 与 `groove_b` 之间滑动。`groove_a` 和 `groove_b` 的位置会根据 `bodyA` 的位置和旋转而变化。\n\
+  \n首先，进行芯片木偶的初始设置。为了更好地可视化，我们将添加一个圆，并在该圆与静态物体之间建立一个滑动关节：\n\n```\n1   var bodyA =\
+  \ this.addPhysicsCircle(cc.p(cc.winSize.width * 0.25, cc.winSize.h\\\n2   eight\
+  \ * 0.3));\n3   var bodyB = this.addPhysicsBox(cc.p(cc.winSize.width * 0.75, cc.winSize.heig\\\
+  \n4   ht * 0.3));\n5   var bodyC=this.space.staticBody;\n\n7   var slideJoint =\
+  \ new cp.SlideJoint(bodyA, bodyC, cc.p(-50,0),\n8   cc.p(cc.winSize.width/2,cc.winSize.height),\
+  \ 100, cc.winSize.width/2);\n9   this.space.addConstraint(slideJoint);\n```\n\n\
+  现在，我们将添加一个沟槽关节，并连接 `bodyA` 和 `bodyB`：\n\n```\n1   var x=cc.winSize.width/2;\n\n\
+  3   var grooveJoint = new cp.GrooveJoint(bodyA, bodyB, cc.p(x,0),\n4   cc.p(x,50),\
+  \ cc.p(25,0));\n\n6   this.space.addConstraint(grooveJoint);\n```\n\n参数分别为 `bodyA`、`bodyB`、`groove_a`、`groove_b`\
+  \ 和 `anchor`。\n\n以下是该层的完整源代码：\n\n```\n1   var GrooveJointLayer = BaseSampleLayer.extend({\n\
+  2       sprite:null,\n3       ctor:function () {\n4           this._super();\n5\
+  \           this.initPhysics();\n6           this.setupDebugNode();\n7         \
+  \  this.addBottomWall();\n\n9           var bodyA = this.addPhysicsCircle(cc.p(cc.winSize.width\
+  \ * 0.25, cc.win\\\n10           Size.height * 0.3));\n11           var bodyB =\
+  \ this.addPhysicsBox(cc.p(cc.winSize.width * 0.75, cc.winSiz\\\n12           e.height\
+  \ * 0.3));\n13           var bodyC=this.space.staticBody;\n\n15           var slideJoint\
+  \ = new cp.SlideJoint(bodyA, bodyC, cc.p(-50,0),\n16           cc.p(cc.winSize.width/2,cc.winSize.height),\
+  \ 100, cc.winSize.width/2);\n17           this.space.addConstraint(slideJoint);\n\
+  \n19           var x=cc.winSize.width/2;\n\n21           var grooveJoint = new cp.GrooveJoint(bodyA,\
+  \ bodyB, cc.p(x,0), cc.p(x,5\\\n22           0), cc.p(25,0));\n23           this.space.addConstraint(grooveJoint);\n\
+  \n25           this.scheduleUpdate();\n26           return true;\n27       },\n\
+  28       initPhysics:function() {\n29          //initiate space\n30          this.space\
+  \ = new cp.Space();\n31          //set up the Gravity\n32          this.space.gravity\
+  \ = cp.v(0, -800); //Earth gravity\n33          this.space.iterations = 30;\n34\
+  \          this.space.sleepTimeThreshold = Infinity;\n35          this.space.collisionSlop\
+  \ = Infinity;\n36       },\n\n38       update:function (dt) {\n39         this.space.step(dt);\n\
+  40       },\n41       addBottomWall: function() {\n42         var bottomWall = new\
+  \ cp.SegmentShape(this.space.staticBody, new cp.v(0\\\n43   , 0), new cp.v(cc.winSize.width,\
+  \ 0), 5);\n44         bottomWall.setElasticity(1);\n45         bottomWall.setFriction(1);\n\
+  46         this.space.addStaticShape(bottomWall);\n47        },\n48        setupDebugNode\
+  \ : function()\n49        {\n50          this._debugNode = new cc.PhysicsDebugNode(this.space);\n\
+  51          this.addChild( this._debugNode );\n52        },\n53        addPhysicsCircle:\
+  \ function(pos) {\n54          var width=50,height=50,mass=1;\n\n56          var\
+  \ phBodyCircle = this.space.addBody(new cp.Body(mass, cp.momentForCi\\\n57     \
+  \     rcle(mass,0,width*0.5,cc.p(0,0))));\n58          phBodyCircle.setPos(pos);\n\
+  \n60          var phShape = this.space.addShape(new cp.CircleShape(phBodyCircle,\
+  \ wid\\\n61          th, cc.p(0, 0)));\n62          phShape.setFriction(0);\n63\
+  \          phShape.setElasticity(1);\n64          phShape.setCollisionType(0);\n\
+  \n66          return phBodyCircle;\n67        },\n\n69        addPhysicsBox: function(pos)\
+  \ {\n70          var width=50,height=50,mass=1;\n71          var phBodyBox = this.space.addBody(new\
+  \ cp.Body(mass, cp.momentForBox(m\\\n72          ass, width,height)));\n73     \
+  \     phBodyBox.setPos(pos);\n\n75          var phShape = this.space.addShape(new\
+  \ cp.BoxShape(phBodyBox, width, he\\\n76          ight));\n77          phShape.setFriction(0);\n\
+  78          phShape.setElasticity(1);\n79          phShape.setCollisionType(1);\n\
+  \n81          return phBodyBox;\n82        }\n83   });\n```\n\n您将看到如图 7-7 所示的输出结果。\n\
+  \n![A435521_1_En_7_Fig7_HTML.jpg](img/A435521_1_En_7_Fig7_HTML.jpg)\n\n图 7-7.\n\n\
+  沟槽关节\n\n\n\n#### 7.9.5 阻尼弹簧\n\n在阻尼弹簧中，`bodyA`和`bodyB`将连接到弹簧的两端，我们需要提供其他参数来定义弹簧的行为。\n\
+  \n首先，初始化 Chipmunk 空间。与之前的示例类似，为了更直观地展示效果，我们将添加一个圆形，并为其建立到静态体的滑动关节。具体如下：\n\n```\n\
+  1   var bodyA = this.addPhysicsCircle(cc.p(cc.winSize.width * 0.25, cc.winSize.height\
+  \ * 0.3));\n2   var bodyB = this.addPhysicsBox(cc.p(cc.winSize.width * 0.75, cc.winSize.height\
+  \ * 0.3));\n3   var bodyC = this.space.staticBody;\n4   \n5   var slideJoint = new\
+  \ cp.SlideJoint(bodyA, bodyC, cc.p(-50,0),\n6   cc.p(cc.winSize.width/2, cc.winSize.height),\
+  \ 100, cc.winSize.width/2);\n7   this.space.addConstraint(slideJoint);\n```\n\n\
+  然后，在`bodyA`和`bodyB`之间添加一个阻尼弹簧：\n\n```\n1   var dampedSpring = new cp.DampedSpring(bodyA,\
+  \ bodyB, cc.p(50,0),\n2   cc.p(25,0), 25, 5, 0.6);\n3   \n4   this.space.addConstraint(dampedSpring);\n\
+  ```\n\n在`bodyA`和`bodyB`之后，共有五个参数：\n\n*   `anchorA` - `bodyA`的锚点\n*   `anchorB` -\
+  \ `bodyB`的锚点\n*   `resLength` - 弹簧的基准长度\n*   `stiffness` - 弹簧常数（参考杨氏模量）\n*   `damping`\
+  \ - 表示阻尼的柔软程度\n\n以下是该图层的完整源代码：\n\n```\n1   var DampedSpringLayer = BaseSampleLayer.extend({\n\
+  2       sprite:null,\n3       ctor:function () {\n4           this._super();\n5\
+  \           this.initPhysics();\n6           this.setupDebugNode();\n7         \
+  \  this.addBottomWall();\n8           \n9           var bodyA = this.addPhysicsCircle(cc.p(cc.winSize.width\
+  \ * 0.25, cc.winSize.height * 0.3));\n10          var bodyB = this.addPhysicsBox(cc.p(cc.winSize.width\
+  \ * 0.75, cc.winSize.height * 0.3));\n11          var bodyC = this.space.staticBody;\n\
+  12          \n13          var slideJoint = new cp.SlideJoint(bodyA, bodyC, cc.p(-50,0),\n\
+  14          cc.p(cc.winSize.width/2, cc.winSize.height), 100, cc.winSize.width/2);\n\
+  15          this.space.addConstraint(slideJoint);\n16          \n17          var\
+  \ dampedSpring = new cp.DampedSpring(bodyA, bodyB, cc.p(50,0), cc.p(25,0), 25, 5,\
+  \ 0.6);\n18          this.space.addConstraint(dampedSpring);\n19          \n20 \
+  \         this.scheduleUpdate();\n21          return true;\n22      },\n23     \
+  \ initPhysics:function() {\n24          //初始化空间\n25          this.space = new cp.Space();\n\
+  26          //设置重力\n27          this.space.gravity = cp.v(0, -800); //地球重力\n28 \
+  \         this.space.iterations = 30;\n29          this.space.sleepTimeThreshold\
+  \ = Infinity;\n30          this.space.collisionSlop = Infinity;\n31      },\n32\
+  \      \n33      update:function (dt) {\n34          this.space.step(dt);\n35  \
+  \    },\n36      addBottomWall: function() {\n37          var bottomWall = new cp.SegmentShape(this.space.staticBody,\
+  \ new cp.v(0, 0), new cp.v(cc.winSize.width, 0), 5);\n38          bottomWall.setElasticity(1);\n\
+  39          bottomWall.setFriction(1);\n40          this.space.addStaticShape(bottomWall);\n\
+  41      },\n42      setupDebugNode : function() {\n43          this._debugNode =\
+  \ new cc.PhysicsDebugNode(this.space);\n44          this.addChild( this._debugNode\
+  \ );\n45      },\n46      addPhysicsCircle: function(pos) {\n47          var width=50,\
+  \ height=50, mass=1;\n48          \n49          var phBodyCircle = this.space.addBody(new\
+  \ cp.Body(mass, cp.momentForCircle(mass, 0, width*0.5, cc.p(0,0))));\n50       \
+  \   phBodyCircle.setPos(pos);\n51          \n52          var phShape = this.space.addShape(new\
+  \ cp.CircleShape(phBodyCircle, width, cc.p(0, 0)));\n53          phShape.setFriction(0);\n\
+  54          phShape.setElasticity(1);\n55          phShape.setCollisionType(0);\n\
+  56          \n57          return phBodyCircle;\n58      },\n59      \n60      addPhysicsBox:\
+  \ function(pos) {\n61          var width=50, height=50, mass=1;\n62          var\
+  \ phBodyBox = this.space.addBody(new cp.Body(mass, cp.momentForBox(mass, width,\
+  \ height)));\n63          phBodyBox.setPos(pos);\n64          \n65          var\
+  \ phShape = this.space.addShape(new cp.BoxShape(phBodyBox, width, height));\n66\
+  \          phShape.setFriction(0);\n67          phShape.setElasticity(1);\n68  \
+  \        phShape.setCollisionType(1);\n69          \n70          return phBodyBox;\n\
+  71      }\n72   });\n```\n\n输出效果将如图 7-8 所示。\n\n![A435521_1_En_7_Fig8_HTML.jpg](img/A435521_1_En_7_Fig8_HTML.jpg)\n\
+  \n图 7-8. 阻尼弹簧\n\n\n\n#### 7.9.6 阻尼旋转弹簧\n\n这与阻尼弹簧类似，唯一的区别在于它以角度方式工作。它并非通过锚点连接两个刚体，而是通过一个相对角度将两个刚体连接起来，使它们保持在该角度；刚度和阻尼决定了刚体在任何时刻的位置。\n\
+  \n与之前的示例类似，设置 Chipmunk 空间，添加一个圆形，并在圆形和静态刚体之间建立一个滑动关节，然后添加一个阻尼旋转弹簧：\n\n```\n1   var\
+  \ dampedRotarySpring = new cp.DampedRotarySpring(bodyA, bodyB, 0, 25, 0.6);\n2 \
+  \  this.space.addConstraint(dampedRotarySpring);\n```\n\n此处，参数分别为 `bodyA`、`bodyB`、`restAngle`、`stiffness`\
+  \ 和 `damping`；参数说明请参考之前的示例。\n\n以下是该层的完整源代码：\n\n```\n1   var DampedRotarySpringLayer\
+  \ = BaseSampleLayer.extend({\n2      sprite:null,\n3      ctor:function () {\n4\
+  \          this._super();\n5          this.initPhysics();\n6          this.setupDebugNode();\n\
+  7          this.addBottomWall();\n\n9          var bodyA = this.addPhysicsCircle(cc.p(cc.winSize.width\
+  \ * 0.25, cc.win\\\n10          Size.height * 0.3));\n11          var bodyB = this.addPhysicsBox(cc.p(cc.winSize.width\
+  \ * 0.75, cc.winSiz\\\n12          e.height * 0.3));\n13          var bodyC=this.space.staticBody;\n\
+  \n15          var slideJoint = new cp.SlideJoint(bodyA, bodyC, cc.p(-50,0),\n16\
+  \          cc.p(cc.winSize.width/2,cc.winSize.height), 100, cc.winSize.width/2);\n\
+  17          this.space.addConstraint(slideJoint);\n\n19          var dampedRotarySpring\
+  \ = new cp.DampedRotarySpring(bodyA, bodyB, 0, 25\\\n20          , 0.6);\n21   \
+  \       this.space.addConstraint(dampedRotarySpring);\n\n23          this.scheduleUpdate();\n\
+  24          return true;\n25        },\n26        initPhysics:function() {\n27 \
+  \         //initiate space\n28          this.space = new cp.Space();\n29       \
+  \   //set up the Gravity\n30          this.space.gravity = cp.v(0, -800); //Earth\
+  \ gravity\n31          this.space.iterations = 30;\n32          this.space.sleepTimeThreshold\
+  \ = Infinity;\n33          this.space.collisionSlop = Infinity;\n34       },\n\n\
+  36       update:function (dt) {\n37         this.space.step(dt);\n38       },\n\
+  39       addBottomWall: function() {\n40         var bottomWall = new cp.SegmentShape(this.space.staticBody,\
+  \ new cp.v(0\\\n41 , 0), new cp.v(cc.winSize.width, 0), 5);\n42         bottomWall.setElasticity(1);\n\
+  43         bottomWall.setFriction(1);\n44         this.space.addStaticShape(bottomWall);\n\
+  45       },\n46       setupDebugNode : function()\n47       {\n48         this._debugNode\
+  \ = new cc.PhysicsDebugNode(this.space);\n49         this.addChild( this._debugNode\
+  \ );\n50       },\n51       addPhysicsCircle: function(pos) {\n52         var width=50,height=50,mass=1;\n\
+  \n54         var phBodyCircle = this.space.addBody(new cp.Body(mass, cp.momentForCi\\\
+  \n55         rcle(mass,0,width*0.5,cc.p(0,0))));\n56         phBodyCircle.setPos(pos);\n\
+  \n58         var phShape = this.space.addShape(new cp.CircleShape(phBodyCircle,\
+  \ wid\\\n59         th, cc.p(0, 0)));\n60         phShape.setFriction(0);\n61  \
+  \       phShape.setElasticity(1);\n62         phShape.setCollisionType(0);\n\n64\
+  \         return phBodyCircle;\n65       },\n\n67       addPhysicsBox: function(pos)\
+  \ {\n68         var width=50,height=50,mass=1;\n69         var phBodyBox = this.space.addBody(new\
+  \ cp.Body(mass, cp.momentForBox(m\\\n70         ass, width,height)));\n71      \
+  \   phBodyBox.setPos(pos);\n\n73         var phShape = this.space.addShape(new cp.BoxShape(phBodyBox,\
+  \ width, he\\\n74         ight));\n75         phShape.setFriction(0);\n76      \
+  \   phShape.setElasticity(1);\n77         phShape.setCollisionType(1);\n\n79   \
+  \      return phBodyBox;\n80       }\n81   });\n```\n\n输出结果应如图 7-9 所示。\n\n![A435521_1_En_7_Fig9_HTML.jpg](img/A435521_1_En_7_Fig9_HTML.jpg)\n\
+  \n图 7-9.\n\n阻尼旋转弹簧\n\n#### 7.9.7 旋转限制关节\n\n旋转限制关节通过提供最小和最大角度界限，来约束两个刚体的相对旋转。如果 `bodyA`\
+  \ 和 `bodyB` 通过一个具有最小和最大角度的旋转限制关节连接，那么这两个刚体的相对旋转角度将不会低于最小角度，也不会超过最大角度。\n\n与之前的示例类似，初始化\
+  \ Chipmunk 空间并添加一个圆形，然后通过一个滑动关节将其与静态刚体连接。现在，在 `bodyA` 和 `bodyB` 之间应用一个旋转限制：\n\n\
+  ```\n1   var rotaryLimitJoint = new cp.RotaryLimitJoint(bodyA, bodyB, -Math.PI/2,\
+  \ Mat\\\n2   h.PI/2);\n3   this.space.addConstraint(rotaryLimitJoint);\n```\n\n\
+  在 `bodyA` 和 `bodyB` 之后，提供了最小和最大角度，这样两个刚体的相对旋转将在这个范围内。\n\n以下是该层的完整源代码：\n\n```\n1\
+  \   var RotaryLimitJointLayer = BaseSampleLayer.extend({\n2      sprite:null,\n\
+  3      ctor:function () {\n4         this._super();\n5         this.initPhysics();\n\
+  6         this.setupDebugNode();\n7         this.addBottomWall();\n\n9         var\
+  \ bodyA = this.addPhysicsCircle(cc.p(cc.winSize.width * 0.25, cc.win\\\n10  Size.height\
+  \ * 0.3));\n11        var bodyB = this.addPhysicsBox(cc.p(cc.winSize.width * 0.75,\
+  \ cc.winSiz\\\n12        e.height * 0.3));\n13        var bodyC=this.space.staticBody;\n\
+  \n15        var rotaryLimitJoint = new cp.RotaryLimitJoint(bodyA, bodyB, -Math.PI/\\\
+  \n16        2, Math.PI/2);\n17        this.space.addConstraint(rotaryLimitJoint);\n\
+  \n19        var slideJoint = new cp.SlideJoint(bodyA, bodyC, cc.p(-50,0),\n20  \
+  \      cc.p(cc.winSize.width/2,cc.winSize.height), 100, cc.winSize.width/2);\n21\
+  \        this.space.addConstraint(slideJoint);\n\n23        this.scheduleUpdate();\n\
+  24        return true;\n25      },\n26      initPhysics:function() {\n27       \
+  \ //initiate space\n28        this.space = new cp.Space();\n29        //set up the\
+  \ Gravity\n30        this.space.gravity = cp.v(0, -800); //Earth gravity\n31   \
+  \     this.space.iterations = 30;\n32        this.space.sleepTimeThreshold = Infinity;\n\
+  33        this.space.collisionSlop = Infinity;\n34     },\n\n36     update:function\
+  \ (dt) {\n37        this.space.step(dt);\n38     },\n39     addBottomWall: function()\
+  \ {\n40        var bottomWall = new cp.SegmentShape(this.space.staticBody, new cp.v(0\\\
+  \n41        , 0), new cp.v(cc.winSize.width, 0), 5);\n42        bottomWall.setElasticity(1);\n\
+  43        bottomWall.setFriction(1);\n44        this.space.addStaticShape(bottomWall);\n\
+  45     },\n46     setupDebugNode : function()\n47     {\n48        this._debugNode\
+  \ = new cc.PhysicsDebugNode(this.space);\n49        this.addChild( this._debugNode\
+  \ );\n50     },\n51     addPhysicsCircle: function(pos) {\n52        var width=50,height=50,mass=1;\n\
+  \n54        var phBodyCircle = this.space.addBody(new cp.Body(mass, cp.momentForCi\\\
+  \n55  rcle(mass,0,width*0.5,cc.p(0,0))));\n56        phBodyCircle.setPos(pos);\n\
+  \n58        var phShape = this.space.addShape(new cp.CircleShape(phBodyCircle, wid\\\
+  \n59  th, cc.p(0, 0)));\n60        phShape.setFriction(0);\n61        phShape.setElasticity(1);\n\
+  62        phShape.setCollisionType(0);\n\n64        return phBodyCircle;\n65   \
+  \  },\n\n67     addPhysicsBox: function(pos) {\n68        var width=50,height=50,mass=1;\n\
+  69        var phBodyBox = this.space.addBody(new cp.Body(mass, cp.momentForBox(m\\\
+  \n70  ass, width,height)));\n71        phBodyBox.setPos(pos);\n\n73        var phShape\
+  \ = this.space.addShape(new cp.BoxShape(phBodyBox, width, he\\\n74  ight));\n75\
+  \        phShape.setFriction(0);\n76        phShape.setElasticity(1);\n77      \
+  \  phShape.setCollisionType(1);\n\n79        return phBodyBox;\n80     }\n81  });\n\
+  ```\n\n输出结果与阻尼旋转弹簧相同；不过，你会注意到两个刚体在旋转上的差异。\n\n\n\n#### 7.9.8 简单电机\n\n`SimpleMotor`\
+  \ 用于维持两个物体按设定的角速度进行相对旋转；也就是说，当涉及 `bodyA` 和 `bodyB` 时，`SimpleMotor` 会以设定的角速度维持这两个物体的相对旋转。\n\
+  \n首先，设置 Chipmunk 空间并向其中添加两个盒子：\n\n```\n1   var bodyA = this.addPhysicsBox(cc.p(cc.winSize.width\
+  \ * 0.25,\n2              cc.winSize.height * 0.5));\n\n4   var bodyB = this.addPhysicsBox(cc.p(cc.winSize.width\
+  \ * 0.75,\n5               cc.winSize.height * 0.5));\n```\n\n然后，通过枢轴关节将这两个物体固定在默认的静态物体上：\n\
+  \n```\n1   var staticBody=this.space.staticBody;\n\n3   this.space.addConstraint(new\
+  \ cp.PivotJoint(bodyA, staticBody,\n4      cc.p(cc.winSize.width * 0.25, cc.winSize.height\
+  \ * 0.5)));\n\n6   this.space.addConstraint(new cp.PivotJoint(bodyB, staticBody,\n\
+  7      cc.p(cc.winSize.width * 0.75, cc.winSize.height * 0.5)));\n```\n\n接着，对 `bodyA`\
+  \ 和 `bodyB` 应用 `SimpleMotor`：\n\n```\n1   var simpleMotor = new cp.SimpleMotor(bodyA,\
+  \ bodyB, Math.PI);\n2   this.space.addConstraint(simpleMotor);\n```\n\n这里，两个物体的相对角速度被设置为\
+  \ `Math.PI`。以下是该层的完整源代码：\n\n```\n1   var SimpleMotorLayer = BaseSampleLayer.extend({\n\
+  2       sprite:null,\n3       ctor:function () {\n4           this._super();\n5\
+  \           this.initPhysics();\n6           this.setupDebugNode();\n7         \
+  \  this.addBottomWall();\n\n9           var bodyA = this.addPhysicsBox(cc.p(cc.winSize.width\
+  \ * 0.25, cc.winSiz\\\n10  e.height * 0.5));\n11          var bodyB = this.addPhysicsBox(cc.p(cc.winSize.width\
+  \ * 0.75, cc.winSiz\\\n12          e.height * 0.5));\n\n14          var staticBody=this.space.staticBody;\n\
+  \n16          this.space.addConstraint(new cp.PivotJoint(bodyA, staticBody,\n17\
+  \          cc.p(cc.winSize.width * 0.25, cc.winSize.height * 0.5)));\n\n19     \
+  \     this.space.addConstraint(new cp.PivotJoint(bodyB, staticBody,\n20        \
+  \  cc.p(cc.winSize.width * 0.75, cc.winSize.height * 0.5)));\n\n22          var\
+  \ simpleMotor = new cp.SimpleMotor(bodyA, bodyB, Math.PI);\n23          this.space.addConstraint(simpleMotor);\n\
+  \n25          this.scheduleUpdate();\n26          return true;\n27       },\n28\
+  \       initPhysics:function() {\n29         //initiate space\n30         this.space\
+  \ = new cp.Space();\n31         //set up the Gravity\n32         this.space.gravity\
+  \ = cp.v(0, -800); //Earth gravity\n33         this.space.iterations = 30;\n34 \
+  \        this.space.sleepTimeThreshold = Infinity;\n35         this.space.collisionSlop\
+  \ = Infinity;\n36       },\n\n38       update:function (dt) {\n39         this.space.step(dt);\n\
+  40       },\n41       addBottomWall: function() {\n42         var bottomWall = new\
+  \ cp.SegmentShape(this.space.staticBody, new cp.v(0\\\n43         , 0), new cp.v(cc.winSize.width,\
+  \ 0), 5);\n44         bottomWall.setElasticity(1);\n45         bottomWall.setFriction(1);\n\
+  46         this.space.addStaticShape(bottomWall);\n47       },\n48       setupDebugNode\
+  \ : function()\n49       {\n50         this._debugNode = new cc.PhysicsDebugNode(this.space);\n\
+  51         this.addChild( this._debugNode );\n52       },\n\n54       addPhysicsBox:\
+  \ function(pos) {\n55         var width=50,height=50,mass=1;\n56         var phBodyBox\
+  \ = this.space.addBody(new cp.Body(mass, cp.momentForBox(m\\\n57         ass, width,height)));\n\
+  58         phBodyBox.setPos(pos);\n\n60        var phShape = this.space.addShape(new\
+  \ cp.BoxShape(phBodyBox, width, he\\\n61        ight));\n62        phShape.setFriction(0);\n\
+  63        phShape.setElasticity(1);\n64        phShape.setCollisionType(1);\n\n\
+  66        return phBodyBox;\n67      }\n68   });\n```\n\n你会看到两个盒子以恒定速度旋转，如图 7-10\
+  \ 所示。\n\n![A435521_1_En_7_Fig10_HTML.jpg](img/A435521_1_En_7_Fig10_HTML.jpg)\n\n\
+  图 7-10. 简单电机\n\n#### 7.9.9 齿轮关节\n\n齿轮关节与 `SimpleMotor` 类似，但齿轮关节本身不会引入角速度。因为一个物体的角速度取决于另一个物体，所以速度取决于设定的比率。让我们看一个例子。\n\
+  \n首先，像前面的例子一样，初始化 Chipmunk 空间并通过枢轴关节将两个盒子连接到静态物体上。此外，添加第三个物体，它将通过齿轮关节与 `bodyB` 绑定：\n\
+  \n```\n1   var bodyA = this.addPhysicsBox(cc.p(cc.winSize.width * 0.25,\n2     \
+  \          cc.winSize.height * 0.5));\n3   var bodyB = this.addPhysicsBox(cc.p(cc.winSize.width\
+  \ * 0.75,\n4               cc.winSize.height * 0.5));\n5   var bodyC = this.addPhysicsBox(cc.p(cc.winSize.width\
+  \ * 0.5,\n6               cc.winSize.height * 0.3));\n7   var staticBody=this.space.staticBody;\n\
+  \n9   this.space.addConstraint(new cp.PivotJoint(bodyA, staticBody,\n10      cc.p(cc.winSize.width\
+  \ * 0.25, cc.winSize.height * 0.5)));\n\n12   this.space.addConstraint(new cp.PivotJoint(bodyB,\
+  \ staticBody,\n13      cc.p(cc.winSize.width * 0.75, cc.winSize.height * 0.5)));\n\
+  \n15   this.space.addConstraint(new cp.PivotJoint(bodyC, staticBody,\n16      cc.p(cc.winSize.width\
+  \ * 0.5, cc.winSize.height * 0.3)));\n```\n\n然后，对 `bodyA` 和 `bodyB` 应用 `SimpleMotor`\
+  \ 以引入恒定角速度：\n\n```\n1   var gearJoint = new cp.GearJoint(bodyB, bodyC, 0, 2);\n\
+  2   this.space.addConstraint(gearJoint);\n```\n\n接着，对 `bodyB` 和 `bodyC` 应用一个齿轮关节，使得\
+  \ `bodyC` 的旋转依赖于 `bodyB` 的角速度：\n\n```\n1   var gearJoint = new cp.GearJoint(bodyB,\
+  \ bodyC, 0, 2);\n2   this.space.addConstraint(gearJoint);\n```\n\n最后两个参数是：\n\n*\
+  \   `offset` - 两个物体的初始角度偏移量\n*   `ratio` - 需要维持的速度比率；在此例中，`bodyC` 的角速度是 `bodyB`\
+  \ 的一半。\n\n以下是该层的完整源代码：\n\n```\n1   var GearJointLayer = BaseSampleLayer.extend({\n\
+  2      sprite:null,\n3      ctor:function () {\n4         this._super();\n5    \
+  \     this.initPhysics();\n6         this.setupDebugNode();\n7         this.addBottomWall();\n\
+  \n9         var bodyA = this.addPhysicsBox(cc.p(cc.winSize.width * 0.25, cc.winSiz\\\
+  \n10         e.height * 0.5));\n11         var bodyB = this.addPhysicsBox(cc.p(cc.winSize.width\
+  \ * 0.75, cc.winSiz\\\n12         e.height * 0.5));\n13         var bodyC = this.addPhysicsBox(cc.p(cc.winSize.width\
+  \ * 0.5, cc.winSize\\\n14         .height * 0.3));\n15         var staticBody=this.space.staticBody;\n\
+  \n17         this.space.addConstraint(new cp.PivotJoint(bodyA, staticBody,\n18 \
+  \          cc.p(cc.winSize.width * 0.25, cc.winSize.height * 0.5)));\n\n20     \
+  \    this.space.addConstraint(new cp.PivotJoint(bodyB, staticBody,\n21         \
+  \  cc.p(cc.winSize.width * 0.75, cc.winSize.height * 0.5)));\n\n23         this.space.addConstraint(new\
+  \ cp.PivotJoint(bodyC, staticBody,\n24           cc.p(cc.winSize.width * 0.5, cc.winSize.height\
+  \ * 0.3)));\n\n26         var simpleMotor = new cp.SimpleMotor(bodyA, bodyB, Math.PI);\n\
+  27         this.space.addConstraint(simpleMotor);\n\n29         var gearJoint =\
+  \ new cp.GearJoint(bodyB, bodyC, 0, 2);\n30         this.space.addConstraint(gearJoint);\n\
+  \n32         this.scheduleUpdate();\n33         return true;\n34       },\n35  \
+  \     initPhysics:function() {\n36         //initiate space\n37         this.space\
+  \ = new cp.Space();\n38         //set up the Gravity\n39         this.space.gravity\
+  \ = cp.v(0, -800); //Earth gravity\n40         this.space.iterations = 30;\n41 \
+  \        this.space.sleepTimeThreshold = Infinity;\n42         this.space.collisionSlop\
+  \ = Infinity;\n43       },\n\n\n```javascript\n45       update:function (dt) {\n\
+  46         this.space.step(dt);\n47       },\n48       addBottomWall: function()\
+  \ {\n49         var bottomWall = new cp.SegmentShape(this.space.staticBody, new\
+  \ cp.v(0, 0), new cp.v(cc.winSize.width, 0), 5);\n50         bottomWall.setElasticity(1);\n\
+  51         bottomWall.setFriction(1);\n52         this.space.addStaticShape(bottomWall);\n\
+  53       },\n54       setupDebugNode : function()\n55       {\n56         this._debugNode\
+  \ = new cc.PhysicsDebugNode(this.space);\n57         this.addChild( this._debugNode\
+  \ );\n58       },\n\n60       addPhysicsBox: function(pos) {\n61         var width=50,height=50,mass=1;\n\
+  62         var phBodyBox = this.space.addBody(new cp.Body(mass, cp.momentForBox(mass,\
+  \ width,height)));\n63         phBodyBox.setPos(pos);\n\n65         var phShape\
+  \ = this.space.addShape(new cp.BoxShape(phBodyBox, width, height));\n66        \
+  \ phShape.setFriction(0);\n67         phShape.setElasticity(1);\n68         phShape.setCollisionType(1);\n\
+  \n70         return phBodyBox;\n71      }\n72   });\n```\n\n在输出结果中，你会看到方框 c 的旋转速度是方框\
+  \ b 的一半。如图 7-11 所示。\n\n![A435521_1_En_7_Fig11_HTML.jpg](img/A435521_1_En_7_Fig11_HTML.jpg)\n\
+  \n**图 7-11.** 齿轮关节\n\n#### 7.9.10 棘轮关节\n\n棘轮关节的工作原理类似于套筒扳手，它使物体按照指定的初始角度偏移进行角步进旋转，其中`phase`是角步长，即当前旋转步与下一步之间的距离。\n\
+  \n语法如下：\n\n```\n1   var ratchet = new cp.RatchetJoint(body1, body2, offset, phase);\n\
+  ```\n\n参数说明：\n\n*   `offset` - 指物体的初始角度旋转量\n*   `phase` - 指步进之间的角度距离\n\n# 8. 其他功能\n\
+  \n## 8.1 绘制基本图形\n\n要绘制基本图形，可使用`cc.drawNode`。该节点类型提供了`drawCircle`、`drawPoly`、`drawRect`、`drawSegment`等函数。来看一个示例：\n\
+  \n```\n1   this.draw=new cc.DrawNode();\n2   this.addChild(this.draw);\n\n4   //drawCircle\n\
+  5   this.draw.drawCircle(cc.p(cc.winSize.width / 2, cc.winSize.height / 2), 100,\
+  \ 0, 10, false, 6, cc.color(0, 255, 0, 255));\n6   this.draw.drawCircle(cc.p(cc.winSize.width\
+  \ / 2, cc.winSize.height / 2), 50, cc.degreesToRadians(90), 50, true, 2, cc.color(0,\
+  \ 255, 255, 255));\n```\n\n这里，我们在同一个`DrawNode`上绘制了两个圆形。你可以在同一个绘制节点上绘制任意数量的图形。如果需要清除图形，必须使用`clear`函数：\n\
+  \n```\n1   this.draw.clear();\n```\n\n还可以使用`drawCardinalSpline`方法绘制路径：\n\n```\n\
+  1   this.draw.drawCardinalSpline(poinsArray,1,1,10,cc.color(255,255,255));\n```\n\
+  \n第一个参数是定义路径数据的一组点坐标数组。第二、三、四个参数分别是`张力`、分段数、线宽和线条颜色。\n\n完整代码如下：\n\n```\n1   var\
+  \ DrawNodeDemoLayer = BaseSampleLayer.extend({\n2      sprite:null,\n3      ctor:function\
+  \ () {\n\n5          this._super();\n\n7          var size = cc.winSize;\n\n9  \
+  \        this.draw=new cc.DrawNode();\n10          this.addChild(this.draw);\n\n\
+  12          //drawCircle\n13          this.draw.drawCircle(cc.p(size.width / 2,\
+  \ size.height / 2), 100, 0, 10, false, 6, cc.color(0, 255, 0, 255));\n14       \
+  \   this.draw.drawCircle(cc.p(size.width / 2, size.height / 2), 50, cc.degreesToRadians(90),\
+  \ 50, true, 2, cc.color(0, 255, 255, 255));\n\n16         return true;\n17     \
+  \  }\n18   });\n```\n\n输出结果如图 8-1 所示。\n\n![A435521_1_En_8_Fig1_HTML.jpg](img/A435521_1_En_8_Fig1_HTML.jpg)\n\
+  \n**图 8-1.** DrawNode 演示\n\n## 8.2 添加音乐和音效\n\n在 Cocos2d-js 中，可通过单例对象`cc.audioEngine`为游戏添加音乐和音效。音乐代表游戏中长时间运行的背景音，而音效代表快速播放的声音，如玩家跳跃、收集金币等。你需要谨慎选择使用的音频格式文件，因为某些浏览器不支持特定格式。在游戏启动时，你首先要做的就是在`app.js`的`onStart`方法中预加载音效文件：\n\
+  \n```\n1   cc.audioEngine.preloadMusic(s_music_background);\n2   cc.audioEngine.preloadEffect(s_music_jump);\n\
+  ```\n\n然后，你可以按如下方式播放音乐和音效：\n\n```\n1   cc.audioEngine.playMusic(s_music_background,\
+  \ true);\n2   cc.audioEngine.playEffect(s_music_jump, true);\n```\n\n第二个参数表示是否循环播放声音。\n\
+  \n你可以按如下方式暂停、恢复和停止音乐与音效：\n\n```\n1   //暂停声音\n2   cc.audioEngine.pauseMusic();\n\
+  3   cc.audioEngine.pauseEffect();\n\n5   //恢复声音\n6   cc.audioEngine.resumeMusic();\n\
+  7   cc.audioEngine.resumeEffect();\n\n9   //倒带音乐\n10  cc.audioEngine.rewindMusic();\n\
+  \n12  //停止声音\n13  cc.audioEngine.stopMusic();\n14  cc.audioEngine.stopEffect();\n\
+  ```\n\n对于音效，没有倒带选项，因为播放音乐和音效的结构是分开的，以提高系统效率。\n\n## 8.3 使用自定义着色器\n\n着色器负责渲染你的整个游戏。我们为运行游戏所做的一切最终都会通过着色器进行处理并渲染。着色器分为顶点着色器和片段着色器。顶点着色器处理节点的顶点数据，并将输出传递给片段着色器，片段着色器则对插值后的顶点数据进行像素颜色处理。Cocos2d-x\
+  \ 使用 GL 着色器进行渲染。GL 着色器是一个更为庞大的概念，详细讨论已超出本书范围。自定义着色器用于在游戏中创建炫酷的效果。我们将学习如何在精灵上使用自定义顶点和片段着色器。\n\
+  \n在 Cocos2d-js 中，`cc.GLProgram`类代表特定节点的着色器实体。每个节点都有`setShaderProgram`和`getShaderProgram`函数来获取/设置该对象。\n\
+  \n我们来看一个示例顶点和片段着色器：\n\n```\n1   //gray.vsh\n2   attribute vec4 a_position;\n3  \
+  \ attribute vec2 a_texCoord;\n4   attribute vec4 a_color;\n\n7   varying vec4 v_fragmentColor;\n\
+  8   varying vec2 v_texCoord;\n\n10   void main()\n11   {\n12       gl_Position =\
+  \ CC_MVPMatrix * a_position;\n13       v_fragmentColor = a_color;\n14       v_texCoord\
+  \ = a_texCoord;\n15   }\n\n17   //gray.fsh\n18   varying vec4 v_fragmentColor;\n\
+  19   varying vec2 v_texCoord;\n20   uniform sampler2D CC_Texture0;\n\n22   void\
+  \ main()\n23   {\n24          vec4 v_orColor = v_fragmentColor * texture2D(CC_Texture0,\
+  \ v_texCoord);\n25          float gray = dot(v_orColor.rgb, vec3(0.299, 0.587, 0.114));\n\
+  26          gl_FragColor = vec4(gray, gray, gray, v_orColor.a);\n27   }\n```\n\n\
+  要在你的精灵上使用这些着色器，你需要创建一个`GLProgram`实例，并用这两个着色器的路径进行初始化，同时还需要为顶点着色器初始化属性。操作如下：\n\n\
+  ```\n1   var shader = new cc.GLProgram();\n2   shader.retain();\n3   shader.initWithFilenames(\"\
+  res/gray.vsh\", \"res/gray.fsh\");\n4   shader.addAttribute(cc.ATTRIBUTE_NAME_POSITION,\
+  \ cc.VERTEX_ATTRIB_POSITION);\n5   shader.addAttribute(cc.ATTRIBUTE_NAME_COLOR,\
+  \ cc.VERTEX_ATTRIB_COLOR);\n6   shader.addAttribute(cc.ATTRIBUTE_NAME_TEX_COORD,\
+  \ cc.VERTEX_ATTRIB_TEX_COORDS);\n\n8   shader.link();\n9   shader.updateUniforms();\n\
+  10  this.sprite.setShaderProgram(shader);\n```\n\n\n## 8.4 运动拖尾效果\n\n在 Cocos2d-js\
+  \ 中，可以通过 `MotionStreak` 类来实现运动拖尾效果。运动拖尾效果是指当物体移动时，在其路径上留下痕迹，这些痕迹会随时间逐渐消失，如同留下脚印一般。\n\
+  \n让我们来看一个示例。首先，创建一个空层并向其中添加一个精灵：\n\n```\n1   this.sprite = new cc.Sprite(res.Sprite_Image);\n\
+  2   this.sprite.attr({\n3       x: size.width / 2,\n4       y: 0\n5   });\n6   this.addChild(this.sprite,\
+  \ 2);\n```\n\n然后，创建一个动作和序列的组合，使精灵从底部移动到顶部：\n\n```\n1   var action1 = cc.moveTo(5,\
+  \ cc.p(size.width / 2, size.height));\n2   var action2= action1.reverse();\n3  \
+  \ var seq1 = new cc.Sequence(action1,action2);\n4   this.sprite.runAction(seq1.repeatForever());\n\
+  ```\n\n接着，使用一个纹理来定义运动拖尾。它可以非常简单，比如一个旋转了 90 度的白色三角形：\n\n```\n1   this.tail = new\
+  \ cc.MotionStreak(2, 3, 50, cc.color.WHITE, res.Tail);\n2   this.tail.attr({\n3\
+  \      x: size.width / 2,\n4      y: 0\n5   });\n6   this.addChild(this.tail,1);\n\
+  ```\n\n`MotionStreak` 的构造函数包含以下参数：\n\n*   `fade` - 拖尾的淡出时间\n*   `minSeg` - 最小片段数\n\
+  *   `stroke` - 拖尾的描边颜色\n*   `texture` - 用于渲染拖尾的图像\n\n层的完整源代码应如下所示：\n\n```\n1   var\
+  \ MotionTrailLayer = BaseSampleLayer.extend({\n2      sprite:null,\n3      ctor:function\
+  \ () {\n4          this._super();\n6          var size = cc.winSize;\n8        \
+  \  this.sprite = new cc.Sprite(res.Sprite_Image);\n9          this.sprite.attr({\n\
+  10              x: size.width / 2,\n11              y: 0\n12          });\n13  \
+  \        this.addChild(this.sprite, 2);\n15          var action1 = cc.moveTo(5,\
+  \ cc.p(size.width / 2, size.height));\n16          var action2= action1.reverse();\n\
+  17          var seq1 = new cc.Sequence(action1,action2);\n18          this.sprite.runAction(seq1.repeatForever());\n\
+  20          this.tail = new cc.MotionStreak(2, 3, 50, cc.color.WHITE, res.Tail);\n\
+  21          this.tail.attr({\n22              x: size.width / 2,\n23           \
+  \   y: 0\n24          });\n25          this.addChild(this.tail,1);\n27         \
+  \ var seq2 = seq1.clone();\n28          this.tail.runAction(seq2.repeatForever());\n\
+  30          return true;\n31        }\n32   });\n```\n\n您将得到如图 8-2 所示的结果。\n\n![A435521_1_En_8_Fig2_HTML.jpg](img/A435521_1_En_8_Fig2_HTML.jpg)\n\
+  \n图 8-2. 运动拖尾\n\n## 8.5 访问本地存储\n\n本地存储即平台（Web/Android/iOS）提供的持久存储功能，您可以在其中存储键值对，并在之后进行检索。Cocos2d-js\
+  \ 提供了一个 API 来访问平台的本地存储，您可以使用此 API 来存储游戏状态、用户最高分等内容。\n\n```\n1   cc.sys.localStorage\n\
+  ```\n\n上述对象提供了对本地存储的访问。有两种方法来获取/设置值：\n\n```\n1   //设置值到本地存储\n2   localstorage.setItem(,);\n\
+  4   //从本地存储获取值\n5   var value = localstorage.getItem();\n```\n\n`setItem` 方法提供了一种使用键作为引用来设置本地存储值的方式。键是一个字符串，值可以是原始值或\
+  \ JavaScript 对象。\n\n让我们看一个简单的示例。创建一个新层，并像之前的示例一样，向该层添加一个标签：\n\n```\n1   var size\
+  \ = cc.winSize;\n3   this.Label = new cc.LabelTTF('','', 32);\n4   this.Label.attr({\n\
+  5      x: size.width / 2,\n6      y: size.height / 2\n7   });\n8   this.addChild(this.Label);\n\
+  ```\n\n然后，将一个字符串值存储到本地存储中，并使用 `var localstorage=cc.sys.localStorage` 将其检索出来：\n\n\
+  ```\n1   //在本地存储中存储一个键/值对\n2   localstorage.setItem('key1','来自本地存储的文本');\n4   //使用键检索值\n\
+  5   var text=localStorage.getItem('key1');\n```\n\n完整的代码应如下所示：\n\n```\n1   var LocalStorageLayer\
+  \ = BaseSampleLayer.extend({\n2       sprite:null,\n3       ctor:function () {\n\
+  5           this._super();\n7           var size = cc.winSize;\n9           this.Label\
+  \ = new cc.LabelTTF('','', 32);\n10           this.Label.attr({\n11            \
+  \   x: size.width / 2,\n12               y: size.height / 2\n13           });\n\
+  14           this.addChild(this.Label);\n16           var localstorage=cc.sys.localStorage;\n\
+  18           //在本地存储中存储一个键/值对\n19           localstorage.setItem('key1','来自本地存储的文本');\n\
+  21           var text=localStorage.getItem('key1');\n23           //使用存储在 localStorage\
+  \ 中的键检索值\n24           this.Label.setString(text);\n26           return true;\n\
+  27       }\n28   });\n```\n\n您将看到如图 8-3 所示的输出。\n\n![A435521_1_En_8_Fig3_HTML.jpg](img/A435521_1_En_8_Fig3_HTML.jpg)\n\
+  \n图 8-3. 本地存储\n\n## 8.6 调度一个时间间隔回调\n\n在第 6 章“动画乐趣”中，我们了解了调度器和更新，其中每个 `cc.Node` 都可以订阅更新通知，即运行循环。类似地，我们可以创建一个在给定时间间隔内被调用的函数。`cc.Node`\
+  \ 中有一个名为 `schedule` 的函数可以为我们完成这项工作：\n\n```\n1   this.schedule(,);\n```\n\n让我们看一个示例。首先，创建一个空层并向其中添加一个标签：\n\
+  \n```\n1   var size = cc.winSize;\n3   this.Label = new cc.LabelTTF('','', 32);\n\
+  4   this.Label.attr({\n5      x: size.width / 2,\n6      y: size.height / 2\n7 \
+  \  });\n9   this.addChild(this.Label);\n```\n\n然后，在 `layer` 对象中有一个回调函数，并用文本更新 `Label`：\n\
+  \n```\n1   onUpdate:function(){\n2     this.Label.setString((this.timer++)+' 秒');\n\
+  3   }\n```\n\n接着，在 `ctor` 中初始化一个变量 `timer`，并使用 `schedule` 函数以 1 秒为时间间隔开始回调：\n\n\
+  ```\n1   this.timer=0;\n2   this.schedule(this.onUpdate,1);\n```\n\n现在，完整的代码如下所示：\n\
+  \n```\n1   var SchedulerLayer = BaseSampleLayer.extend({\n2       sprite:null,\n\
+  3       ctor:function () {\n4           this._super();\n6           var size = cc.winSize;\n\
+  8           this.Label = new cc.LabelTTF('','', 32);\n9           this.Label.attr({\n\
+  10               x: size.width / 2,\n11               y: size.height / 2\n12   \
+  \        });\n14           this.addChild(this.Label);\n16           this.timer=0;\n\
+  17           this.schedule(this.onUpdate,1);\n19           return true;\n20    \
+  \   },\n21       onUpdate:function(){\n22           this.Label.setString((this.timer++)+'\
+  \ 秒');\n23       }\n24   });\n```\n\n您将看到如图 8-4 所示的输出。\n\n![A435521_1_En_8_Fig4_HTML.jpg](img/A435521_1_En_8_Fig4_HTML.jpg)\n\
+  \n图 8-4. 调度一个函数\n\n\n\n## 8.7 访问当前语言\n\nCocos2d-Js 也提供了一种在运行时访问当前区域设置的方法。`cc.sys`\
+  \ 中有一个属性，可以用来获取当前语言的字符串：\n\n```\ncc.sys.language\n```\n\n让我们来看一个简单示例。与前面的示例一样，先在一个空层上添加一个标签：\n\
+  \n```\nthis.Label = new cc.LabelTTF('','', 32);\nthis.Label.attr({\n    x: size.width\
+  \ / 2,\n    y: size.height / 2\n});\n\nthis.addChild(this.Label);\n```\n\n然后，访问语言信息：\n\
+  \n```\nvar language=cc.sys.language;\n```\n\n接着，将其设置到你添加的标签上：\n\n```\n// 设置语言字符串\n\
+  this.Label.setString('当前区域设置: '+language);\n```\n\n以下是完整代码：\n\n```\nvar LanguageLayer\
+  \ = BaseSampleLayer.extend({\n    sprite:null,\n    ctor:function () {\n       \
+  \ this._super();\n\n        var size = cc.winSize;\n\n        this.Label = new cc.LabelTTF('','',\
+  \ 32);\n        this.Label.attr({\n            x: size.width / 2,\n            y:\
+  \ size.height / 2\n        });\n\n        this.addChild(this.Label);\n\n       \
+  \ var language=cc.sys.language;\n\n        // 设置语言字符串\n        this.Label.setString('当前区域设置:\
+  \ '+language);\n        return true;\n    }\n});\n```\n\n你将得到如图 8-5 所示的输出结果。\n\n\
+  ![A435521_1_En_8_Fig5_HTML.jpg](img/A435521_1_En_8_Fig5_HTML.jpg)\n\n图 8-5. 访问区域设置\n\
+  \n## 8.8 访问系统能力\n\n正如你所知，你的 Cocos2d-js 游戏可以部署到不同的原生平台上，这些平台可能具有不同的能力。Cocos2d-js\
+  \ 提供了一种通过 `cc.sys` 检测当前环境能力的方法：\n\n```\ncc.sys.capabilities\n```\n\n如果你在浏览器中控制台输出此对象，将会得到类似如下的对象结构：\n\
+  \n```\n{\n   accelerometer: true,\n   canvas: true,\n   keyboard: true,\n   mouse:\
+  \ true,\n   opengl: true,\n}\n```\n\n例如，如果你想检测系统是否支持触摸，可以直接查询此对象的 `touch` 属性。同样地，也可以查询其他原生能力。\n\
+  \n## 8.9 优化\n\n对于任何类型的游戏而言，优化都是一个至关重要的部分。这并非游戏开发中的最后一个环节，实际上，你甚至在编码过程之前就必须提前规划。有一些技巧和窍门已被公认为最佳实践。\n\
+  \n### 8.9.1 内存优化\n\n*   游戏中的大部分内存将被纹理消耗，因此你必须更加关注所加载纹理的大小。最佳实践是仅在需要时才加载纹理。\n*  \
+  \ 尝试将游戏中所有纹理合并到一张精灵表或纹理图集中，这将节省大量内存。\n*   此外，始终使用 NPOT 纹理而不是 POT 纹理也是一个好习惯。\n\n\
+  ### 8.9.2 性能优化\n\n*   当涉及到性能或绘制调用的帧率时，**增量时间**扮演着重要的角色。\n*   确保避免使用大量绘制调用。为游戏中的所有精灵使用单一纹理，这将启用精灵批处理。\n\
+  *   另外，如果你的平台不支持自动批处理，请确保使用 `SpriteBatchNode` 将所有需要的精灵合并到单个绘制调用中进行渲染。\n*   如果你编写自定义着色器，请确保顶点着色器和片段着色器没有密集的计算操作。\n\
+  *   着色器中的复杂计算会限制 GPU 的性能，尤其是在片段函数中，因为片段函数会为屏幕上的每个像素执行一次。\n*   尝试使用颜色深度为 RBGA4444\
+  \ 的 16 位纹理。\n\n### 8.9.3 JavaScript 层面\n\n*   确保代码没有内存泄漏。\n*   当你在外部节点中引用内部节点时，确保在不需要时清除这些值。\n\
+  *   仅使用有文档记录的 API，因为对内部变量和函数的使用和调整会导致行为不一致，未文档化的 API 在后续版本中可能会发生变更。\n\n## 8.10 结论\n\
+  \n到目前为止，我们已经从头了解了 Cocos2d-js 的功能特性。希望这能为你的游戏开发提供一个良好的开端。Cocos2d-x 是一个庞大的世界，单单一本书不足以详细解释它的全部功能。我们已尽可能覆盖了几乎所有功能特性和高级技巧。是时候由你来创建自己精彩绝伦的游戏了。\n\
+  \n# 索引\n\nA, B  \n加速计事件  \n动画动作  \n动作列表  \n贝塞尔曲线  \n基数样条  \n跳跃  \n移动  \n旋转  \n缩放\
+  \  \n倾斜  \n着色  \n缓动  \n调度器与更新  \n序列  \n生成  \n精灵帧  \n停止  \n架构, Cocos2d-js  \n部署选项\
+  \  \nJSB  \n对象层级  \nOpenGL/DirectX  \n\nC, D  \nChipmunk  \n物体  \n空间  \n静态物体  \n\
+  Cocos2d-js 控制台设置  \n创建  \n文件夹结构  \n程序  \nproject.json  \n当前语言字符串  \n绘制基本形状  \n执行间隔回调\
+  \  \n原生部署  \nPython 安装  \n系统能力  \n自定义事件  \n自定义着色器  \n\nE, F  \n事件机制  \n监听器  \n管理器\
+  \  \n触发  \n\nG, H, I  \nGUI 元素  \n标签  \n背景颜色  \n位图字体  \n创建  \nTrueType 字体  \n菜单与菜单项\
+  \  \n创建  \n图片标签  \n\nJ  \n关节  \nChipmunk 空间  \n阻尼旋转弹簧  \n阻尼弹簧  \n齿轮关节  \n沟槽关节  \n\
+  枢轴关节  \n销关节  \n棘轮关节  \n旋转限制关节  \n简单马达  \n滑动关节  \n\nK  \n键盘事件  \n\nL  \n本地存储访问  \n\
+  \nM, N  \n运动轨迹效果  \n鼠标事件  \n音乐与音效  \n\nO  \n优化, Cocos2d-js  \nJavaScript  \n内存 \
+  \ \n性能  \n\nP, Q  \n基于物理的游戏  \nChipmunk 概述  \n另见 Chipmunk  \n碰撞检测  \n关节  \n另见 关节\
+  \  \nPhysicsDebugNode 程序  \nPhysicsDebugNode  \n\nR  \n分辨率策略  \n自定义  \n预定义  \n术语\
+  \  \n\nS  \n精灵  \n批处理  \n类  \n帧动画  \nPList 数据  \n程序  \n矩形数组  \n分辨率策略  \n另见 分辨率策略\
+  \  \n精灵表  \n单张图片  \nFPS 显示  \nSpriteImageLayer  \nSpriteFrameCache  \nTextureCache\
+  \  \n\nT, U, V, W, X, Y, Z  \n触摸事件  \n多点触摸  \n单点触摸\n"
