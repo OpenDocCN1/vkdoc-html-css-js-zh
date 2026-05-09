@@ -1,0 +1,4286 @@
+- '
+
+  '
+- "# 用 JavaScript 制作游戏\n\n## 克里斯托弗·皮特\n\n作者在本书中引用的任何源代码或其他补充资料，均可供读者在 [`www.apress.com`](http://www.apress.com)\
+  \ 获取。有关如何找到本书源代码的详细信息，请访问 [`www.apress.com/source-code/`](http://www.apress.com/source-code/)。读者还可以在\
+  \ SpringerLink 上每个章节的“补充材料”部分访问源代码。\n\nISBN 978-1-4842-2492-2  \n电子书 ISBN 978-1-4842-2493-9\
+  \  \nDOI 10.1007/978-1-4842-2493-9  \n美国国会图书馆控制编号：2016961803\n\n© 克里斯托弗·皮特 2016\n\
+  \n本作品受版权保护。出版商保留所有权利，无论是涉及全部还是部分材料，特别包括翻译权、重印权、插图复用权、朗诵权、广播权、缩微胶片或其他物理形式的复制权，以及信息存储与检索、电子改编、计算机软件，或目前已知或今后开发的任何类似或不同方法的传输权。\n\
+  \n本书中可能包含商标名称、徽标和图像。我们并非在每次出现商标名称、徽标或图像时都使用商标符号，而是仅以编辑方式使用这些名称、徽标和图像，以维护商标所有者的利益，并无意侵犯商标权。本出版物中使用的商品名称、商标、服务标志及类似术语，即使未被明确标识，也不应视为对这些术语是否受专有权利保护的任何意见表达。\n\
+  \n尽管本书中的建议和信息在出版时被认为是真实准确的，但作者、编辑和出版商均不对可能出现的任何错误或遗漏承担法律责任。出版商不对本书所含内容提供任何明示或暗示的担保。\n\
+  \n本书采用无酸纸印刷。\n\n本书在全球图书贸易中由 Springer Science+Business Media New York 发行，地址：233 Spring\
+  \ Street, 6th Floor, New York, NY 10013。电话：1-800-SPRINGER，传真：(201) 348-4505，电子邮件：`orders-ny@springer-sbm.com`，或访问\
+  \ `www.springeronline.com`。Apress Media, LLC 是一家加利福尼亚有限责任公司，其唯一成员（所有者）是 Springer\
+  \ Science + Business Media Finance Inc (SSBM Finance Inc)。SSBM Finance Inc 是一家特拉华州公司。\n\
+  \n献给山姆、妮可、伊娃和西蒙。\n\n## 目录\n\n第 1 章：引言 1\n\n第 2 章：游戏循环 3  \n为游戏搭建舞台 3  \n创建精灵 4 \
+  \ \n游戏循环 6  \n小结 8\n\n第 3 章：玩家输入 9  \n检测输入 9  \n自然的玩家移动 12  \n小结 13\n\n第 4 章：碰撞检测\
+  \ 15  \n创建方框 15  \n检测圆形碰撞 17  \n检测矩形碰撞 19  \n小结 21\n\n第 5 章：重力 23  \n清理现有代码 23 \
+  \ \n为世界添加重力 28  \n允许玩家跳跃 32  \n小结 34\n\n第 6 章：梯子 35  \n创建我们的第一个梯子 35  \n允许玩家攀爬梯子\
+  \ 37  \n小结 40\n\n第 7 章：楼梯 41  \n构建斜坡 41  \n走上斜坡 44  \n保持在地面之上 46  \n小结 46\n\n第 8\
+  \ 章：摄像机锁定 47  \n使用摄像机进行环绕 47  \n扩展关卡 49  \n小结 51\n\n第 9 章：投掷物 53  \n自定义准星 53  \n\
+  自定义按键 56  \n射击 58  \n小结 60\n\n第 10 章：怪物 61  \n巡逻的黏怪 61  \n射击怪物 63  \n小结 64\n\n第\
+  \ 11 章：生命值 65  \n承受伤害 65  \n显示生命值 66  \n小结 68\n\n第 12 章：动画 69  \n玩家动画 69  \n切换动画\
+  \ 70  \n小结 72\n\n第 13 章：音效 73  \n添加背景音乐 73  \n添加操作与事件音效 74  \n小结 74\n\n第 14 章：游戏手柄\
+  \ 75  \n处理事件 75  \n扳机与摇杆 78  \n小结 78\n\n"
+- '# 索引
+
+
+  81
+
+
+  ## 内容概览
+
+
+  关于作者 xi
+
+
+  第 1 章：引言 1
+
+
+  第 2 章：游戏循环 3
+
+
+  第 3 章：玩家输入 9
+
+
+  第 4 章：碰撞检测 15
+
+
+  第 5 章：重力 23
+
+
+  第 6 章：梯子 35
+
+
+  第 7 章：楼梯 41
+
+
+  第 8 章：摄像机锁定 47
+
+
+  第 9 章：投掷物 53
+
+
+  第 10 章：怪物 61
+
+
+  第 11 章：生命值 65
+
+
+  第 12 章：动画 69
+
+
+  第 13 章：音效 73
+
+
+  第 14 章：游戏手柄 75
+
+
+  '
+- '# 索引
+
+
+  81
+
+
+  ## 关于作者
+
+
+
+
+  '
+- '# 1. 引言
+
+
+  电子补充材料 本章的在线版本 (doi:[10.1007/978-1-4842-2493-9_1](http://dx.doi.org/10.1007/978-1-4842-2493-9_1))
+  包含补充材料，仅供授权用户使用。
+
+
+  我是个游戏迷。早在成为程序员之前，我就已经是游戏玩家了。然而，直到现在我才尝试构建一款游戏……就在几周前，一位同事草绘了一款简约而精美的平台游戏。当我看到它的那一刻，我就知道我想把它做出来。
+
+
+  知道从何入手总是很难。许多关于游戏制作的书籍和教程通常是用 Java、C++ 或其他你还没学会的语言编写的。因此，当你还需要学习新语言时，制作游戏的复杂性就增加了。
+
+
+  相反，我将使用现代 JavaScript 来为网页浏览器制作游戏。它们使用起来毫不费力，并且能在任何地方运行。如果你曾想过制作一款游戏，那就加入我吧。我们将从零开始，很快就能构建出有趣的游戏。
+
+
+  如果你有任何疑问，欢迎在 Twitter 上向我提问：[`https://twitter.com/assertchris`](https://twitter.com/assertchris)。
+
+
+  '
+- '# 2. 游戏循环
+
+
+  游戏循环是每款游戏必不可少的部分。在本章中，我们将通过创建可靠的工作流程和环境来为我们的游戏搭建舞台。我们将看到一些有用的库，并渲染出我们的第一个游戏角色。这会很有趣！
+
+
+  ## 为游戏搭建舞台
+
+
+  我们将使用最新的 JavaScript 标准和语言特性来构建游戏。通常，我会在这里展示如何创建一个 JavaScript 构建链，但我们将采取不同的做法……
+
+
+  在本书中，我们所有的编码工作都将在名为 CodePen 的托管服务中完成。它看起来就像图 2-1 中的代码。
+
+
+  ![A435434_1_En_2_Fig1_HTML.jpg](img/A435434_1_En_2_Fig1_HTML.jpg)
+
+
+  图 2-1. CodePen
+
+
+  这种方法有几个好处：
+
+
+  1. 我们不需要涉及 JavaScript 构建链。它们具有主观性、脆弱性且容易分散注意力。
+
+  2. 我们可以免费使用 SCSS（增强样式表）。
+
+  3. 你无需进行任何设置即可开始与源代码交互。
+
+
+  我们将使用一个名为 PixiJS ([`www.pixijs.com`](http://www.pixijs.com)) 的 JavaScript 库。它是一个渲染库，能够平滑处理浏览器之间的不一致性。它既不是游戏引擎也不是物理引擎，因此我们仍需自行学习和编写这些方面的代码。PixiJS
+  只是让我们能够更快地进入这些主题。
+
+
+  我们使用的是 PixiJS `v4`。当你阅读本文时，很可能已经有更新的版本可用。概念应该是通用的，但语法可能已经发生了变化。
+
+
+  我们可以通过点击“设置”➤“JavaScript”，并将以下 URL 添加到 PixiJS CDN 脚本来将 PixiJS 添加到我们的 CodePen 中：[`https://cdnjs.cloudflare.com/ajax/libs/pixi.js/4.0.0/pixi.min.js`](https://cdnjs.cloudflare.com/ajax/libs/pixi.js/4.0.0/pixi.min.js)。这个过程如图
+  2-2 所示。
+
+
+  ![A435434_1_En_2_Fig2_HTML.jpg](img/A435434_1_En_2_Fig2_HTML.jpg)
+
+
+  图 2-2. 将 PixiJS 添加到 CodePen
+
+
+  ## 创建精灵
+
+
+  精灵是游戏中视觉对象的常用名称。我们可以在屏幕上移动它们（尽管它们通常负责自身移动）。我们可以与它们进行交互。
+
+
+  马里奥 ([`https://en.wikipedia.org/wiki/Mario`](https://en.wikipedia.org/wiki/Mario))
+  是一个精灵，他行走的平台是精灵，背景中的云朵也是精灵。可以把精灵想象成设计文件中的切片，我们将其绘制在抽象数据结构之上。这些抽象数据结构具有位置，有时还具有速度。我们正是将这些游戏规则应用于这些抽象数据结构。它们就是我们的增强道具和敌人。
+
+
+  那么，我们如何创建它们呢？让我们从创建一个小型 PNG 图像开始。我们使用 PNG 是因为它允许我们使部分精灵纹理透明。如果你愿意，也可以使用 JPEG 图像来创建精灵。
+
+
+  然后，我们需要创建一个渲染器、一个舞台和一个精灵：
+
+
+  ```
+
+  const renderer = new PIXI.autoDetectRenderer(
+
+  window.innerWidth,
+
+  window.innerHeight,
+
+  {
+
+  "antialias": true,
+
+  "autoResize": true,
+
+  "transparent": true,
+
+  "resolution": 2,
+
+  },
+
+  )
+
+  document.body.appendChild(renderer.view)
+
+  const sprite = new PIXI.Sprite.fromImage(
+
+  "path/to/sprites/player-idle.png",
+
+  )
+
+  sprite.x = window.innerWidth / 2
+
+  sprite.y = window.innerHeight / 2
+
+  const stage = new PIXI.Container()
+
+  stage.addChild(sprite)
+
+  const animate = function() {
+
+  requestAnimationFrame(animate)
+
+  renderer.render(stage)
+
+  }
+
+  animate()
+
+  ```
+
+
+  此代码来自 [`http://codepen.io/assertchris/pen/qaobAz`](http://codepen.io/assertchris/pen/qaobAz)。
+
+
+  好的，这里涉及的内容很多！让我们分步骤来看这段代码：
+
+
+  1. 我们创建一个渲染器。渲染器的作用是将 PixiJS 抽象（精灵、纹理等）转换为 canvas 或 WebGL 图形。我们不需要与它们交互，但必须有一个渲染器才能显示我们的
+  PixiJS 内容。我们告诉渲染器要占满浏览器窗口的整个宽度和高度。我们还告诉它对我们的图形进行抗锯齿处理，并将其提升到视网膜分辨率。我们让它拥有透明背景，并调整所有图形以适应屏幕。
+
+  2. 然后，我们使用之前创建的 PNG 图像创建一个新的 `PIXI.Sprite` 实例。默认情况下，它的位置是 `x = 0` 和 `y = 0`。我们可以将其定位到屏幕中心。我们必须创建一个根精灵容器（通常称为舞台），并将精灵附加到舞台上。这并没有听起来那么复杂。可以把它想象成
+  HTML 文档，它们有一个根 `html` 元素，我们将所有其他元素添加到其中。这是类似的事情。
+
+  3. 最后，我们创建一个动画函数，并确保渲染器渲染我们的舞台和精灵。我们使用 `requestAnimationFrame` 函数作为一种在不阻塞 JavaScript
+  线程的情况下进行渲染的方式。关于这一点，我们可以进行长时间的讨论。目前，只需要知道 `requestAnimationFrame` 每秒执行很多次就足够了。我们的游戏目标是每秒渲染
+  30 到 60 帧，同时在后台进行各种玩家和世界的计算。要实现这一切的顺畅运行，我们就需要使用这个函数。
+
+
+
+  好的，作为一名高级文档工程师和翻译员，我将严格按照您的要求，对给定的英文文本进行翻译。
+
+
+
+  '
+- '# 游戏循环
+
+
+  游戏循环将控制我们游戏的流程。这是一个重复的过程：读取输入、计算状态变化、并将输出渲染到屏幕上。
+
+
+  到目前为止，我们已经搭建了很多脚手架，但所做的一切只是渲染一个静态图像。让我们让它动起来吧！首先，我们将创建一个 `Player` 类，这样我们就可以追踪玩家的位置了：
+
+
+  ```
+
+  class Player {
+
+  constructor(sprite, x, y) {
+
+  this.sprite = sprite
+
+  this.x = x
+
+  this.y = y
+
+  this.sprite.x = this.x
+
+  this.sprite.y = this.y
+
+  }
+
+  animate(state) {
+
+  this.x += 5
+
+  if (this.x > window.innerWidth) {
+
+  this.x = 0
+
+  }
+
+  this.sprite.x = this.x
+
+  this.sprite.y = this.y
+
+  }
+
+  }
+
+  ```
+
+
+  这段代码来自 [`codepen.io/assertchris/pen/qaobAz`](http://codepen.io/assertchris/pen/qaobAz)。
+
+
+  这就是 ES2015 及更高版本中 JavaScript 类的写法。`Player` 类有一个构造函数，我们用它来存储对精灵的引用，以及初始的 `x` 和 `y`
+  位置。
+
+
+  它还有一个 `animate` 方法，我们每秒会调用很多次。我们可以用这个方法来判断玩家是否需要改变位置或执行其他操作。在这个例子中，我们将精灵的 `x` 坐标稍微增加了一点。如果玩家/精灵移出了屏幕右侧，我们就把它移回屏幕左侧。
+
+
+  我们还必须改变创建精灵的方式：
+
+
+  ```
+
+  const player = new Player(
+
+  sprite,
+
+  window.innerWidth / 2,
+
+  window.innerHeight / 2,
+
+  )
+
+  stage.addChild(sprite)
+
+  let state = {
+
+  "renderer": renderer,
+
+  "stage": stage,
+
+  }
+
+  const animate = function() {
+
+  requestAnimationFrame(animate)
+
+  player.animate(state)
+
+  renderer.render(stage)
+
+  }
+
+  ```
+
+
+  这段代码来自 [`codepen.io/assertchris/pen/qaobAz`](http://codepen.io/assertchris/pen/qaobAz)。
+
+
+  现在我们开始看到游戏中的循环了。正如图 2-3 所示，我们每秒多次告诉我们的玩家去执行动画。玩家会根据一些内部逻辑进行调整，并更新其精灵。渲染器渲染输出，我们看到的就是一个流畅的动画。
+
+
+  ![A435434_1_En_2_Fig3_HTML.jpg](img/A435434_1_En_2_Fig3_HTML.jpg)
+
+
+  图 2-3. 移动精灵
+
+
+  我们目前唯一缺少的就是输入，但我们很快就会讲到……
+
+
+  ## 总结
+
+
+  在本章中，我们成功搭建了一个游戏环境（使用 CodePen）。我们简要介绍了 PixiJS，并了解了如何将玩家的精灵渲染到屏幕上。
+
+
+  我们还为玩家的精灵添加了动画，并学会了如何使用 `requestAnimationFrame` 函数。
+
+
+  花点时间为你的游戏寻找精灵图形。派生 (Fork) 这个 CodePen，并稍作自定义。感受一下创建和操控精灵的过程非常重要。这就是你游戏的开始！
+
+
+  '
+- '# 玩家输入
+
+
+  电影和游戏的区别是什么？玩家输入！事实上，这是游戏设计中非常关键的一环，以至于游戏往往是由它们如何处理玩家输入来定义的。
+
+
+  赛车游戏依赖于持续、微妙的输入。如果你将手指从键盘上抬起，或将脚从油门上移开，就会失去动力。如果你没有输入正确的按键组合，你的飞行模拟就会坠毁。
+
+
+  像我们正在构建的这种平台游戏，需要双手输入。通常键盘的右侧用于移动。通常键盘的左侧用于玩家动作，比如射击或开门。
+
+
+  也许你想设计一个像《泰拉瑞亚》（[`terraria.org`](https://terraria.org)）这样的平台游戏，它使用鼠标进行玩家操作和弹道瞄准。也许你想使用
+  WASD 键在屏幕上移动你的玩家。让我们开始吧！
+
+
+  ## 检测输入
+
+
+  当我第一次尝试检测输入时，我试图为所有东西添加事件监听器。我尝试为玩家添加事件监听器，也为舞台添加事件监听器。啊……然后事情就失控了。
+
+
+  诀窍是在最高层级检测事件，并将其详细信息保存到一个游戏状态对象中。上一次我们创建了这种状态对象，并将其传递给了玩家的 `animate` 方法。让我们扩展一下那个状态：
+
+
+  ```
+
+  let state = {
+
+  "renderer": renderer,
+
+  "stage": stage,
+
+  "keys": {},
+
+  "clicks": {},
+
+  "mouse": {},
+
+  }
+
+  window.addEventListener("keydown", function(event) {
+
+  state.keys[event.keyCode] = true
+
+  })
+
+  window.addEventListener("keyup", function(event) {
+
+  state.keys[event.keyCode] = false
+
+  })
+
+  window.addEventListener("mousedown", function(event) {
+
+  state.clicks[event.which] = {
+
+  "clientX": event.clientX,
+
+  "clientY": event.clientY,
+
+  }
+
+  })
+
+  window.addEventListener("mouseup", function(event) {
+
+  state.clicks[event.which] = false
+
+  })
+
+  window.addEventListener("mousemove", function(event) {
+
+  state.mouse.clientX = event.clientX
+
+  state.mouse.clientY = event.clientY
+
+  })
+
+  ```
+
+
+  这段代码来自 [`codepen.io/assertchris/pen/rrdZYB`](http://codepen.io/assertchris/pen/rrdZYB)。
+
+
+  我们开始时将渲染器和舞台添加到了游戏状态对象中。现在我们添加了 `keys`、`clicks` 和 `mouse` 属性，用于跟踪按键和鼠标移动。
+
+
+  注意
+
+
+  对于下一部分，我不得不调整 `index.html` 的 CSS，使画布绝对定位。这使得更精确地追踪鼠标移动成为可能。查看源代码以了解更改。
+
+
+  随着我们向游戏中添加更多对象，我们会将游戏状态对象传递给它们每一个。它们可以使用它来计算出当玩家与游戏交互时它们应该做什么。让我们移除当前的玩家移动，并添加由输入驱动的移动：
+
+
+  ```
+
+  animate(state) {
+
+  if (state.keys[37]) { // 左
+
+  this.x = Math.max(
+
+  0, this.x - 5
+
+  )
+
+  }
+
+  if (state.keys[39]) { // 右
+
+  this.x = Math.min(
+
+  window.innerWidth - 64, this.x + 5
+
+  )
+
+  }
+
+  if (state.clicks[1]) { // 左键点击
+
+  this.x = state.clicks[1].clientX
+
+  }
+
+  this.sprite.x = this.x
+
+  this.sprite.y = this.y
+
+  }
+
+  ```
+
+
+  这段代码来自 [`codepen.io/assertchris/pen/rrdZYB`](http://codepen.io/assertchris/pen/rrdZYB)。
+
+
+  `animate` 方法的实际变化很小。我们检查两个方向键，如果玩家按下了其中一个，我们就进行移动。我们还检查玩家是否点击了鼠标，如果点击了，就立即移动。
+
+
+  提示
+
+
+  不必理会 `Math` 函数和魔法数字 `64`。这些只是为了阻止玩家精灵移出屏幕。当我们开始构建墙壁时，我们会移除这些东西……
+
+
+  ![A435434_1_En_3_Fig1_HTML.jpg](img/A435434_1_En_3_Fig1_HTML.jpg)
+
+
+  图 3-1. 玩家输入
+
+
+
+
+  ### 自然的角色移动
+
+
+  现在角色可以移动一点了。不过，感觉并不好。当我们松开方向键的瞬间，动作就戛然而止。游戏只有一种速度：慢速。
+
+
+  我们需要的是加速度，让角色能在特定方向上加速。当角色不再加速时，我们还需要一些摩擦力来使其减速。让我们加入这些功能：
+
+
+  ```
+
+  class Player {
+
+  constructor(sprite, x, y) {
+
+  this.sprite = sprite
+
+  this.x = x
+
+  this.y = y
+
+  this.velocityX = 0
+
+  this.maximumVelocityX = 8
+
+  this.accelerationX = 2
+
+  this.frictionX = 0.9
+
+  this.sprite.x = this.x
+
+  this.sprite.y = this.y
+
+  }
+
+  animate(state) {
+
+  if (state.keys[37]) { // 左键
+
+  this.velocityX = Math.max(
+
+  this.velocityX - this.accelerationX,
+
+  this.maximumVelocityX * -1
+
+  )
+
+  }
+
+  if (state.keys[39]) { // 右键
+
+  this.velocityX = Math.min(
+
+  this.velocityX + this.accelerationX,
+
+  this.maximumVelocityX
+
+  )
+
+  }
+
+  this.velocityX *= this.frictionX
+
+  this.x += this.velocityX
+
+  // if (state.clicks[1]) { // 左键点击
+
+  //   this.x = state.clicks[1].clientX
+
+  // }
+
+  this.sprite.x = this.x
+
+  this.sprite.y = this.y
+
+  }
+
+  }
+
+  ```
+
+
+  这段代码来自 [`http://codepen.io/assertchris/pen/rrdZYB`](http://codepen.io/assertchris/pen/rrdZYB)。
+
+
+  慢着，别急！让我们一步步来回顾：
+
+
+  1.  我们创建了几个属性：速度、最大速度、加速度和摩擦力，并为它们设置了合理的默认值。你可以随意调整这些数值，直到理解每个属性的作用。
+
+  2.  我们现在可以追踪角色在任意方向上的加速度。如果按左方向键，角色就会向该方向加速。角色有一个最大加速度，以防止速度无限增加。
+
+  3.  如果没有某种反作用力，角色会持续朝同一方向移动。这就像在太空中，没有空气阻力或重力来抵消动量。我们将这种反作用力定义为摩擦力，并用速度乘以它。在没有加速度的情况下，这意味着动趋向于零。这样就呈现出角色停下来的效果。
+
+
+  ## 总结
+
+
+  我们已经开始让游戏变得可交互了。现在可以按下方向键，看到角色的精灵在场景中平滑移动。
+
+
+  通过为精灵的移动添加加速和减速，我们也让游戏体验不那么突兀。这个逻辑将指导我们如何创建其他机制（比如重力）。
+
+
+  花点时间调整加速度属性，让你的角色精灵在游戏中移动起来感觉恰到好处。你也可以尝试将其他按键映射到左右动作上。
+
+
+  '
+- "# 4. 碰撞检测\n\n是时候讨论碰撞检测了。它影响着游戏中显而易见的元素，比如无法穿过的墙壁，无法掉下去的地板。它也影响着游戏中不太明显的元素，比如武器弹丸和检查点。\n\
+  \n我们暂时还不会涉及重力，也不会探讨角色血量或重生。地板、弹丸和检查点都很有趣，但它们值得拥有独立的章节。在本章中，我们将创建不可穿越的物体。我们将学习如何判断两个物体是否占据同一个空间。\n\
+  \n我花了一些时间研究这个话题。看起来有很多方法可以判断两个物体是否占据同一个空间。有些方法易于解释和实现。我们将研究这些方法。另一些方法则不那么简单，尽管如此，它们仍然很酷。\n\
+  \n### 创建箱子\n\n角色只是屏幕上同时存在的众多物体之一。我们的游戏是一个平台游戏，因此可以预见在任意时刻屏幕上至少会有一个平台。\n\n平台有一些有趣的特性。有时它们允许角色穿过它们向下掉落。比如，当你站在一个平台上，同时按住下键并按下跳跃键。有些游戏将这一系列操作理解为你想穿过平台落下去。\n\
+  \n类似地，有些游戏允许角色从平台底部向上跳跃穿过。这样可以在头顶没有平台间隙的情况下实现垂直移动。\n\n有时平台甚至会移动！\n\n平台是如此特殊，以至于我们将花几节内容来实现它们的不同行为。但现在，我们将专注于另一种常见的物体：通用的箱子。\n\
+  \n把这个箱子视为平台的“祖先”。它可能共享平台的部分功能，但它存在的主要目的是让其他物体与它发生碰撞。尤其是像角色这样的物体。\n\n我们要制作的箱子甚至可能看起来不像箱子。当实现重力时，我们需要一个宽而扁的箱子来防止角色掉出世界。我们也需要高而窄的箱子来阻止角色跑出地板边缘。我们将用它们来制作墙壁。我们甚至可能用箱子来制作箱子——那种大大的、木制的、“跳到我身上到达更高处吧”的箱子。\n\
+  \n好了，不多说了。\n\n```\nclass Box {\nconstructor(sprite, x, y, w, h) {\nthis.sprite =\
+  \ sprite\nthis.x = x\nthis.y = y\nthis.w = w\nthis.h = h\nthis.sprite.x = this.x\n\
+  this.sprite.y = this.y\n}\nanimate(state) {\nthis.sprite.x = this.x\nthis.sprite.y\
+  \ = this.y\n}\n}\n```\n\n这段代码来自 [`http://codepen.io/assertchris/pen/qaokJj`](http://codepen.io/assertchris/pen/qaokJj)。\n\
+  \n为了制作这个类，我复制粘贴了 `Player` 类并删除了一堆东西。不过，我确实需要为它添加宽度和高度属性。我们稍后会讲到。\n\n接下来，我们需要将这两个箱子添加到舞台上：\n\
+  \n```\nconst playerSprite = new PIXI.Sprite.fromImage(\n\"path/to/sprites/player-idle.png\"\
+  ,\n)\nconst player = new Player(\nplayerSprite,\nwindow.innerWidth / 2,\nwindow.innerHeight\
+  \ / 2,\n44,\n56,\n)\nconst blob1Sprite = new PIXI.Sprite.fromImage(\n\"path/to/sprites/blob-idle-1.png\"\
+  ,\n)\nconst blob1 = new Player(\nblob1Sprite,\n(window.innerWidth / 2) - 150,\n\
+  (window.innerHeight / 2) - 35,\n48,\n48,\n)\nconst blob2Sprite = new PIXI.Sprite.fromImage(\n\
+  \"path/to/sprites/blob-idle-2.png\",\n)\nconst blob2 = new Player(\nblob2Sprite,\n\
+  (window.innerWidth / 2) + 150,\n(window.innerHeight / 2) + 35,\n48,\n48,\n)\nconst\
+  \ stage = new PIXI.Container()\nstage.addChild(playerSprite)\nstage.addChild(blob1Sprite)\n\
+  stage.addChild(blob2Sprite)\nlet state = {\n\"renderer\": renderer,\n\"stage\":\
+  \ stage,\n\"keys\": {},\n\"clicks\": {},\n\"mouse\": {},\n\"objects\": [\nplayer,\n\
+  blob1,\nblob2,\n],\n}\n```\n\n这段代码来自 [`http://codepen.io/assertchris/pen/qaokJj`](http://codepen.io/assertchris/pen/qaokJj)。\n\
+  \n这有点奇怪！我创建了两个新的 `Box` 实例，却把它们叫做 `blob`（软泥怪）。这是因为我马山要讨论……\n\n\n\n## 检测圆形碰撞\n\n我希望你为前几个方块创建圆形。我们首先要做的碰撞检测类型，就是针对圆形的。即使方块有宽度和高度而不是半径也没关系。除非你的平台游戏中有大量圆形，否则你不会经常用到这种碰撞检测方式。\n\
+  \n让我们看看这种检测方式是如何工作的：\n\n```\nclass Player {\n  constructor(sprite, x, y, w, h) {\n\
+  \    this.sprite = sprite\n    this.x = x\n    this.y = y\n    this.w = w\n    this.h\
+  \ = h\n    this.velocityX = 0\n    this.maximumVelocityX = 8\n    this.accelerationX\
+  \ = 2\n    this.frictionX = 0.9\n    this.sprite.x = this.x\n    this.sprite.y =\
+  \ this.y\n  }\n  animate(state) {\n    if (state.keys[37]) { // 左\n      this.velocityX\
+  \ = Math.max(\n        this.velocityX - this.accelerationX,\n        this.maximumVelocityX\
+  \ * -1,\n      )\n    }\n    if (state.keys[39]) { // 右\n      this.velocityX =\
+  \ Math.min(\n        this.velocityX + this.accelerationX,\n        this.maximumVelocityX,\n\
+  \      );\n    }\n    this.velocityX *= this.frictionX\n    let move = true\n  \
+  \  state.objects.forEach((object) => {\n      if (object === this) {\n        return\n\
+  \      }\n      var deltaX = this.x - object.x\n      var deltaY = this.y - object.y\n\
+  \      var distance = Math.sqrt(\n        deltaX * deltaX + deltaY * deltaY,\n \
+  \     );\n      if (distance < (this.w / 2 + object.w / 2)) {\n        if (this.velocityX\
+  \ > 0 && object.x >= this.x) {\n          move = false\n        }\n        if (this.velocityX\
+  \ < 0 && object.x <= this.x) {\n          move = false\n        }\n      }\n   \
+  \ });\n    if (move) {\n      this.x += this.velocityX\n    }\n    this.sprite.x\
+  \ = this.x\n    this.sprite.y = this.y\n  }\n}\n```\n\n这段代码来自 [`http://codepen.io/assertchris/pen/qaokJj`](http://codepen.io/assertchris/pen/qaokJj)。\n\
+  \n我们首先需要定义宽度和高度。虽然我们假设玩家和方块都是圆形，但我们只需要将宽度的一半作为半径即可。\n\n接下来，我们检查状态中的每个对象。我们可以忽略玩家对象，因为我们不需要知道它自身何时发生碰撞。不过，其他所有对象都需要检查。\n\
+  \n当两个圆形的圆心之间的距离小于它们半径之和时，它们就会发生碰撞。它们的中点靠得太近，以至于其边界必然重叠。\n\n我们快速检查一下玩家移动的方向是否与方块所在的方向一致。如果是这种情况，我们就阻止玩家向该方向移动。\n\
+  \n试试看吧。看到非方块形状的物体相互阻挡是很有趣的。当然，要让这个简单的算法生效，所有物体都必须是完美的圆形。\n\n## 检测矩形碰撞\n\n检测矩形碰撞几乎和检测圆形碰撞一样简单。请继续把圆形图片换成方块图片。你甚至可以根据方块的方形特征调整精灵名称。\n\
+  \n这一回，我们将玩家视为矩形。与使用半径不同，我们需要检查玩家矩形与任意方块之间是否存在空隙。这种检测方法称为**轴对齐边界框碰撞检测**（简称 AABB）。\n\
+  \n如果没有空隙，并且玩家想要向方块所在的方向移动，我们就阻止这种情况发生：\n\n```\nlet move = true\nstate.objects.forEach((object)\
+  \ => {\n  if (object === this) {\n    return\n  }\n  if (this.x < object.x + object.w\
+  \ &&\n    this.x + this.w > object.x &&\n    this.y < object.y + object.h &&\n \
+  \   this.y + this.h > object.y) {\n    if (this.velocityX > 0 && object.x >= this.x)\
+  \ {\n      move = false\n    }\n  }\n})\nif (move) {\n  this.x += this.velocityX\n\
+  }\n```\n\n这段代码来自 [`http://codepen.io/assertchris/pen/qaokJj`](http://codepen.io/assertchris/pen/qaokJj)\n\
+  \n这些是检测碰撞的简单方法，但还有其他的方法。有一种方法使用基于投影的向量数学（`www.sevenson.com.au/actionscript/sat`）来确定重叠。另一种方法则检查多边形的每条线段，看是否有任何线段相交（[`http://stackoverflow.com/questions/9043805/test-if-two-lines-intersect-javascript-function`](http://stackoverflow.com/questions/9043805/test-if-two-lines-intersect-javascript-function)）。这可真够复杂的。\n\
+  \n你甚至可以尝试让一组圆形相互碰撞。那可能很有趣。在图 4-1 中，我将让这个小角色在这些小方块中跑动一会儿……\n\n![A435434_1_En_4_Fig1_HTML.jpg](img/A435434_1_En_4_Fig1_HTML.jpg)\n\
+  \n**图 4-1.** 玩家与方块\n\n## 总结\n\n本章我们探讨了几种可用于检测玩家精灵与游戏中其他各种对象之间碰撞的方法。\n\n花点时间重新排列方块和圆形，这样你就能初步感受你的第一个游戏关卡可能是什么样子了。\n\
+  \n"
+- '# 5. 重力
+
+
+  在本章中，我们将优化代码结构，并为我们的游戏添加重力效果。重力方面的大部分工作我们已经完成了，因此完成余下部分应该相对简单。
+
+
+
+  ## 清理现有代码
+
+
+  我们需要清理一些内容！首先，将 `x`、`y`、`w`、`h`（位于 `Box` 和 `Player` 中）替换为 `PIXI.Rectangle`。这些属性不仅保留原有功能，还能以有趣的方式与
+  `PIXI` 的其他部分交互。
+
+
+  ```
+
+  class Player {
+
+  constructor(sprite, rectangle) {
+
+  this.sprite = sprite
+
+  this.rectangle = rectangle
+
+  this.velocityX = 0
+
+  this.maximumVelocityX = 8
+
+  this.accelerationX = 2
+
+  this.frictionX = 0.9
+
+  }
+
+  animate(state) {
+
+  if (state.keys[37]) { // 左
+
+  this.velocityX = Math.max(
+
+  this.velocityX - this.accelerationX,
+
+  this.maximumVelocityX * -1,
+
+  )
+
+  }
+
+  if (state.keys[39]) { // 右
+
+  this.velocityX = Math.min(
+
+  this.velocityX + this.accelerationX,
+
+  this.maximumVelocityX,
+
+  );
+
+  }
+
+  this.velocityX *= this.frictionX
+
+  let move = true
+
+  state.objects.forEach((object) => {
+
+  if (object === this) {
+
+  return
+
+  }
+
+  const me = this.rectangle
+
+  const you = object.rectangle
+
+  if (me.x  you.x &&
+
+  me.y  you.y) {
+
+  if (this.velocityX  0 && you.x >= me.x) {
+
+  move = false
+
+  }
+
+  }
+
+  })
+
+  if (move) {
+
+  this.rectangle.x += this.velocityX
+
+  }
+
+  this.sprite.x = this.rectangle.x
+
+  this.sprite.y = this.rectangle.y
+
+  }
+
+  }
+
+  class Box {
+
+  constructor(sprite, rectangle) {
+
+  this.sprite = sprite
+
+  this.rectangle = rectangle
+
+  }
+
+  animate(state) {
+
+  this.sprite.x = this.rectangle.x
+
+  this.sprite.y = this.rectangle.y
+
+  }
+
+  }
+
+  ```
+
+
+  此代码来自 [`http://codepen.io/assertchris/pen/ALyXKq`](http://codepen.io/assertchris/pen/ALyXKq)。
+
+
+  注意到我们删除了多少代码吗？比较逻辑虽然略显冗长，但一两个局部变量就足以解决。我还意识到可以将初始的 `x` 和 `y` 设置操作移至 `animate` 方法中。
+
+
+  接下来，我想将事件、渲染器和舞台逻辑封装到一个 `Game` 类中：
+
+
+  ```
+
+  class Game {
+
+  constructor() {
+
+  this.state = {
+
+  "keys": {},
+
+  "clicks": {},
+
+  "mouse": {},
+
+  "objects": [],
+
+  }
+
+  this.animate = this.animate.bind(this)
+
+  }
+
+  get stage() {
+
+  if (!this._stage) {
+
+  this._stage = this.newStage()
+
+  }
+
+  return this._stage
+
+  }
+
+  set stage(stage) {
+
+  this._stage = stage
+
+  }
+
+  newStage() {
+
+  return new PIXI.Container()
+
+  }
+
+  get renderer() {
+
+  if (!this._renderer) {
+
+  this._renderer = this.newRenderer()
+
+  }
+
+  return this._renderer
+
+  }
+
+  set renderer(renderer) {
+
+  this._renderer = renderer
+
+  }
+
+  newRenderer() {
+
+  return new PIXI.autoDetectRenderer(
+
+  window.innerWidth,
+
+  window.innerHeight,
+
+  this.newRendererOptions(),
+
+  )
+
+  }
+
+  newRendererOptions() {
+
+  return {
+
+  "antialias": true,
+
+  "autoResize": true,
+
+  "transparent": true,
+
+  "resolution": 2,
+
+  }
+
+  }
+
+  animate() {
+
+  requestAnimationFrame(this.animate)
+
+  this.state.renderer = this.renderer
+
+  this.state.stage = this.stage
+
+  this.state.objects.forEach((object) => {
+
+  console.log(object)
+
+  object.animate(this.state)
+
+  })
+
+  this.renderer.render(this.stage)
+
+  }
+
+  addEventListenerTo(element) {
+
+  element.addEventListener("keydown", (event) => {
+
+  this.state.keys[event.keyCode] = true
+
+  })
+
+  element.addEventListener("keyup", (event) => {
+
+  this.state.keys[event.keyCode] = false
+
+  })
+
+  element.addEventListener("mousedown", (event) => {
+
+  this.state.clicks[event.which] = {
+
+  "clientX": event.clientX,
+
+  "clientY": event.clientY,
+
+  }
+
+  })
+
+  element.addEventListener("mouseup", (event) => {
+
+  this.state.clicks[event.which] = false
+
+  })
+
+  element.addEventListener("mousemove", (event) => {
+
+  this.state.mouse.clientX = event.clientX
+
+  this.state.mouse.clientY = event.clientY
+
+  })
+
+  }
+
+  addRendererTo(element) {
+
+  element.appendChild(this.renderer.view)
+
+  }
+
+  addObject(object) {
+
+  this.state.objects.push(object)
+
+  this.stage.addChild(object.sprite)
+
+  }
+
+  }
+
+  ```
+
+
+  此代码来自 [`http://codepen.io/assertchris/pen/ALyXKq`](http://codepen.io/assertchris/pen/ALyXKq)。
+
+
+  请注意类中的 getter 和 setter。它们可以灵活地按需填充可选依赖项。如果需要，我们可以覆盖 `renderer` 和 `stage`，同时它们也提供了合理的默认值。
+
+
+  这里唯一显著的差异是：我们不再需要将精灵单独添加到舞台，而是与状态中的对象添加同步进行。
+
+
+  我对此有些犹豫。一方面，手动添加精灵到舞台能让逻辑更清晰；另一方面，我们是否会存在添加精灵（与对象绑定）却不添加对象的情况？我认为不会。
+
+
+  也许我们之后会回来修改这个设计。目前来看，它让代码更简洁了。让我们先添加之前用到的精灵：
+
+
+  ```
+
+  const game = new Game()
+
+  game.addObject(
+
+  new Box(
+
+  new PIXI.Sprite.fromImage(
+
+  "path/to/sprites/box.png",
+
+  ),
+
+  new PIXI.Rectangle(
+
+  (window.innerWidth / 2) - 150,
+
+  (window.innerHeight / 2) - 35,
+
+  44,
+
+  44,
+
+  ),
+
+  ),
+
+  )
+
+  game.addObject(
+
+  new Box(
+
+  new PIXI.Sprite.fromImage(
+
+  "path/to/sprites/box.png",
+
+  ),
+
+  new PIXI.Rectangle(
+
+  (window.innerWidth / 2) + 150,
+
+  (window.innerHeight / 2) + 35,
+
+  44,
+
+  44,
+
+  ),
+
+  ),
+
+  )
+
+  game.addObject(
+
+  new Player(
+
+  new PIXI.Sprite.fromImage(
+
+  "path/to/sprites/player-idle.png",
+
+  ),
+
+  new PIXI.Rectangle(
+
+  window.innerWidth / 2,
+
+  window.innerHeight / 2,
+
+  44,
+
+  56,
+
+  ),
+
+  ),
+
+  )
+
+  game.addEventListenerTo(window)
+
+  game.addRendererTo(document.body)
+
+  game.animate()
+
+  ```
+
+
+  此代码来自 [`http://codepen.io/assertchris/pen/ALyXKq`](http://codepen.io/assertchris/pen/ALyXKq)。
+
+
+  看起来好多了！现在我们能充分控制每个游戏对象的起始位置。但你会发现，从第一帧之后，`animate` 方法就会接管控制权。重力、碰撞等机制将开始主导游戏进程。不过，这本来就是设计预期——现在这个文件给人的感觉也是如此。
+
+
+  此时，我们可以将事件和渲染器限定在更小范围的元素中，也可以从此处向游戏添加任意数量的对象。其他与游戏相关的逻辑都封装在 `Game` 类中；而玩家或盒子相关的逻辑则保留在各自的类中。整洁多了！
+
+
+
+
+  ## 为世界添加重力
+
+
+  平台游戏之所以有趣，其中一个原因在于游戏中融入了适度的物理效果。首先，我们来添加墙壁和地面：
+
+
+  ```
+
+  const game = new Game()
+
+  game.addObject (
+
+  new Box(
+
+  new PIXI.extras.TilingSprite.fromImage(
+
+  "path/to/sprites/floor-tile.png",
+
+  window.innerWidth,
+
+  64,
+
+  ),
+
+  new PIXI.Rectangle(
+
+  0,
+
+  window.innerHeight - 64,
+
+  window.innerWidth,
+
+  64,
+
+  ),
+
+  ),
+
+  )
+
+  game.addObject(
+
+  new Box(
+
+  new PIXI.Sprite.fromImage(
+
+  "path/to/sprites/box.png",
+
+  ),
+
+  new PIXI.Rectangle(
+
+  0 + 32,
+
+  window.innerHeight - 44 - 64,
+
+  44,
+
+  44,
+
+  ),
+
+  ),
+
+  )
+
+  game.addObject(
+
+  new Box(
+
+  new PIXI.Sprite.fromImage(
+
+  "path/to/sprites/box.png",
+
+  ),
+
+  new PIXI.Rectangle(
+
+  window.innerWidth - 32 - 44,
+
+  window.innerHeight - 44 - 64,
+
+  44,
+
+  44,
+
+  ),
+
+  ),
+
+  )
+
+  game.addObject(
+
+  new Player(
+
+  new PIXI.Sprite.fromImage(
+
+  "path/to/sprites/player-idle.png",
+
+  ),
+
+  new PIXI.Rectangle(
+
+  window.innerWidth / 2,
+
+  window.innerHeight / 2,
+
+  44,
+
+  56,
+
+  ),
+
+  ),
+
+  )
+
+  ```
+
+
+  此代码来自 [`http://codepen.io/assertchris/pen/ALyXKq`](http://codepen.io/assertchris/pen/ALyXKq)。
+
+
+  在这里，我们添加了一个与整个场景同宽的地面。我使用了平铺纹理和 `new PIXI.extras.TilingSprite.fromImage` 来在场景中渲染它。我还移动了两个板条箱，以阻止玩家从地板边缘跑出去。它们的碰撞方式与之前相同。现在，我们来看看如何添加重力：
+
+
+  ```
+
+  class Player {
+
+  constructor(sprite, rectangle) {
+
+  this.sprite = sprite
+
+  this.rectangle = rectangle
+
+  this.velocityX = 0
+
+  this.maximumVelocityX = 8
+
+  this.accelerationX = 2
+
+  this.frictionX = 0.9
+
+  this.velocityY = 0
+
+  this.maximumVelocityY = 30
+
+  this.accelerationY = 3
+
+  this.jumpVelocity = -30
+
+  this.isOnGround = false
+
+  }
+
+  animate(state) {
+
+  if (state.keys[37]) { // left
+
+  this.velocityX = Math.max(
+
+  this.velocityX - this.accelerationX,
+
+  this.maximumVelocityX * -1,
+
+  )
+
+  }
+
+  if (state.keys[39]) { // right
+
+  this.velocityX = Math.min(
+
+  this.velocityX + this.accelerationX,
+
+  this.maximumVelocityX,
+
+  )
+
+  }
+
+  this.velocityX *= this.frictionX
+
+  this.velocityY = Math.min(
+
+  this.velocityY + this.accelerationY,
+
+  this.maximumVelocityY,
+
+  )
+
+  state.objects.forEach((object) => {
+
+  if (object === this) {
+
+  return
+
+  }
+
+  var me = this.rectangle
+
+  var you = object.rectangle
+
+  if (me.x  you.x &&
+
+  me.y  you.y) {
+
+  if (this.velocityY > 0 && you.y >= me.y) {
+
+  this.velocityY = 0
+
+  return
+
+  }
+
+  if (this.velocityY  0 && you.x >= me.x) {
+
+  this.velocityX = 0
+
+  return
+
+  }
+
+  }
+
+  })
+
+  this.rectangle.x += this.velocityX
+
+  this.rectangle.y += this.velocityY
+
+  this.sprite.x = this.rectangle.x
+
+  this.sprite.y = this.rectangle.y
+
+  }
+
+  }
+
+  ```
+
+
+  此代码来自 [`http://codepen.io/assertchris/pen/ALyXKq`](http://codepen.io/assertchris/pen/ALyXKq)。
+
+
+  我们首先创建一组属性，与之前追踪水平移动的属性相匹配。我们不需要垂直摩擦，因为这种细节在平台游戏中通常被省略。
+
+
+  我们还需要追踪垂直和水平碰撞。当玩家与平台/地面碰撞时，我们停止向下的速度。当撞到天花板时，我们用重力替换向上的速度。
+
+
+  ## 允许玩家跳跃
+
+
+  跳跃其实就是短时间内逆转重力：
+
+
+  ```
+
+  animate(state) {
+
+  if (state.keys[37]) { // left
+
+  this.velocityX = Math.max(
+
+  this.velocityX - this.accelerationX,
+
+  this.maximumVelocityX * -1,
+
+  )
+
+  }
+
+  if (state.keys[39]) { // right
+
+  this.velocityX = Math.min(
+
+  this.velocityX + this.accelerationX,
+
+  this.maximumVelocityX,
+
+  )
+
+  }
+
+  this.velocityX *= this.frictionX
+
+  this.velocityY = Math.min(
+
+  this.velocityY + this.accelerationY,
+
+  this.maximumVelocityY,
+
+  )
+
+  state.objects.forEach((object) => {
+
+  if (object === this) {
+
+  return
+
+  }
+
+  var me = this.rectangle
+
+  var you = object.rectangle
+
+  // ...snip
+
+  if (state.keys[32] && this.isOnGround) {
+
+  this.velocityY = this.jumpVelocity
+
+  this.isOnGround = false
+
+  }
+
+  this.rectangle.x += this.velocityX
+
+  this.rectangle.y += this.velocityY
+
+  this.sprite.x = this.rectangle.x
+
+  this.sprite.y = this.rectangle.y
+
+  }
+
+  ```
+
+
+  此代码来自 [`http://codepen.io/assertchris/pen/ALyXKq`](http://codepen.io/assertchris/pen/ALyXKq)。
+
+
+  通过这段代码，我们将空格键映射为跳跃。我们将键盘检测放在碰撞检测之后，因为我们只希望玩家在站立于平台或地面上时才能跳跃。
+
+
+  ![A435434_1_En_5_Fig1_HTML.jpg](img/A435434_1_En_5_Fig1_HTML.jpg)
+
+
+  **图 5-1.** 添加重力
+
+
+  现在，可以用盒子创建关卡，为其中一些盒子赋予可见纹理，并让玩家在其周围跳跃。花点时间制作一个关卡并在其中跳跃吧！
+
+
+  ## 总结
+
+
+  在本章中，我们清理了游戏代码。每个部分现在都是独立、自包含的——从盒子到玩家再到游戏本身。这将使各个游戏对象更易于自行管理。
+
+
+  我们还创建了地面和基本墙壁（由板条箱构成），这样玩家就不会掉出世界。最后，我们增加了玩家跳跃的能力。现在，已经可以构建一个可穿越的关卡了！
+
+
+  '
+- '# 6. 梯子
+
+
+  如果玩家只能通过跳跃穿过间隙或跳跃到箱子上来向上移动，那将非常受限。不过，这些并非唯一选择。我们还需要了解电梯、楼梯和梯子。让我们从建造一个梯子开始吧！
+
+
+  ## 创建我们的第一个梯子
+
+
+  让我们通过复制 `Box` 类来开始创建梯子：
+
+
+  ```
+
+  class Ladder {
+
+  constructor(sprite, rectangle) {
+
+  this.sprite = sprite
+
+  this.rectangle = rectangle
+
+  }
+
+  animate(state) {
+
+  this.sprite.x = this.rectangle.x
+
+  this.sprite.y = this.rectangle.y
+
+  }
+
+  }
+
+  // ...later
+
+  game.addObject(
+
+  new Box(
+
+  new PIXI.Sprite.fromImage(
+
+  "path/to/sprites/platform.png",
+
+  ),
+
+  new PIXI.Rectangle(
+
+  window.innerWidth - 400,
+
+  window.innerHeight - 64 - 200,
+
+  256,
+
+  64,
+
+  ),
+
+  ),
+
+  )
+
+  game.addObject(
+
+  new Ladder(
+
+  new PIXI.extras.TilingSprite.fromImage(
+
+  "path/to/sprites/ladder.png",
+
+  44,
+
+  200,
+
+  ),
+
+  new PIXI.Rectangle(
+
+  window.innerWidth - 250,
+
+  window.innerHeight - 64 - 200,
+
+  44,
+
+  200,
+
+  ),
+
+  ),
+
+  )
+
+  ```
+
+
+  此代码来自 [`http://codepen.io/assertchris/pen/jrzrPw`](http://codepen.io/assertchris/pen/jrzrPw)。
+
+
+  你需要制作 `ladder.png` 和 `platform.png` 图片。请确保在添加玩家之前将这些图片添加到游戏中，否则梯子精灵会出现在玩家精灵的前面。
+
+
+  你会注意到玩家会撞到梯子，就好像它是一个盒子一样。我们需要为盒子和梯子添加一些 getter 方法，以便碰撞检测可以决定它们是否仍彼此碰撞：
+
+
+  ```
+
+  state.objects.forEach((object) => {
+
+  if (object === this) {
+
+  return
+
+  }
+
+  const me = this.rectangle
+
+  const you = object.rectangle
+
+  const collides = object.collides
+
+  if (me.x  you.x &&
+
+  me.y  you.y) {
+
+  if (collides && this.velocityY > 0 && you.y >= me.y) {
+
+  this.isOnGround = true
+
+  this.velocityY = 0
+
+  return
+
+  }
+
+  if (collides && this.velocityY  0 && you.x >= me.x) {
+
+  this.velocityX = 0
+
+  return
+
+  }
+
+  }
+
+  })
+
+  ```
+
+
+  此代码来自 [`http://codepen.io/assertchris/pen/jrzrPw`](http://codepen.io/assertchris/pen/jrzrPw)。
+
+
+  我们为 `Box` 和 `Ladder` 赋予了 `collides` 属性，以便 `Player.animate` 可以忽略与玩家不应碰撞的对象的碰撞。如果我们要允许同一个游戏/关卡中存在多个玩家，那么我们也需要为
+  `Player` 添加一个 `collides` 属性。当然，除非我们希望多个玩家彼此碰撞。
+
+
+  ![A435434_1_En_6_Fig1_HTML.jpg](img/A435434_1_En_6_Fig1_HTML.jpg)
+
+
+  **图 6-1.** 平台与梯子
+
+
+
+
+  ## 允许玩家攀爬梯子
+
+
+  为了让玩家能够攀爬梯子，我们必须能够判断他们是否正在尝试攀爬。同时，我们还需要暂停重力和侧向移动，这样玩家就不会从梯子上掉下来或滑落：
+
+
+  ```
+
+  class Player {
+
+  constructor(sprite, rectangle) {
+
+  this.sprite = sprite
+
+  this.rectangle = rectangle
+
+  this.velocityX = 0
+
+  this.maximumVelocityX = 8
+
+  this.accelerationX = 2
+
+  this.frictionX = 0.9
+
+  this.velocityY = 0
+
+  this.maximumVelocityY = 30
+
+  this.accelerationY = 3
+
+  this.jumpVelocity = -30
+
+  this.climbingSpeed = 10
+
+  this.isOnGround = false
+
+  this.isOnLadder = false
+
+  }
+
+  animate(state) {
+
+  if (state.keys[37]) { // 左
+
+  this.velocityX = Math.max(
+
+  this.velocityX - this.accelerationX,
+
+  this.maximumVelocityX * -1,
+
+  )
+
+  }
+
+  if (state.keys[39]) { // 右
+
+  this.velocityX = Math.min(
+
+  this.velocityX + this.accelerationX,
+
+  this.maximumVelocityX,
+
+  )
+
+  }
+
+  this.velocityX *= this.frictionX
+
+  this.velocityY = Math.min(
+
+  this.velocityY + this.accelerationY,
+
+  this.maximumVelocityY,
+
+  )
+
+  state.objects.forEach((object) => {
+
+  if (object === this) {
+
+  return
+
+  }
+
+  const me = this.rectangle
+
+  const you = object.rectangle
+
+  const collides = object.collides
+
+  if (me.x < you.x + you.width &&
+
+  me.x + me.width > you.x &&
+
+  me.y < you.y + you.height &&
+
+  me.y + me.height > you.y) {
+
+  if (object.constructor.name === "Ladder") {
+
+  if (state.keys[38] || state.keys[40]) {
+
+  this.isOnLadder = true
+
+  this.isOnGround = false
+
+  this.velocityY = 0
+
+  this.velocityX = 0
+
+  }
+
+  if (state.keys[38]) {
+
+  this.rectangle.y -= this.climbingSpeed
+
+  }
+
+  if (state.keys[40] &&
+
+  me.y + me.height < you.y + you.height) {
+
+  this.rectangle.y += this.climbingSpeed
+
+  }
+
+  }
+
+  // ...省略
+
+  }
+
+  })
+
+  if (state.keys[32] && this.isOnGround) {
+
+  this.velocityY = this.jumpVelocity
+
+  this.isOnGround = false
+
+  }
+
+  this.rectangle.x += this.velocityX
+
+  if (!this.isOnLadder) {
+
+  this.rectangle.y += this.velocityY
+
+  }
+
+  this.sprite.x = this.rectangle.x
+
+  this.sprite.y = this.rectangle.y
+
+  }
+
+  }
+
+  ```
+
+
+  这段代码摘自 [`http://codepen.io/assertchris/pen/jrzrPw`](http://codepen.io/assertchris/pen/jrzrPw)。
+
+
+  在这段代码中，我们创建了一个 `isOnLadder` 变量，以便判断玩家是否静止地站在梯子上。在常规的碰撞检测过程中，我们记录玩家碰撞的对象是否为梯子。如果是，并且玩家按下了上箭头键，我们就让玩家开始攀爬。`isOnLadder`
+  仅在玩家按下上箭头键时被设置为 `true`，这也是我们一开始需要这个变量的原因。
+
+
+  然后，我们重置了玩家的速度以及与跳跃相关的属性。我们还直接修改了玩家的矩形位置。如果按下了上箭头键，我们就将玩家向上移动。
+
+
+  ## 总结
+
+
+  在本章中，我们添加了梯子和固定平台。现在，我们的玩家可以跳跃和攀爬梯子来穿越关卡。这是 2D 平台游戏中两个基本元素。
+
+
+  在这一点上，你应该清楚你的游戏想要做成什么样子。我投入使用了很棒的角色包。你可以在 Graphic River（ [`https://graphicriver.net`](https://graphicriver.net)
+  ）找到其他素材。
+
+
+  '
+- '# 7. 楼梯
+
+
+  我们实现了跳跃和攀爬作为垂直穿越关卡的主要方式。这些动作很棒，但它们将关卡设计限制在了平台和梯子。让我们通过实现楼梯（或类似的爬坡动作）来扩展我们的设计选项。
+
+
+  对于这部分内容，我们需要创建更多的角色美术资源，并构建由多种角色类型组成的更复杂的方块。让我来解释我的意思……
+
+
+  ## 构建斜坡
+
+
+  我已经创建了新的斜坡角色。我们还需要添加几个新的对象类型：贴花（decal）和斜坡（slope）。贴花将是一种非碰撞类型，而斜坡则可以通过玩家的碰撞检测算法来识别：
+
+
+  ```
+
+  class LeftSlope {
+
+  get collides() {
+
+  return false
+
+  }
+
+  constructor(sprite, rectangle) {
+
+  this.sprite = sprite
+
+  this.rectangle = rectangle
+
+  }
+
+  animate(state) {
+
+  this.sprite.x = this.rectangle.x
+
+  this.sprite.y = this.rectangle.y
+
+  }
+
+  }
+
+  class RightSlope {
+
+  get collides() {
+
+  return false
+
+  }
+
+  constructor(sprite, rectangle) {
+
+  this.sprite = sprite
+
+  this.rectangle = rectangle
+
+  }
+
+  animate(state) {
+
+  this.sprite.x = this.rectangle.x
+
+  this.sprite.y = this.rectangle.y
+
+  }
+
+  }
+
+  class Decal {
+
+  get collides() {
+
+  return false
+
+  }
+
+  constructor(sprite, rectangle) {
+
+  this.sprite = sprite
+
+  this.rectangle = rectangle
+
+  }
+
+  animate(state) {
+
+  this.sprite.x = this.rectangle.x
+
+  this.sprite.y = this.rectangle.y
+
+  }
+
+  }
+
+  // ...稍后
+
+  game.addObject(
+
+  new LeftSlope(
+
+  new PIXI.Sprite.fromImage(
+
+  "path/to/sprites/slope-left.png",
+
+  ),
+
+  new PIXI.Rectangle(
+
+  0 + 250,
+
+  window.innerHeight - 64 - 64 + 1,
+
+  64,
+
+  64,
+
+  ),
+
+  ),
+
+  )
+
+  game.addObject(
+
+  new RightSlope(
+
+  new PIXI.Sprite.fromImage(
+
+  "path/to/sprites/slope-right.png",
+
+  ),
+
+  new PIXI.Rectangle(
+
+  0 + 250 + 64 + 128,
+
+  window.innerHeight - 64 - 64 + 1,
+
+  64,
+
+  64,
+
+  ),
+
+  ),
+
+  )
+
+  game.addObject(
+
+  new Decal(
+
+  new PIXI.Sprite.fromImage(
+
+  "path/to/sprites/hill-base.png",
+
+  ),
+
+  new PIXI.Rectangle(
+
+  0 + 250,
+
+  window.innerHeight - 64 + 1,
+
+  128,
+
+  64,
+
+  ),
+
+  ),
+
+  )
+
+  game.addObject(
+
+  new Box(
+
+  new PIXI.Sprite.fromImage(
+
+  "path/to/sprites/hill-top.png",
+
+  ),
+
+  new PIXI.Rectangle(
+
+  0 + 250 + 64,
+
+  window.innerHeight - 64 - 64 + 1,
+
+  128,
+
+  64,
+
+  ),
+
+  ),
+
+  )
+
+  ```
+
+
+  这段代码摘自 [`http://codepen.io/assertchris/pen/dpmOEJ`](http://codepen.io/assertchris/pen/dpmOEJ)。
+
+
+  我们需要在地面之后添加这些对象，否则地面会遮挡它们。它们共同构成了一座小巧美观的小山丘。我们可以跳到它的顶部，但当我们试图在这些对象上攀爬或下降时，事情就开始变得棘手了。不过，它看起来还不错，如图
+  7-1 所示：
+
+
+  ![A435434_1_En_7_Fig1_HTML.jpg](img/A435434_1_En_7_Fig1_HTML.jpg)
+
+
+  图 7-1. 小山丘
+
+
+  ## 爬坡
+
+
+  为了让我们的玩家能够在斜坡上移动，我们需要再次调整碰撞检测算法：
+
+
+  ```
+
+  if (me.x < you.x + you.width &&
+
+  me.x + me.width > you.x &&
+
+  me.y < you.y + you.height &&
+
+  me.y + me.height > you.y) {
+
+  if (object.constructor.name === "LeftSlope") {
+
+  const meCenter = Math.round(me.x + (me.width / 2))
+
+  const youRight = you.x + you.width
+
+  const youBottom = you.y + you.height
+
+  const highest = you.y - me.height
+
+  const lowest = youBottom - me.height
+
+  this.isOnGround = true
+
+  this.isOnSlope = true
+
+  me.y = lowest - (meCenter - you.x)
+
+  me.y = Math.max(me.y, highest)
+
+  me.y = Math.min(me.y, lowest)
+
+  if (me.y >= lowest || me.y <= highest) {
+
+  this.isOnSlope = false
+
+  }
+
+  return
+
+  }
+
+  if (object.constructor.name === "RightSlope") {
+
+  const meCenter = Math.round(me.x + (me.width / 2))
+
+  const youBottom = you.y + you.height
+
+  const highest = you.y - me.height
+
+  const lowest = youBottom - me.height
+
+  this.isOnGround = true
+
+  this.isOnSlope = true
+
+  me.y = lowest - (you.x + you.width - meCenter)
+
+  me.y = Math.max(me.y, highest)
+
+  me.y = Math.min(me.y, lowest)
+
+  if (me.y >= lowest || me.y <= highest) {
+
+  this.isOnSlope = false
+
+  }
+
+  return
+
+  }
+
+  if (collides && this.velocityY > 0 && you.y >= me.y) {
+
+  this.isOnGround = true
+
+  this.velocityY = 0
+
+  return
+
+  }
+
+  // ...剩余的碰撞检测代码
+
+  }
+
+  if (state.keys[32] && this.isOnGround) {
+
+  this.velocityY = this.jumpVelocity
+
+  this.isOnGround = false
+
+  this.isOnSlope = false
+
+  }
+
+  ```
+
+
+  这段代码摘自 [`http://codepen.io/assertchris/pen/dpmOEJ`](http://codepen.io/assertchris/pen/dpmOEJ)。
+
+
+  如果玩家与 `LeftSlope` 碰撞，我们不会像处理方块那样进行碰撞处理。相反，我们会根据玩家在斜坡右侧的距离来减小玩家的 `y` 坐标（从而将角色向上移动）。换句话说，随着玩家的
+  `x` 增加，他们的 `y` 坐标会减少。
+
+
+  对于 `RightSlope`，我们只需交换 `x` 和 `y` 的关系，当玩家的 `x` 增加时，将他们向下移动。我们还希望玩家能够在斜坡上跳跃，所以需要将
+  `isOnGround` 设置为 `true`。
+
+
+  最后，如果玩家的底部边缘与斜坡的顶部边缘相同（或小于），我们将 `isOnSlope` 设置为 `false`，这样玩家就能在水平轴上正确移动了。
+
+
+  ## 停留在地面之上
+
+
+  如果你一直在跟随代码操作，你可能已经注意到了一个奇怪的视觉错误。似乎玩家可以在碰撞检测阻止他们之前，部分地陷入地板之下。
+
+
+  我们可以通过在相应碰撞发生时重置玩家的 `y` 坐标来解决这个错误：
+
+
+  ```
+
+  if (collides && this.velocityY > 0 && you.y >= me.y) {
+
+  me.y = you.y - me.height + 1
+
+  this.isOnGround = true
+
+  this.velocityY = 0
+
+  return
+
+  }
+
+  if (collides && this.velocityY < 0 && you.y + you.height >= me.y) {
+
+  me.y = you.y + you.height
+
+  this.velocityY = 0
+
+  return
+
+  }
+
+  if (collides && this.velocityX > 0 && you.x >= me.x) {
+
+  me.x = you.x - me.width
+
+  this.velocityX = 0
+
+  return
+
+  }
+
+  if (collides && this.velocityX < 0 && you.x <= me.x) {
+
+  this.velocityX = 0
+
+  return
+
+  }
+
+  这段代码摘自 http://codepen.io/assertchris/pen/dpmOEJ。
+
+  ```
+
+
+  现在，当玩家撞到某物时，他们会立即被推回到边界之外。这将阻止玩家陷入地板。
+
+
+
+
+  ## 总结
+
+
+  本章中，我们学习了如何制作角色无需跳跃即可行走的斜坡。这些概念可应用于古老城堡中楼梯的实现。
+
+
+  尝试创建属于你自己的楼梯吧。也许你的楼梯比我的更陡或更缓，你需要调整角色上升或下降的速度。
+
+
+  '
+- '# 8. 摄像机锁定
+
+
+  目前为止，我们将关卡限制在浏览器窗口的尺寸内。这对于概念验证来说尚可接受，但真正的关卡需要比当前所能提供的更大空间。
+
+
+  我计划了几项措施来克服这一限制。首先，我们将把摄像机锁定到角色上，使其随角色移动而移动。然后，我们将扩大关卡的尺寸，使其能根据需要设定任意大小。
+
+
+  ## 用包裹实现摄像机效果
+
+
+  PixiJS 并不支持任何用于渲染场景的自由移动摄像机，但我们并不需要它。我们无需移动渲染器或场景，而是将其包裹在一个 HTML 元素中并移动该元素。我们需要修改游戏的嵌入方式：
+
+
+  ```
+
+  click to focus
+
+
+  .camera, .focus-target {
+
+  width: 100%;
+
+  height: 100%;
+
+  position: absolute;
+
+  top: 0;
+
+  left: 0;
+
+  }
+
+  .focus-target {
+
+  padding: 25px;
+
+  text-align: center;
+
+  }
+
+
+  game.addEventListenerTo(window)
+
+  game.addRendererTo(document.querySelector(".camera"))
+
+  game.animate()
+
+  ```
+
+
+  以上代码来自 [`http://codepen.io/assertchris/pen/WGzkym`](http://codepen.io/assertchris/pen/WGzkym)。
+
+
+  我们首先创建一个占据整个屏幕空间的摄像机。然后，我们不将场景附加到 `document.body`，而是将其附加到 `.camera`。这使我们能够以有趣的方式变换
+  `.camera`：
+
+
+  ```
+
+  animate() {
+
+  requestAnimationFrame(this.animate)
+
+  this.state.renderer = this.renderer
+
+  this.state.stage = this.stage
+
+  this.state.objects.forEach((object) => {
+
+  object.animate(this.state)
+
+  })
+
+  if (this.player) {
+
+  const offsetLeft = Math.round(
+
+  this.player.rectangle.x - (window.innerWidth / 2)
+
+  ) * -1
+
+  const offsetTop = Math.round(
+
+  this.player.rectangle.y - (window.innerHeight / 2)
+
+  ) * -1
+
+  this.element.style = `
+
+  transform:
+
+  scale(1.2)
+
+  translate(${offsetLeft}px)
+
+  translateY(${offsetTop}px)
+
+  `
+
+  }
+
+  this.renderer.render(this.stage)
+
+  }
+
+  // ... 稍后
+
+  const player = new Player(
+
+  new PIXI.Sprite.fromImage(
+
+  "path/to/sprites/player-idle.png",
+
+  ),
+
+  new PIXI.Rectangle(
+
+  Math.round(window.innerWidth / 2),
+
+  Math.round(window.innerHeight / 2),
+
+  44,
+
+  56,
+
+  ),
+
+  )
+
+  game.addObject(player)
+
+  game.player = player
+
+  ```
+
+
+  以上代码来自 [`http://codepen.io/assertchris/pen/WGzkym`](http://codepen.io/assertchris/pen/WGzkym)。
+
+
+  我们需要稍微不同地创建 `player` 对象。不再直接将其添加到 `game`，而是将其声明为一个常量。我们仍然将其添加到 `game`，但同时将其赋值给一个属性。
+
+
+  这意味着我们可以在 `Game.animate` 内部引用它。我们获取角色的 `x` 和 `y` 坐标，然后减去屏幕一半的 `innerWidth` 和 `innerHeight`，使得角色大致位于屏幕中央。
+
+
+  然后我们使用 CSS 变换将 `.camera` 向左和向上移动我们刚计算出的数值。我们还可以将摄像机稍微放大，使画面看起来略有放大效果（见图 8-1）。由于这段代码位于
+  `Game.animate` 中，它会在每次角色渲染时更新，这意味着摄像机将随角色移动而移动。
+
+
+  ![A435434_1_En_8_Fig1_HTML.jpg](img/A435434_1_En_8_Fig1_HTML.jpg)
+
+
+  **图 8-1.** 放大并锁定
+
+
+  ## 扩大关卡
+
+
+  这引出了一个有趣的发现。当角色站在我的平台上然后跳跃时，他们会跳出渲染场景的顶部（并消失）。这是由于场景的固定高度（与窗口高度相同）所致。
+
+
+  为了解决这个问题，我们需要修改定义游戏尺寸以及在游戏内部放置对象的方式：
+
+
+  ```
+
+  constructor(w, h) {
+
+  this.w = w
+
+  this.h = h
+
+  this.state = {
+
+  "keys": {},
+
+  "clicks": {},
+
+  "mouse": {},
+
+  "objects": [],
+
+  }
+
+  this.animate = this.animate.bind(this)
+
+  }
+
+  newRenderer() {
+
+  return new PIXI.autoDetectRenderer(
+
+  this.w, this.h, this.newRendererOptions(),
+
+  )
+
+  }
+
+  // ... 稍后
+
+  const width = window.innerWidth
+
+  const height = window.innerHeight + 200
+
+  const game = new Game(
+
+  width,
+
+  height,
+
+  )
+
+  game.addObject(
+
+  new Box(
+
+  new PIXI.extras.TilingSprite.fromImage(
+
+  "path/to/sprites/floor-tile.png",
+
+  width,
+
+  64,
+
+  ),
+
+  new PIXI.Rectangle(
+
+  0,
+
+  height - 64,
+
+  width,
+
+  64,
+
+  ),
+
+  ),
+
+  )
+
+  // ... 其余对象定义
+
+  ```
+
+
+  以上代码来自 [`http://codepen.io/assertchris/pen/WGzkym`](http://codepen.io/assertchris/pen/WGzkym)。
+
+
+  我们修改了 `Game` 构造函数以接受 `width` 和 `height` 参数。然后，我们不再到处使用 `window.innerWidth` 和 `window.innerHeight`，而是使用传递给
+  `game` 的相同宽度和高度。
+
+
+  到目前为止，我们都是相对于屏幕边缘添加游戏对象。这使得我们可以轻松更改宽度和高度，而无需重新定位所有游戏对象。现在，我们需要用 `width` 和 `height`
+  常量替换所有之前（全局）宽度和高度的实例。
+
+
+  唯一不删除全局引用的地方是我们刚添加的摄像机锁定代码。这些需要相对于窗口（而非整个关卡尺寸），因此它们可以保持不变。
+
+
+  ## 总结
+
+
+  本章中，我们学习了如何将关卡扩展到窗口局限之外。现在我们可以将摄像机锁定到角色，从而创建错综复杂的迷宫和令人敬畏的城堡。
+
+
+  花点时间思考如何改进每个关卡的背景和边界，使其不像我的那样空旷。也许你可以创建动态背景来展现每个关卡的基调和位置。
+
+
+  '
+- '# 9. 抛射物
+
+
+  我们的游戏充满了键盘控制，但鼠标呢？本章将全面介绍抛射物：如何发射它们以及它们如何移动。
+
+
+  在本章中，我们将添加几个新的、流行的键盘控制（WASD），以及鼠标瞄准和射击。同时，我们还会添加一个自定义的瞄准准星。这会很有趣。
+
+
+
+
+  ## 自定义准星
+
+
+  在显示自定义准星之前，我们需要一种方法来禁用默认鼠标光标。幸运的是，CSS 已经提供了这个机制：
+
+
+  ```css
+
+  body {
+
+  background: url("path/to/sprites/background.png");
+
+  color: grey;
+
+  font-family: helvetica, arial;
+
+  font-size: 20px;
+
+  cursor: none;
+
+  }
+
+  ```
+
+
+  这段代码来自 [`http://codepen.io/assertchris/pen/YGaYvy`](http://codepen.io/assertchris/pen/YGaYvy)。
+
+
+  只需在 `body` 中添加 `cursor: none`，就能从游戏画面中隐藏默认光标。接下来，我们将准星作为新的贴花添加进来：
+
+
+  ```javascript
+
+  const crosshair = new Decal(
+
+  new PIXI.Sprite.fromImage(
+
+  "path/to/sprites/crosshair.png",
+
+  ),
+
+  new PIXI.Rectangle(
+
+  0, 0, 18, 18,
+
+  ),
+
+  )
+
+  game.addObject(crosshair)
+
+  game.crosshair = crosshair
+
+  ```
+
+
+  这段代码来自 [`http://codepen.io/assertchris/pen/YGaYvy`](http://codepen.io/assertchris/pen/YGaYvy)。
+
+
+  现在可以在游戏画面的左上角看到该准星（请在浏览器窗口中缩小页面查看）。然而，这并非我们想要的位置。我们真正希望的是让它靠近玩家，但以玩家中心和鼠标光标之间的角度方向为准。
+
+
+  让我们捕获光标位置，并计算鼠标光标与玩家之间的角度：
+
+
+  ```javascript
+
+  element.addEventListener("mousemove", (event) => {
+
+  this.state.mouse.clientX = event.clientX
+
+  this.state.mouse.clientY = event.clientY
+
+  const rect = this.player.rectangle
+
+  const centerX = (window.innerWidth / 2) + (rect.width / 2)
+
+  const centerY = (window.innerHeight / 2) + (rect.height / 2)
+
+  const deltaX = event.clientX - centerX
+
+  const deltaY = centerY - event.clientY
+
+  this.state.angle = Math.atan2(deltaY, deltaX)
+
+  })
+
+  ```
+
+
+  这段代码来自 [`http://codepen.io/assertchris/pen/YGaYvy`](http://codepen.io/assertchris/pen/YGaYvy)。
+
+
+  这段代码有点难理解，但它所做的只是获取鼠标光标与玩家之间形成的三角形的宽度和高度。我们从该三角形计算出角度，并将其存储在游戏状态中。光标将使用这个角度（一旦我们将
+  `cursor = new Decal` 替换为 `cursor = new Cursor`）：
+
+
+  ```javascript
+
+  class Ladder extends Box {
+
+  get collides() {
+
+  return false
+
+  }
+
+  }
+
+  class LeftSlope extends Box {
+
+  get collides() {
+
+  return false
+
+  }
+
+  }
+
+  class RightSlope extends Box {
+
+  get collides() {
+
+  return false
+
+  }
+
+  }
+
+  class Decal extends Box {
+
+  get collides() {
+
+  return false
+
+  }
+
+  }
+
+  class Crosshair extends Decal {
+
+  animate(state) {
+
+  const rect = state.player.rectangle
+
+  const centerX = rect.x + (rect.width / 2)
+
+  const centerY = rect.y + (rect.height / 2)
+
+  const radius = 70
+
+  const targetX = centerX + Math.cos(state.angle) * radius
+
+  const targetY = centerY - Math.sin(state.angle) * radius
+
+  this.sprite.x = targetX
+
+  this.sprite.y = targetY
+
+  }
+
+  }
+
+  ```
+
+
+  这段代码来自 [`http://codepen.io/assertchris/pen/YGaYvy`](http://codepen.io/assertchris/pen/YGaYvy)。
+
+
+  在深入研究 `Crosshair.animate` 方法之前，请注意我是如何简化 `Ladder`、`LeftSlope`、`RightSlope` 和 `Decal`
+  的定义的？我们可以使用 `extends` 关键字来继承 `Box` 的行为。
+
+
+  > **注意**：继承并不总能带来良好的代码架构，但在这种简单情况下，它对我们很适用。
+
+
+  使用我们计算出的角度（在 `mousemove` 事件监听器中），我们计算出准星需要渲染的位置（见图 9-1）。
+
+
+  ![A435434_1_En_9_Fig1_HTML.jpg](img/A435434_1_En_9_Fig1_HTML.jpg)
+
+
+  **图 9-1.** 固定准星
+
+
+  ## 自定义按键
+
+
+  到目前为止，我们一直用方向键移动玩家。如果只需要使用键盘，这样没问题，但我们刚刚加入了鼠标瞄准。让我们在 `Player.animate` 中添加流行的 WASD
+  移动键：
+
+
+  ```javascript
+
+  animate(state) {
+
+  if (state.keys[37] || state.keys[65]) { // 向左
+
+  this.velocityX = Math.max(
+
+  this.velocityX - this.accelerationX,
+
+  this.maximumVelocityX * -1,
+
+  )
+
+  }
+
+  if (state.keys[39] || state.keys[68]) { // 向右
+
+  this.velocityX = Math.min(
+
+  this.velocityX + this.accelerationX,
+
+  this.maximumVelocityX,
+
+  )
+
+  }
+
+  // ...速度计算
+
+  state.objects.forEach((object) => {
+
+  if (object === this) {
+
+  return
+
+  }
+
+  const me = this.rectangle
+
+  const you = object.rectangle
+
+  const collides = object.collides
+
+  if (me.x < you.x + you.width &&
+
+  me.x + me.width > you.x &&
+
+  me.y < you.y + you.height &&
+
+  me.y + me.height > you.y) {
+
+  if (object.constructor.name === "Ladder") {
+
+  if (state.keys[38] || state.keys[40] ||
+
+  state.keys[87] || state.keys[83]) {
+
+  this.isOnLadder = true
+
+  this.isOnGround = false
+
+  this.velocityY = 0
+
+  this.velocityX = 0
+
+  }
+
+  if (state.keys[38] || state.keys[87]) {
+
+  this.rectangle.y -= this.climbingSpeed
+
+  }
+
+  if (state.keys[40] || state.keys[83] &&
+
+  me.y + me.height < you.y + you.height) {
+
+  this.rectangle.y += this.climbingSpeed
+
+  }
+
+  if (me.y <= you.x - me.height) {
+
+  this.isOnLadder = false
+
+  }
+
+  return
+
+  }
+
+  // ...剩余碰撞检测
+
+  }
+
+  })
+
+  // ...剩余计算
+
+  }
+
+  ```
+
+
+  这段代码来自 [`http://codepen.io/assertchris/pen/YGaYvy`](http://codepen.io/assertchris/pen/YGaYvy)。
+
+
+  我们添加了 `state.keys[65]` 和 `state.keys[68]` 作为左右移动的替代键。此外，为了在梯子上上下移动，我们还添加了 `state.keys[87]`
+  和 `state.keys[83]`。
+
+
+
+
+  ## 射击
+
+
+  最后，我们来增加向准星方向射击的功能。为此，我们需要创建另一种类型的对象：
+
+
+  ```
+
+  class Bullet extends Decal {
+
+  animate(state) {
+
+  const rect = state.player.rectangle
+
+  this.x = this.x || rect.x + rect.width
+
+  this.y = this.y || rect.y + (rect.height / 2)
+
+  this.angle = this.angle || state.angle
+
+  this.rotation = this.rotation || state.rotation
+
+  this.radius = this.radius || 0
+
+  this.radius += 15
+
+  const targetX = this.x + Math.cos(this.angle) * this.radius
+
+  const targetY = this.y - Math.sin(this.angle) * this.radius
+
+  this.sprite.x = targetX
+
+  this.sprite.y = targetY
+
+  this.sprite.rotation = this.rotation
+
+  }
+
+  }
+
+  ```
+
+
+  此代码来自 [`http://codepen.io/assertchris/pen/YGaYvy`](http://codepen.io/assertchris/pen/YGaYvy)。
+
+
+  `Bullet` 的动画方式与大多数其他对象类型不同，它会在每次时钟滴答时修改自身状态。`this.x = this.x || something` 这种模式对于一次性初始化值非常有用。重要的是，我们只在子弹发射时存储
+  `x`、`y`、`angle` 和 `rotation` 等属性，否则当我们移动玩家或准星时，这些值会持续变化。
+
+
+  `radius` 从玩家前方开始，并沿着子弹发射时准星的方向增加。我们还需旋转子弹精灵，使其与角度匹配。这要求我们在鼠标事件监听器中同时存储 `rotation`
+  和 `angle`。此外，当鼠标点击时，我们还需创建新的子弹：
+
+
+  ```
+
+  element.addEventListener("mousedown", (event) => {
+
+  this.state.clicks[event.which] = {
+
+  "clientX": event.clientX,
+
+  "clientY": event.clientY,
+
+  }
+
+  if (event.button === 0) { // 左键点击
+
+  const rect = this.player.rectangle
+
+  const bullet = new Bullet(
+
+  new PIXI.Sprite.fromImage(
+
+  "path/to/sprites/bullet.png",
+
+  ),
+
+  new PIXI.Rectangle(
+
+  rect.x + rect.width, rect.y, 8, 8,
+
+  ),
+
+  )
+
+  this.addObject(bullet)
+
+  setTimeout(() => {
+
+  this.removeObject(bullet)
+
+  }, 250)
+
+  }
+
+  })
+
+  element.addEventListener("mousemove", (event) => {
+
+  this.state.mouse.clientX = event.clientX
+
+  this.state.mouse.clientY = event.clientY
+
+  const rect = this.player.rectangle
+
+  const centerX = (window.innerWidth / 2) + (rect.width / 2)
+
+  const centerY = (window.innerHeight / 2) + (rect.height / 2)
+
+  const deltaX = event.clientX - centerX
+
+  const deltaY = centerY - event.clientY
+
+  const rotationX = event.clientX - centerX
+
+  const rotationY = event.clientY - centerY
+
+  this.state.angle = Math.atan2(deltaY, deltaX)
+
+  this.state.rotation = Math.atan2(rotationY, rotationX)
+
+  })
+
+  // ...其余的事件监听器
+
+  ```
+
+
+  此代码来自 [`http://codepen.io/assertchris/pen/YGaYvy`](http://codepen.io/assertchris/pen/YGaYvy)。
+
+
+  计算 `rotation` 的方式与计算 `angle` 类似，但我们将垂直轴翻转了。当玩家点击时，我们创建一个新的 `bullet`（位于玩家前方）并将其添加到游戏中。
+
+
+  `250` 毫秒后，我们会移除子弹。这样做是为了确保子弹在不再需要时不会拖慢动画循环。我们需要在 `Game` 类中添加 `removeObject` 方法：
+
+
+  ```
+
+  removeObject(object) {
+
+  this.state.objects = this.state.objects.filter(
+
+  function(next) {
+
+  return next !== object
+
+  }
+
+  )
+
+  this.stage.removeChild(object.sprite)
+
+  }
+
+  ```
+
+
+  此代码来自 [`http://codepen.io/assertchris/pen/YGaYvy`](http://codepen.io/assertchris/pen/YGaYvy)。
+
+
+  在下一章创建可供射击的怪物时，我们将探讨更多的抛射体行为。
+
+
+  ## 总结
+
+
+  在本章中，我们探讨了创建自定义光标和发射抛射体的方法。我们发现了一些有用的三角学知识，用于将准星约束在玩家周围的一定半径内，并进一步将子弹推出该半径范围。
+
+
+  请尝试调整抛射体的速度和外观。也许你正在构建一款中世纪游戏，你的抛射体是魔法箭矢。也可以考虑增加垂直加速度，让子弹飞行一段距离后落向地面。
+
+
+  '
+- '# 10. 怪物
+
+
+  如果玩家独自闯荡整个游戏，那该有多无聊？我们现在需要的是无脑的怪物（或者你喜欢叫它们斑点也行）来巡逻，并/或以其他方式给英雄的前进之路制造麻烦。
+
+
+  ## 巡逻的斑点
+
+
+  在本章中，我们将添加巡逻的斑点，这意味着我们需要另一个类来封装它们的逻辑：
+
+
+  ```
+
+  class Blob extends Box {
+
+  constructor(sprite, rectangle) {
+
+  super(sprite, rectangle)
+
+  this.limit = 200
+
+  this.left = true
+
+  }
+
+  animate(state) {
+
+  if (this.left) {
+
+  this.rectangle.x -= 2
+
+  }
+
+  if (!this.left) {
+
+  this.rectangle.x += 2
+
+  }
+
+  this.limit -= 2
+
+  if (this.limit <= 0) {
+
+  this.left = !this.left
+
+  this.limit = 200
+
+  }
+
+  this.sprite.x = this.rectangle.x
+
+  this.sprite.y = this.rectangle.y
+
+  }
+
+  }
+
+  ```
+
+
+  此代码来自 [`http://codepen.io/assertchris/pen/XjEExz`](http://codepen.io/assertchris/pen/XjEExz)。
+
+
+  这次我们在构造函数中设置了一些属性。我们仍然希望应用父类构造函数，因此我们调用了 `super`，并提供了预期的 `sprite` 和 `rectangle`
+  参数。
+
+
+  然后，在 `animate` 方法中，我们将斑点向左或向右移动 `2` 像素（取决于斑点是否正在向左移动）。一旦斑点朝同一方向移动了 `200` 像素，我们就让它转身（并重置朝另一方向移动的
+  `200` 像素）。
+
+
+  我们应该在关卡中放置几个这样的斑点：
+
+
+  ```
+
+  game.addObject(
+
+  new Blob(
+
+  new PIXI.Sprite.fromImage(
+
+  "path/to/sprites/blob-idle-1.png",
+
+  ),
+
+  new PIXI.Rectangle(
+
+  width - 450,
+
+  height - 64 - 48,
+
+  48,
+
+  48,
+
+  ),
+
+  ),
+
+  )
+
+  ```
+
+
+  此代码来自 [`http://codepen.io/assertchris/pen/XjEExz`](http://codepen.io/assertchris/pen/XjEExz)。
+
+
+  这段代码会将斑点放置在玩家起始位置旁边，如图 10-1 所示（至少在我的关卡中是如此）。看着它来回移动，甚至让玩家跳上它的头顶，非常有趣。
+
+
+  ![A435434_1_En_10_Fig1_HTML.jpg](img/A435434_1_En_10_Fig1_HTML.jpg)
+
+
+  **图 10-1. 巡逻的斑点**
+
+
+  ## 射击怪物
+
+
+  在上一章中，我们为玩家增加了发射抛射体的能力。现在让我们通过在子弹本身上添加一些碰撞检测来应用这些能力：
+
+
+  ```
+
+  class Bullet extends Decal {
+
+  animate(state) {
+
+  const rect = state.player.rectangle
+
+  this.x = this.x || rect.x + rect.width
+
+  this.y = this.y || rect.y + (rect.height / 2)
+
+  this.angle = this.angle || state.angle
+
+  this.rotation = this.rotation || state.rotation
+
+  this.radius = this.radius || 0
+
+  this.radius += 10
+
+  const targetX = this.x + Math.cos(this.angle) * this.radius
+
+  const targetY = this.y - Math.sin(this.angle) * this.radius
+
+  this.rectangle.x = targetX
+
+  this.rectangle.y = targetY
+
+  this.sprite.x = targetX
+
+  this.sprite.y = targetY
+
+  this.sprite.rotation = this.rotation
+
+  state.objects.forEach((object) => {
+
+  if (object === this) {
+
+  return
+
+  }
+
+  const me = this.rectangle
+
+  const you = object.rectangle
+
+  if (me.x  you.x &&
+
+  me.y  you.y) {
+
+  if (object.constructor.name === "Blob") {
+
+  state.game.removeObject(object)
+
+  state.game.removeObject(this)
+
+  }
+
+  }
+
+  })
+
+  }
+
+  }
+
+  ```
+
+
+  此代码来自 [`http://codepen.io/assertchris/pen/XjEExz`](http://codepen.io/assertchris/pen/XjEExz)。
+
+
+  这个碰撞检测逻辑类似于我们在 `Player` 类中做的第一次尝试。我们不需要检查斜坡或梯子之类的东西。我们只关心子弹是否与斑点碰撞。如果是，则将两者都从游戏中移除。
+
+
+  > **注意：** 我还稍微降低了子弹速度。尽管设想玩家几乎能追上高速子弹并不太现实，但这样游戏体验会更好一些。
+
+
+  虽然如果斑点的生命值持续减少会更优雅，但我们稍后会重新讨论这个话题。
+
+
+  ## 总结
+
+
+  在本章中，我们向游戏添加了一种简单的怪物。我们还让我们的子弹具备了消灭这些怪物的能力。它们虽然不是最聪明（甚至最耐打）的怪物，但这是一个开始。
+
+
+  这正是你可以发挥创造力的地方。如果你给怪物的移动增加重力效果会怎样？或者让它们在玩家靠近之前保持静止？如果它们能反击呢？
+
+
+
+
+  '
+- '# 11. 生命值
+
+
+  我玩过的游戏中，很少有因第一个失误就立即失败的。通常，最终失败前会有一段很长的铺垫。索尼克（ [`https://en.wikipedia.org/wiki/Sonic_the_Hedgehog`](https://en.wikipedia.org/wiki/Sonic_the_Hedgehog)
+  ）会失去他的金环，马里奥会失去他的能力。
+
+
+  本章的目标是让我们实现一个生命值系统，让玩家有机会犯错并从中学习。
+
+
+  ## 承受伤害
+
+
+  （到目前为止，在我们的游戏中）玩家只有一种方式会失败：从关卡边缘跳下。然而，这并非一个真实的失败条件，因为精心设计的关卡会通过布局确保玩家永远无法到达关卡边界之外。
+
+
+  在制定生命值损失的细节之前，我们需要引入另一种机制来触发生命值损失。在这里，我们将引入一种机制：当玩家与史莱姆接触时，会损失生命值（并短暂失去控制）。
+
+
+  首先，我们需要在 `Player.animate` 中增加更多的碰撞检测逻辑：
+
+
+  ```
+
+  if (object.constructor.name === "Blob" && !this.invulnerable) {
+
+  if (this.velocityX >= 0) {
+
+  this.velocityX = -10
+
+  } else {
+
+  this.velocityX = 10
+
+  }
+
+  this.velocityY *= -1
+
+  this.invulnerable = true
+
+  this.sprite.alpha = 0.5
+
+  setTimeout(() => {
+
+  this.invulnerable = false
+
+  this.sprite.alpha = 1
+
+  }, 2000)
+
+  if (typeof this.onHurt === "function") {
+
+  this.onHurt.apply(this)
+
+  }
+
+  }
+
+  ```
+
+
+  这段代码来自 [`http://codepen.io/assertchris/pen/qaoyPo`](http://codepen.io/assertchris/pen/qaoyPo)
+  。
+
+
+  之前，我们在 `Bullet.animate` 中添加了针对 `Blob` 的碰撞检测。现在，我们将其添加到 `Player.animate`，这样当玩家与 `Blob`
+  接触时就会“受到伤害”。
+
+
+  **注意：** 我在这里及之前硬编码了很多东西。你可以自由地将硬编码的值抽象出来，但我选择不在每个实例中都这样做，以节省时间并保持简单。例如，你可以完全移除 `alpha`
+  逻辑，并通过构造函数提供 `invulnerable` 的持续时间。
+
+
+  现在，当玩家与史莱姆碰撞时，玩家会被向后上方弹开。玩家还会进入无敌状态，这意味着在 `2000` 毫秒内不会损失所有生命值。既然我们有了伤害玩家的方法，接下来就该处理它了。
+
+
+  ## 显示生命值
+
+
+  注意到 `onHurt` 那段代码了吗？我不想将显示玩家当前生命值的界面更改硬编码。通过调用用户提供的函数，我们可以将该行为外包给创建玩家的代码。
+
+
+  虽然试图将所有内容都塞进 PixiJS 模型很诱人，但我们是在 Web 环境中编码。我们不通过 PixiJS 渲染器和场景来渲染玩家的生命值，而是使用 HTML
+  和 CSS 来显示生命条。而且，由于我们有办法通过 `onHurt` 将内部伤害行为与外部环境联系起来，这应该不会太难。
+
+
+  让我们创建所需的 HTML 元素：
+
+
+  ```
+
+  click to focus
+
+
+  .camera, .hud, .focus-target {
+
+  width: 100%;
+
+  height: 100%;
+
+  position: absolute;
+
+  top: 0;
+
+  left: 0;
+
+  }
+
+  .hud {
+
+  .heart {
+
+  width: 32px;
+
+  height: 28px;
+
+  background-image: url("path/to/sprites/heart-red.png");
+
+  position: absolute;
+
+  top: 15px;
+
+  }
+
+  .heart-1 {
+
+  left: 15px;
+
+  }
+
+  .heart-2 {
+
+  left: 57px;
+
+  }
+
+  .heart-3 {
+
+  left: 99px;
+
+  }
+
+  .heart-grey {
+
+  background-image: url("path/to/sprites/heart-grey.png");
+
+  }
+
+  }
+
+  ```
+
+
+  这段代码来自 [`http://codepen.io/assertchris/pen/qaoyPo`](http://codepen.io/assertchris/pen/qaoyPo)
+  。
+
+
+  这个标记在屏幕左上角添加了三颗红心。当玩家受伤时，我们将它们逐一变为灰色：
+
+
+  ```
+
+  let hearts = 3
+
+  player.onHurt = function() {
+
+  document.querySelector(".heart-" + hearts)
+
+  .className += " heart-grey"
+
+  hearts--
+
+  if (hearts < 1) {
+
+  alert("game over!")
+
+  game.removeObject(player)
+
+  game.removeObject(crosshair)
+
+  }
+
+  }
+
+  ```
+
+
+  这段代码来自 [`http://codepen.io/assertchris/pen/qaoyPo`](http://codepen.io/assertchris/pen/qaoyPo)
+  。
+
+
+  这比我最初预想的要简单得多。每次调用 `onHurt` 函数时，我们都会获取与剩余心数对应的元素，并将其变为灰色，如图 11-1 所示（这要归功于我们之前添加的
+  `.heart-grey` 类）。
+
+
+  ![A435434_1_En_11_Fig1_HTML.jpg](img/A435434_1_En_11_Fig1_HTML.jpg)
+
+
+  **图 11-1.** 承受伤害
+
+
+  如果玩家用完了最后一颗心，我们会弹出一个警告（尽管将其设计成样式化的“游戏结束”消息可能会更好），并从游戏中移除玩家和准星。
+
+
+  ## 本章小结
+
+
+  在本章中，我们添加了第一种合理的玩家失败方式。既然存在了危险，游戏体验应该会更加有趣。
+
+
+  我们还创建了一种将内部事件（如玩家受伤）与外部行为联系起来的方法。你不必在玩家受伤时就将其淘汰。你可以尝试将他们传送回关卡起点，或降低他们的能力。选择权在你手中。
+
+
+  '
+- '# 12. 动画
+
+
+  我们短暂而愉快的旅程即将结束。是时候添加一些收尾工作了。例如，我们的精灵太呆板了。让我们为它们添加动画吧！
+
+
+  ## 为玩家添加动画
+
+
+  玩家精灵是整个游戏中最早也是最重要的部分之一。我们可以花很多时间盯着这个小家伙，如果不添加一点动画，那将非常无聊。
+
+
+  幸运的是，PixiJS 提供了一些工具来简化这个过程。让我们开始使用其中一个：
+
+
+  ```
+
+  const playerIdleLeftImages = [
+
+  "path/to/sprites/player-idle-1.png",
+
+  "path/to/sprites/player-idle-2.png",
+
+  "path/to/sprites/player-idle-3.png",
+
+  "path/to/sprites/player-idle-4.png",
+
+  ]
+
+  const playerIdleLeftTextures =
+
+  playerIdleLeftImages.map(function(image) {
+
+  return PIXI.Texture.fromImage(image)
+
+  })
+
+  const playerIdleLeftSprite =
+
+  new PIXI.MovieClip(playerIdleLeftTextures)
+
+  playerIdleLeftSprite.play()
+
+  playerIdleLeftSprite.animationSpeed = 0.12
+
+  const player = new Player(
+
+  playerIdleLeftSprite,
+
+  new PIXI.Rectangle(
+
+  Math.round(width / 2),
+
+  Math.round(height / 2),
+
+  48,
+
+  56,
+
+  ),
+
+  )
+
+  player.idleLeftSprite = playerIdleLeftSprite
+
+  ```
+
+
+  这段代码来自 [`http://codepen.io/assertchris/pen/ALyPGw`](http://codepen.io/assertchris/pen/ALyPGw)
+  。
+
+
+  我们用 `new PIXI.MovieClip` 替换了 `new PIXI.Sprite.fromImage`。我们首先创建了一个图像数组（任何好的精灵包都应该包含这些），并为每个图像创建了新的
+  `PIXI.Texture` 对象。
+
+
+  我们需要调用 `play` 来启动动画，调整动画速度也无妨。我们很快就会明白为什么存储对动画的引用是个好主意。
+
+
+  **提示：** 没有静态图像能完美展现这个动画。请查看 CodePen 来观看它的运动效果！
+
+
+
+
+  ## 切换动画
+
+
+  我们不仅可以让角色在静止站立时呈现动画效果，还能为其添加行走、跳跃甚至受伤时的动画。让我们先添加奔跑动画。动画初始化代码整体如下：
+
+
+  ```
+
+  const playerIdleLeftImages = [
+
+  "path/to/sprites/player-idle-1.png",
+
+  "path/to/sprites/player-idle-2.png",
+
+  "path/to/sprites/player-idle-3.png",
+
+  "path/to/sprites/player-idle-4.png",
+
+  ]
+
+  const playerIdleLeftTextures =
+
+  playerIdleLeftImages.map(function(image) {
+
+  return PIXI.Texture.fromImage(image)
+
+  })
+
+  const playerIdleLeftSprite = new PIXI.MovieClip(playerIdleLeftTextures)
+
+  playerIdleLeftSprite.play()
+
+  playerIdleLeftSprite.animationSpeed = 0.12
+
+  const playerRunLeftImages = [
+
+  "path/to/sprites/player-run-1.png",
+
+  "path/to/sprites/player-run-2.png",
+
+  "path/to/sprites/player-run-3.png",
+
+  "path/to/sprites/player-run-4.png",
+
+  "path/to/sprites/player-run-5.png",
+
+  "path/to/sprites/player-run-6.png",
+
+  "path/to/sprites/player-run-7.png",
+
+  "path/to/sprites/player-run-8.png",
+
+  "path/to/sprites/player-run-9.png",
+
+  "path/to/sprites/player-run-10.png",
+
+  ]
+
+  const playerRunLeftTextures =
+
+  playerRunLeftImages.map(function(image) {
+
+  return PIXI.Texture.fromImage(image)
+
+  })
+
+  const playerRunLeftSprite = new PIXI.MovieClip(playerRunLeftTextures)
+
+  playerRunLeftSprite.play()
+
+  playerRunLeftSprite.animationSpeed = 0.2
+
+  const player = new Player(
+
+  playerIdleLeftSprite,
+
+  new PIXI.Rectangle(
+
+  Math.round(width / 2),
+
+  Math.round(height / 2),
+
+  48,
+
+  56,
+
+  ),
+
+  )
+
+  player.idleLeftSprite = playerIdleLeftSprite
+
+  player.runLeftSprite = playerRunLeftSprite
+
+  game.addObject(player)
+
+  game.player = player
+
+  ```
+
+
+  此段代码来源于 [`http://codepen.io/assertchris/pen/ALyPGw`](http://codepen.io/assertchris/pen/ALyPGw)。
+
+
+  添加动画虽然很有趣，但过程也可能相当繁琐。我们需要为每个动作的每一帧进行裁剪和导出，然后将它们整合到多个图像数组和动画精灵中。
+
+
+  将每个动画精灵的引用赋值给`player`是个好习惯。这样，我们就能在`Player.animate`内部切换它们：
+
+
+  ```
+
+  this.rectangle.x += this.velocityX
+
+  if (!this.isOnLadder && !this.isOnSlope) {
+
+  this.rectangle.y += this.velocityY
+
+  }
+
+  if (this.isOnGround && Math.abs(this.velocityX)  0.5) {
+
+  state.game.stage.removeChild(this.sprite)
+
+  state.game.stage.addChild(this.runLeftSprite)
+
+  this.sprite = this.runLeftSprite
+
+  }
+
+  this.sprite.x = this.rectangle.x
+
+  this.sprite.y = this.rectangle.y
+
+  ```
+
+
+  此段代码来源于 [`http://codepen.io/assertchris/pen/ALyPGw`](http://codepen.io/assertchris/pen/ALyPGw)。
+
+
+  在`animate`方法的末尾，我们可以检测玩家是否仍在移动（或移动幅度很小）。如果不是，则将当前可见的精灵切换为待机动画。
+
+
+  如果玩家仍在移动，则将可见精灵切换为奔跑动画。此逻辑目前仅支持单一方向，但我们可以推断其行为，以涵盖更广泛的动画和方向。
+
+
+  ## 小结
+
+
+  在本章中，我们为游戏添加了一些动画（非巡逻类怪物动画）。我们可以花上几个小时看着角色的头发上下摆动。
+
+
+  我们还可以添加多种不同类型的动画：
+
+
+  *   跳跃和/或下落
+
+  *   受伤
+
+  *   着陆（伴随一阵尘土）
+
+  *   爬梯子
+
+  *   发射弹丸（手持武器）
+
+
+  虽然我们只添加了两种，但还有很多可以添加。关键在于找到（或设计）一套好的精灵包，并将所有元素完美地拼接在一起。如果你能做到这一点，就能制作出一款画面精美的动画游戏！
+
+
+  '
+- '# 13. 音效
+
+
+  我最喜爱的游戏回忆中，有一部分来自于玩游戏时聆听的音乐和音效。无论是《堡垒》和《菲斯》的音乐，还是《星露谷物语》的音效，我们的耳朵帮助我们充分享受游戏。
+
+
+  ## 添加背景音乐
+
+
+  没有什么比一首好的背景音乐更能让你沉浸于游戏之中了。最优秀的游戏会根据玩家的情绪和所在位置切换背景音乐。我们将从一个更简单的方案开始：
+
+
+  ```
+
+  game.addEventListenerTo(window)
+
+  game.addRendererTo(document.querySelector(".camera"))
+
+  game.animate()
+
+  const music = new Audio("path/to/sounds/background.mp3")
+
+  music.loop = true
+
+  music.play()
+
+  ```
+
+
+  点击此链接前请调低音量——因为它会播放音乐。
+
+
+  此段代码来源于 [`http://codepen.io/assertchris/pen/wzmQWb`](http://codepen.io/assertchris/pen/wzmQWb)。
+
+
+  在现代浏览器中播放音效其实相当简单。快速搜索一个可循环的 MP3 文件，再配合这个新的`Audio`对象，基本上就是我们所需要的全部了。不过，如果我们希望背景音乐循环播放，需要将`loop`属性设置为`true`。
+
+
+  **注意：** 没有简便的方法能让`Audio`对象在循环时不出现播放间隙。你可能需要考虑替代方案，比如 SoundManager2 ([`github.com/scottschiller/SoundManager2`](https://github.com/scottschiller/SoundManager2))。
+
+
+  ## 添加动作与事件音效
+
+
+  添加游戏音效（针对玩家发起的动作和事件），需要我们深入到动作和事件发生的地方：
+
+
+  ```
+
+  element.addEventListener("keydown", (event) => {
+
+  this.state.keys[event.keyCode] = true
+
+  if (event.keyCode === 32) {
+
+  new Audio("path/to/sounds/jump.wav").play()
+
+  }
+
+  })
+
+  ```
+
+
+  此段代码来源于 [`http://codepen.io/assertchris/pen/wzmQWb`](http://codepen.io/assertchris/pen/wzmQWb)。
+
+
+  当我们第一次尝试跳跃时，音效似乎需要加载一下才能播放。我们可以通过在玩家开始移动前预加载所有音效来解决这个问题。
+
+
+  事实上，通常的做法是在游戏开始前预加载所有游戏资源（如字体、图像和音效）。就音效而言，我们只需要在游戏开始前添加以下代码进行预加载：
+
+
+  ```
+
+  new Audio("path/to/sounds/jump.wav").load()
+
+  ```
+
+
+  这将启动加载过程，音效文件应该能在被使用前加载完成（只要网络连接速度足够快）。还有其他方法可以确保所有音效文件都已加载，但它们会使过程变得相当复杂。我认为，这是另一个话题了……
+
+
+  ## 小结
+
+
+  在本章中，我们简要了解了如何将背景音乐和动作/事件音效嵌入到游戏中。现代浏览器为此提供了良好的工具，但如果需要支持旧版浏览器，或需要对播放进行更精细的控制，我们始终可以回退到像
+  SoundManager2 这样的库。
+
+
+  购买大量音效、音乐文件和精灵（或精灵包）可能会很昂贵。你可能更希望在游戏制作过程中邀请图形和音效艺术家参与。
+
+
+  '
+- '# 14. 游戏手柄
+
+
+  我们快要完成了。在分别之前，我想尝试一下游戏手柄会很有趣。虽然只有少数浏览器通过 JavaScript 支持它们，但它们确实非常好玩！
+
+
+
+
+  ## 事件处理
+
+
+  游戏手柄事件与我们目前看到的键盘和鼠标事件的工作方式略有不同。由于它们的实验性质，我们需要用一种特定的方式在 `Game.animate` 中捕获它们：
+
+
+  ```
+
+  constructor(w, h) {
+
+  this.w = w
+
+  this.h = h
+
+  this.state = {
+
+  "game": this,
+
+  "keys": {},
+
+  "clicks": {},
+
+  "mouse": {},
+
+  "buttons": {},
+
+  "objects": [],
+
+  "player": null,
+
+  "crosshair": null,
+
+  }
+
+  this.animate = this.animate.bind(this)
+
+  }
+
+  // ...稍后
+
+  animate() {
+
+  requestAnimationFrame(this.animate)
+
+  this.state.renderer = this.renderer
+
+  this.state.stage = this.stage
+
+  this.state.player = this.player
+
+  this.state.crosshair = this.crosshair
+
+  let gamepads = []
+
+  if (navigator.getGamepads) {
+
+  gamepads = navigator.getGamepads()
+
+  }
+
+  if (navigator.webkitGetGamepads) {
+
+  gamepads = navigator.webkitGetGamepads
+
+  }
+
+  if (gamepads) {
+
+  const gamepad = gamepads[0]
+
+  gamepad.buttons.forEach((button, i) => {
+
+  this.state.buttons[i] = button.pressed
+
+  })
+
+  }
+
+  // ...剩余的动画代码
+
+  }
+
+  ```
+
+
+  此代码来自 [`http://codepen.io/assertchris/pen/WGzYgA`](http://codepen.io/assertchris/pen/WGzYgA)。
+
+
+  在找到我们所用浏览器支持的游戏手柄列表之前，我们需要尝试几种不同的方法。我使用的是现代版 Chrome 浏览器，它支持 JavaScript Gamepad API。
+
+
+  我们捕获每个按钮的按下状态，并将其存储在 `state.buttons` 对象（在 `constructor` 中初始化）中。考虑到我们在 `Player.animate`
+  中增加了不少复杂性，我认为是时候对它进行一些重构了：
+
+
+  ```
+
+  animate(state) {
+
+  const leftKey = state.keys[37] || state.keys[65]
+
+  const leftButton = state.buttons && state.buttons[13]
+
+  const rightKey = state.keys[39] || state.keys[68]
+
+  const rightButton = state.buttons && state.buttons[14]
+
+  const upKey = state.keys[38] || state.keys[87]
+
+  const upButton = state.buttons && state.buttons[11]
+
+  const jumpKey = state.keys[32]
+
+  const jumpButton = state.buttons && state.buttons[0]
+
+  if (leftKey || leftButton) {
+
+  this.velocityX = Math.max(
+
+  this.velocityX - this.accelerationX,
+
+  this.maximumVelocityX * -1,
+
+  )
+
+  }
+
+  if (rightKey || rightButton) {
+
+  this.velocityX = Math.min(
+
+  this.velocityX + this.accelerationX,
+
+  this.maximumVelocityX,
+
+  )
+
+  }
+
+  this.velocityX *= this.frictionX
+
+  this.velocityY = Math.min(
+
+  this.velocityY + this.accelerationY,
+
+  this.maximumVelocityY,
+
+  )
+
+  state.objects.forEach((object) => {
+
+  if (object === this) {
+
+  return
+
+  }
+
+  const me = this.rectangle
+
+  const you = object.rectangle
+
+  const collides = object.collides
+
+  if (me.x  you.x &&
+
+  me.y  you.y) {
+
+  if (object.constructor.name === "Ladder") {
+
+  if (upKey || upButton) {
+
+  this.rectangle.y -= this.climbingSpeed
+
+  this.isOnLadder = true
+
+  this.isOnGround = false
+
+  this.velocityY = 0
+
+  this.velocityX = 0
+
+  }
+
+  if (me.y <= you.x - me.height) {
+
+  this.isOnLadder = false
+
+  }
+
+  return
+
+  }
+
+  // ...剩余的碰撞检测代码
+
+  }
+
+  })
+
+  if ((jumpKey || jumpButton) && this.isOnGround) {
+
+  this.velocityY = this.jumpVelocity
+
+  this.isOnGround = false
+
+  this.isOnSlope = false
+
+  }
+
+  // ...剩余的移动代码
+
+  }
+
+  ```
+
+
+  此代码来自 [`http://codepen.io/assertchris/pen/WGzYgA`](http://codepen.io/assertchris/pen/WGzYgA)。
+
+
+  这里我们定义了许多常量（来表示按下的键盘键和游戏手柄按钮）。我们很容易假设键盘是存在的，但游戏手柄的存在就没那么确定了。
+
+
+  这就是为什么我们将几个不同的键盘按键组合到一次检查中，而每次检测游戏手柄按钮都需要我们先确保已经定义了游戏手柄按钮。
+
+
+  使用这段代码，我们将方向按钮（D-Pad）和跳跃按钮（PS 兼容手柄上的 A 键）映射到了相应的玩家动作。
+
+
+  ## 扳机和摇杆
+
+
+  与按钮相比，扳机和摇杆要复杂得多（并且更容易因游戏手柄设计不同而产生差异）。我使用的是一个兼容 PS 的罗技游戏手柄，扳机和摇杆都被映射到了 `gamepad.axes`
+  对象中。
+
+
+  捕获的值范围从 `-1` 到 `1`，涵盖所有 6 个轴。在静止状态下，摇杆并不精确为 `0`，这意味着我们需要使用某个 Epsilon 值 ([`https://en.wikipedia.org/wiki/Epsilon`](https://en.wikipedia.org/wiki/Epsilon))
+  或四舍五入，来判断轴是否处于静止状态。
+
+
+  我们还需要修改我们的三角函数方程，以适应输入值/比例尺度的差异。我想说的是，我们需要考虑我们打算支持哪些游戏手柄，以及玩家需要使用哪些浏览器才能使用它们。
+
+
+  ## 总结
+
+
+  在本章中，我们初探了游戏手柄这片领域。我们很幸运生活在一个浏览器日益支持使用 JavaScript 操作游戏手柄的时代，但距离其变得简单或普及，仍有大量工作要做。
+
+
+  如果你感觉有勇气，或许可以尝试将你游戏手柄的扳机和摇杆映射到游戏操作中（比如瞄准和发射弹丸）。
+
+
+  在此，我想感谢你阅读本书。对我来说，这是一个短暂但激动人心的项目，我希望你也能像我一样（甚至更多）从中学习和享受乐趣。
+
+
+  正如我在开头所说：如有问题或改进建议，请随时联系我。鉴于示例的动态性，我将能够修复错误，并添加关于如何改进它们的评论。
+
+
+  我的 Twitter 个人资料是 [`https://twitter.com/assertchris`](https://twitter.com/assertchris)。
+
+
+  我偶尔也会在编码时进行直播。你可以加入进来，提问（实时地）并和我一起学习。
+
+
+  我的 Twitch 频道是 [`https://www.twitch.tv/assertchris`](https://www.twitch.tv/assertchris)。
+
+
+  '
+- '# 索引
+
+
+  A
+
+  动作和事件音效
+
+  角度计算
+
+  Animate 方法
+
+  动画
+
+  animate 方法
+
+  图片数组和动画精灵
+
+  初始化代码
+
+  PixiJS
+
+  PIXI.Texture 对象
+
+
+  B
+
+  背景音乐，游戏
+
+
+  C
+
+  摄像机锁定
+
+  游戏尺寸
+
+  innerWidth 和 innerHeight
+
+  屏幕宽度和高度常量
+
+  环绕
+
+  缩放与锁定
+
+  碰撞检测
+
+  算法
+
+  创建碰撞框
+
+  圆形
+
+  逻辑
+
+  矩形
+
+  复杂性，制作游戏
+
+  Crosshair.animate 方法
+
+  准星射击
+
+  自定义准星
+
+  自定义键
+
+
+  D
+
+  贴花
+
+  方向键
+
+
+  E
+
+  Extends 关键字
+
+
+  F
+
+  固定准星
+
+  有趣的游戏
+
+
+  G
+
+  游戏循环
+
+  animate 方法
+
+  优势
+
+  CodePen
+
+  PixiJS
+
+  Player 类
+
+  精灵
+
+  图形和音效艺术家
+
+  重力
+
+  添加
+
+  animate 方法
+
+  Game 类
+
+  game.addObject
+
+  跳跃
+
+  可选依赖项
+
+  PIXI.Rectangle
+
+  精灵
+
+  TilingSprite.fromImage
+
+  向上和向下的速度
+
+
+  H, I
+
+  事件处理
+
+  生命值系统
+
+  HTML 元素
+
+  PixiJS 模型
+
+  Player.animate
+
+  player.onHurt = function()
+
+  用户提供的函数
+
+
+  J, K
+
+  JavaScript Gamepad API
+
+
+  L
+
+  梯子
+
+  Box 类
+
+  爬梯子
+
+  碰撞检测
+
+  创建
+
+  isOnLadder 变量
+
+  ladder.png 和 platform.png 图片
+
+  与平台
+
+  Player.animate
+
+  左斜坡
+
+
+  M
+
+  mousemove 事件监听器
+
+
+  N, O
+
+  自然的玩家移动
+
+
+  P, Q
+
+  巡逻的敌人
+
+  Player.animate 方法
+
+  玩家输入检测
+
+  自然的玩家移动
+
+  平台游戏
+
+  竞速游戏
+
+  PS 兼容手柄
+
+
+  R
+
+  removeObject 方法
+
+  右斜坡
+
+
+  S
+
+  射击
+
+  射击敌人
+
+  斜坡
+
+  构建
+
+  走上坡
+
+  音效
+
+  精灵
+
+  精灵和矩形参数
+
+  楼梯 参见 斜坡
+
+  state.buttons 对象
+
+
+  T, U, V
+
+  扳机和摇杆
+
+
+  W, X, Y, Z
+
+  WASD 移动键
+
+  '

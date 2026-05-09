@@ -1,0 +1,5557 @@
+- '
+
+  ![A978-1-4842-2623-0_CoverFigure.jpg]
+
+
+  '
+- "# 面向人类的 ES6  \n## JavaScript 最新标准：ES2015 及其未来\n\nDeepak Grover 和 Hanu Prateek Kunduru\n\
+  \n![A431489_1_En_BookFrontmatter_Figa_HTML.png]\n\n本书作者引用的任何源代码或其他补充材料，读者均可通过 GitHub\
+  \ 上的书籍产品页面获取，网址为 [`www.apress.com/9781484226223`](http://www.apress.com/9781484226223)。如需更多详细信息，请访问\
+  \ [`http://www.apress.com/source-code`](http://www.apress.com/source-code)。\n\n\
+  ISBN 978-1-4842-2622-3  \n电子版 ISBN 978-1-4842-2623-0  \n[`doi.org/10.1007/978-1-4842-2623-0`](https://doi.org/10.1007/978-1-4842-2623-0)\n\
+  \n美国国会图书馆控制编号：2017944929\n\n© Deepak Grover 和 Hanu Kunduru 2017\n\n本作品受版权保护。出版商保留所有权利，涉及全部或部分材料，具体包括翻译权、重印权、插图复用权、朗诵权、广播权、微缩胶片复制权或任何其他物理形式的复制权，以及电子改编、计算机软件或目前已知或未来开发的类似或不同方法的传输、信息存储与检索权。\n\
+  \n本书中可能出现商标名称、徽标和图像。我们不会在每次出现商标名称、徽标或图像时都使用商标符号，而是仅在编辑性语境中使用这些名称、徽标和图像，以维护商标所有者的利益，且无意侵犯商标权。本出版物中使用商品名称、商标、服务标记及类似术语，即使未明确标识，也不应被视作对它们是否受专有权利保护的任何意见。\n\
+  \n尽管本书中的建议和信息在出版时被认为是真实准确的，但作者、编辑和出版商均不对任何可能存在的错误或遗漏承担法律责任。出版商对本材料所含内容不作任何明示或默示的保证。\n\
+  \n印刷于无酸纸上\n\n本书由 Springer Science+Business Media New York 向全球图书贸易发行，地址：233 Spring\
+  \ Street, 6th Floor, New York, NY 10013。电话：1-800-SPRINGER，传真：(201) 348-4505，电子邮件：`orders-ny@springer-sbm.com`，或访问\
+  \ `www.springeronline.com`。\n\nApress Media, LLC 是一家加利福尼亚有限责任公司，其唯一成员（所有者）是 Springer\
+  \ Science + Business Media Finance Inc (SSBM Finance Inc)。SSBM Finance Inc 是一家特拉华州公司。\n\
+  \n## 献词\n\n谨以此书献给我的父母。没有他们，就没有我们的今天。\n\n## 致谢\n\n我们要感谢 Louise Corrigan 发掘了我们，并为我们提供了与全世界分享我们对\
+  \ JavaScript 的热爱这一绝佳机会。\n\n如果没有 Apress 团队不知疲倦的努力和极大的支持与响应，这本书将无法问世。衷心感谢 Nancy Chen\
+  \ 和 James Markham 在我们多次错过截止日期和大规模重写时表现出的极大耐心。\n\n特别感谢 Phil Nash，他极具洞察力和精准的审阅意见极大地影响了本书内容的最终成果。\n\
+  \n我们要感谢所有无法一一列举的朋友和家人，感谢你们在整个旅程中给予我们的激励与支持。最后，我们想感谢作为 JavaScript 生态系统一部分的无数开发者和贡献者，他们不断创新、突破边界；你们持续激励着我们。\n\
+  \n\n\n"
+- '# 目录
+
+
+  ## 第 1 章：ES6 入门 1
+
+
+  ### ES6 规范 1
+
+  ### ECMA、ECMAScript 与 JavaScript 的历史 2
+
+  ### 统一的 JavaScript 3
+
+  ### 使用 ES6 4
+
+  ### 使用 Babel 和 webpack 搭建 ES6 环境 5
+
+  #### 使用 Babel 进行转译 5
+
+  #### 搭建 ES6 基础模板 5
+
+  #### 将生成的`bundle.js`脚本添加到`index.html`中 8
+
+  ### 本章小结 10
+
+
+  ## 第 2 章：ES6 新语法 11
+
+
+  ### 变量声明：`let`、`const`与块级作用域 11
+
+  #### 块级作用域与`let`和`const` 12
+
+  #### 深入理解暂时性死区 14
+
+  #### 循环中的变量声明 15
+
+  #### 函数参数与全局作用域中的变量声明 16
+
+  ### 箭头函数 17
+
+  #### 使用箭头函数创建 IIFE 18
+
+  #### 关于`this`的故事 19
+
+  #### 使用箭头函数 24
+
+  ### 默认函数参数 25
+
+  ### 剩余与扩展运算符 27
+
+  #### 扩展运算符 29
+
+  ### 对象字面量扩展 30
+
+  ### 模板字面量与分隔符 32
+
+  #### 带标签的模板字面量 32
+
+  ### 本章小结 35
+
+
+  ## 第 3 章：解构 37
+
+
+  ### 对象与数组的解构 37
+
+  #### 对象解构语法 38
+
+  #### 使用解构进行赋值 40
+
+  #### 默认值 41
+
+  #### 嵌套解构 42
+
+  #### 使用`rest`语法进行解构 44
+
+  #### 解构参数 45
+
+  ### 本章小结 47
+
+
+  ## 第 4 章：ES6 中的类 49
+
+
+  ### ES6 中的类 49
+
+  #### 在 ES6 中定义类 51
+
+  #### 类声明 51
+
+  #### 类表达式 52
+
+  #### 类方法与访问器属性 53
+
+  #### 计算属性名 56
+
+  #### 类属性与隐私 56
+
+  #### 使用构造函数环境 57
+
+  #### 使用 WeakMaps 57
+
+  #### 静态方法与属性 58
+
+  #### 类继承与`super`关键字 59
+
+  #### 继承静态属性 61
+
+  #### 方法重写 62
+
+  #### 可继承的内置对象 63
+
+  ### 本章小结 64
+
+
+  ## 第 5 章：模块 65
+
+
+  ### 模块系统与历史沿革 65
+
+  #### 传统 JavaScript 中的模块模式 66
+
+  ### ES6 中的模块 66
+
+  #### 导出 67
+
+  #### 默认导出 67
+
+  #### 导入 68
+
+  #### 导入默认值 69
+
+  #### 导出已导入的绑定 70
+
+  #### 重命名标识符 70
+
+  #### 加载模块 71
+
+  #### Web 浏览器中的模块 71
+
+  #### 使用`<script>`加载模块 71
+
+  #### 在浏览器中异步加载模块 72
+
+  ### 常见陷阱 72
+
+  #### 语法 72
+
+  #### 只读绑定 73
+
+  #### 解构导入语句与使用变量 73
+
+  #### 使用`eval()` 74
+
+  #### 模块说明符 74
+
+  ### 本章小结 74
+
+
+  ## 第 6 章：ES6 中的符号 75
+
+
+  ### 符号 75
+
+  #### 符号的应用 76
+
+  ### 符号与注册表 79
+
+  #### `Symbol.for(key)` 79
+
+  #### `Symbol.keyFor(symbol)` 80
+
+  #### 内置符号 80
+
+  ### 本章小结 80
+
+
+  ## 第 7 章：数组与集合 81
+
+
+  ### 数组与新增方法 81
+
+  #### `Array.from()` 81
+
+  #### `Array.of()` 83
+
+  #### 新的数组原型方法 84
+
+  #### 类型化数组 89
+
+  #### 类型化数组的基本用法 89
+
+  #### 类型化数组与普通数组 90
+
+  ### Map 与 WeakMap 91
+
+  #### Map 91
+
+  #### WeakMap 93
+
+  ### Set 与 WeakSet 94
+
+  #### Set 94
+
+  #### WeakSet 95
+
+  ### 本章小结 96
+
+
+  ## 第 8 章：迭代器与生成器 97
+
+
+  ### 可迭代对象与迭代器 97
+
+  #### 迭代协议 100
+
+  #### 可迭代协议 100
+
+  #### 迭代器协议 100
+
+  #### 作为可迭代对象的迭代器 101
+
+  #### 迭代器中的`return()`与`throw()` 102
+
+  ### 生成器 102
+
+  #### 生成器函数 103
+
+  #### 与生成器通信 104
+
+  #### 提前结束 106
+
+  ### 本章小结 108
+
+
+  ## 第 9 章：ES6 中的 Promise 109
+
+
+  ### Promise 概述 109
+
+  #### 创建 Promise 110
+
+  #### 使用`then()`和`catch()`消费 Promise 111
+
+  #### Promise 链式调用 113
+
+  #### 错误处理 114
+
+  #### 使用`Promise.all`组合 Promise 115
+
+  ### 本章小结 116
+
+
+  ## 第 10 章：元编程 117
+
+
+  ### ES5 与 ES6 中的元编程概述 117
+
+  ### ES6 中的 Proxy（代理） 118
+
+  #### Proxy 处理器中的陷阱 119
+
+  #### `has` 121
+
+  #### `ownKeys` 122
+
+  #### `apply` 122
+
+  #### 可撤销的 Proxy 123
+
+  ### Reflect（反射） 125
+
+  ### 本章小结 127
+
+
+  ## 第 11 章：超越 ES6 129
+
+
+  ### ES2016 129
+
+  #### 数组的`includes`方法 129
+
+  #### 指数运算符`**` 130
+
+  ### ES2017 130
+
+  #### 异步函数 131
+
+  #### 原子操作与共享内存 132
+
+  #### `Object.entries()`与`Object.values()` 132
+
+  #### `padStart`与`padEnd` 132
+
+  #### `Object.getOwnPropertyDescriptors()` 133
+
+  #### 函数参数列表与调用中的尾逗号 134
+
+  ### 本章小结 134
+
+
+  ## 索引 135
+
+
+  '
+- "# 内容速览\n\n关于作者 xiii  \n关于技术审校者 xv  \n致谢 xvii  \n\n## 第 1 章：ES6 入门 1\n## 第 2 章：ES6\
+  \ 新语法 11\n## 第 3 章：解构 37\n## 第 4 章：ES6 中的类 49\n## 第 5 章：模块 65\n## 第 6 章：ES6 中的符号\
+  \ 75\n## 第 7 章：数组与集合 81\n## 第 8 章：迭代器与生成器 97\n## 第 9 章：ES6 中的 Promise 109\n## 第\
+  \ 10 章：元编程 117\n## 第 11 章：超越 ES6 129\n\n### 索引 135\n\n## 关于作者与技术审校者\n\n关于作者  \n\
+  关于技术审校者\n\n\n\n"
+- "# 1\\. ES6 入门指南\n\n如今，全球约有 46%的人口能够接入互联网，并且这一数字还在稳步增长。当你阅读这段文字时，世界各地正有人通过互联网服务预订出租车、航班，或是在高档餐厅预定双人桌；关键在于，如今的互联网已让人们的生活变得更加便捷。每天都有越来越多的\
+  \ Web 应用被创建出来，旨在节省人们的时间、提供更高标准的舒适度，或仅仅是为了娱乐。这些应用可以随时随地访问，其中许多都是使用`JavaScript`构建的。\n\
+  \n根据 StackOverflow 开发者调查，`JavaScript`是地球上最常用的编程语言。Web 平台的普适性正推动开发者比其他任何语言都更多地使用`JavaScript`，这进而催生了像`Node.js`这样的`JavaScript`平台，像`Angular`和`React`这样的前端框架，以及像`MEAN`（`MongoDB`、`ExpressJS`、`AngularJS`和`NodeJS`）这样的完整\
+  \ Web 技术栈。\n\n本书将讨论`ES 2015`（通常被称为`ES6`）及之后版本的核心概念，同时聚焦于最佳开发实践。当你读完本书时，你将深刻理解核心`ES6`的概念、特性及其在现代开发工作流中的适用性。\n\
+  \n### ES6 规范\n\n多年来，`ECMAScript 6`（`ES6`）一直在研发中。但在 2015 年 6 月 17 日，第 109 届 Ecma\
+  \ 全体大会批准了第 6 版`ECMA-262`标准，正式对我们所熟知并热爱的`JavaScript`进行了一次重大升级。\n\n`JavaScript`，更具体地说是`ECMAScript`的演进，主要由社区驱动，而`TC39`是负责此事的官方委员会。`TC39`主要由代表各方利益的成员组成，例如各大浏览器公司及其他受邀成员。他们定期会面与沟通，负责维护和升级`ECMAScript`编程语言及其扩展其能力的库的标准。在此过程中，他们审议和评估关于补充和附加技术以演进`ES`的提案。如果你有兴趣了解更多或查看他们会议的议程和纪要，这些内容都在\
+  \ GitHub 上公开（`https://github.com/tc39/tc39-notes`）。\n\n`ECMAScript`标准的设计流程围绕提案展开，这些提案通常是开发者社区对新特性或现有特性升级的热门请求。由于`TC39`参与者众多，进行协作设计工作较为困难，因此通常会指派一到两名委员会成员作为“负责人”，负责维护一个提案、进行设计工作并向委员会汇报。\n\
+  \n一个提案要成为标准，必须经过多个阶段。提案的初始特性草图，也被称为“稻草人提案”，是委员会讨论的第一阶段；如果委员会认同其重要性，它将被视为正式提案。随后，该提议的特性至少需要在两个主要的`JavaScript`引擎中实现，以收集社区反馈并进一步演进提案。一旦提案通过这些阶段并整合了反馈，`TC39`便会批准它，并将其纳入新版的`ECMAScript`标准中。\n\
+  \n## ECMA、ECMAScript 和 JavaScript 的历史\n\n对于不了解`JavaScript`历史的人来说，看到诸如`JavaScript`、`ECMAScript`、不同的版本号，以及其他流行的分支如`ActionScript`、`JScript`和`TypeScript`等众多不同名称时，会很快变得非常困惑——而这些其实都是`JavaScript`的不同形式。\n\
+  \n`JavaScript`最初由布兰登·艾奇（Brendan Eich）开发，作为 Netscape 浏览器中使用的 Web 脚本语言。由于当时`Java`日益流行，出于营销原因选择了这个名字，尽管它与`Java`毫无关系。为了将语言和规范标准化，它被提交给了`ECMA\
+  \ International`——一个专注于信息和通信技术及消费电子产品标准化的机构。最终，在`ECMA-262`中标准化的语言被简称为`ECMAScript`或`ES`，因为`JavaScript`是\
+  \ Sun 公司的商标，现在归 Oracle 所有。尽管如此，大家仍然普遍称这种语言为`JavaScript`。在以`ECMAScript`为核心的不同实现中存在许多变体，例如微软为\
+  \ Internet Explorer 稍作修改后采用的`JScript`。另一个衍生的例子是 Adobe 开发的`ActionScript`。\n\n最初的版本`ES1`和`ES2`分别于\
+  \ 1997 年和 1998 年发布。但在 1999 年，`ES3`版本是一次重大升级，引入了诸如正则表达式、改进的字符串处理、更多控制语句、更好的错误处理以及`try\
+  \ catch`异常处理等许多我们今天在`JavaScript`中常用的增强功能。它在各大主流浏览器和引擎中有着广泛的基础实现形式。\n\n在`ES3`发布后，`ES4`的工作进展顺利，但涉及许多根本性的变革和庞大的范围。更新的特性包括新语法、模块、类、经典继承、私有对象成员、可选类型注解等。提议的变更导致了社区内各利益相关方在技术和政治上的诸多分歧，最终导致其在\
+  \ 2003 年被搁置。部分提议的特性被纳入到像`ActionScript`和`Jscript.NET`这样的实现中。在收到这些实现的反馈后，`TC39`于 2005\
+  \ 年决定恢复`ES4`的工作。但此时社区内部已经出现巨大分裂，形成了两个主要阵营，在前进方向上存在分歧。\n\n由微软和雅虎等公司支持的替代版本，在对现有规范进行较少特性添加和改进方面，被称为`ECMAScript\
+  \ 3.1`。由于阵营之间未能达成共识，且`JavaScript`的未来充满不确定性，数年内没有取得重大进展。最终在 2008 年，`TC39`在`ES4`和`ES3.1`之间达成了共识。`ECMAScript\
+  \ 3.1`最终被标准化为`ECMA-262`的第五版，也称为`ECMAScript 5`，而为了避免混淆，委员会从未发布过`ECMAScript 4`标准。`ES5`将是一个小规模的增量更新，同时他们将致力于下一个主要版本，该版本将比`ES4`更为温和，放弃了诸如包、命名空间和早期绑定等许多提议特性。由于此次会议的性质，这个提议的版本被代号为`ES\
+  \ Harmony`。\n\n`ES5`于 2009 年 12 月发布，是目前现代浏览器中支持最广泛的版本。它带来了对标准库的许多增强，并通过严格模式更新了语言语义。\n\
+  \n当`ES Harmony`的计划对于一个单一版本来说显得过于雄心勃勃时，他们将优先级最高的第一批特性拆分出来，并代号为`ES.Next`，以避免重蹈`ES4`的覆辙而使用版本号进行草率命名；一旦成熟，该规范便被命名为`ECMAScript\
+  \ 6`。\n\n\n\nES6 经过漫长的时间才正式定稿。ES6 提案的截止日期是 2011 年 5 月，此后不再考虑任何重大提案；但从后续版本开始，TC39\
+  \ 决定采用时间箱式发布，每年发布一个包含增量小改动的新版本，使用当时已获批的任何特性。因此，委员会决定更改版本的命名约定，以表明发布年份。因此，ES6 的官方名称在最终发布前改为\
+  \ ECMAScript 2015，但 ES6 这个名称多年来被广泛使用，以至于 ES2015 仍然常被称为 ES6，这也是我们在本书中始终将新规范称为 ES6\
+  \ 的原因。但展望未来，ES 版本将正式以其发布年份命名。所以当我们说 ES6 时，我们指的是 ES2015 中更广泛的改动。\n\n从宏观角度来看，ES6 规范草案分为四个主要部分：目标、要求、方法和主题。目标旨在修复\
+  \ JavaScript 中的常见缺陷并添加新特性，而要求则指出这两点必须在不破坏任何现有代码的同时，保持语言的轻量级特性。\n\n我们不会在此深入探讨所有目标。但你应该知道，这些目标旨在使其成为更适合编写复杂应用程序、库等的语言。ES6\
+  \ 保持版本控制的简单和增量性，避免了版本分裂；“单一 JavaScript”哲学对此做了最好的描述。例如，在 ES6 中，一切都是 ES6 代码：不存在仅针对\
+  \ ES5 的部分。\n\nES6 旨在为大型应用程序和库的创建提供更好的支持。它提供了诸如类、模块、词法块作用域、迭代器、生成器、对 Promise 的原生语言支持等增强功能。\n\
+  \nECMAScript 标准的开发是由社区驱动的，该语言的特性要求在未来版本中将持续演進，以便做得更好。\n\n## 单一 JavaScript\n\n原则上，当语言实现的新版本出现时，这是一个清理旧有过时特性、为更新更好的实现让路的机会。这导致了版本分裂，这基本上意味着每段代码都需要关联到语言的特定版本。例如在\
+  \ Python 中，要在 Python 2 和 Python 3 之间切换，就需要迁移代码库。但这种选择对于 Web 和像 JavaScript 这样的语言是不可行的。你总会遇到互联网上遗留的旧代码块。\n\
+  \n因此，ES 规范致力于升级语言并避免版本分裂。这是通过始终保持向后兼容来实现的，也就是说，所有有效的 ES5 代码也是有效的 ES6 代码。因此，ES6 被设计为没有任何破坏性的更改，并且不会移除任何以前的特性。所以理论上，引擎不需要指定版本。因此，与其移除现有特性，不如引入新的、更好的特性。\n\
+  \n这对你，一位 JavaScript 开发者，意味着什么？由于 ES6 是 ES5 的超集，你将无需迁移任何旧代码。你现有的 JS 代码同样是有效的 ES6\
+  \ 代码。因此，重申一遍，你无需做任何事。因此，你在现有 JavaScript 中学到并使用的所有东西都可以迁移到 ES6，并且它有更多更好的工具可以添加到你的现有技能库中。如果你希望逐步将当前系统移植到\
+  \ ES6，这将非常有用，因为一切都是向后兼容的。\n\n### 使用 ES6\n\n许多 JavaScript 环境，包括 Web 浏览器和 Node.js，都在积极致力于实现\
+  \ ECMAScript 6 及后续版本的所有特性。但要在整个互联网上普遍支持 ES6 还需要一些时间。在编写本书时，最新版本的 Chrome 已实现 97%\
+  \ 的特性，Safari 已实现 100% 的特性。你可以通过 [`http://kangax.github.io/compat-table/es6/`](http://kangax.github.io/compat-table/es6/)\
+  \ 查看所有引擎当前按特性划分的支持情况。\n\n在所有 ES6 特性得到普遍支持之前，我们需要一种将 ES6 转换为兼容 JavaScript 代码的方法。这就是转译\
+  \ (transpiling) 的作用所在。转译（转换 + 编译）是一种技术，我们使用特殊工具将 ES6 代码转换为其最接近的等价物——ES5 代码，以便在旧版浏览器或环境中运行。\n\
+  \n考虑以下 ES6 代码：\n\n```\nconst fruits = [\"apples\", \"bananas\", \"oranges\"];\n\
+  let store = {\nfruits\n};\nstore.fruits; // [\"apples\", \"bananas\", \"oranges\"\
+  ]\n```\n\n它大致转译成：\n\n```\nvar fruits = [\"apples\", \"bananas\", \"oranges\"];\n\
+  var store = {\nfruits: fruits\n};\nstore.fruits; // [\"apples\", \"bananas\", \"\
+  oranges\"]\n```\n\n一些 ES6 特性只需使用 polyfill 或 shim 即可工作，这些是简单模式，用于在旧环境中定义新行为。你也可以通过\
+  \ ES6 REPL（如 [`https://jsfiddle.net/`](https://jsfiddle.net/) 和 [`babeljs.io/repl/`](http://babeljs.io/repl/)）在浏览器中在线运行和转译小段\
+  \ ES6 代码。但对于大型项目，你需要使用任何可用的转译器。我们推荐使用 Babel，它是当今最流行的 JavaScript 转译器之一。\n\n### 使用\
+  \ Babel 和 webpack 搭建 ES6 环境\n\n为了在今天的项目中使用 ES6，你需要一套构建工具来启动和运行。在本节中，我们将讨论一些构建工具，并搭建一个\
+  \ ES6 样板项目，你可以将其作为 ES6 项目的入门套件。\n\n#### 使用 Babel 进行转译\n\nBabel.js 是一个很棒的工具，它能让你将\
+  \ ES6 代码转译成 ES5 代码，然后可以在当前的 JavaScript 环境中运行。Babel 通过语法转换器支持最新版本的 JavaScript，这些插件允许你使用新的语法，而无需等待浏览器支持。\n\
+  \n第一步是使用 npm 在你的本地机器上安装 Babel。\n\n注意\n\n在继续之前，请确保你已经安装了 Node.js 和 npm。如果你尚未安装 node\
+  \ 和 npm，可以访问 [`https://nodejs.org/en/`](https://nodejs.org/en/) 来搭建你的开发环境。\n\n```\n\
+  npm install -g babel-cli\n```\n\n现在，你可以从命令行使用以下命令运行任何包含 ES6 代码的文件：\n\n```\nbabel-node\
+  \ \n```\n\n但是，手动转译每个文件效率不高，并且在大多数情况下，不是管理大型项目的解决方案。所以让我们搭建一个 ES6 入门套件，它将帮助你自动化构建过程，并使开发过程更高效。\n\
+  \n### 搭建 ES6 样板项目\n\n为了转译一个 ES6 项目，我们将使用 `babel-loader` 和 `webpack`，它们将帮助我们生成一个包含所有转译代码及相关依赖的捆绑输出。\n\
+  \n#### 启动一个新项目\n\n在你的终端中运行以下一组命令来启动一个新项目：\n\n```\nmkdir es6-boilerplate\ncd es6-boilerplate\n\
+  npm init –yes\n```\n\n`npm init` 创建一个具有其自身 `package.json` 的新项目，`–yes` 标志阻止 `npm`\
+  \ 提示你任何选项，并将使用默认设置。\n\n\n\n## 安装 webpack 和 webpack-dev-server\n\nWebpack 是一个非常灵活的模块打包工具，它可以接收带有依赖关系的模块，并生成代表这些模块的静态资源。我们将使用\
+  \ webpack 让 `babel-loader` 把我们的 ES6 代码转译为传统的 ES5 代码，并生成一个打包后的输出文件。\n\n```\nnpm install\
+  \ –-save-dev webpack\n```\n\n除了 webpack，我们还需要使用 `webpack-dev-server` 来运行我们的应用并即时转译代码。但请注意，`webpack-dev-server`\
+  \ 是一个开发服务器，不应在生产环境中使用。\n\n```\nnpm install –-save-dev webpack-dev-server\n```\n\n\
+  **注意：** 想更详细地了解 webpack 和 `webpack-dev-server`，可以访问 [`webpack.js.org/concepts/`](https://webpack.js.org/concepts/)。\n\
+  \n## 在项目中安装 Babel\n\n使用以下 npm 包，你可以非常轻松地将 babel 安装到你的项目中：\n\n```\nnpm install --save-dev\
+  \ babel-loader babel-core babel-preset-es2015\n```\n\n下一步是通过在项目根目录下添加一个包含以下 JSON\
+  \ 内容的新文件 `.babelrc` 来配置 babel 使用 ES2015 预设：\n\n```\n{\n\"presets\": [\"es2015\"\
+  ]\n}\n```\n\n你的 `package.json` 文件应该大致如下所示：\n\n```\n{\n\"name\": \"es6-boilerplate\"\
+  ,\n\"version\": \"1.0.0\",\n\"description\": \"ES6 Boilerplate\",\n\"devDependencies\"\
+  : {\n\"babel-core\": \"⁶.24.1\",\n\"babel-loader\": \"⁶.4.1\",\n\"babel-preset-es2015\"\
+  : \"⁶.24.1\",\n\"webpack\": \"².4.1\",\n\"webpack-dev-server\": \"².4.2\"\n}\n}\n\
+  ```\n\n现在，在你的项目根目录下创建一个新的 `index.html` 文件和 `index.js` 文件。你当前的项目目录应该如下所示：\n\n```\n\
+  .\n├── index.html\n├── node_modules\n├── package.json\n├── index.js\n```\n\n## 配置\
+  \ Webpack\n\n下一步是通过在项目根目录下创建一个配置文件 `webpack.config.js` 来设置 webpack。\n\n一个 webpack\
+  \ 配置文件是一个 CommonJS 风格的模块，它从中导出一个配置对象。\n\n```js\n// webpack.config.js\nmodule.exports\
+  \ = {\nentry: './index.js',\noutput: {\npath: './dist',\nfilename: 'bundle.js'\n\
+  }\n};\n```\n\n这里，`entry` 是你的项目源文件的路径，webpack 会分析你的入口文件以获取依赖关系，并生成一个打包后的输出（包含所有依赖模块）。请注意，启动时只会执行入口模块。\n\
+  \n## 添加加载器\n\n加载器让你可以在加载文件时对它们进行预处理。加载器提供了一种强大的方式来处理前端构建步骤，并且可以将文件从不同的语言（如 CoffeeScript）转换为\
+  \ JavaScript，或将内联图像转换为数据 URL。例如，`babel-loader` 使用 Babel 来加载 ES2015 文件。\n\n所以现在，修改\
+  \ `webpack.config.js` 以使用 `babel-loader` 处理所有 `.js` 文件：\n\n```js\nmodule.exports\
+  \ = {\nentry: './index.js',\noutput: {\npath: __dirname + '/dist',\npublicPath:\
+  \ '/dist/',\nfilename: 'bundle.js'\n},\nmodule: {\nrules: [{\ntest: /\\.js$/,\n\
+  exclude: /node_modules/,\nuse: 'babel-loader'\n}]\n}\n};\n```\n\n上述配置包含以下含义：\n\n\
+  1. `./index.js` 是应用的入口点。\n2. 输出将生成在 `./dist/bundle.js`。\n3. 我们使用 `babel-loader`\
+  \ 处理每一个 `.js` 文件，并排除 `node_modules`，以避免外部库经过 Babel 处理，从而拖慢编译速度。\n\n## 将你生成的 `bundle.js`\
+  \ 脚本添加到你的 `index.html`\n\n现在我们可以将 `bundle.js` 脚本包含到我们的 html 文件中以运行代码。\n\n```html\n\
+  <!DOCTYPE html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"UTF-8\">\n    <title>ES6\
+  \ Boilerplate</title>\n</head>\n<body>\n    <h1>ES6 Boilerplate</h1>\n    <p>查看控制台了解详情</p>\n\
+  \    <script src=\"./dist/bundle.js\"></script>\n</body>\n</html>\n```\n\n要编译你的\
+  \ `.js` 文件，你可以在终端中运行以下命令：\n\n```\nwebpack\n```\n\n你也可以将 `webpack` 与以下附加标志一起使用：\n\
+  \n* `webpack` 用于为开发环境构建一次。\n* `webpack -p` 用于为生产环境构建一次（压缩）。\n* `webpack -w` 用于开发环境中的持续增量构建（快速！）。\n\
+  * `webpack -d` 用于包含 source map。\n\n**专业提示：** 使用 `webpack --progress --colors` 可以美化输出，它会在终端的\
+  \ webpack 输出中添加一个进度条和颜色。\n\n## 设置开发服务器\n\n要启动开发服务器来测试你的代码，你可以运行以下命令：\n\n```\nwebpack-dev-server\
+  \ -d --progress --colors\n```\n\n这会在 `localhost:8080` 上绑定一个小的 node-express 服务器，它提供你的静态资源以及（自动编译的）打包文件。当打包文件被重新编译时，它会自动更新浏览器页面。\n\
+  \n我们还可以将这些 webpack 命令添加到你的 `package.json` 的脚本中。\n\n```json\n\"scripts\": {\n\"start\"\
+  : \"webpack-dev-server --hot --inline\",\n\"watch\": \"webpack -w -d\",\n\"build\"\
+  : \"webpack -p\"\n},\n```\n\n现在，你可以使用这个：\n\n* `npm start` 在 `localhost:8080` 上运行一个开发服务器，并监听/重新编译更改。\n\
+  * `npm run watch` 仅在你自己的 web 服务器上监听/重新编译更改。\n* `npm run build` 生成一个压缩的、可用于生产环境的构建。\n\
+  \n让我们用 `index.js` 文件中的一个 `helloWorld()` 函数来试试这个：\n\n```js\nconst helloWorld = ()\
+  \ => {\nconsole.log(\"Hello! We are all set!\");\nconsole.log(\"Arrow functions\
+  \ are working\");\n};\nhelloWorld();\n```\n\n为确保一切运行正常，你可以在终端中运行 `npm start`，并检查服务器是否在\
+  \ `http://localhost:8080` 上运行。\n\n你可以运行 `npm run watch` 来查看位于 `dist` 目录下的 `bundle.js`\
+  \ 文件中的转译代码，其中将包含如下这段转译后的 ES5 代码：\n\n```js\nfunction(module, exports) {\n\"use strict\"\
+  ;\nvar helloWorld = function sayHello() {\nconsole.log(\"Hello! We are all set!\"\
+  );\nconsole.log(\"Arrow functions are working\");\n};\nhelloWorld();\n}\n```\n\n\
+  最后，我们还建议在项目中使用 ESLint，以在编写代码时遵循最佳实践并避免错误。你可以在 [`github.com/metagrover/ES6-boilerplate`](https://github.com/metagrover/ES6-boilerplate)\
+  \ 找到上述样板代码，该仓库还包含一个 `.eslintrc` 文件，其中包含我们使用的标准规则和配置。\n\n\n\n## 摘要\n\nJavaScript\
+  \ 是当今 Web 上最强大的语言之一，并且其能力还在不断增强。`ES6`（官方名称为`ES2015`）及其后续版本为 JavaScript 带来了全新的范式。正如我们将在后续章节中看到的，对于传统\
+  \ JavaScript 开发者而言，存在大量新内容。但对于现有 JavaScript 开发者来说，了解这些新特性至关重要，以便在越来越多特性成为浏览器和框架世界主流时保持领先。\n\
+  \nJavaScript 的发展速度比以往任何时候都快，而转译器与填补/垫片（shims/polyfills）是助你始终站在语言发展前沿的重要工具。`ECMAScript\
+  \ 6` 为该语言带来了非常广泛的新增功能，其中每个特性都经过社区的仔细考量、深入讨论并被选定为标准的一部分。现在，我们开发者有责任使用并应用这一新标准到我们的产品中，以更好地服务用户。\n\
+  \n你可能会问自己，这些改变是否值得。将`ES6`集成到你的项目和工作是否必要？你真的需要改变现有的做事方式吗？我们想说的是：“是的，这是值得的”，并且通过本书，我们希望能鼓励你适应这个新世界。即使你在告别旧方式时遇到一些阻力，我们建议你坚持下去并改变你的实践。\n\
+  \nJavaScript 社区充满活力且动态十足，一切都在快速变化。现在，`ES6/ES2015` 知识已成为 JavaScript 开发者的必备技能。新的语言结构不仅变得流行，而且得到了广泛支持。掌握`ES6`的内部机制将让你能够构建现代应用程序，获得更强大的语言能力，并帮助你提升编程技能。\n\
+  \n通过`ES6`，你将能够使用更强大的编程概念，例如实用的面向对象代码以及其他一些在过去根本无法实现的新特性。我们希望向你介绍现代化的工作流程和工具（如`Babel`和`Webpack`），使应用程序开发更快、更愉快。你将能够衡量代码质量，并编写更易于测试的\
+  \ JavaScript。\n\n"
+- '# ES6 中的新语法
+
+
+  `ECMAScript 6` 引入的新特性代表了未来 JavaScript 应用程序构建的基础。在本章中，我们将探讨`ES6`语法的变化和新增内容，这些内容有助于修复之前
+  JavaScript 版本中存在的许多问题。我们将详细讨论声明变量和定义作用域的新方式。我们还将介绍新概念，如箭头函数、默认函数参数、展开与剩余运算符以及对象字面量扩展。
+
+
+  ## 变量声明：let、const 与块级作用域
+
+
+  过去，JavaScript 中的所有变量都使用关键字`var`声明。这些变量是函数作用域的，意味着它们的作用域受限于包含它们的函数，这对于来自其他语言的开发者来说有时会造成混淆。因此，如果需要创建一个具有自身作用域的新块，你必须将所需代码包裹在一个常规函数或立即调用函数表达式中。
+
+
+  以下是常规函数级作用域的示例：
+
+
+  ```
+
+  var price = 10; // 全局声明
+
+  function showPrice() {
+
+  var price = 12; // 使用 var 的局部声明
+
+  console.log(price); // 12
+
+  }
+
+  showPrice();
+
+  console.log(price); // 10
+
+  ```
+
+
+  以下是使用 IIFE 的函数级作用域示例：
+
+
+  ```
+
+  var price = 10; // 全局声明
+
+  (function () {
+
+  var price = 12; // 使用 var 的局部声明
+
+  console.log(price); // 12
+
+  })();
+
+  console.log(price); // 10
+
+  ```
+
+
+  上述代码表明，变量 `price` 现在的作用域限定在包含它的函数内，并且变更不会泄露到父作用域（在本例中为全局作用域）。新值 `price = 12` 仅在包含它的函数作用域内可用。
+
+
+  如果我们用块作用域（‘if’块）替换函数作用域，代码如下：
+
+
+  ```
+
+  var price = 10;
+
+  if (price) {
+
+  price = 12;
+
+  console.log(price); // 12
+
+  }
+
+  console.log(price); // 12
+
+  ```
+
+
+  上述代码清楚地表明，‘if’块内部的变更泄露到了父作用域，这告诉我们`var`声明绑定的是函数作用域，并不会创建块级作用域。
+
+
+  在`ES6`之前，JavaScript 使用函数作用域，但在大多数编程语言中，块级作用域比函数作用域更常见。随着`ES6`的到来，我们现在有了两种额外的变量声明方式：`let`和`const`，它们声明的变量都是块级作用域的。
+
+
+
+
+  ### 使用 `let` 和 `const` 进行块级作用域
+
+
+  简单来说，块级作用域是指在一对 `{ }` 之间创建了一个新的作用域。使用关键字 `let` 和 `const` 声明的变量只存在于包裹它们的最内层块中。
+
+
+  在下面的示例中，你认为执行这段代码片段时控制台会打印什么？
+
+
+  ```
+
+  let nbr = 42;
+
+  {
+
+  let nbr = 1000;
+
+  }
+
+  console.log(nbr);
+
+  ```
+
+
+  控制台会打印值 `42`，因为第二个 `nbr` 变量的作用域限定在其声明的块内部，不会影响块外部的 `nbr` 变量，外部变量仍为 `42`。通常，你不会这样使用一个块，除非它位于像
+  `if` 条件或循环这样的控制流语句中，但这解释了变量如何实现块级作用域。
+
+
+  我们现在知道，`var` 受函数作用域约束，而 `let` 和 `const` 则是块级作用域。这意味着如果你有一组花括号（一个代码块），你就有一个块级作用域。但需要注意的是，在每个块级作用域中，你只能声明一次变量。
+
+
+  另一方面，与 `let` 不同，`const` 创建的是不可变的变量。使用 `const` 创建的变量必须在声明时赋值，并且之后在程序中不能更改。
+
+
+  请看下面的例子：
+
+
+  ```
+
+  const value = 42;
+
+  console.log(value);   // 42
+
+  value = 1000;         // TypeError
+
+  ```
+
+
+  **注意**
+
+
+  尝试更改 `const` 变量的值会抛出 `TypeError`。在严格模式下更改不可变绑定只会引发异常 `SetMutableBinding()`。
+
+
+  请确保始终为使用 `const` 声明的变量初始化一个值；否则会抛出错误。请看下面的例子：
+
+
+  ```
+
+  const item;  // SyntaxError: Missing initializer in const declaration
+
+  ```
+
+
+  如果你需要一个值为 `undefined` 的常量，你仍然需要这样做：
+
+
+  ```
+
+  const value = undefined;
+
+  ```
+
+
+  如果你知道变量的值在整个代码中不会改变，你应该使用 `const`；否则使用 `let` 来声明变量。我们建议摒弃使用 `var` 声明变量的做法，因为如果你使用块级作用域，代码会更清晰、更高效，并且易于调试。`let`
+  和 `const` 避免了误解的来源，尤其是对于习惯了具有块级作用域语言的程序员来说。如果你试图在声明变量的块外部访问由 `let` 和 `const` 声明的变量，它们会抛出异常，并且不会发生提升，这有助于你限定代码片段的影响范围。
+
+
+  请参考以下示例，理解提升如何影响使用关键字 `var` 声明的变量：
+
+
+  ```
+
+  console.log(nbr);  // undefined
+
+  var nbr = 42;
+
+  ```
+
+
+  由于提升，上述例子会在控制台打印 `undefined`。当我们使用 `var` 声明变量 `nbr` 时，由于提升，这等同于在作用域的开头声明该变量，并将其值设置为
+  `undefined`。但是，如果你将 `console.log` 语句移动到声明之后，它会打印数字 `42`，这是因为进入使用 `var` 声明的变量的作用域（即其外围函数）会创建一个绑定。然后通过将值设置为
+  `undefined` 来初始化该变量。当执行到达声明处时，该变量会被设置为赋值语句中指定的值。
+
+
+  让我们看一个使用 `let` 的类似例子：
+
+
+  ```
+
+  console.log(nbr); // Reference Error: nbr is not defined
+
+  let nbr = 42;
+
+  ```
+
+
+  这实际上会给你一个 `Reference Error: nbr is not defined`，因为这里没有发生提升。这有助于调试由变量在声明之前被使用引起的各种类型的错误。这种
+  `Reference Error` 在技术上被称为暂时性死区（TDZ）错误，因为你正在访问一个已声明但尚未初始化的变量。
+
+
+  ### 关于暂时性死区的更多内容
+
+
+  本讨论的主要收获是，`let` 和 `const` 声明的变量具有暂时性死区（TDZ），这与使用 `var` 时发生的提升形成对比。暂时性死区中的变量尚未用任何值初始化。当变量被声明时，会创建一个内存绑定，但保持未初始化状态。此时尝试获取或设置该变量会引发
+  `Reference Error`。当程序流到达声明处时，该变量会被设置为语句中指定的值；如果语句中没有赋值，则设置为 `undefined`。
+
+
+  `const` 的工作方式类似，唯一的区别是它需要在声明时提供一个初始值，该值之后不能更改。
+
+
+  ```
+
+  let data = true;
+
+  if (true) { // 进入新作用域，TDZ 开始
+
+  // 为 "data" 创建未初始化的绑定
+
+  console.log(data); // ReferenceError
+
+  let data; // TDZ 结束，"data" 被初始化为 "undefined"
+
+  }
+
+  console.log(data); // true
+
+  ```
+
+
+  一旦通过给变量赋值完成初始化，TDZ 就结束了。
+
+
+  暂时性死区的主要目的是捕获错误。你不应该能在声明变量之前访问它，即使你意外访问了，也应该得到警告。TDZ 是让 `const` 按现有方式工作的最佳解决方案，而让
+  `let` 也拥有 TDZ 使得在两者之间切换非常容易。TDZ 帮助我们确保变量在运行时始终具有正确的值。
+
+
+  ```
+
+  if (true) {
+
+  console.log(typeof anUndeclaredVariable); // ''undefined''
+
+  console.log(typeof random); // ReferenceError (TDZ)
+
+  let random;
+
+  }
+
+  ```
+
+
+  即使你尝试使用 `typeof` 访问暂时性死区中的变量，也会得到异常。`typeof` 是检查变量是否存在的安全方法。但如果一个变量稍后使用 `let` 在代码中声明，那么当你调用
+  `typeof` 时，它会抛出一个 TDZ 错误，因为该变量正处于暂时性死区中。因此，一个良好的实践是始终将变量声明放在作用域的顶部。这项检查对于使用 `var`
+  有条件地创建全局变量也很有用。你可以通过以下方式检查全局变量是否存在：
+
+
+  ```
+
+  if (typeof globalVariable === ''undefined'') {
+
+  var globalVariable = { ··· };
+
+  }
+
+  ```
+
+
+  **注意**
+
+
+  `const` 用于声明一个不可变的变量，但这并不会使变量中包含的值变成不可变的。
+
+
+  在以下代码片段中，`obj` 是一个常量，但它所指向的值是可变的；因此你可以向其添加属性，但无法为 `obj` 赋另一个值。
+
+
+  ```
+
+  const obj = {};
+
+  obj.key = 42;
+
+  console.log(obj.key); // 42
+
+  obj = {}; // TypeError
+
+  ```
+
+
+  如果你愿意，可以通过冻结来使值本身变成不可变的。
+
+
+  ```
+
+  const obj = Object.freeze({});
+
+  obj.key = 42;
+
+  console.log(obj);   // {}
+
+  ```
+
+
+  请记住，`Object.freeze()` 是浅层冻结。它只会冻结传递给它的对象的直接属性。只有对象的第一层属性变得不可变，而存储在其属性中的对象则不会。
+
+
+
+
+  #### 循环中的变量声明
+
+
+  `for` 循环（`for`、`for-in`、`for-of`）允许你在循环头部声明变量。但使用 `var`、`let` 或 `const` 声明这些变量的方式会改变一些事情。我们来逐一分析这些情况。
+
+
+  在基本的 `for` 循环中，使用 `var` 会为该变量创建一个单一绑定：
+
+
+  ```
+
+  let arr = [];
+
+  for (var i=0; i < 3; i++) {
+
+  arr.push(function () { return i });
+
+  }
+
+  let value = arr[0]();
+
+  console.log(value); // 3
+
+  ```
+
+
+  你可能期望输出结果是 0，但实际输出是 3，因为循环结束时，变量 `i` 上形成了一个闭包。`i` 被设置为 3，并且函数体中的每个 `i` 都指向同一个绑定。因此，该函数始终返回
+  3。现在，我们来看看使用 `let` 声明 `i` 的情况：
+
+
+  ```
+
+  let arr = [];
+
+  for (let i=0; i < 3; i++) {
+
+  arr.push(function () { return i });
+
+  }
+
+  let value = arr[0]();
+
+  console.log(value); // 0
+
+  ```
+
+
+  当我们在 `for` 循环中使用 `let` 时，循环的每次迭代都会获得自己的 `i` 变量，并且任何闭包都会封闭其自身的 `i` 值。
+
+
+  对于 `const` 来说，它的工作方式类似于 `var`，因为赋给 `const` 变量的初始值不会再次改变。
+
+
+  ```
+
+  for (const i=0; i<3; i++) {
+
+  console.log(i);
+
+  }
+
+  // TypeError: Assignment to constant variable (due to i++)
+
+  ```
+
+
+  #### 函数参数与全局作用域中的变量声明
+
+
+  如果你在函数内部使用 `let` 声明一个与参数同名的变量，ES6 将会抛出一个静态（加载时）错误。
+
+
+  ```
+
+  function fn(param) {
+
+  let param; // SyntaxError: Identifier ''param'' has already been declared
+
+  }
+
+  ```
+
+
+  使用 `var` 做同样的事情则不会产生任何效果，因为这等同于重新声明一个变量。解决这个问题的另一种方法是在块内使用 `let`，但新声明的变量只会隐藏（shadow）参数：
+
+
+  ```
+
+  function fn(param) {
+
+  {
+
+  let param;
+
+  }
+
+  }
+
+  ```
+
+
+  JavaScript 中的全局对象（浏览器中的 `window` 和 Node.js 中的 `global`）一直令人困惑。这就是为什么在 ES6 中引入了一个区分。请考虑以下示例：
+
+
+  ```
+
+  let notGlobal = "hello";
+
+  var isGlobal = "what up";
+
+  { console.log(notGlobal); } // hello
+
+  { console.log(isGlobal); } // what up
+
+  global.isGlobal //''what up''
+
+  global.notGlobal // undefined
+
+  ```
+
+
+  全局对象的所有属性都是全局变量。因此，在全局作用域中，`var` 声明和函数声明会创建此类属性。但是，使用 `let` 和 `const` 声明的全局变量不会成为全局对象的属性。
+
+
+  ### 箭头函数
+
+
+  箭头函数是 ES6 中另一项主要的语法更新。箭头函数是使用一种新语法（即“胖”箭头 `=>`）定义的函数。该箭头基于 CoffeeScript 中的类似概念。通过省略
+  `function` 和 `return` 关键字，它们有助于使代码更易读，并以与函数执行相同的方式解读。在本节中，我们将详细讨论如何使用箭头函数以及何时使用它们是有意义的。
+
+
+  箭头函数的基本语法如下：
+
+
+  ```
+
+  var fn = data => data;
+
+  ```
+
+
+  赋值语句左侧的第一部分是提供给函数的参数。如果只有一个参数，则不需要任何额外的语法。接下来的部分是箭头，然后是即将返回的表达式。在这里，它只是返回参数。该函数实际上等同于：
+
+
+  ```
+
+  var fn = function(data) {
+
+  return data;
+
+  };
+
+  ```
+
+
+  考虑另一个示例：
+
+
+  ```
+
+  let getNumber = () => 42;
+
+  console.log(typeof getNumber); // function
+
+  console.log(getNumber()); // 42
+
+  ```
+
+
+  在上面的代码中，我们声明了一个名为 `getNumber` 的新函数，并使用箭头函数进行赋值。空括号 `()` 表示该函数没有参数，最后，函数返回值 42。在箭头函数中，我们可以省略
+  `return` 关键字。只要箭头后指定的表达式没有用 `{}` 包裹，它就会被返回。
+
+
+  ```
+
+  var getPrice = (quantity, tax) => (quantity * 5) * (1 + tax);
+
+  console.log(getPrice(2, .095)); //  10.95
+
+  ```
+
+
+  请注意，如果恰好只有一个参数，可以省略括号 `()`，但当参数为零个或多个时，则始终需要使用括号。
+
+
+  如果要指定一个包含多个表达式的更传统的函数块，则需要将函数体包裹在花括号中。但是你需要特别使用 `return` 关键字来指定返回值。请查看以下代码片段以获取示例：
+
+
+  ```
+
+  var getPrice = (quantity, tax) => {
+
+  let price = (quantity * 5)
+
+  price *= (1 + tax);
+
+  return price;
+
+  }
+
+  console.log(getPrice(2, .095)); //  10.95
+
+  ```
+
+
+  花括号表示函数体。如果你希望箭头函数在函数体外返回一个对象字面量，则必须将该字面量包裹在括号中。例如：
+
+
+  ```
+
+  var getNumber = data => ({ data: "check", number: 42 });
+
+  // 实际上等同于：
+
+  var getNumber = function(data) {
+
+  return {
+
+  data: "check",
+
+  number: 42
+
+  };
+
+  };
+
+  ```
+
+
+  用括号包裹的对象字面量表明这些花括号是一个对象字面量，而不是函数体。
+
+
+  #### 使用箭头函数创建 IIFE
+
+
+  JavaScript 中的函数可用于创建立即调用函数表达式（IIFE）。你可以定义一个匿名函数并立即调用它，而不保留对它的任何引用。这是一种将表达式与程序其他部分隔离开的有效模式。
+
+
+  ```
+
+  var fn = function(number) {
+
+  return {
+
+  getNumber: function() {
+
+  return number;
+
+  }
+
+  };
+
+  }(42);
+
+  console.log(fn.getNumber());      // 42
+
+  ```
+
+
+  在上面的代码中，使用了一个 IIFE 来创建 `getNumber()` 方法，该方法使用 `number` 参数作为返回值，确保 `number` 属性实际上是返回对象的一个私有成员。使用箭头函数也可以实现非常类似的效果，只需将其包裹在括号中即可。
+
+
+  ```
+
+  var fn = ((number) => {
+
+  return {
+
+  getNumber: function() {
+
+  return number;
+
+  }
+
+  };
+
+  })(42);
+
+  console.log(fn.getNumber());      // 42
+
+  ```
+
+
+  需要注意的一个区别是，箭头函数是函数表达式，而不是函数声明。它们是匿名的函数表达式，为了递归、事件绑定或解绑的目的，没有命名的引用。
+
+
+  箭头函数的优点不仅仅是漂亮和更清晰的语法。箭头函数确实可以为我们节省几行代码和几个字符，但箭头函数的真正目的是处理函数内部的 `this` 关键字。`this`
+  在箭头函数内部有不同的行为。但在我们讨论这一点之前，在下一节中，让我们先看看 `this` 关键字通常是如何工作的。
+
+
+  ## 关于 this 的故事
+
+
+  在 JavaScript 中，`this` 是函数的当前执行上下文。让我们看看它在以下场景中的含义：
+
+
+  ### 1. 函数调用
+
+
+  在 Chrome 中调用 `getContext()` 函数将在控制台中打印 `Window` 对象。这是因为 `getContext()` 的上下文是 `Window/Global
+  对象`。在调用 `getContext()` 时，JavaScript 会自动将 `this` 设置为 `global` 对象，在浏览器中即 `Window`。
+
+
+  ```
+
+  function getContext() {
+
+  console.log(this); // Global 或 Window
+
+  }
+
+  ```
+
+
+  当 `this` 在任何 `函数` 作用域之外使用时，它同样指的是 `全局` 作用域。请检查以下代码片段：
+
+
+  ```
+
+  if (this === window) {
+
+  console.log("this 指的是全局上下文");
+
+  }
+
+  ```
+
+
+  **注意：** 如果你处于严格模式（`"use strict"`）下，`this` 将为 `undefined`。
+
+
+
+
+  ### 2\. 方法调用
+
+
+  方法调用是指调用对象的方法，在这种情况下，`this` 指向方法调用中拥有该方法的对象。
+
+
+  ```
+
+  let myObj = {
+
+  name: ''fancy'',
+
+  operation: function() {
+
+  console.log(this);
+
+  }
+
+  }
+
+  myObj.operation(); // { name: ''fancy'', operation: [Function: operation]}
+
+  ```
+
+
+  方法调用，即调用 `myObj.operation()` 时，控制台会打印出 `[myObj object]`。
+
+
+  现在，让我们尝试以下代码：
+
+
+  ```
+
+  let x = myObj.operation;
+
+  x(); // Window
+
+  ```
+
+
+  此处，`x` 引用了 `[myObj object]` 中的 `operation()` 方法。调用 `x()` 意味着我们进行的是函数调用而非方法调用，因此，`this`
+  将指向 `Global`（或 `Window`）对象。
+
+
+  如果我们想使用 `[myObj object]` 来调用 `x`（进行方法调用），就必须使用 `.call()` 方法：
+
+
+  ```
+
+  let x = myObj.operation;
+
+  x(); // Window
+
+  x.call(myObj); // { name: ''fancy'', operation: [function]}
+
+  ```
+
+
+  ### 3\. 构造函数调用
+
+
+  构造函数调用发生在使用 `new` 关键字创建对象时。请考虑以下示例：
+
+
+  ```
+
+  function Employee(name, department, salary) {
+
+  this.name = name;
+
+  this.department = department;
+
+  this.salary = salary;
+
+  console.log("Welcome " + this.name + "!");
+
+  }
+
+  let john = new Employee(''John'', ''Sales'', 4000);
+
+  // Welcome John!
+
+  ```
+
+
+  `new Employee(''John'', ''Sales'', 4000)` 是对 `Employee` 函数的构造函数调用。执行结果是一个新对象，并且
+  `this` 指向这个新创建的对象。
+
+
+  构造函数 `Employee()` 可以用 ES6 中的 class 来编写，我们将在本书后面讨论。
+
+
+  ### 箭头函数中的 `this`
+
+
+  让我们看看 `this` 在箭头函数内部是如何工作的。箭头函数旨在词法上绑定上下文，这意味着 `this` 指向定义箭头函数时的封闭上下文。与普通函数不同，箭头函数不会创建自己的执行上下文，而是从定义它的外部函数中获取
+  `this`。请考虑以下代码：
+
+
+  ```
+
+  function Employee(firstName, department, salary) {
+
+  this.firstName = firstName;
+
+  this.department = department;
+
+  this.salary = salary;
+
+  this.getInfo = function() {
+
+  // 外部函数上下文 = Employee 对象
+
+  return function () {
+
+  // 内部函数上下文 = Global 对象
+
+  console.log(this.firstName + " from " +
+
+  this.department + " earns " + this.salary);
+
+  };
+
+  }
+
+  }
+
+  let jim = new Employee(''Jim'', ''Finance'', 5200);
+
+  ```
+
+
+  在上面的示例中，我们创建了一个名为 `Employee` 的构造函数，并使用该构造函数和 `new` 关键字创建了一个名为 `jim` 的新员工对象。为了打印员工信息，我们需要使用
+  `jim.getInfo()` 返回的函数。请查看以下代码片段：
+
+
+  ```
+
+  let printInfo = jim.getInfo();
+
+  printInfo();  // undefined from undefined earns undefined
+
+  ```
+
+
+  这里，`printInfo` 指向内部函数。由于我们只是进行函数调用，`this` 指向 `Global` 对象，该对象没有任何 `Employee` 属性，因此每当使用
+  `this` 上的属性时都会产生 `undefined`。
+
+
+  让我们看看如果用箭头函数替换内部函数，`this` 的行为会有什么不同：
+
+
+  ```
+
+  function Employee(firstName, department, salary) {
+
+  this.firstName = firstName;
+
+  this.department = department;
+
+  this.salary = salary;
+
+  this.getInfo = function() {
+
+  // 外部函数上下文 = Employee 对象
+
+  return () => {
+
+  // 内部函数上下文 = 包围它的上下文 = Employee 对象
+
+  console.log(this.firstName + " from " +
+
+  this.department + " earns " + this.salary);
+
+  };
+
+  }
+
+  }
+
+  let jim = new Employee(''Jim'', ''Finance'', 5200);
+
+  let printInfo = jim.getInfo();
+
+  printInfo();  // Jim from Finance earns 5200
+
+  ```
+
+
+  在这种情况下，`this` 关键字指向的是包围箭头函数的函数的上下文，而不是之前指向 `Global` 对象的情况。这里需要注意的是，箭头函数不会在调用时改变它们的上下文。请考虑以下示例：
+
+
+  ```
+
+  function Employee() {
+
+  this.firstName = ''Mike'',
+
+  this.department = ''HR'',
+
+  this.salary = 4500,
+
+  this.getContext = () => {
+
+  console.log(this);
+
+  }
+
+  }
+
+  let mark = new Employee();
+
+  mark.getContext(); // [Employee object]
+
+  let context = mark.getContext;
+
+  context(); // [Employee object] (无论是否是函数调用)
+
+  ```
+
+
+  在上面的示例中，箭头函数的上下文在声明时就被设置，并且无法更改。这里需要注意的是，你无法“重新绑定”一个箭头函数。上下文始终是固定的。请查看以下代码片段以获取示例：
+
+
+  ```
+
+  var details = {
+
+  number: 42,
+
+  operation: function () {
+
+  return () => console.log(this.number);
+
+  }
+
+  };
+
+  var details2 = {
+
+  number: 84
+
+  };
+
+  details.operation().bind(details2)(); // 42
+
+  ```
+
+
+  在上面的示例中，我们将 `details2` 的 number 设置为 84。但知道我们无法将新对象绑定到箭头函数。引擎不会抛出任何错误，它只是完全忽略了 `bind`。因此，即使我们用
+  `details2` 对象调用 `operation` 方法，也会打印出 42。这也适用于 `call` 和 `apply`。因此，对于箭头函数，调用 `bind`、`call`
+  或 `apply` 将无法改变 `this` 的值。
+
+
+  从这个例子中可以清楚地看出，函数内部 `this` 关键字的值是无法更改的。函数内部 `this` 的值将保持不变，但你仍然可以在箭头函数上使用 `bind`、`call`
+  和 `apply`。
+
+
+  ```
+
+  var product = (x, y) => x * y;
+
+  console.log(product.call(null, 2, 3));           // 6
+
+  console.log(product.apply(null, [2, 3]));        // 6
+
+  var multiply = product.bind(null, 2, 3);
+
+  console.log(multiply ());                        // 6
+
+  ```
+
+
+  除了词法上的 `this`，箭头函数还具有词法上的 `arguments`。它们没有自己的 `arguments` 数组，而是从父级继承。箭头函数没有 `this`、`super`、`arguments`
+  和 `new.target` 绑定，因此函数内部的 `this`、`super`、`arguments` 和 `new.target` 的值是最近的包含非箭头函数里的相应值。
+
+
+  **注意**
+
+
+  通常情况下，在 JavaScript 中，代码之间的额外换行符没有任何意义，代码仍然可以正常工作，但对于箭头函数来说，这是一个问题。我们不能将箭头符号放在新行上。ES6
+  禁止在箭头函数的参数定义和箭头之间出现换行。
+
+
+  箭头函数的另一个重要方面是，它们不能与 `new` 一起调用，因为它们没有构造方法，也不能用作构造函数。当与 `new` 一起使用时，它们会产生错误。请查看下面的示例：
+
+
+  ```
+
+  var newFn = () => {},
+
+  object = new newFn();  // 错误 - 你不能对箭头函数使用 ''new''
+
+  ```
+
+
+  通常，在 ES5 中声明函数时，它有一个用于构造函数的 `prototype` 属性。但由于你不能对箭头函数使用 `new`，因此也就不需要 `prototype`。因此，使用箭头函数声明的函数无法访问
+  `prototype` 字段。
+
+
+  ```
+
+  var details = () => 42;
+
+  console.log(details.hasOwnProperty("prototype")); // false
+
+  ```
+
+
+  与严格模式下不允许重复命名参数的非箭头函数类似，箭头函数无论在严格模式还是非严格模式下都不能有重复的命名参数。
+
+
+
+  好的，作为高级文档工程师和翻译员，我将严格遵循您提供的格式和注意事项，对给定的英文文本进行翻译。
+
+
+
+  #### 使用箭头函数
+
+
+  当你有一个简短的单行内联函数表达式，且有计算后的返回值，并且该函数没有使用 `this` 引用或自引用时，你就可以用箭头函数替换它。
+
+
+  如果你有函数使用 `var self = this` 这种技巧来处理 `this` 问题，或者调用 `.bind(this)` 来实现正确的 `this` 绑定，那么箭头函数正是为解决此问题而生的。例如，考虑以下代码片段，我们在点击
+  `btn` 后等待 1 秒钟来切换 `btn-active` 类。
+
+
+  ```javascript
+
+  $(''.btn'').on(''click'', function() {
+
+  var self = this;
+
+  setTimeout(function() {
+
+  $(self).toggleClass(''btn-active'');
+
+  }, 1000);
+
+  });
+
+  ```
+
+
+  如果没有箭头函数，我们需要将上下文存储在一个变量中，以便能够在 `setTimeout` 函数内部访问它。使用箭头函数可以简单地重写为：
+
+
+  ```javascript
+
+  $(''.btn'').on(''click'', function() {
+
+  setTimeout(() => {
+
+  $(this).toggleClass(''btn-active'');
+
+  }, 1000);
+
+  });
+
+  ```
+
+
+  因此，除了更短、更简洁的语法外，箭头函数对 `this` 关键字的处理方式也略有不同，使得在许多情况下代码更易于管理。
+
+
+  ### 默认函数参数
+
+
+  与其他语言中常见的模式不同，JavaScript 中的函数很独特，它允许你传入任意数量的参数来调用它们，而不受函数定义中声明的参数数量的限制。这为开发人员提供了一个机会，可以在未指定参数时为参数使用任意值。在
+  ES5 中，如果未指定参数，其值将被设置为 `undefined`。为未指定参数设置默认值的常见模式如下：
+
+
+  ```javascript
+
+  function getSum(a,b) {
+
+  a = (a !== undefined) ? a : 1;
+
+  b = (b !== undefined) ? b : 41;
+
+  console.log( a + b );
+
+  }
+
+  getSum();            // 42
+
+  getSum(1, 2);        // 3
+
+  getSum(10);          // 51
+
+  getSum(null, 6);     // 6
+
+  ```
+
+
+  ES6 试图通过允许我们在函数声明语句中为参数设置默认值来简化此过程。
+
+
+  ```javascript
+
+  var getSum2 = function(a = 1, b = 41) {
+
+  console.log(a + b);
+
+  }
+
+  getSum2();            // 42
+
+  getSum2(1, 2);        // 3
+
+  getSum2(10);          // 51
+
+  getSum2(null, 6);     // 6
+
+  ```
+
+
+  当我们调用函数时，如果未指定任何参数，则会使用参数的默认值。指定默认值的语法是参数后跟等号 `=` 和一个表达式。
+
+
+  ```javascript
+
+  var getAnswer = function(number = 42, item = "universe") {
+
+  console.log(number + " is the answer to " + item);
+
+  }
+
+  getAnswer(undefined, "life"); // 42 is the answer to life
+
+  ```
+
+
+  在这里，我们将 `undefined` 作为第一个参数传递，ES6 会使用默认值 42 代替。
+
+
+  函数默认值可以不仅仅是像 42 这样的简单值；它们可以是任何有效的表达式，甚至是函数调用。你可以使用复杂的表达式作为参数的默认值。默认值表达式是惰性求值的，这意味着它们仅在参数的参数不存在或是
+  `undefined` 时才运行。
+
+
+  ```javascript
+
+  var getName = function(firstName = "John", lastName = "Doe") {
+
+  console.log(firstName + " " + lastName);
+
+  }
+
+  getName("Jane"); // Jane Doe
+
+  ```
+
+
+  你还可以在用作默认值的表达式中访问其他变量。
+
+
+  ```javascript
+
+  var defaultName = "John";
+
+  var getName = function(firstName = defaultName, lastName = "Doe") {
+
+  console.log(firstName + " " + lastName);
+
+  }
+
+  getName(); // John Doe
+
+  ```
+
+
+  在给参数指定默认值时，你也可以调用一个函数。
+
+
+  ```javascript
+
+  var getFirstName = () => "John";
+
+  var getName = function(firstName = getFirstName(), lastName = "Doe") {
+
+  console.log(firstName + " " + lastName);
+
+  }
+
+  getName(); // John Doe
+
+  ```
+
+
+  在上面几个例子中，如果我们尝试检查参数个数：
+
+
+  ```javascript
+
+  var getName = function(firstName, lastName = "Doe") {
+
+  console.log(arguments.length);
+
+  }
+
+  getName("John"); // 1
+
+  ```
+
+
+  即使第二个参数有默认值，`arguments.length` 也只返回实际传递给函数的参数个数。
+
+
+  让我们看一个稍微复杂一点的例子：
+
+
+  ```javascript
+
+  var getPrice = function(quantity = price, price = 5) {
+
+  console.log(quantity + ", " + price);
+
+  }
+
+  getPrice(); // ReferenceError: price is not defined
+
+  ```
+
+
+  把函数声明和参数看作一个作用域。函数声明的参数在括号 `(...)` 之间有它们自己的作用域。不要将其与函数体作用域混淆。在求值 `quantity` 时，JavaScript
+  尚未执行到 `price` 的声明，因此它不知道 `price` 的值。在默认值表达式中引用一个标识符时，会先在形式参数的作用域内匹配，然后才查找外部作用域。
+
+
+  就像我们在关于 `let` 声明的部分中讨论的那样，ES6 有一个暂时性死区（TDZ），不允许在变量初始化之前访问它。因此，在上面的例子中，当你尝试在声明之前使用参数时，会发生暂时性死区引用错误。
+
+
+  ES6 默认参数的另一个很棒的特性是，即使在创建动态函数时它们也能正常工作：
+
+
+  ```javascript
+
+  var getNumber = new Function("number = 42", "return number;");
+
+  console.log(getNumber()); // 42
+
+  ```
+
+
+
+
+  '
+- '# Rest 与 Spread 操作符
+
+
+  JavaScript 一直以来都允许向函数传递比函数声明中正式指定的参数更少或更多的参数，而不会出现任何问题。正如之前讨论的，默认参数可以帮助你接受更少的参数值，同时让其他参数仍有值可赋。
+
+
+  许多现代编程语言都提供了函数接受可变数量参数的能力。ES6 通过 Rest 参数（剩余参数）为 JavaScript 引入了这一迫切需要的特性。现在，你可以非常轻松地向函数传递动态数量的参数。如果你在
+  ES5 中想这样做，就必须将所有值放入一个像数组这样的数据容器数据类型中。Rest 参数简化了整个流程。
+
+
+  **注意：** 不要将此术语与 Web 服务中的 REST 概念混淆。这与 Web 服务中的 REST 毫无关系。此处的 Rest 指的是将参数收集起来，并将它们全部放入一个单一的数组中。Spread（展开）则指将数组（甚至字符串）的元素展开。
+
+
+  让我们看一个例子：
+
+
+  ```
+
+  var showCollections = function (id, ...collection) {
+
+  console.log(collection instanceof Array);
+
+  };
+
+  showCollections(42, "movies", "music");  // true
+
+  ```
+
+
+  `...` 符号就是 rest 符号。它位于一个命名参数之前。这个命名参数将成为一个数组，用来收集所有传递给函数的剩余参数。因此在这里，`collection`
+  被设置成了一个数组。为了更清楚地说明，如果我们按以下方式执行上述程序：
+
+
+  ```
+
+  var showCollections = function (id, ...collection) {
+
+  console.log(collection);
+
+  };
+
+  showCollections(42, "movies", "music"); // ["movies", "music"]
+
+  ```
+
+
+  Rest 参数收集了 `id` 参数之后的所有剩余参数，并将它们放入一个名为 `collection` 的数组中。除了第一个已定义的参数 `''id''` 之外，所有其他内容都将被放入该数组中。
+
+
+  如果我们只传递一个值（即 `id`）来调用同一个函数，它会输出一个空数组 `[]`。
+
+
+  让我们看一下函数的 `length` 属性。如果我们调用 `showCollections.length`，它将返回函数中参数的数量。
+
+
+  ```
+
+  var showCollections = function (id, ...collection) {};
+
+  console.log(showCollections.length); // 1
+
+  ```
+
+
+  `length` 属性会忽略 Rest 参数。在这个例子中，它是 1。函数的 `length` 属性只计算命名参数的数量，而不包括 rest 参数。现在，我们来看看在函数内部检查
+  `arguments.length` 的情况：
+
+
+  ```
+
+  var showCollections = function (id, ...collection) {
+
+  console.log(arguments.length);
+
+  };
+
+  showCollections(123, "movies", "music"); // 3
+
+  ```
+
+
+  我们之前已经有一个 `arguments` 对象，我们可以用它来检查传递给函数的所有参数，而无需具体定义每个参数。请记住，函数中既可以有命名参数，也可以有未命名参数。在这种情况下，尽管函数定义中只有两个参数，但
+  `arguments` 对象会引用原始的函数调用，而 3 是传递给函数的参数个数。
+
+
+  在 ES4 规范中，Rest 参数本意是要取代 `arguments`，并且 `arguments` 对象会被完全废除，但 ES4 从未成为现实。在 ES6 中，这一概念被重新引入，但这一次
+  `''arguments''` 并未从语言中移除。
+
+
+  我们可以在函数构造器中使用 Rest 操作符。请看下面的例子，我们创建了一个带有 rest 参数的新函数，该函数返回传递给它的第一个参数。
+
+
+  ```
+
+  var getFirst = new Function("...args", "return args[0]");
+
+  console.log(getFirst(1, 2));   // 1
+
+  ```
+
+
+  ## Spread 操作符
+
+
+  Spread 操作符，同样用数组前的 `...` 表示，其作用本质上是 rest 操作符的逆操作。它将一个数组展开，并将值传递给指定的函数。请看下面的示例：
+
+
+  ```
+
+  let values = [200, 300, 400];
+
+  let newSet = [100, ...values, 500]
+
+  console.log(newSet);  // [100, 200, 300, 400, 500]
+
+  ```
+
+
+  Spread 操作符与 rest 参数密切相关。在这种特定的格式中，作为 spread 操作符，`...` 被用作一种拼接或插入机制，将 `values` 数组插入到现有值之间，从而将新形成的数组赋值给
+  `newSet`。
+
+
+  在 rest 参数的情况下，你可以将多个参数合并成一个单一的数组；而在 spread 操作符的情况下，你可以指定一个单一的数组，它会被拆分成单独的参数，然后传递给一个函数或方法。让我们再看一个使用
+  `Math.max()` 方法和 spread 操作符的例子：
+
+
+  ```
+
+  let numbers = [-25, 100, 42, -1000];
+
+  console.log(Math.max(...numbers, 900));        // 900
+
+  ```
+
+
+  在上述例子中，`Math.max` 接收了五个参数，前四个是 -25, 100, 42, 和 -1000，另外还有我们添加的第五个参数 900。结果是这些数中的最大值，即
+  900。因此，spread 操作符将数组中的值作为参数展开到函数调用中。
+
+
+  Spread 操作符使得将以数组形式传递给函数的参数处理起来更加容易。与 rest 操作符一样，你也可以在函数构造器中使用 spread 操作符。
+
+
+  如果我们尝试展开一个空数组，比如一个可能缺少两个值的数组 `[,,]`，最后一个逗号被视为尾部逗号而被忽略。展开的参数也将会是 `undefined`。请看下面的例子：
+
+
+  ```
+
+  function printInput(...input) {
+
+  console.log(input);
+
+  }
+
+  let input = [,,];
+
+  printInput(...input); // [undefined, undefined]
+
+  ```
+
+
+
+
+  '
+- '# 对象字面量的扩展
+
+
+  ES6 为对象字面量引入了一些新的扩展特性。
+
+
+  要声明对象字面量，目前使用变量时我们不得不采用以下编码模式：
+
+
+  ```
+
+  var price = 4.20, quantity = 20;
+
+  var invoiceData = {
+
+  price: price,
+
+  quantity: quantity
+
+  };
+
+  console.log(invoiceData);
+
+  ```
+
+
+  同时声明 `price` 和 `quantity` 两次有些冗余，但现在 ES6 提供了一种简写形式，让写法更简洁。请看下面的示例：
+
+
+  ```
+
+  const price = 4.20, quantity = 20;
+
+  const invoiceData = {
+
+  price,
+
+  quantity
+
+  };
+
+  console.log(invoiceData);
+
+  ```
+
+
+  我们只需列出字段一次，ES6 的对象字面量就能智能识别出我们想要一个名为 `price` 的字段，并将其上下文数据设置为同名变量的值。这种简写语法不仅减少了代码量，也提高了可读性。
+
+
+  ES6 还提供了一种在对象字面量中编写函数的简写形式。例如，请看下面的代码片段：
+
+
+  ```
+
+  const price = 4.20, quantity = 20;
+
+  const invoiceData = {
+
+  price,
+
+  quantity,
+
+  calculateTotal() {
+
+  return this.price * this.quantity;
+
+  }
+
+  };
+
+  console.log(invoiceData.calculateTotal());
+
+  ```
+
+
+  在上述简写形式中，你不再需要 `function` 关键字。当我们在对象字面量中使用函数简写时，`this` 指向代码的上下文，其行为与箭头函数类似。它并不指向包含该函数的对象。其行为与箭头函数完全一致。
+
+
+  请注意，你可以在对象字面量中使用动态字段名：
+
+
+  ```
+
+  const field = ''dynamicRandom'';
+
+  const price = 5.99;
+
+  const quantity = 2;
+
+  const invoiceData = {
+
+  [field]: price,
+
+  quantity,
+
+  calculateTotal() {
+
+  return this.price * this.quantity;
+
+  }
+
+  };
+
+  console.log(invoiceData);
+
+  // { dynamicRandom: 5.99,
+
+  //   quantity: 2,
+
+  //   caculateTotal: [Function: calculateTotal] }
+
+  ```
+
+
+  对象中的字段被命名为 `dynamicRandom`。实际上，你还可以使用完整的表达式，让属性命名更具动态性：
+
+
+  ```
+
+  const field = ''dynamicRandom'';
+
+  const price = 5.99, quantity = 2;
+
+  const invoiceData = {
+
+  [field + "-01"]: price,
+
+  quantity,
+
+  calculateTotal() {
+
+  return this.price * this.quantity;
+
+  }
+
+  };
+
+  console.log(invoiceData);
+
+  // { dynamicRandom-01: 5.99,
+
+  //   quantity: 2,
+
+  //   caculateTotal: [Function: calculateTotal] }
+
+  ```
+
+
+  你甚至可以在方法中创建动态字段名。它们也可以与 setter 和 getter 一起使用。
+
+
+  ### 模板字面量与分隔符
+
+
+  JavaScript 中的字符串在历史上一直受限，缺乏其他编程语言所具备的能力。ES6 引入了模板字面量，它提供了一种定义字符串的方式，并具备以下额外功能：
+
+
+  * 字符串插值
+
+  * 嵌入表达式
+
+  * 多行字符串（无需技巧）
+
+  * 字符串格式化
+
+
+  模板字面量使用反引号（`` ` ``）而不是单引号或双引号。模板字面量最终总会生成字符串。模板字面量可以这样写：
+
+
+  ```
+
+  let user = `Kevin`;
+
+  ```
+
+
+  模板字面量支持字符串替换，允许我们在字符串中替换任意有效的 JavaScript 表达式。模板字面量可以使用 `${ }` 语法作为字符串替换的占位符。请看以下示例：
+
+
+  ```
+
+  console.log(`Hi ${user}!`); // Hi Kevin!
+
+  ```
+
+
+  在上述示例中，模板字面量由反引号（`` ` ``）界定，字面量内部的插值表达式由 `${` 和 `}` 界定。
+
+
+  我们不仅可以替换变量名，还可以替换更多内容。模板字面量允许使用表达式插值来嵌入可读的内联数学运算，例如：
+
+
+  ```
+
+  let a = 10;
+
+  let b = 20;
+
+  console.log(`Sum of ${a} and ${b} is ${a+b}`);
+
+  ```
+
+
+  模板字面量还允许你轻松添加多行字符串（无需使用 `\n`）：
+
+
+  ```
+
+  console.log(`I am line-one
+
+  I am line-two`);
+
+  // I am line-one
+
+  // I am line-two
+
+  ```
+
+
+  ## 标签模板字面量
+
+
+  一种更高级的模板字面量形式是标签模板字面量。标签模板通过在模板字符串前放置一个函数名来转换模板字符串。例如：
+
+
+  ```
+
+  output`Hi, my name is ${name} and I love ${language}`;
+
+  ```
+
+
+  这个表达式可以转换成一个函数调用，该函数接受两种参数：
+
+
+  1. 字面量字符串数组，即 `["Hi, my name is", "and I love", " "]`
+
+  2. 替换值，即 `name`, `language`。
+
+
+  字面量字符串的总数始终比替换值的数量多一。你可以将每个替换值视为被两侧的两个字面量包裹。这就是为什么上述字面量字符串数组中有一个空字符串作为最后一个元素。
+
+
+  因此，上述标签模板可以写成：
+
+
+  ```
+
+  output(["Hi, my name is ", " and I love ", ""], name, language)
+
+  ```
+
+
+  标签函数通常使用剩余参数（rest arguments）来定义，以便更轻松地处理参数。上述函数可以定义为：
+
+
+  ```
+
+  function output(literals, ...substitutions) {
+
+  let result = "";
+
+  // 拼接字面量字符串和替换值
+
+  for (let i=0; i<substitutions.length; i++) {
+
+  result += literals[i] + substitutions[i];
+
+  }
+
+  // 拼接字面量数组中的最后一个元素
+
+  // 该数组总是比替换值数组多一个元素
+
+  result += literals[literals.length - 1];
+
+  return result;
+
+  }
+
+  const  name = ''John'',
+
+  language = ''JavaScript'';
+
+  let text = output`Hi, my name is ${name} and I love ${language}`
+
+  console.log(text); // Hi, my name is John and I love JavaScript
+
+  ```
+
+
+  由于这些函数将模板字符串的各个部分作为参数接收，你可以决定如何使用这些字符串和替换值来确定最终的字符串输出。例如，你可以使用 `output` 函数将所有字符转换为大写、将输入转换为哈希字符串，或实现任何你需要的功能。
+
+
+  ### 使用 `for...of` 进行迭代
+
+
+  在 JavaScript 过去的二十年里，我们一直使用 `for`、`for-in` 和 `forEach`（针对数组）进行迭代。ES6 引入了另一种结构——`for...of`
+  循环，它允许对可迭代对象（如 `array`、`map`、`set`、`string` 等）进行迭代。我们将在本书后面更详细地探讨迭代器和可迭代对象。下面是一个用于遍历数组的简单
+  for 循环示例：
+
+
+  ```
+
+  let names = [''matt'', ''smith'', ''jack''];
+
+  for (let i = 0; i<names.length; i++) {
+
+  console.log(names[i]);
+
+  }
+
+  // matt
+
+  // smith
+
+  // jack
+
+  ```
+
+
+
+
+  '
+- '# `for...of` 循环
+
+
+  这种格式本身完全没问题，但通过新语法，我们不再需要初始化并跟踪循环计数器变量（`i`）。我们可以用更少、更简洁的代码实现相同的迭代逻辑。查看以下使用`for-of`语法编写的代码片段：
+
+
+  ```javascript
+
+  let names = [''matt'', ''smith'', ''jack''];
+
+  for (let name of names) {
+
+  console.log(name);
+
+  }
+
+  // matt
+
+  // smith
+
+  // jack
+
+  ```
+
+
+  请注意，使用`for...of`循环遍历的值必须是可迭代对象。可迭代对象就是能够产生迭代器的对象，循环会使用这个迭代器。`for...of`循环不仅适用于数组，也适用于其他可迭代对象，例如`DOM`的`NodeList`对象、`arguments`对象和`String`对象。与数组一样，`for-of`循环使得遍历这些非数组序列更加容易。例如，考虑以下代码片段：
+
+
+  ```javascript
+
+  for (let char of ''Bye'') {
+
+  console.log(char);
+
+  }
+
+  // B
+
+  // y
+
+  // e
+
+  ```
+
+
+  注意
+
+
+  重要的是不要将`for...of`与更旧的`for...in`循环语法混淆，后者用于遍历对象的可枚举属性（或键）。
+
+
+  `for...of`循环结构的应用和优势将在本书后面详细讨论迭代器和可迭代对象时变得更加清晰。本节仅旨在介绍新的`for...of`循环语法及其在数组和字符串等数据结构中的用法。
+
+
+  ## 总结
+
+
+  如果你是一名 JavaScript 程序员，你可能已经注意到我们编写 JavaScript 时存在的一些小问题，尽管它的语法与其他语言相比相当合理且直接。ES6
+  通过引入大量新语法和对 JavaScript 现有模式的更改，试图解决许多这些问题。有许多新概念需要你去熟悉。引入的许多新模式旨在解决先前版本语言中的现有挑战，并简化
+  JavaScript 编程过程。它们有助于编写更清晰的代码、更快地调试、用更少的代码行实现逻辑，并避免混淆。
+
+
+  像`let`和`const`这样的新关键字用于变量声明，为 JavaScript 引入了块级作用域，带来了其他编程语言中常见的功能，使得编写更健壮的代码更容易，并有助于调试过程。像箭头函数这样的特性，不仅有助于编写更短、更美观的函数，还引入了特定行为，你可以在特定情况下使用，比如简化`this`关键字的使用。
+
+
+  通过本章，我们还向你介绍了新概念，如函数参数的默认值以及`Rest`和`Spread`运算符。将函数参数的“剩余”部分收集到一个数组中的模式现在只需使用三个点。我们还讨论了模板字面量如何为模板化和字符串操作赋予我们更多能力。最后，我们了解了新的`for...of`循环结构，用于遍历可迭代对象，而无需使用额外的计数器变量。
+
+
+  在本章中，我们只介绍了一些重要的新语法特性，但在接下来的几章中，我们将看到更多新特性，如解构、类和模块、迭代器和生成器、元编程等。敬请期待。
+
+
+  '
+- "# 3. 解构\n\n对象字面量和数组可能是 JavaScript 中使用最广泛的符号之一。这些 JavaScript 符号的流行甚至扩展到了语言之外，体现在`JSON`数据格式中。在\
+  \ JavaScript 中，对象和数组通常用于分组数据，并且存在多种模式，以便在需要时系统地从中提取数据。ES6 通过一个称为解构的过程，使这一过程更加容易和简单，进一步扩展了这种能力。\n\
+  \n## 对象和数组的解构\n\n解构基本上是一种将数据结构分解为更小部分，以便更容易访问其数据并从对象或数组中提取多个值的便捷方式。为了更好地理解解构，只需将其视为从对象或数组进行结构化赋值。考虑以下示例：\n\
+  \n```javascript\nvar letters = ['a', 'b', 'c'],\nx = letters[0],\ny = letters[1],\n\
+  z = letters[2];\nconsole.log( x, y, z );             // a b c\n```\n\n在上面的例子中，我们给一个名为`letters`的数组赋值，然后通过`letters`变量上的索引给变量`x`、`y`和`z`赋值。让我们看另一个使用对象的例子：\n\
+  \n```javascript\nvar numbers = {a: 1, b: 2, c: 3},\na = numbers.a,\nb = numbers.b,\n\
+  c = numbers.c;\nconsole.log( a, b, c );             // 1 2 3\n```\n\n在这个例子中，我们使用`numbers.a`的值来给变量`a`赋值，类似地，使用`numbers.b`和`numbers.c`来给`b`和`c`赋值。ES6\
+  \ 通过一种称为解构的新专用语法，使这种结构化赋值模式更加简单。这种语法消除了对临时中间变量（`letters`和`numbers`）的需求。考虑以下示例：\n\
+  \n```javascript\nvar [ x, y, z ] = ['a', 'b', 'c'];\nvar { a: a, b: b, c: c } =\
+  \ {a: 1, b: 2, c: 3};\nconsole.log( x, y, z );             // a b c\nconsole.log(\
+  \ a, b, c );             // 1 2 3\n```\n\n注意\n\n我们通常习惯在赋值语句的右侧看到像`{a: a, b:b, c:c\
+  \ }`和`[x, y, z]`这样的对象和数组语法。解构翻转了这种模式，将它们放在左侧，并带有变量声明关键字，允许你将右侧分解为单独的值，并将它们分配给左侧的变量。\n\
+  \n如前面的两个示例所示，在 ES6 之前，从对象和数组中获取信息并将其放入局部变量需要更多的代码。想象一下，你需要从一个非常大的对象或数组中提取值，并将它们存储到同名的变量中。你必须编写大量代码逐个赋值，但使用解构，这个过程简化为一个单一的赋值语句。\n\
+  \n使用解构将数据结构分解为更小的部分，使得获取所需数据变得更加容易。此外，ES6 中的解构使用了对象和数组字面量语法，这对传统的 JavaScript 用户来说已经非常熟悉。\n\
+  \n#### 对象解构语法\n\n让我们更仔细地看一下对象解构语法。我们看到的对象解构语法是：\n\n```javascript\nvar { a: a, b:\
+  \ b, c: c } = {a: 1, b: 2, c: 3};\n```\n\n在这个例子中，你可以注意到，被赋值的变量名与返回对象的属性名相同。但它们不必相同，你可以为被赋值的局部变量使用任何名称。但是，如果它们相同，则可以通过省略`\"\
+  a: \"`部分来进一步缩短语法。这个声明语句可以直接写成：\n\n```javascript\nvar { a, b, c } = {a: 1, b: 2,\
+  \ c: 3};\nconsole.log( a, b, c );             // 1 2 3\n```\n\n使用更短的语法而不是长形式对我们来说非常有意义，除非你想将属性赋值给一个不同的变量名。但是在使用长形式时，有一个重要的细微差别你需要小心。考虑以下示例：\n\
+  \n```javascript\nvar { a: foo, b: bar, c: baz } = {a: 1, b: 2, c: 3};\nconsole.log(\
+  \ foo, bar, baz );         // 1 2 3\nconsole.log( a, b, c );               // ReferenceError\n\
+  ```\n\n\n\n仔细观察这个例子。这种模式看起来可能很直接：左侧从右侧的对象表示法`{ a: foo, b: bar, c: baz }`中获取值。但实际上它是相反的。它并不是我们通常习惯的“目标：源”模式，而更准确地说是其逆模式，即“源：目标”模式。为什么会这样令人困惑呢？如果你换个角度看，这个模式会更有意义。考虑以下赋值语句：\n\
+  \n```\nvar foo = 42, bar = 100;\nvar obj = { a: foo, b: bar };\nvar { a: FOO, b:\
+  \ BAR } = obj;\nconsole.log( FOO, BAR );              // 42 100\n```\n\n在这个例子中，`a`和`b`指的是对象的属性，而在对象解构赋值语句中，`a`和`b`同样代表对象属性。回想一下之前在简化代码的例子中，我们提到可以省略`a:`部分，正是这个原因。在这个例子中，如果你去掉语法中的`a:`和`b:`部分，你将只剩下`FOO`和`BAR`。这种语法有时会令人困惑，但如果你将其理解为相应的属性名和值彼此映射，就很容易掌握了：在这个例子中，`foo`被赋值给`FOO`，`bar`被赋值给`BAR`，使用的就是`a`和`b`属性名。\n\
+  \n使用对象解构，你实际上可以通过同一个属性值来设置多个变量的值。考虑以下示例：\n\n```\nvar { x: foo, x: bar } = { x: 42\
+  \ };\nconsole.log( foo );  // 42\nconsole.log( bar );  // 42\n```\n\n在这种情况下，`foo`和`bar`都通过对象的`x`属性获取其值。\n\
+  \n在解构声明语句中，你可以根据情况和需求自由使用`let`、`const`或`var`。但请确保语句中始终存在赋值操作，即语句的右侧是必需的。\n\n```\n\
+  var { x, y };         // syntax error!\nlet { x, y };         // syntax error!\n\
+  const { x, y };       // syntax error!\n```\n\n以上所有声明都会导致语法错误，因为解构声明中缺少初始化器。虽然我们知道`const`在所有情况下都需要初始化器，但使用解构时，`var`和`let`也需要初始化器。\n\
+  \n#### 使用解构进行赋值\n\n到目前为止，在我们的讨论中，我们只看到了使用解构声明语句的情况。但解构也可以用于赋值语句。考虑以下使用之前例子中的`getChars()`和`getNumbers()`函数的示例：\n\
+  \n```\nvar a, b, c, x, y, z;\n[x, y ,z] = getChars();\n( { a, b, c } = getNumbers()\
+  \ );\nconsole.log( x, y, z );             // a b c\nconsole.log( a, b, c );    \
+  \         // 1 2 3\n```\n\n在这个例子中，`x`、`y`、`z`、`a`、`b`和`c`在声明后都通过解构进行了赋值。\n\n> **注意**\n\
+  > \n> 你必须始终在对象解构赋值语句周围加上括号。这是因为左花括号用于表示块语句的开始。周围的括号则表示该花括号应被解释为在赋值语句中使用解构的表达式。\n\
+  \n你也可以在变量通过解构赋值后更改它们的值。考虑以下示例：\n\n```\nlet item = {\nname: \"Apples\",\nquantity:\
+  \ 5\n},\nname = \"Oranges\",\nquantity = 3;\n// assigning different values using\
+  \ destructuring\n({ name, quantity } = item);\nconsole.log(name);          // \"\
+  Apples\"\nconsole.log(quantity);      // 5\n```\n\n在这个例子中，`name`、`quantity`和`item`在一个声明语句中初始化了值。然后，`name`和`quantity`通过从`item`中解构获取值而被赋予了新值。\n\
+  \n#### 默认值\n\n当使用解构从没有相应属性名的对象中给变量赋值时，该变量的值会被设置为`undefined`。例如：\n\n```\nvar item\
+  \ = {\nname: \"Apples\",\nquantity: 5\n};\nvar { name, quantity, value } = item;\n\
+  console.log(name);           // \"Apples\"\nconsole.log(quantity);       // 5\n\
+  console.log(value);          // undefined\n```\n\n在这个例子中，一个额外的变量`value`在`item`中没有对应的属性，它被声明在解构语句中。当`name`和`quantity`从`item`获取各自的值时，`value`被设置为`undefined`。\n\
+  \n此外，与其让额外的变量值为`undefined`，你也可以选择在指定属性缺失的情况下为其定义一个默认值。为此，只需在属性名后面使用等号`=`并指定一个默认值，如下所示：\n\
+  \n```\nvar item = {\nname: \"Apples\",\nquantity: 5\n};\nvar { name = \"Oranges\"\
+  , quantity = 3, value = 25 } = item;\nconsole.log(name);          // \"Apples\"\n\
+  console.log(quantity);      // 5\nconsole.log(value);         // 25\n```\n\n在这个例子中，变量`quantity`和`value`分别被赋予了默认值`3`和`25`。由于没有`item.value`属性，变量`value`使用了其默认值`25`。这与我们之前章节中看到的函数默认参数值的工作方式类似。\n\
+  \n> **注意**\n> \n> 只有在`item`中缺少某个属性时，默认值（如果未指定则为`undefined`）才会被赋给该变量。\n\n你也可以在长格式的解构赋值语句中使用默认值。但此时代码可能会变得混乱且有些令人困惑。考虑以下示例：\n\
+  \n```\nvar { a, b, c: c = 3, d: FOO = 42 } = {a: 1, b: 2};\nconsole.log( a, b, c,\
+  \ FOO );     // 1 2 3 42\n```\n\n在这种情况下，变量`a`和`b`被声明并设置为右侧对象字面量中它们对应的属性值，但由于对象中不存在属性`c`，其值被设置为默认值`3`。声明的变量`FOO`也被设置为其默认值`42`，因为对象中不存在对应的属性`d`。这里你需要记住我们之前讨论的“目标：源”语法，这有时会导致混淆。因此，除非绝对必要，否则最好避免这种混合的编码风格。\n\
+  \n另一个建议是，避免在解构语句中使用对象或数组作为默认值。这同样会导致任何阅读你代码的人（包括你自己）感到困惑。请看下面的例子：\n\n```\nvar a\
+  \ = 1, b = 2, c = 3;\nvar obj = { a: { b: 42 }, c: { b: c } };\n( { b: a = { b:\
+  \ b } } = obj );\n( { c: b = { b: c } } = obj );\n( { a: c = { b: a } } = obj );\n\
+  console.log( a.b, b.b, c.b );\n```\n\n尝试猜测`console.log`语句的输出会是什么。如果你猜出是`\"2 3 42\"\
+  `，那完全正确。但你明白为什么这会令人困惑了。\n\n#### 嵌套解构\n\n解构语法，与对象字面量语法非常相似，可用于导航到嵌套对象内部以检索信息。如果你解构的值包含嵌套的对象或数组，你也可以解构这些嵌套的值。这里有一个例子：\n\
+  \n```\nlet items = {\ncount : 2,\nname: \"fruits\",\napple: {\nquantity: 5,\nvalue:\
+  \ 25\n},\norange: {\nquantity: 3,\nvalue: 5\n}\n};\nlet { apple: { quantity }} =\
+  \ items;\nconsole.log(quantity);        // 5\n```\n\n这里的花括号用于表示我们需要首先深入到`items`对象内部的`apple`属性一级，然后获取`quantity`属性。根据我们之前的讨论，我们知道`':'`之前的标识符表示我们需要去的位置，而右侧则进行赋值。如果冒号后面跟着一个花括号，则表示目标位于对象的下一个嵌套深度层级，以此类推。\n\
+  \n由于空的花括号在对象解构中是合法的，你在使用嵌套解构时必须非常小心。考虑以下示例：\n\n\n\n```javascript\nlet { apple: {}\
+  \ } = items;\nconsole.log(apple);      // ReferenceError: apple is not defined\n\
+  ```\n\n此解构语句没有绑定任何变量，由于右侧的花括号，`apple`并不会被创建为变量绑定，而是作为`items`对象内部的一个位置进行探查。在这种情况下，如果你想要为变量`apple`创建绑定，应该使用`=`来定义默认值，而不是使用`:`来定义位置，例如：\n\
+  \n```javascript\nlet { apple = {} } = items;\nconsole.log(apple);      // {quantity:\
+  \ 5, value: 25}\n```\n\n我们再看一个使用嵌套数组解构的例子。你可以在整体模式中插入另一个数组模式，解构操作就会深入到嵌套数组中：\n\n\
+  ```javascript\nlet fruits = [ \"apple\", [ \"blueberry\", \"raspberry\" ], \"orange\"\
+  \ ];\nlet [ fruit1, [ fruit2 ], fruit4 ] = fruits;\nconsole.log(fruit1);       //\
+  \ \"apple\"\nconsole.log(fruit2);       // \"blueberry\"\nconsole.log(fruit4); \
+  \      // \"orange\"\n```\n\n在这个例子中，变量`fruit2`会被赋值为从第二个数组（表示`fruits`数组中的浆果）中获取的`\"\
+  blueberry\"`。解构语句中`fruit2`周围的额外方括号是必要的，用于解包`fruits`数组及其内部的浆果数组。与我们之前看到对象类似，你可以拥有任意深度的嵌套数组，并且需要在解构语句中使用相应的符号来从中提取值。\n\
+  \n我们可以为对象和数组的解构构建复杂的表达式，以获取正确的值并将其分配给不同的变量，无论对象或数组嵌套多深，或者混合了对象和数组，只需借助解构的力量，使用一条语句即可完成。请看下面的例子：\n\
+  \n```javascript\nlet student = {\n  name: \"Tony\",\n  courses: {\n    english:\
+  \ {\n      id: 1,\n      score: 7\n    },\n    math: {\n      id: 2,\n      score:\
+  \ 9\n    }\n  },\n  scoreRange: [0, 10]\n};\nlet {\n  courses: { english },\n  scoreRange:\
+  \ [ minScore ]\n} = student;\nconsole.log(english.id);        // 1\nconsole.log(english.score);\
+  \     // 7\nconsole.log(minScore);          // 0\n```\n\n这段代码将`student.courses.english`和`student.scoreRange[0]`分别提取到`english`和`minScore`中。在这个例子中，`courses`和`scoreRange`都是解构模式中的变量，它们从`student`对象中的相应属性获取值。当你需要从复杂的\
+  \ JSON 结构中获取某些特定数据或值，而无需遍历整个结构时，这种方法非常有用。\n\n## 使用剩余语法进行解构\n\n在解构模式中使用剩余运算符，可以成为\
+  \ ES6 中变量赋值的一种非常强大且简洁的语法。我们已经在上一章中探讨了剩余模式。现在，让我们看看它与解构模式结合使用的例子。请看下面的示例：\n\n```javascript\n\
+  var num1, num2, rest;\nvar x, y, z;\n[num1, num2, ...rest] = [1, 2, 3, 4, 5];\n\
+  [x, y, z] = [1, 2, 3, 4, 5];\nconsole.log(num1);        // 1\nconsole.log(num2);\
+  \        // 2\nconsole.log(rest);        // [3, 4, 5]\nconsole.log(x, y, z)    \
+  \  // 1 2 3\n```\n\n在上面的例子中，我们使用解构将值赋给变量`num1`、`num2`和`rest`（仅对`rest`使用了剩余运算符）。我们对另一组变量`x`、`y`和`z`执行了完全相同的操作。但如果你注意到输出结果，当我们使用包含五个数字的数组赋值时，前两个值被赋给了`num1`和`num2`，但其余的值被收集到一个数组中并赋给了变量`rest`，因为我们对其使用了剩余运算符。将此与第二个解构语句进行对比，在第二个语句中，`z`只被赋值为`3`。\n\
+  \n这里需要重点注意的一点是，如果在左侧对剩余元素使用了尾随逗号，则会抛出`SyntaxError`。请看以下示例：\n\n```javascript\nvar\
+  \ [a, b,] = [1, 2, 3];\nconsole.log(a, b)               // 1 2\nvar [num1, ...num2,]\
+  \ = [1, 2, 3];\n// SyntaxError: rest element may not have a trailing comma\n```\n\
+  \n因此，请记住，尽管在简单的解构语句中尾随逗号不会有任何影响，但你**不应**在解构语句中的剩余元素之后使用它。\n\n#### 解构参数\n\n解构语法除了为我们提供更简单的声明和赋值语法外，还可以在传递函数参数时使用。前面讨论过的所有解构变体，在参数解构中同样适用。解构还与其他\
+  \ ES6 函数参数特性（如默认参数值和剩余参数）很好地融合在一起。\n\n让我们看一个使用解构数组参数的简单示例：\n\n```javascript\nfunction\
+  \ sum( [ num1, num2 = 0 ] ) {\n  console.log( num1 + num2 );\n}\nsum( [ 1, 2 ] );\
+  \         // 3\nsum( [ 1 ] );            // 1\nsum( [  ] );             // NaN\n\
+  ```\n\n在上面的例子中，有几点需要注意：当向`sum()`函数传入包含两个值`1 和 2`的数组时，它会打印它们的和`3`；但当只传入一个值`1`时，由于`num2`被分配了默认值`0`，它会输出`1`。当没有向解构数组传入任何值时，它会打印`NaN`（Not\
+  \ a Number），因为尽管`num2`默认为`0`，但`num1`被设置为`undefined`。\n\n当你需要为函数提供大量参数时，一种常见的模式是创建一个对象，其属性指定参数，然后将该对象传入函数。但这种模式的问题在于，仅通过查看函数定义，很难猜测函数需要什么样的输入。你需要遍历函数体才能了解函数所需的不同输入。请看下面这个函数接受选项对象的示例：\n\
+  \n```javascript\nfunction createObj(name, value, options) {\n  let obj = {};\n \
+  \ obj.x = options.a;\n  obj.y = options.b;\n  obj.z = options.c;\n  obj[name] =\
+  \ value;\n  return obj;\n}\nlet options = {a: 1, b: 2, c: 3};\nlet testObj = createObj('test',\
+  \ 4, options);\nconsole.log(testObj)// {x:1, y:2, z:3, test:4}\n```\n\n这里，`options`对象是函数`createObj`所需的参数之一，但解构可以帮助我们更好地读取和获取函数内部所需的\
+  \ options 属性。我们可以使用解构参数重写函数定义，如下所示：\n\n```javascript\nfunction createObj(name, value,\
+  \ {x:a, y:b, z:c}) {\n  // 返回对象的代码\n}\n```\n\n这个函数的行为与上一个示例完全相同，但由于第三个参数使用解构从`options`对象中获取相应的值，因此仅通过查看函数定义就能轻松理解函数所需的输入。而且，这些值甚至可以在函数调用语句本身中直接赋值。因此，你可以使用默认值、混合的对象和数组模式，以及与你读取的属性不同的变量名。\n\
+  \n**注意**：解构参数的行为与常规参数类似，如果没有传入，它们会被设置为`undefined`。\n\n使用对象解构参数的能力还为我们带来了额外的好处：它们使我们能够在参数列表中的任何位置拥有可选参数。请看下面的示例：\n\
+  \n\n\n```\nfunction printNums( { num1, num2 } ) {\nconsole.log( num1, num2 );\n\
+  }\nprintNums( { num2: 1, num1: 2 } );           // 2 1\nprintNums( { num2: 42 }\
+  \ );                   // undefined 42\n```\n\n在此示例中，`printNums()` 函数将两个数字打印出来，这些数字是通过解构包含\
+  \ `num1` 和 `num2` 属性的对象作为参数传入的。请注意，在第一次函数调用中，你可以通过先指定 `num2` 再指定 `num1` 来交换参数的顺序。类似地，通过只指定\
+  \ `num2`，实际上你可以将第一个预期参数 `num1` 的值设置为 `undefined`。\n\n此时，有必要指出解构默认值和函数参数默认值在行为上的区别。请看以下示例：\n\
+  \n```\nfunction foo({ num1 = 42 } = {}, { num2 } = { num2: 42 }) {\nconsole.log(\
+  \ num1, num2 );\n}\nfoo();                               // 42 42\nfoo( {}, {} );\
+  \                       // 42 undefined\n```\n\n在此示例中，如果不看输出结果，可能看起来我们以两种不同方式为 `num1`\
+  \ 和 `num2` 都声明了默认值 `42`。第一次函数调用也表明了这一点。但第二次函数调用——向函数中传入了两个空对象——则揭示了一个不同的情况。\n\n\
+  如果仔细观察，这两种声明参数值的方式存在细微差别。在上面的例子中，函数 `foo` 接受两个参数：\n\n*   `{ num1 = 42 } = {}`\n\
+  *   `{ num2 } = { num2: 42 }`\n\n当没有参数传给函数时，第一个参数默认为一个空对象 `{}`，但由于它使用了对象解构，因此无论在什么情况下，只要传入的参数对象中没有\
+  \ `num1` 这个属性，命名参数 `num1` 都会默认为 `42`。\n\n对于第二个参数，它的默认参数值是一个对象 `{ num2: 42 }`。当没有提供第二个参数给函数时，该参数会默认使用这个对象。由于左侧是解构对象，当参数默认使用该对象时，`num2`\
+  \ 被设置为 `42`。但是，如果将一个空对象 `{}` 作为第二个参数传入，则默认值永远不会被使用，然后对传入的空对象 `{}` 进行 `{ num2 }`\
+  \ 解构，导致 `num2` 被设置为 `undefined`。\n\n## 总结\n\n随着你在 JavaScript 中处理数据，你会逐渐意识到通过分解对象和数组来逐个检查其组成部分以提取特定信息的必要性。在\
+  \ ES6 之前，开发者需要编写相当多的代码来解构数据，但现在他们可以使用 ES6 带来的新解构语法，就所需编写的代码量而言，这个过程变得简单得多。\n\n此外，解构有助于使函数的对象参数更加明确。使用解构，你可以拥有默认值而无需检查属性是否存在于对象中，并且现在我们可以通过为属性提供默认值来使可选属性更加明确。显式可见的内容使代码更易于维护，因为你无需猜测或阅读整个函数就能弄清楚。\n\
+  \n"
+- '# 4. ES6 中的类
+
+
+  如果你来自 C++、Java 或 Python 等面向对象编程语言，你一定已经了解类是如何工作的。在 ES6 之前，JavaScript 中从未存在过类，但从早期开始，就已经存在许多模式来模拟经典的面向类开发。类的概念以各种不同的形式被尝试，这主要是因为无法在
+  JavaScript 内部以一种简洁直接的方式支持类和经典继承。这导致了许多来自其他语言的传统开发者感到困惑，因为在 JavaScript 中，类和继承并不是创建相似或相关对象的主要方法。
+
+
+  这些语法和编码模式试图在原型系统内部，以隐藏的方式使用面向类开发，比如使用 `new`、`instanceOf` 和 `constructor` 属性。许多库，如
+  JSClass、Classify.js 等，都试图让 JavaScript 看起来支持传统的类。因此，尽管许多传统的 JS 开发者认为不需要传统意义上的类，但仅仅因为存在数量庞大的此类库，就影响了
+  TC39 在 ES6 中引入“类”。其目标是让它们看起来像真正的类，这通过引入 `class` 关键字和相关的声明机制来实现。
+
+
+  ### ES6 中的类
+
+
+  在 ES6 的设计过程中，类的模式被广泛争论和讨论，并最终达成了一项折衷方案。重要的是要理解，ES6 的类的工作方式与其他面向对象语言并非完全相同。也就是说，TC39
+  仍在 ES6 之后陆续添加更多特性来增强类，使其更接近经典定义。
+
+
+  从概念上讲，传统的 JavaScript 中并没有“类”。ES6 中的类本质上只是一个函数。它只不过是对对象和原型的语法糖，提供了一种方便的声明式形式来实现类模式，从而促进互操作性。ES6
+  中这个新的 `class` 关键字支持基于原型的继承、构造函数、`super` 调用、实例方法和静态方法。
+
+
+  让我们看看如何在 ES6 中编写最基本形式的类声明，这与在其他语言中定义类非常相似。考虑以下示例：
+
+
+  ```
+
+  class Car {
+
+  constructor(brand) {
+
+  this.brand = brand;
+
+  }
+
+  }
+
+  const myTesla = new Car("Tesla");
+
+  console.log(myTesla.hasOwnProperty("brand"));  // true
+
+  console.log(typeof Car);                       // function
+
+  ```
+
+
+  在这个示例中，`brand` 是赋值在 `myTesla` 对象上的属性。这个对象也可以用对象字面量的形式表示如下：
+
+
+  ```
+
+  const myTesla = {
+
+  brand: "Tesla"
+
+  };
+
+  ```
+
+
+  上面的例子简单展示了如何创建一个带有可选 `constructor` 方法的类，当该类的对象被实例化时，此方法将被调用。ES6 中的类并没有为语言中已有的功能添加任何新功能；它们只是构建对象的更简洁语法。任何传入
+  `new Car()` 的参数都将被 `Car` 的 `constructor` 方法接收作为参数，你可以使用这些参数来初始化同一类的实例。因此，`constructor()`
+  方法是初始化对象属性的地方，这些属性是可枚举的。同时，由于 `constructor()` 方法是可选的，你可以声明一个像下面例子中的空类：
+
+
+  ```
+
+  class EmptyClass {
+
+  }
+
+  ```
+
+
+  如果你没有在类中定义 `constructor()` 方法，JavaScript 引擎会为你插入一个空构造函数：
+
+
+  ```
+
+  class EmptyClass {
+
+  /* JavaScript 会插入一个空构造函数：
+
+  constructor () { }
+
+  */
+
+  }
+
+  ```
+
+
+  现在我们知道如何在类中初始化属性以及在哪里初始化属性，接下来看看如何定义方法。类声明允许你定义类的方法而无需使用 `function` 关键字：
+
+
+  ```
+
+  class Car {
+
+  constructor(brand) {
+
+  this.brand = brand;
+
+  }
+
+  start() {
+
+  console.log(`你的 ${this.brand} 已经准备出发！`);
+
+  }
+
+  }
+
+  const myTesla = new Car("Tesla");
+
+  myTesla.start();
+
+  // 你的 Tesla 已经准备出发！
+
+  ```
+
+
+  在上面的例子中，我们在类定义中定义了一个 `start()` 方法，它使用 `this` 关键字访问类的 `brand` 属性。这个方法会自动附加到类的原型上，因此它是不可枚举的。我们将在本章后面更详细地讨论这一点以及类方法，但首先，让我们看看在
+  ES6 中定义类的不同方式。
+
+
+  #### 在 ES6 中定义类
+
+
+
+
+  就像函数一样，在 ES6 中有两种定义类的方式。我们来看看每种方式。
+
+
+  #### 类声明
+
+
+  正如前面例子所示，类声明非常简单。你使用`class`关键字后跟一个类名来声明一个类，按照惯例类名通常使用`TitleCase`（首字母大写）写法。这里需要注意的一点是，类名在类定义内部的行为表现类似于常量，这意味着你不能在类内部使用类名来覆盖它：
+
+
+  ```
+
+  class SimpleClass {
+
+  constructor() {
+
+  SimpleClass = "42";      // 执行时会抛出错误
+
+  }
+
+  }
+
+  SimpleClass = "42";              // 声明后可以正常工作
+
+  ```
+
+
+  与函数声明不同，类声明不会被提升（hoisted）。类似于`let`和`const`，类声明会处于暂时性死区（TDZ），直到执行到达类声明的位置。因此，你需要在访问类之前声明它，否则会引发`ReferenceError`：
+
+
+  ```
+
+  const b = new Bike(); // ReferenceError
+
+  class Bike {}
+
+  ```
+
+
+  在上面的例子中，由于类尚未声明，它存在于暂时性死区中，因此当你尝试使用`new`关键字初始化一个新实例时，会抛出一个引用错误。
+
+
+  #### 类表达式
+
+
+  除了类声明之外，在 ES6 中定义新类的第二种方式是通过类表达式。它们与函数表达式完全相同，并且和函数表达式一样，也可以是匿名的。请看下面的例子：
+
+
+  ```
+
+  const Circle = class {
+
+  constructor() {
+
+  this.radius = 20;
+
+  }
+
+  }
+
+  ```
+
+
+  注意，在上面的例子中，`class`关键字后面缺少标识符；这使它成为一个匿名的类表达式。除了变量声明外，这些类表达式还可以用于向函数传递参数。考虑以下代码片段，它有一个用于创建汽车的工厂函数：
+
+
+  ```
+
+  function carFactory(car) {
+
+  return new car();
+
+  }
+
+  const Toyota  = carFactory(class {
+
+  start() {
+
+  console.log("Your car is ready to roll");
+
+  }
+
+  stop() {
+
+  console.log("Shutting down the engines");
+
+  }
+
+  });
+
+  Toyota.start();
+
+  // Your car is ready to roll
+
+  Toyota.stop();
+
+  // Shutting down the engines
+
+  ```
+
+
+  工厂函数接受类定义作为参数，并返回传入参数的类的对象。在编程语言中，如果一个实体可以作为参数传递、从函数返回、被修改以及赋值给变量，它就被认为是该语言的一等公民。函数式编程在
+  JavaScript 中流行的众多原因之一，就是因为函数是语言的一等公民，这使我们能够最大程度地利用函数，并轻松创建高阶函数。在 ES6 中，与函数类似，类也是语言的一等公民，允许将类作为参数传递给函数（如上面的例子所示），以及通过类表达式将其赋值给变量。
+
+
+  ## 类方法和访问器属性
+
+
+  在 ES6 之前，你需要使用`Object.defineProperty()`来使一个方法不可枚举，但在 ES6 中，类的所有方法都是不可枚举的。这些方法被附加到原型（prototype）上，这使得该方法可以被类的所有实例共享，从而提供了一种节省内存的有效方式。
+
+
+  在 ES6 中定义类方法的语法类似于对象字面量的方法简写（即，不带`function`关键字的函数）：
+
+
+  ```
+
+  class AeroPlane {
+
+  constructor(model, capacity) {
+
+  this.model = model;
+
+  this.capacity = capacity;
+
+  }
+
+  getData() {
+
+  console.log(`You''re flying a ${this.model} aeroplane`);
+
+  console.log(`This plane can fly with ${this.capacity} passengers`);
+
+  }
+
+  }
+
+  const jet = new AeroPlane("Jet", 60);
+
+  jet.getData();
+
+  // You''re flying a Jet aeroplane
+
+  // This plane can fly with 60 passengers
+
+  console.log(jet.hasOwnProperty("getData"));                     // false
+
+  console.log(jet.__proto__.hasOwnProperty("getData"));           // true
+
+  ```
+
+
+  上面的例子展示了一个`AeroPlane`类，我们在构造每个实例时初始化名为`model`和`capacity`的实例属性。`getData()`方法声明告诉`AeroPlane`类的实例，它们将拥有一个`getData()`方法，无论何时调用该方法，都会返回该方法的执行结果。这个`getData()`方法会自动添加到原型中。用
+  ES5 的方式重新创建上面的例子将是：
+
+
+  ```
+
+  function AeroPlane(model, capacity) {
+
+  this.model = model;
+
+  this.capacity = capacity;
+
+  }
+
+  AeroPlane.prototype.getData = function() {
+
+  console.log("You''re flying a " + this.model + " aeroplane");
+
+  console.log("This plane can fly with " + this.capacity + " passengers");
+
+  }
+
+  var jet = new AeroPlane("Jet", 60);
+
+  jet.getData();
+
+  // You''re flying a Jet aeroplane
+
+  // This plane can fly with 60 passengers
+
+  ```
+
+
+  ES6 类还允许你在原型上创建访问器属性。我们可以使用`get`和`set`关键字放在标识符前面来分别创建 getter 和 setter 属性。这些属性描述符是不可枚举的，并且可以通过在类的原型上使用`Object.getOwnPropertyDescriptor()`来访问，因为这些属性驻留在原型对象上。例如，请考虑以下代码片段：
+
+
+  ```
+
+  class AeroPlane {
+
+  constructor(model, capacity) {
+
+  this._model = model;
+
+  this._capacity = capacity;
+
+  }
+
+  get model() {
+
+  return this._model;
+
+  }
+
+  get capacity() {
+
+  return this._capacity;
+
+  }
+
+  set model(model) {
+
+  this._model = model;
+
+  }
+
+  set capacity(capacity) {
+
+  this._capacity = capacity;
+
+  }
+
+  }
+
+  const jet = new AeroPlane("Jet", 100);
+
+  console.log(jet.capacity);
+
+  // 100
+
+  console.log(Object.getOwnPropertyDescriptor(AeroPlane.prototype, "model"));
+
+  /*
+
+  {
+
+  get: [Function: get model],
+
+  set: [Function: set model],
+
+  enumerable: false,
+
+  configurable: true
+
+  }
+
+  */
+
+  ```
+
+
+  在上面的例子中，你必须注意，我们在类定义中的属性名前添加了一个`_`（下划线）。让我们使用下面的代码片段来看看我们为什么这么做：
+
+
+  ```
+
+  class StudyGroup {
+
+  constructor(name) {
+
+  this.name = name;
+
+  }
+
+  set name(newName) {
+
+  this.name = newName;
+
+  }
+
+  }
+
+  const jsGroup = new StudyGroup("js");
+
+  // RangeError: Maximum call stack size exceeded
+
+  ```
+
+
+  如果你尝试运行上面的代码片段，你会看到一个`RangeError`，提示超出最大调用堆栈大小，这是因为你的 setter 属性在递归地设置自身，导致无限函数调用。因此，你绝不能让你的
+  setter 方法名与属性名相同，因为在 setter 内部通过其自身名称访问属性 setter 会创建一个无限递归的函数调用。
+
+
+  如果你此时想知道为什么首先要使用 setter 和 getter，以下是一些应该考虑使用它们的原因：
+
+
+
+
+  '
+- '# 设置器与访问器
+
+
+  设置器（setter）和访问器（getter）允许我们封装与对象属性获取或设置相关的行为，这使得代码更具扩展性，因为你可以根据需求轻松添加更多功能，例如输入验证或对输入数据的一些转换。此外，将这些验证或转换功能继承给子类，并根据应用需求进行保留或修改也会很有帮助。
+
+
+  有时，通过属性访问器向用户暴露属性的另一种表示形式，同时隐藏属性的内部表示形式，似乎是个不错的主意。
+
+
+  拥有属性访问器方法允许我们设置不同的访问级别，例如，访问器可以是公开的，但设置器方法可以针对特定用户群设置为受保护的。
+
+
+  你还应注意，设置器必须有且只有一个形式参数，这意味着你应该为类实例的每个属性创建独立的设置器和访问器。
+
+
+  ## 计算式方法名
+
+
+  与对象字面量类似，类内部的方法也可以拥有计算式名称。这也适用于类的访问器和设置器访问器属性。正如在对象字面量中所见，计算式方法名可以用`[ ]`包裹起来；请查看以下代码片段作为示例：
+
+
+  ```
+
+  const methodName = "getColor";
+
+  const propName = "color";
+
+  class AeroPlane {
+
+  constructor(color) {
+
+  this._color = color
+
+  }
+
+  [methodName]() {
+
+  return this._color;
+
+  }
+
+  get [propName]() {
+
+  return this[`_${propName}`];
+
+  }
+
+  set propName {
+
+  return this[`_${propName}`] = value;
+
+  }
+
+  }
+
+  const whiteJet = new AeroPlane("white");
+
+  console.log(whiteJet.color);
+
+  // white
+
+  ```
+
+
+  在上例中，我们通过将方法名和访问器与设置器访问器属性名包裹在`[ ]`内，在类定义中对其进行计算。我们还在访问器和设置器方法内部使用字符串字面量来求值动态属性名。
+
+
+  #### 类属性与隐私
+
+
+  到目前为止，我们已经看到如何通过在类定义的构造函数方法内定义属性来向类的实例添加属性。然而，我们目前看到的所有属性都是公共属性，可以在类定义外部不使用设置器或访问器方法就能轻松访问。JavaScript
+  社区中关于私有属性的讨论由来已久。遗憾的是，在 ES6 之前，JavaScript 中从未存在过私有属性，因此必须模拟它们。最常见的约定是在属性或方法名称前加上下划线，我们在前面的示例中已经看到过。
+
+
+  在 ES6 中，有几种方法可以在类内部管理数据隐私。
+
+
+  #### 使用构造函数环境
+
+
+  将方法和属性存储在构造函数环境中，并在闭包中捕获变量，这种思路确保这些方法或属性不会被添加到原型中，并且只能由构造函数及其创建的函数访问。
+
+
+  ```
+
+  class AeroPlane {
+
+  constructor(capacity) {
+
+  this.checkCapacity = function(value) {
+
+  if (capacity >= value) {
+
+  return true;
+
+  }
+
+  return false;
+
+  }
+
+  }
+
+  }
+
+  const jet = new AeroPlane(200);
+
+  console.log(jet.checkCapacity(100));    // true
+
+  console.log(jet.capacity);              // undefined
+
+  ```
+
+
+  在上面的示例中，构造函数环境存储了参数和局部变量，通过使类属性（此处为`capacity`）在构造函数外部不可访问，从而保持其私有性。这使得私有数据完全安全，并且无法从类实例访问。
+
+
+  #### 使用 WeakMaps
+
+
+  在我们继续了解 WeakMaps 如何帮助在类内部保持数据私有之前，让我们快速了解一下什么是 WeakMaps。`WeakMap` 是 ES6 中引入的一种新数据类型。它们只是一个键值对的集合，主要限制是必须使用对象作为键。我们将在本书后面更详细地学习它们。但目前，你应该注意，你可以使用以下方式创建
+  `WeakMap`：
+
+
+  ```
+
+  const myMap = new WeakMap();
+
+  ```
+
+
+  并且你可以在返回的 `WeakMap` 上使用 `set` 和 `get` 方法来存储和检索与之关联的值：
+
+
+  ```
+
+  const myMap = new WeakMap();
+
+  const myObj = { name: "jack" };
+
+  myMap.set(myObj, "developer");
+
+  console.log(myMap.get(myObj));
+
+  // developer
+
+  ```
+
+
+  如上述代码片段所示，我们使用一个对象作为键来在 `WeakMap` 内部存储值。
+
+
+  `WeakMap` 的另一个特性是，如果对对象没有其他引用，它们不会阻止垃圾回收。因此，使用 WeakMap 来存储类的属性有助于保持数据私有，并且每当与类关联的实例被销毁时，它也会销毁这些私有属性。
+
+
+  ```
+
+  const data = new WeakMap();
+
+  class AeroPlane {
+
+  constructor(seats) {
+
+  data.set(this, {
+
+  capacity: seats
+
+  });
+
+  }
+
+  get seats() {
+
+  return data.get(this).capacity;
+
+  }
+
+  set seats(value) {
+
+  data.get(this).capacity = value;
+
+  }
+
+  }
+
+  const jet = new AeroPlane(200);
+
+  console.log(jet.capacity);                // undefined
+
+  console.log(jet.seats);                   // 200
+
+  ```
+
+
+  在上面的示例中，我们使用 `WeakMap` 来保持数据私有，并公开设置器和访问器来与类的私有数据进行交互。但这样做的代价是，需要将你的 `WeakMap` 对外部世界隐藏。只要它对外部访问是隐藏的，你的属性就会保持安全且私有。
+
+
+  除了 `WeakMap` 之外，ES6 还提供了另一种新技术来保持数据私有（或者更确切地说，防止随意访问），即使用 Symbols，我们将在本书后面学习。
+
+
+  #### 静态方法与属性
+
+
+  使用类，你还可以定义属于类本身而非类的任何特定实例的属性和方法。这些方法和属性与类关联，而不是与类的实例关联，这通常有助于为应用程序创建实用函数。ES6 允许你通过在方法名之前使用
+  `static` 关键字轻松创建静态方法：
+
+
+  ```
+
+  class AeroPlane {
+
+  constructor(capacity) {
+
+  this.capacity = capacity;
+
+  }
+
+  static radio(message) {
+
+  console.log(`Message from broadcast: ${message}`)
+
+  }
+
+  }
+
+  AeroPlane.radio("Sky is clear");
+
+  // Message from broadcast: Sky is clear
+
+  ```
+
+
+  如前所述，需要重点注意的是，静态方法和属性是直接从其类中访问的，你不能从类的实例访问静态方法或属性。因此，静态方法也不能使用 `this` 访问在类的实例上定义的属性或方法。
+
+
+  在编写本书时，ES6 不支持使用 `static` 关键字创建属性。有一个关于将它们添加到语言规范的提案，但在此提案被接受且实现发布之前，你可以使用静态访问器和设置器，或者手动将静态属性附加到类，如下所示：
+
+
+  ```
+
+  class AeroPlane {
+
+  constructor(capacity) {
+
+  this.capacity = capacity;
+
+  }
+
+  }
+
+  AeroPlane.color = "white";
+
+  console.log(AeroPlane.color);
+
+  // white
+
+  console.log(AeroPlane.capacity);
+
+  // undefined
+
+  ```
+
+
+  在这个例子中，请注意我们如何使用类名访问静态属性，而对非静态属性则返回 `undefined`。
+
+
+  ## 类继承与 super 关键字
+
+
+
+
+  '
+- "# ES6 类与继承\n\n`ES6` 引入了 `extends` 关键字，允许创建一个类作为另一个类的子类。继承让我们能够将另一个类的状态和行为合并到我们自己的类中。从父类扩展子类可以防止代码重复。考虑以下示例：\n\
+  \n```javascript\nclass AeroPlane {\n  constructor(capacity) {\n    this.capacity\
+  \ = capacity;\n  }\n  showCapacity() {\n    console.log(`Capacity of this plane:\
+  \ ${this.capacity}`);\n  }\n}\nclass FighterPlane {\n  constructor(capacity) {\n\
+  \    this.capacity = capacity;\n  }\n  showCapacity() {\n    console.log(`Capacity\
+  \ of this plane: ${this.capacity}`);\n  }\n  fire() {\n    console.log(\"Loading\
+  \ weapons and firing\");\n  }\n}\n```\n\n在上面的示例中，数据属性 `capacity` 和方法 `showCapacity`\
+  \ 在两个类中重复出现。我们可以通过让 `FighterPlane` 继承自 `AeroPlane` 来轻松消除这种重复，从而将 `AeroPlane` 的状态和行为合并到\
+  \ `FighterPlane` 中。考虑以下示例，其中 `FighterPlane` 类使用 `extends` 关键字从父类 `AeroPlane` 继承：\n\
+  \n```javascript\nclass AeroPlane {\n  constructor(capacity) {\n    this.capacity\
+  \ = capacity;\n  }\n  showCapacity() {\n    console.log(`Capacity of this plane:\
+  \ ${this.capacity}`);\n  }\n}\nclass FighterPlane extends AeroPlane {\n  fire()\
+  \ {\n    console.log(\"Loading weapons and firing\");\n  }\n}\nconst phantom = new\
+  \ FighterPlane(2);\nphantom.showCapacity();\n// Capacity of this plane: 2\nphantom.fire();\n\
+  // Loading weapons and firing\n```\n\n如果你也想在派生类中定义构造函数方法，你需要使用 `super()`，它允许在派生类中调用父类的构造函数。`super()`\
+  \ 负责初始化上下文，因此你必须在构造函数方法中访问上下文（`this`）之前调用 `super()`；否则会导致错误。\n\n如果未定义构造函数，则在创建类的新实例时会使用所有给定的参数自动调用\
+  \ `super()`，如下例所示：\n\n```javascript\nclass FighterPlane extends AeroPlane {\n  //\
+  \ 没有构造函数\n  fire() {\n    console.log(\"Loading weapons and firing\");\n  }\n}\n\
+  // 等价于\nclass FighterPlane extends AeroPlane {\n  constructor(...args) {\n    super(...args);\n\
+  \  }\n  fire() {\n    console.log(\"Loading weapons and firing\");\n  }\n}\n```\n\
+  \n#### 继承静态属性\n\n`ES6` 允许我们将父类的静态属性继承到子类中。考虑以下示例，其中 `AeroPlane` 的静态方法在其派生类（`FighterPlane`）上被调用：\n\
+  \n```javascript\nclass AeroPlane {\n  static radio() {\n    console.log(\"Radio\
+  \ works\");\n  }\n}\nclass FighterPlane extends AeroPlane {}\nFighterPlane.radio();\n\
+  // Radio works\n```\n\n在这段代码中，一个新的静态方法 `radio()` 被添加到 `AeroPlane` 类中。通过继承，此方法可以作为\
+  \ `FighterPlane.radio()` 使用，其行为方式与 `AeroPlane.radio()` 方法相同。\n\n#### 方法重写\n\n父类的方法可以在派生类内部被同名的父类方法轻松覆盖。例如，检查以下代码片段，其中父类（`AeroPlane`）中的\
+  \ `fly()` 方法在派生类（`FighterPlane`）内部被重写：\n\n```javascript\nclass AeroPlane {\n  constructor(capacity)\
+  \ {\n    this.capacity = capacity;\n  }\n  showCapacity() {\n    console.log(`Capacity\
+  \ of this plane: ${this.capacity}`);\n  }\n  fly() {\n    console.log(\"Engines\
+  \ on, and the plane will take off soon\");\n  }\n}\nclass FighterPlane extends AeroPlane\
+  \ {\n  fly() {\n    console.log(\"Engines on, and the plane is gone\");\n  }\n \
+  \ fire() {\n    console.log(\"Loading weapons and firing\");\n  }\n}\nconst phantom\
+  \ = new FighterPlane(2);\nphantom.fly();\n// Engines on, and the plane is gone\n\
+  phantom.showCapacity();\n// 2\n```\n\n如果你希望访问父类版本的方法，你可以通过 `super.fly()` 来实现，如下所示：\n\
+  \n```javascript\nclass FighterPlane extends AeroPlane {\n  fly() {\n    super.fly();\n\
+  \    console.log(\"Engines on, and the plane is gone\");\n  }\n}\n```\n\n这确保了每次在\
+  \ `FighterPlane` 的实例上调用 `fly()` 方法时，首先会调用父类的该方法。除了方法，你也可以重写构造函数；例如，考虑以下代码片段：\n\n\
+  ```javascript\nclass AeroPlane {\n  constructor(capacity, color) {\n    this.capacity\
+  \ = capacity;\n    this.color = color;\n  }\n}\nclass FighterPlane extends AeroPlane\
+  \ {\n  constructor(color) {\n    // 这个战斗机是双座的\n    super(2, color);\n  }\n}\nconst\
+  \ phantom = new FighterPlane(\"grey\");\nconsole.log(phantom.capacity);       //\
+  \ 2\n```\n\n#### 可继承的内置对象\n\n`ES6` 使得继承自内置类（如 `Array`，`String`，`RegEx` 等）变得非常容易，这在需要像栈、队列或任何其他链表结构这样的数据结构时非常有用。你也可以利用此功能根据需求为数组提供额外的辅助方法，例如\
+  \ `first`，`last`，`shuffle` 等。\n\n考虑以下代码片段，我们通过扩展内置的 `String` 类来实现一个 `ReversedString`\
+  \ 数据类型：\n\n```javascript\nclass ReversedString extends String {\n  print() {\n \
+  \   return this.split('').reverse().join('');\n  }\n}\nconst str = new ReversedString(\"\
+  Awesome\");\nconsole.log(str.print());\n// emosewA\n```\n\n## 总结\n\n`ES6` 类将 JavaScript\
+  \ 中构建伪类以模仿其他编程语言中基于类的开发模式的现有模式正式化。它们使 JavaScript 中的继承更易于使用，并为你提供了语法糖，以便用更简单的基于类的语法实现\
+  \ JavaScript 的经典原型继承模型。\n\n在本章中，我们研究了 `ES6` 中的类如何在底层使用原型继承，通过在类原型上定义非静态方法，而所有静态方法则定义在类本身上，使得所有类方法都不可枚举。我们还学习了新的基于类的继承语法，它允许你从基类创建派生类，也允许你继承自\
+  \ JavaScript 中的内置类，如 `Array`，`String` 和其他数据类型。总的来说，类是对 JavaScript 非常重要的语法补充，通过提供简洁的语法，使我们能够以更清晰的方式声明自定义对象类型。\n\
+  \n"
+- '# 5. 模块
+
+
+  JavaScript 在其早期阶段，最初是作为 Web 浏览器的一种简单脚本语言开始的。因此，它最初是建立在“一切都是共享的”方法之上的。但随着时间的推移，随着语言的发展以及
+  JavaScript 应用程序变得越来越复杂，这种加载代码的方法开始变得更容易出错且令人困惑。这与大多数高级语言使用如模块和包等概念来帮助定义代码作用域的事实形成对比。在
+  `ES6` 之前，JavaScript 应用程序中的所有内容，包括应用程序不同文件中的代码，都共享相同的作用域。这正是模块发挥作用的地方，它们有助于更好地管理和引入代码分离，减少命名冲突等问题并提高数据安全性。JavaScript
+  开发者被迫求助于外部库来引入模块以帮助解决这些特定问题，但有了 `ES6`，模块现在已成为该语言的官方组成部分。
+
+
+  ## 模块系统及一点历史
+
+
+  过去，JavaScript 有两个主要的模块系统：异步模块定义 (AMD) 和 `CommonJS`。`CommonJS` 是 `Node.js` 中常用实现的模块标准。它具有简洁的语法，专为同步加载和服务器设计。另一方面，`AMD`
+  是 `RequireJS` 中的流行实现，其语法稍显复杂，允许它在没有 `eval()` 或编译步骤的情况下工作。它专为异步加载和浏览器设计。两者在浏览器中都不是原生可用的。
+
+
+
+
+  当 TC39 决定在 ES6 中实现模块规范时，他们没有采用已有的两种方案，而是提出了一种新的实现方法。他们的目标是同时满足 CommonJS 和 AMD 的用户。这种新方法建立在两者之上，并试图解决开发者在这两种实现中经常遇到的许多问题。
+
+
+  ES6 模块提供了来自 AMD 和 CommonJS 的特性。它们使用紧凑的语法和静态模块结构，有助于代码优化、静态检查和消除死代码。它还像 CommonJS
+  一样支持循环依赖，并像 AMD 一样支持异步加载和可配置的模块加载。
+
+
+  终结 CommonJS 和 AMD 之间的碎片化，并拥有一个统一的本地模块标准，带来了额外的好处，例如废弃了传统上用于使同一文件能在不同系统中使用的 UMD（通用模块定义）模式。
+
+
+  #### 传统 JavaScript 中的模块模式
+
+
+  为了帮助我们更好地理解模块，在深入探讨 ES6 模块之前，我们将使用传统 JavaScript 实现模块模式。简单来说，模块是一个包含内部变量和函数的函数，它可以通过返回一个“公共
+  API”来暴露给外部环境，该 API 通过拥有数据闭包的方法来访问函数内的数据。为了说明这一点，我们使用模块模式编写一个函数：
+
+
+  ```
+
+  function Message(text) {
+
+  function printMessage() {
+
+  console.log("This is the message: " + text + "!");
+
+  }
+
+  return {
+
+  printMessage: printMessage
+
+  };
+
+  }
+
+  var printer = Message("test");
+
+  printer.printMessage();          // This is the message: test!
+
+  ```
+
+
+  在此示例中，变量 `printer` 被赋值为带有参数 "`test`" 的函数 `Message`。`Message` 是实现模块模式的函数，它为 `printer`
+  提供了一个公共 API，该 API 可以访问其内部函数 `printMessage`，作为打印 `text` 参数的方法。
+
+
+  ### ES6 中的模块
+
+
+  ES6 中的模块使得将代码划分和分离成更小的独立片段变得更加容易，这些片段可以在需要时被重用并注入到其他地方，从而使测试代码的过程更加容易，因为模块与主代码解耦。模块在异步加载脚本方面也很有用，可以提高应用的加载时间。但模块系统对
+  JavaScript 来说并不新鲜。
+
+
+  模块就是被从其他文件加载到 JavaScript 代码中的 JavaScript 文件。但理解这与脚本的加载方式有何不同非常重要。如果我们将 JavaScript
+  模块的语义与传统脚本加载进行比较，会发现一些关键区别。首先，模块始终在严格模式下运行，而传统脚本则可以更改其模式。如果你查看模块的顶级作用域，`this` 的值是
+  `undefined`，并且在顶层创建的变量不会出现在共享的全局作用域中。你需要从模块内部获取的任何东西都必须显式地导出，我们才能在模块外部使用它们。现在，让我们通过理解导入和导出绑定的能力，来了解模块的核心价值。
+
+
+  #### 导出
+
+
+  `export` 关键字可用于将模块内部的代码部分暴露给其他模块。你可以从模块中导出一个变量、一个函数或一个类声明。未从模块导出的变量、函数或类在模块外部不可访问。让我们看几个例子：
+
+
+  ```
+
+  export var text = "ES6 is awesome";
+
+  export let name = "Ian Murawski";
+
+  export const number = 7;
+
+  ```
+
+
+  在此示例中，你正在导出 `text`、`name` 和 `number`，它们使用不同的变量声明关键字声明。你也可以从模块中导出一个函数或类。考虑以下示例：
+
+
+  ```
+
+  export function add(a, b) {
+
+  return a + b;
+
+  }
+
+  export class Rectangle {
+
+  constructor(length, width) {
+
+  this.length = length;
+
+  this.width = width;
+
+  }
+
+  }
+
+  ```
+
+
+  在这段代码片段中，我们正在导出函数 `add` 和类 `Rectangle`。你也可以导出一个模块私有的现有函数。
+
+
+  ```
+
+  function multiply(a, b) {
+
+  return a * b;
+
+  }
+
+  export { multiply };
+
+  ```
+
+
+  从这个例子中，我们可以看到不仅可以导出一个函数声明——而且还可以导出一个对模块私有函数的引用。
+
+
+  此时，理解这一点很重要：只有带有名称的函数或类声明才能以这种方式导出，所有这些导出都被称为命名导出。你不能从模块中导出匿名函数或类，除非它们被标记为使用 `default`
+  关键字指定的 `default` 导出。你可以在一个模块中有多个命名导出，但只能有一个默认导出。同时使用两者是可能的，但通常最佳实践是将它们分开。
+
+
+  #### 默认导出
+
+
+  在 Node.js 中，模块只导出单个值是常见的做法。即使在前端 JavaScript 中，当我们为模型和组件使用类时，每个模块一个类也是常见的做法。ES6 模块被设计为选取一个默认导出，作为主要的导出值。
+
+
+  可以使用 `default` 关键字将单个变量、函数或类指定为模块的默认导出。在一个模块中，你只能有一个值作为默认导出。在模块内对多个导出使用该关键字会引发错误。默认导出有助于简化从模块导入导出的语法。
+
+
+  ```
+
+  export default function(a, b) {
+
+  return a * b;
+
+  }
+
+  ```
+
+
+  在此示例中，该函数作为其默认值从模块导出。你可以注意到该函数如何不需要名称，因为它是默认导出，并且模块本身代表该函数，允许你省略函数的名称。你也可以为其分配一个名称，并使用
+  `default` 导出函数名称。考虑以下示例：
+
+
+  ```
+
+  function multiply(a, b) {
+
+  return a * b;
+
+  }
+
+  export default multiply;
+
+  ```
+
+
+  #### 导入
+
+
+  一旦设置了包含相关导出的模块，就可以通过使用 `import` 关键字在另一个模块内访问它。import 语句包含两部分：你要导入的标识符以及应从哪里导入这些标识符的模块。这是其基本形式的语句：
+
+
+  ```
+
+  import { identifier1, identifier2 } from "./moduleFile.js";
+
+  ```
+
+
+  在上面的语句中，`identifier1` 和 `identifier2` 是从 `moduleFile.js` 导入的绑定。
+
+
+  模块通过 `from` 关键字后一个表示包含模块的文件路径的字符串来指定。请注意，绑定列表看起来像一个解构对象，但请记住它不是。此外，绑定类似于使用 `const`
+  定义的变量，也就是说，你不能使用相同的名称定义任何其他变量，也不能导入另一个具有相同名称的模块。
+
+
+  使用上述语法，你可以从模块中导入特定的绑定，如下所示：
+
+
+  ```
+
+  // 导入函数 sum 和 multiply
+
+  import { sum, multiply } from "./ moduleFile.js";
+
+  console.log(sum(1, 7));                // 8
+
+  console.log(multiply(2, 3));           // 6
+
+  ```
+
+
+  这里，有两个绑定从 `moduleFile` 模块导入：`sum` 和 `multiply` 可以像本地定义的标识符一样使用。但让我们考虑一种情况，即你想要导入模块中所有可用的导出，而无需显式地按名称声明它们。这可以通过使用通配符
+  `*` 并将导入的标识符作为对象的属性来实现。
+
+
+  ```
+
+  // 导入所有内容
+
+  import * as example from "./ moduleFile.js";
+
+  console.log(example.sum(1,7));          // 8
+
+  console.log(example.multiply(2, 3));    // 6
+
+  ```
+
+
+  在这段代码中，`moduleFile` 中所有导出的绑定都被加载到一个名为 `example` 的对象中。
+
+
+
+
+  '
+- '# JavaScript 模块指南
+
+
+  ## 引言
+
+
+  模块中的所有导出都将作为已声明对象的属性被访问。这会创建一个新的命名空间，因为该对象并不存在于实际模块中。
+
+
+  需要注意的是，无论模块在导入语句中被导入多少次，它都只会被执行一次。当导入被执行时，该模块会被存储在内存中，并供所有后续导入重用。存储该模块的文件只会被执行一次。
+
+
+  #### 导入默认值
+
+
+  从模块中导入默认值非常简单：
+
+
+  ```javascript
+
+  import multiply from "./moduleFile.js";
+
+  ```
+
+
+  该导入语句从模块中导入了默认值。请注意，与导入命名导出不同，这里我们没有使用任何花括号。此例中的名称 `multiply` 是本地的，用于引用从模块中导入的默认值。
+
+
+  对于同时导出默认值和非默认值的模块，你可以使用一条语句来导入所有绑定：
+
+
+  ```javascript
+
+  export let message = "42 is the answer to the everything.";
+
+  export default function(a, b) {
+
+  return a * b;
+
+  }
+
+  import multiply, { message } from "./moduleFile.js";
+
+  console.log(multiply (21, 2));    // 42
+
+  console.log(message);             // "42 is the answer to the everything."
+
+  ```
+
+
+  你需要使用逗号来分隔默认的本地名称和花括号内列出的非默认标识符。请确保始终将默认值放在非默认值之前。
+
+
+  另一种为默认模块指定特定本地名称的导入方式是：
+
+
+  ```javascript
+
+  import { default as multiply, message } from "./moduleFile.js";
+
+  ```
+
+
+  在此例中，与上一个示例类似，`multiply` 存储了从 `moduleFile.js` 导出的默认模块。我们将在本章后续部分讨论使用 `as` 关键字重命名标识符。
+
+
+  #### 导出已导入的绑定
+
+
+  如果你需要重新导出已导入到模块中的绑定，可以使用导出语句：
+
+
+  ```javascript
+
+  import { message } from "./moduleFile.js";
+
+  // 一些 JavaScript 代码
+
+  export message;
+
+  ```
+
+
+  在此示例中，我们从 `moduleFile.js` 导入了绑定 `message`，并再次导出了相同的绑定。你也可以使用一条语句而不是两条来完成此操作，如下所示：
+
+
+  ```javascript
+
+  export { multiply } from "./moduleFile.js";
+
+  ```
+
+
+  此外，你可以使用通配符 `*` 重新导出所有内容，如下例所示：
+
+
+  ```javascript
+
+  export * from "./moduleFile.js";
+
+  ```
+
+
+  在上述示例中，来自 `moduleFile.js` 的所有内容（包括默认值）都会从当前模块中导出。
+
+
+  #### 重命名标识符
+
+
+  在许多情况下，你可能不想使用导入的变量、函数或类的原始名称，因为它可能与代码中的其他声明发生冲突。ES6 通过允许你使用 `as` 关键字重命名导出和导入来帮助你解决此问题：
+
+
+  ```javascript
+
+  function sum(a, b) {
+
+  return a + b;
+
+  }
+
+  export { sum as add };
+
+  ```
+
+
+  在此示例中，`sum` 是导出函数的本地名称。但该函数被导出为 `add`，需要在另一个模块中使用其导出的名称 `add` 来导入：
+
+
+  ```javascript
+
+  import { add } from "./moduleFIle.js";
+
+  ```
+
+
+  同样，如果你想在导入标识符时使用不同的名称，可以这样做：
+
+
+  ```javascript
+
+  import { add as sum } from "./moduleFile.js";
+
+  console.log(typeof add);            // "undefined"
+
+  console.log(sum(1, 2));             // 3
+
+  ```
+
+
+  在这里，导出名称 `add` 被作为 `sum` 导入。因此，从技术上讲，在代码的其余部分没有名为 `add` 的标识符可供使用，它只能被引用为 `sum`。
+
+
+  你还可以将标识符重命名为 `default` 以使其成为默认导出：
+
+
+  ```javascript
+
+  function multiply(a, b) {
+
+  return a * b;
+
+  }
+
+  export { multiply as default };
+
+  ```
+
+
+  类似地，正如我们之前讨论过的，你也可以在重命名后导入默认值：
+
+
+  ```javascript
+
+  import { default as multiply, message } from "moduleFile.js";
+
+  console.log(multiply(1, 2));      // 2
+
+  console.log(message);             // "42 is the answer to the everything."
+
+  ```
+
+
+  由于 `default` 是 JavaScript 中的关键字，因此它不能用作变量、函数或类名。因此，使用 `default` 重命名导出可以被视为一种特殊情况，以与定义非默认导出的方式保持一致。如果你想使用单条导出语句同时指定多个导出（包括默认值），这种语法会非常有用。
+
+
+  #### 加载模块
+
+
+  ES6 并未具体定义如何加载模块。这是因为模块规范的设计目标之一就是保持与实现环境的无关性。ES6 没有创建一种适用于所有 JavaScript 环境的规范，而只是指定了语法。浏览器和
+  Node.js 需要决定如何实现 `HostResolveImportedModule`，这是 ES6 抽象出加载机制的内部操作。
+
+
+  #### Web 浏览器中的模块
+
+
+  在 Web 应用程序中使用 JavaScript 的方法有很多，但将 JavaScript 插入 HTML 的主要方式是通过 `<script>` 标签。`<script>`
+  标签有一个 `src` 属性，用于告知应用程序脚本位于特定位置。另一种方式是直接将代码包含在标签内部。你也可以使用 workers 来加载 JavaScript。让我们在模块的上下文中逐一探讨这些机制。
+
+
+  ### 使用 `<script>` 加载模块
+
+
+  默认情况下，`<script>` 元素将 JavaScript 文件作为脚本加载。这等同于显式地将 `type` 属性设置为内容类型 `text/javascript`。为了支持模块，`module`
+  值被添加到了类型选项中。例如：
+
+
+  ```javascript
+
+  import { multiply } from "./moduleFile.js";
+
+  let result = multiply(1, 2);
+
+  ```
+
+
+  与脚本不同，模块使用 `import` 来指定为了正确执行而需要加载的其他文件。为了使其功能正常工作，`script` 元素的模块类型始终表现得如同应用了 `defer`
+  属性一样。`defer` 属性对于加载脚本文件是可选的，但对于加载模块文件始终是应用的。一旦 HTML 解析器遇到 `<script type="module">`
+  元素，模块文件就会开始被下载。因此，所有模块都按照它们出现的顺序执行。
+
+
+  #### 在浏览器中异步加载模块
+
+
+  你可能已经在 HTML 中使用了 `<script>` 标签的 `async` 属性。当你在 script 标签中使用此属性时，它让浏览器知道脚本在获取并可用后需要立即执行。因此，异步脚本的执行顺序不是同步的。它们一旦可用就会立即执行，无论它们被声明的顺序如何。对于模块，你可以使用相同的异步执行过程。唯一需要记住的一点是，在模块可以执行之前，需要先获取导入资源。
+
+
+  ### 常见陷阱
+
+
+  模块在分隔代码和创建可重用的逻辑组件方面非常有用。但是，为了有效使用它们，你需要了解一些陷阱。在本节中，我们将详细讨论这些陷阱。
+
+
+  #### 语法
+
+
+  请记住，`export` 和 `import` 都只能在顶层使用，不能成为其他语句或函数的一部分。例如，以下代码将抛出语法错误：
+
+
+  ```javascript
+
+  if (condition) {
+
+  export condition;
+
+  // SyntaxError: ''import'' and ''export'' may only appear at the top level
+
+  }
+
+  ```
+
+
+  这里，导出语句是 `if` 语句的一部分，这会抛出错误。导出和导入不能以任何方式被条件性地或动态地执行。在 `try-catch` 块中使用 import-export
+  语句时也是如此。`export` 和 `import` 关键字被特意设计为静态的，以便文本编辑器能够在导入特定模块时轻松地提供该模块中可用的信息。
+
+
+  #### 只读绑定
+
+
+
+
+  '
+- "# ES6 模块\n\nES6 的 `import` 语句只会创建指向相应变量、函数或类的**只读绑定**。因此，导入这些绑定的模块无法修改其值。但导出标识符的模块可以对其进行修改。例如：\n\
+  \n```javascript\n// moduleFile.js 从这里开始\nexport var message = \"模块文件中的消息\";\nexport\
+  \ function setMessage(newText) {\n    message = newText;\n}\n// moduleFile.js 在这里结束\n\
+  \n// file.js\nimport { message, setMessage } from \"./moduleFile.js\"\nconsole.log(message);\
+  \          // \"模块文件中的消息\"\nsetMessage(\"新消息\");\nconsole.log(message);        \
+  \  // \"新消息\"\nmessage = \"这是另一条消息\";      // 报错\n```\n\n在上述示例中，我们从模块中导入了两个绑定：`message`\
+  \ 和 `setMessage`。函数 `setMessage()` 可以更改变量 `message` 的值，但如果你尝试直接更改该值，则会抛出错误。\n\n\
+  #### 解构导入语句与使用变量\n\n尽管 import 语句看起来像是解构，但事实并非如此。因此，以下代码是无效的，将会抛出错误：\n\n```javascript\n\
+  import { toto: { tata } } from 'someModule'; // 报错\n```\n\n你还需要牢记一点：import 语句不能依赖于任何需要在运行时计算的内容。因此，类似下面的示例也会抛出错误：\n\
+  \n```javascript\nimport toto from \"someModule\" + tata; // 报错\n```\n\n因此，在导入模块时，请确保不要使用任何此类复杂的机制。\n\
+  \n## 使用 `eval()`\n\n你不能在模块上使用 `eval()`，因为模块对于 `eval()` 来说是一种高级结构。`eval()` 通常接受不允许使用\
+  \ `import` 或 `export` 的脚本。\n\n## 模块标识符\n\n在上述所有示例中，我们在模块标识符中使用了相对路径，例如 `\"./moduleFile.js\"\
+  `。当浏览器尝试运行此代码时，它们会按以下方式理解这些路径：\n\n- `/` 解析为根目录\n- `./` 解析为当前目录\n- `./` 解析为父目录\n\n\
+  ## 总结\n\nES6 中的模块为扩展 JavaScript 的功能提供了新的方式。它们有助于更好地组织代码，并维护更具模块化语义的代码库。ES6 引入了新的关键字，如\
+  \ `import`、`export` 和 `default`，使得模块的使用成为可能。由于 ES6 集成了两者的优点，你不再需要使用 UMD 或诸如 CommonJS\
+  \ 或 AMD 之类的额外模块系统。\n\n使用模块，你可以编写可重用且封装性更好的代码。与脚本不同，模块不会修改全局作用域，从而降低了出错的可能性。如果你想在其他地方使用模块中的值，你必须专门将它们从模块中导出。\n\
+  \n"
+- "# ES6 中的 Symbol\n\n早在 1996 年，也就是 JavaScript 首次被标准化、ECMA 试图制定出标准规范的时候，JavaScript\
+  \ 就已经有五种原始数据类型：布尔型、数字型、字符串型、未定义型和空值型，每种类型都代表一个值。但现在，ES6 引入了一种全新的原始数据类型——Symbol。在本章中，我们将详细讲解这种新的原始类型及其应用。\n\
+  \n## Symbols\n\nSymbol 表示一个唯一的值，其本质是一个保证永远不会与其他 Symbol 冲突的唯一令牌。ES6 中的 Symbol 可以通过一个工厂函数来创建。`Symbol()`\
+  \ 方法可用于创建一个新的 Symbol。考虑以下示例：\n\n```javascript\nconst foo = Symbol();\nconsole.log(typeof\
+  \ foo);      // \"symbol\"\n```\n\n每次调用工厂函数，都会创建一个新的、唯一的 Symbol。对 Symbol 类型使用 `typeof`\
+  \ 运算符，其输出是 `\"symbol\"`，这是识别 Symbol 的主要方式。\n\n**注意：** ES6 中的 Symbol 不像其他原始类型那样具有字面量形式。\n\
+  \n（可选地）在创建 Symbol 时，你也可以通过向 `Symbol()` 方法传递一个字符串作为参数来为其添加标签：\n\n```javascript\n\
+  const chocolate = Symbol(\"这是我的巧克力\");\nconsole.log(chocolate);\n// Symbol(这是我的巧克力)\n\
+  console.log(chocolate.toString());\n// \"Symbol(这是我的巧克力)\"\n```\n\n作为参数传入的标签不会影响\
+  \ Symbol 的值。除了在打印 Symbol 时用作描述该 Symbol 的字符串之外，它没有其他作用。当你对返回的 Symbol 调用 `.toString()`\
+  \ 方法（该方法将 Symbol 转换为字符串）时，它也非常有用。当你将 Symbol 写入 `console.log()` 以及可能的错误消息时，该标签会显示出来。这对于调试目的非常有帮助。\n\
+  \n请注意，你不应该使用 `new` 关键字来创建 Symbol。Symbol 没有对象构造函数；因此你不能使用 `new` 关键字创建 Symbol：\n\n\
+  ```javascript\nconst bar = new Symbol();           // 类型错误\n```\n\n如前所述，Symbol 永远是唯一的，两个\
+  \ Symbol 永远不可能相同。但是，你可以使用相同的标签创建多个 Symbol，但返回的 Symbol 始终是唯一的。查看以下代码片段示例：\n\n```javascript\n\
+  const kit = Symbol(\"你好\");\nconst kat = Symbol(\"你好\");\nconsole.log(kit === kat);\
+  \       // false\n```\n\n或者你可以简单地尝试：\n\n```javascript\nSymbol() !== Symbol()   \
+  \      // true\n```\n\n因此，Symbol 永远是唯一的，并且在各种情况下都有其不可思议的用途。让我们在下一节中看看它们的应用。\n\n\
+  ### Symbol 的应用\n\n从本质上讲，Symbol 主要用作唯一的属性键，因为一个 Symbol 永远不会与对象的任何其他属性（Symbol 或字符串）发生冲突，这在你不希望冒险覆盖对象的原生属性时非常有用。Symbol\
+  \ 也常用于为类或对象类型的内部使用创建匿名（或在某种程度上是私有的）属性。考虑以下示例，其中我们有一个名为 `Person` 的对象，它包含一些“公共”属性：\n\
+  \n```javascript\nlet Person = {\n    name: \"John\",\n    age: 14,\n    location:\
+  \ \"New York\"\n}\n```\n\n现在，假设我们想向 `Person` 对象添加一个私有方法。我们可以像下面这样使用 Symbol 来实现：\n\
+  \n```javascript\nlet votingEligibility = Symbol();\nPerson[votingEligibility] =\
+  \ function() {\n    return this.age >= 18;\n}\n```\n\n现在让我们看看 `Person` 对象，你会发现一个匿名方法已经被添加到其中：\n\
+  \n```javascript\nconsole.log(Person);\n// {name: \"John\", age: 14, location: \"\
+  New York\"}\n// 如果你在较新版本的 Google Chrome 中运行此代码，\n// 你还会看到 - Symbol(): [Function]\
+  \ 属性\n```\n\n你也可以在这里使用计算属性键，我们已经在之前的章节中讨论过这一点：\n\n```javascript\nlet Person = {\n\
+  \    name: \"John\",\n    age: 14,\n    location: \"New York\",\n    [Symbol()]:\
+  \ function() {\n        return this.age >= 18;\n    }\n}\n```\n\nSymbol 属性是不可枚举且匿名的。因此，在使用\
+  \ `for...in` 循环时，遍历过程中无法访问对象的 Symbol 属性；并且由于它是匿名的，它也不会被列在 `Object.getOwnPropertyNames()`\
+  \ 方法的结果数组中。但是，你可以使用 `Object.getOwnPropertySymbols()` 来获取 Symbol 属性。例如：\n\n```javascript\n\
+  Object.getOwnPropertyNames(Person);\n// [\"name\", \"age\", \"location\"]\nObject.getOwnPropertySymbols(Person);\n\
+  // [Symbol()]\n```\n\n让我们看看在上一个创建 `Person` 对象的示例中如何使用 `Object.getOwnPropertySymbols()`：\n\
+  \n```javascript\nlet canVote = Object.getOwnPropertySymbols(Person)[0];\nPerson[canVote]();\n\
+  // false\n```\n\n**注意：** 我们看到 `Object.getOwnPropertySymbols()` 会返回一个与对象关联的属性 Symbol\
+  \ 数组，因此这些属性是可访问的，而不是私有的。但是通过使用 Symbol，我们确实拥有不会随意发现这些属性的优势。\n\n你也可以通过使用创建的引用来将属性绑定到\
+  \ `Person` 对象来实现这一点。还记得我们是使用 `let votingEligibility = Symbol();` 来创建 Symbol 的吗？因此：\n\
+  \n```javascript\nPerson[votingEligibility]();\n// false\n```\n\n\n\n同样，自定义类也可以通过这种方式创建私有成员，使其仅能被类中定义的其他方法私有访问。动态创建的符号值可以保存到作用域内的类变量中，该类变量只能被类的内部方法访问，从而保护私有属性不被无意或随意发现。例如，请看以下代码片段：\n\
+  \n```\nconst age = Symbol(\"age\");\nclass Person {\nconstructor(value) {\nthis[age]\
+  \ = value;\n}\ngetAge() {\nconsole.log(this[age]);\n}\n}\nconst jack = new Person(23);\n\
+  console.log(jack);\n// Person {}\nconsole.log(jack.age);\n// undefined\nconsole.log(jack[Symbol(\"\
+  age\")]);\n// undefined\njack.getAge();\n// 23\n```\n\n在这个例子中，我们有一个 `Person` 类，它使用符号创建了一个私有属性来存储人的年龄。从代码片段中可以看出，该属性是不可枚举的，因为它返回一个空对象，并且只能通过公开的\
+  \ `getAge()` 方法访问。由于符号总是唯一的，通过创建具有相同标签 `age` 的符号 `Symbol(\"age\")` 来访问私有属性，只会创建一个新的唯一符号，而无法访问对象的所需属性。\n\
+  \n### 符号与注册表\n\n到目前为止，我们已经讨论了局部符号以及如何通过获取引用访问它们。符号也可以放在一个全局注册表中，通过它可以在不同的上下文（称为领域）中访问。领域是代码片段存在的上下文，例如应用程序运行的页面、页面中的\
+  \ `<iframe>`，或包含全局变量和已加载模块的 web worker 上下文。\n\n符号拥有一项特殊能力，可以存在于整个运行时符号注册表中，你可以使用以下方法将符号添加到运行时符号注册表中：\n\
+  \n```\nSymbol.for(key) 和 Symbol.keyFor(symbol)。\n```\n\n## Symbol.for(key)\n\n此方法在运行时符号注册表中查找具有给定键的现有符号。如果在全局注册表中存在具有该键的符号，则返回该符号。如果在注册表中未找到具有该键的符号，则会创建一个新符号。例如，考虑以下代码片段，其中第一次调用\
+  \ `Symbol.for('myCar')` 创建一个符号，将其添加到注册表并返回；第二次调用则返回同一个符号，因为该键已存在于运行时符号注册表中：\n\n\
+  ```\nSymbol.for('myCar') === Symbol.for('myCar')\n// true\n```\n\n运行时全局注册表会跟踪所有使用\
+  \ `Symbol.for(key)` 方法创建的符号，这些符号可以在不同的领域之间访问。例如，在网页中任何地方创建的符号也可以在 iframe 的上下文中访问。查看以下代码片段（你可以在浏览器控制台中运行）：\n\
+  \n```\n// 创建一个 iframe\nconst frame = document.createElement('iframe');\n// 将 iframe\
+  \ 附加到 body\ndocument.body.appendChild(frame);\nconsole.log(Symbol.for('temperature')\
+  \ === frame.contentWindow.Symbol.for('temperature'));\n// true\n```\n\n在上面的示例中，来自网页上下文的全局符号与\
+  \ iframe 中的全局符号完全相同，这表明使用 `Symbol.for(key)` 方法创建的符号可以在不同领域之间访问。\n\n## Symbol.keyFor(symbol)\n\
+  \n`Symbol.keyFor(symbol)` 从全局符号注册表中检索与给定符号关联的键，该键是在将符号添加到注册表时关联的。如果在注册表中未找到该符号，则返回\
+  \ undefined。\n\n```\nconst symbol = Symbol.for('myHouse');\nconsole.log(Symbol.keyFor(symbol));\
+  \ // myHouse\nconst myCat = Symbol();\nSymbol.keyFor(myCat); // undefined\n```\n\
+  \n#### 内置符号\n\nES6 附带了一系列语言规范中预定义的符号，其中大部分暴露了 JavaScript 对象的一些元属性和行为。一些众所周知的符号如下：\n\
+  \n`Symbol.hasInstance` - 允许我们确定对象是否是构造函数的实例。它由 instanceof 运算符在内部调用。\n\n另一个是 `Symbol.iterator`，我们将在本书后面深入探讨。它保存对象的默认迭代器。数组、集合（Set）、映射（Map）和弱映射（WeakMap）在其结构中都有一个不可枚举的\
+  \ `[Symbol.iterator]` 属性。\n\n## 总结\n\n符号是 ES6 中引入 JavaScript 的一种新的原始类型。当你想避免属性键的名称冲突时，它们非常有用，特别是在你不想冒险覆盖对象的原生属性的情况下。符号因其不可枚举性，通过创建受保护的属性提供优势，防止这些属性被轻易发现，因为你必须专门查找符号才能找到它们。\n\
+  \n"
+- '# 7. 数组与集合
+
+
+  到目前为止，我们已经涵盖了 ES6 提供的许多新的和改进的特性和功能。在本章中，我们将介绍数组和集合等数据类型的更多增强功能。ES6 为 JavaScript
+  语言带来了许多新的静态属性和方法，扩展了内置原生对象和对象的功能。我们将探讨 Array 类型的扩展特性，以及一些现在已成为语言原生组件的新数据结构抽象。
+
+
+  ## 数组与新方法
+
+
+  多年来，许多流行的 JavaScript 库（如 Underscore 和 Lodash）都随着数组数据结构的发展而发展，数组是最常被扩展的特性之一。因此，随着时间的推移，语言对这些库中常见的数组功能提供内置支持变得越来越必要。在本节中，我们将介绍所有新的
+  ES6 数组功能，并研究一些它们表现出色的用例。
+
+
+  我们现在有了语言提供的几个新的静态方法和原型方法，可帮助你创建、操作、填充和过滤数组。首先，让我们看看静态方法：`Array.from()` 和 `Array.of()`，然后我们将探索
+  ES6 中为数组引入的新原型方法。
+
+
+  ### Array.from()
+
+
+  在 ES6 之前，为了将类数组对象（例如 `arguments` 和 `NodeList`）转换为真正的数组，我们需要使用一些技巧，比如在 `arguments`
+  或 `NodeList` 上调用 `Array.prototype.slice.call()` 来将对象转换为数组。考虑以下示例，其中 DOM 中存在一个元素列表：
+
+
+  ```
+
+  Apple
+
+  Mango
+
+  Orange
+
+  Litchi
+
+  Banana
+
+
+  var listItems = document.querySelectorAll(''li'');
+
+  // 将 NodeList 转换为数组
+
+  listItems = Array.prototype.slice.call(listItems);
+
+  // 在新转换的数组上使用数组方法
+
+  listItems.map(item => { console.log(item.innerText) });
+
+  // Apple
+
+  // Mango
+
+  // Orange
+
+  // Litchi
+
+  // Banana
+
+  ```
+
+
+  有了 ES6，我们现在有了一个更直接的解决方案，用于将像上例中描述的类数组对象转换为数组。新的 `Array.from` 静态方法允许我们从任何类数组或可迭代对象创建数组。不过，在继续之前，让我们清楚地理解我们所说的类数组对象具体是什么意思。这些就是具有
+  length 属性或索引元素的对象。例如，考虑以下对象：
+
+
+  ```
+
+  const customers = {
+
+  ''0'': ''matt'',
+
+  ''1'': ''ian'',
+
+  ''2'': ''mikhail'',
+
+  ''3'': ''akia'',
+
+  ''4'': ''vincent'',
+
+  length: 5
+
+  };
+
+  ```
+
+
+  现在，如果我们想把这个对象转换为数组，我们可以使用 `Array.from()` 语法像这样简单地实现：
+
+
+  ```
+
+  Array.from(customers).forEach(customer => {
+
+  console.log(customer);
+
+  });
+
+  ```
+
+
+  在这个例子中，我们只是将客户对象传递给了函数，而它就返回了一个由各个元素组成的数组。让我们看看具体的 `Array.from` 语法：
+
+
+  ```
+
+  Array.from(arrayLike[, mapFn[, thisArg]])
+
+  ```
+
+
+
+
+  在语法`arrayLike`中，`arrayLike`是一个类数组或可迭代对象，`mapFn`（可选参数）是一个映射函数，可应用于数组的每个元素。`thisArg`是另一个可选参数，其值在执行`mapFn`时用作`this`。
+
+
+  `Array.from()`会尝试检查其第一个参数是否可迭代，如果是，则使用迭代器生成值并复制到返回的数组中。但如果传入一个类数组对象，其行为与`slice()`或`apply()`相同，即简单地循环访问从
+  0 到对象长度的数值命名属性值。
+
+
+  如果现在将上述示例与可选参数`mapFn`结合使用，代码如下所示：
+
+
+  ```
+
+  Array.from(customers, customer => {
+
+  console.log(customer);
+
+  });
+
+  ```
+
+
+  注意，我们移除了`forEach`方法，并使用第二个参数作为映射函数来遍历结果数组。
+
+
+  #### `Array.of()`
+
+
+  ES6 引入的另一个非常实用的方法是`Array.of()`，它允许你轻松创建元素数组。`Array.of()`接受一个项目列表作为参数，并将其作为数组返回。请看以下示例：
+
+
+  ```
+
+  let arr = Array.of(10, 20, 30, 40);
+
+  console.log(arr); // [10, 20, 30, 40]
+
+  ```
+
+
+  你可能会疑惑这与传统的`Array(...)`构造函数有何不同。你也可以使用`Array()`语法通过数组构造方法来创建数组。但`Array.of()`与`Array`构造函数的区别在于它们处理单个数字作为参数的方式。`Array`构造函数有一个非常奇怪的行为：如果只传入一个数字，它不会创建包含该数字值的单元素数组，而是创建一个空数组，并以该数字作为其长度，所有元素都被设置为`undefined`。
+
+
+  `Array.of()`静态方法解决了这个问题，现在是首选的函数形式数组构造函数。
+
+
+  请看以下示例：
+
+
+  ```
+
+  const arr1 = Array.of(10);
+
+  console.log(arr1); // [10]
+
+  console.log(arr1.length);      // 1
+
+  const arr2 = Array(10);
+
+  console.log(arr2); // [,,,,,,,,,]
+
+  console.log(arr2.length);      // 10
+
+  ```
+
+
+  从上面的示例可以看出，`Array.of(10)`创建了一个包含单个数字`[10]`的数组，而`new Array(10)`方法创建了一个长度为 10 的空数组。说到这里，我们需要理解为什么在第一种情况下要使用构造函数，而不是像`a
+  = [1, 2, 3]`这样的字面量语法。例如，当你有一个回调函数需要将传入的参数包装成数组时，或者当你需要子类化`Array`并希望在子类实例中创建或初始化元素时，就会使用构造函数。
+
+
+  现在我们已经了解了 ES6 中为数组引入的两个新静态方法，接下来深入探讨 ES6 中为`Array`原型引入的新原型方法。
+
+
+  ### 新的`Array.prototype`方法
+
+
+  在讨论了创建数组的新方法之后，让我们看看 ES6 中引入的新数组方法如何帮助我们轻松访问和操作存储在数组中的数据。在本节中，我们将介绍新的`Array.prototype`方法，包括`entries()`、`keys()`、`values()`、`find()`、`findIndex()`、`fill()`和`copyWithin()`，并通过一些实际示例来理解这些方法如何帮助我们轻松访问和操作数据。
+
+
+  #### `Array.prototype.entries()`
+
+
+  `entries()`方法返回一系列值，但通过迭代器逐个暴露它们，而不是一次性作为一个数组返回。你将在后续章节中更详细地学习迭代器，但这里我们先对迭代器做一个快速介绍。
+
+
+  迭代器一次从集合中访问一个项目，同时跟踪其在序列中的当前位置。它提供了一个`next()`方法，该方法返回序列中的下一个项目。`next()`方法返回一个包含两个属性的对象：`done`和`value`，其中`value`表示集合中的项目，`done`是一个布尔值，当可迭代对象的所有元素都被迭代完毕时，其值为`true`。
+
+
+  每个可迭代对象（例如数组）都必须实现可迭代协议，这意味着该对象（或其原型链上的某个对象）必须有一个属性，其键为`Symbol.iterator`。`Symbol.iterator`是
+  ES6 的另一个新增特性，我们将在本书后面讨论，但现在可以将其视为一种定义永远不会与常规对象键冲突的特殊键的方式。
+
+
+  让我们来看一个数组，它是一个可迭代对象，以及它可以生成的用于消费其值的迭代器：
+
+
+  ```
+
+  const arr = [11,12,13];
+
+  const itr = arr[Symbol.iterator]();
+
+  itr.next(); // { value: 11, done: false }
+
+  itr.next(); // { value: 12, done: false }
+
+  itr.next(); // { value: 13, done: false }
+
+  itr.next(); // { value: undefined, done: true }
+
+  ```
+
+
+  现在我们对迭代器和可迭代对象有了基本了解，让我们仔细看看`Array.prototype.entries()`方法如何帮助我们遍历数组。此方法返回一个新的`Array
+  Iterator`对象，该对象包含数组中每个索引的键/值对。例如，考虑以下代码片段：
+
+
+  ```
+
+  const breakfast = [''apples'', ''bananas'', ''oranges''];
+
+  const eBreakfast = breakfast.entries();
+
+  console.log(eBreakfast.next().value); // [0, ''apples'']
+
+  console.log(eBreakfast.next().value); // [1, ''bananas'']
+
+  console.log(eBreakfast.next().value); // [2, ''oranges'']
+
+  ```
+
+
+  你也可以使用`for-of`循环来遍历从`breakfast.entries()`调用返回的迭代器：
+
+
+  ```
+
+  for (let entry of eBreakfast) {
+
+  console.log(entry);
+
+  }
+
+  // [0, ''apples'']
+
+  // [1, ''bananas'']
+
+  // [2, ''oranges'']
+
+  ```
+
+
+  类似地，还有另外两个数组方法可以分别访问键和值。让我们来看看它们。
+
+
+  #### `Array.prototype.keys()`
+
+
+  此方法返回一个新的`Array Iterator`，其中包含数组中每个索引的键：
+
+
+  ```
+
+  const breakfast = [''apples'', ''bananas'', ''oranges''];
+
+  const kBreakfast = breakfast.keys();
+
+  console.log(kBreakfast.next().value); // 0
+
+  console.log(kBreakfast.next().value); // 1
+
+  console.log(kBreakfast.next().value); // 2
+
+  ```
+
+
+  #### `Array.prototype.values()`
+
+
+  此方法返回一个新的`Array Iterator`对象，其中包含数组中每个索引的值：
+
+
+  ```
+
+  const breakfast = [''apples'', ''bananas'', ''oranges''];
+
+  const vBreakfast = breakfast.values();
+
+  console.log(vBreakfast.next().value); // apples
+
+  console.log(vBreakfast.next().value); // bananas
+
+  console.log(vBreakfast.next().value); // oranges
+
+  ```
+
+
+  #### `Array.prototype.find()`
+
+
+  `find()`方法允许你遍历数组，并返回第一个与数组的`callback(element, index, array)`匹配的项目。此方法还允许你选择性地为`this`传递上下文绑定。换句话说，`find()`方法返回数组中第一个使测试函数返回`true`的值；否则返回`undefined`。`find()`方法的语法如下：
+
+
+  ```
+
+  arr.find(callback[, thisArg])
+
+  ```
+
+
+  其中`callback`是测试函数，它对每个值执行，并接受三个参数：
+
+
+  ```
+
+  element, index and array.
+
+  function callback(element, index, array) {
+
+  // 基于某些条件返回 true 或 false
+
+  }
+
+  ```
+
+
+  考虑以下代码片段：
+
+
+  ```
+
+  const inventory = [
+
+  {name: ''apples'', quantity: 2},
+
+  {name: ''bananas'', quantity: 0},
+
+  {name: ''oranges'', quantity: 5}
+
+  ];
+
+  let result = inventory.find((fruit) => fruit.name === ''apples'');
+
+  console.log(result);             // {name: ''apples'', quantity: 2}
+
+  ```
+
+
+
+
+  上述示例展示了如何轻松地在给定数组中查找与`fruit.name`匹配`''apples''`的`第一个`元素。你也可以使用`find()`方法获取特定索引位置的元素，例如：
+
+
+  ```
+
+  result = inventory.find((fruit, i) => i > 2);
+
+  console.log(result);             // {name: ''oranges'', quantity: 5}
+
+  ```
+
+
+  如上所述，如果在数组中未找到元素，`find()`方法返回`undefined`：
+
+
+  ```
+
+  result = inventory.find((fruit, i) => i > 10);
+
+  console.log(result);             // undefined
+
+  ```
+
+
+  下一个参数`thisArg`允许你为`this`可选地传递一个上下文绑定；例如，考虑以下代码片段：
+
+
+  ```
+
+  function eligibleToVote(age) {
+
+  return age >= this.legalAge;
+
+  }
+
+  function foo() {
+
+  this.legalAge = 18;
+
+  const result = [10, 12, 23, 26, 32].find(eligibleToVote, this);
+
+  console.log(result);
+
+  }
+
+  foo();     // 23
+
+  ```
+
+
+  在这个例子中，`foo`的上下文作为第二个参数传递给`find()`方法，因此`eligibleToVote()`中的`this`指向`foo`的上下文，而`this.legalAge`的值为`18`。
+
+
+  你可能会认为这个方法类似于 ES5 中的`filter()`方法，但请注意`filter()`总是返回一个匹配项的数组（并且可能返回多个匹配项），而`find()`只返回一个元素（数组中第一个满足条件的元素）。
+
+
+  ### `Array.prototype.findIndex()`
+
+
+  此方法是`find()`的等价方法。它不返回元素本身，而是返回索引位置。如果集合中没有元素满足`callback (element, index, array)`的条件，则返回值为
+  -1。
+
+
+  例如，考虑以下代码片段：
+
+
+  ```
+
+  result = inventory.findIndex((fruit) => fruit.name === ''apples'');
+
+  console.log(result);             // 0
+
+  result = inventory.findIndex((fruit) => fruit.name === ''grapes'');
+
+  console.log(result);             // -1
+
+  ```
+
+
+  此方法类似于 ES5 中的`indexOf()`方法，它仅定位数组中的元素。使用`indexOf()`方法，你只能搜索数组中的元素；它不支持回调函数。而使用`findIndex()`方法，我们可以应用一个条件，返回的索引位置上的元素必须满足该条件。
+
+
+  ### `Array.prototype.fill()`
+
+
+  这是一个非常简单的方法，允许我们用静态值填充数组的所有元素。它还可以接受可选的起始和结束索引值。
+
+
+  考虑以下代码片段：
+
+
+  ```
+
+  [1, 2, 3].fill(4);         // [4, 4, 4]
+
+  [1, 2, 3].fill(4, 1);      // [1, 4, 4]
+
+  [1, 2, 3].fill(4, 1, 2);   // [1, 4, 3]
+
+  ```
+
+
+  输入值可以是任意值，不一定是数字、字符或任何其他原始类型。它可以是一个对象，例如：
+
+
+  ```
+
+  new Array(4).fill({});     // [{}, {}, {}]
+
+  ```
+
+
+  ### `Array.prototype.copyWithin()`
+
+
+  `copyWithin()`方法将数组中的元素序列复制到以`target`为目标起始位置。要复制的元素取自`(start, end)`范围。`start`参数是可选的，默认为
+  0。同样，`end`参数也是可选的，默认为数组的长度。
+
+
+  `copyWithin()`方法的语法如下：
+
+
+  ```
+
+  Array.prototype.copyWithin(target, start = 0, end = this.length)
+
+  ```
+
+
+  我们先从一个简单的例子开始。考虑以下代码片段：
+
+
+  ```
+
+  let fruits = ["apples", "bananas", "oranges", "grapes", "guava", "watermelon"];
+
+  fruits.copyWithin(4);
+
+  console.log(fruits);
+
+  // ["apples", "bananas", "oranges", "grapes", "apples", "bananas"]
+
+  ```
+
+
+  `fruits.copyWithin(4)`将`target`索引设为 4，即"guava"。然后，它将确定要复制的元素`start`为 0（默认值），`end`为
+  6（数组长度）。当然，你可以根据需要指定起始和结束值：
+
+
+  ```
+
+  fruits = ["apples", "bananas", "oranges", "grapes", "guava", "watermelon"];
+
+  fruits.copyWithin(4, 1, 3);
+
+  console.log(fruits);
+
+  // ["apples", "bananas", "oranges", "grapes", "bananas", "oranges"]
+
+  ```
+
+
+  `copyWithin()`方法也接受负值的`start`索引、负值的`end`索引和负值的`target`索引。让我们看一个使用负值的例子：
+
+
+  ```
+
+  [1, 2, 3, 4, 5].copyWithin(-3, -4, -1);    // [1, 2, 2, 3, 4]
+
+  ```
+
+
+  在这个例子中，`target`索引为`-3`，确定了起始位置为数组倒数第三个元素（在输入数组中是`3`）。然后确定`start`和`end`值分别为`2`和`5`（分别是数组的第四个和最后一个元素，但这里`-4`对应的索引是
+  2，`-1`对应的索引是 5，表述需准确：-4 对应数组第四个元素，即 2；-1 对应数组最后一个元素，即 5）。
+
+
+  #### 类型化数组
+
+
+  ES6 中的类型化数组提供了一种高效访问和操作二进制数据的方法。在 ES6 之前，JavaScript 不太擅长处理二进制数据。在处理二进制数据时，类型化数组有助于提高性能。
+
+
+  使用类型化数组，JavaScript 引擎不必推断数组的类型。如果你在 JavaScript 中创建一个普通数组，并且只存储浮点数，你的 JavaScript
+  引擎可能会乐观地认为它是一个浮点数数组，并为其优化代码。此时性能可以与类型化数组相当。但是，假设你有一个浮点数数组，并且代码中某个时刻，你在一个元素中存储了一个对象。在这种情况下，你的
+  JavaScript 引擎必须取消优化并重新生成代码，使数组恢复为通用类型。因此，使用类型化数组，事情要简单得多，因为它们保证是单一类型，并且你不能在其中存储对象等其他内容。它们更简单这一事实意味着不那么复杂的
+  JavaScript 引擎可以轻松实现它们，并且你可以获得一致的性能。
+
+
+  类型化数组的架构由缓冲区和视图组成。缓冲区是一个表示数据块的对象。我们不能直接操作缓冲区的内容。为了访问缓冲区中包含的内存，我们需要使用视图。视图使我们能够读写缓冲区的数据内容。
+
+
+  因此，类型化数组有两个独立的类：`ArrayBuffer`和`DataView`。`ArrayBuffer`包含我们的数据，而`DataView`提供了对此数据的自定义视图，该视图以特定格式表示缓冲区，并支持数据访问和操作。
+
+
+  ### 使用类型化数组的基础知识
+
+
+  查看以下代码片段；这里我们创建一个`ArrayBuffer`，然后创建一个特定的`DataView`来处理该缓冲区内的数据：
+
+
+  ```
+
+  const buffer = new ArrayBuffer(16);
+
+  const int32View = new Int32Array(buffer);
+
+  for (let i = 0; i < int32View.length; i++) {
+
+  int32View[i] = i * 2;
+
+  }
+
+  console.log(int32View); // [0, 2, 4, 6]
+
+  ```
+
+
+  类型化数组视图为所有常用的数值类型提供了视图，如 Int8、Uint32、Float64 等。你可以在表 7-1 中查看所有类型及其各自的大小和描述。
+
+
+  **表 7-1.** 类型化数组视图
+
+
+  | 类型 | 大小（字节） | 描述 |
+
+  | --- | --- | --- |
+
+  | Int8Array | 1 | 8 位有符号整数 |
+
+  | Uint8Array | 1 | 8 位无符号整数 |
+
+  | Uint8ClampedArray | 1 | 8 位无符号整数（钳制） |
+
+  | Int16Array | 2 | 16 位有符号整数 |
+
+  | Uint16Array | 2 | 16 位无符号整数 |
+
+  | Int32Array | 4 | 32 位有符号整数 |
+
+  | Uint32Array | 4 | 32 位无符号整数 |
+
+  | Float32Array | 4 | 32 位浮点数 |
+
+  | Float64Array | 8 | 64 位浮点数 |
+
+
+
+
+  请注意，在钳位数组（clamped arrays）的情况下，所有超出范围的值都会被设置为范围内最近的值，即第一个或最后一个元素。`Uint8ClampedArray`类型化数组表示一个
+  8 位无符号整数的数组，值被钳位在 0-255 之间，这意味着如果你指定一个超出`[0,255]`范围的值，则会设置 0 或 255。如果你指定一个非整数，则会设置最近的整数。
+
+
+  #### 类型化数组与普通数组
+
+
+  类型化数组和普通数组在某些方面相似：它们都有`length`属性，并且在两种情况下，都可以使用`[]`运算符访问数组中的元素。类型化数组也支持所有标准数组方法。但它们在多方面存在差异。
+
+
+  JavaScript 中的类型化数组类似于 C、C++等其他编程语言中的数组，其中数组的所有元素类型相同，这与 JavaScript 中的数组不同，后者元素可以是任何类型。类型化数组对所有元素都有严格的类型要求。
+
+
+  类型化数组不能有空元素。它们总是用 0 值进行初始化，而普通数组中的值可以是空的（`undefined`）。请查看以下代码片段：
+
+
+  ```
+
+  const buffer = new ArrayBuffer(16);
+
+  const float32View = new Float32Array(buffer);
+
+  let arr = new Array(10);
+
+  console.log(float32View); // Float32Array [0, 0, 0, 0]
+
+  console.log(arr); // [,,,,,,,,,]
+
+  ```
+
+
+  类型化数组受到多种浏览器 API 的支持：`File API`、`XMLHttpRequest`、`Fetch API`、`Canvas`、`WebSockets`、`WebGL`、`Web
+  Audio API`、`Media elements`等。目前，类型化数组的某些功能可能并非所有浏览器和 JavaScript 引擎都支持，因此你可以在`https://kangax.github.io/compat-table/es6/#typed_arrays`检查目标
+  JavaScript 引擎的可用性。
+
+
+  ## Map 和 WeakMap
+
+
+  ES6 引入了一组新的数据结构，称为`Map`和`WeakMap`，它们本质上是一个哈希表或字典，类似于 Python 或 C#中的概念。ES6 Maps 提供了一个简单的
+  API，用于通过任意键存储对象，这是许多 JavaScript 程序中必不可少的核心功能。我们将在本节中详细介绍它们。
+
+
+  #### Map
+
+
+  实际上，我们一直在 JavaScript 中使用 Map。事实上，每个对象都可以被视为一个`Map`。对象由键（始终是字符串）和值组成，而在`Map`中，任何值（包括对象和原始值）都可以用作键或值。
+
+
+  在`Map`中，键可以是任何类型：`string`、`Boolean`、`number`、`object`或`function`。请看这段代码：
+
+
+  ```
+
+  let myMap = new Map();
+
+  const keyString = "a string",
+
+  keyObj = {},
+
+  keyFunc = () => {};
+
+  // 设置值
+
+  myMap.set(keyString, "value associated with ''a string''");
+
+  myMap.set(keyObj, "value associated with keyObj");
+
+  myMap.set(keyFunc, "value associated with keyFunc");
+
+  ```
+
+
+  请注意，`set()`方法是可链式调用的，因此你也可以这样做：
+
+
+  ```
+
+  myMap.set(keyString, "value associated with ''a string''")
+
+  .set(keyObj, "value associated with keyObj")
+
+  .set(keyFunc, "value associated with keyFunc");
+
+  myMap.size; // 3
+
+  // 获取值
+
+  myMap.get(keyString);    // "value associated with ''a string''"
+
+  myMap.get(keyObj);       // "value associated with keyObj"
+
+  myMap.get(keyFunc);      // "value associated with keyFunc"
+
+  ```
+
+
+  #### 检查键的相等性
+
+
+  `Map()`中的键相等性基于“same-value”算法，该算法与`===`运算符类似，但将`NaN`视为等于自身（尽管通常`NaN !== NaN`），这意味着当使用`NaN`作为键时，它将返回之前使用`NaN`作为键设置的
+  map 对象。请看以下代码片段：
+
+
+  ```
+
+  let myMap = new Map();
+
+  myMap.set(NaN, "not a number");
+
+  myMap.get(NaN); // "not a number"
+
+  ```
+
+
+  请注意，你也可以通过一个包含键/值对的可迭代对象来创建 map：
+
+
+  ```
+
+  let myMap = new Map([
+
+  [ 1, ''apple'' ],
+
+  [ 2, ''banana'' ],
+
+  [ 3, ''orange'' ]
+
+  ]);
+
+  ```
+
+
+  此外，maps 可以使用`for...of`或`forEach()`进行迭代：
+
+
+  ```
+
+  for (let [key, value] of myMap) {
+
+  console.log(key + " = " + value);
+
+  }
+
+  // 1 = apple
+
+  // 2 = banana
+
+  // 3 = orange
+
+  ```
+
+
+  Maps 还支持`keys()`、`values()`和`entries()`方法：
+
+
+  ```
+
+  for (let key of myMap.keys()) {
+
+  console.log(key);
+
+  }
+
+  // 1
+
+  // 2
+
+  // 3
+
+  for (let value of myMap.values()) {
+
+  console.log(value);
+
+  }
+
+  // apple
+
+  // banana
+
+  // orange
+
+  for (let [key, value] of myMap.entries()) {
+
+  console.log(key + " = " + value);
+
+  }
+
+  // 1 = apple
+
+  // 2 = banana
+
+  // 3 = orange
+
+  ```
+
+
+  如果你是一位经验丰富的 JS 开发者，你会知道对象是创建无序键/值对作为数据结构的主要机制。然而，使用对象作为 maps 并不能让我们使用非字符串值作为键。
+
+
+  此时，你一定会想，何时该使用 maps，何时不该使用 maps 而使用对象。当你需要一个键/值集合时，你应该始终使用`Map`，因为对象本质上并不是设计用来作为集合的，因此没有有效的方法来确定对象拥有的属性数量。当你遍历对象的属性时，你也会得到其原型属性。当然，有一些解决方法，但当你遍历对象的属性时，属性不一定会按照插入的顺序被检索到。这就是为什么在
+  JavaScript 程序中需要键/值集合时，推荐使用 maps。
+
+
+  另一个好的判断指标是，当你事先不知道集合的键时，即这些键是从数据库读取或由用户输入的，这意味着它们不一定是字符串或数字。相反，当你在编写代码时就知道对象拥有哪些属性以及有多少属性时，即当它们的结构是静态的时，你应该使用对象。
+
+
+  #### WeakMap
+
+
+  `WeakMaps`类似于普通的`Maps`，但方法更少，并且在垃圾回收方面存在一些差异。`WeakMap`是一种键被弱引用的`Map`，这意味着如果对键的所有引用都丢失了，并且没有更多对值的引用，那么`WeakMap`不会阻止其键被垃圾回收。因此，你无需担心`WeakMaps`的内存泄漏。通常，当你需要存储与
+  DOM 节点等相关的元数据时，你会希望有这样的行为，这样当 DOM 元素不再被关注时，它们可以被从内存中释放。
+
+
+  `WeakMap`最大的限制是它是不可迭代的，这与`Map`不同——这意味着它不支持`entries()`、`keys()`、`values()`、`forEach()`和`clear()`方法。这里需要注意的另一件事是，与`Map`不同，在`WeakMap`中，每个键都必须是`object`。
+
+
+  尽管它拥有与`Map`几乎相同的 API，但我们无法迭代`WeakMap`集合。我们甚至无法确定集合的长度，因为这里我们没有`size`属性。`WeakMap`只有四个方法：
+
+
+  *   `delete(key)`
+
+  *   `has(key)`
+
+  *   `get(key)`
+
+  *   `set(key, value)`
+
+
+  ```
+
+  let wMap = new WeakMap();
+
+  wMap.set(''a'', ''b'');
+
+  // Uncaught TypeError: Invalid value used as weak map key
+
+  const o1 = {},
+
+  o2 = () => {},
+
+  o3 = window;
+
+  wMap.set(o1, 42);
+
+  wMap.set(o2, "hello");
+
+  wMap.set(o3, undefined);
+
+  wMap.get(o3); // undefined, 因为这就是设置的值
+
+  wMap.has(o1); // true
+
+  wMap.delete(o1);
+
+  wMap.has(o1); // false
+
+  ```
+
+
+  ## Set 和 WeakSet
+
+
+  `Sets`和`WeakSets`是 ES6 中引入的另一种集合类型。如果你来自像 Python 这样的编程语言，你会知道集合是多么有用。让我们在本节中看看它们。
+
+
+  #### Set
+
+
+  `Set`对象是唯一值的集合。重复值将被忽略，因为集合必须包含所有唯一的值。`Sets`速度很快，值可以是原始类型或对象引用。
+
+
+  查看以下代码片段以了解有关集合及其方法的更多信息：
+
+
+
+
+  ```
+
+  let mySet = new Set([1, 1, 2, 2, 3, 3]);
+
+  mySet.size; // 3
+
+  mySet.has(1); // true
+
+  mySet.add(''strings'');
+
+  mySet.delete(''strings''); // true
+
+  mySet.has(''strings''); // false
+
+  mySet.add({ a: 1, b:2 });
+
+  mySet.size; // 4
+
+  mySet.clear(); // 清空集合
+
+  mySet.size; // 0
+
+  ```
+
+
+  请注意，与映射（Maps）类似，在 `Set` 中 `NaN` 也等于 `NaN`。你可以使用 `forEach` 方法或 `for...of` 循环按照插入顺序遍历集合：
+
+
+  ```
+
+  mySet = new Set([1, 1, 2, 2, 3, 3, { a: 1, b:2 }]);
+
+  mySet.forEach((item) => {
+
+  console.log(item);
+
+  });
+
+  // 1
+
+  // 2
+
+  // 3
+
+  // Object { a: 1, b: 2 }
+
+  for (let value of mySet) {
+
+  console.log(value);
+
+  }
+
+  // 1
+
+  // 2
+
+  // 3
+
+  // Object { a: 1, b: 2 }
+
+  ```
+
+
+  如果你需要一个包含唯一元素的动态列表，用于在下拉菜单中渲染或作为输入框的自动建议，集合（Sets）会非常有用。使用 `Set` 可以确保你的建议列表永远不会出现重复值，并省去了检查重复的麻烦。
+
+
+  #### WeakSet
+
+
+  与 `WeakMap` 类似，`WeakSet` 对象允许你在集合中存储对象的弱引用，这意味着 `WeakSet` 不会阻止其元素被垃圾回收。`WeakSet`
+  中的对象只出现一次；它在集合中是唯一的。
+
+
+  `WeakMap` 中的值必须是唯一的 `对象` 引用。如果没有其他内容引用 `WeakSet` 中存在的对象，它将被垃圾回收。
+
+
+  与 `WeakMap` 非常相似，`WeakSet` 是不可遍历的，也没有 `size` 属性。`WeakSet` 仅支持三种方法：
+
+
+  - `add(value)`
+
+  - `has(value)`
+
+  - `delete(value)`
+
+
+  ```
+
+  let ws = new WeakSet();
+
+  const obj = {};
+
+  const foo = {};
+
+  ws.add(window);
+
+  ws.add(obj);
+
+  ws.has(window); // true
+
+  ws.has(foo);    // false，foo 尚未添加到集合中
+
+  ws.delete(window); // 从集合中移除 window
+
+  ws.has(window);    // false，window 已被移除
+
+  ```
+
+
+  当你需要在集合中利用垃圾回收能力时，应优先使用 `WeakSet` 而非 `Set`。另一个典型用例是标记某个对象具有某些属性。请参考以下示例：
+
+
+  ```
+
+  const fruits = new WeakSet();
+
+  class Fruit {
+
+  constructor() {
+
+  fruits.add(this);
+
+  }
+
+  getName() {
+
+  if (!fruits.has(this)) {
+
+  throw new TypeError("getName() 在不相容的对象上被调用！");
+
+  } else {
+
+  // 返回名称
+
+  }
+
+  }
+
+  }
+
+  ```
+
+
+  这是一种很好的方式，可以防止在非类构造函数创建的对象上使用类方法。
+
+
+  ## 总结
+
+
+  在本章中，我们学习了 ES6 中引入的、用于使用数组和集合处理及操作数据的新有效方法。这些新特性为 ES6 之前处理起来很棘手的常见用例提供了内置解决方案。借助新的数组方法，你可以在
+  JavaScript 程序中轻松创建和管理数组。我们还学习了 ES6 中引入的新数组原型方法，这些方法帮助我们高效地遍历和访问存储在数组中的元素。我们还讨论了在处理
+  JavaScript 中的二进制数据时，类型数组如何帮助你提升性能。在本章后半部分，我们学习了 ES6 中引入的新集合类型：映射（Maps）、弱映射（WeakMaps）、集合（Sets）和弱集合（WeakSets），它们具有可靠的功能集和有效的用例。
+
+
+  至此，你应该对在 JavaScript 应用程序中使用这些新数据类型充满信心。在下一章中，我们将深入探讨之前简要介绍过的可迭代对象和迭代器，并学习 ES6 中引入的生成器概念。
+
+
+  '
+- "# 8. 迭代器和生成器\n\n在本章中，我们将全面学习新引入的迭代器和生成器，它们为 JavaScript 的遍历机制带来了简洁性和可定制性。许多编程语言已经摒弃了繁琐的陈旧的\
+  \ `for` 循环，这种循环在遍历集合中的项目时需要额外跟踪当前索引位置。让我们看看如何利用迭代器和生成器在我们的应用程序中高效地处理数据。\n\n## 可迭代对象和迭代器\n\
+  \n在最新发布的 ECMAScript 标准中，我们投入了大量精力来改进代码的组织方式。ES6 引入了一套全新的遍历机制，使得实现可迭代对象和迭代器变得非常简单和容易。这一版本的\
+  \ JavaScript 引入了一组称为迭代器协议和可迭代对象协议的协议，任何 JavaScript 对象都应实现这些协议才能成为迭代器或可迭代对象。在继续讨论这些协议之前，让我们先了解一下\
+  \ JavaScript 中的可迭代对象和迭代器：\n\n简而言之，迭代器模式是一种结构化的模式，用于按特定顺序逐个从元素集合中获取信息。它是一个具有特定接口、专为迭代设计的对象。这种模式一直存在，并通过自定义对象在\
+  \ JavaScript 中使用，但通过 ES6，我们迎来了迭代器模式的隐性标准化。JavaScript 中的许多现有数据结构现在都公开了迭代器，你也可以使用相同的标准构建自己的迭代器，从而获得最大的互操作性。\n\
+  \n可迭代对象是一系列可以迭代的元素的简单表示。它没有任何迭代状态，例如“当前元素”。相反，它有一个生成迭代器的方法。\n\n迭代器是带有迭代状态的对象。所有迭代器对象都有一个\
+  \ `next()` 方法，用于返回集合中的下一个对象。`next()` 方法返回的对象具有两个属性，即：\n\n(i) `value`，表示集合中的下一个值；\n\
+  (ii) `done`，是一个布尔值，用于指示序列是否结束。也就是说，只要序列中还有值要返回，它就是 `false`；只有当集合中的值已全部返回时，它才返回 `true`。\n\
+  \n每次调用 `next()` 方法都会生成集合中的下一个值。遍历完集合的所有值后，再次调用 `next()` 方法将返回 `value` 为 `undefined`\
+  \ 且 `done` 为 `true`。\n\n综上所述，让我们看看如何在 ES6 中手动实现一个迭代器：\n\n```\nfunction myIterator(data)\
+  \ {\nlet currentIndex = 0;\nreturn {\nnext: () => {\nconst done = (currentIndex\
+  \ >= data.length);\nconst value = !done ? data[currentIndex] : undefined;\ncurrentIndex\
+  \ += 1;\nreturn {\ndone,\nvalue\n};\n}\n};\n}\nconst itrObj = myIterator([41, 42,\
+  \ 43]);\nitrObj.next();  // { value: 41, done: false }\nitrObj.next();  // { value:\
+  \ 42, done: false }\nitrObj.next();  // { value: 43, done: false }\nitrObj.next();\
+  \  // { value: undefined, done: true }\n// 此后所有调用\nconsole.log(itrObj.next()); \
+  \   // { value: undefined, done: true }\n```\n\n在上述代码片段中，`myIterator()` 函数返回一个含有\
+  \ `next()` 方法的对象，每次调用该方法都会返回集合中的下一个值。在最后一个元素之后，返回对象的 `done` 值变为 `true`，且返回的 `value`\
+  \ 始终为 `undefined`。\n\n\n\nES6 通过引入 `[Symbol.iterator]` 简化了迭代器的实现过程，该属性用于指定对象的默认迭代器。这个键持有\
+  \ `@@iterator` 方法，它是本章后续将讨论的可迭代协议的基础。每当需要对对象进行迭代时（例如在 `for..of` 循环开始时），其 `@@iterator`\
+  \ 方法会被无参数调用。该方法返回对象的默认迭代器。在 ES6 中，`@@` 表示一个众所周知的符号。此处，`@@iterator` 指定了存储在对象键 `[Symbol.iterator]`\
+  \ 上的迭代器函数。因此，对于上述示例，`@@iterator` 方法将返回 `next()` 函数：\n\n```\nmyIterator[Symbol.iterator]\
+  \ = function () {\n  return {\n    next: function () {}\n  }\n}\n```\n\n使用符号作为键来持有迭代器方法，可确保它永远不会与常规对象键冲突。现在，让我们来看一下上述示例在\
+  \ ES6 中替换为 `Symbol.iterator` 后的相同场景：\n\n```\nconst arr = [41, 42, 43];\nconst itrObj\
+  \ = arr[Symbol.iterator]();\nitrObj.next(); // { value: 41, done: false }\nitrObj.next();\
+  \ // { value: 42, done: false }\nitrObj.next(); // { value: 43, done: false }\n\
+  itrObj.next(); // { value: undefined, done: true }\n```\n\n当为给定数组 `arr` 调用 `Symbol.iterator`\
+  \ 处的 `@@iterator` 方法时，会创建一个新的迭代器。请注意，每次调用时都会创建一个全新的迭代器。可迭代的 ES6 内置数据结构均具有此行为，允许通过\
+  \ `next()` 方法对值进行迭代。\n\n让我们以原始字符串值为例：\n\n```\nconst message = \"Ian is an awesome\
+  \ student\";\nconst itrObj = message[Symbol.iterator]();\nitrObj.next();      //\
+  \ { value: \"I\", done: false }\nitrObj.next();      // { value: \"a\", done: false\
+  \ }\n..\n```\n\n在上述示例中，我们能够使用 `next()` 方法对字符串 `message` 的每个字符进行迭代。ES6 还允许我们对新的数据结构（如\
+  \ `Map` 和 `Set` 集合）进行迭代。让我们以 `Map` 为例：\n\n```\nconst permissionMap = new Map();\n\
+  permissionMap.set(\"admin\", {read: true, write: true, del: true});\npermissionMap.set(\"\
+  student\", {read: true, write: false, del: false});\npermissionMap.set(\"faculty\"\
+  , {read: true, write: true, del: false});\npermissionMap.set(\"staff\", {read: true,\
+  \ write: false, del: true});\nconst permissions= permissionMap[Symbol.iterator]();\n\
+  console.log(permissions.next());\n// {value: ['admin', { read: true, write: true,\
+  \ del: true }], done: false}\nconsole.log(permissions.next());\n// {value: ['student',\
+  \ { read: true, write: false, del: false }], done: false}\nconsole.log(permissions.next());\n\
+  // {value: ['faculty', { read: true, write: true, del: false }], done: false}\n\
+  console.log(permissions.next());\n// {value: ['staff', { read: true, write: false,\
+  \ del: true }], done: false}\nconsole.log(permissions.next());\n// {value: undefined,\
+  \ done: true}\n```\n\n在上例中，我们为不同用户类型的权限创建了一个映射，并以用户类型作为键。我们可以通过调用 `@@iterator` 方法简单地创建一个新的迭代器，并使用\
+  \ `next()` 对值进行迭代。此处值得注意的一点是，这些集合还提供了用于生成迭代器的 API 方法，例如，你可以使用 `entries()` 方法获取映射的迭代器：\n\
+  \n```\nconst permissionEntries = permissionMap.entries();\nconsole.log(permissionEntries.next());\n\
+  // {value: ['admin', { read: true, write: true, del: true }], done: false}\nconsole.log(permissionEntries.next());\n\
+  // {value: ['student', { read: true, write: false, del: false }], done: false}\n\
+  ```\n\n#### 迭代协议\n\n现在我们已对迭代器和可迭代对象有了基本了解，接下来谈谈本章开头简要讨论过的那些协议。迭代协议共有两种：可迭代协议和迭代器协议。任何遵守特定约定的对象都可以实现这些协议。\n\
+  \n#### 可迭代协议\n\n\n\n#### 可迭代协议\n\n可迭代协议允许你自定义 JavaScript 对象的迭代行为。该协议规定，所有可迭代对象都必须通过\
+  \ `[Symbol.iterator]` 属性实现 `@@iterator` 方法。每当需要迭代某个对象时，就会调用此方法。该方法不接受参数，并返回默认的迭代器，可用于从可迭代对象中获取值。内置的可迭代对象，例如\
+  \ `Array`、`Map`、`Set` 等，都有默认的 `@@iterator` 方法，允许我们遍历相应的集合。\n\n#### 迭代器协议\n\n迭代器协议定义了一种从可迭代对象获取值序列的标准方式。该协议规定，迭代器对象必须定义一个\
+  \ `next()` 方法，该方法不接受参数，并返回一个包含两个属性的对象：`done` 和 `value`。\n\n#### 作为可迭代对象的迭代器\n\n\
+  如果一个迭代器本身也是可迭代对象，那么它可以直接与 `for...of` 循环一起使用。你可以通过为迭代器提供 `Symbol.iterator` 属性（该属性返回迭代器自身）来使其成为可迭代对象。请看下面的代码片段，我们将一个迭代器变成了可迭代对象，然后使用\
+  \ `for...of` 循环进行遍历：\n\n```javascript\nconst infiniteSequenceGenerator = {\ncurrentNumber:\
+  \ 0,\n// 使 \"infiniteSequenceGenerator\" 这个迭代器成为可迭代对象\n[Symbol.iterator]() {\nreturn\
+  \ this;\n},\nnext() {\nreturn {\nvalue: this.currentNumber++,\ndone: false\n}\n\
+  }\n};\nconst iter = infiniteSequenceGenerator[Symbol.iterator]();\nconsole.log(iter\
+  \ === infiniteSequenceGenerator);   // true\nconsole.log(iter.next().value);   //\
+  \ 0\nconsole.log(iter.next().value);   // 1\nconsole.log(iter.next().value);   //\
+  \ 2\nconsole.log(iter.next().value);   // 3\nfor (let item of iter) {\nif (item\
+  \ > 20) break;\nconsole.log( item );\n}\n// 4\n// 5\n// 6\n// 7\n// ... 20\n```\n\
+  \n在上面的示例中，请注意我们是如何直接对可迭代对象使用 `for...of` 循环的，但内部实际上使用了 `next()` 方法，因为在 `for...of`\
+  \ 循环中我们得到的数字列表是从 `4` 开始的，我们已经在循环开始前手动使用 `next()` 方法调用了迭代器四次。\n\n## 迭代器中的 `return()`\
+  \ 和 `throw()`\n\n迭代器还有两个可选的方法：`return()` 和 `throw()`。大多数内置迭代器并未实现这两个方法，但它们在生成器的上下文中确实具有重要作用，我们将在本章后面部分进行探讨。\n\
+  \n在某些情况下，你可能希望最后一个 `{done: true, value: undefined}` 项的 `value` 不是 `undefined`，而是某个其他值。这就是\
+  \ `return()` 方法的用武之地。`return()` 方法用于向迭代器发送信号，表明使用该迭代器的代码将不再从迭代器中请求更多的值。当迭代器已消耗完所有值，或遇到异常终止时，可以使用此方法，以便执行清理操作，如关闭数据库连接、保存文件或关闭文件。如果\
+  \ `return()` 方法存在，当集合被耗尽时，它将自动被调用；当然，也可以手动调用。`return()` 方法接受一个可选参数，该参数通常作为返回对象中的\
+  \ `value` 值传回。\n\n另一方面，`throw()` 用于向迭代器发出关于可能发生的异常或错误的信号。迭代器对 `throw()` 信号的处理方式可以与\
+  \ `return()` 不同，因为它不意味着像 `return()` 那样完全停止。我们将在生成器章节中更详细地研究这些方法。\n\n### 生成器\n\n\
+  简单来说，生成器是可以暂停的函数。在 ES6 之前，JavaScript 的函数一旦开始运行，就必须运行到完成，期间无法中断任何执行。随着 ES6 的到来，通过生成器，我们引入了一种不同类型的函数，它不像普通函数那样总是运行到完成，而是可以在执行过程中暂停和恢复循环。\n\
+  \n生成器是一种允许我们创建特殊类型迭代器的函数，其执行可以被挂起并保留上下文。如果一个函数包含一个或多个 `yield` 表达式，并且使用了 `function\
+  \ *` 语法，那么它就是一个生成器：\n\n```javascript\nfunction *gen() {\nyield 42;\n}\n```\n\n在这种语法中，`*`\
+  \ 的位置并不重要。生成器可以通过以下几种方式编写：\n\n```javascript\nfunction *gen()  { .. }\nfunction*\
+  \ gen()  { .. }\nfunction * gen() { .. }\nfunction*gen()   { .. }\n```\n\n尽管如此，在代码中使用生成器时，最好保持风格一致。在本书的其余部分，我们将使用第一种格式。\n\
+  \n#### 生成器函数\n\n生成器函数通过执行函数体中的 `yield` 关键字来暂停，`yield` 可以在函数体中使用任意多次。你可以通过 `yield`\
+  \ 表达式返回值。请看下面的例子，我们从一个生成器中 yield 了值 `42`：\n\n```javascript\nfunction *generator\
+  \ () {\nyield 42;\n}\n```\n\n生成器执行起来就像任何其他函数一样，你也可以向它传递参数。唯一的区别在于，执行生成器并不会真正运行其内部的代码。它只是生成了一个迭代器，可以用来执行其内部的代码。\n\
+  \n```javascript\nfunction *gen() {\nyield \"Hello\";\nyield \"from\";\nyield \"\
+  generator\";\n}\n```\n\n现在，如果我们调用这个生成器函数，它不会被执行；相反，它会返回一个迭代器，用于执行其内部的代码。\n\n```javascript\n\
+  let obj = gen();\n```\n\n在上面这个生成器中，开头的操作会先运行，然后 `yield` 语句会暂停生成器的执行，直到调用 `next()`\
+  \ 方法。方法 `obj.next()` 会继续执行 `gen`，直到遇到下一个 `yield` 表达式：\n\n```javascript\nconsole.log(obj.next());\
+  \   // { value: \"Hello\", done: false}\nconsole.log(obj.next());   // { value:\
+  \ \"from\", done: false}\nconsole.log(obj.next());   // { value: \"generator\",\
+  \ done: false}\nconsole.log(obj.next());   // { value: undefined, done: true}\n\
+  ```\n\n`yield` 可以在生成器内部使用任意多次。它也可以是循环的一部分，用于表示重复的暂停点。请注意，`yield` 不仅仅是一个暂停点，它在暂停生成器时还会发出一个值。\n\
+  \n```javascript\nfunction *infiniteNumbers() {\nvar n = 1;\nwhile (true) {\nyield\
+  \ n++;\n}\n}\nvar numbers = infiniteNumbers(); // 返回一个可迭代对象\nconsole.log(numbers.next());\
+  \ // { value: 1, done: false }\nconsole.log(numbers.next()); // { value: 2, done:\
+  \ false }\nconsole.log(numbers.next()); // { value: 3, done: false }\n```\n\n每次调用\
+  \ `yield` 时，yield 出来的值就成为序列中的下一个值。没有提供值的 `yield` 语句仅表示该值为 `undefined`。\n\n#### 与生成器通信\n\
+  \n在上一节中，我们看到了生成器如何使用 `yield` 语句向我们的代码通信。我们也可以通过 `yield` 向生成器函数传递一个值，并在执行恢复时在生成器函数内部使用这些值。请看下面的代码片段：\n\
+  \n```javascript\nfunction *calculator() {\nconst num1 = yield \"I am a calculator\"\
+  ;\nconst num2 = yield \"I add numbers\";\nconsole.log(`Sum is: ${num1 + num2}`);\n\
+  }\nconst myGenerator = calculator();\nconsole.log(myGenerator.next());\n// { value:\
+  \ 'I am a calculator', done: false }\nconsole.log(myGenerator.next(2));\n// { value:\
+  \ 'I add numbers', done: false }\nconsole.log(myGenerator.next(3));\n// Sum is:\
+  \ 5\n// { value: undefined, done: true }\n```\n\n\n\n在上面的例子中，第一次调用`next()`时，生成器\
+  \ yield 出`\"I am a calculator\"`字符串然后暂停。第二次调用`next(2)`时，传入的值会被赋值给`num1`，因为在生成器内部，我们指定了在`yield\
+  \ \"I am a calculator\"`处 yield 出的任何值都会赋值给`num1`，`num2`同理。因此，第三次调用`next()`时，`Sum\
+  \ is: 5`被打印到控制台，并且由于没有更多的`yield`语句，`undefined`被作为值返回。\n\n生成器与代码良好通信的这种行为在异步编程场景中非常有用。生成器可以使你的异步代码看起来像同步代码。考虑另一个例子，演示生成器和异步代码如何良好协作：\n\
+  \n```javascript\nfunction getFlightDurations() {\n  setTimeout(() => {\n    flightIterator.next({\n\
+  \      Qatar: \"39h 0m\",\n      Emirates: \"40h 20m\"\n    });\n  }, 1200);\n}\n\
+  function getFlightPrices() {\n  setTimeout(function(){\n    flightIterator.next({\n\
+  \      Qatar: \"$2010\",\n      Emirates: \"$1904\"\n    })\n  }, 1000);\n}\nfunction\
+  \ *getFlights() {\n  const allFlights = [\"Qatar\", \"Emirates\"];\n  const flightDurations\
+  \ = yield getFlightDurations();\n  const flightPrices = yield getFlightPrices();\n\
+  \  for (let flight of allFlights) {\n    console.log(`New York to Auckland takes\
+  \ ${flightDurations[flight]} in ${flight} airlines for around ${flightPrices[flight]}`);\n\
+  \  }\n}\nconst flightIterator = getFlights();\nflightIterator.next();\n// New York\
+  \ to Auckland takes 39h 0m in Qatar airlines for around $2010\n// New York to Auckland\
+  \ takes 40h 20m in Emirates airlines for around $1904\n```\n\n在上面的例子中，`genFlights()`是一个生成器函数，它返回一个迭代器。在调用返回的迭代器的`next()`方法时，生成器执行到第一个`yield`语句，该语句调用了`getFlightDurations()`。`getFlightDurations()`是一个异步函数，它使用`setTimeout`将执行延迟\
+  \ 1.2 秒，并在迭代器上调用`next()`方法，确保`flightDurations`能被正确赋值。`flightPrices`同理，当`getFlightPrices()`中再次调用`next()`方法时，输出结果会被打印到控制台。如果我们在这里没有使用`yield`，`flightDurations`和`flightPrices`只会被赋值为`undefined`，因为在赋值时函数本身返回了`undefined`。使用`yield`语句可以防止在`setTimeout`函数执行之前赋值。这就是生成器如何帮助我们编写阻塞式异步代码，使代码看起来更同步。\n\
+  \n## 提前完成\n\n在本章前面，我们讨论了迭代器有两个可选方法：`return(...)`和`throw(...)`，它们在生成器上下文中具有很大相关性。一旦调用这些方法，它们会立即结束暂停生成器中的序列。例如，请看以下代码片段：\n\
+  \n```javascript\nfunction *getFruits() {\n  yield \"apple\";\n  yield \"orange\"\
+  ;\n  yield \"banana\";\n}\nconst fruitIterator = getFruits();\nconsole.log(fruitIterator.next());\
+  \           // {value: 'apple', done: false}\nconsole.log(fruitIterator.return(\"\
+  kiwi\"));  // {value: 'kiwi', done: true}\nconsole.log(fruitIterator.next());  \
+  \         // {value: undefined, done: true}\n```\n\n在上面的例子中，`return(\"kiwi\")`返回了传入的参数值`\"\
+  kiwi\"`并结束序列，因此`done`为`true`。这等同于在生成器函数中有一个返回值，不过你应该始终牢记，遍历从生成器获得的序列时，不包括`{ done:\
+  \ true }`所表示的值。例如，检查以下代码片段，我们正在遍历集合`fruitIterator`，它只包含在源生成器中调用`return()`方法之前 yield\
+  \ 出的元素：\n\n```javascript\nfunction *getFruits() {\n  yield \"apple\";\n  yield \"\
+  orange\";\n  yield \"banana\";\n  return \"kiwi\";\n  yield \"watermelon\";\n}\n\
+  const fruitIterator = getFruits();\nfor (let fruit of fruitIterator) {\n  console.log(fruit);\n\
+  }\n// apple\n// orange\n// banana\n```\n\n你也可以通过将代码包装在`try-finally`块中来避免序列立即终止，确保无论序列是提前完成还是`yield`语句耗尽，`finally`子句中的代码都会执行。这在序列结束后执行清理或关闭操作时非常有用。例如，请看以下代码片段：\n\
+  \n```javascript\nfunction *getFruits() {\n  try {\n    yield \"apple\";\n    yield\
+  \ \"orange\";\n    yield \"banana\";\n  }\n  finally {\n    console.log(\"You must\
+  \ always eat a big watermelon\");\n    yield \"watermelon\";\n  }\n}\nconst fruitIterator\
+  \ = getFruits();\nconsole.log(fruitIterator.next());\n// { value: 'apple', done:\
+  \ false }\nconsole.log(fruitIterator.return(\"kiwi\"));\n// You must always eat\
+  \ a big watermelon\n// { value: 'watermelon', done: false }\nconsole.log(fruitIterator.next());\n\
+  // { value: 'kiwi', done: true }\nconsole.log(fruitIterator.next());\n// { value:\
+  \ undefined, done: true }\n```\n\n在上面的例子中，一旦`finally`块中的表达式执行完毕，序列将以`value`为`'kiwi'`且`done`为`true`终止，其中`'kiwi'`是作为参数传递给`return(...)`方法的。\n\
+  \n类似地，`throw(...)`也会停止生成器的执行，但它永远不会被自动调用。当您可能想要警告用户一些意外错误时，这个方法会很有用，利用`try-catch`块在生成器中启用错误处理。例如，请看以下代码片段：\n\
+  \n```javascript\nfunction *getFruits() {\n  yield \"apple\";\n  yield \"orange\"\
+  ;\n  yield \"spinach\";\n  yield \"watermelon\"\n}\nconst fruitIterator = getFruits();\n\
+  for (let fruit of fruitIterator) {\n  try {\n    console.log(fruit);\n    if (fruit\
+  \ === \"spinach\") {\n      fruitIterator.throw(\"Vegetable Found\");\n    }\n \
+  \ }\n  catch (err) {\n    console.log(`Exception: ${err}`);\n  }\n}\n// apple\n\
+  // orange\n// spinach\n// Exception: Vegetable Found\n```\n\n注意`\"watermelon\"`从未从生成器\
+  \ yield 出来，因为当`\"spinach\"`被返回时调用了`throw()`，从而停止了序列的执行。\n\n## 总结\n\nES6 引入的迭代器和生成器提供了对集合中存储值的顺序访问，并允许我们自定义遍历这些值的方式。ES6\
+  \ 还引入了一组新的协议来定义迭代器和可迭代对象，称为迭代协议。在本章中，我们学习了如何使用独特的`Symbol.iterator`属性定义对象的默认迭代器。当在对象上提供`Symbol.iterator`时，该对象被视为可迭代对象。\n\
+  \n在本章的后半部分，我们还学习了生成器函数，它由星号（*）字符和函数体中的一个或多个`yield`语句表示。它们是特殊类型的函数，可以在执行过程中暂停和恢复。\n\
+  \n"
+- '# 9. ES6 中的 Promise
+
+
+  众所周知，JavaScript 在设计上是单线程的。在浏览器中，它使用事件处理来并发管理许多任务。JavaScript 引擎管理一个事件队列，当事件发生时，会调用注册的处理函数。如果你有传统
+  JavaScript 的经验，那么你很清楚理解异步编程是正确使用 JavaScript 的必备条件。使用异步的主要模式是通过回调函数。ES6 为标准 JavaScript
+  规范带来了一个新特性 —— Promise（一些新的和最新的 JS 库和框架中已有的特性），它解决了回调（唯一的异步方法）中的许多重大问题。
+
+
+  ### Promise 概述
+
+
+
+
+  在某些需要等待异步操作完成然后执行任务的情况下，JavaScript 严重依赖回调函数，允许代码执行绕过长时间运行的任务继续进行。您一定已经知道`setTimeout`、`XMLHttpRequest`以及所有基于浏览器的异步函数都是基于回调的。虽然这个概念在理论上简单易懂，但它可能导致一些非常令人困惑且难以理解的代码，尤其是在需要在回调之后进行回调（嵌套回调）的情况下，这通常被称为“回调地狱”。例如，考虑以下代码片段，其中必须先发生
+  X，然后发生 Y，最后发生 Z：
+
+
+  ```
+
+  x = getData();
+
+  y = getMoreData(x);
+
+  z = getMoreData(y);
+
+  ```
+
+
+  在 ES6 之前，您可以异步获取`x`，然后将其作为参数传递给获取`y`的函数，对`z`也是如此，使用回调的方式如下：
+
+
+  ```
+
+  getData(function(x){
+
+  getMoreData(x, function(y){
+
+  getMoreData(y, function(z){
+
+  ...
+
+  });
+
+  });
+
+  });
+
+  ```
+
+
+  在实际应用中，当您有大量回调函数时，这可能会变得越来越复杂，从而形成回调金字塔。这些回调金字塔无处不在——在处理 HTTP 请求、数据库操作、动画、进程间通信以及其他各种场景中都会出现。通常，使用回调函数的代码会变得更难理解、重构和测试。
+
+
+  这就是 Promise 的用武之地。Promise 为我们提供了一种更可控的模式来处理异步处理。它们代表了一个可以在未来某个时间点处理的值，并提供了一种摆脱回调地狱的方法。与基于回调的方法相比，Promise
+  为执行、组合和管理异步操作提供了一种更简单的替代方案。它们还使得代码的逻辑流程更容易理解。
+
+
+  ES6 原生支持 Promise。一个 Promise 是一个等待异步操作完成的对象，当该操作完成时，该 Promise 要么被兑现（fulfilled），要么被拒绝（rejected）。一个
+  Promise 对象可以处于以下三种状态之一：
+
+
+  *   `fulfilled` – 当 Promise 成功时
+
+  *   `rejected` – 当 Promise 失败时
+
+  *   `pending` – 当它既未兑现也未拒绝时
+
+
+  一个待定（pending）的 Promise 可能会转换为兑现（fulfilled）或拒绝（rejected）状态，并且当 Promise 被兑现或拒绝时，它被认为已敲定（settled）。需要注意的是，一个已敲定的
+  Promise 是不可变的，这意味着一旦 Promise 被敲定，就不能重新敲定。
+
+
+  #### 创建 Promise
+
+
+  Promise 是使用`new Promise()`构造函数创建的，该构造函数接受一个执行器（一个函数），该函数有两个参数：
+
+
+  *   第一个参数（通常命名为`resolve`）是一个函数，当未来值就绪时，即 Promise 被兑现时，会调用该函数；
+
+  *   第二个参数（通常命名为`reject`）是一个函数，如果它无法解决未来值，则调用该函数来拒绝 Promise。
+
+
+  执行器启动一些异步工作，然后一旦完成，就调用`resolve`或`reject`函数来兑现 Promise，或者如果发生错误则拒绝它。
+
+
+  一个简单的 Promise 如下所示：
+
+
+  ```
+
+  const p = new Promise((resolve, reject) => {
+
+  if (/* some condition */) {
+
+  resolve(/* some value */);  // fulfilled successfully
+
+  } else {
+
+  reject(/* some reason */);  // error, rejected
+
+  }
+
+  });
+
+  ```
+
+
+  第二个方法（`reject`）是可选的，您可以只使用`resolve`方法来创建 Promise，如下面的代码片段所示，其中 Promise 分别被兑现和拒绝：
+
+
+  ```
+
+  new Promise(resolve => resolve()) // promise is fulfilled
+
+  new Promise((resolve, reject) => reject()) // promise is rejected
+
+  ```
+
+
+  您也可以使用以下方式创建一个立即兑现的 Promise：
+
+
+  ```
+
+  const sayHello = Promise.resolve("hello!");
+
+  ```
+
+
+  类似地，您也可以使用`Promise.reject(value)`来拒绝一个 Promise。不带值地兑现或拒绝 Promise 并不十分有用。通常，一个 Promise
+  会兑现为某个值，该值可能是来自 HTTP 请求、动画或其他异步操作的结果。
+
+
+  一旦创建，一个 Promise 只能被敲定，这意味着它要么被兑现，要么被拒绝。并且如上所述，由于已敲定的 Promise 是不可变的，因此已敲定的值或失败原因不能被更改（该值也可以是`undefined`）。然而，一个对象可以用作已兑现的值，并且对象的属性可能会发生改变。
+
+
+  #### 使用`then()`和`catch()`消费 Promise
+
+
+  一旦创建了 Promise，它可以作为一个值传递，本质上表示未来值的占位符。当 Promise 被兑现时，可以使用`.then()`方法来消费这个值。此方法接受一个函数，该函数将在
+  Promise 被兑现时被传递已兑现的值。例如，考虑以下代码片段：
+
+
+  ```
+
+  const p = new Promise((resolve, reject) => resolve(42));
+
+  p.then((val) => console.log(val)); // 42
+
+  ```
+
+
+  每个 Promise 都必须有一个`.then()`方法，它实际上接受两个可能的参数。第一个参数是 Promise 被兑现时要调用的函数，第二个参数是 Promise
+  被拒绝时要调用的函数，如图 9-1 所示。
+
+
+  ![A431489_1_En_9_Fig1_HTML.gif](img/A431489_1_En_9_Fig1_HTML.gif)
+
+
+  图 9-1.
+
+
+  一个待定的 Promise 可以被兑现或拒绝，并使用`.then()`方法进行处理
+
+
+  ```
+
+  p.then((value) => { console.log("Promise Fulfilled:", value) },
+
+  (error) => { console.log("Promise Rejected: ", error) });
+
+  ```
+
+
+  如果给定的 Promise 总是被解决，我们可以为了简单起见省略第二个参数。查看以下示例，其中顾客在订单下达五秒后收到他的披萨：
+
+
+  ```
+
+  const pizza = new Promise((resolve) => {
+
+  console.log("Getting your pizza in 5 seconds...");
+
+  setTimeout(() => {
+
+  resolve("Onion Pizza");
+
+  }, 5000);
+
+  });
+
+  pizza.then(
+
+  (item) => { console.log(`Order Received: ${item}`) },
+
+  (error) => { console.log("Something went wrong with your pizza") }
+
+  );
+
+  // Getting your pizza in 5 seconds...
+
+  // Order Received: Onion Pizza
+
+  ```
+
+
+  此示例演示了两件事：
+
+
+  *   首先，我们附加到 Promise 上的处理程序是在所有其他代码异步运行之后才被调用的。
+
+  *   其次，兑现处理程序仅在 Promise 被兑现时被调用，并传入它被解决时的值（在我们的例子中，是洋葱披萨）。拒绝处理程序也是如此。
+
+
+  这是另一个消费 Promise 的典型示例，其中`getRentalList(location)`是异步的，并使用返回 Promise 的 Web 服务返回给定位置当前可用的租赁房产列表：
+
+
+  ```
+
+  const housingPromise = getRentalList("London");
+
+  housingPromise.then(
+
+  (res) => {
+
+  if (res.properties && res.properties.length > 0) {
+
+  console.log(`We found the houses for you: ${res.properties}`);
+
+  } else {
+
+  console.log(`Sorry, no housing is available in ${res.location}`);
+
+  }
+
+  },
+
+  (error) => {
+
+  console.log(`Something went wrong: ${error}`);
+
+  }
+
+  );
+
+  ```
+
+
+  如果您只对拒绝 Promise 感兴趣，可以省略第一个参数并将其传递为`null`。例如，查看以下代码片段：
+
+
+  ```
+
+  const networkReq = new Promise((resolve, reject) => {
+
+  reject("No Server Found");
+
+  });
+
+  networkReq.then(
+
+  null,
+
+  (error) => { console.log(error); }
+
+  );
+
+  ```
+
+
+  一方面，如果处理程序在`.then()`调用中返回一个值，它会在返回时自动包装在一个 Promise 中。这些`.then()`调用可以被链式调用。我们将在下一节详细讨论
+  Promise 链式调用的工作原理。另一方面，您也可以使用`catch()`方法以更紧凑的方式处理被拒绝的 Promise。例如，您可以重写上面的示例如下：
+
+
+  ```
+
+  networkReq.catch((error) => { console.log(error); });
+
+  ```
+
+
+
+
+  '
+- "# `catch()` 方法与 Promise 链式调用\n\n`catch()` 方法在 Promise 组合中用于错误处理非常有用。与 `then()`\
+  \ 方法类似，它也会返回一个 Promise，但只处理被拒绝的情况。`catch()` 方法相当于 `then(null, onRejected)` 的简写形式。我们将在本章后面进一步学习如何处理错误。\n\
+  \n## Promise 的链式调用\n\n由于 `.then()` 和 `.catch()` 始终返回一个新的 Promise，因此可以轻松地链式调用 Promise，同时高度控制错误处理的方式和位置。链式调用允许将异步操作串联起来，确保它们按照正确且预期的顺序执行，从而使代码看起来几乎是同步的。请看以下示例：\n\
+  \n```\nconst bond = new Promise((resolve, reject) => {\n  resolve(\"Bond\");\n});\n\
+  bond.then((str) => `${str}, James ${str}`)\n  .then((str) => `Hello, I'm ${str}!`)\n\
+  \  .then((str) => console.log(str));\n// Hello, I'm Bond, James Bond!\n```\n\n上面是一个简单的示例，展示了链式调用如何帮助按顺序执行不同任务并获得最终结果。让我们看看下面这段更实际的代码片段，它演示了链式调用在处理异步任务时的优势：\n\
+  \n```\ngetPaymentFromUser\n  .then(displayTransactionDetails)\n  .then(queueTransactionEmail)\n\
+  \  .then(redirectToOrdersPage)\n  .catch(logError)\n```\n\n这里，`getPaymentFromUser`\
+  \ 返回一个 Promise，链中的每个函数都会在前一个处理器完成后，被调用并传入其返回值。在这个例子中，`displayTransactionDetails()`\
+  \ 会等待 `getPaymentFromUser()` 完成后再开始；`queueTransactionEmail()` 会等待 `displayTransactionDetails()`\
+  \ 完成后再开始，依此类推。需要注意的是，`logError()` 仅在之前的任意一个 Promise 被拒绝时才会执行。这种方式将调用串行化，而不会阻塞主执行线程，并确保这些操作按顺序执行。\n\
+  \n#### 错误处理\n\n在本章前面，我们讨论了在消费 Promise 时如何处理错误，可以通过以下任意一种方式：\n\n```\nsomePromise().then(onResolved,\
+  \ onRejected);\n// 或者直接使用 catch()\nsomePromise()\n  .then(onResolved)\n  .catch(onRejected);\n\
+  ```\n\n但你应该更倾向于哪一种方式，为什么呢？这个问题的答案取决于你的 `onResolved()` 函数是否会抛出错误。`then()` 方法返回的 Promise\
+  \ 可能会被拒绝，但如果使用第一种方式，这个拒绝无法被捕获——导致错误在你的应用中被忽略。而使用第二种方式，无论是来自 `somePromise()` 还是 `onResolved()`\
+  \ 的错误，都可以在 `catch()` 方法中得到处理。如果我们有多个 `then()` 调用，错误会一直传递下去，直到遇到错误处理器。因此，建议在所有 Promise\
+  \ 链的末尾都加上一个 `catch()` 方法。\n\n## 使用 `Promise.all` 组合 Promise\n\n`Promise.all` 接收一个\
+  \ Promise 数组（或任何可迭代对象），并返回一个 Promise。当可迭代参数中的所有 Promise 都 resolve 时，该返回的 Promise\
+  \ 会 resolve；如果任何一个 Promise 拒绝，它就会以第一个拒绝的 Promise 的原因 reject。\n\n如果传入的任意一个 Promise\
+  \ 被拒绝，那么所有 Promise 会立即以该拒绝的 Promise 的值 reject，并丢弃所有其他 Promise，无论它们是否已 resolve。注意，如果传入一个空数组，该方法会立即\
+  \ resolve。\n\n```\nconst p1 = Promise.resolve(3);\nconst p2 = 42;\nconst p3 = new\
+  \ Promise((resolve, reject) => {\n  setTimeout(resolve, 100, \"foo\");\n});\nPromise.all([p1,\
+  \ p2, p3]).then(values => {\n  console.log(values); // [3, 42, \"foo\"]\n});\n```\n\
+  \n然而，在某些情况下，你可能不想等待数组中的所有 Promise 都 resolve，而只是想获取数组中第一个完成的 Promise 的结果。在这种情况下，可以使用\
+  \ `Promise.race()`。\n\n`Promise.race()` 也接收一个 Promise 数组，但与 `Promise.all()` 不同，它会在数组中第一个\
+  \ Promise 完成时立即兑现其返回的 Promise。例如，假设我们想从 API 端点获取一些 JSON 数据，但不想无限等待响应。在这种情况下，我们只想使用一个默认值。我们可以使用\
+  \ `Promise.race()` 来实现这一点：\n\n```\n// 一个在给定时间（t）后超时的 Promise\nfunction delay(t)\
+  \ {\n  return new Promise((resolve, reject) => {\n    setTimeout(resolve, t);\n\
+  \  });\n}\n// 哪个 Promise 先完成，其结果就会被传递到我们的处理器中\nPromise.race([\n    fetchData(),\n\
+  \    delay(5000).then(() => { data: \"test\" })\n  ])\n  .then((res) => {\n    //\
+  \ 如果 fetchData() 耗时超过 5 秒，这里将是 \"test\"\n    console.log(\"data:\", res.data);\n\
+  \  })\n  .catch(function(err) {\n    console.log(\"error:\", err);\n  });\n```\n\
+  \n在这个例子中，`delay()` 函数返回一个在 `t` 毫秒后 resolve 的新 Promise。然后我们为该返回的 Promise 附加一个处理器，返回默认的用户对象\
+  \ `{user: \"guest\"}`。这确保了如果在 5 秒内从服务器获取到用户数据，我们将获得用户详情；否则将使用一个访客用户。\n\n## 总结\n\n\
+  Promise 已成为处理大量异步操作的标准方法。在本章中，我们学习了如何正确使用 Promise 来编写易于阅读的代码，这使得它们比传统回调函数更容易调试。它们允许我们组合异步\
+  \ API，并让我们用真正的 Promise 封装不符合规范的 Promise API 或回调 API。与回调和事件不同，Promise 帮助我们避免竞态条件，并确保其表示的值的不可变性。Promise\
+  \ 让我们能够以同步风格编写异步代码，拥有平坦的缩进和单一的异常处理通道。\n\n"
+- "# 10. 元编程\n\n“元”这个术语描述了某种本质上自指的特性。在编程领域，元编程意味着对程序本身的编程进行编程。它可以检查或修改程序的结构，或者改变语言本身的工作方式。ES6\
+  \ 引入了一系列与元编程相关的重要特性，为程序的代码机制提供了底层钩子。在本章中，我们将深入探讨这些特性，并了解元编程在 JavaScript 中是如何工作的。\n\
+  \n## ES5 与 ES6 中元编程概述\n\n元编程的概念对 JavaScript 来说并不新鲜。你可能每天都在使用元编程，甚至没有意识到这一点。例如，检查一个对象是否是另一个对象的原型，我们使用\
+  \ `a.isPrototypeOf(b)`。这就是元编程的一种形式。通常，所有 `Object.*` 方法都可以被视为元编程的一种形式。元编程提供了一种利用语言特性和功能的方法，使你能够创建更灵活的程序，并高效地处理应用程序的自定义需求。\n\
+  \n元编程的一个关键策略是反射。它允许我们在运行时检查或修改程序的结构，或者改变内部行为（特别是元数据属性和函数）。ES6 通过三种形式的元编程提供了反射能力。\n\
+  \n元编程有三种形式：自省、自我修改和调解。\n\n- **自省（Introspection）** – 当代码检查自身时，例如：`a.isPrototypeOf(b)`\
+  \ 就是自省。`typeof`、`instanceof` 也是自省操作符，因为它们收集有关代码的信息。\n- **自我修改（Self-modification）**\
+  \ – 当你修改程序的结构时。一个例子是 `Object.defineProperty()` 方法，它可以在对象上定义一个新属性，或者修改已有属性（如果存在的话）。\n\
+  \n\n\n```javascript\nlet cake = {};\nconsole.log(cake);      // {}\nObject.defineProperty(cake,\
+  \ \"ingredients\", {\n  value: [\"sugar\", \"all things nice\"],\n  enumerable:\
+  \ true,\n  configurable: true,\n  writable: true\n});\nconsole.log(cake);\n// {\
+  \ ingredients: [ 'sugar', 'all things nice' ] }\n```\n\n在上述示例中，请注意我们是如何使用 `Object.defineProperty()`\
+  \ 修改 `cake` 对象结构的。自修改指的是在运行时访问或创建新属性以及修改程序结构的能力。\n\n- **中介** – 当你的代码修改了默认行为，从而影响到其余代码时，就涉及中介。中介处理的是语言语义的修改，或者在运行时向程序添加新结构。这是\
+  \ ES6 中的新特性，我们将在本章后续内容中进一步了解。\n\nES6 通过三个新的 API 引入了元编程：`Symbol`、`Proxy` 和 `Reflect`。在本书前面的内容中，我们已经看到符号如何让我们创建唯一且不可变的标识符。它们为我们提供了一种高效的方式，为对象创建唯一且不可枚举的属性，这对于将对象的元数据与其公共接口分离非常有用。符号还能帮助我们自定义对象的默认迭代行为，本质上是通过允许我们在运行时修改程序行为或为对象创建新的（且唯一的）属性，来提供反射（自修改）能力。现在，让我们来看看\
+  \ `Proxy` 和 `Reflect` 带来了什么。\n\n## ES6 中的代理\n\n代理代表了元编程的中介形式。代理对象允许我们拦截任何程序的行为。它们使我们能够修改对象的操作并实现自定义行为。简而言之，对象上可以执行许多操作，而代理帮助我们修改这些操作并实现所需的行为。这些操作可以是属性查找、赋值、枚举、函数调用等。\n\
+  \n代理对象会包裹目标对象并修改其行为。我们可以通过以下方式创建代理：\n\n```javascript\nconst proxy = new Proxy(target,\
+  \ handler);\n```\n\n其中，`target` 是其行为被修改的对象，`handler` 是一个对象，其属性是函数（称为陷阱），当对代理执行各种操作时会调用这些函数。处理程序对象允许我们定义目标对象的新行为。它使我们能够在将操作转发给目标/被包裹对象之外，执行额外的逻辑。\n\
+  \n## 代理处理程序中的陷阱\n\n处理程序对象提供了一系列方法，这些方法作为代理的陷阱。这些方法是可选的，如果未定义陷阱，则默认行为是将操作转发给目标对象。\n\
+  \n最常见的陷阱是针对 getter 和 setter 的。例如，请看下面的代码片段，我们在其中为 get 属性访问器方法定义了一个陷阱：\n\n```javascript\n\
+  const restaurant = {\n  soda: 2,\n  burger: 1\n};\nconst restHandler = {\n  get:\
+  \ function(target, property) {\n    if (property in target && target[property] >\
+  \ 0) {\n      target[property] -= 1;\n      return `享受您的${property}吧`;\n    }\n\
+  \    return `抱歉，我们的${property}已经卖完了！`;\n  }\n};\nconst restProxy = new Proxy(restaurant,\
+  \ restHandler);\nconsole.log(restProxy.soda);\n// 享受您的 soda 吧\nconsole.log(restProxy.soda);\n\
+  // 享受您的 soda 吧\nconsole.log(restProxy.soda);\n// 抱歉，我们的 sodas 已经卖完了！\nconsole.log(restProxy.burger);\n\
+  // 享受您的 burger 吧\nconsole.log(restProxy.burger);\n// 抱歉，我们的 burgers 已经卖完了！\n```\n\
+  \n在上面的示例中，我们有一个 `restaurant` 对象，其中包含可用库存的列表和数量。我们使用代理来包裹 `restaurant` 对象，这使我们能够拦截（或“捕获”）`restaurant`\
+  \ 对象的原生操作，并对其执行修改后的行为。这里，`handler` 对象包含一个针对 get 属性访问器的陷阱，该陷阱在被调用时接收 `target` 和属性名。此方法会捕获所有“get\
+  \ 属性访问器”的调用，并检查该属性是否存在且其值是否大于 0，如果是，则将其值减 1，并返回消息 `享受您的${property}吧`；否则，返回消息 `抱歉，我们的${property}已经卖完了！`。这个“get”陷阱可用于捕获目标对象上的所有\
+  \ getter 事件。类似地，你也可以拦截 setter 事件。例如，请看下面的代码片段：\n\n```javascript\nconst restaurant\
+  \ = {\n  soda: 5\n};\nconst restHandler = {\n  set: function(target, property, value)\
+  \ {\n    target[property] = value;\n    console.log(`${property} 已添加到库存中`);\n  }\n\
+  }\nconst restProxy = new Proxy(restaurant, restHandler);\nrestProxy.beer = 10;\n\
+  // beer 已添加到库存中\n```\n\n在这个示例中，我们重写了 set 属性访问器方法，覆盖了默认的赋值操作。在进行验证时，代理可能非常有用。我们可以使用\
+  \ set 处理程序轻松验证传递给对象的值。例如，假设我们在创建一个投票应用，只有年满 18 岁且拥有该国居留权的人才能投票：\n\n```javascript\n\
+  const voterValidator = {\n  set: function(obj, prop, value) {\n    if (prop ===\
+  \ \"age\") {\n      if (!Number.isInteger(value)) {\n        throw new TypeError(\"\
+  输入的年龄不是整数\");\n      }\n      if (value < 18) {\n        throw new RangeError(\"\
+  输入的年龄无效\");\n      }\n    } else if (prop === \"residency\") {\n      if (value\
+  \ === false) {\n        throw new Error(\"必须有居留权才能投票\");\n      }\n    }\n    //\
+  \ 存储值的默认行为\n    obj[prop] = value;\n    // 表示成功\n    return true;\n  }\n};\nconst\
+  \ person = new Proxy({}, voterValidator);\nperson.age = 23;\nperson.residency =\
+  \ false;     // 抛出异常\nperson.age = \"young\";         // 抛出异常\nperson.age = 200;\
+  \             // 抛出异常\n```\n\n`set` 陷阱的另一个很好的用例是数据绑定，你可以在其中设置一个回调方法，当属性被设置时会调用该方法，并且该回调方法可以对目标对象属性的更改做出响应。\n\
+  \n除了 setter 和 getter，代理还提供了一系列你可以设置的其他陷阱。以下是一些可以帮助你更好地理解代理的陷阱。\n\n### has\n\n`has`\
+  \ 用于拦截 `in` 操作符。如果你想隐藏对象的某个特定属性，`has` 会非常有用。即使该属性存在于对象上，我们也可以返回 `false`。请看下面的示例，我们使用\
+  \ `has` 方法拦截 `in` 操作符，从而隐藏 `restaurant` 对象中的 `beer` 库存。\n\n```javascript\nconst\
+  \ restaurant = {\n  soda: 5,\n  beer: 10\n};\nconst restHandler = {\n  has: function(target,\
+  \ property) {\n    if (property === \"beer\") {\n      return false;\n    }\n  \
+  \  return property in target;\n  }\n}\nconst restProxy = new Proxy(restaurant, restHandler);\n\
+  console.log(\"beer\" in restProxy);    // false\nconsole.log(\"soda\" in restProxy);\
+  \    // true\n```\n\n在上面的示例中，所有 `in` 操作符的调用都会被 `has` 方法捕获，如果属性名是 `\"beer\"`，则返回\
+  \ `false`；否则保持默认行为（检查属性是否在目标对象中）。请注意，`has` 只能帮助你阻止通过 `in` 操作符检测特定属性。该属性仍然是可枚举的，并且可以通过\
+  \ `for...in` 循环访问。\n\n\n\n### ownKeys\n\n`ownKeys`用于拦截通过`Object.keys()`、`Object.getOwnPropertyNames()`或`Object.getOwnSymbolProperties()`访问自有属性和自有符号属性的行为。它还可以与`has`陷阱处理器结合使用，以增强目标对象属性的私密性（请注意，这些属性仍然不是完全私有的）：\n\
+  \n```\nconst restaurant = {\nsoda: 5,\nbeer: 10\n};\nconst restHandler = {\nhas:\
+  \ function(target, property) {\nif (property === \"beer\") {\nreturn false;\n}\n\
+  return property in target;\n},\nownKeys: function(target) {\nreturn [\"soda\"];\n\
+  }\n}\nconst restProxy = new Proxy(restaurant, restHandler);\nconsole.log(\"beer\"\
+  \ in restProxy);          // false\nconsole.log(Object.keys(restProxy));       //\
+  \ [\"soda\"]\n```\n\n你还可以添加另一个陷阱处理器：`getOwnPropertyDescriptor`，它用于拦截`Object.getOwnPropertyDescriptor()`调用，以进一步增强私密性。\n\
+  \n### apply\n\n`apply`用于拦截函数调用。它接受三个参数：\n\n*   `target`：行为被修改的目标函数；\n*   `context`：调用时作为`this`传递给目标函数的上下文；\n\
+  *   `args`：调用时传递的参数。\n\n看看下面的代码片段，我们使用`apply`陷阱处理器对最终账单金额应用季节性折扣：\n\n```\nfunction\
+  \ getBill(amount) {\nreturn amount;\n}\nconst billHandler = {\napply: function(target,\
+  \ context, args) {\nconsole.log(\"Applying Discount of 35%\");\nreturn args[0] -\
+  \ (args[0] * 0.35);\n}\n}\nconst billProxy = new Proxy(getBill, billHandler);\n\
+  console.log(billProxy(300));\n// Applying Discount of 35%\n// 195\n```\n\n由于这里的目标对象是一个函数，这些也被称为函数陷阱，你也可以为`.call()`和`.bind()`方法设置陷阱。\n\
+  \n到目前为止，我们已经介绍了足够多的陷阱处理器，让你对整体概念有所了解。我们看到了`Proxy`如何帮助我们拦截设置器（setter）和获取器（getter）、装饰对象、添加验证规则、增强私密性，以及本质上修改对象的默认行为。你可以通过以下链接探索更多陷阱处理器：[`https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Meta_programming`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Meta_programming)。\n\
+  \n## 可撤销代理（Revocable Proxy）\n\nES6 允许我们创建可撤销的代理。`Proxy.revocable()`方法用于创建一个可撤销的代理对象。与代理对象类似，它也需要一个处理器和一个目标对象，并返回一个新创建的可撤销代理对象。\n\
+  \n一个可撤销代理对象有两个属性：`proxy`和`revoke`。\n\n```\nconst { proxy, revoke } = Proxy.revocable(target,\
+  \ handler);\n```\n\n其中：\n\n*   `proxy` – 通过`new Proxy(target, handler)`调用创建的`Proxy`对象。\n\
+  *   `revoke` – 一个无参函数，用于使代理失效（关闭）。\n\n如果调用了`revoke()`函数，代理将变得不可用，这意味着对处理器的任何陷阱都会抛出`TypeError`。代理一旦被撤销，将保持撤销状态并可被垃圾回收。后续对`revoke`的调用没有进一步效果。请看下面的代码片段示例：\n\
+  \n```\nconst restaurant = {\nsoda: 10,\nbeer: 5\n};\nconst { proxy, revoke } = Proxy.revocable(restaurant,\
+  \ {});\nconsole.log(proxy.soda);   // 10\nconsole.log(proxy.beer);   // 5\nrevoke();\n\
+  console.log(proxy.soda);   // TypeError: Revoked\n```\n\n由于可撤销代理允许你完全切断代理及其陷阱，它可以在某些情况下用于增强对象的安全性，例如在检测到试图访问私有属性时撤销代理。我们可以修改上面的示例来增强`beer`属性的私密性，如下所示：\n\
+  \n```\nconst restaurant = {\nsoda: 10,\nbeer: 5\n};\nconst resthandler = {\nget:\
+  \ function(target, property) {\nif (property === \"beer\") {\nrevoke();\nreturn\
+  \ undefined;\n}\nreturn target[property];\n}\n}\nconst { proxy, revoke } = Proxy.revocable(restaurant,\
+  \ resthandler);\nconsole.log(proxy.soda);    // 10\nconsole.log(proxy.beer);   \
+  \ // undefined\nconsole.log(proxy.soda);    // TypeError: Revoked\n```\n\n在上面的示例中，如果访问了`beer`属性，我们会返回`undefined`并撤销代理，从而切断通过代理对目标对象的后续调用。\n\
+  \n到目前为止，我们已经了解了 ES6 中的自修改和中介（intercession）机制。现在，让我们来看看通过内省（introspection）实现的反射。\n\
+  \n### Reflect\n\n`Reflect`是一个内置的全局对象，提供了一系列内省方法。这些方法本质上是收集关于对象运行时元操作的信息。除了已有的内省方法如`typeof`、`instanceof`等，`Reflect`作为一个单一对象包装器，封装了许多仅通过\
+  \ JavaScript 引擎内部可访问的重要内部方法。`Reflect`的一个简单实现如下：\n\n```\nconst restaurant = {\nsoda:\
+  \ 10,\nbeer: 5\n};\nconsole.log(Reflect.ownKeys(restaurant));\n// [\"soda\", \"\
+  beer\"]\n```\n\n请注意，`Reflect`是一个静态对象，因此不能与`new`关键字一起使用。\n\n对于 ES6 `Proxy`中的每一个陷阱方法，`Reflect`中都有一个对应的反射方法。因此，`Reflect`也适用于在代理中实现陷阱。查看下面的代码片段，我们在代理中使用了`Reflect`：\n\
+  \n```\nconst restaurant = {\nsoda: 2,\nbeer: 5\n};\nconst restHandler = {\nget:\
+  \ function(target, property) {\nif (property === \"beer\") {\nreturn undefined;\n\
+  }\nreturn Reflect.get(target, property);\n}\n};\nconst restProxy = new Proxy(restaurant,\
+  \ restHandler);\nconsole.log(restProxy.beer);\n// undefined\nconsole.log(restProxy.soda);\n\
+  // 2\n```\n\n再次说明，在上面的示例中，我们阻止了对`beer`的访问，并使用`Reflect.get()`来访问目标对象的其他属性。你应该优先使用`Reflect`而不是传统的`target[property]`方式的原因之一是：如果在非对象目标上使用`Reflect.get`，它会抛出错误，而`target[property]`则简单地返回`undefined`。因此，在这里使用`Reflect.get`是一个好习惯。查看下面的代码片段示例，我们尝试在一个非对象目标上获取属性：\n\
+  \n```\nconsole.log(Reflect.get(1, \"name\"));\n// TypeError: Reflect.get called\
+  \ on non-object\nconsole.log(1[\"name\"]);\n// undefined\n```\n\n除此之外，在`Function.prototype`上调用方法时，也建议使用`Reflect`，因为如果参数列表为`null`或`undefined`，`Function.prototype.apply`会用无参方式调用函数，而`Reflect.apply`会抛出错误。另一个原因是`Reflect`提供了更简洁的语法，而`Function.prototype`显得过于冗长。查看下面的代码片段示例：\n\
+  \n```\nfunction sayHello() {\nconsole.log(`${this.name} says hello`);\n}\nconst\
+  \ person = {\nname: \"Jack\"\n};\nFunction.prototype.apply.call(sayHello, person);\n\
+  // Jack says hello\nReflect.apply(sayHello, person);\n// TypeError: CreateListFromArrayLike\
+  \ called on non-object\nReflect.apply(sayHello, person, []);\n// Jack says hello\n\
+  ```\n\n类似地，还有许多其他有用的静态函数，其中一些与代理处理器方法同名，以下是一些常见的可用的函数：\n\n*   `Reflect.get()` –\
+  \ 返回属性值的函数。\n*   `Reflect.set()` – 为属性赋值的函数。如果更新成功，返回布尔值`true`。\n*   `Reflect.getPrototypeOf()`\
+  \ – 与`Object.getPrototypeOf()`相同。\n*   `Reflect.has()` – 作为函数的`in`操作符。返回一个布尔值，指示是否存在自有或继承的属性。\n\
+  \n\n\n"
+- '# 摘要
+
+
+  ES6 中的元编程通过为程序代码机制提供底层钩子，使我们能够修改语言内部特性的行为。它有三种形式：内省、自我修改和中介。
+
+
+  在本章中，我们学习了新的`Proxy`和`Reflect` API，它们帮助我们实现不同形式的元编程。我们还看到了一些有趣的示例，其中`Proxy`帮助我们管理对象中的私有属性。我们了解了`Proxy`提供的各种陷阱处理方法，以及它们一一对应的静态`Reflect`方法，并探讨了如何在应用程序中充分利用这些方法。随着未来
+  ECMAScript 版本的发展，我们预期将看到更多有趣的元编程特性，从而更广泛地摆弄语言的默认内部操作。
+
+
+  '
+- '# 11. 超越 ES6
+
+
+  正如第一章所述，ES6 的发布版本非常庞大，是对现有 JavaScript 版本（即 ES5）的重要更新。我们在本书的前几章中已经全面介绍了所有主要变化。TC39
+  花费了六年多的时间才推出新版本的语言，并引入了大量全新的概念和功能。委员会在版本发布末期做出的一项重大决定是：他们不会再像以前那样花费太长时间才得出结论并发布新功能。他们决定正式将
+  ES6 命名为 ES2015，并在此后以逐年递增的方式发布更小规模的增量更新，并以发布年份命名。在本章中，我们将探讨 ES2016 和 ES2017 中的变化和新特性。
+
+
+  ### ES2016
+
+
+  ES2016 是对现有 ES2015（ES6）版本的一次小型增量更新，引入了`Array.prototype.includes`方法和求幂运算符`**`。你还可以查看
+  KangaX 兼容性表格，了解支持 JavaScript 的不同浏览器和平台对 ES2016 新特性的支持程度：[`https://kangax.github.io/compat-table/es2016plus/`](https://kangax.github.io/compat-table/es2016plus/)。
+
+
+  #### 数组的`includes`方法
+
+
+  ES2016 为 JavaScript 中的数组原型引入了`includes`方法。你可以使用此方法检查数组中是否存在某个元素。它会根据传递给它的元素是否属于调用该方法的数组的一部分，返回一个布尔值。请参考以下示例：
+
+
+  ```
+
+  [''apple'', ''banana'', ''carrot''].includes(''apple'');    //true
+
+  [''apple'', ''banana'', ''carrot''].includes(''orange'');   //false
+
+  ```
+
+
+  如上例所示，在水果数组上使用`includes`方法，如果传递给它的元素是数组的一部分，则返回`true`，否则返回`false`。在 JavaScript 中，传统上这种检查是通过`indexOf`方法完成的，该方法如果存在则返回元素的索引，否则返回-1。所以，上面的示例实际上等同于：
+
+
+  ```
+
+  [''apple'', ''banana'', ''carrot''].indexOf(''apple'') >= 0;    //true
+
+  [''apple'', ''banana'', ''carrot''].indexOf(''orange'') >= 0;   //false
+
+  ```
+
+
+  上述两个语句的工作方式与之前使用`includes`的示例完全一致。但`includes()`和`indexOf()`的主要区别在于它们与值`NaN`（非数字）的交互方式，这有助于识别该值。
+
+
+  ```
+
+  const arr = [NaN];
+
+  arr.includes(NaN);              // true
+
+  arr.indexOf(NaN);               // -1
+
+  ```
+
+
+  从这个示例可以明显看出，`indexOf`不能用于检查数组中的`NaN`值，但`includes`方法允许我们检查数组中是否存在`NaN`值。
+
+
+  ### 求幂运算符 `**`
+
+
+  求幂运算符是 ES2016 中引入的一个新的算术运算符，它与 Python 等语言中的对应运算符非常相似，使用双星号来计算数字的幂值。它等同于 Math 库中传统的`pow()`函数。
+
+
+  ```
+
+  let a = 2;
+
+  let b = 3;
+
+  a ** b               //8
+
+  Math.pow(a, b)       // 8
+
+  ```
+
+
+  使用求幂运算符是一种快速计算数值的方法，当数字被提升到相应幂次时，例如本例中 2 的 3 次方等于 8。
+
+
+  ### ES2017
+
+
+  ES2017 为该语言带来了两个主要的新特性，即异步函数和带共享内存的 Atomics。它还包括其他更简单的特性，如`Object.entries()`、`Object.values()`、`Object.getOwnPropertyDescriptors()`、`padStart`、`padEnd`，以及在函数参数列表和调用中使用尾后逗号的能力。让我们更详细地了解每一个特性。
+
+
+  #### 异步函数
+
+
+  ES2017 引入了一种处理异步代码的令人兴奋的新方式，而异步代码是 JavaScript 的生存之道。我们已经了解了一种使用 Promise 处理异步操作的流行方法。ES2017
+  在此基础上进一步构建，通过使用`async`和`await`关键字，使其以同步方式工作。为了正确理解这一点，请考虑以下示例，我们只是简单地创建了一个返回 Promise
+  的函数：
+
+
+  ```
+
+  function getData(site) {
+
+  return fetch(site)
+
+  .then(request => request.json())
+
+  }
+
+  ```
+
+
+  对于上面的示例，调用`getData()`函数将返回一个 Promise，该 Promise 将在我们的执行上下文中异步地得到解决。现在使用`async`/`await`关键字，我们可以利用基于
+  Promise 的方法来发挥生成器模式的优势，使我们的代码表现得像同步代码。`async`始终返回一个可以被解析为值的 Promise，而`await`会暂停执行，直到
+  Promise 被解决。我们可以使用`async`/`await`关键字重写上面的示例，如下所示：
+
+
+  ```
+
+  async function getData(site) {
+
+  let request = await fetch(url);
+
+  let text = await request.text();
+
+  return JSON.parse(text);
+
+  }
+
+  ```
+
+
+  请注意，`await`关键字仅适用于 Promise，如果表达式不是 Promise，它会将其转换为 Promise。你还可以在函数表达式、方法定义和箭头函数中使用`async`，如下例所示：
+
+
+  ```
+
+  // 使用函数表达式：
+
+  const getData = async function () {};
+
+  // 使用方法定义：
+
+  const item = { async getData() {} }
+
+  // 使用箭头函数：
+
+  const item = async () => {};
+
+  ```
+
+
+  你可能对上一个示例中使用的`await`关键字感到好奇：`await`运算符会等待操作数（即 Promise）被解决，如果 Promise 被履行，其结果就是兑现值；如果
+  Promise 被拒绝，它会抛出拒绝值。因此，我们可以使用传统的`try`/`catch`块配合`async`/`await`，以更好的方式处理 Promise。
+
+
+
+
+  #### 原子操作与共享内存
+
+
+  任何熟悉 `WebWorker` 的人都已经了解创建工作进程的过程。通过分配 `Worker` 对象并将需要运行的脚本传入其中来创建它们。工作进程通过消息通道进行通信，多种类型的数据都可以通过此通道发送，并且当数据到达目的地时，其类型和结构会保持不变。在
+  ES2017 中，要分配共享内存，你可以直接使用 `SharedArrayBuffer` 构造函数。它就像一个普通的 `ArrayBuffer`，但其内存是共享的。
+
+
+  此外，ES2017 中的这个新规范还为我们带来了新的底层 `Atomics` 命名空间对象的概念，它与 `SharedArrayBuffer` 构造函数一起，为我们提供了用于构建更高级别并发抽象的基本构建块。你可以使用这些特性在多个
+  Web Worker 和主线程之间共享 `SharedArrayBuffer` 对象中的数据。这使你能受益于轻松地在 Worker 之间共享数据，从而更好地协调它们之间工作。关于此主题的更详细教程和规范（由共享内存和
+  `Atomics` 的原始提案作者 Lars Hansen 编写）可以在以下链接中找到：[`https://github.com/tc39/ecmascript_sharedmem/blob/master/TUTORIAL.md`](https://github.com/tc39/ecmascript_sharedmem/blob/master/TUTORIAL.md)，但这超出了本书的范围。
+
+
+  '
+- '# Object.entries() 和 Object.values()
+
+
+  `Object.entries()` 和 `Object.values()` 是 ES2017 中引入的两个新方法。`Object.entries()` 方法在对象上运行时，会以
+  `for-in` 循环提供的相同顺序返回该对象自身的可枚举属性 `[key, value]` 对。但与 `for-in` 循环不同，它不会枚举原型链上的属性。类似地，`Object.values()`
+  在传入对象时，会返回一个包含其自身可枚举属性值的数组：
+
+
+  ```javascript
+
+  const myObj = { a: 1, b: 42 };
+
+  Object.entries(myObj);     // [[''a'', 1], [''b'', 42]]
+
+  Object.values(myObj);      // [1, 42]
+
+  ```
+
+
+  正如你在上面的示例中所看到的，当传入 `Object.entries()` 方法时，该对象会返回一个包含其键/值对的数组，而 `Object.values()`
+  方法则返回属性值。
+
+
+  '
+- '# padStart 和 padEnd
+
+
+  `padStart()` 和 `padEnd()` 方法是 ES2017 中引入的两个新的字符串方法，它们有助于向字符串添加填充，以便结果字符串的长度等于作为第一个参数传入的值。你还可以传入第二个可选参数（另一个字符串）来代替默认的空格进行填充。思考以下示例：
+
+
+  ```javascript
+
+  ''string''.padStart(10);           // "    string"
+
+  ''string''.padStart(10, "abc");    // "abcastring"
+
+  ''string''.padStart(10,"123465");  // "1234string"
+
+  ''string''.padStart(8, "0");       // "00string"
+
+  ''string''.padStart(3);            // "string"
+
+  ''string''.padEnd(10);             // "string    "
+
+  ''string''.padEnd(10, "abc");      // "stringabca"
+
+  ''string''.padEnd(8, "123456");    // "string12"
+
+  ''string''.padEnd(1);              // "string"
+
+  ```
+
+
+  正如你在上面的示例中所看到的，添加到给定字符串的填充使得最终结果字符串的长度要么大于第一个参数的长度，具体取决于原始字符串的长度；如果给定的长度更大，则会根据你使用的方法在字符串的开头或结尾添加适当数量的填充。你也可以使用第二个参数来使用不同的字符串代替空格进行填充。
+
+
+  '
+- '# Object.getOwnPropertyDescriptors()
+
+
+  顾名思义，`Object.getOwnPropertyDescriptors()` 是 ES2017 中的一个新方法，它允许你精确检查给定对象所有自身属性的描述。JavaScript
+  对象中的属性通常由一个字符串名称和一个属性描述符组成。描述符是属性值、布尔值 `writable`、`get` 函数、`set` 函数、布尔值 `configurable`
+  和布尔值 `enumerable` 的记录。思考以下示例：
+
+
+  ```javascript
+
+  const myObj = {
+
+  [Symbol(''mySymbol'')]: 42,
+
+  get random() { return ''test'' },
+
+  };
+
+  console.log(Object.getOwnPropertyDescriptors(myObj));
+
+  // Object {random: Object, Symbol(mySymbol): Object}
+
+  // {random:{
+
+  //     configurable: true,
+
+  //     enumerable: true,
+
+  //     get: function random(),
+
+  //     set: undefined}
+
+  //[Symbol(''mySymbol'')]:{
+
+  //     configurable: true,
+
+  //     enumerable: true,
+
+  //     value: 42,
+
+  //     writable: true}
+
+  //}
+
+  ```
+
+
+  在像 `myObj` 这样的对象上使用 `Object.getOwnPropertyDescriptors()` 的输出将大致如上所示。请注意，上述所有特性都相当新且是实验性的，因此你可能不总是能得到完全相同的结果。话虽如此，它们现在正变得越来越标准化。
+
+
+  #### 函数参数列表与调用中的尾逗号
+
+
+  ES2017 中的这个特性是一个简单的语法更新。在引入此特性之前，即使规范的其他部分（如数组和对象字面量的情况）中已普遍允许，但在 JavaScript 中是不允许在最后一个函数参数后面有逗号的。通过
+  ES2017 的这一更新，你在整个 JavaScript 中拥有了更统一的尾逗号语法。所以你可以这样做：
+
+
+  ```javascript
+
+  const trailFunct = function(x, y, z,) {
+
+  // 函数体
+
+  }
+
+  ```
+
+
+  这纯粹是语言的一个语法更新，对该语言的行为或功能没有重大改变。
+
+
+
+
+  '
+- '# 总结
+
+
+  本章我们探讨了在编写本书时已发布的 `JavaScript` 各种微小增量变更以及基于 `ES6` 的更新。`TC39` 的目标是每年发布一次新规范，这些规范从提案阶段进入最终规范阶段，然后被纳入到语言中。它们应当是小型功能更新，不像
+  `ES6`（`ES2015`）那样是巨大的变革。
+
+
+  `索引 A`、`B`、`Array.from()`、`Array.of()`、`Array.prototype.copyWithin()`、`Array.prototype.entries()`、`Array.prototype.fill()`、`Array.prototype.find()`、`Array.prototype.findIndex()`、`Array.prototype.keys()`、`Array.prototype.values()`、`异步函数`、`异步模块定义（AMD）`、`C`、`CommonJS
+  风格模块`、`Constructor() 方法`、`D`、`解构赋值`、`默认值`、`定义`、`JSON` 数据格式中的 `JavaScript`、`嵌套值`、`对象和数组`、`参数值`、`剩余语法`、`E`、`F`、`ECMA
+  国际组织`、`ECMAScript 2015`、`ECMAScript 3.1`、`ECMAScript 4`、`ECMAScript 6（ES6）`、`添加加载器`、`箭头函数`、项目中的
+  `Babel` 和 `块级作用域`、`样板代码`、`类与访问器属性`、`内置类`、`基于类的开发模式`、`经典类导向开发`、`计算属性名`、`constructor()
+  方法`、`构造函数环境`、`声明`、`表达式`、`继承与 super 关键字`、`继承静态属性`、`语言`、`可选构造函数方法`、`属性与隐私`、`静态方法与属性`、`构造函数调用`、`默认函数参数`
+  的 `核心概念`、`ECMA`、`ECMAScript` 与 `JavaScript`、`ES6/ES2015` 知识、`函数调用`、`函数参数` 与 `全局作用域`、`循环结构`、`对象字面量`、`原型方法`、`剩余与展开运算符`、`“稻草人提案”`、`带标签的模板字面量`、`TDZ`、`模板字面量`
+  与 `分隔符`、`转译`、`Web 浏览器` 与 `Node.js`、`webpack` 与 `webpack-dev-server`、`数组` 上的 `ES2016`、`原子操作与共享内存`、`ES2017`、`指数运算符
+  **`、`object.entries()`、`object.getOwnPropertyDescriptors()`、`object.values()`、`padStart`
+  与 `padEnd`、`尾后逗号`、`ES2017 表达式插值`、`G`、`H`、`生成器`、`I`、`J`、`K`、`L`、`立即执行函数表达式（IIFE）`、`拦截`、`内省`、`可迭代协议`、`迭代器生成器`、`可迭代对象`、`可选方法`、`协议`、`return()`
+  与 `throw()`、`Symbol.iterator`、`yield 语句`、`M`、`Map`、`元编程`、`ES5` 与 `ES6` 概述、`未来 ECMAScript
+  版本`、`内部语言特性`、`ES6` 中 `代理处理器` 的 `代理`、`可撤销代理`、`浏览器` 中的 `模块系统`、`ES6` 中的 `解构`、`eval()`、`导出`、`导入`、`JavaScript`
+  应用、`模块化语义代码库`、`只读绑定`、`N`、`新的 Array.prototype 方法`、`O`、`Object.defineProperty()`、`对象解构语法`、`Object.entries()`、`Object.getOwnPropertyDescriptors()`、`Object.getOwnPropertySymbols()`、`Object.getOwnSymbolProperties()`、`Object.values()`、`OnResolved()
+  函数`、`P`、`Q`、`padEnd() 方法`、`padStart() 方法`、`待定状态的 Promise`、`Promise() 构造函数`、`Promise`、`异步操作`、`链式调用`、`创建`、`错误处理`、`嵌套回调`、`对象`、`带
+  then() 和 catch() 的 setTimeout`、`XMLHttpRequest`、`R`、`Reflect.get()`、`Reflect.getPrototypeOf()`、`Reflect.has()`、`Reflect.set()`、`Revoke()
+  函数`、`S`、`自修改`、`字符串替换`、`Symbol.for(key) 方法`、`Symbol.for(myCar)`、`Symbol.iterator`、`Symbol`、`内置符号`
+  的 `应用`、`创建`、`symbol.for(key)`、`Symbol.keyFor(symbol)`、`.toString() 方法`、`T`、`暂时性死区（TDZ）`、`类型化数组`、`U`、`V`、`通用模块定义（UMD）`、`W`、`X`、`Y`、`Z`、`WeakMap`、`WeakSet`
+
+  '
