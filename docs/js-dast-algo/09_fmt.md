@@ -1,0 +1,209 @@
+# 九、集合
+
+本章重点介绍如何使用集合。集合的概念从数学定义和在实现水平上被描述和探索。常见的集合操作，以及它们的实现，都有非常详细的介绍。本章结束时，你将理解如何使用 JavaScript 的本地`Set`对象来利用集合操作。
+
+## 器械包简介
+
+集合是最基本的数据结构之一。集合的概念很简单:它是一组明确的、不同的对象。通俗地说，在编程中，一个*集合*就是一组无序的*唯一的*(无重复)元素。例如，一组整数可能是{1，2，3，4}。其中，它的子集是{}、{1}、{2}、{3}、{4}、{1，2}、{1，3}、{1，4}、{2，3}、{2，4}、{3，4}、{1，2，3}、{1，2，4}、{1，3，4}和{2，3，4}。集合对于检查和添加 O(1)常数时间中的唯一元素非常重要。集合具有常量时间操作的原因是其实现是基于散列表的(在第十一章中讨论)。
+
+`Set`在 JavaScript 中受本地支持，如下所示:
+
+```js
+var exampleSet = new Set();
+```
+
+原生的`Set`对象只有一个属性:`size`(整数)。此属性是集合中元素的当前数量。
+
+## 集合操作
+
+该集合是用于执行唯一性检查的强大数据结构。本节将涵盖以下关键操作:*插入*、*删除*、*包含*。
+
+### 插入
+
+有一个主要功能:检查唯一性。`Set`可以添加项目，但不允许重复。
+
+```js
+var exampleSet = new Set();
+exampleSet.add(1); // exampleSet: Set {1}
+exampleSet.add(1); // exampleSet: Set {1}
+exampleSet.add(2); // exampleSet: Set {1, 2}
+```
+
+请注意，添加重复元素不适用于集合。正如在引言中所讨论的，插入到集合中是在恒定时间内发生的。
+
+**时间复杂度:** O(1)
+
+### 删除
+
+`Set`也可以从集合中删除项目。`Set.delete`返回一个布尔值(如果该元素存在并被删除，则为真，否则为假)。
+
+```js
+var exampleSet = new Set();
+exampleSet.add(1); // exampleSet: Set {1}
+exampleSet.delete(1); // true
+exampleSet.add(2); // exampleSet: Set {2}
+```
+
+这对于能够在恒定时间内删除项目是有用的，相比之下，在数组中删除一个项目需要 O( *n* )时间。
+
+**时间复杂度:** O(1)
+
+### 包含
+
+`Set.has`执行快速 O(1)查找，检查元素是否存在于集合中。
+
+```js
+var exampleSet = new Set();
+exampleSet.add(1); // exampleSet: Set {1}
+exampleSet.has(1); // true
+exampleSet.has(2); // false
+exampleSet.add(2); // exampleSet: Set {1, 2}
+exampleSet.has(2); // true
+```
+
+**时间复杂度:** O(1)
+
+## 其他实用功能
+
+除了本机支持的 set 函数之外，其他基本操作也是可用的；本节将对此进行探讨。
+
+### 交集
+
+首先，两个集合的交集由这两个集合之间的公共元素组成。此函数返回两个集合之间具有公共元素的集合:
+
+```js
+function intersectSets (setA, setB) {
+    var intersection = new Set();
+    for (var elem of setB) {
+        if (setA.has(elem)) {
+            intersection.add(elem);
+        }
+    }
+    return intersection;
+}
+var setA = new Set([1, 2, 3, 4]),
+    setB = new Set([2, 3]);
+intersectSets(setA,setB); // Set {2, 3}
+```
+
+### 父集
+
+第二，一个集合是另一个集合的“超集”，如果它包含另一个集合的所有元素。这个函数检查一个集合是否是另一个集合的超集。这可以简单地通过检查另一个集合是否包含参考集合的所有元素来实现。
+
+```js
+function isSuperset(setA, subset) {
+    for (var elem of subset) {
+        if (!setA.has(elem)) {
+            return false;
+        }
+    }
+    return true;
+}
+var setA = new Set([1, 2, 3, 4]),
+    setB = new Set([2, 3]),
+    setC = new Set([5]);
+isSuperset(setA, setB); // true
+// because setA has all elements that setB does
+isSuperset(setA, setC); // false
+// because setA does not contain 5 which setC contains
+```
+
+### 联盟
+
+第三，两个集合的并集合并了两个集合中的元素。这个函数返回一个包含两个元素的新集合，没有重复的元素。
+
+```js
+function unionSet(setA, setB) {
+    var union = new Set(setA);
+    for (var elem of setB) {
+        union.add(elem);
+    }
+    return union;
+}
+var setA = new Set([1, 2, 3, 4]),
+    setB = new Set([2, 3]),
+    setC = new Set([5]);
+unionSet(setA,setB); // Set {1, 2, 3, 4}
+unionSet(setA,setC); // Set {1, 2, 3, 4, 5}
+```
+
+### 差异
+
+最后，集合 A 与集合 B 的差异是集合 A 中不在集合 B 中的所有元素。该函数通过使用本机`delete`方法来实现差异运算。
+
+```js
+function differenceSet(setA, setB) {
+    var difference = new Set(setA);
+    for (var elem of setB) {
+        difference.delete(elem);
+    }
+    return difference;
+}
+var setA = new Set([1, 2, 3, 4]),
+    setB = new Set([2, 3]);
+differenceSet(setA, setB); // Set {1, 4}
+```
+
+## 摘要
+
+集合是表示无序唯一元素的基本数据结构。本章介绍了 JavaScript 的本机`Set`对象。`Set`对象支持插入、删除、包含检查，时间复杂度均为 O(1)。使用这些内置方法，可以实现其他基本的集合运算，如交集、差集、并集和超集检查。这些将使你在以后的章节中实现快速唯一性检查的算法。
+
+表 9-1 总结了设置操作。
+
+表 9-1
+
+设置摘要
+
+| 操作 | 函数名 | 描述 |
+| --- | --- | --- |
+| 插入 | `Set.add` | 原生 JavaScript。如果元素不在集合中，则将其添加到集合中。 |
+| 删除 | `Set.delete` | 原生 JavaScript。如果元素在集合中，则将其从集合中删除。 |
+| 包含 | `Set.has` | 原生 JavaScript。检查元素是否存在于集合中。 |
+| 交集(A∩B) | `intersectSets` | 返回具有集合 A 和集合 b 的公共元素的集合。 |
+
+| 联合(a 至 b) | `unionSet` | 返回包含集合 A 和集合 b 的所有元素的集合。 |
+| 差异(A-B) | `differenceSet` | 返回包含所有元素的集合。 |
+
+## 练习
+
+### 使用集合检查数组中的重复项
+
+使用集合检查整数数组中是否有重复项。通过将数组转换为集合，可以将集合的大小与数组的长度进行比较，从而轻松检查重复项。
+
+```js
+ 1   function checkDuplicates(arr) {
+ 2       var mySet = new Set(arr);
+ 3       return mySet.size < arr.length;
+ 4   }
+ 5   checkDuplicates([1,2,3,4,5]); // false
+ 6   checkDuplicates([1,1,2,3,4,5]); // true
+```
+
+**时间复杂度:** O(`n`)
+
+**空间复杂度:** O(`n`)
+
+在一个长度为 `n` 的数组中，这个函数必须在最坏的情况下遍历整个数组，并且将所有这些元素存储在集合中。
+
+### 从单独的数组中返回所有唯一值
+
+给定两个具有相同值的整数数组，返回一个包含两个原始数组中所有唯一元素的数组。
+
+使用集合，可以轻松存储唯一的元素。通过连接两个数组并将它们转换为一个集合，只存储唯一的项。将集合转换为数组会产生一个只包含唯一项的数组。
+
+```js
+ 1   function uniqueList(arr1, arr2) {
+ 2       var mySet = new Set(arr1.concat(arr2));
+ 3       return Array.from(mySet);
+ 4   }
+ 5
+ 6   uniqueList([1,1,2,2],[2,3,4,5]); // [1,2,3,4,5]
+ 7   uniqueList([1,2],[3,4,5]); // [1,2,3,4,5]
+ 8   uniqueList([],[2,2,3,4,5]); // [2,3,4,5]
+```
+
+**时间复杂度:** O(`n + m`)
+
+**空间复杂度:** O(`n + m`)
+
+该算法的时空复杂度为 O(`n + m`)，其中 `n` 为`arr1`的长度， `m` 为`arr2`的长度。这是因为两个数组中的所有元素都需要被迭代。
