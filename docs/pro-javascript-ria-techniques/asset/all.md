@@ -236,121 +236,121 @@ The information in this book is distributed on an “as is” basis, without war
 
 Contents at a Glance
 
-About the Author . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . [xv](#index_split_000.html#p16)
+About the Author . [xv](#index_split_000.html#p16)
 
-About the Technical Reviewer . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . [xvii](#index_split_000.html#p18)
+About the Technical Reviewer . . . [xvii](#index_split_000.html#p18)
 
-Acknowledgments . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . [xix](#index_split_000.html#p20)
+Acknowledgments . . . . [xix](#index_split_000.html#p20)
 
-Introduction . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . [xxi](#index_split_000.html#p22)
+Introduction [xxi](#index_split_000.html#p22)
 
 PART 1 ■ ■ ■ Best Practices
 
 **CHAPTER 1**
 
-Building a Solid Foundation . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . [3](#index_split_000.html#p27)
+Building a Solid Foundation . . . [3](#index_split_000.html#p27)
 
 **CHAPTER 2**
 
-JavaScript for Rich Internet Applications . . . . . . . . . . . . . . . . . . . . . . . . [51](#index_split_000.html#p75)
+JavaScript for Rich Internet Applications . . . . [51](#index_split_000.html#p75)
 
 PART 2 ■ ■ ■ Performance
 
 **CHAPTER 3**
 
-Understanding the Web Browser . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . [115](#index_split_002.html#p139)
+Understanding the Web Browser . [115](#index_split_002.html#p139)
 
 **CHAPTER 4**
 
-Performance Tweaking . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . [135](#index_split_002.html#p159)
+Performance Tweaking [135](#index_split_002.html#p159)
 
 **CHAPTER 5**
 
-Smoke and Mirrors: Perceived Responsiveness . . . . . . . . . . . . . . . . . [179](#index_split_003.html#p203)
+Smoke and Mirrors: Perceived Responsiveness . . [179](#index_split_003.html#p203)
 
 PART 3 ■ ■ ■ Presentation
 
 **CHAPTER 6**
 
-Beautiful Typography . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . [195](#index_split_003.html#p219)
+Beautiful Typography . . [195](#index_split_003.html#p219)
 
 **CHAPTER 7**
 
-Multimedia Playback . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . [225](#index_split_003.html#p249)
+Multimedia Playback . . [225](#index_split_003.html#p249)
 
 **CHAPTER 8**
 
-Form Controls . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . [249](#index_split_004.html#p273)
+Form Controls . . . . [249](#index_split_004.html#p273)
 
 **CHAPTER 9**
 
-Offline Storage—When the Lights Go Out . . . . . . . . . . . . . . . . . . . . . . . [307](#index_split_005.html#p331)
+Offline Storage—When the Lights Go Out . . . [307](#index_split_005.html#p331)
 
-**CHAPTER 10** Binary Ajax . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . [331](#index_split_005.html#p355)
+**CHAPTER 10** Binary Ajax . [331](#index_split_005.html#p355)
 
-**CHAPTER 11** Drawing in the Browser . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . [357](#index_split_006.html#p381)
+**CHAPTER 11** Drawing in the Browser . . . . [357](#index_split_006.html#p381)
 
-**CHAPTER 12** Accessibility in Rich Internet Applications . . . . . . . . . . . . . . . . . . . . . . [375](#index_split_006.html#p399)
+**CHAPTER 12** Accessibility in Rich Internet Applications . . [375](#index_split_006.html#p399)
 
-**INDEX** . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . [403](#index_split_007.html#p427)
+**INDEX** . [403](#index_split_007.html#p427)
 
 [**v**](#index_split_000.html#p6)
 
 Contents
 
-About the Author . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . [xv](#index_split_000.html#p16)
+About the Author . [xv](#index_split_000.html#p16)
 
-About the Technical Reviewer . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . [xvii](#index_split_000.html#p18)
+About the Technical Reviewer . . . [xvii](#index_split_000.html#p18)
 
-Acknowledgments . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . [xix](#index_split_000.html#p20)
+Acknowledgments . . . . [xix](#index_split_000.html#p20)
 
-Introduction . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . [xxi](#index_split_000.html#p22)
+Introduction [xxi](#index_split_000.html#p22)
 
 **PART 1** ■ ■ ■ **Best Practices**
 
 **CHAPTER 1**
 
-**Building a Solid Foundation** . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . [3](#index_split_000.html#p27)
+**Building a Solid Foundation** . . . [3](#index_split_000.html#p27)
 
-Best Practice Overview . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . [3](#index_split_000.html#p27)
+Best Practice Overview . . . . [3](#index_split_000.html#p27)
 
-Who Put the “Best” in Best Practice? . . . . . . . . . . . . . . . . . . . . . . . . . . . [4](#index_split_000.html#p28)
+Who Put the “Best” in Best Practice? . . [4](#index_split_000.html#p28)
 
-Who Benefits from Best Practices? . . . . . . . . . . . . . . . . . . . . . . . . . . . . . [4](#index_split_000.html#p28)
+Who Benefits from Best Practices? . . . . [4](#index_split_000.html#p28)
 
-General Best Practices . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . [5](#index_split_000.html#p29)
+General Best Practices . . . . [5](#index_split_000.html#p29)
 
-Define the Project Goals . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . [6](#index_split_000.html#p30)
+Define the Project Goals . . . [6](#index_split_000.html#p30)
 
-Know the Basic Rules . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . [6](#index_split_000.html#p30)
+Know the Basic Rules [6](#index_split_000.html#p30)
 
-Markup Best Practice: Semantic HTML . . . . . . . . . . . . . . . . . . . . . . . . . . . . . [14](#index_split_000.html#p38)
+Markup Best Practice: Semantic HTML . . . . [14](#index_split_000.html#p38)
 
-Learn the HTML Tags . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . [14](#index_split_000.html#p38)
+Learn the HTML Tags . . . . [14](#index_split_000.html#p38)
 
-Start with a Document Type Definition . . . . . . . . . . . . . . . . . . . . . . . . . [16](#index_split_000.html#p40)
+Start with a Document Type Definition [16](#index_split_000.html#p40)
 
-How Do You Put the X in XHTML? . . . . . . . . . . . . . . . . . . . . . . . . . . . . . [17](#index_split_000.html#p41)
+How Do You Put the X in XHTML? . . . . [17](#index_split_000.html#p41)
 
-Put Best Practice into Practice . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . [19](#index_split_000.html#p43)
+Put Best Practice into Practice . . [19](#index_split_000.html#p43)
 
-Accessibility Guidelines for Web Content . . . . . . . . . . . . . . . . . . . . . . . [28](#index_split_000.html#p52)
+Accessibility Guidelines for Web Content . . . [28](#index_split_000.html#p52)
 
-Formatting Best Practice: CSS . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . [30](#index_split_000.html#p54)
+Formatting Best Practice: CSS . [30](#index_split_000.html#p54)
 
-Regarding Pixel- Perfect Reproduction of Designs . . . . . . . . . . . . . . . [30](#index_split_000.html#p54)
+Regarding Pixel- Perfect Reproduction of Designs [30](#index_split_000.html#p54)
 
-W3C CSS Standards . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . [31](#index_split_000.html#p55)
+W3C CSS Standards [31](#index_split_000.html#p55)
 
-Guidelines for Style Sheets . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . [31](#index_split_000.html#p55)
+Guidelines for Style Sheets [31](#index_split_000.html#p55)
 
-Accessibility Guidelines for Styles . . . . . . . . . . . . . . . . . . . . . . . . . . . . . [39](#index_split_000.html#p63)
+Accessibility Guidelines for Styles . . . . [39](#index_split_000.html#p63)
 
-Comment Blocks . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . [41](#index_split_000.html#p65)
+Comment Blocks . . . [41](#index_split_000.html#p65)
 
-Browser Work- Arounds . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . [42](#index_split_000.html#p66)
+Browser Work- Arounds . . . [42](#index_split_000.html#p66)
 
-Localization Considerations . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . [43](#index_split_000.html#p67)
+Localization Considerations . . . . [43](#index_split_000.html#p67)
 
 [**vii**](#index_split_000.html#p8)
 
@@ -358,213 +358,213 @@ Localization Considerations . . . . . . . . . . . . . . . . . . . . . . . . . . 
 
 ■CONTENTS
 
-Structuring Your Folders, Files, and Assets . . . . . . . . . . . . . . . . . . . . . . . . . [43](#index_split_000.html#p67)
+Structuring Your Folders, Files, and Assets [43](#index_split_000.html#p67)
 
-Readable URLs . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . [43](#index_split_000.html#p67)
+Readable URLs . . . . [43](#index_split_000.html#p67)
 
-File and Folder Naming . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . [44](#index_split_000.html#p68)
+File and Folder Naming . . . [44](#index_split_000.html#p68)
 
-File Encoding . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . [44](#index_split_000.html#p68)
+File Encoding . [44](#index_split_000.html#p68)
 
-Organizing Assets . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . [44](#index_split_000.html#p68)
+Organizing Assets . . [44](#index_split_000.html#p68)
 
-Setting Up Your Development Environment . . . . . . . . . . . . . . . . . . . . . . . . . [46](#index_split_000.html#p70)
+Setting Up Your Development Environment [46](#index_split_000.html#p70)
 
-Writing Your Files: Integrated Development Environments . . . . . . . . [46](#index_split_000.html#p70)
+Writing Your Files: Integrated Development Environments . . . [46](#index_split_000.html#p70)
 
-Storing Your Files: Version Control Systems . . . . . . . . . . . . . . . . . . . . [47](#index_split_000.html#p71)
+Storing Your Files: Version Control Systems [47](#index_split_000.html#p71)
 
-Testing Your Pages: Browsers and Development Tools . . . . . . . . . . [47](#index_split_000.html#p71)
+Testing Your Pages: Browsers and Development Tools [47](#index_split_000.html#p71)
 
-Summary . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . [49](#index_split_000.html#p73)
+Summary [49](#index_split_000.html#p73)
 
 **CHAPTER 2**
 
-**JavaScript for Rich Internet Applications** . . . . . . . . . . . . . . . . . [51](#index_split_000.html#p75)
+**JavaScript for Rich Internet Applications** . . [51](#index_split_000.html#p75)
 
-Coding Style Guidelines . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . [51](#index_split_000.html#p75)
+Coding Style Guidelines . . [51](#index_split_000.html#p75)
 
-Use Consistent Formatting . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . [51](#index_split_000.html#p75)
+Use Consistent Formatting [51](#index_split_000.html#p75)
 
-Use Braces and Brackets . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . [52](#index_split_000.html#p76)
+Use Braces and Brackets . [52](#index_split_000.html#p76)
 
-Add Meaning with Letter Casing . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . [53](#index_split_000.html#p77)
+Add Meaning with Letter Casing [53](#index_split_000.html#p77)
 
-Use Descriptive Variable and Function Names . . . . . . . . . . . . . . . . . . [53](#index_split_000.html#p77)
+Use Descriptive Variable and Function Names . . . [53](#index_split_000.html#p77)
 
-Maintain Short Function Blocks . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . [54](#index_split_000.html#p78)
+Maintain Short Function Blocks . [54](#index_split_000.html#p78)
 
-Use Comments As Documentation with ScriptDoc . . . . . . . . . . . . . . [56](#index_split_001.html#p80)
+Use Comments As Documentation with ScriptDoc . . . . [56](#index_split_001.html#p80)
 
-Mark Remaining Tasks with TODO . . . . . . . . . . . . . . . . . . . . . . . . . . . . [57](#index_split_001.html#p81)
+Mark Remaining Tasks with TODO . . . [57](#index_split_001.html#p81)
 
-Professional JavaScript Programming . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . [57](#index_split_001.html#p81)
+Professional JavaScript Programming [57](#index_split_001.html#p81)
 
-Avoid Solving Nonexistent Problems . . . . . . . . . . . . . . . . . . . . . . . . . . [57](#index_split_001.html#p81)
+Avoid Solving Nonexistent Problems . [57](#index_split_001.html#p81)
 
-Use the Document Object Model . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . [58](#index_split_001.html#p82)
+Use the Document Object Model [58](#index_split_001.html#p82)
 
-Don’t Mix JavaScript and HTML . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . [60](#index_split_001.html#p84)
+Don’t Mix JavaScript and HTML [60](#index_split_001.html#p84)
 
-Separate Style from Code . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . [60](#index_split_001.html#p84)
+Separate Style from Code . [60](#index_split_001.html#p84)
 
-Chain Function Calls . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . [61](#index_split_001.html#p85)
+Chain Function Calls [61](#index_split_001.html#p85)
 
-Write Bulletproof Code . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . [61](#index_split_001.html#p85)
+Write Bulletproof Code . . . [61](#index_split_001.html#p85)
 
-Code with Localization in Mind . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . [63](#index_split_001.html#p87)
+Code with Localization in Mind . [63](#index_split_001.html#p87)
 
-Object-Oriented JavaScript . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . [64](#index_split_001.html#p88)
+Object-Oriented JavaScript . . . . [64](#index_split_001.html#p88)
 
-Objects, Classes, and Constructors . . . . . . . . . . . . . . . . . . . . . . . . . . . [64](#index_split_001.html#p88)
+Objects, Classes, and Constructors . . [64](#index_split_001.html#p88)
 
-Inheritance: Creating New Classes from Existing Ones . . . . . . . . . . . [68](#index_split_001.html#p92)
+Inheritance: Creating New Classes from Existing Ones . [68](#index_split_001.html#p92)
 
-The this Keyword . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . [71](#index_split_001.html#p95)
+The this Keyword . . . [71](#index_split_001.html#p95)
 
-Access to Properties and Methods . . . . . . . . . . . . . . . . . . . . . . . . . . . . [73](#index_split_001.html#p97)
+Access to Properties and Methods . . . [73](#index_split_001.html#p97)
 
-Object Literals and JavaScript Object Notation . . . . . . . . . . . . . . . . . . [75](#index_split_001.html#p99)
+Object Literals and JavaScript Object Notation . . . [75](#index_split_001.html#p99)
 
-Creating Namespaces and Hierarchies . . . . . . . . . . . . . . . . . . . . . . . . [77](#index_split_001.html#p101)
+Creating Namespaces and Hierarchies . . . . [77](#index_split_001.html#p101)
 
 ■CONTENTS
 
 [**ix**](#index_split_000.html#p10)
 
-Libraries and Frameworks . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . [77](#index_split_001.html#p101)
+Libraries and Frameworks [77](#index_split_001.html#p101)
 
-Selecting a Library . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . [78](#index_split_001.html#p102)
+Selecting a Library . . [78](#index_split_001.html#p102)
 
-Building a JavaScript Library . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . [79](#index_split_001.html#p103)
+Building a JavaScript Library . . . [79](#index_split_001.html#p103)
 
-Building RIAs . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . [97](#index_split_001.html#p121)
+Building RIAs . [97](#index_split_001.html#p121)
 
-Structuring the Application . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . [97](#index_split_001.html#p121)
+Structuring the Application [97](#index_split_001.html#p121)
 
-Managing Two Sets of HTML . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . [100](#index_split_001.html#p124)
+Managing Two Sets of HTML . . [100](#index_split_001.html#p124)
 
-Using Design Patterns . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . [101](#index_split_001.html#p125)
+Using Design Patterns . . . [101](#index_split_001.html#p125)
 
-Testing and Test- Driven Development . . . . . . . . . . . . . . . . . . . . . . . . . . . . . [107](#index_split_002.html#p131)
+Testing and Test- Driven Development . . . . [107](#index_split_002.html#p131)
 
-Using Third- Party Scripts . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . [110](#index_split_002.html#p134)
+Using Third- Party Scripts [110](#index_split_002.html#p134)
 
-Summary . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . [111](#index_split_002.html#p135)
+Summary . . . . [111](#index_split_002.html#p135)
 
 **PART 2** ■ ■ ■ **Performance**
 
 **CHAPTER 3**
 
-**Understanding the Web Browser** . . . . . . . . . . . . . . . . . . . . . . . . . . [115](#index_split_002.html#p139)
+**Understanding the Web Browser** . [115](#index_split_002.html#p139)
 
-Engines: The Browser’s Powerhouse . . . . . . . . . . . . . . . . . . . . . . . . . . . . . [115](#index_split_002.html#p139)
+Engines: The Browser’s Powerhouse . . . . [115](#index_split_002.html#p139)
 
-The Rendering and JavaScript Engines . . . . . . . . . . . . . . . . . . . . . . . [115](#index_split_002.html#p139)
+The Rendering and JavaScript Engines . . . [115](#index_split_002.html#p139)
 
-JavaScript Engine Performance Benchmarking . . . . . . . . . . . . . . . [116](#index_split_002.html#p140)
+JavaScript Engine Performance Benchmarking [116](#index_split_002.html#p140)
 
-Anatomy of a Web Page Request . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . [119](#index_split_002.html#p143)
+Anatomy of a Web Page Request . . . [119](#index_split_002.html#p143)
 
-HTTP: The Communication Standard Behind the Web . . . . . . . . . . [119](#index_split_002.html#p143)
+HTTP: The Communication Standard Behind the Web [119](#index_split_002.html#p143)
 
-HTTP Status Codes . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . [125](#index_split_002.html#p149)
+HTTP Status Codes [125](#index_split_002.html#p149)
 
-How Messages Are Transmitted . . . . . . . . . . . . . . . . . . . . . . . . . . . . . [127](#index_split_002.html#p151)
+How Messages Are Transmitted . . . . [127](#index_split_002.html#p151)
 
-Loading Order of an HTML Page . . . . . . . . . . . . . . . . . . . . . . . . . . . . [130](#index_split_002.html#p154)
+Loading Order of an HTML Page . . . [130](#index_split_002.html#p154)
 
-Page Performance . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . [131](#index_split_002.html#p155)
+Page Performance . [131](#index_split_002.html#p155)
 
-Viewing the Performance of a Page . . . . . . . . . . . . . . . . . . . . . . . . . . [131](#index_split_002.html#p155)
+Viewing the Performance of a Page . [131](#index_split_002.html#p155)
 
-Identifying Potential Bottlenecks in Performance . . . . . . . . . . . . . . . [132](#index_split_002.html#p156)
+Identifying Potential Bottlenecks in Performance [132](#index_split_002.html#p156)
 
-Summary . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . [134](#index_split_002.html#p158)
+Summary . . . . [134](#index_split_002.html#p158)
 
 **CHAPTER 4**
 
-**Performance Tweaking** . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . [135](#index_split_002.html#p159)
+**Performance Tweaking** . [135](#index_split_002.html#p159)
 
-Is Performance Really an Issue? . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . [135](#index_split_002.html#p159)
+Is Performance Really an Issue? . . . . [135](#index_split_002.html#p159)
 
-Tweaking Your Web Server for Performance . . . . . . . . . . . . . . . . . . . . . . . [137](#index_split_002.html#p161)
+Tweaking Your Web Server for Performance . . . [137](#index_split_002.html#p161)
 
-Use Separate Domain Names for External Assets . . . . . . . . . . . . . . [137](#index_split_002.html#p161)
+Use Separate Domain Names for External Assets . . . . [137](#index_split_002.html#p161)
 
-Use a Content Delivery Network . . . . . . . . . . . . . . . . . . . . . . . . . . . . . [137](#index_split_002.html#p161)
+Use a Content Delivery Network . . . . [137](#index_split_002.html#p161)
 
-Send HTML to the Browser in Chunks . . . . . . . . . . . . . . . . . . . . . . . . [138](#index_split_002.html#p162)
+Send HTML to the Browser in Chunks . . . . [138](#index_split_002.html#p162)
 
-Customize HTTP Headers to Force Browser Caching . . . . . . . . . . . [140](#index_split_002.html#p164)
+Customize HTTP Headers to Force Browser Caching . [140](#index_split_002.html#p164)
 
-Compress the Output from the Server . . . . . . . . . . . . . . . . . . . . . . . . [141](#index_split_002.html#p165)
+Compress the Output from the Server . . . . [141](#index_split_002.html#p165)
 
 [**x**](#index_split_000.html#p11)
 
 ■CONTENTS
 
-Tweaking HTML for Performance . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . [142](#index_split_002.html#p166)
+Tweaking HTML for Performance . . . [142](#index_split_002.html#p166)
 
-Shrink Your HTML File Size with HTML Tidy . . . . . . . . . . . . . . . . . . . [143](#index_split_002.html#p167)
+Shrink Your HTML File Size with HTML Tidy . . . . [143](#index_split_002.html#p167)
 
-Reference JavaScript Files at the End of Your HTML . . . . . . . . . . . . [143](#index_split_002.html#p167)
+Reference JavaScript Files at the End of Your HTML . . [143](#index_split_002.html#p167)
 
-Reduce the Number of HTTP Requests . . . . . . . . . . . . . . . . . . . . . . . [144](#index_split_002.html#p168)
+Reduce the Number of HTTP Requests . . . [144](#index_split_002.html#p168)
 
-Don’t Load Every Asset from Your Home Page . . . . . . . . . . . . . . . . . [146](#index_split_002.html#p170)
+Don’t Load Every Asset from Your Home Page . . [146](#index_split_002.html#p170)
 
-Reduce Domain Name Lookups . . . . . . . . . . . . . . . . . . . . . . . . . . . . . [146](#index_split_002.html#p170)
+Reduce Domain Name Lookups . . . . [146](#index_split_002.html#p170)
 
-Split Components Across Domains . . . . . . . . . . . . . . . . . . . . . . . . . . . [147](#index_split_002.html#p171)
+Split Components Across Domains . . [147](#index_split_002.html#p171)
 
-Avoid Linking to Redirects . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . [148](#index_split_002.html#p172)
+Avoid Linking to Redirects . . . . [148](#index_split_002.html#p172)
 
-Reduce the Number of HTML Elements . . . . . . . . . . . . . . . . . . . . . . . [148](#index_split_002.html#p172)
+Reduce the Number of HTML Elements . . . [148](#index_split_002.html#p172)
 
-Don’t Link to Nonexistent Files . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . [149](#index_split_002.html#p173)
+Don’t Link to Nonexistent Files [149](#index_split_002.html#p173)
 
-Reduce the Size of HTTP Cookies . . . . . . . . . . . . . . . . . . . . . . . . . . . . [149](#index_split_002.html#p173)
+Reduce the Size of HTTP Cookies . . . [149](#index_split_002.html#p173)
 
-Tweaking Your Style Sheets for Performance . . . . . . . . . . . . . . . . . . . . . . [150](#index_split_002.html#p174)
+Tweaking Your Style Sheets for Performance . . [150](#index_split_002.html#p174)
 
-Shrink Your CSS File Size with CSSTidy . . . . . . . . . . . . . . . . . . . . . . [150](#index_split_002.html#p174)
+Shrink Your CSS File Size with CSSTidy . . [150](#index_split_002.html#p174)
 
-Don’t Use the @import Command . . . . . . . . . . . . . . . . . . . . . . . . . . . [150](#index_split_002.html#p174)
+Don’t Use the @import Command . . [150](#index_split_002.html#p174)
 
-Speed Up Table Layouts . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . [150](#index_split_002.html#p174)
+Speed Up Table Layouts . [150](#index_split_002.html#p174)
 
-Avoid CSS Filters and Expressions in IE . . . . . . . . . . . . . . . . . . . . . . . [151](#index_split_002.html#p175)
+Avoid CSS Filters and Expressions in IE . . . [151](#index_split_002.html#p175)
 
-Use Shorthand Values . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . [151](#index_split_002.html#p175)
+Use Shorthand Values . . . [151](#index_split_002.html#p175)
 
-Use the CSS Sprite Technique . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . [155](#index_split_002.html#p179)
+Use the CSS Sprite Technique . [155](#index_split_002.html#p179)
 
-Avoid Inefficient CSS Selectors . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . [159](#index_split_002.html#p183)
+Avoid Inefficient CSS Selectors [159](#index_split_002.html#p183)
 
-Tweaking Your Images for Performance . . . . . . . . . . . . . . . . . . . . . . . . . . . [159](#index_split_002.html#p183)
+Tweaking Your Images for Performance . . [159](#index_split_002.html#p183)
 
-Understand Image File Formats . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . [160](#index_split_002.html#p184)
+Understand Image File Formats [160](#index_split_002.html#p184)
 
-Optimize PNG Images . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . [162](#index_split_002.html#p186)
+Optimize PNG Images . . . [162](#index_split_002.html#p186)
 
-Don’t Forget the Favicon . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . [163](#index_split_002.html#p187)
+Don’t Forget the Favicon . [163](#index_split_002.html#p187)
 
-Tweaking Your JavaScript for Performance . . . . . . . . . . . . . . . . . . . . . . . . [163](#index_split_002.html#p187)
+Tweaking Your JavaScript for Performance . . . . [163](#index_split_002.html#p187)
 
-Shrink Your JavaScript File Using Dojo ShrinkSafe . . . . . . . . . . . . . [163](#index_split_002.html#p187)
+Shrink Your JavaScript File Using Dojo ShrinkSafe . . . [163](#index_split_002.html#p187)
 
-Access JavaScript Libraries Through CDNs . . . . . . . . . . . . . . . . . . . [164](#index_split_002.html#p188)
+Access JavaScript Libraries Through CDNs . . . . [164](#index_split_002.html#p188)
 
-Timing Is Everything . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . [164](#index_split_002.html#p188)
+Timing Is Everything . . . . [164](#index_split_002.html#p188)
 
-Boost Core JavaScript Performance . . . . . . . . . . . . . . . . . . . . . . . . . . [166](#index_split_002.html#p190)
+Boost Core JavaScript Performance . [166](#index_split_002.html#p190)
 
-Improve Ajax Performance . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . [170](#index_split_002.html#p194)
+Improve Ajax Performance . . . . [170](#index_split_002.html#p194)
 
-Improve DOM Performance . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . [172](#index_split_003.html#p196)
+Improve DOM Performance . . . [172](#index_split_003.html#p196)
 
-Summary . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . [178](#index_split_003.html#p202)
+Summary . . . . [178](#index_split_003.html#p202)
 
 ■CONTENTS
 
@@ -572,71 +572,71 @@ Summary . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
 
 **CHAPTER 5**
 
-**Smoke and Mirrors: Perceived Responsiveness** . . . . . . . . . [179](#index_split_003.html#p203)
+**Smoke and Mirrors: Perceived Responsiveness** . . . . [179](#index_split_003.html#p203)
 
-Providing Prompt Visual Feedback . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . [179](#index_split_003.html#p203)
+Providing Prompt Visual Feedback . . [179](#index_split_003.html#p203)
 
-Time It Right . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . [179](#index_split_003.html#p203)
+Time It Right . [179](#index_split_003.html#p203)
 
-Use CSS Pseudo- Classes on Hyperlinks . . . . . . . . . . . . . . . . . . . . . . [181](#index_split_003.html#p205)
+Use CSS Pseudo- Classes on Hyperlinks . . [181](#index_split_003.html#p205)
 
-Let the User Know the Form Is Being Submitted . . . . . . . . . . . . . . . [181](#index_split_003.html#p205)
+Let the User Know the Form Is Being Submitted [181](#index_split_003.html#p205)
 
-Change the Mouse Pointer . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . [182](#index_split_003.html#p206)
+Change the Mouse Pointer . . . . [182](#index_split_003.html#p206)
 
-Use a Web 2 .0–Style Animated Indicator . . . . . . . . . . . . . . . . . . . . . . [183](#index_split_003.html#p207)
+Use a Web 2 .0–Style Animated Indicator . . [183](#index_split_003.html#p207)
 
-Show a Progress Bar . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . [183](#index_split_003.html#p207)
+Show a Progress Bar . . . . [183](#index_split_003.html#p207)
 
-Handling Long- Running Scripts . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . [. 184](#index_split_003.html#p208)
+Handling Long- Running Scripts . . . . [. 184](#index_split_003.html#p208)
 
-Divide Long- Running Scripts into Chunks . . . . . . . . . . . . . . . . . . . . . [185](#index_split_003.html#p209)
+Divide Long- Running Scripts into Chunks . [185](#index_split_003.html#p209)
 
-Use a Timer to Run Code Blocks Multiple Times . . . . . . . . . . . . . . . [187](#index_split_003.html#p211)
+Use a Timer to Run Code Blocks Multiple Times [187](#index_split_003.html#p211)
 
-Anticipating Your Site Visitors’ Needs . . . . . . . . . . . . . . . . . . . . . . . . . . . . . [189](#index_split_003.html#p213)
+Anticipating Your Site Visitors’ Needs . . . . [189](#index_split_003.html#p213)
 
-Preload Content . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . [189](#index_split_003.html#p213)
+Preload Content . . . [189](#index_split_003.html#p213)
 
-Load Navigation Levels Efficiently . . . . . . . . . . . . . . . . . . . . . . . . . . . . [190](#index_split_003.html#p214)
+Load Navigation Levels Efficiently . . . [190](#index_split_003.html#p214)
 
-Catch Mouse Clicks Early . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . [192](#index_split_003.html#p216)
+Catch Mouse Clicks Early [192](#index_split_003.html#p216)
 
-Summary . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . [192](#index_split_003.html#p216)
+Summary . . . . [192](#index_split_003.html#p216)
 
 **PART 3** ■ ■ ■ **Presentation**
 
 **CHAPTER 6**
 
-**Beautiful Typography** . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . [195](#index_split_003.html#p219)
+**Beautiful Typography** . . . [195](#index_split_003.html#p219)
 
-The Challenge . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . [. 195](#index_split_003.html#p219)
+The Challenge . . . . [. 195](#index_split_003.html#p219)
 
-The Basic Anatomy of a Font . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . [196](#index_split_003.html#p220)
+The Basic Anatomy of a Font . . [196](#index_split_003.html#p220)
 
-Using Static Images for Text . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . [198](#index_split_003.html#p222)
+Using Static Images for Text . . [198](#index_split_003.html#p222)
 
-Generating Images for Text Dynamically . . . . . . . . . . . . . . . . . . . . . . . . . . . [199](#index_split_003.html#p223)
+Generating Images for Text Dynamically . . [199](#index_split_003.html#p223)
 
-Using CSS to Embed Font Files Directly . . . . . . . . . . . . . . . . . . . . . . . [199](#index_split_003.html#p223)
+Using CSS to Embed Font Files Directly . . . [199](#index_split_003.html#p223)
 
-Having the Server Generate Text Images . . . . . . . . . . . . . . . . . . . . . . [202](#index_split_003.html#p226)
+Having the Server Generate Text Images . . [202](#index_split_003.html#p226)
 
-Generating Text in Custom Typefaces Using Flash . . . . . . . . . . . . . [210](#index_split_003.html#p234)
+Generating Text in Custom Typefaces Using Flash . . . [210](#index_split_003.html#p234)
 
-Generating Text Using Vector Graphics . . . . . . . . . . . . . . . . . . . . . . . [211](#index_split_003.html#p235)
+Generating Text Using Vector Graphics . . . [211](#index_split_003.html#p235)
 
-Using Reusable Custom Font Components . . . . . . . . . . . . . . . . . . . . . . . . . [211](#index_split_003.html#p235)
+Using Reusable Custom Font Components [211](#index_split_003.html#p235)
 
-Text2PNG . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . [211](#index_split_003.html#p235)
+Text2PNG . . . . [211](#index_split_003.html#p235)
 
-Scalable Inman Flash Replacement . . . . . . . . . . . . . . . . . . . . . . . . . . [215](#index_split_003.html#p239)
+Scalable Inman Flash Replacement . [215](#index_split_003.html#p239)
 
-Facelift Image Replacement . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . [219](#index_split_003.html#p243)
+Facelift Image Replacement . . . [219](#index_split_003.html#p243)
 
-Typeface .js . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . [221](#index_split_003.html#p245)
+Typeface .js . . [221](#index_split_003.html#p245)
 
-Summary . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . [223](#index_split_003.html#p247)
+Summary . . . . [223](#index_split_003.html#p247)
 
 [**xii**](#index_split_000.html#p13)
 
@@ -644,173 +644,173 @@ Summary . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
 
 **CHAPTER 7**
 
-**Multimedia Playback** . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . [225](#index_split_003.html#p249)
+**Multimedia Playback** . . . [225](#index_split_003.html#p249)
 
-Handling Accessibility . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . [225](#index_split_003.html#p249)
+Handling Accessibility . . . [225](#index_split_003.html#p249)
 
-Using Reusable Audio Playback Components . . . . . . . . . . . . . . . . . . . . . . . [226](#index_split_003.html#p250)
+Using Reusable Audio Playback Components . . . [226](#index_split_003.html#p250)
 
-The SoundManager Component . . . . . . . . . . . . . . . . . . . . . . . . . . . . . [226](#index_split_003.html#p250)
+The SoundManager Component . . . . [226](#index_split_003.html#p250)
 
-Playing Audio Files Without Flash . . . . . . . . . . . . . . . . . . . . . . . . . . . . [231](#index_split_003.html#p255)
+Playing Audio Files Without Flash . . . [231](#index_split_003.html#p255)
 
-Using Reusable Video Playback Components . . . . . . . . . . . . . . . . . . . . . . . [232](#index_split_003.html#p256)
+Using Reusable Video Playback Components . . . [232](#index_split_003.html#p256)
 
-YouTube Chromeless Player . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . [. 235](#index_split_003.html#p259)
+YouTube Chromeless Player . . [. 235](#index_split_003.html#p259)
 
-JW FLV Player . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . [241](#index_split_004.html#p265)
+JW FLV Player [241](#index_split_004.html#p265)
 
-The Future: Audio and Video in HTML 5 . . . . . . . . . . . . . . . . . . . . . . . . . . . [246](#index_split_004.html#p270)
+The Future: Audio and Video in HTML 5 . . [246](#index_split_004.html#p270)
 
-The <audio> and <video> Tags . . . . . . . . . . . . . . . . . . . . . . . . . . . . . [246](#index_split_004.html#p270)
+The <audio> and <video> Tags . . . . [246](#index_split_004.html#p270)
 
-JavaScript API . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . [247](#index_split_004.html#p271)
+JavaScript API [247](#index_split_004.html#p271)
 
-Current Adoption Level . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . [248](#index_split_004.html#p272)
+Current Adoption Level . . [248](#index_split_004.html#p272)
 
-Summary . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . [248](#index_split_004.html#p272)
+Summary . . . . [248](#index_split_004.html#p272)
 
 **CHAPTER 8**
 
-**Form Controls** . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . [249](#index_split_004.html#p273)
+**Form Controls** . [249](#index_split_004.html#p273)
 
-Customizing Existing Form Controls . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . [249](#index_split_004.html#p273)
+Customizing Existing Form Controls . [249](#index_split_004.html#p273)
 
-Buttons . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . [249](#index_split_004.html#p273)
+Buttons . [249](#index_split_004.html#p273)
 
-Text Fields . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . [253](#index_split_004.html#p277)
+Text Fields . . . [253](#index_split_004.html#p277)
 
-File Upload Controls . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . [255](#index_split_004.html#p279)
+File Upload Controls [255](#index_split_004.html#p279)
 
-Adding New Types of Form Controls . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . [259](#index_split_004.html#p283)
+Adding New Types of Form Controls [259](#index_split_004.html#p283)
 
-A Calendar Widget for Date Selection . . . . . . . . . . . . . . . . . . . . . . . . [. 259](#index_split_004.html#p283)
+A Calendar Widget for Date Selection . . . . [. 259](#index_split_004.html#p283)
 
-Slider Control . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . [281](#index_split_004.html#p305)
+Slider Control [281](#index_split_004.html#p305)
 
-Using Reusable Form Components . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . [296](#index_split_005.html#p320)
+Using Reusable Form Components . . [296](#index_split_005.html#p320)
 
-SWFUpload: Multiple File Uploads with Progress Bars . . . . . . . . . . [296](#index_split_005.html#p320)
+SWFUpload: Multiple File Uploads with Progress Bars [296](#index_split_005.html#p320)
 
-TinyMCE: Rich Text Editing . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . [301](#index_split_005.html#p325)
+TinyMCE: Rich Text Editing . . . . [301](#index_split_005.html#p325)
 
-Validating Forms . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . [304](#index_split_005.html#p328)
+Validating Forms . . [304](#index_split_005.html#p328)
 
-Summary . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . [305](#index_split_005.html#p329)
+Summary . . . . [305](#index_split_005.html#p329)
 
 **CHAPTER 9**
 
-**Offline Storage—When the Lights Go Out** . . . . . . . . . . . . . . . . [307](#index_split_005.html#p331)
+**Offline Storage—When the Lights Go Out** . [307](#index_split_005.html#p331)
 
-Using Cookies to Store Data . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . [307](#index_split_005.html#p331)
+Using Cookies to Store Data . . [307](#index_split_005.html#p331)
 
-Creating Cookies . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . [308](#index_split_005.html#p332)
+Creating Cookies . . [308](#index_split_005.html#p332)
 
-The Downside of Cookies . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . [310](#index_split_005.html#p334)
+The Downside of Cookies [310](#index_split_005.html#p334)
 
-Using Internet Explorer’s Data Store . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . [311](#index_split_005.html#p335)
+Using Internet Explorer’s Data Store [311](#index_split_005.html#p335)
 
 ■CONTENTS
 
 [**xiii**](#index_split_000.html#p14)
 
-Introducing the Data Storage APIs . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . [314](#index_split_005.html#p338)
+Introducing the Data Storage APIs . . [314](#index_split_005.html#p338)
 
-The Local Storage API . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . [314](#index_split_005.html#p338)
+The Local Storage API . . . [314](#index_split_005.html#p338)
 
-Mozilla’s Global Storage API . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . [315](#index_split_005.html#p339)
+Mozilla’s Global Storage API . . . [315](#index_split_005.html#p339)
 
-Client-Side Database Storage API . . . . . . . . . . . . . . . . . . . . . . . . . . . . [317](#index_split_005.html#p341)
+Client-Side Database Storage API . . . [317](#index_split_005.html#p341)
 
-Storing Data Using Flash Shared Objects . . . . . . . . . . . . . . . . . . . . . . . . . . [322](#index_split_005.html#p346)
+Storing Data Using Flash Shared Objects . [322](#index_split_005.html#p346)
 
-Creating a Cross- Browser Local Data Storage API . . . . . . . . . . . . . . . . . . [323](#index_split_005.html#p347)
+Creating a Cross- Browser Local Data Storage API . . . [323](#index_split_005.html#p347)
 
-Using a Reusable Offline Storage Component . . . . . . . . . . . . . . . . . . . . . . [330](#index_split_005.html#p354)
+Using a Reusable Offline Storage Component . . [330](#index_split_005.html#p354)
 
-Summary . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . [330](#index_split_005.html#p354)
+Summary . . . . [330](#index_split_005.html#p354)
 
-**CHAPTER 10 Binary Ajax** . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . [331](#index_split_005.html#p355)
+**CHAPTER 10 Binary Ajax** . . . . [331](#index_split_005.html#p355)
 
-Plain Text Files vs . Binary Files . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . [331](#index_split_005.html#p355)
+Plain Text Files vs . Binary Files [331](#index_split_005.html#p355)
 
-Reading Binary Files with Ajax . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . [331](#index_split_005.html#p355)
+Reading Binary Files with Ajax [331](#index_split_005.html#p355)
 
-Extracting Image Data from Photo Files . . . . . . . . . . . . . . . . . . . . . . . . . . . [. 339](#index_split_006.html#p363)
+Extracting Image Data from Photo Files . . [. 339](#index_split_006.html#p363)
 
-Understanding the EXIF Format . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . [340](#index_split_006.html#p364)
+Understanding the EXIF Format [340](#index_split_006.html#p364)
 
-Reading EXIF Data Using JavaScript . . . . . . . . . . . . . . . . . . . . . . . . . . [341](#index_split_006.html#p365)
+Reading EXIF Data Using JavaScript . [341](#index_split_006.html#p365)
 
-Displaying EXIF Data from a File . . . . . . . . . . . . . . . . . . . . . . . . . . . . . [351](#index_split_006.html#p375)
+Displaying EXIF Data from a File . . . . [351](#index_split_006.html#p375)
 
-Summary . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . [356](#index_split_006.html#p380)
+Summary . . . . [356](#index_split_006.html#p380)
 
-**CHAPTER 11 Drawing in the Browser** . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . [357](#index_split_006.html#p381)
+**CHAPTER 11 Drawing in the Browser** [357](#index_split_006.html#p381)
 
-Creating Scalable Vector Graphics . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . [357](#index_split_006.html#p381)
+Creating Scalable Vector Graphics . . [357](#index_split_006.html#p381)
 
-Creating SVG Image Files . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . [358](#index_split_006.html#p382)
+Creating SVG Image Files [358](#index_split_006.html#p382)
 
-Specifying SVG Within HTML . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . [359](#index_split_006.html#p383)
+Specifying SVG Within HTML . . [359](#index_split_006.html#p383)
 
-Specifying SVG Through JavaScript . . . . . . . . . . . . . . . . . . . . . . . . . . [361](#index_split_006.html#p385)
+Specifying SVG Through JavaScript . [361](#index_split_006.html#p385)
 
-Drawing with Vector Markup Language . . . . . . . . . . . . . . . . . . . . . . . . . . . [. 362](#index_split_006.html#p386)
+Drawing with Vector Markup Language . . [. 362](#index_split_006.html#p386)
 
-Building Dynamic Graphs with a Reusable Drawing Library . . . . . . . . . . [363](#index_split_006.html#p387)
+Building Dynamic Graphs with a Reusable Drawing Library [363](#index_split_006.html#p387)
 
-Using the HTML 5 <canvas> Tag . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . [371](#index_split_006.html#p395)
+Using the HTML 5 <canvas> Tag . . . [371](#index_split_006.html#p395)
 
-Summary . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . [373](#index_split_006.html#p397)
+Summary . . . . [373](#index_split_006.html#p397)
 
-**CHAPTER 12 Accessibility in Rich Internet Applications** . . . . . . . . . . . . . . . [375](#index_split_006.html#p399)
+**CHAPTER 12 Accessibility in Rich Internet Applications** [375](#index_split_006.html#p399)
 
-Whose Needs Are We Meeting? . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . [375](#index_split_006.html#p399)
+Whose Needs Are We Meeting? . . . . [375](#index_split_006.html#p399)
 
-Users Using Assistive Technology . . . . . . . . . . . . . . . . . . . . . . . . . . . . [375](#index_split_006.html#p399)
+Users Using Assistive Technology . . . [375](#index_split_006.html#p399)
 
-Users on Mobile Devices . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . [375](#index_split_006.html#p399)
+Users on Mobile Devices . [375](#index_split_006.html#p399)
 
-Users Without a Mouse . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . [376](#index_split_006.html#p400)
+Users Without a Mouse . . [376](#index_split_006.html#p400)
 
-Accessibility for All . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . [377](#index_split_006.html#p401)
+Accessibility for All . [377](#index_split_006.html#p401)
 
 [**xiv**](#index_split_000.html#p15)
 
 ■CONTENTS
 
-Proper Navigation with the Back and Forward Buttons . . . . . . . . . . . . . . [377](#index_split_006.html#p401)
+Proper Navigation with the Back and Forward Buttons . . . . [377](#index_split_006.html#p401)
 
-Device-Independent JavaScript . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . [383](#index_split_006.html#p407)
+Device-Independent JavaScript . . . . [383](#index_split_006.html#p407)
 
-Device-Independent Events . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . [383](#index_split_006.html#p407)
+Device-Independent Events . . . [383](#index_split_006.html#p407)
 
-Device-Independent Event Delegation . . . . . . . . . . . . . . . . . . . . . . . . [384](#index_split_006.html#p408)
+Device-Independent Event Delegation . . . . [384](#index_split_006.html#p408)
 
-Updated Content Alerts and Focus . . . . . . . . . . . . . . . . . . . . . . . . . . . [386](#index_split_006.html#p410)
+Updated Content Alerts and Focus . . [386](#index_split_006.html#p410)
 
 Web Accessibility Initiative: Accessible Rich Internet
 
-Applications (WAI-ARIA) . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . [390](#index_split_006.html#p414)
+Applications (WAI-ARIA) . . . . [390](#index_split_006.html#p414)
 
-Roles . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . [. 390](#index_split_006.html#p414)
+Roles . . [. 390](#index_split_006.html#p414)
 
-States and Properties . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . [391](#index_split_006.html#p415)
+States and Properties . . . [391](#index_split_006.html#p415)
 
-Focus Management . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . [393](#index_split_007.html#p417)
+Focus Management [393](#index_split_007.html#p417)
 
-Keyboard Interaction with ARIA Widgets . . . . . . . . . . . . . . . . . . . . . . [394](#index_split_007.html#p418)
+Keyboard Interaction with ARIA Widgets . . [394](#index_split_007.html#p418)
 
-WAI-ARIA Examples . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . [394](#index_split_007.html#p418)
+WAI-ARIA Examples [394](#index_split_007.html#p418)
 
-Validation . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . [399](#index_split_007.html#p423)
+Validation . . . . [399](#index_split_007.html#p423)
 
-Testing . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . [400](#index_split_007.html#p424)
+Testing . [400](#index_split_007.html#p424)
 
-Summary . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . [401](#index_split_007.html#p425)
+Summary . . . . [401](#index_split_007.html#p425)
 
-**INDEX** . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . [403](#index_split_007.html#p427)
+**INDEX** . [403](#index_split_007.html#p427)
 
 ![Image 7](index-17_1.png)
 
