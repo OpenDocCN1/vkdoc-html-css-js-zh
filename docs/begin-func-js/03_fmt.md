@@ -1,0 +1,591 @@
+# 三、高阶函数
+
+在前一章中，我们看到了如何在 ES8 中创建简单的函数。我们还设置了我们的环境，使用节点生态系统来运行功能程序。事实上，我们在前一章中创建了我们的第一个函数式程序应用编程接口（API），称为 `forEach`。我们在第二章开发的 `forEach` 函数有一些特殊之处。我们将函数本身作为参数传递给了 `forEach` 函数。这里不涉及任何技巧；JavaScript 规范的一部分是函数可以作为参数传递。作为一种语言，JavaScript 将函数视为数据。这是一个非常强大的概念，它允许我们传递函数来代替数据。以另一个函数为自变量的函数称为高阶函数。
+
+我们将在本章深入探讨高阶函数（简称 HOC）。我们从一个简单的例子和 HOC 的定义开始这一章。稍后，我们将提供更多真实世界的例子，说明 HOC 如何帮助程序员轻松解决复杂的问题。像以前一样，我们将在本章中创建的特殊函数添加到我们的库中。我们开始吧！
+
+我们将创建一些高阶函数，并将它们添加到我们的库中。我们这样做是为了展示事情是如何在幕后运作的。该库有利于学习当前的资源，但是它们还没有为该库做好生产准备，所以请记住这一点。
+
+### 注意
+
+章节示例和库源代码在第三章分支中。回购的网址是：[`github.com/antsmartian/functional-es8.git`](https://github.com/antsmartian/functional-es8.git)
+
+一旦你检查出代码，请检查分支第三章：
+
+```
+git checkout -b 第三章来源/第三章
+```
+
+对于运行代码，与之前一样，运行：
+
+```
+npm 跑步游乐场
+```
+
+## 理解数据
+
+作为程序员，我们知道我们的程序作用于数据。数据对于我们编写的要执行的程序来说是非常重要的。因此，几乎所有的编程语言都给程序员提供了一些数据。例如，我们可以在字符串数据类型中存储一个人的姓名。JavaScript 提供了几种数据类型，我们将在下一小节中介绍。在这一节的最后，我们用简单和简明的例子介绍高阶函数的一个坚实的定义。
+
+### 理解 JavaScript 数据类型
+
+每种编程语言都有数据类型。这些数据类型可以保存数据，并允许我们的程序对其进行操作。在这个简短的部分中，我们将介绍 JavaScript 数据类型。
+
+In a nutshell, JavaScript as a language supports the following data types:
+
+*   民数记
+*   用线串
+*   布尔运算
+*   目标
+*   空
+*   不明确的
+
+重要的是，在 JavaScript 语言中，我们还有作为数据类型的 friend 函数。因为函数是像字符串一样的数据类型，所以我们可以传递它们，将它们存储在变量中，等等。当语言允许函数作为任何其他数据类型使用时，函数就是一等公民；也就是说，函数可以被赋给变量，作为参数传递，并从其他函数返回，就像我们对字符串和数字数据所做的那样。在下一节中，我们将提供一个简单的例子来说明存储和传递函数的含义。
+
+### 存储功能
+
+As previously mentioned, functions are nothing but data. Because they are data, we can hold them in a variable! The code in Listing 3-1 is valid code in a JavaScript context.
+
+```
+let fn = () => {}
+```
+
+Listing 3-1 将函数存储在变量中
+
+In this code snippet, `fn` is nothing but a variable that is pointing to a data type function. We can quickly check that `fn` is of type function by running the following code:
+
+```
+typeof fn => "function"
+```
+
+Because `fn` is just a reference to our function, we can call it like this:
+
+```
+fn()
+```
+
+这将执行 `fn` 指向的函数。
+
+### 传递函数
+
+As day-to-day JavaScript programmers, we know how to pass data to a function. Consider the following function (Listing 3-2), which takes an argument and logs to console the type of the argument:
+
+```
+let tellType = (arg) => {
+    console.log(typeof arg)
+}
+```
+
+Listing 3-2 电传打字功能
+
+One can pass the argument to the `tellType` function to see it in action:
+
+```
+let data = 1
+tellType(data) => number
+```
+
+There is nothing fancy here. As seen in the previous section, we can store even functions in our variable (as functions in JavaScript are data). So how about passing a variable that has reference to a function? Let’s quickly check it:
+
+```
+let dataFn = () => {
+    console.log("I'm a function")
+}
+tellType(dataFn) => function
+```
+
+That’s great! Now we will make our `tellType` execute the passed argument as shown in Listing 3-3 if it is of type function:
+
+```
+var tellType = (arg) => {
+   if(typeof arg === "function")
+      arg()
+   else
+      console.log("The passed data is " + arg)
+}
+```
+
+Listing 3-3 如果是函数，`tellType` 将执行 `arg`
+
+这里我们检查传递的 `arg` 是否属于 `function` 类型；如果有，那就打电话。记住，如果一个变量是 `function` 类型的，这意味着它有一个可以执行的函数的引用。这就是我们调用 `arg()` 的原因，如果它在清单 3-3 的代码中输入 `if` 语句。
+
+Let’s execute our `tellType` function by passing our `dataFn` variable to it:
+
+```
+tellType(dataFn) => I'm a function
+```
+
+我们已经成功地将一个函数 `dataFn` 传递给另一个函数 `tellType`，后者已经执行了传递的函数。就这么简单。
+
+### 返回一个函数
+
+我们已经看到了如何将一个函数传递给另一个函数。因为函数在 JavaScript 中是简单的数据，所以我们也可以从其他函数中返回它们（像其他数据类型一样）。
+
+We’ll take a simple example of a function that returns another function as shown in Listing 3-4.
+
+```
+let crazy = () => {
+    return String
+}
+```
+
+Listing 3-4 疯狂函数返回字符串
+
+### 注意
+
+JavaScript 有一个名为 `String` 的内置函数。我们可以使用这个函数在 JavaScript 中创建新的字符串值，如下所示：
+
+```
+String("特设") => 特设
+```
+
+Note that our `crazy` function returns a function reference that is pointing to `String` function. Let’s call our `crazy` function:
+
+```
+crazy() => String() { [native code] }
+```
+
+As you can see, calling the `crazy` function returns a `String` function. Note that it just returns the function reference and does not execute the function. We can hold back the returned function reference and call them like this:
+
+```
+let fn = crazy()
+fn("HOC") => HOC
+```
+
+or even better like this:
+
+```
+crazy()("HOC") => HOC
+```
+
+### 注意
+
+# 高阶函数与抽象
+
+我们在所有返回另一个函数的函数上使用简单的文档。这将非常有帮助，因为它使阅读源代码变得容易。例如，`crazy` 函数将被记录为这样：
+
+```javascript
+//Fn => String
+let crazy = () => { return String }
+```
+
+`Fn => String` 注释帮助读者理解这个 `crazy` 函数，它执行并返回另一个指向 `String` 的函数。
+
+我们在本书中使用了这些可读的注释。
+
+在这些部分中，我们看到了以其他函数作为参数的函数，也看到了不返回其他函数的函数示例。现在是时候给你一个高阶函数的定义了：一个函数接收函数作为它的参数，返回它作为输出，或者两者都有。
+
+## 抽象和高阶函数
+
+我们已经看到了如何创建和执行高阶函数。一般来说，高阶函数通常是为了抽象常见问题而编写的。换句话说，高阶函数无非是定义`抽象`。
+
+在本节中，我们将讨论高阶函数与术语`抽象`之间的关系。
+
+### 抽象定义
+
+Wikipedia helps us by providing this definition of abstraction:
+
+*   在软件工程和计算机科学中，抽象是一种管理计算机系统复杂性的技术。它的工作原理是建立一个人与系统交互的复杂级别，将更复杂的细节抑制在当前级别之下。程序员使用一个理想化的界面（通常是定义良好的），并且可以添加额外的功能级别，否则这些功能会太复杂而难以处理。
+
+It also includes the following text, which is what we are interested in:
+
+*   例如，编写涉及数字运算的代码的程序员可能对数字在底层硬件中的表示方式不感兴趣（例如，它们是 16 位还是 32 位整数），在那些细节被隐藏的地方，可以说它们被`抽象掉了`，只留下程序员可以使用的数字。
+
+这段文字清楚地给出了抽象的概念。抽象允许我们致力于期望的目标，而不用担心底层的系统概念。
+
+### 经由高阶函数的抽象
+
+In this section we will see how higher order functions help us to achieve the abstraction concept we discussed in the previous section. Here is the code snippet of our `forEach` function defined in Chapter 2 (Listing 2-9):
+
+```javascript
+const forEach = (array,fn) => {
+    for(let i=0;array.length;i++)
+        fn(array[i])
+}
+```
+
+前面的 `forEach` 函数抽象出了遍历数组的问题。`forEach` API 的用户不需要理解 `forEach` 是如何实现遍历部分的，这样就抽象出了这个问题。
+
+### 注意
+
+在 `forEach` 函数中，调用传递的函数 `fn` 时使用一个参数作为数组的当前迭代内容，如下所示：
+
+```javascript
+fn(array[i])
+```
+
+所以当 `forEach` 函数的用户这样调用它时：
+
+```javascript
+forEach([1, 2, 3], (data) => {
+    //数据从 forEach 函数传递
+    //作为参数传递给当前函数
+})
+```
+
+`forEach` essentially traverses the array. What about traversing a JavaScript object? Traversing a JavaScript object has steps like this:
+
+1.  迭代给定对象的所有键。
+2.  确定该键属于它自己的对象。
+3.  如果步骤 2 为真，则获取该项的值。
+
+Let’s abstract these steps into a higher order function named `forEachObject`, as shown in Listing 3-5.
+
+```javascript
+const forEachObject = (obj,fn) => {
+    for (var property in obj) {
+        if (obj.hasOwnProperty(property)) {
+            //calls the fn with key and value as its argument
+            fn(property, obj[property])
+        }
+    }
+}
+```
+
+**Listing 3-5 `forEachObject` 函数定义**
+
+### 注意
+
+`forEachObject` 将第一个参数作为 JavaScript 对象（作为 `obj`），第二个参数是函数 `fn`。它使用 `hasOwnProperty` 算法遍历对象，并分别以 `key` 和值作为参数调用 `fn`。
+
+Here they are in action:
+
+```javascript
+let object = {a:1, b:2}
+forEachObject(object, (k,v) => console.log(k + ":" + v))
+// => a:1
+// => b:1
+```
+
+酷！需要注意的重要一点是，`forEach` 和 `forEachObject` 函数都是高阶函数，它允许开发人员处理任务（通过传递相应的函数），抽象掉遍历部分！因为这些遍历函数被抽象掉了，所以我们可以彻底测试它们，从而得到一个简洁的代码库。让我们实现一种抽象的方法来处理控制流。
+
+For that, let us create a function called `unless`. `Unless` is a simple function that takes a `predicate` (which should be either `true` or `false`); if the `predicate` is `false`, call the `fn` as shown in Listing 3-6.
+
+```javascript
+const unless = (predicate,fn) => {
+    if(!predicate)
+        fn()
+}
+```
+
+**Listing 3-6 `unless` 函数定义**
+
+With the `unless` function in place, we can write a concise piece of code to find the list of even numbers. The code for it looks like this:
+
+```javascript
+forEach([1,2,3,4,5,6,7],(number) => {
+    unless((number % 2), () => {
+        console.log(number, " is even")
+    })
+})
+```
+
+This code, when executed, is going to print the following:
+
+```
+2 ' is even'
+4 ' is even'
+6 ' is even'
+```
+
+In this case we are getting the even numbers from the array list. What if we want to get the list of even numbers from, say, 0 to 100? We cannot use `forEach` here (of course we can, if we have the array that has `[0,1,2.....,100]` content). Let’s meet another higher order function called `times`. `Times` is yet another simple higher order function that takes the number and calls the passed function as many times as the caller indicates. The `times` function is shown in Listing 3-7.
+
+```javascript
+const times = (times, fn) => {
+    for (var i = 0; i < times; i++)
+        fn(i);
+}
+```
+
+**Listing 3-7 `times` 函数定义**
+
+The `times` function looks very similar to the `forEach` function; it’s just that we are operating on a `Number` rather than an `Array`. Now with the `times` function in place, we can go ahead and solve our problem at hand like this:
+
+```javascript
+times(100, function(n) {
+    unless(n % 2, function() {
+        console.log(n, "is even");
+    });
+});
+```
+
+That’s going to print our expected answer:
+
+```
+0 'is even'
+2 'is even'
+4 'is even'
+6 'is even'
+8 'is even'
+10 'is even'
+...
+94 'is even'
+96 'is even'
+98 'is even'
+```
+
+有了这段代码，我们就抽象出了循环，条件检查变成了一个简单明了的高阶函数！
+
+已经看了几个高阶函数的例子，是时候更进一步了。在下一节中，我们将讨论现实世界中的高阶函数以及如何创建它们。
+
+### 注意
+
+我们在本章中创建的所有高阶函数都将出现在第三章分支中。
+
+## 现实世界中的高阶函数
+
+在这一节中，我们将介绍高阶函数的实际例子。我们将从简单的高阶函数开始，慢慢过渡到更复杂的高阶函数，JavaScript 开发人员在日常生活中会用到这些函数。激动吗？那你还在等什么？继续读。
+
+### 注意
+
+在我们介绍了*闭包*的概念后，这些例子将在下一章继续。大多数高阶函数在闭包的帮助下工作。
+
+### 每个功能
+
+Often JavaScript developers need to check if the array of content is a number, custom object, or anything else. We usually use a typical `for` loop approach to solve these problems, but let’s abstract these away into a function called `every`. The `every` function takes two arguments: an array and a function. It checks if all the elements of the array are evaluated to `true` by the passed function. The implementation looks like Listing 3-8:
+
+```javascript
+const every = (arr, fn) => {
+    let result = true;
+    for (let i = 0; i < arr.length; i++)
+        result = result && fn(arr[i]);
+    return result;
+};
+```
+
+**Listing 3-8** 每个函数定义
+
+在这里，我们简单地迭代传递的数组，并通过在迭代中传递数组元素的当前内容来调用 `fn`。注意，传递的 `fn` 应该返回一个布尔值。然后，我们使用 `&&` 来确保数组的所有内容都符合 `fn` 给出的标准。
+
+We need to quickly check that our `every` function works fine. Then pass on the array of `NaN` and pass `fn` as `isNaN`, which does check if the given number is `NaN` or not:
+
+```javascript
+every([NaN, NaN, NaN], isNaN) // => true
+every([NaN, NaN, 4], isNaN)   // => false
+```
+
+Great. The `every` is a typical higher order function that is easy to implement and it’s very useful too! Before we go further, we need to make ourselves comfortable with the `for..of` loop. `for..of` loops can be used to iterate the array elements. Let’s rewrite our `every` function with a `for..of` loop (Listing 3-9).
+
+```javascript
+const every = (arr, fn) => {
+    let result = true;
+    for (const value of arr)
+        result = result && fn(value);
+    return result;
+};
+```
+
+**Listing 3-9** 每个带 `for..of` 循环的函数
+
+`for..of` 循环只是对我们旧的 `for` 循环的抽象。正如您在这里看到的，`for..of` 通过隐藏索引变量消除了数组的遍历，等等。我们已经离开了 `for..of` 与每一个。这完全是抽象的。如果 JavaScript 的下一个版本改变了 `for..of` 什么样的？我们只需要在每个函数中改变它。这是抽象最重要的优点之一。
+
+### 一些功能
+
+Similar to the `every` function, we also have a function called `some`. The `some` works quite the opposite way of the `every` function such that the `some` function returns `true` if either one of the elements in the array returns `true` for the passed function. The `some` function is also called as `any` function. To implement the `some` function we use `||` rather than `&&`, as shown in Listing 3-10.
+
+```javascript
+const some = (arr, fn) => {
+    let result = false;
+    for (const value of arr)
+        result = result || fn(value);
+    return result;
+};
+```
+
+**Listing 3-10** 一些函数定义
+
+### 注意
+
+对于大型数组来说，`every` 和 `some` 函数都是低效的实现，因为 `every` 函数应该遍历数组直到第一个不匹配标准的元素，而 `some` 函数应该只遍历数组直到第一个匹配。请记住，我们试图理解本章中高阶函数的概念，而不是为了效率和准确性而编写代码。
+
+With the `some` function in place, we can check its result by passing the arrays like this:
+
+```javascript
+some([NaN, NaN, 4], isNaN) // => true
+some([3, 4, 4], isNaN)     // => false
+```
+
+已经看到了一些和每一个函数，让我们看看排序函数，以及一个高阶函数是如何发挥重要作用的。
+
+### 排序功能
+
+The `sort` is a built-in function that is available in the `Array` prototype of JavaScript. Suppose we need to sort a list of fruits:
+
+```javascript
+var fruit = ['cherries', 'apples', 'bananas'];
+```
+
+You can simply call the `sort` function that is available on the `Array` prototype:
+
+```javascript
+fruit.sort() // => ["apples", "bananas", "cherries"]
+```
+
+That’s so simple. The `sort` function is a higher order function that takes up a function as its argument, which will help the `sort` function to decide the sorting logic. Simply put, the signature of the `sort` function looks like this:
+
+```javascript
+arr.sort([compareFunction])
+```
+
+这里 `compareFunction` 是可选的。如果未提供 `compareFunction`，则通过将元素转换为字符串并按 Unicode 码位顺序比较字符串来对元素进行排序。在本节中，您不需要担心 Unicode 转换，因为我们更关注高阶函数。这里需要注意的重要一点是，为了在执行排序时将元素与我们自己的逻辑进行比较，我们需要传递 `compareFunction`。我们可以感觉到 `sort` 函数是如何被设计得如此灵活，以至于它可以对 JavaScript 世界中的任何数据进行排序，只要我们传递一个 `compareFunction`。由于高阶函数的性质，排序函数是灵活的！
+
+## 比较函数的实现
+
+在编写我们的 `compareFunction` 之前，让我们看看它应该实现什么。`compareFunction` 应该实现如 [`developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort) 中提到的，如清单 3-11 所示的逻辑。
+
+```javascript
+function compare(a, b) {
+  if (a is less than b by some ordering criterion) {
+    return -1;
+  }
+  if (a is greater than b by the ordering criterion) {
+    return 1;
+  }
+  // a must be equal to b
+  return 0;
+}
+```
+
+**清单 3-11 比较函数的框架**
+
+## 高阶函数的应用
+
+作为一个简单的例子，假设我们有一个人员列表：
+
+```javascript
+var people = [
+    {firstname: "aaFirstName", lastname: "cclastName"},
+    {firstname: "ccFirstName", lastname: "aalastName"},
+    {firstname:"bbFirstName", lastname:"bblastName"}
+];
+```
+
+现在我们需要使用对象中的 `firstname` 键对 `people` 进行排序，然后我们需要传递我们自己的 `compareFunction`，如下所示：
+
+```javascript
+people.sort((a,b) => {
+    return (a.firstname < b.firstname) ? -1 : (a.firstname > b.firstname) ? 1 : 0
+})
+```
+
+这将返回以下数据：
+
+```javascript
+[
+  { firstname: 'aaFirstName', lastname: 'cclastName' },
+  { firstname: 'bbFirstName', lastname: 'bblastName' },
+  { firstname: 'ccFirstName', lastname: 'aalastName' }
+]
+```
+
+按 `lastname` 排序如下所示：
+
+```javascript
+people.sort((a,b) => {
+    return (a.lastname < b.lastname) ? -1 : (a.lastname > b.lastname) ? 1 : 0
+})
+```
+
+将返回：
+
+```javascript
+[
+  { firstname: 'ccFirstName', lastname: 'aalastName' },
+  { firstname: 'bbFirstName', lastname: 'bblastName' },
+  { firstname: 'aaFirstName', lastname: 'cclastName' }
+]
+```
+
+再次回到 `compareFunction` 的逻辑：
+
+```javascript
+function compare(a, b) {
+  if (a is less than b by some ordering criterion) {
+    return -1;
+  }
+  if (a is greater than b by the ordering criterion) {
+    return 1;
+  }
+  // a must be equal to b
+  return 0;
+}
+```
+
+## 抽象比较逻辑
+
+知道了比较函数的算法，我们能做得更好吗？与其每次都写 `compareFunction`，我们能不能把这个逻辑抽象成一个函数？正如您在前面的示例中所看到的，我们编写了两个函数，分别用于比较具有几乎相同重复代码的 `firstName` 和 `lastName`。让我们用高阶函数来解决这个问题。现在我们要设计的函数不会把函数作为参数，而是返回一个函数。（记住 HOC 也可以返回一个函数。）
+
+让我们称这个函数为 `sortBy`，它允许用户根据传递的属性对对象数组进行排序，如清单 3-12 所示。
+
+```javascript
+const sortBy = (property) => {
+    return (a,b) => {
+        var result = (a[property] < b[property]) ? -1 : (a[property] > b[property]) ? 1 : 0;
+        return result;
+    }
+}
+```
+
+**清单 3-12 `sortBy` 函数定义**
+
+`sortBy` 函数接受一个名为 `property` 的参数，并返回一个新函数，该函数接受两个参数：
+
+```javascript
+return (a,b) => {
+}
+```
+
+返回的函数有一个非常简单的函数体，清楚地展示了 `compareFunction` 的逻辑：
+
+```javascript
+(a[property] < b[property]) ? -1 : (a[property] > b[property]) ? 1 : 0;
+```
+
+假设我们使用属性名 `firstname` 调用该函数，那么替换 `property` 参数后的函数体如下所示：
+
+```javascript
+(a,b) => return (a['firstname'] < b['firstname']) ? -1 : (a['firstname'] > b['firstname']) ? 1 : 0;
+```
+
+这正是我们手动编写函数时所做的。以下是我们的 `sortBy` 函数的实际应用：
+
+```javascript
+people.sort(sortBy("firstname"))
+```
+
+将返回：
+
+```javascript
+[
+  { firstname: 'aaFirstName', lastname: 'cclastName' },
+  { firstname: 'bbFirstName', lastname: 'bblastName' },
+  { firstname: 'ccFirstName', lastname: 'aalastName' }
+]
+```
+
+按 `lastname` 排序如下所示：
+
+```javascript
+people.sort(sortBy("lastname"))
+```
+
+返回：
+
+```javascript
+[
+  { firstname: 'ccFirstName', lastname: 'aalastName' },
+  { firstname: 'bbFirstName', lastname: 'bblastName' },
+  { firstname: 'aaFirstName', lastname: 'cclastName' }
+]
+```
+
+和以前一样。哇，这真是太神奇了！`sort` 函数接受由 `sortBy` 函数返回的 `compareFunction`！有很多高阶函数在浮动！我们再次抽象出了 `compareFunction` 背后的逻辑，让用户专注于他或她真正需要的东西。毕竟，高阶函数是关于抽象的。
+
+不过，在这里暂停一下，考虑一下 `sortBy` 函数。请记住，我们的 `sortBy` 函数接受一个属性并返回另一个函数。返回的函数是作为 `compareFunction` 传递给排序函数的。这里的问题是为什么返回的函数带有我们传递的属性参数值。
+
+欢迎来到闭包的世界！`sortBy` 函数工作只是因为 JavaScript 支持闭包。在我们继续写高阶函数之前，我们需要清楚地理解什么是闭包。闭包是下一章的主题。
+
+但是请记住，在下一章解释闭包之后，我们将编写真实世界的高阶函数！
+
+## 摘要
+
+我们从 JavaScript 支持的简单数据类型开始。我们发现函数在 JavaScript 中也是一种数据类型。因此，我们可以在所有可以保存数据的地方保存函数。换句话说，函数可以像 JavaScript 中的其他数据类型一样被存储、传递和重新分配。JavaScript 的这个极端特性允许将函数传递给另一个函数，我们称之为高阶函数。请记住，高阶函数是以另一个函数作为参数或返回一个函数的函数。我们在本章中看到了一些例子，展示了这些高阶函数概念如何帮助开发人员编写抽象出困难部分的代码！我们已经在自己的库中创建并添加了一些这样的函数。我们通过提到高阶函数与 JavaScript 中另一个叫做闭包的重要概念一起工作来结束这一章，这是第四章的主题。

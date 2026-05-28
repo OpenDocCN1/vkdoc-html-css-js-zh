@@ -1,0 +1,607 @@
+# 七、组件和管道
+
+在前一章中，我们看到了函数式编程的两种重要技术:currying 和局部应用。我们讨论了这两种技术是如何工作的，以及作为 JavaScript 程序员，我们在代码库中选择 currying 或 partial application。在这一章中，我们将看到功能组合的含义及其实际使用案例。
+
+`函数式组合`在函数式编程界简称为`组合`。我们将会看到一些关于合成的理论和一些例子，然后我们将会写我们自己的合成函数。理解如何使用 `compose` 函数来编写更干净的 JavaScript 是一项有趣的任务。
+
+### 注意
+
+章节示例和库源代码在第七章分支。回购的网址是[`github.com/antsmartian/functional-es8.git`](https://github.com/antsmartian/functional-es8.git)。
+
+一旦你检查出代码，请检查分支第七章:
+
+```
+git checkout -b 第七章来源/第七章
+```
+
+对于运行代码，与之前一样，运行:
+
+```
+npm 跑步游乐场
+```
+
+## 一般意义上的构成
+
+在我们了解功能组合是怎么一回事之前，让我们退一步理解组合背后的思想。在这一节中，我们将通过使用一种在 Unix 世界中更为流行的哲学来探索组合的思想。
+
+### Unix 哲学
+
+Unix philosophy is a set of ideas that were originated by Ken Thompson. One part of the Unix philosophy is this:
+
+*   让每个程序做好一件事。要做一项新的工作，就要重新构建，而不是通过添加新的“特性”使旧的程序变得复杂
+
+这正是我们在创建函数时所做的事情。正如我们在本书中看到的，函数应该接受一个参数并返回数据。是的，函数式编程确实遵循 Unix 哲学。
+
+The second part of the philosophy is this:
+
+*   期望每个程序的输出成为另一个未知程序的输入。
+
+这是一个有趣的报价。“期望每个程序的输出成为另一个程序的输入”是什么意思？为了说明这一点，让我们看看 Unix 平台上遵循这些原则构建的几个命令。
+
+For example, `cat` is a command (or you can think of it as a function) that is used to display the contents of a text file to a console. Here the `cat` command takes an argument (as similar to a function), that is, the file location, and so on, and returns the output (again as similar to a function) to the console. So we can do the following:`cat test.txt` which will print to the console`Hello world`
+
+### 注意
+
+这里 `test.txt` 的内容将是 `Hello world`。
+
+就这么简单。另一个名为 `grep` 的命令允许我们在给定的文本中搜索内容。需要注意的重要一点是，`grep` 函数接受输入并给出输出(同样非常类似于函数)。
+
+We can do the following with the `grep` command:`grep 'world' test.txt` which will return the matching content, in this case:`Hello world` We have seen two quite simple functions—`grep` and `cat`—that are built by following the Unix philosophy. Now we can take some time to understand this quote:
+
+*   期望每个程序的输出成为另一个未知程序的输入。
+
+Imagine you to want to send the data from the `cat` command as an input to the `grep` command to do a search. We know that the `cat` command will return the data; we also know that the `grep` command takes the data for processing the search operation. Thus, using the Unix `|` (pipe symbol), we can achieve our task:`cat test.txt | grep 'world'` which will return the data as expected:`Hello world`
+
+### 注意
+
+符号`|`称为管道符号。这使得我们可以将几个函数组合起来，创建一个新的函数来帮助我们解决问题。基本上`|`把左边一个函数的输出作为右边一个函数的输入发送！这个过程，从技术上来说，叫做 s 流水线。
+
+This example might be trivial, but it conveys the idea behind the quote:
+
+*   期望每个程序的输出成为另一个未知程序的输入。
+
+如我们的示例所示，`grep` 命令或函数接收 `cat` 命令或函数的输出。这里，我们通过组合两个现有的基本函数，毫不费力地创建了一个新函数。当然，这里的`|`管道充当了一个`桥`来连接给定的两个命令。
+
+让我们稍微改变一下我们的问题陈述。如果我们想计算单词 `world` 在一个给定的文本文件中出现的次数呢？我们如何实现它？
+
+This is how we are going to solve it:`cat test.txt | grep 'world' | wc`
+
+### 注意
+
+命令 `wc` 用于计算给定文本中的单词数。该命令在所有 Unix 和 Linux 平台上都可用。
+
+This is going to return the data as we expected. As the preceding examples show, we are creating a new function as per our need on the fly from our `base` functions! In other words, we are `composing` a new function from our base function(s). Note that the `base` function needs to obey this rule :
+
+*   每个基本函数都需要一个参数和返回值。
+
+我们将能够在`|`的帮助下构造一个新的函数。如本章所示，我们将在 JavaScript 中构建我们自己的 `compose` 函数，它在 Unix 和 Linux 世界中做与`|`相同的工作。
+
+现在我们有了从基本函数合成函数的想法。组合函数的真正好处是，我们可以组合我们的基本函数来解决手头的问题，而无需重新创建一个新函数。
+
+## 操作组合
+
+在这一节中，我们将讨论一个用例，在这个用例中，函数组合在 JavaScript 世界中非常有用。和我们在一起；你一定会喜欢作曲功能的想法。
+
+### 重访地图，过滤器
+
+在第五章中，我们看到了如何从地图和过滤器中链接数据来解决手头的问题。让我们快速回顾一下问题和解决方案。
+
+We had an array of objects, the structure of which looks like Listing 7-1.
+
+```json
+{
+    "id": 111,
+    "title": "C# 6.0",
+    "author": "ANDREW TROELSEN",
+    "rating": [4.7],
+    "reviews": [{good : 4 , excellent : 12}]
+},
+{
+    "id": 222,
+    "title": "Efficient Learning Machines",
+    "author": "Rahul Khanna",
+    "rating": [4.5],
+    "reviews": []
+},
+{
+    "id": 333,
+    "title": "Pro AngularJS",
+    "author": "Adam Freeman",
+    "rating": [4.0],
+    "reviews": []
+},
+{
+    "id": 444,
+    "title": "Pro ASP.NET",
+    "author": "Adam Freeman",
+    "rating": [4.2],
+    "reviews": [{good : 14 , excellent : 12}]
+}
+```
+
+Listing 7-1 `Apressbook` 对象结构，设 `apressBooks = `
+
+The problem was to get the `title` and `author` objects out of `apressBooks` for which the review value is greater than 4.5. Our solution to the problem was Listing 7-2.
+
+```javascript
+map(filter(apressBooks, (book) => book.rating[0] > 4.5),(book) => {
+    return {title: book.title,author:book.author}
+})
+```
+
+Listing 7-2 使用地图获取作者详细信息
+
+For this, the result is the following:
+
+```json
+[
+    {
+        title: 'C# 6.0',
+        author: 'ANDREW TROELSEN'
+    }
+]
+```
+
+实现解决方案的代码说明了重要的一点。来自过滤器函数的数据作为输入参数传递给 `map` 函数。是的，你猜对了:这听起来是不是和我们在上一节中在 Unix 世界中使用 `|` 解决的问题一样？我们能在 JavaScript 世界做同样的事情吗？我们能否通过将一个函数的输出作为另一个函数的输入来创建一个将两个函数结合起来的函数？是的，我们可以！满足作曲功能。
+
+### 撰写功能
+
+In this section, let’s create our first compose function. Creating a new compose function is easy and straightforward. The compose function needs to take the output of one function and provide it as input to another function. Let’s write a simple compose function in Listing 7-3.
+
+```javascript
+const compose = (a, b) =>
+  (c) => a(b(c))
+```
+
+Listing 7-3 撰写函数定义
+
+`compose` 函数很简单，完成了我们需要它做的事情。它接受两个函数 `a` 和 `b`，并返回一个接受一个参数 `c` 的函数。当我们通过提供 `c` 的值来调用 `compose` 函数时，它将调用输入为 `c` 的函数 `b`，函数 `b` 的输出作为输入进入函数 `a`。这正是组合函数的定义。
+
+现在，让我们先用一个简单的例子快速测试一下我们的 `compose` 函数，然后再深入研究上一节中的运行例子。
+
+### 注意
+
+`compose` 函数首先执行 `b`，并将 `b` 的返回值作为参数传递给函数 `a`。在 `compose` 中调用函数的方向是从右到左(即 `b` 先执行，然后是 `a`)。
+
+## 使用撰写功能
+
+有了我们的 `compose` 函数，让我们构建一些例子。
+
+假设我们想对一个给定的数字进行四舍五入。该数字将是一个浮点数，所以我们必须将该数字转换为浮点数，然后调用 `Math.round`。
+
+Without compose, we can do the following:
+
+```javascript
+let data = parseFloat("3.56")
+let number = Math.round(data)
+```
+
+如我们所料，输出将是 4。在这个例子中可以看到，数据(`parseFloat` 函数的输出)作为输入被传递给 `Math.round` 以获得一个解；这正是我们的组合函数要解决的问题。
+
+Let’s solve this via our compose function:
+
+```javascript
+let number = compose(Math.round,parseFloat)
+```
+
+This statement will return a new function that is stored as a `number` and looks like this:
+
+```javascript
+number = (c) => Math.round(parseFloat(c))
+```
+
+Now if we pass the input `c` to our `number` function, we will get what we expect:
+
+```javascript
+number("3.56") => 4
+```
+
+我们刚才做的是功能构图！是的，我们已经编写了两个函数来动态构建一个新函数！这里要注意的一个关键点是，在我们调用我们的 `number` 函数之前，函数 `Math.round` 和 `parseFloat` 不会被执行或运行。
+
+Now imagine we have two functions:
+
+```javascript
+let splitIntoSpaces = (str) => str.split(" ");
+let count = (array) => array.length;
+```
+
+Now if you want to build a new function to count the number of words in a string, we can easily do this:
+
+```javascript
+const countWords = compose(count,splitIntoSpaces);
+```
+
+Now we can call that:
+
+```javascript
+countWords("hello your reading about composition") => 5
+```
+
+使用 `compose` 新创建的函数 `countWords` 是通过组合多个基本函数创作简单函数的一种优雅而简单的方式。
+
+### 库里又偏去救援了
+
+我们知道，只有当这个函数接受一个输入参数时，我们才能组合两个函数。不过，情况并不总是这样，因为函数可能有多个参数。我们该如何组合这些函数呢？我们能做些什么吗？
+
+Yes, we can do it using either the `curry` or `partial` functions that we defined in the previous chapter. Earlier in this chapter we used the following code to solve one of the problems (Listing 7-2):
+
+```javascript
+map(filter(apressBooks, (book) => book.rating[0] > 4.5),(book) => {
+    return {title: book.title,author:book.author}
+})
+```
+
+现在，我们可以使用 `compose` 函数根据我们的示例来组合 `map` 和 `filter` 了吗？记住，`map` 和 `filter` 函数都有两个参数:第一个参数是数组，第二个参数是对数组进行操作的函数。因此我们不能直接组合这两个函数。
+
+We can, however, take help from partial functions. Remember that the preceding code snippet does work on the `apressBooks` object. We pull it out here again for easy reference:
+
+```javascript
+let apressBooks = [
+    {
+        "id": 111,
+        "title": "C# 6.0",
+        "author": "ANDREW TROELSEN",
+        "rating": [4.7],
+        "reviews": [{good : 4 , excellent : 12}]
+    },
+    {
+        "id": 222,
+        "title": "Efficient Learning Machines",
+        "author": "Rahul Khanna",
+        "rating": [4.5],
+        "reviews": []
+    },
+    {
+        "id": 333,
+        "title": "Pro AngularJS",
+        "author": "Adam Freeman",
+        "rating": [4.0],
+        "reviews": []
+    },
+    {
+        "id": 444,
+        "title": "Pro ASP.NET",
+        "author": "Adam Freeman",
+        "rating": [4.2],
+        "reviews": [{good : 14 , excellent : 12}]
+    }
+];
+```
+
+Now let’s say we have many small functions in our code base for filtering the books based on different ratings like the following:
+
+```javascript
+let filterOutStandingBooks = (book) => book.rating[0] === 5;
+let filterGoodBooks = (book) => book.rating[0] > 4.5;
+let filterBadBooks = (book) => book.rating[0] < 3.5;
+```
+
+and we do have many projection functions like this:
+
+```javascript
+let projectTitleAndAuthor = (book) => {
+    return {title: book.title, author: book.author}
+}
+let projectAuthor = (book) => {
+    return {author: book.author}
+}
+let projectTitle = (book) => {
+    return {title: book.title}
+}
+```
+
+### 注意
+
+你可能想知道为什么我们有小函数，即使是简单的东西。记住，组合就是将小功能组合成一个更大的功能。简单的功能易于阅读、测试和维护；使用 `compose` 我们可以从它构建任何东西，正如我们将在本节中看到的。
+
+Now to solve our problem—to get book titles and authors with ratings higher than 4.5—we can use `compose` and `partial` as in the following:
+
+```javascript
+let queryGoodBooks = partial(filter, undefined, filterGoodBooks);
+let mapTitleAndAuthor = partial(map, undefined, projectTitleAndAuthor)
+let titleAndAuthorForGoodBooks = compose(mapTitleAndAuthor, queryGoodBooks)
+```
+
+让我们花一些时间来理解部分函数在当前问题域中的位置。如上所述，`compose` 函数只能构造一个带有一个参数的函数。然而，`filter` 和 `map` 都有两个参数，所以我们不能直接组合它们。
+
+That’s the reason we have used the `partial` function to partially apply the second argument for both `map` and `filter`, as you can see here:
+
+```javascript
+partial(filter, undefined, filterGoodBooks);
+partial(map, undefined, projectTitleAndAuthor)
+```
+
+Here we have passed the `filterGoodBooks` function to query the books that have ratings over 4.5 and the `projectTitleAndAuthor` function to take the title and author properties from the `apressBooks` object. Now the returned partial application will expect only one argument, which is nothing but the array itself. With these two partial functions in place, we can compose them via `compose` as we already have done, as shown in Listing 7-4.
+
+```javascript
+let titleAndAuthorForGoodBooks = compose(mapTitleAndAuthor, queryGoodBooks)
+```
+
+**Listing 7-4**
+
+使用合成功能
+
+Now the function `titleAndAuthorForGoodBooks` expects one argument, in our case `apressBooks`; let’s pass the object array to it:
+
+```javascript
+titleAndAuthorForGoodBooks(apressBooks) => [
+    {
+        title: 'C# 6.0',
+        author: 'ANDREW TROELSEN'
+    }
+]
+```
+
+没有 `compose`，我们得到了我们想要的东西，但是在我们看来，最新的 composed 版本 `titleAndAuthorForGoodBooks` 可读性更好，也更优雅。您可以感觉到创建小功能单元的重要性，这些小功能单元可以根据我们的需要使用 `compose` 进行重建。
+
+In the same example, what if we want to get only the titles of the books with a rating higher than 4.5? It’s simple:
+
+```javascript
+let mapTitle = partial(map, undefined, projectTitle)
+let titleForGoodBooks = compose(mapTitle, queryGoodBooks)
+//call it
+titleForGoodBooks(apressBooks) => [
+    {
+        title: 'C# 6.0'
+    }
+]
+```
+
+只获取评分等于 5 的书籍的作者姓名怎么样？那应该很容易，对吗？我们让您使用已经定义的函数和 `compose` 函数来解决这个问题。
+
+### 注意
+
+在本节中，我们使用了 `partial` 来填充函数的参数。然而，你可以用咖喱做同样的事情。只是选择的问题。你能想出一个在我们的例子中使用咖喱的解决方案吗？(提示:颠倒映射、过滤器的参数顺序)。
+
+### 组合许多功能
+
+目前我们的 `compose` 函数版本只包含两个给定的函数。组合三个、四个或者 *n* 个函数怎么样？遗憾的是，我们当前的实现不能处理这个问题。让我们重写我们的 `compose` 函数，以便它可以动态地组合多个函数。
+
+Remember that we need to send the output of each function as an input to another function (by remembering the last executed function output recursively). We can use the `reduce` function, which we used in previous chapters to reduce the *n* of function calls one at a time. The rewritten `compose` function now looks like Listing 7-5.
+
+```javascript
+const compose = (...fns) =>
+  (value) =>
+    reduce(fns.reverse(), (acc, fn) => fn(acc), value);
+```
+
+Listing 7-5 组合多种功能
+
+### 注意
+
+这个函数在源代码 repo 中称为 `composeN`。
+
+The important line of the function is this:
+
+```javascript
+reduce(fns.reverse(), (acc, fn) => fn(acc), value);
+```
+
+### 注意
+
+回想一下前一章，我们使用 `reduce` 函数将数组缩减为单个值(以及一个累加器值；即 `reduce` 的第三个参数)。例如，要查找给定数组的总和，请使用 `reduce`:
+
+```javascript
+reduce([1, 2, 3], (acc, it) => it + acc, 0) => 6
+```
+
+这里数组 `[1, 2, 3]` 被简化为 `[6]`；这里的累加器值是 `0`。
+
+在这里，我们首先通过 `fns.reverse()` 反转函数数组，并将函数作为 `(acc, fn) => fn(acc)` 传递，这将通过将 `acc` 值作为参数传递来逐个调用每个函数。值得注意的是，初始累加器值只是一个 `value` 变量，它将是我们函数的第一个输入。
+
+With the new `compose` function in place, let’s test it with our old example. In the previous section we composed a function to count words given in a string:
+
+```javascript
+let splitIntoSpaces = (str) => str.split(" ");
+let count = (array) => array.length;
+const countWords = compose(count, splitIntoSpaces);
+//count the words
+countWords("hello your reading about composition") => 5
+```
+
+Imagine we want to find out whether the word count in the given string is odd or even. We already have a function for it:
+
+```javascript
+let oddOrEven = (ip) => ip % 2 == 0 ? "even" : "odd"
+```
+
+Now with our `compose` function in place, we can compose these three functions to get what we really want:
+
+```javascript
+const oddOrEvenWords = composeN(oddOrEven, count, splitIntoSpaces);
+oddOrEvenWords("hello your reading about composition") => ["odd"]
+```
+
+我们得到了预期的结果。去玩我们新的撰写功能吧！
+
+现在，我们对如何使用 `compose` 函数来获取我们需要的内容有了一个很好的理解。在下一节中，我们将看到相同的概念以不同的方式组合，称为*管道*。
+
+## 管道和序列
+
+在上一节中，我们看到 `compose` 的数据流是从左到右的，因为最左边的函数首先执行，然后将数据传递给下一个函数，依此类推，直到最右边的函数最后执行。
+
+有些人喜欢另一种方式——首先执行最右边的函数，最后执行最左边的函数。正如您所记得的，当我们执行 `|` 时，Unix 命令上的数据流是从右到左的。在这一节中，我们将实现一个名为 `pipe` 的新函数，它的功能与 `compose` 函数完全相同，只是交换了数据流。
+
+### 注意
+
+这种数据从右向左流动的过程被称为管道甚至序列。您可以根据自己的喜好将它们称为管道或序列。
+
+### 实施管道
+
+The `pipe` function is just a replica of our `compose` function; the only change is the data flow, as shown in Listing 7-6.
+
+```javascript
+const pipe = (...fns) =>
+  (value) =>
+    reduce(fns, (acc, fn) => fn(acc), value);
+```
+
+Listing 7-6 管道功能定义
+
+就这样。注意，不再像在 `compose` 中那样调用 `fns.reverse()` 函数，这意味着我们将按原样执行函数顺序(从左到右)。
+
+Let’s quickly check our implementation of the `pipe` function by rerunning the same example as in the previous section:
+
+```javascript
+const oddOrEvenWords = pipe(splitIntoSpaces, count, oddOrEven);
+oddOrEvenWords("hello your reading about composition"); => ["odd"]
+```
+
+结果是完全一样的。然而，请注意，当我们做管道时，我们已经改变了函数的顺序。首先，我们调用 `splitIntoSpaces`，然后 `count`，最后 `oddOrEven`。
+
+有些人(了解 shell 脚本)更喜欢管道而不是组合。这只是个人喜好，与底层实现无关。要点是 `pipe` 和 `compose` 做同样的事情，但是使用不同的数据流。您可以在代码库中使用 `pipe` 或 `compose`，但不能两者都用，因为这会导致团队成员的混乱。坚持一种作曲风格。
+
+### 作文赔率
+
+在本节中，我们讨论两个主题。第一个是 `compose` 最重要的属性之一: *Composition 是 associative*。第二个讨论是关于当我们组合许多函数时如何调试。
+
+让我们一个接一个地解决。
+
+#### 构图是联想的
+
+Functional composition is always associative. In general, the associative law states the outcome of the expression remains the same irrespective of the order of the parentheses, for example:
+
+```javascript
+x * (y * z) = (x * y) * z = xyz
+```
+
+Likewise,
+
+```javascript
+compose(f, compose(g, h)) == compose(compose(f, g), h);
+```
+
+Let’s quickly check our previous section example:
+
+```javascript
+//compose(compose(f, g), h)
+let oddOrEvenWords = compose(compose(oddOrEven, count), splitIntoSpaces);
+let oddOrEvenWords("hello your reading about composition") => ['odd']
+
+//compose(f, compose(g, h))
+let oddOrEvenWords = compose(oddOrEven, compose(count, splitIntoSpaces));
+let oddOrEvenWords("hello your reading about composition") => ['odd']
+```
+
+正如你在这些例子中看到的，两种情况下的结果是一样的。从而证明了功能组合是结合的。您可能想知道组合关联的好处是什么？
+
+The real benefit is that it allows us to group functions into their own `compose`; that is:
+
+```javascript
+let countWords = compose(count, splitIntoSpaces)
+let oddOrEvenWords = compose(oddOrEven, countWords)
+```
+
+or
+
+```javascript
+let countOddOrEven = compose(oddOrEven, count)
+let oddOrEvenWords = compose(countOddOrEven, splitIntoSpaces)
+```
+
+or ...
+
+这种代码之所以可能，只是因为组合具有关联属性。在本章的前面，我们讨论了创建小函数是合成的关键。因为组合是关联的，所以我们可以通过组合创建小函数，而不用担心，因为结果是一样的。
+
+## 管道运营商
+
+组合或链接基本函数的另一种方法是使用管道操作符。管道操作符类似于我们前面看到的 Unix 管道操作符。新的管道操作符旨在使链接的 JavaScript 函数的代码更具可读性和可扩展性。
+
+### 注意
+
+在撰写本文时，管道运营商仍处于 TC39 批准工作流的第一阶段草案(提案)状态，这意味着它还不是 ECMAScript 规范的一部分。该提案的最新状态以及浏览器兼容性将在[`github.com/tc39/proposals`](https://github.com/tc39/proposals)发布。
+
+让我们看一些管道操作符的例子。
+
+Consider the following mathematical functions that operate on a single string argument.
+
+```javascript
+const double = (n) => n * 2;
+const increment = (n) => n + 1;
+const ntimes = (n) => n * n;
+```
+
+Now, to call these functions on any number, normally we would write the following statement:
+
+```javascript
+ntimes(double(increment(double(double(5)))));
+```
+
+This statement should return a value of 1764\. The problem with this statement is the readability, as the sequence of operations or number of the operations is not readable. Linux-like systems use a pipeline operator like the one we saw at the beginning of the chapter. To make the code more readable a similar operator is being added to the ECMAScript 2017 (ECMA8). The name of the operator is pipeline (or binary infix operator), which looks like ‘|>’. The binary infix operator evaluates its left-hand side (LHS) and applies the right-hand side (RHS) to the LHS’s value as a unary function call. Using this operator, the preceding statement can be written as shown here.
+
+```javascript
+5 |> double |> double |> increment |> double |> ntimes  // returns 1764.
+```
+
+这样可读性更强，不是吗？当然，它比嵌套表达式更容易阅读，包含的括号更少或没有括号，缩进也更少。请记住，在这一点上，它只适用于一元函数，只有一个参数的函数。
+
+### 注意
+
+在撰写本文时，我们还没有机会使用 Babel 编译器来执行它，因为该操作符处于提议状态。使用最新的 Babel 编译器，当提案通过阶段 0(已发布)时，您可以尝试前面的示例。你也可以使用在线巴别塔编译器，比如在 https://babeljs.io/的那个。该提案被纳入 ECMAScript 的最新状态可以在 http://tc39.github.io/proposal-pipeline-operator/[的](http://tc39.github.io/proposal-pipeline-operator/)查看。
+
+Using the pipeline operator with our earlier example of getting the title and author of highly reviewed books is shown here.
+
+```javascript
+let queryGoodBooks = partial(filter, undefined, filterGoodBooks);
+let mapTitleAndAuthor = partial(map, undefined, projectTitleAndAuthor);
+let titleAndAuthorForGoodBooks = compose(mapTitleAndAuthor, queryGoodBooks);
+titleAndAuthorForGoodBooks(apressBooks);
+```
+
+This can be rewritten more understandably as
+
+```javascript
+apressBooks |> queryGoodBooks |> mapTitleAndAuthor.
+```
+
+同样，这个操作符只是一个语法选择；幕后的代码保持不变，所以这是开发人员的选择问题。然而，这种模式通过消除命名中间变量的工作节省了一些击键次数。这个管道操作者的 GitHub 库是[`GitHub . com/babel/babel/tree/master/packages/babel-plugin-syntax-pipeline-operator`](https://github.com/babel/babel/tree/master/packages/babel-plugin-syntax-pipeline-operator)。
+
+Although the pipeline operator works only on unary functions, there is a way around that to use it for functions with multiple arguments. Say we have these functions:
+
+```javascript
+let add = (x, y) => x + y;
+let double = (x) => x + x;
+// without pipe operator
+add(10, double(7))
+// with pipe operator
+7 |> double |> ( _=> add(10, _ )  // returns 24.
+```
+
+### 注意
+
+在这里，字符 `_` 可以替换为任何有效的变量名。
+
+## 使用 tap 功能进行调试
+
+在这一章中，我们已经用了很多 compose 函数。组合函数可以组合任意数量的函数。数据将在一个链中从左到右流动，直到完整的函数列表被求值。在这一节中，我们教你一个技巧，它允许你调试 compose 上的错误。
+
+Let’s create a simple function called `identity`. The aim of this function is to take the argument and return the same argument; hence the name *identity*.
+
+```javascript
+const identity = (it) => {
+    console.log(it);
+    return it;
+}
+```
+
+Here we have added a simple `console.log` to print the value this function receives and also return it as it is. Now imagine we have the following call:
+
+```javascript
+compose(oddOrEven, count, splitIntoSpaces)("Test string");
+```
+
+When you execute this code, what if the `count` function throws an error? How will you know what value the `count` function receives as its argument? That’s where our little `identity` function comes into the picture. We can add `identity` in the flow where we see an error like this:
+
+```javascript
+compose(oddOrEven, count, identity, splitIntoSpaces)("Test string");
+```
+
+它将打印 `count` 函数将要接收的输入参数。这个简单的函数对于调试函数接收到的数据非常有用。
+
+## 摘要
+
+我们以 Unix 哲学为例开始这一章。我们已经看到，通过遵循 Unix 理念，像`cat`、`grep`和`wc`这样的 Unix 命令能够根据需要进行组合。我们创建了自己版本的`compose`函数，以在 JavaScript 世界中实现同样的功能。简单的组合函数对开发人员很有用，因为我们可以根据需要从定义良好的小函数中组合复杂的函数。我们还看到了一个例子，通过部分函数，currying 如何帮助功能组合。
+
+我们还讨论了另一个名为`pipe`的函数，它做完全相同的事情，但是与`compose`函数相比，它反转了数据流。在本章的最后，我们讨论了复合的一个重要性质:复合是结合的。我们还介绍了一个新的管道操作符(`| >`)的用法，也称为二元中缀操作符，它可以用于一元函数。管道操作符是 ECMAScript 2017 的提案，目前处于提案阶段，将很快在 ECMAScript 的下一个版本中提供。我们还展示了一个名为`identity`的小函数，在面临`compose`函数的问题时，我们可以使用它作为调试工具。
+
+在下一章，我们将讨论函子。函子非常简单，但是非常强大。我们将在下一章介绍用例以及更多关于函子的内容。

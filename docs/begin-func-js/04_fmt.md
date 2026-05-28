@@ -1,0 +1,465 @@
+# 四、闭包和高阶函数
+
+在前一章中，我们看到了高阶函数如何帮助开发人员对常见问题进行抽象。正如我们所知，这是一个非常强大的概念。我们已经创建了`sortBy`高阶函数来展示用例的有效且相关的示例。尽管`sortBy`函数是在高阶函数的基础上工作的(这也是将函数作为参数传递给其他函数的概念)，但它与JavaScript中另一个叫做闭包的概念有关。
+
+在我们继续函数式编程技术的旅程之前，我们需要理解JavaScript世界中的闭包。这就是这一章的意义所在。在这一章中，我们将详细讨论闭包的含义，同时继续我们编写有用的和真实世界中的高阶函数的旅程。闭包的概念与JavaScript中的作用域有关，所以让我们在下一节从闭包开始。
+
+### 注意
+
+章节示例和库源代码在第四章分支中。回购的网址是[`github.com/antoaravinth/functional-es8.git`](https://github.com/antoaravinth/functional-es8.git)
+
+一旦你检查出代码，请检查分支第四章:
+
+```
+git checkout -b 第四章来源/第四章
+```
+
+对于运行代码，与之前一样，运行:
+
+```
+npm 跑步游乐场
+```
+
+## 理解闭包
+
+在这一节中，我们将通过一个简单的例子来解释闭包的含义，然后通过解开它如何与闭包一起工作来继续我们的`sortBy`函数。
+
+### 什么是闭包？
+
+Simply put, a closure is an inner function. So what is an inner function? It is just a function within another function, something like the following:
+
+```
+function outer() {
+    function inner() {
+    }
+}
+```
+
+是的，这就是终结。这个函数内部被称为`闭包` `函数`。闭包是强大的，因为它可以访问作用域链(或作用域级别)。我们将在这一节讨论作用域链。
+
+### 注意
+
+作用域链和作用域级别含义相同，因此它们在本章中可以互换使用。
+
+Technically the closure has access to three scopes:
+
+1.  在自己的声明中声明的变量。
+2.  对全局变量的访问。
+3.  访问外部函数的变量(有趣)。
+
+Let’s talk about these three points separately with a simple example. Consider the following code snippet:
+
+```
+function outer() {
+    function inner() {
+        let a = 5;
+        console.log(a)
+    }
+    inner() //call the inner function.
+}
+```
+
+当内部函数被调用时，控制台会输出什么？该值将为5。这主要是由于第一点。一个闭包函数可以访问在它自己的声明中声明的所有变量(见第1点)。这里没有火箭科学！
+
+### 注意
+
+从前面的代码片段中可以看出，内部函数在外部函数之外是不可见的！继续测试它。
+
+Now modify the preceding code snippet to the following:
+
+```
+let global = "global"
+function outer() {
+    function inner() {
+        let a = 5;
+        console.log(global)
+    }
+    inner() //call the inner function.
+}
+```
+
+现在，当内部函数被执行时，它打印出值`global`。因此闭包可以访问全局变量(见第2点)。
+
+Points 1 and 2 are now clear with the example. The third point is very interesting, and the claim can be seen in the following code:
+
+```
+let global = "global"
+function outer() {
+    let outer = "outer"
+    function inner() {
+        let a = 5;
+        console.log(outer)
+    }
+    inner() //call the inner function.
+}
+```
+
+现在，当内部函数执行时，它打印`outer`的值。这看起来很合理，但是这是闭包的一个非常重要的属性。闭包可以访问外部函数的变量。这里的外部函数是指封闭闭包函数的函数。这个属性使得闭包如此强大！
+
+### 注意
+
+闭包也可以访问封闭的函数参数。尝试给我们的外部函数添加一个参数，并尝试从内部函数访问它。我们会在这里等你做完这个小练习。
+
+### 记住它出生的地方
+
+在上一节中，我们看到了什么是闭包。现在我们将看到一个稍微复杂的例子，它解释了闭包中的另一个重要概念:记住上下文的闭包。
+
+Take a look at the following code:
+
+```
+var fn = (arg) => {
+    let outer = "Visible"
+    let innerFn = () => {
+        console.log(outer)
+        console.log(arg)
+    }
+    return innerFn
+}
+```
+
+代码很简单。`innerFn`是`fn`的闭包函数，调用时`fn`返回`innerFn`。这里没有什么花哨的东西。
+
+Let’s play around with `fn`:
+
+```
+var closureFn = fn(5);
+closureFn()
+```
+
+will print the following:
+
+```
+Visible
+5
+```
+
+调用`closureFn`如何打印`Visible`和`5`到控制台？幕后发生了什么？我们来分解一下。
+
+There are two steps happening in this case:
+
+1.  当该行被调用时:
+
+```
+var closureFn = fn(5);
+```
+
+our `fn` gets called with argument `5`. As per our `fn` definition, it returns the `innerFn`.
+
+2.  有趣的事情在这里发生。当返回`innerFn`时，JavaScript执行引擎将`innerFn`视为一个闭包，并相应地设置其作用域。正如我们在上一节中看到的，闭包可以访问三个作用域级别。当`innerFn`返回时，所有这三个作用域级别都被设置(`arg`，`outer`值将在`innerFn`的作用域级别中设置)。返回的函数引用存储在`closureFn`中。因此，当通过作用域链调用时，`closureFn`将有`arg`，`outer`值。
+
+3.  当我们最终宣布结束时`fn`:
+
+```
+closureFn()
+```
+
+it prints:
+
+```
+Visible
+5
+```
+
+现在您可以猜到，`closureFn`记得它的上下文(作用域；即`outer`和`arg`)。因此，对`console.log`的调用会相应地打印出来。
+
+您可能想知道闭包的用例是什么？。我们已经在`sortBy`函数中看到了它的作用。让我们快速重温一下。
+
+### 重新审视 sortBy 函数
+
+Recall the `sortBy` function that we defined and used in the previous chapter:
+
+```
+const sortBy = (property) => {
+    return (a,b) => {
+        var result = (a[property] < b[property]) ? -1 : (a[property] > b[property]) ? 1 : 0;
+        return result;
+    }
+}
+```
+
+当我们像这样调用`sortBy`函数时:
+
+sortBy("firstname")sortBy returned a new function that takes two arguments, like this:(a,b) => { /* implementation */ } Now we are comfortable with closures and we are aware that the returned function will have access to the sortBy function argument property. Because this function will be returned only when sortBy is called, the property argument is linked with a value; hence the returned function will carry this `context` throughout its life://scope it carries via closure property = "passedValue" (a,b) => { /* implementation */ }
+
+现在，因为返回的函数在其上下文中携带属性值，所以它将在适当的地方和需要的时候使用返回值。有了这样的解释，我们就可以完全理解闭包和高阶函数，它们允许我们编写一个像 `sortBy` 这样的函数来抽象出内部细节。前进到我们的功能世界。
+
+这一部分要理解的东西太多了；在下一节中，我们将继续我们的旅程，使用闭包和高阶函数编写更抽象的函数。
+
+## 现实世界中的高阶函数(续)
+
+有了对闭包的理解，我们可以继续实现一些在现实世界中使用的有用的高阶函数。
+
+### 抽头函数
+
+因为我们将在编程世界中处理大量的函数，所以我们需要一种方法来调试它们之间发生的事情。正如我们在前面的章节中看到的，我们正在设计函数，它接受参数并返回另一个函数，这个函数也接受一些参数，等等。
+
+Let’s design a simple function called `tap`:
+
+```javascript
+const tap = (value) =>
+  (fn) => (
+    typeof(fn) === 'function' && fn(value),
+    console.log(value)
+  )
+```
+
+这里 `tap` 函数接受一个值并返回一个具有闭包值的函数，它将被执行。
+
+### 注意
+
+在 JavaScript 中，`(exp1，exp2)`意味着它将执行两个参数并返回第二个表达式的结果，即 `exp2`。在前面的示例中，语法将调用函数 `fn`，并将值打印到控制台。
+
+Let’s play around with the `tap` function:
+
+```javascript
+tap("fun")((it) => console.log("value is ",it))
+// =>value is fun
+// =>fun
+```
+
+正如你在这个例子中看到的，值被打印出来，然后值被打印出来。这看起来简单明了。
+
+So where can the `tap` function be used? Imagine you are iterating an array that has data come from a server. You feel that the data are wrong, so you want to debug and see what the array really contains, while iterating. How will you do that? This is where the `tap` function comes into the picture. For the current scenario, we can do this:
+
+```javascript
+forEach([1,2,3], (a) =>
+   tap(a)(() =>
+     {
+       console.log(a)
+     }
+   )
+ )
+```
+
+这按预期打印了值，在我们的工具包中提供了一个简单而强大的函数。
+
+### 一元函数
+
+数组原型中有一个默认的方法叫做 `map`。不用担心；我们将在下一章发现数组的许多函数，在那里我们也将看到如何创建我们自己的地图。目前，`map` 是一个函数，它与我们已经定义的 `forEach` 函数非常相似。唯一的区别是 `map` 返回回调函数的结果。
+
+To get the gist of it, let’s say we want to double the array and get back the result; using the `map` function, we can do that like this:
+
+```javascript
+[1, 2, 3].map((a) => { return a * a })
+// =>[1, 4, 9]
+```
+
+The interesting point to note here is that `map` calls the function with three arguments, which are element, index, and arr. Imagine we want to parse the array of strings to the array of int; we have a built-in function called `parseInt` that takes two argument parses and radixes and converts the passed parse into a number if possible. If we pass the `parseInt` to our `map` function, `map` will pass the index value to the radix argument of `parseInt`, which will result in unexpected behavior.
+
+```javascript
+['1', '2', '3'].map(parseInt)
+// =>[1, NaN, NaN]
+```
+
+哎呀！在这个结果中可以看到，数组`[1，NaN，NaN]`并不是我们所期望的。这里我们需要将 `parseInt` 函数转换成另一个只需要一个参数的函数。我们如何实现这一目标？见见我们的下一个朋友，一元函数。一元函数的任务是获取带有 *n* 个参数的给定函数，并将其转换为单个参数。
+
+Our unary function looks like the following:
+
+```javascript
+const unary = (fn) =>
+  fn.length === 1
+    ? fn
+    : (arg) => fn(arg)
+```
+
+我们正在检查传递的 `fn` 是否有一个大小为 1 的参数列表(可以通过 `length` 属性找到)；如果是这样，我们什么都不会做。如果没有，我们返回一个新函数，它只接受一个参数 `arg`，并使用该参数调用函数。
+
+To see our unary function in action, we can rerun our problem with `unary`:
+
+```javascript
+['1', '2', '3'].map(unary(parseInt))
+// =>[1, 2, 3]
+```
+
+这里我们的一元函数返回一个新函数(`parseInt` 的克隆)，它将只接受一个参数。因此，传递 `index`，`arr` 参数的 `map` 函数不受影响，因为我们得到了预期的结果。
+
+### 注意
+
+也有像 `binary` 和其他函数将转换函数以接受相应的参数。
+
+接下来我们将要看到的两个函数是特殊的高阶函数，它允许开发者控制函数被调用的次数。他们在现实世界中有很多用例。
+
+### 一次函数
+
+在很多情况下，我们只需要运行一次给定的函数。JavaScript 开发人员在日常生活中会遇到这种情况，因为他们只想建立一次第三方库，只需启动一次支付设置，只需进行一次银行支付请求，等等。这些是开发人员面临的常见情况。
+
+In this section we are going to write a higher order function called `once`, which will allow the developer to run the given function only once. Again the point to note here is that we have to keep on abstracting away our day-to-day activities into our functional toolkits.
+
+```javascript
+const once = (fn) => {
+  let done = false;
+  return function () {
+    return done ? undefined : ((done = true), fn.apply(this, arguments))
+  }
+}
+```
+
+# 高阶函数：once与memoize
+
+这个`once`函数接受一个参数`fn`，并通过用`apply`方法调用它来返回它的结果（稍后给出`apply`方法的注释）。这里需要注意的重要一点是，我们已经声明了一个名为`done`的变量，并在最初将其设置为`false`。返回的函数将有一个闭包作用域；因此，它将访问它来检查`done`是否为真，如果为真则返回`undefined`，否则将`done`设置为真（从而阻止下一次执行），并使用必要的参数调用函数。
+
+### 注意
+
+`apply`函数将允许我们设置函数的上下文，并传递给定函数的参数。你可以在 [`developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/apply`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/apply) 找到更多关于它的信息。
+
+有了`once`函数，我们可以快速检查它。
+
+```javascript
+var doPayment = once(() => {
+    console.log("Payment is done")
+})
+doPayment() // => Payment is done
+// oops bad, we are doing second time!
+doPayment() // => undefined!
+```
+
+这个代码片段展示了包装一次的`doPayment`函数将只执行一次，不管我们调用它们多少次。`once`函数是我们工具箱中一个简单但有效的函数。
+
+### 记忆功能
+
+在结束本节之前，让我们看看一个名为`memoize`的函数。我们知道纯函数是关于在其参数上工作，而不涉及其他任何东西。它不依赖外部世界的任何东西。纯函数的结果完全基于其参数。想象一下，我们有一个名为`factorial`的纯函数，它计算给定数字的阶乘。该函数如下所示：
+
+```javascript
+var factorial = (n) => {
+    if (n === 0) {
+        return 1;
+    }
+    // This is it! Recursion!!
+    return n * factorial(n - 1);
+}
+```
+
+你可以用几个输入快速检查`factorial`函数：
+
+```javascript
+factorial(2) // => 2
+factorial(3) // => 6
+```
+
+这里没什么特别的。但是，我们知道值2的阶乘是2，3是6，以此类推，主要是因为我们知道阶乘函数确实有效，但只是基于它的参数，而不是其他。这里出现了一个问题：如果输入已经存在于对象中，为什么我们不能存储每个输入（某种对象）的结果并返回输出呢？此外，为了计算3的阶乘，我们需要计算2的阶乘，那么为什么我们不能在函数中重用这些计算呢？这正是`memoize`函数要做的。`memoize`函数是一种特殊的高阶函数，它允许函数记住或记忆其结果。
+
+让我们看看如何在JavaScript中实现这样一个函数。它看起来很简单：
+
+```javascript
+const memoized = (fn) => {
+    const lookupTable = {};
+    return (arg) => lookupTable[arg] || (lookupTable[arg] = fn(arg));
+}
+```
+
+这里我们有一个名为`lookupTable`的局部变量，它将位于返回函数的闭包上下文中。它将接受参数并检查该参数是否在`lookupTable`中：`lookupTable[arg]`。如果是，则返回该值；否则，用新的输入作为键，`fn`的结果作为其值来更新对象：`(lookupTable[arg] = fn(arg))`。
+
+完美。现在我们可以将`factorial`函数包装到`memoize`函数中，以持续记住其输出：
+
+```javascript
+let fastFactorial = memoized((n) => {
+    if (n === 0) {
+        return 1;
+    }
+    // This is it! Recursion!!
+    return n * fastFactorial(n - 1);
+})
+```
+
+现在去调用`fastFactorial`：
+
+```javascript
+fastFactorial(5) // => 120
+// => lookupTable will be like:
+// Object {0: 1, 1: 1, 2: 2, 3: 6, 4: 24, 5: 120}
+
+fastFactorial(3) // => 6 // returned from lookupTable
+
+fastFactorial(7) // => 5040
+// => lookupTable will be like:
+// Object {0: 1, 1: 1, 2: 2, 3: 6, 4: 24, 5: 120, 6: 720, 7: 5040}
+```
+
+它将以同样的方式工作，但现在比以前快得多。在运行`fastFactorial`时，我希望您检查`lookupTable`对象，以及它如何帮助加快速度，如前面的代码片段所示。这就是高阶函数的美妙之处：闭包和纯函数在起作用！
+
+### 注意
+
+我们的记忆函数是为只有一个参数的函数编写的。你能为所有有*n*个参数的函数想出一个解决方案吗？
+
+我们已经将许多常见的问题抽象成高阶函数，这使得我们能够轻松优雅地编写解决方案。
+
+### 分配功能
+
+# JavaScript (JS) objects are mutable, which means the state of the object can be changed after it is created. Often, you will come across a scenario in which you have to merge objects to form a new object.
+
+Consider the following objects:
+
+```javascript
+var a = { name: "srikanth" };
+var b = { age: 30 };
+var c = { sex: 'M' };
+```
+
+What if I want to merge all objects to create a new object? Let us go ahead and write the relevant function.
+
+```javascript
+function objectAssign(target, source) {
+    var to = {};
+    for (var i = 0; i < arguments.length; i += 1) {
+        var from = arguments[i];
+        var keys = Object.keys(from);
+        for (var j = 0; j < keys.length; j += 1) {
+            to[keys[j]] = from[keys[j]];
+        }
+    }
+    return to;
+}
+```
+
+`arguments` is a special variable available to every JS function. JS functions allow you to send any number of arguments to a function, which means that if a function is declared with two arguments, JS allows you to send more than two arguments. `Object.keys` is an inbuilt method that gives you the property names of every object, in our case, the `name`, `age`, and `sex`.
+
+The following usage shows how we abstracted the functionality to merge any number of JS objects into one object.
+
+```javascript
+var customObjectAssign = objectAssign(a, b, c);
+//prints { name: 'srikanth', age: 30, sex: 'M' }
+```
+
+However, if you’re following ES6 standards, you may not have to write a new function. The following function also does the same.
+
+```javascript
+// ES6 Object.Assign
+var nativeObjectAssign = Object.assign(a, b, c);
+//prints { name: 'srikanth', age: 30, sex: 'M' }
+```
+
+Note that when we use `Object.assign` to merge objects `a`, `b`, and `c`, even object `a` is changed. This does not occur with our custom implementation. That is because object `a` is considered to be the target object we merge into. Because the objects are mutable, `a` is now updated accordingly. If you require the preceding behavior, you can do this:
+
+```javascript
+var nativeObjectAssign = Object.assign({}, a, b, c);
+```
+
+对象 `a` 在前面的用法中保持不变，因为所有的对象都合并到一个空对象中。
+
+## Let me show you another new addition to ES6, Object.entries.
+
+Suppose you have an object such as the following:
+
+```javascript
+var book = {
+    "id": 111,
+    "title": "C# 6.0",
+    "author": "ANDREW TROELSEN",
+    "rating": [4.7],
+    "reviews": [{good : 4 , excellent : 12}]
+};
+```
+
+If you’re only interested in the `title` property, the following function can help you convert that property into an array of strings.
+
+```javascript
+console.log(Object.entries(book)[1]); //prints Array ["title", "C# 6.0"]
+```
+
+如果您不想升级到 ES6，但又对获取对象条目感兴趣，该怎么办？唯一的方法是实现一个功能性的方法来做同样的事情，就像我们之前做的那样。你准备好迎接挑战了吗？如果是，我将把它作为一个练习留给你。
+
+我们现在已经将许多常见问题抽象成高阶函数，这使得我们可以轻松地编写一个优雅的解决方案。
+
+## 摘要
+
+我们从一系列关于函数能看到什么的问题开始了这一章。通过从小处着手并构建示例，我们展示了闭包如何让函数记住它诞生的上下文。有了这样的理解，我们实现了一些 JavaScript 程序员日常生活中使用的高阶函数。我们已经看到了如何将常见问题抽象成一个特定的函数并重用它。现在我们理解了闭包、高阶函数、抽象和纯函数的重要性。在下一章中，我们将继续构建高阶函数，但是是关于数组的。
