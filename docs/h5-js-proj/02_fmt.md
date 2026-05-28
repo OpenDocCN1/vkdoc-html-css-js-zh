@@ -1,0 +1,1561 @@
+# 二、家庭剪贴画（FamilyCollage）：在画布上操作程序员定义的对象
+
+在本章中，您将学习以下内容:
+
+*   为在画布上绘图创建和操作面向对象的编程
+*   处理鼠标事件，包括双击
+*   将画布存储到图像
+*   使用`try`和`catch`捕捉错误
+*   涉及代码位置的浏览器差异
+*   使用代数和几何构造形状并确定光标何时位于特定对象上
+*   控制用于光标的图标
+
+## 介绍
+
+这一章的项目是一个在画布上操作对象来产生图片的工具。我称之为实用工具，因为一个人做编程，收集照片和设计，然后可以将程序提供给朋友、家人、同事和其他人来制作构图/剪贴画。结果可以是任何东西，从抽象设计到照片剪贴画。我的示例中的对象包括一个矩形、两个椭圆形、一颗心、两张家庭照片和一个视频(单杠上的 Annika)。您或者您的最终用户/客户/玩家有可能复制任何对象并删除项目。最终用户使用鼠标拖放来定位对象。当判断图片完整时，可以创建一个可以下载到文件中的图像。
+
+图 2-1 显示了我的程序的开始屏幕。请注意，您从要排列的七个对象开始。
+
+![img/272384_2_En_2_Fig1_HTML.jpg](img/272384_2_En_2_Fig1_HTML.jpg)
+
+图 2-1 家庭照片的打开屏幕
+
+图 2-2 显示了作为最终用户的我制作的最终产品，并在新窗口中保存为图像。我复制了两张照片和一段视频，添加了两个心形，去掉了矩形和椭圆形。
+
+![img/272384_2_En_2_Fig2_HTML.jpg](img/272384_2_En_2_Fig2_HTML.jpg)
+
+图 2-2 最终产品样本:重新排列的对象
+
+我决定加入一颗心，不仅仅是出于感情上的原因，还因为这需要我用到代数和几何。不要害怕数学。它非常有用。可以说，我发明了一颗规范的心。对于其他形状，您可能能够找到数学表达式方面的标准定义。
+
+在这种情况下，我创建了一组对象，然后我用程序来制作一个组合。您可以计划您的应用程序包括图片和视频与一些图形，矩形和心脏。完成后，您可以将此程序提供给其他人使用。这类似于为玩家构建游戏程序。该应用程序的最终用户可能是家庭成员、朋友或同事。项目列表存储在独立于主程序的文件中，因此很容易更改包含的内容。将内容规范从程序中分离出来的技术是一个很好的技巧。
+
+当然，当然可以使用 Adobe Photoshop 或 Corel Paint Shop Pro 等绘图程序来创建这样的作品，但该应用程序为其特定目的提供了相当好的易用性。该项目也是学习重要编程技术以及 HTML5 和 JavaScript 特性的一个途径。而且，正如人们不断重复的那样，各种浏览器之间也有不同之处需要讨论。
+
+## 关键要求
+
+这个项目的关键需求包括构建一个在屏幕上操作对象的框架，包括检测对象上的鼠标事件、删除对象和创建对象的副本，以及在外部文件中指定内容。当前的框架提供了一种指定矩形、椭圆形、心形和图像的方法，但是这种方法可以适应其他形状，这是本章的重要一课。
+
+目标是使拖放操作相当精确:不仅仅是将某物从窗口的一个区域移动到另一个区域。我将在关于制作拼图游戏的第 8 和 9 章中再次讨论这个话题。
+
+我还决定控制光标的外观。当鼠标不在画布上时，光标就是标准箭头。当在画布元素上时，光标将成为十字光标。当用户按下鼠标按钮并拖动一个对象时，光标变成一只带指针的手。
+
+当工作完成时，很自然地希望保存它，也许作为一个图像文件，所以这也是项目的一个需求。
+
+在为这本书的第二版做这个项目时，我发现了 Chrome 浏览器的一个特性，我需要讨论一下:自动播放策略。
+
+### 自动播放策略
+
+自动播放是指自动播放视频剪辑，无需用户操作。在剪贴画项目中，将在第三章中描述的弹跳视频，以及将在第八章中描述的拼图变成视频程序，我的意图是让视频在程序控制下播放。我承认有人反对这一点。视频的自动播放可能会使用户支付数据费用，并可能使网络过载。视频广告可能很烦人。
+
+截至 2018 年 4 月，Chrome 浏览器采用了视频自动播放的政策(详见 [`https://developers.google.com/web/updates/2017/09/autoplay-policy-changes`](https://developers.google.com/web/updates/2017/09/autoplay-policy-changes) )，在大多数情况下不允许自动播放。但是，也有例外，包括静音。对于剪贴画程序，我决定通过静音来启用视频播放。我的原始程序提供了一种方法，让每个视频有不同的音量级别。因为这可以在 Firefox 上工作，也许在其他浏览器上也可以，至少现在，我在程序中保留了指定视频音量的机制。但是，该代码在视频标记中包含一个静音属性，因此您需要移除它才能听到音频。苹果要求 iPhones 和 iPads 用户启动任何视频已经有一段时间了，我将在第八章中描述这一点的含义。
+
+这对我们来说是一个教训:1)事物在变化，2) HTML/JavaScript/CSS 程序依赖于浏览器。
+
+## HTML5、CSS 和 JavaScript 特性
+
+我们现在探索用于家庭剪贴画项目的 HTML5 和 JavaScript 的特性。这个想法是维护画布上的材料列表。这个列表将是一个 JavaScript 数组。这些信息将包括每个项目的位置，如何在画布上绘制，以及如何确定鼠标光标是否在项目上。
+
+### JavaScript 对象
+
+面向对象编程是计算机科学的标准，也是大多数编程语言的关键部分。对象有`属性`，也叫`属性`，和`方法`。方法是一个函数。换句话说，一个对象有数据和可能使用这些数据的代码。HTML 和 JavaScript 有很多内置对象，比如`document`和`window`，还有数组和字符串。对于家庭剪贴画项目，我使用 JavaScript 中的一个基本工具(在 HTML5 之前建立)来定义我自己的对象。这些有时被称为用户定义的对象，但是我和其他人更喜欢的术语是程序员定义的对象。这对于家庭剪贴画项目来说是一个重要的区别，在这个项目中，你，程序员，可以用你识别和设计的图片和其他形状创建一个应用程序，然后提供给家庭成员使用。
+
+这个项目的目标是建立一个框架，用于在画布上创建和操作不同的形状，记住，一旦一些东西被绘制到画布上，它作为矩形或图像的身份就丢失了。每个形状的第一步是定义一个称为`构造函数`的函数，它存储指定形状的信息。下一步是定义方法和代码，使用这些信息来做需要做的事情。
+
+我的方法给人一种在画布上移动物体的感觉。事实上，保存在内部变量中的信息会发生变化，每次发生改变画布外观的情况时，画布会被清除并绘制新的图形。
+
+我的策略是定义新类型的对象，每个对象都定义了两个方法:
+
+*   `draw`用于在画布上绘制对象
+*   `overcheck`用于确定给定位置，特别是鼠标位置，是否在对象上
+
+这些方法引用对象的属性，并在数学表达式中使用这些值来产生结果。一旦定义了构造函数，就可以将值创建为这些对象的新实例。一个名为`stuff`的数组保存所有的对象实例。
+
+### 注意
+
+面向对象编程的辉煌之处在于它拥有丰富的、通常令人望而生畏的词汇。类是定义对象的东西。我在这里已经暗示了所谓的接口。类可以是其他类的子类，这可能对图片和矩形有用。我想用更随意的语气。例如，我将谈到对象和对象实例。
+
+让我们抛开泛泛而谈，看看这是如何工作的。有一种说法:先有鸡还是先有蛋？我在订单上有一个“先有鸡还是先有蛋”的问题。我首先描述外部文件中内容的规范。然后我将描述我创建并命名为`Rect`、`Oval`、`Picture, Videoblock`和`Heart`的函数。这些将被称为`Rect`、`Oval`、`Picture`、`Videoblock`和`Heart`对象实例的构造函数。以大写字母开始这些函数是一种惯例。然后我将描述调用`constructor`函数的`createelements`函数。关于绘制对象，有一个类似的“鸡和蛋”的问题。
+
+#### 规范的外部文件
+
+对象的规范保存在一个单独的文件中。我显示长注释是因为我需要它来记住每个对象的参数是什么。
+
+```markdown
+## 视频信息
+
+```js
+/*
+Information on videos, other objects used in collagebase.html
+You need to produce 3 video files for each video, type mp4,ogg,webm, with names as indicated in the videoinfo array.
+The first element of each subarray indicates the type of object, that is, 'video', 'heart', 'picture', 'oval','rectangle'.
+The elements for video objects are
+"video", basename of video files, angle in radians, source x, source y, destination on canvas x, destination y, width, height, scale factor (x and y), volume level (0 to 1)
+The angle can be used to change the orientation for clips shot on iPhone or iPads.
+The source x and y, with the width and height, allows you to use only some of the source video.
+
+The elements for 'picture' are
+'picture',x,y,w,h,imagename.
+
+The elements for heart are
+'heart',x,y,h,drx,color
+
+The elements for oval are
+'oval',x,y,r,horizontal scaling, vertical scaling, color
+
+The elements for rectangle are
+'rect',x,y, w,h,color
+
+The element for video
+
+are
+'video',videoname, angle, sourcex, sourcey, x, y, width, height, scale, volume, alpha
+Note: the width and height are the final (destination) width and height.
+*/
+
+var mediainfo=
+[
+['heart', 300,40,100,30,'red'],
+
+['rect',620,400,100,150,"purple"],
+
+['oval',600,50,30,2,1,'green'],
+
+['oval',80, 500, 30, 2, 1, 'blue'],
+
+['video','monkeyMar18',0,0,0,1000,800,896,1198,.25,1],
+
+['picture',5,150, 150, 200,'danielAndAnnika.jpg'],
+
+['picture',500,150,280,210,'threePlusDog.jpg']
+
+];
+```
+
+## 矩形
+
+`Rect`构造函数的定义是：
+
+```js
+function Rect(x,y,w,h,c) {
+        this.x = x;
+        this.y = y;
+        this.w = w;
+        this.h = h;
+        this.draw = drawrect;
+        this.color = c;
+        this.overcheck = overrect;
+}
+```
+
+可以通过以下方式调用该函数：
+
+```js
+var r1 = new Rect(2,10,50,50,"red");
+```
+
+变量`r1`被声明并设置为使用函数`Rect`构造的新对象。内置术语`new`完成创建新对象的任务。新构造的对象保存初始 x 和 y 位置的值 2 和 10，使用属性名`x`和`y`访问，使用属性名`w`和`h`访问宽度和高度的值 50 和 50。术语`this`指的是正在构建的对象。*新*和*本*的英文意思和计算机行话意思相符。`Rect`函数还存储属性`draw`和`overcheck`的离开值。到目前为止，您所看到的并不明显，但是这些值将用于调用名为`drawrect`和`overrect`的函数。这是为程序员定义的对象指定方法的方式。最后，`color`属性被设置为“`red`”。存在指定颜色的其他可能性。
+
+## 卵形的
+
+接下来，`Oval`的构造函数是类似的。
+
+```js
+function Oval(x,y,r,hor,ver,c) {
+        this.x = x;
+        this.y = y;
+        this.r = r;
+        this.radsq = r*r;
+        this.hor = hor;
+        this.ver = ver;
+        this.draw = drawoval;
+        this.color = c;
+        this.overcheck = overoval;
+}
+```
+
+`x`和`y`值是指椭圆的中心。`hor`和`ver`属性将分别用于缩放水平轴和垂直轴，并根据值生成一个不是圆的椭圆。在`overoval`功能中，计算并存储`radsq`属性以节省时间。
+
+### 注意
+
+电脑速度很快，我通过储存然后用半径的平方来显示我的年龄。尽管如此，为了节省计算时间而进行额外存储的权衡可能是合理的。
+
+设置蓝绿色椭圆形的一种方法是：
+
+```js
+var oval1 = new Oval(200,30,20,2.0,1.0, "teal");
+```
+
+紫色圆圈的`hor`和`ver`值相同，圆圈也是如此。你完全有权利询问如何或在哪里使用这些信息来产生一个椭圆或圆。答案就在后面将要展示的`drawoval`函数中。类似地，`overoval`函数检查给定的 x，y 位置是否在椭圆上。
+
+## 画
+
+对象的构造函数存储位置、宽度和高度，以及图像对象的名称。
+
+```js
+function Picture(x,y,w,h,imagename) {
+        this.x = x;
+        this.y = y;
+        this.w = w;
+        this.h = h;
+        this.imagename = imagename;
+        this.draw = drawpic;
+        this.overcheck = overrect;
+}
+```
+
+设置一张图片需要下面的代码，设置一个`Image`变量，然后是`Picture`对象：
+
+```js
+var dad = new Image();
+dad.src = "daniel1.jpg";
+var pic1 = new Picture(10,100,100,100,dad);
+```
+
+## 视频块
+
+`Videoblock`的构造函数提供了相当大的灵活性。视频可以倾斜一个角度(虽然我选择不这样做的猴子酒吧视频剪辑)。可以控制音频的音量。如果您决定包含多个视频，并且所有视频都有音频，您可能需要控制音量。视频可以缩放。`sx`和`sy` ( `s`表示信号源)允许我指定从视频中的哪个位置开始提取要显示的视频。`x`和`y`指定画布中的位置，而`w`和`h`指定最终的宽度和高度。`alpha`参数可用于设置视频的不同透明度。对于视频，我坚持设置为 1，没有透明度，但是我的代码确实提供了一种使视频看起来比其他元素更亮的方法。这应该作为一个通知，以调查结合图像和属性，如`globalAlpha`。
+```
+
+```markdown
+## 心
+
+我们还要介绍一个程序员定义的对象。我给自己设定的挑战是定义指定心形的值。我得出了以下结论：心形由位置定义——一对 `x`，`y` 值，它们将是心脏裂口的位置；从裂缝到底点的距离；以及代表心脏弯曲部分的两个部分圆的半径。你可以认为这是一颗规范的心。关键信息如图 2-3 所示。如果向应用程序添加新类型的形状，您将需要发明或发现定义该形状的数据。
+
+![img/272384_2_En_2_Fig3_HTML.jpg](img/272384_2_En_2_Fig3_HTML.jpg)
+
+图 2-3 定义心脏的数据
+
+构造函数将指示的值和颜色一起保存到任何新构造的对象中。你可能会怀疑绘图和检查会比矩形的函数更复杂，你是对的。构造函数类似于另一个构造函数。
+
+```js
+function Heart(x,y,h,drx,color) {
+        this.x = x;
+        this.y = y;
+        this.h = h;
+        this.drx = drx;
+        this.radsq = drx*drx;
+        this.color = color;
+        this.draw = drawheart;
+        this.overcheck = overheart;
+        this.ang = .25*Math.PI;
+}
+```
+
+属性是我两面下注的一个例子。你注意到它是一个常量，我可以避免把它变成一个属性。稍后当我解释 `drawheart` 我的编码如何使用它来使心脏变圆时，你会看到。我把它作为一个属性，以防万一我想改变，让心脏有更多的可变性。
+
+## 创建元素
+
+至此，我已经向您展示了对象的规范以及如何创建对象，但是我还没有向您展示从规范到创建的代码。这是在我的 `createelements` 函数中完成的。注意使用元素类型来决定动作的 `switch` 语句。最复杂的案例是视频，其次是 `picture`。我的代码需要创建一个 HTML 视频元素，这是通过在我的代码创建的名为 `videomarkup` 的字符串中插入视频文件的名称来完成的。反过来，`videomarkup` 是通过组合三个变量创建的：`videotext1`、`videotext2` 和 `videotext3`。我可以只用一个，但是初始化它们的语句会很长。使用 JavaScript 提供的名为 `replace` 的 `String` 方法来插入名称。这是所谓的*正则表达式*的完整实现的一部分。视频案例也有两个对 `addEventListener` 的调用。针对事件 `loadeddata` 的一个调用用于等待所有视频完全加载。针对事件 `ended` 的另一个调用调用了 `restart` 函数。这对于不支持循环的浏览器是必要的。所有案例都包含一个将元素添加到名为 `stuff` 的数组中的语句。
+
+```js
+function createelements() {
+      var name;
+      var i;
+      var type;
+      var divelement;
+      var videomarkup;
+      var velref;
+      var vb;
+      var imgdummy;
+
+      for (i=0;i<mediainfo.length;i++) {
+             type = mediainfo[i].shift();  //removes 1st element from array
+          info = mediainfo[i];
+
+             switch(type) {
+              case 'video':
+               videocount++;
+               name = info[0];
+            divelement= document.createElement("div");
+                   videomarkup = videotext1+videotext2+videotext3;
+                   videomarkup = videomarkup.replace(/XXXX/g,name);
+                   divelement.innerHTML = videomarkup;
+                   document.body.appendChild(divelement);
+                   velref = document.getElementById(name);
+                   velref.addEventListener("ended",restart,false);
+                   velref.addEventListener("loadeddata",videoloaded,false);
+       vb = new Videoblock(info[2],info[3],info[4],info[5],info[6],info[7],info[8],velref,info[9],info[1],info[10]);
+                   stuff.push(vb);
+                   break;
+              case 'picture':
+               imgdummy = new Image();
+               imgdummy.src = info[4];
+               images.push(imgdummy);
+               stuff.push( new Picture(info[0],info[1],info[2],info[3],images[images.length-1]));
+
+               break;
+              case 'heart':
+                stuff.push(new Heart(info[0],info[1],info[2],info[3],info[4]));
+                break;
+              case 'oval':
+                stuff.push(new Oval(info[0],info[1],info[2],info[3],info[4],info[5]));
+              break;
+              case 'rect':
+                stuff.push(new Rect(info[0],info[1],info[2],info[3],info[4]));
+              break;
+             }
+
+        }
+
+}
+```
+
+## 图画
+
+我仍然需要解释为每个不同类型的元素完成 `draw` 方法的函数，但是为了演示所有这些是如何一起工作的，让我们先来看看绘制是在哪里完成的。我定义了一个数组，最初是空的
+
+```js
+var stuff = [];
+```
+
+`createelements` 函数调用数组 `push` 方法将每个元素添加到数组中。
+
+在适当的时候，即在任何变化之后，调用函数 `drawstuff`。它的工作方式是擦除画布，绘制一个矩形来制作一个框架，然后遍历 `stuff` 数组中的每个元素并调用 `draw` 方法。该功能是
+
+```js
+function Videoblock(sx,sy,x,y,w,h,scale,videoel,volume,angle,alpha) {
+      this.sx = sx;
+      this.sy = sy;
+      this.x = x;
+      this.y = y;
+      this.w = w;
+      this.h = h;
+      this.videoelement = videoel;
+      this.volume = volume;
+      this.draw = drawvideo;
+      this.overcheck = overvideo;  //need more complex checking because of angle and scale
+      this.angle = angle;
+      this.cosine = Math.cos(angle);
+      this.sine = Math.sin(angle);
+      this.scale = scale;
+      this.alpha = alpha;
+      videoel.volume = 0;
+}
+```
+```
+
+```markdown
+### 检查对象上的鼠标
+
+```js
+function drawstuff() {
+        ctx.clearRect(0,0,800,600);
+        ctx.strokeStyle = "black";
+        ctx.lineWidth = 2;
+        ctx.strokeRect(0,0,800,600);
+        for (var i=0;i<stuff.length;i++) {
+                stuff[i].draw();
+        }
+}
+```
+
+注意，没有代码会问，这是一个椭圆吗，如果是这样做，还是一张图片，如果是这样做....相反，为数组的每个成员建立的`draw`方法完成了它的工作！当检查一个位置(鼠标)是否在一个对象上时，同样的魔法也会发生。随着更多对象类型的添加，这种方法的好处也会增加。
+
+我确实意识到，由于我的代码从不改变`strokeStyle`或`lineWidth`，我可以将这些语句移到`init`函数中，只做一次。然而，我想到我可能有一个形状会改变这些值，所以为了准备以后应用程序中可能的改变，我在`drawstuff`中设置了`strokeStyle`和`lineWidth`。
+
+现在我将解释绘制的方法和检查对象上是否有位置的方法。`drawrect`函数非常简单:
+
+```js
+function drawrect() {
+        ctx.fillStyle = this.color;
+        ctx.fillRect(this.x, this.y, this.w, this.h);
+}
+```
+
+记住术语`this`指的是`drawrect`作为方法的对象。`drawrect`函数是矩形的方法。
+
+`drawoval`函数稍微复杂一点，但仅仅是稍微复杂一点。您需要回忆一下坐标变换是如何工作的。HTML5 JavaScript 只允许圆弧，但允许缩放坐标以生成不是圆的椭圆。`drawoval`函数中的代码所做的是保存坐标系的当前状态，然后执行向对象中心的平移。然后应用缩放变换，使用`hor`和`ver`属性。现在，在将`fillStyle`设置为`color`属性中指定的颜色后，我使用代码绘制一条由圆弧组成的路径并填充该路径。圆弧可以是圆的一部分，具有指定的开始和结束角度，true 表示逆时针方向。对于顺时针方向，默认值为 false。对于一个完整的圆，也就是这里指出的，我可以省略 true，因为它和 false 有相同的结果。参见心脏的编码，其方向至关重要。最后一步是恢复坐标系的原始状态。
+
+```js
+function drawoval() {
+        ctx.save();
+        ctx.translate(this.x,this.y);
+        ctx.scale(this.hor,this.ver);
+        ctx.fillStyle = this.color;
+        ctx.beginPath();
+        ctx.arc(0,0,this.r,0,2*Math.PI,true);
+        ctx.closePath();
+        ctx.fill();
+        ctx.restore();
+}
+```
+
+这就是在画布上画出可能是圆也可能不是圆的椭圆的方式。由于我的代码恢复了坐标系统的原始状态，这具有撤销缩放和平移转换的效果。
+
+同样，以`this`开头的术语后跟一个点，然后是引用存储属性的属性名。
+
+### 注意
+
+请记住，我没有计划和编程这整个应用程序一次。我画了长方形和椭圆形，然后添加了图片，很久以后才添加了心形。我还在很久以后添加了复制操作和删除操作。分阶段工作才是正确的做法。计划很重要也很有用，但是你不必一开始就把所有的细节都做好。
+
+`drawheart`函数从定义稍后使用的变量开始。`leftctrx`是左圆弧中心的 x 坐标，`rightctrx`是右圆弧中心的 x 坐标。每个圆弧都超过半个圆。多了多少？我决定将它设为`.25* Math.PI`，并将这个值存储在`ang`属性中。
+
+棘手的事情是确定弧线在右侧的终止位置。我的代码使用 trig 表达式来设置`cx`和`cy`值。`cx,cy`位置是圆弧与直线相交的地方。图 2-4 表示变量的含义。
+
+![img/272384_2_En_2_Fig4_HTML.jpg](img/272384_2_En_2_Fig4_HTML.jpg)
+
+图 2-4
+
+添加了函数中使用的数据
+
+路径将从我们称之为裂缝或乳沟(咯咯笑)的地方开始，并在左边画出弧线。然后它会画一条线到底点，再往上到`cx,cy`点，然后以右边的弧线结束。该函数如下所示:
+
+```js
+function drawheart() {
+        var leftctrx = this.x-this.drx;
+        var rightctrx = this.x+this.drx;
+        var cx = rightctrx+this.drx*Math.cos(this.ang);
+        var cy = this.y + this.drx*Math.sin(this.ang);
+        ctx.fillStyle = this.color;
+        ctx.beginPath();
+        ctx.moveTo(this.x,this.y);
+        ctx.arc(leftctrx,this.y,this.drx,0,Math.PI-this.ang,true);
+        ctx.lineTo(this.x,this.y+this.h);
+        ctx.lineTo(cx,cy);
+        ctx.arc(rightctrx,this.y,this.drx,this.ang,Math.PI,true);
+        ctx.closePath();
+        ctx.fill();
+}
+```
+
+画图画是直截了当的。对于图片和视频，如果一个对象在另一个对象之上，我提供了一种生成合成图的方法。
+
+```js
+function drawpic() {
+    ctx.globalAlpha = 1.0;
+    ctx.drawImage(this.imagename,this.x,this.y,this.w,this.h);
+}
+```
+
+视频块的绘制更为复杂，因为需要将视频放在一个角度并进行缩放。了解正在绘制的是视频剪辑的当前帧也很重要。这是使用 canvas 元素的`drawimage`方法完成的。
+
+```js
+function drawvideo() {
+      var savedalpha = ctx.globalAlpha;
+      ctx.globalCompositeOperation = "lighter";
+      ctx.globalAlpha = this.alpha;
+   if (this.angle!=0) {
+      ctx.save();
+      ctx.translate(this.x,this.y);
+      ctx.rotate(this.angle);
+      ctx.translate(-this.x,-this.y)
+      if (this.scale!=1) {
+
+             ctx.scale(this.scale,this.scale); }
+      ctx.drawImage(this.videoelement,this.sx,this.sy,this.w,this.h,this.x,this.y, this.w, this.h);
+
+      ctx.restore();
+
+      }
+      else {
+             if (this.scale!=1) {
+                   ctx.save();
+                   ctx.scale(this.scale,this.scale);
+
+       ctx.drawImage(this.videoelement,this.sx,this.sy,this.w,this.h,this.x,this.y, this.w, this.h);
+
+                   ctx.restore();
+
+             }
+             else {
+       ctx.drawImage(this.videoelement,this.sx,this.sy,this.w,this.h,this.x,this.y, this.w, this.h);
+             }
+      }
+      ctx.globalAlpha = savedalpha;
+      ctx.globalCompositeOperation = savedgco;
+}
+```
+```
+
+## overcheck 方法概述
+
+在描述 `overcheck` 方法的函数之前，我将预览一下为什么需要它。HTML5 和 JavaScript 提供了处理（监听和响应）画布上鼠标事件的方法，并提供事件发生的坐标。然而，我们的代码必须完成确定所涉及的对象的工作。记住：画布上实际上没有物体，只有残余物，把它想象成颜料，不管画的是什么。我的代码通过遍历 `stuff` 数组并为每个对象调用 `overcheck` 方法来完成这项任务。只要有一个命中（我稍后会解释这个操作的顺序），我的代码就会按照所选的对象继续执行。发生这种检查的函数是 `startdragging` 和 `makenewitem`，将在下一节中解释。
+
+因为 `Picture` 和 `Rect` 指的是同一个函数，所以 `overcheck` 方法有四个函数要解释。每个函数都有两个参数。把 `mx`、`my` 想象成鼠标的位置。
+
+### overrect 函数
+
+`overrect` 功能检查四个条件是否都为真。英文中的问题是：`mx` 是否大于等于 `this.x` *是否小于等于 `this.x + this.w` *是否大于等于 `this.y` *是否小于等于 `this.y + this.h`？该函数更简洁地说明了这一点：
+
+```js
+function overrect (mx,my) {
+        return (
+             (mx>=this.x)&&(mx<=(this.x+this.w))&&(my>=this.y)&&(my<=(this.y+this.h)));
+}
+```
+
+### overoval 函数
+
+为椭圆定义 `overcheck` 方法的函数是 `overoval`。`overoval` 功能执行检查某物是否在一个圆内的操作，但在一个平移和缩放的坐标系中。通过将圆心设置为 `x1,y1` 并将点设置为 `x2,y2` 并查看两者之间的距离是否小于半径，可以检查一个点是否在圆内。为了节省时间，我用了一种不同的方法来比较距离的平方和半径的平方。我定义了一个名为 `distsq` 的函数，它返回距离的平方。但是现在我需要弄清楚如何在一个平移和缩放的坐标系中做到这一点。答案是将 `x1,y1` 设置为 0，0。这是椭圆中心在转换坐标系中的位置。然后，我的代码将代码中指示的 `x2` 和 `y2` 设置为缩放后的值。
+
+```js
+function overoval(mx,my) {
+        var x1 = 0;
+        var y1 = 0;
+        var x2 = (mx-this.x)/this.hor;
+        var y2 = (my-this.y)/this.ver;
+        if (distsq(x1,y1,x2,y2)<=(this.radsq) ){
+                return true
+        }
+        else {return false}
+}
+```
+
+这不是我立即想到的。我通过尝试相对于椭圆中心位于不同位置的 `mx` 和 `my` 的值算出了它。代码确实代表了转换在平移和缩放方面所做的事情。
+
+### overheart 函数
+
+`overheart` 函数由几个不同的 `if` 语句组成。这是一个不是为了一个简单的表达，而是考虑各种情况的例子。该函数从设置稍后要使用的变量开始。该函数进行的第一项检查是确定 `mx,my` 点是否在作为心脏边界矩形的矩形之外。我编写了 `outside` 函数，如果最后两个参数指定的位置在前四个参数指示的矩形之外，则返回 true。`qx,qy` 点是左上角。`qwidth` 是最宽处的宽度，`qheight` 是总高度。我认为这是一个快速检查，大多数情况下会返回 false。接下来的两个 `if` 语句决定了 `mx,my` 点是否包含在任一圆内。也就是说，我再次使用从 `mx,my` 到每个弧的中心的距离的平方与存储的 `radsq` 属性的比较。在函数的这一点上，也就是说，如果 `mx,my` 位置没有足够靠近任一圆的中心，并且如果 `my` 高于（小于）`this.y`，则代码返回 false。最后，代码将 `mx` 值放入每条斜线的等式中，并将结果与 `my` 进行比较。直线的方程可以用斜率 `m` 和直线上的一点 `x2,y2` 来写（注意：这是数学，不是编程）：
+
+```
+y = m * (x – x2) + y2
+```
+
+代码为左边的行设置 `m` 和 `x2,y2`，然后通过改变 `m` 的符号来修改它以适用于右边的行。该检查是为 `x` 设置为 `mx`，是我小于所示的表达式。这里一个可能的问题是屏幕坐标系具有颠倒的垂直值（垂直值沿屏幕向下增加）是否会引起问题。我查了案例，代码是有效的。
+
+```js
+function overheart(mx,my) {
+        var leftctrx = this.x-this.drx;
+        var rightctrx = this.x+this.drx;
+        var qx = this.x-2*this.drx;
+        var qy = this.y-this.drx;
+        var qwidth = 4*this.drx;
+        var qheight = this.drx+this.h;
+
+//quick test if it is in bounding rectangle
+        if (outside(qx,qy,qwidth,qheight,mx,my)) {
+
+                return false;}
+//compare to two centers
+
+  if (distsq(mx,my,leftctrx,this.y)<this.radsq) return true;
+  if (distsq(mx,my,rightctrx,this.y)<this.radsq) return true;
+// if outside of circles AND below (higher in the screen) than this.y, return false
+  if (my<this.y) return false;
+
+// compare to each slope
+ var x2 = this.x;
+ var y2 = this.y + this.h;
+ var m = (this.h)/(2*this.drx);
+// left side
+ if (mx<=this.x) {
+         if (my < (m*(mx-x2)+y2)) {return true;}
+         else { return false;}
+ }
+ else {
+//right side
+ m = -m;
+
+ if (my < (m*(mx-x2)+y2)) { return true}
+ else return false;
+ }
+}
+```
+
+### outside 函数
+
+`outside` 函数的推理类似于 `overrect` 函数。您需要编写代码来比较 `mx,my` 值和矩形的边长。然而，对于 `outside`，我选择使用 `OR` 操作符 `||`，并返回它的值。如果任何一个因素为真，这将是真的，否则为假。
+
+```js
+function outside(x,y,w,h,mx,my) {
+        return ((mx<x) || (mx > (x+w)) || (my < y) || (my > (y+h)));
+}
+```
+
+实际上，我说的是真的，但是忽略了如果性能是一个问题的话可能是一个重要的考虑因素。`||` 从第一个（最左边）条件开始评估每个条件。只要其中一个为真，它就停止计算并返回真。`&&` 操作符做类似的事情。只要其中一个条件为假，它就返回假。
+
+### overvideo 函数
+
+`overvideo` 功能必须考虑角度和比例。
+
+# 画布对象与用户交互
+
+```js
+function overvideo (mx,my) {
+  //need to add code to check in rotation case and scaling
+             omx = mx;
+             omy = my;
+
+    if (this.angle!=0) {
+             omx = omx-this.x;
+             omy = omy - this.y;
+             mx = omx*this.cosine + omy*this.sine;
+             my = -omx*this.sine + omy*this.cosine;
+             mx = this.x +mx;
+             my = this.y + my;
+
+       }
+       if (this.scale!=1) {
+             //alert("prescaling mx is "+mx+" prescaling my is "+my);
+             mx = mx/this.scale;
+             my = my/this.scale;
+             //alert("post scaling mx is "+mx+" post scaling my is "+my);
+       }
+       return (
+        (mx>=this.x)&&(mx<=(this.x+this.w))&&(my>=this.y)&&(my<=(this.y+this.h)));
+
+}
+```
+
+这是我为在画布上操作而设计的五种对象的基础。您可以向前看，检查所有代码，或者继续查看这些对象是如何在对鼠标事件的响应中使用的。
+
+### 注意
+
+这个例子没有展示面向对象编程的全部能力。在 `Java` (或为艺术家设计的变体处理) 这样的语言中，我可以用这种方式编写程序，以检查每个附加对象是否定义正确，也就是用 `x` 和 `y` 属性表示位置，用方法表示绘制和检查。
+
+### 用户界面
+
+用户界面的应用要求包括拖动，即鼠标按下、鼠标移动和鼠标抬起，用于重新定位项目和双击以产生项目的副本。我决定对其他终端用户操作使用按钮:从画布中移除一个项目并创建一个要保存的图像。按钮操作非常简单。我编写了 `HTML5` 按钮元素的两个实例，并将 `onClick` 属性设置为适当的函数。
+
+```js
+<button onClick="saveasimage();">Open window with image (which you can save into image file)
+ </button></br>
+<button onClick="removeobj();">Remove last object moved </button>
+```
+
+下一节将解释 `saveasimage` 功能。`removeobj` 函数从 `stuff` 数组中删除最后移动的对象，因为最后移动的对象已经被定位为数组中的最后一个元素。这使得编码极其简单:
+
+```js
+function removeobj() {
+        stuff.pop();
+        drawstuff();
+}
+```
+
+任何数组的一个 `pop` 删除最后一个元素。然后，该函数调用 `drawstuff` 函数来显示除最后一个元素之外的所有元素。顺便说一句，如果在应用程序开始时点击按钮，在 `stuff` 数组上按下的最后一个元素将被删除。如果这是不可接受的，您可以添加一个检查来防止这种情况发生。代价是用户每次点击按钮都需要这样做。
+
+幸运的是，`HTML5` 提供了这个应用程序需要的鼠标事件。在 `init` 函数中，我包含了以下几行:
+
+```js
+   canvas1 = document.getElementById('canvas');
+   canvas1.onmousedown = function () { return false; };
+   canvas1.addEventListener('dblclick',makenewitem,false);
+   canvas1.addEventListener('mousedown',startdragging,false);
+```
+
+第一条语句设置 `canvas1` 变量来引用 `canvas` 元素。第二条语句是关闭光标的默认操作所必需的。我还为画布添加了一个样式指令，它使定位成为绝对的，然后将画布定位在距离顶部 80 像素的位置。这对于方向和按钮来说是足够的空间。
+
+```js
+canvas {position:absolute; top:80px;
+  cursor:crosshair;
+}
+```
+
+第三和第四个语句为双击和 `mouse button down` 事件设置事件处理。我们应该意识到，作为程序员，我们不必编写代码来区分鼠标按下、单击和双击。然而，不幸的是，双击会同时调用 `makenewitem` 函数和 `startdragging` 函数。在这种情况下，这没什么，但在未来的工作中一定要意识到这一点。
+
+`makenewitem` 和 `startdragging` 功能开始时相同。代码首先确定鼠标光标的坐标，然后遍历 `stuff` 数组来确定哪个对象被点击了。你可能以前在 `HTML5` 的基本指南中见过鼠标光标坐标代码，例如。以相反的顺序循环数组。调用 `overcheck` 方法，为不同类型的对象适当地定义。如果命中，那么 `makenewitem` 函数调用 `clone` 函数来复制该项。代码稍微修改了 `x` 和 `y`，这样新的项目就不会直接位于原始项目之上。新的项目被添加到数组中，并且有一个断点离开 `for` 循环。
+
+```js
+function makenewitem(ev) {
+        var mx;
+        var my;
+        if (ev.layerX ||  ev.layerX == 0) {
+                mx= ev.layerX;
+                my = ev.layerY;
+                } else if (ev.offsetX || ev.offsetX == 0) {
+                          mx = ev.offsetX;
+                          my = ev.offsetY;
+                }
+        var endpt = stuff.length-1;
+        var item;
+        for (var i=endpt;i>=0;i--) {  //reverse order
+                if (stuff[i].overcheck(mx,my)) {
+                   item = clone(stuff[i]);
+                   item.x +=20;
+                   item.y += 20;
+                   stuff.push(item);
+                   break;
+                }
+        }
+}
+```
+
+如前所述，`clone` 函数复制了 `stuff` 数组中的一个元素。你可能会问，为什么不直接写呢
+
+```js
+         item = stuff[i];
+```
+
+答案是，这种分配并没有创造新的、独特的价值。`JavaScript` 只是将 `item` 变量设置为指向与 `stuff` 的第 `i` 个成员相同的东西。这叫做“引用复制”。我们不想那样。我们想要一个全新的、独立的、我们可以改变的东西。复制的方法在 `clone` 功能中演示。创建一个新对象，然后调用一个 `for` 循环。`for(var info in obj)` 说:对于 `obj` 的每一个属性，将 `item` 中的一个同名属性设置为该属性的值。
+
+```js
+function clone(obj) {
+        var item = new Object();
+        for (var info in obj) {
+                item[info] = obj[info];
+        }
+        return item;
+}
+```
+
+所以这两个函数的作用是复制鼠标光标下的任何元素。然后，您或您的最终用户可以将鼠标放在原始或克隆的对象上，并四处移动它。
+
+`startdragged` 功能按照指示进行，以确定哪个对象在鼠标下面。然后，代码确定我(和其他人)所说的鼠标坐标在 `x` 和 `y` 方向相对于对象的 `x`，`y` 位置的偏移量。这是因为我们希望对象四处移动，保持对象和鼠标之间的关系不变。有些人称之为捕蝇纸效应。这就好像鼠标光标落在对象上，像捕蝇纸一样粘在上面。`offsetx` 和 `offsety` 是全局变量。请注意，编码适用于 `x`、`y` 值指向左上角(图片和矩形)、中心(椭圆形)和特定内部点(心形)的对象。
+
+然后，代码执行一系列操作，将该对象移动到数组的末尾。第一条语句是设置变量`item`的引用复制操作。下一步将填充数组最后一个元素的索引保存到全局变量`thingInMotion`。该变量将被`moveit`函数使用。`splice`语句删除原始元素，`push`语句将它添加到数组的末尾。引用游标的语句是指定游标的方式。“指针”指的是其中一个内置选项。函数中的最后两条语句设置了移动鼠标和释放鼠标按钮的事件处理。该事件处理将在`dropit`功能中移除。
+
+```js
+function startdragging(ev) {
+        var mx;
+        var my;
+        if (ev.layerX ||  ev.layerX == 0) {
+                        mx= ev.layerX;
+                my = ev.layerY;
+                } else if (ev.offsetX || ev.offsetX == 0) {
+                mx = ev.offsetX;
+                my = ev.offsetY;
+                }
+        var endpt = stuff.length-1;
+        for (var i=endpt;i>=0;i--) {  //reverse order
+                if (stuff[i].overcheck(mx,my)) {
+                offsetx = mx-stuff[i].x;
+                 offsety = my-stuff[i].y;
+                 var item = stuff[i];
+                 thingInMotion = stuff.length-1;
+                 stuff.splice(i,1);
+                 stuff.push(item);
+                 canvas1.style.cursor = "pointer";   // change to finger
+                 canvas1.addEventListener('mousemove',moveit,false);
+                 canvas1.addEventListener('mouseup',dropit,false);
+                 break;
+                }
+        }
+}
+```
+
+`moveit`函数移动由`thingInMotion`引用的对象，并使用`offsetx`和`offsety`变量移动对象。调用`drawstuff`函数来显示修改后的画布。
+
+```js
+function moveit(ev) {
+        var mx;
+        var my;
+        if ( ev.layerX ||  ev.layerX == 0) {
+                mx= ev.layerX;
+                my = ev.layerY;
+                } else if (ev.offsetX || ev.offsetX == 0) {
+                mx = ev.offsetX;
+                my = ev.offsetY;
+                }
+        stuff[thingInMotion].x = mx-offsetx; //adjust for flypaper dragging
+        stuff[thingInMotion].y = my-offsety;
+  }
+```
+
+如果鼠标向任何方向移动一个像素，就会触发一个`mousemove`事件。如果这看起来太多了，请记住是计算机做的，而不是你或我。用户移动鼠标会得到平滑的响应。
+
+在`mouseup`事件时调用`dropit`功能。响应是移除、停止移动和释放鼠标的监听，然后将光标变回十字光标。
+
+```js
+function dropit(ev) {
+        canvas1.removeEventListener('mousemove',moveit,false);
+        canvas1.removeEventListener('mouseup',dropit,false);
+        canvas1.style.cursor = "crosshair";  //change back to crosshair
+}
+```
+
+总而言之，这个应用程序的用户界面包括两个按钮和几个鼠标动作。拖放操作是通过按下鼠标、移动鼠标和抬起鼠标来实现的，克隆对象是通过双击来完成的。
+
+### 将画布存储到图像
+
+创建合成后，我为用户提供了一种将它保存到图像文件的方法。火狐浏览器让这变得简单。使用 PC 时，您可以在画布上单击鼠标右键，或者在 Mac 上执行相同的操作，会出现一个弹出菜单，其中包含将图像另存为的选项...然而，Chrome、Safari 和 Opera 不提供这种功能。如果右键单击，这些选项与 HTML 文档有关。然而，HTML5 中提供了一种替代方案，适用于 Firefox，或许还适用于其他浏览器。对 Chrome 的支持随着最近的更新而改变。
+
+canvas 元素有一个名为`toDataURL`的方法，它将从 canvas 中产生一个图像。该方法提供了图像文件类型的选择，包括 PNG 和 JPG。我选择对这个操作的结果做的是编写代码来打开一个以图像为内容的新窗口。然后，用户可以通过保存文件选项或右键单击图像，将该图像保存为文件。但是，还有一个考虑。Firefox 要求这段代码在服务器上运行，而不是在客户端计算机上运行。客户端计算机是运行浏览器程序的计算机。服务器计算机将是网站，你将上传你完成的工作。你可能有也可能没有。Opera 和 Safari 允许代码从客户端电脑运行。这对测试有影响，因为一般来说，我们在本地测试程序，然后上传到服务器。由于这种情况，这是使用 JavaScript 的`try`/`catch`工具捕捉错误(可以这么说)以便程序员采取行动的合适地方。下面是`saveasimage`函数的代码。变量`canvas1`已被设置为加载文档时调用的`init`函数中的 canvas 元素。
+
+```js
+function saveasimage() {
+ try {
+  window.open(canvas1.toDataURL("image/png"));}
+  catch(err) {
+          alert("You need to change browsers AND/OR upload the file to a server.");
+  }
+}
+```
+
+## 构建应用程序并使之成为您自己的应用程序
+
+您可以通过识别您自己的媒体文件，指定您想要在要操作的对象集合中包括哪些矩形、椭圆形和心形，并在您完成一些工作后，添加新的对象类型，来使该应用程序成为您自己的应用程序。该应用程序有许多功能，但每个功能都很小，并且许多功能与其他功能具有相同的属性。申请的非正式摘要/大纲如下：
+
+1.  `init`用于初始化，包括`createelement`函数，设置双击、鼠标按下、鼠标移动和鼠标抬起的事件处理。
+
+2.  对象定义方法:构造函数、绘制函数和检查函数。
+
+3.  事件处理功能:鼠标事件和按钮`onClick`。
+
+更正式的说法是，表 2-1 列出了所有的函数，并指出它们是如何被调用的以及它们调用了哪些函数。请注意，由于函数被指定为对象类型的方法，因此会调用几个函数。
+
+**表 2-1**
+
+*html 5 家庭剪贴画项目中的函数*
+
+| 功能 | 调用/调用者 | 打电话 |
+| :--- | :--- | :--- |
+| `init` | 由标签`<body>`中的`onLoad attribute`动作调用 | `Picture`、`Rect, Oval`、`Heart`、`drawstuff` |
+| `saveasimage` | 由按钮标签中的`onClick`属性的动作调用 |   |
+| `removeobj` | 由按钮标签中的`onClick`属性的动作调用 | `drawstuff` |
+| `createelements` | 由`init`调用 | `Videoblock`、`Picture`、`Rect`、`Oval`、`Heart` |
+| `restart` | 由`createelements`中`addEventListener`的动作调用 |   |
+
+# 函数调用关系
+
+| 函数名 | 调用位置 | 备注 |
+| :--- | :--- | :--- |
+| `videoloaded` | 由`createelements`中`addEventListener`的动作调用 | |
+| `loading` | 由`init`中`setInterval`的动作调用 | |
+| `Picture` | 在`createelements`功能中调用 | |
+| `Rect` | 在`createelements`功能中调用 | |
+| `Oval` | 在`createelements`功能中调用 | |
+| `Heart` | 在`createelements`功能中调用 | |
+| `Videoblock` | 在`createelements`功能中调用 | |
+| `drawheart` | 在`drawstuff`中调用 | |
+| `drawrect` | 在`drawstuff`中调用 | |
+| `drawoval` | 在`drawstuff`中调用 | |
+| `drawpic` | 在`drawstuff`中调用 | |
+| `drawvideo` | 在`drawstuff`中调用 | |
+| `overheart` | 在`startdragging`和`makenewitem`中调用 | `distsq`, `outside` |
+| `overrect` | 在`startdragging`和`makenewitem`中调用 | |
+| `overoval` | 在`startdragging`和`makenewitem`中调用 | `distsq` |
+| `overvideo` | 在`startdragging`和`makenewitem`中调用 | |
+| `distsq` | 由`overheart`和`overoval`调用 | |
+| `drawstuff` | 加载时由`makenewitem`、`removeobj`、`init`和`setInterval`动作调用 | 填充数组中每一项的绘制方法 |
+| `moveit` | 由在`startdragging`中设置的`mousemove`的`addEventListener`设置的动作调用 | |
+| `dropit` | 由在`startdragging`中设置的`mouseup`的`addEventListener`设置的动作调用 | |
+| `outside` | 由`overheart`调用 | |
+| `makenewitem` | 由在`init`中设置的`dblclick`的`addEventListener`设置的动作调用 | `clone` |
+| `clone` | 由`makenewitem`调用 | |
+| `startdragging` | 由`init`中设置的`mousedown`的`addEventListener`设置的动作调用 | |
+
+# 完整代码示例
+
+表 2-2 显示了基本应用程序的代码，每一行都有注释。
+
+**表 2-2 家庭剪贴画项目的完整代码**
+
+| 代码 | 说明 |
+| :--- | :--- |
+| `<!DOCTYPE html >` | HTML5 文档的标准标题 |
+| `<html>` | `html`标签 |
+| `<head>` | `head`标签 |
+| `<title>Collage, with video</title>` | 完整标题 |
+| `<meta charset="UTF-8">` | `meta`标签 |
+| `<style>` | 风格的开始 |
+| `canvas {position:absolute; top:80px;` | 指令，将其位置设置为绝对位置，其位置距离文档顶部 80 个像素 |
+| `cursor:crosshair;` | 指定鼠标在画布上时的光标图标 |
+| `}` | 关闭指令 |
+| `video {display:none;}` | 初调 |
+| `</style>` | 关闭样式 |
+| `<script type="text/javascript" src="collagedataV2.js"> </script>` | 外部脚本元素链接 |
+| `<script language="Javascript">` | 本地脚本标签 |
+| `var ctx;` | 变量来保存画布上下文 |
+| `var canvas1;` | 保存对画布的引用的变量 |
+| `var stuff = [];` | 画布上所有对象的数组 |
+| `var thingInMotion;` | 对被拖动对象的引用 |
+| `var offsetx;` | 被拖动对象的水平偏移量 |
+| `var offsety;` | 被拖动对象的垂直偏移量 |
+| `var tid;` | 为周期性重画画布保存定时标识符。 |
+| `var savedgco;` | 存储以前的合成值 |
+| `var images = [];` | 保存图像 |
+| `var videotext1 = "<video id=\"XXXX\"  preload=\"auto\" loop=\"loop\" muted> <source src=\"XXXX.webm\" type=\'video/webm; codec=\"vp8, vorbis\"\'> ";` | 视频元素开始的模板`html`；注意静音属性 |
+| `var videotext2="<source src=\"XXXX.mp4\" type=\'video/mp4; codecs=\"avc1.42E01E, mp4a.40.2\"\'> <source src=\"XXXX.ogv\" type=\'video/ogg; codecs=\"theora, vorbis\"\'>";` | 视频元素中间的模板`html` |
+| `var videotext3="Your browser does not accept the video tag.</video>";` | 视频元素最后部分的模板`html` |
+| `function restart(ev) {` | 重新开始视频剪辑 |
+| `var v = ev.target;` | 刚刚结束的视频 |
+| `v.currentTime=0;` | 将当前时间设回 0 |
+| `v.play();` | 播放视频 |
+| `}` | 关闭重启 |
+| `var videocount =0;` | 跟踪要加载的视频的全局变量 |
+| `var okaytogo = false;` | 当所有视频加载后，将被更改为 true |
+| `function videoloaded(ev) {` | `videoloaded`功能的表头；为视频加载数据的事件的处理程序 |
+| `ctx.fillText(ev.target.id+" loaded.",400,100*videocount);` | 将信息放在屏幕上(不会在画布上停留太久) |
+| `ev.target.play();` | 开始播放视频 |
+| `videocount--;` | 减少仍待加载的视频数量 |
+| `if (videocount==0) {` | 当不再有... |
+| `okaytogo = true;` | 将`okaytogo`设置为真 |
+| `}` | 关闭真子句 |
+| `}` | 关闭`videoloaded`功能 |
+| `var textmsg = "Loading videos ";` | 视频仍在加载时出现消息 |
+| `function init() {` | `init`的标题 |
+| `canvas1 = document.getElementById('canvas');` | 设置变量以引用画布元素 |
+| `canvas1.onmousedown = function () { return false; };` | 防止将光标更改为默认值 |
+| `canvas1.addEventListener('dblclick',makenewitem,false);` | 设置双击的处理 |
+| `canvas1.addEventListener('mousedown',startdragging,false);` | 设置拖动开始的处理 |
+| `ctx = canvas1.getContext("2d");` | 设置变量以保存上下文 |
+| `savedgco = ctx.globalCompositeOperation;` | 保存初始`gco` |
+| `createelements();` | 调用`createlements`，它使用外部文件内容 |
+| `drawstuff();` | 画出材料中的所有元素 |
+| `ctx.fillText(textmsg,100,100);` | 编写表示等待视频的文本消息 |
+
+```javascript
+// 完整的JavaScript代码示例
+var ctx;
+var canvas1;
+var stuff = [];
+var thingInMotion;
+var offsetx;
+var offsety;
+var tid;
+var savedgco;
+var images = [];
+var videotext1 = "<video id=\"XXXX\"  preload=\"auto\" loop=\"loop\" muted> <source src=\"XXXX.webm\" type=\'video/webm; codec=\"vp8, vorbis\"\'> ";
+var videotext2="<source src=\"XXXX.mp4\" type=\'video/mp4; codecs=\"avc1.42E01E, mp4a.40.2\"\'> <source src=\"XXXX.ogv\" type=\'video/ogg; codecs=\"theora, vorbis\"\'>";
+var videotext3="Your browser does not accept the video tag.</video>";
+function restart(ev) {
+    var v = ev.target;
+    v.currentTime=0;
+    v.play();
+}
+var videocount =0;
+var okaytogo = false;
+function videoloaded(ev) {
+    ctx.fillText(ev.target.id+" loaded.",400,100*videocount);
+    ev.target.play();
+    videocount--;
+    if (videocount==0) {
+        okaytogo = true;
+    }
+}
+var textmsg = "Loading videos ";
+function init() {
+    canvas1 = document.getElementById('canvas');
+    canvas1.onmousedown = function () { return false; };
+    canvas1.addEventListener('dblclick',makenewitem,false);
+    canvas1.addEventListener('mousedown',startdragging,false);
+    ctx = canvas1.getContext("2d");
+    savedgco = ctx.globalCompositeOperation;
+    createelements();
+    drawstuff();
+    ctx.fillText(textmsg,100,100);
+}
+```
+
+# JavaScript 代码注释文档
+
+## `loading` 函数
+
+`loadid = setInterval(loading, 2000);` 为计时设置处理。
+
+`ctx.strokeStyle = "blue";` 设置边框颜色。
+
+`}` 关闭初始化。
+
+`function loading() {` 装载用割台。
+
+`if (okaytogo) {` 如果加载了所有视频。
+
+`clearInterval(loadid);` 停止计时。
+
+`tid = setInterval(drawstuff, 40);` 开始新的计时事件，每 40 毫秒绘制一次。
+
+`}` 如果`okaytogo`关闭。
+
+`else {` 其他。
+
+`textmsg += ".";` 给信息加一个点。
+
+`ctx.fillText(textmsg, 100, 100);` 写下信息。
+
+`}` 关闭 else。
+
+`}` 关闭加载功能。
+
+## `createelements` 函数
+
+`function createelements() {` `createelements`的标题。
+
+`var name;` 将保存媒体名称。
+
+`var i;` 用于操纵数组。
+
+`var type;` 将保持该类型。
+
+`var divelement;` 会按住`divelement`。
+
+`var videomarkup;` 将持有组合的`videomarkup`模板。
+
+`var velref;` 将举行裁判。任何新创建的视频元素。
+
+`var vb;` 将保存任何新创建的视频块。
+
+`var imgdummy;` 将保存任何新创建的图像变量。
+
+`for (i = 0; i < mediainfo.length; i++) {` 循环浏览所有内容。
+
+`type = mediainfo[i].shift();` 从数组中移除第一个元素。
+
+`info = mediainfo[i];` 保存第一个子数组(减去原来的第 0 个<sup>到第</sup>个元素)。
+
+`switch(type) {` 打开打字开关。
+
+`case 'video':` 视频案例。
+
+`videocount++;` 增加该计数，用于确定是否所有视频都已加载。
+
+`name = info[0];` 三个视频文件的基本名称。
+
+`divelement = document.createElement("div");` 创建一个`div`。
+
+`videomarkup = videotext1 + videotext2 + videotext3;` 制作模板。
+
+`videomarkup = videomarkup.replace(/XXXX/g, name);` 换入基本名称。
+
+`divelement.innerHTML = videomarkup;` 将结果放入`div`。
+
+`document.body.appendChild(divelement);` 添加到正文，使其成为文档的一部分；注意:它还不可见。
+
+`velref = document.getElementById(name);` 获取参考。
+
+`velref.addEventListener("ended", restart, false);` 开始已结束的事件。
+
+`velref.addEventListener("loadeddata", videoloaded, false);` 启动`loadeddata`事件。
+
+`vb = new Videoblock(info[2], info[3], info[4], info[5], info[6], info[7], info[8], velref, info[9], info[1], info[10]);` 创建`videoblock`元素。
+
+`stuff.push(vb);` 添加到填充数组。
+
+`break;` 退出`switch`。
+
+`case 'picture':` 相框。
+
+`imgdummy = new Image();` 创建一个`image`变量。
+
+`imgdummy.src = info[4];` 设置其`src`。
+
+`images.push(imgdummy);` 添加到图像数组。
+
+`stuff.push(new Picture(info[0], info[1], info[2], info[3], images[images.length - 1]));` 添加到填充数组。
+
+`break;` 退出交换机。
+
+`case 'heart':` 心脏病例。
+
+`stuff.push(new Heart(info[0], info[1], info[2], info[3], info[4]));` 创建`heart`对象并添加到素材中。
+
+`break;` 退出交换机。
+
+`case 'oval':` 椭圆形的箱子。
+
+`stuff.push(new Oval(info[0], info[1], info[2], info[3], info[4], info[5]));` 创建椭圆对象并添加东西。
+
+`break;` 退出`switch`。
+
+`case 'rect':` `rect`案件。
+
+`stuff.push(new Rect(info[0], info[1], info[2], info[3], info[4]));` 创建`rect`对象并添加到素材中。
+
+`break;` 退出交换机。
+
+`}` 关闭开关。
+
+`}` 关闭`for`回路。
+
+`}` 关闭`createelements`功能。
+
+## `distsq` 函数
+
+`function distsq(x1, y1, x2, y2) {` `distsq`的函数头。接受两个点(2x2 值)作为参数。
+
+```javascript
+//done to avoid taking square roots
+```
+
+`var xd = x1 - x2;` 设置 x 方向的差异。
+
+`var yd = y1 - y2;` 设置 y 方向的差异。
+
+`return ((xd * xd) + (yd * yd));` 返回平方和；这是两点间距离的平方。
+
+`}` 结束`distsq`功能。
+
+## `Videoblock` 构造函数
+
+`function Videoblock(sx, sy, x, y, w, h, scale, videoel, volume, angle, alpha) {` `videoblock`的标题。
+
+`this.sx = sx;` 保存源 x。
+
+`this.sy = sy;` 保存源 y。
+
+`this.x = x;` 将 x 保存在画布上。
+
+`this.y = y;` 在画布上保存 y。
+
+`this.w = w;` 保存宽度。
+
+`this.h = h;` 保存高度。
+
+`this.videoelement = videoel;` 保存对视频元素的引用。
+
+`this.volume = volume;` 保存卷。
+
+`this.draw = drawvideo;` 设置绘制方法。
+
+`this.overcheck = overvideo;` 由于角度和比例，需要更复杂的检查。
+
+`this.angle = angle;` 保存角度。
+
+`this.cosine = Math.cos(angle);` 预先计算余弦值。
+
+`this.sine = Math.sin(angle);` 预先计算正弦值。
+
+`this.scale = scale;` 保存秤。
+
+`this.alpha = alpha;` 保存 alpha。
+
+`videoel.volume = 0;` 保存卷。
+
+`}`
+
+## `overvideo` 函数
+
+`function overvideo(mx, my) {` `overvideo`的标题。
+
+```javascript
+//need to add code to check in rotation case and scaling
+```
+
+`omx = mx;` 储存鼠标 x。
+
+`omy = my;` 储存鼠标 y。
+
+`if (this.angle != 0) {` 角度不为 0 吗...需要进行更复杂的检查。
+
+`omx = omx - this.x;` 计算水平距离。
+
+`omy = omy - this.y;` 计算垂直差异。
+
+`mx = omx * this.cosine + omy * this.sine;` 多步调整角度。
+
+`my = -omx * this.sine + omy * this.cosine;`
+
+# JavaScript 对象与函数文档
+
+## `overvideo` 函数
+
+`mx = this.x + mx;`
+
+`my = this.y + my;`
+
+`}`
+
+`if (this.scale != 1) {` 现在调整缩放比例
+
+`alert("prescaling mx is " + mx + " prescaling my is " + my);`
+
+`mx = mx / this.scale;`
+
+`my = my / this.scale;`
+
+`}`
+
+`return ((mx >= this.x) && (mx <= (this.x + this.w)) && (my >= this.y) && (my <= (this.y + this.h)));` 现在可以做标准的矩形检查
+
+`}` 关闭 `overvideo`
+
+## `drawvideo` 函数
+
+`function drawvideo() {` `drawvideo` 的标题
+
+`var savedalpha = ctx.globalAlpha;` 保存电流 `globalAlpha`
+
+`ctx.globalCompositeOperation = "lighter";` 设定如何组合
+
+`ctx.globalAlpha = this.alpha;` 设置新 alpha
+
+`if (this.angle != 0) {` 如果角度不等于零...
+
+`ctx.save();` 保存当前坐标状态
+
+`ctx.translate(this.x, this.y);` 转换到视频的位置
+
+`ctx.rotate(this.angle);` 旋转角度
+
+`ctx.translate(-this.x, -this.y)` 翻译回来
+
+`if (this.scale != 1) {` 中频缩放..
+
+`ctx.scale(this.scale, this.scale); }` 做缩放
+
+`ctx.drawImage(this.videoelement, this.sx, this.sy, this.w, this.h, this.x, this.y, this.w, this.h);` 从视频中提取
+
+`ctx.restore();` 恢复以前的坐标状态
+
+`}` 关闭 if 角度
+
+`else {` 其他
+
+`if (this.scale != 1) {` 中频缩放
+
+`ctx.save();` 保存坐标状态
+
+`ctx.scale(this.scale, this.scale);` 做缩放
+
+`ctx.drawImage(this.videoelement, this.sx, this.sy, this.w, this.h, this.x, this.y, this.w, this.h);` 从视频中提取
+
+`ctx.restore();` 恢复坐标状态
+
+`}` 缩放时关闭
+
+`else {` 其他
+
+`ctx.drawImage(this.videoelement, this.sx, this.sy, this.w, this.h, this.x, this.y, this.w, this.h);` 从视频中提取
+
+`}` 关闭 else
+
+`}` 关闭 else
+
+`ctx.globalAlpha = savedalpha;` 恢复 `globalAlpha`
+
+`ctx.globalCompositeOperation = savedgco;` 设置 `savedgco`
+
+`}` 关闭 `drawvideo`
+
+## `Picture` 构造函数
+
+`function Picture(x, y, w, h, imagename) {` `Picture` 构造函数的函数头，位于 `x,y`，宽度 `w`，高度 `h`，以及 `imagename` 图像对象
+
+`this.x = x;` 设置属性
+
+`this.y = y;` 设置属性
+
+`this.w = w;` 设置属性
+
+`this.h = h;` 设置属性
+
+`this.imagename = imagename;` 设置属性
+
+`this.draw = drawpic;` 将 `drawpic` 功能设置为绘制方式
+
+`this.overcheck = overrect;` 将 `overrect` 函数设置为 `overcheck` 方法
+
+`}` 关闭功能
+
+## `Heart` 构造函数
+
+`function Heart(x, y, h, drx, color) {` `Heart` 构造器的函数头，位于 `x, y` 到下尖 `h` 距离 `x, y` 处的劈缝，半径 `drx`，颜色
+
+`this.x = x;` 设置属性
+
+`this.y = y;` 设置属性
+
+`this.h = h;` 设置属性
+
+`this.drx = drx;` 设置属性
+
+`this.radsq = drx * drx;` 设置属性以避免以后重复执行此操作
+
+`this.color = color;` 设置属性
+
+`this.draw = drawheart;` 将 `drawheart` 函数设置为 `draw` 方法
+
+`this.overcheck = overheart;` 将 `overheart` 函数设置为 `overcheck` 方法
+
+`this.ang = .25 * Math.PI;` 将属性设置为此常数值；以后可能会搞得更一般
+
+`}` 关闭功能
+
+## `drawheart` 函数
+
+`function drawheart() {` `drawheart` 的功能头
+
+`var leftctrx = this.x - this.drx;` 计算并设置变量为左曲线中心的 x 坐标
+
+`var rightctrx = this.x + this.drx;` 计算并设置变量为右曲线中心的 x 坐标
+
+`var cx = rightctrx + this.drx * Math.cos(this.ang);` 计算并设置变量为右侧曲线变为直线的点的 x 坐标
+
+`var cy = this.y + this.drx * Math.sin(this.ang);` 计算并设置变量为右侧曲线变为直线的点的 y 坐标
+
+`ctx.fillStyle = this.color;` 设置 `fillStyle`
+
+`ctx.beginPath();` 开始路径
+
+`ctx.moveTo(this.x, this.y);` 移动到心脏的裂缝
+
+`ctx.arc(leftctrx, this.y, this.drx, 0, Math.PI - this.ang, true);` 绘制左曲线
+
+`ctx.lineTo(this.x, this.y + this.h);` 移动到底部点
+
+`ctx.lineTo(cx, cy);` 移动到直线与曲线相交的点
+
+`ctx.arc(rightctrx, this.y, this.drx, this.ang, Math.PI, true);` 绘制右曲线
+
+`ctx.closePath();` 关闭路径
+
+`ctx.fill();` 填充路径
+
+`}` 关闭功能
+
+## `overheart` 函数
+
+`function overheart(mx, my) {` `overheart` 功能的标题
+
+`var leftctrx = this.x - this.drx;` 将变量设置为左曲线中心的 x 坐标
+
+`var rightctrx = this.x + this.drx;` 将变量设置为右曲线中心的 x 坐标
+
+`var qx = this.x - 2 * this.drx;` 计算并设置变量为边界矩形左边的 x 坐标
+
+`var qy = this.y - this.drx;` 计算并设置变量为边界矩形顶部的 y 坐标
+
+`var qwidth = 4 * this.drx;` 计算并将变量设置为边框的宽度
+
+`var qheight = this.drx + this.h;` 计算并设置变量为边界矩形的高度
+
+`if (outside(qx, qy, qwidth, qheight, mx, my)) {` 快速测试它是否在包围矩形中
+
+`return false; }`
+
+`if (distsq(mx, my, leftctrx, this.y) < this.radsq) return true;` 检查是否在左曲线内
+
+`if (distsq(mx, my, rightctrx, this.y) < this.radsq) return true;` 或右曲线
+
+| 代码 | 说明 |
+| :--- | :--- |
+| `if (my<=this.y) return false;` | 如果高于屏幕上的 y 值，返回`false`(之前未确定在曲线内) |
+| `var x2 = this.x` | 开始计算，将`my`与斜率进行比较。设置`x2`并 |
+| `var y2 = this.y + this.h;` | 设置`y2`使`x2`、`y2`点在每条斜线上 |
+| `var m = (this.h)/(2*this.drx);` | 计算左线的斜率 |
+| `if (mx<=this.x) {` | 如果`mx`在左侧... |
+| `if (my < (m*(mx-x2)+y2)) {` | 将`my`与 mx 对应的`y`值进行比较。如果`my`在上面(屏幕上)， |
+| `return true;}` | 然后返回`true` |
+| `else {` | 其他 |
+| `return false;}` | 否则返回`false` |
+| `}` | 关闭`if (mx<=this.x)`子句 |
+| `else {` | 其他 |
+| `m = -m;` | 将斜率的符号改为右侧线的斜率 |
+| `if (my < (m*(mx-x2)+y2)) {return true}` | 将`my`与右侧行中对应于 mx 的值进行比较，如果小于(在屏幕上方)则返回`true` |
+| `else return false;` | 否则返回`false` |
+| `}` | 关闭条款 |
+| `}` | 关闭功能 |
+| `function outside(x,y,w,h,mx,my) {` | 外部集管 |
+| `return ((mx<x) &#124;&#124; (mx > (x+w)) &#124;&#124; (my < y) &#124;&#124; (my > (y+h)));` | 基于 x，y 以及宽度和高度的计算返回 |
+| `}` | 关闭外部 |
+| `function drawpic() {` | 标题`drawpic` |
+| `ctx.globalAlpha = 1.0;` | 设置 alpha |
+| `ctx.drawImage(this.imagename,this.x,this.y,this.w,this.h);` | 绘制图像 |
+| `}` | 关闭`drawpic` |
+| `function Oval(x,y,r,hor,ver,c) {` | `Oval`构造函数的函数头，位置 x，y，水平缩放 hor，垂直缩放`ver`，颜色`c` |
+| `this.x = x;` | 设置属性 |
+| `this.y = y;` | 设置属性 |
+| `this.r = r;` | 设置属性 |
+| `this.radsq = r*r;` | 存储为属性，以避免以后重复计算 |
+| `this.hor = hor;` | 设置属性 |
+| `this.ver = ver;` | 设置属性 |
+| `this.draw = drawoval;` | 将`drawoval`设置为`draw`方法 |
+| `this.color = c;` | 设置属性 |
+| `this.overcheck = overoval;` | 将`overoval`设置为`overcheck`方法 |
+| `}` | 关闭功能 |
+| `function drawoval() {` | `drawoval`的功能头 |
+| `ctx.save();` | 保存当前坐标状态 |
+| `ctx.translate(this.x,this.y);` | 移到中间 |
+| `ctx.scale(this.hor,this.ver);` | 由属性指示的比例 |
+| `ctx.fillStyle = this.color;` | 设置颜色 |
+| `ctx.beginPath();` | 开始路径 |
+| `ctx.arc(0,0,this.r,0,2*Math.PI,true);` | 画圆弧(完整的圆) |
+| `ctx.closePath();` | 关闭路径 |
+| `ctx.fill();` | 填写 |
+| `ctx.restore();` | 恢复原始坐标状态 |
+| `}` | 关闭功能 |
+| `function Rect(x,y,w,h,c) {` | 函数头`Rect`构造函数:位置`x,y`，宽度`w`，高度`h`，颜色`c` |
+| `this.x = x;` | 设置属性 |
+| `this.y = y;` | 设置属性 |
+| `this.w = w;` | 设置属性 |
+| `this.h = h;` | 设置属性 |
+| `this.draw = drawrect;` | 将`drawrect`设置为`draw`方法 |
+| `this.color = c;` | 设置属性 |
+| `this.overcheck = overrect;` | 将`overrect`设置为`overcheck`方法 |
+| `}` | 关闭功能 |
+| `function overoval(mx,my) {` | `overoval`的功能头 |
+| | 计算平移和缩放坐标系中的位置 |
+| `var x1 = 0;` | 设置调用`distsq`时使用的变量；这代表椭圆中心点的 x 坐标 |
+| `var y1 = 0;` | 设置调用`distsq`时使用的变量；这代表椭圆中心点的 y 坐标 |
+| `var x2 = (mx-this.x)/this.hor;` | 使用输入和比例因子计算`x2` |
+| `var y2 = (my-this.y)/this.ver;` | 使用输入和比例因子计算`y2` |
+| `if (distsq(x1,y1,x2,y2)<=(this.radsq) ){` | 如果距离平方小于存储的半径平方.... |
+| `return true` | 返回 true |
+| `}` | 结束子句 |
+| `else {return false}` | 否则返回`false` |
+| `}` | 关闭功能 |
+| `function overrect (mx,my) {` | `overrect`的标题 |
+| `return ( (mx>=this.x)&&(mx<=(this.x+this.w))&&(my>=this.y)&&(my<=(this.y+this.h))) ;` | 矩形的标准计算 |
+| `}` | 关闭`overrect` |
+| `function makenewitem(ev) {` | `makenewitem`的功能头；作为 JavaScript 设置的参数和事件`ev` |
+| `var mx;` | 变量将保存鼠标的 x 坐标 |
+| `var my;` | 变量将保存鼠标的 y 坐标 |
+| `if ( ev.layerX &#124;&#124; ev.layerX == 0) { // Firefox, ???` | 这个浏览器使用层吗... |
+| `mx= ev.layerX;` | `... set mx` |
+| `my = ev.layerY;` | `... set my` |
+| `} else if (ev.offsetX &#124;&#124; ev.offsetX == 0) { // Opera, ???` | 浏览器使用偏移量吗... |
+| `mx = ev.offsetX;` | ...`set mx` |
+| `my = ev.offsetY;` | ...`set my` |
+| `}` | 结束子句 |
+| `var endpt = stuff.length-1;` | 存储填充数组中最后一项的索引 |
+| `var item;` | 将保存新项目 |
+| `for (var i=endpt;i>=0;i--) { //reverse order` | 从末尾开始搜索 |
+| `if (stuff[i].overcheck(mx,my)) {` | 鼠标是否在`stuff`的这个成员上 |
+| `item = clone(stuff[i]);` | 克隆(制作副本) |
+| `item.x +=20;` | 稍微水平移动 |
+| `item.y += 20;` | 垂直地 |
+| `stuff.push(item);` | 将新创建的项目添加到`stuff`数组 |
+| `break;` | 离开`for`循环 |
+| `}` | 结束`if`子句 |
+| `}` | 结束`for`循环 |
+| `}` | 关闭功能 |
+| `function clone(obj) {` | 克隆的函数头 |
+| `var item = new Object();` | 创建一个`Object` |
+| `for (var info in obj) {` | 遍历作为参数传递的`obj`的所有属性 |
+
+# JavaScript 代码注释
+
+## `startdragging` 函数
+
+| 代码 | 说明 |
+| :--- | :--- |
+| `item[info] = obj[info];` | 将该名称的属性设置为属性值 |
+| `}` | 关闭`for`回路 |
+| `return item;` | 返回新创建的对象 |
+| `}` | 关闭功能 |
+| `function startdragging(ev) {` | `startdragging`的功能头；将 JavaScript 设置的事件`ev`作为参数 |
+| `var mx;` | 变量将保存鼠标的 x 坐标 |
+| `var my;` | 变量将保存鼠标的 y 坐标 |
+| `if ( ev.layerX \|\| ev.layerX == 0) { // Firefox, ???` | 这个浏览器使用层吗... |
+| `mx= ev.layerX;` | `... set mx` |
+| `my = ev.layerY;` | `... set my` |
+| `} else if (ev.offsetX \|\| ev.offsetX == 0) { // Opera, ???` | 浏览器使用偏移量吗... |
+| `mx = ev.offsetX;` | `... set mx` |
+| `my = ev.offsetY;` | `... set my` |
+| `}` | 结束子句 |
+| `var endpt = stuff.length-1;` | 存储填充数组中最后一项的索引 |
+| `for (var i=endpt;i>=0;i--) { //reverse order` | 从末尾开始搜索 |
+| `if (stuff[i].overcheck(mx,my)) {` | 鼠标是否在`stuff`的这个成员上 |
+| `offsetx = mx-stuff[i].x;` | 计算`mx`离这个物体的 x 有多远 |
+| `offsety = my-stuff[i].y;` | 计算`my`离这个物体的 y 轴有多远 |
+| `var item = stuff[i];` | 现在会将此项移动到数组的末尾；设置项目 |
+| `thingInMotion = stuff.length-1;` | 设置拖动中使用的全局变量 |
+| `stuff.splice(i,1);` | 将此项目从其原始位置移除 |
+| `stuff.push(item);` | 将项目添加到末尾 |
+| `canvas1.style.cursor = "pointer";` | 拖动时将光标改为手指 |
+| `canvas1.addEventListener('mousemove',moveit,false);` | 设置移动鼠标的事件处理 |
+| `canvas1.addEventListener('mouseup',dropit,false);` | 设置释放鼠标按钮的事件处理 |
+| `break;` | 离开`for`循环 |
+| `}` | 关闭`if`子句 |
+| `}` | 关闭`for`回路 |
+| `}` | 关闭功能 |
+
+## `dropit` 函数
+
+| 代码 | 说明 |
+| :--- | :--- |
+| `function dropit(ev) {` | `dropit`的功能头；作为 JavaScript 设置的参数和事件`ev` |
+| `canvas1.removeEventListener('mousemove',moveit,false);` | 移除(停止)移动鼠标的事件处理 |
+| `canvas1.removeEventListener('mouseup',dropit,false);` | 移除(停止)释放鼠标按钮的事件处理 |
+| `canvas1.style.cursor = "crosshair";` | 将光标变回十字准线 |
+| `}` | 关闭功能 |
+
+## `moveit` 函数
+
+| 代码 | 说明 |
+| :--- | :--- |
+| `function moveit(ev) {` | `moveit`的功能头；作为 JavaScript 设置的参数和事件`ev` |
+| `var mx;` | 变量将保存鼠标的 x 坐标 |
+| `var my;` | 变量将保存鼠标的 y 坐标 |
+| `if ( ev.layerX \|\| ev.layerX == 0) { // Firefox, ???` | 这个浏览器使用层吗... |
+| `mx= ev.layerX;` | `... set mx` |
+| `my = ev.layerY;` | `... set my` |
+| `} else if (ev.offsetX \|\| ev.offsetX == 0) { // Opera, ???` | 浏览器使用偏移量吗... |
+| `mx = ev.offsetX;` | `... set mx` |
+| `my = ev.offsetY;` | `... set my` |
+| `}` | 结束子句 |
+| `stuff[thingInMotion].x = mx-offsetx; //adjust for flypaper dragging` | 设置 x 为`thingInMotion`，调整捕蝇纸拖动 |
+| `stuff[thingInMotion].y = my-offsety;` | 设置 y 为`thingInMotion`，调整捕蝇纸拖动 |
+| `}` | 关闭功能 |
+
+## `drawstuff` 函数
+
+| 代码 | 说明 |
+| :--- | :--- |
+| `function drawstuff() {` | `drawstuff`的功能头 |
+| `ctx.clearRect(0,0,800,600);` | 清除(擦除)画布 |
+| `ctx.strokeStyle = "black";` | 设置框架的颜色 |
+| `ctx.lineWidth = 2;` | 设置`lineWidth` |
+| `ctx.strokeRect(0,0,800,600);` | 并条机 |
+| `for (var i=0;i<stuff.length;i++) {` | 遍历填充数组 |
+| `stuff[i].draw();` | 为数组的每个成员调用`draw`方法 |
+| `}` | 关闭`for` |
+| `}` | 关闭功能 |
+
+## `drawrect` 函数
+
+| 代码 | 说明 |
+| :--- | :--- |
+| `function drawrect() {` | 功能头`drawrect` |
+| `ctx.fillStyle = this.color;` | 设置颜色 |
+| `ctx.fillRect(this.x, this.y, this.w, this.h);` | 绘制一个实心矩形 |
+| `}` | 关闭功能 |
+
+## `saveasimage` 函数
+
+| 代码 | 说明 |
+| :--- | :--- |
+| `function saveasimage() {` | `saveasimage`的功能头 |
+| `try {` | 开始`try`子句 |
+| `window.open(canvas1.toDataURL("image/png"));}` | 创建图像数据并将其用作新窗口的内容 |
+| `catch(err) {` | 如果那不起作用，也就是抛出一个错误 |
+| `alert("You need to change browsers AND/OR upload the file to a server.");` | 显示警告消息 |
+| `}` | 关闭`catch`子句 |
+| `}` | 关闭功能 |
+
+## `removeobj` 函数
+
+| 代码 | 说明 |
+| :--- | :--- |
+| `function removeobj() {` | `removeobj`的功能头 |
+| `stuff.pop();` | 移除`stuff`数组的最后一个成员 |
+| `drawstuff();` | 画出一切 |
+| `}` | 关闭功能 |
+
+## HTML 结构
+
+| 代码 | 说明 |
+| :--- | :--- |
+| `</script>` | 关闭`script`元素 |
+| `</head>` | 关闭`head`元素 |
+| `<body onLoad="init();">` | 设置了`onLoad`的主体标签 |
+| `Mouse down, move and mouse up to move objects. Double-click for make a copy of any object.` | 给出方向的文本 |
+| `<br/>` | 换行符 |
+| `<canvas id="canvas" width="800" height="600">` | 画布标签 |
+| `Your browser doesn't recognize the canvas element` | 针对旧浏览器的消息 |
+| `</canvas>` | 结束画布标签 |
+| `<button onClick="saveasimage();">Open window with image (which you can save into image file) </button></br>` | 保存图像的按钮 |
+| `<button onClick="removeobj();">Remove last object moved </button>` | 用于移除对象的按钮 |
+| `</body>` | 关闭`body`标签 |
+| `</html>` | 关闭`html`标签 |
+
+# 如何自定义应用程序
+
+只使用我的例子中演示的技术，如何使这个应用程序成为您自己的应用程序是显而易见的：收集您自己家庭的照片和视频或获取其他媒体，并使用矩形、椭圆形和心形来创建您自己的一组形状。
+
+您可以使用这里的代码作为模型来定义自己的对象。例如，HTML5 书的基本指南包括显示多边形的编码。你可以让多边形的`overcheck`函数把多边形当作一个圆，也许是一个半径更小的圆，你的客户不会反对。
+
+下一步可能是构建一个允许最终用户指定图像文件地址的应用程序。为此，您需要设置一个表单。另一个增强是允许最终用户输入文本，可能是一个问候，并将其放置在画布上。您将创建一个新的对象类型并编写`draw`和`overcheck`方法。`overcheck`方法可以是`overrect`，也就是说，程序接受包围矩形中的任何文本。
+
+## 测试和上传应用程序
+
+该应用程序由代码文件组成，其中一个文件的扩展名为`.html`，另一个扩展名为`.js`加上所有的媒体文件。您需要收集所有想要包含在应用程序中的媒体文件，并创建`.js`文件，它引用媒体文件并指定您希望如何处理它们。换句话说，你可以保留我的`.html`文件，并替换为您自己的`.js`文件，引用您的所有媒体。测试过程取决于您使用的浏览器。实际上，用几种浏览器进行测试是一种很好的做法。如果您使用的是 Firefox，您需要上传应用程序`.html`文件和所有图像文件—发送到服务器，以测试创建图像的功能。但是，应用程序的其他方面可以在您自己的（客户端）计算机上进行测试。
+
+## 摘要
+
+在本章中，您学习了如何构建一个应用程序，包括创建和定位特定的形状，即矩形、椭圆形和心形，以及图片，如画布上的照片。编程技术和 HTML5 特性包括：
+
+*   分离内容和动作
+*   HTML5 元素的动态创建
+*   编程定义的对象
+*   画布上的鼠标事件
+*   使用`try`和`catch`捕捉错误
+*   几个函数的代数和几何
+*   对视频自动播放策略的思考
+
+下一章将描述如何创建一个应用程序，展示一个像盒子里的球一样来回跳动的视频剪辑。
+
+```
+***
+```
