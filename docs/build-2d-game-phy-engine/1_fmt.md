@@ -1,0 +1,293 @@
+# 一、2D 游戏物理引擎开发简介
+
+## 电子补充材料
+
+本章的在线版本(doi:`10.1007/978-1-4842-2583-7_1`)包含补充材料，可供授权用户使用。
+
+物理引擎在许多类型的游戏中扮演着重要的角色。游戏对象之间可信的物理交互已经成为大多数现代 PC 和主机游戏以及最近的浏览器和智能手机游戏的关键元素。游戏物理学的主题范围很广，包括但不限于刚体、流体动力学、软体、车辆物理学和粒子物理学等领域。这本书将涵盖你开始理解和建立一个通用的二维刚体物理引擎所需的基本主题。这本书还旨在为您提供一个可重复使用的游戏物理引擎，可以用于您自己的游戏，通过指导您从零开始一步一步地构建物理引擎。这样，你将对典型的 2D 刚体系统所需的概念和组件有一个基本的了解。
+
+虽然你可以下载一个物理引擎库，然后继续你的游戏或引擎开发，从头开始构建你自己的游戏引擎有它自己的优势。除了让您对物理引擎如何运行有一个基本的了解之外，它还让您对引擎本身的灵活性、性能、功能和可用性有更多的控制。
+
+如上所述，这本书将涵盖 2D 刚体物理学的基础。主题将包括刚体的性质和行为、碰撞检测、碰撞信息编码和碰撞响应。目标是获得对这些概念的基本理解，这些概念是构建一个可用的物理引擎所必需的。
+
+这本书从三个重要的方面介绍了物理引擎的开发:实用性、可接近性和可重用性。在阅读这本书的同时，我们希望你能参与其中，体验构建游戏引擎的过程。分步指南应该有助于这本书的实用性。在这本书里介绍的理论和实践是基于许多来源的研究和调查，这些来源以不同的细节涵盖了这些主题。信息以一种可接近的方式呈现，允许您跟随每个代码片段，同时解释引擎每个组件背后的总体概念。在跟随并创建了自己的引擎之后，您将能够通过添加自己的特性来扩展和重用成品。
+
+本章描述了本书的实现技术和组织结构。然后，讨论将引导您完成下载、安装和设置开发环境的步骤；指导您构建第一个 `HTML5` 应用；并用 `JavaScript` 编程语言扩展第一个应用来运行第一个模拟。
+
+## 设置您的开发环境
+
+您将要构建的物理引擎将可以通过运行在任何操作系统(`OS`)上的 `web` 浏览器来访问。您将要设置的开发环境也是与操作系统无关的。为简单起见，以下说明基于 `Windows 7/8/10` 操作系统。您应该能够在基于 `Unix` 的环境(如 `Apple macOS` 或 `Ubuntu`)中复制一个类似的环境，只需稍加修改。
+
+您的开发过程包括一个集成开发环境(`IDE`)和一个运行时 `web` 浏览器，该浏览器能够托管正在运行的游戏引擎。我们发现最方便的系统是 `NetBeans IDE`，它使用 `Google Chrome` `web` 浏览器作为运行时环境。以下是详细情况:
+
+*   `IDE` :本书中的所有项目都基于 `NetBeans IDE`。你可以从 `https://netbeans.org/downloads` 下载并安装 `HTML5` 和 `PHP` 的捆绑包。
+*   `运行环境`:你将在谷歌浏览器中执行你的项目。你可以从 `https://www.google.com/chrome/browser/` 下载并安装这个浏览器。
+*   `连接器 Google Chrome 插件`:这是一个 `Google Chrome` 扩展，将 `web` 浏览器连接到 `NetBeans IDE`，支持 `HTML5` 开发。你可以从 `https://chrome.google.com/webstore/detail/netbeans-connector/hafdlehgocfcodbgjnpecfajgkeejnaa` 下载安装这个扩展。下载会自动将插件安装到 `Google Chrome` 上。您可能需要重新启动计算机来完成安装。
+
+请注意，支持 `JavaScript` 编程语言或 `HTML5` 没有特定的系统要求。所有这些技术都嵌入在 `web` 浏览器运行时环境中。
+
+> **注意**
+> 如前所述，我们选择了基于 `NetBeans` 的开发环境，因为我们发现这是最方便的。还有许多其他的选择也是免费的，包括但不限于 `IntelliJ IDEA`、`Eclipse`、`Sublime`、微软的 `Visual Studio` 代码和 `Adobe` 括号。
+
+## 下载和安装 JavaScript 语法检查器
+
+我们发现 `JSLint` 是检测潜在 `JavaScript` 源代码错误的有效工具。您可以通过以下步骤将 `JSLint` 作为插件下载并安装到 `NetBeans IDE` 中:
+
+*   从 `http://plugins.netbeans.org/plugin/40893/jslint` 下载。请务必记下下载文件的位置。
+*   启动 `NetBeans`，选择“工具”“➤插件”,然后转到“下载”选项卡。
+*   单击“添加插件”按钮，搜索步骤 1 中下载的文件。双击该文件以安装插件。
+
+以下是使用 `JSLint` 的一些有用参考:
+
+*   有关如何使用 `JSLint` 的说明，请参见 `http://www.jslint.com/help.html`。
+*   关于 `JSLint` 如何工作的细节，请参见 `http://plugins.netbeans.org/plugin/40893/jslint`。
+
+## 在 NetBeans 开发环境中工作
+
+`NetBeans IDE` 易于使用，本书中的项目只需要编辑器和调试器。要打开项目，请选择文件➤打开项目。一旦项目打开，你需要熟悉三个基本窗口，如图 1-1 所示。
+
+*   `项目窗口`:该窗口显示项目的源代码文件。
+*   `编辑器窗口`:该窗口显示并允许您编辑项目的源代码。通过在“项目”窗口中双击相应的文件名，可以选择要使用的源代码文件。
+*   `Action Items 窗口`:该窗口显示 `JSLint` 检查器输出的错误信息。
+
+![A432927_1_En_1_Fig1_HTML.jpg](img/A432927_1_En_1_Fig1_HTML.jpg)
+
+> **图 1-1。NetBeans IDE**
+
+> **注意**
+> 如果在 `IDE` 中看不到窗口，可以单击“窗口”菜单，选择缺少的窗口的名称，使其出现。例如，如果在 `IDE` 中看不到“项目”窗口，可以选择“窗口”“➤项目”来打开它。
+
+### 在 NetBeans 中创建 HTML5 项目
+
+您现在已经准备好创建您的第一个 `HTML5` 项目了。
+
+1.  启动 `NetBeans`。选择文件➤新建项目(或按 `Ctrl+Shift+N`)，如图 1-2 所示。将出现一个新的项目窗口。
+
+    ![A432927_1_En_1_Fig2_HTML.jpg](img/A432927_1_En_1_Fig2_HTML.jpg)
+
+    > **图 1-2。创建新项目**
+
+2.  在新建项目窗口中，在类别部分选择 `HTML5`，在项目部分选择 `HTML5` 应用，如图 1-3 所示。单击“下一步”按钮，打开项目配置窗口。
+
+    ![A432927_1_En_1_Fig3_HTML.jpg](img/A432927_1_En_1_Fig3_HTML.jpg)
+
+    > **图 1-3。选择 HTML5 项目**
+
+3.  如图 1-4 所示，输入项目的名称和位置，点击完成按钮，创建你的第一个 `HTML5` 项目。
+
+    ![A432927_1_En_1_Fig4_HTML.jpg](img/A432927_1_En_1_Fig4_HTML.jpg)
+
+    > **图 1-4。命名项目**
+
+`NetBeans` 将为您生成一个简单而完整的 `HTML5` 应用项目的模板。您的 `IDE` 看起来应该类似于图 1-5 。
+
+![A432927_1_En_1_Fig5_HTML.jpg](img/A432927_1_En_1_Fig5_HTML.jpg)
+
+> **图 1-5。HTML5 应用项目**
+
+通过在“项目”窗口中选择并双击 `index.html` 文件，可以在编辑器窗口中打开它并观察文件的内容。内容如下:
+
+```markdown
+# HTML5 项目基础
+
+第一行声明该文件是一个 HTML 文件。在标签内的块是一个注释块。互补的标签包含了所有的 HTML 代码。在这种情况下，模板定义头部和身体部分。页眉设置网页的标题，而正文是网页所有内容的位置。
+
+您可以通过选择运行➤运行项目或按 `F6` 键来运行此项目。图 1-6 显示了运行默认项目时的样子。
+
+![A432927_1_En_1_Fig6_HTML.jpg](img/A432927_1_En_1_Fig6_HTML.jpg)
+
+图 1-6。运行简单的 HTML5 项目
+
+要停止该程序，请关闭该网页，或者单击浏览器中的“取消”按钮，使 `NetBeans` 停止跟踪该网页。您已经成功运行了您的第一个 HTML5 项目。您可以使用此项目来了解 IDE 环境。
+
+## 项目文件和文件系统之间的关系
+
+导航到文件系统上的 `html 5` 应用项目位置，例如使用 Windows 中的 Explorer OS 实用程序。您可以看到，在项目文件夹中，`NetBeans` 生成了 `nbProject`、`public_html` 和 `test` 文件夹。表 1-1 总结了这些文件夹和 `index.html` 文件的用途。
+
+表 1-1。`NetBeans` HTML5 项目中的文件夹和文件
+
+| NetBeans HTML5 项目:文件夹/文件 | 目的 |
+| --- | --- |
+| `nbProject/` | 该文件夹包含 IDE 配置文件。您不能修改该文件夹中的任何文件。 |
+| `public_html/` | 这是项目的根文件夹。项目中的源代码和资源将在此文件夹中创建。 |
+| `公共 _html/index.html` | 这是网站的默认入口点。该文件将被修改以加载 JavaScript 源代码文件。 |
+| `测试/` | 这是单元测试源代码文件的默认文件夹。此文件夹在本书中没有使用，并且已经从所有项目中删除。 |
+
+## HTML5 画布项目
+
+这个项目演示了如何设置引擎的核心绘图功能，以及定义一个用户控制脚本。图 1-7 显示了一个运行这个项目的例子，它是在项目文件夹中定义的。
+
+![A432927_1_En_1_Fig7_HTML.gif](img/A432927_1_En_1_Fig7_HTML.gif)
+
+图 1-7。使用绘图核心和用户控件运行 HTML5 项目
+
+该项目的目标如下:
+
+*   了解如何设置 HTML 画布元素
+*   学习如何从 HTML 文档中检索 `canvas` 元素，以便在 JavaScript 中使用
+*   学习如何创建 HTML 画布的引用上下文，并使用它来操作画布
+*   熟悉基本的用户控件脚本
+
+## 拉伸型芯
+
+这个引擎将使用简单的绘图代码来模拟物理引擎代码。毕竟，模拟唯一需要显示的是物理引擎代码实现后简单对象是如何交互的。因此，高级图形功能，如照明、纹理或阴影渲染，只会使代码更加复杂。出于这个原因，一个简单的 HTML5 画布和原始的绘图支持将服务于在创建和调试期间渲染物理模拟的目的。
+
+### 创建 HTML 画布
+
+在这一步中，您将为所有对象的绘制创建一个空的 HTML5 画布。
+
+1.  在编辑器中打开 `index.html` 文件，方法是在项目视图中双击项目名称，然后打开站点根文件夹，并双击 `index.html` 文件。
+2.  要创建用于绘图的 HTML 画布，请在 `index.html` 文件的 `body` 元素中添加以下代码行
+
+    ```js
+    <table style="padding: 2px">
+        <tr>
+            <td>
+                <div>
+                    <canvas id="canvas"></canvas>    
+                </div>
+            </td>
+        </tr>
+    </table>
+    ```
+
+代码定义了一个 `canvas` 元素，其 `id` 为 `canvas`。`id` 是元素的名称，可用于在加载网页时检索相应的元素。请注意，代码中没有指定宽度和高度。这是因为您将在下一步中指定这些属性。您将使用画布 `id` 来检索对实际画布绘制区域的引用，您将在该区域中进行绘制。
+
+### 创建核心脚本
+
+本节详细介绍了创建第一个脚本所需的步骤，即绘图画布初始化。这个脚本将会包含更多物理引擎的核心功能。对于这一步，您将只为绘图画布编写初始化代码。
+
+1.  通过右键单击并创建一个新文件夹，在 `SiteRoot`(或 `public_html`)文件夹中创建一个名为 `EngineCore` 的新文件夹。
+2.  右键单击 `EngineCore` 文件夹，在 `EngineCore` 文件夹中创建一个新的 JavaScript 文件。将文件命名为 `Core.js`。
+3.  打开新的 `Core.js` 文件进行编辑。
+4.  通过添加以下代码，创建对 `gEngine` 的静态引用。
+
+    ```js
+    var gEngine = gEngine || {};
+    gEngine.Core = (function () {
+    }());
+    ```
+
+    `吉恩。核心`是所有物理引擎核心功能将驻留的地方。
+
+    **注意**所有的全局变量名称都以“g”开头，后面跟一个大写字母，就像 `gEngine` 一样。
+
+5.  在基因里。您想要访问的核心，并定义画布元素的宽度和高度。为此，您将创建一个变量 `mCanvas`，并将其引用到 `index.html` 的 `Canvas` 元素，以便您可以设置和修改画布属性。您还需要变量 `mContext`，它将保存一个对在画布中绘图所需的所有方法和属性的引用。添加以下代码来完成这些任务。
+
+    ```js
+    var mCanvas, mContext, mWidth = 800, mHeight = 450;
+    mCanvas = document.getElementById('canvas');
+    mContext = mCanvas.getContext('2d');
+    mCanvas.height = mHeight;
+    mCanvas.width = mWidth;
+    ```
+
+    **注意**所有实例变量名都以“m”开头，后面跟一个大写字母，如 `mCanvas`。
+
+6.  创建一个对象变量 `mPublic`，因为您需要使一些引擎核心变量和函数在引擎开发的后期可以被其他脚本访问。目前，`mPublic` 只需要保持三个变量可访问，即 `canvas` 的宽度和高度，以及要绘制到 `canvas` 中的 `mContext`。
+
+    ```js
+    var mPublic = {
+        mWidth: mWidth,
+        mHeight: mHeight,
+        mContext: mContext
+    };
+    return mPublic;
+    ```
+
+7.  最后，要将 `Core.js` 包含在模拟中，您需要将其添加到 `index.html` 文件中。为此，只需在 `body` 元素中添加以下代码。
+
+    ```js
+    <script type="text/javascript" src="EngineCore/Core.js"></script>
+    ```
+
+## 用户控制
+
+在本节中，将向您介绍使用 JavaScript 的基本用户控件事件处理程序。这是为了让您能够在物理引擎增量开发的每一步中测试您的实现。对于本章，用户控制脚本将用于测试您是否正确初始化了画布并正确实现了绘图功能。
+
+### 创建用户控制脚本
+
+让我们开始吧:
+
+1.  通过右键单击 `SiteRoot`(或 `public_html`)文件夹，在 `SiteRoot` 文件夹中创建一个新的 JavaScript 文件。将文件命名为 `UserControl.js`。
+2.  打开新的 `UserControl.js` 文件进行编辑
+```
+
+3. 这里你想创建一个函数来处理所有的键盘输入。让我们将这个函数命名为`userControl`。这个函数有一个名为`keycode`的变量，用来跟踪用户的键盘输入。为此，请在`UserControl.js`中添加以下代码。
+
+```js
+function userControl(event) {
+    var keycode;
+}
+```
+
+4. 由于某些浏览器处理输入事件的方式不同，所以您想知道模拟将在哪种类型的浏览器中运行。在控件函数中添加以下代码，以区分 IE 键事件处理程序和其他浏览器键事件处理程序。
+
+```js
+if (window.event) { // IE
+    keycode = event.keyCode;
+}
+else if (event.which) { // Netscape/Firefox/Opera
+    keycode = event.which;
+}
+```
+
+这个脚本将使您能够处理来自浏览器的键盘输入事件，并相应地处理输入和响应。在这种情况下，您想要测试您在上一节中刚刚创建的画布。这种测试可以通过在接收到键盘输入时绘制矩形和圆形来实现，这将在下一节中详细介绍。
+
+### 使用用户控制脚本
+
+在本节中，您将通过添加一些用户输入响应来完成本章的`UserControl.js`文件，以便在按下 F 或 G 键时在画布上的随机位置绘制矩形或圆形。
+
+控制脚本将由 HTML `onkeydown` 事件触发。重要的是要认识到，在浏览器中，每个键盘键都与一个唯一的键码相关联。例如，“a”与 65 的键码相关，“b”是 66，依此类推。
+
+**注意：** js 将在开发过程中不断发展，以处理更多的键盘输入和更复杂的响应。
+
+1. 打开`UserControl.js`文件进行编辑。
+
+2. 您需要访问画布的宽度和高度，以及要绘制到画布中的上下文。在控制函数中添加以下代码行。
+
+```js
+var width = gEngine.Core.mWidth;
+var height = gEngine.Core.mHeight;
+var context = gEngine.Core.mContext;
+```
+
+3. 如果按下“F”键(键码值为 70 ),则在随机位置创建一个矩形，如果按下“G”键(键码值为 71 ),则创建一个圆形。添加以下代码行来完成此任务。
+
+```js
+if (keycode === 70) { //f
+    //create new Rectangle at random position
+    context.strokeRect(Math.random() * width * 0.8,     // x position of center
+    Math.random() * height * 0.8,    // y position of center
+    Math.random() * 30 + 10, Math.random() * 30 + 10);  // width and height location
+}
+if (keycode === 71) { //g
+    //create new Circle at random position
+    context.beginPath();
+    //draw a circle
+    context.arc(Math.random() * width * 0.8,      // x position of center
+    Math.random() * height * 0.8,      // y position of center
+    Math.random() * 30 + 10, 0, Math.PI * 2, true);
+    // radius
+    context.closePath();
+    context.stroke();
+}
+```
+
+4. 接下来，要将`UserControl.js`包含在模拟中，您需要将其添加到`index.html`文件中。为此，只需在`body`元素中添加以下代码。
+
+```js
+<script type="text/javascript" src="EngineCore/Control.js"></script>
+```
+
+5. 最后，您希望 HTML 处理按键事件。打开`index.html`文件进行编辑，并将`onkeydown`属性添加到`body`标记中，以调用您的 JavaScript 函数控件。修改您的`index.html`文件，使正文标签看起来像下面这样。
+
+```js
+<body onkeydown="return userControl(event);" >
+```
+
+现在，如果您运行项目并按下 F 或 G 键，模拟将在随机位置以随机大小绘制一个圆形或矩形，如上图 1-7 所示。
+
+## 摘要
+
+至此，物理引擎的基本绘图功能已经初始化，应该能够使用用户要求的基本输入在画布上绘制矩形和圆形。在这一章中，你已经用一种简单的绘制刚体的方法构建了支持未来复杂性增加的源代码。现在，您已经准备好将项目的功能和特性扩展到物理引擎中。下一章将关注任何游戏或物理引擎所需的核心功能(引擎循环，向量计算)，以及将矩形和圆形发展成刚体面向对象的对象来封装它们的绘图和行为。
