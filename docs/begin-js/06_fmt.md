@@ -1,0 +1,319 @@
+# 六、JavaScript 和事件
+
+在上一章中，你学习了函数是如何工作的，以及箭头函数和函数表达式之间的区别。您还了解了执行上下文是如何控制关键字`this`的，以及用于创建一种更可预测的处理方式的内置方法。
+
+函数经常因为一个*事件*而被调用。事件可以是页面加载或按钮点击。JavaScript 允许您“监听”事件，然后执行一个函数来响应事件。
+
+在这一章中，你将学习如何使用前几章的知识，并开始使用事件开发一些与浏览器的交互。您还将探索*事件冒泡*的概念。
+
+有时，内置事件可能不包含您想要做的事情。然后，您可以为您的应用定制事件。
+
+`document`对象是许多包含名为`addEventListener`的方法的对象之一。这个方法有两个参数，一个是您正在监听的事件，另一个是当事件发生时将执行某项操作的函数。
+
+对于您正在使用的环境（[`https://developer.mozilla.org/en-US/docs/Web/Events`](https://developer.mozilla.org/en-US/docs/Web/Events)）有一个很长的事件列表，但是对于这个例子，让我们只计算页面何时被加载。
+
+在本例中，您将监听事件`DOMContentLoaded`。事件`DOMContentLoaded`让您知道页面的内容已经加载到浏览器中并且已经被解析。清单 6-1 展示了一个这样的例子。
+
+```js
+document.addEventListener("DOMContentLoaded", function(){
+    console.log(this); //returns #document
+});
+// Listing 6-1 Adding an Event Listener to Know When the Page Loaded
+```
+
+当您在浏览器开发工具中打开控制台时，您将看到此事件的结果。它应该可以让您访问刚刚加载的整个文档。目前，文档中没有太多内容，但要点是这个匿名函数是在事件发生时执行的。
+
+### 面试问题
+
+命名一个事件，让您知道页面的内容已经被加载和解析。
+
+可以添加和删除事件侦听器。当您想要为同一个对象分配不同的侦听器时，这为您提供了灵活性。
+
+清单 6-2 展示了一个为按钮添加和移除事件监听器的例子。
+
+```js
+document.addEventListener("DOMContentLoaded",onPageLoad);
+
+function onPageLoad(){
+   let theButton = document.getElementById("myButton");
+         theButton.addEventListener("click", handleButtonClick);
+}
+
+function handleButtonclick(){
+   console.log("button clicked");
+   let theButton = document.getElementById("myButton");
+         theButton.removeEventListener("click", handleButtonClick);
+}
+// Listing 6-2 Adding and Removing Event Listeners
+```
+
+此示例使用命名函数而不是匿名函数。逻辑是这样的。事件`DOMContentLoaded`被触发并调用函数`onPageLoad`。该函数创建一个名为`theButton`的局部变量，并通过其 id 引用 HTML 页面中的按钮。然后，它添加一个事件侦听器，等待按钮被单击。
+
+当按钮被点击时，它调用一个名为`handelButtonClick`的函数。该函数在控制台中打印出按钮被单击的信息。然后，它创建自己的引用文档中相同按钮的局部变量，并删除事件侦听器。当用户想第二次点击它的时候，这个按钮就不起作用了。
+
+在这里，您使用`DOMContentLoaded`事件来设置应用做您想做的一切。
+
+当页面加载时，将事件侦听器添加到按钮。在这个用例中，您只希望它在一次点击中处于活动状态。当单击按钮时，删除事件侦听器，使用命名函数使其不活动。这很有帮助，因为在出现错误的情况下，您可以直接引用函数，如果您使用匿名函数，就不能这样做。
+
+向对象添加事件侦听器还允许您为不同类型的事件添加侦听器。清单 6-3 展示了一个向同一个按钮添加多个事件的例子。
+
+```js
+document.addEventListener("DOMContentLoaded",onPageLoad);
+
+function onPageLoad(){
+   let theButton = document.getElementById("myButton");
+         theButton.addEventListener("click", handleButtonClick);
+         theButton.addEventListener("mouseover", mouseOverEvent);
+         theButton.addEventListener("mouseout", mouseOutEvent);
+}
+
+function handleButtonclick(){
+   console.log("button clicked");
+}
+
+function mouseOverEvent (){
+   console.log("mouseover");
+}
+
+function mouseOutEvent (){
+   console.log("mouseout");
+}
+// Listing 6-3 Adding Multiple Events to a Button
+```
+
+您使用`DOMContentLoaded`事件告诉应用向您的按钮添加多个事件监听器。这些侦听器知道按钮何时被单击、滚动和关闭。在每个实例中，当事件被触发时，它会触发一个函数，在浏览器控制台中打印出一条消息。
+
+有时候，您可能想让浏览器停止它通常会做的事情，而让 JavaScript 接管。下一节将使用`preventDeault`方法解决这个问题。
+
+## 使用预防默认
+
+一些阻止浏览器执行正常功能的例子是在使用链接或表单时。链接通常被认为是一种进入网站中另一个页面的方式。
+
+如果你想让某人点击一个链接，而不是让浏览器转到另一个页面，你可以使用`preventDefault`方法。
+
+当事件发生时，事件对象被传递给事件处理函数。该对象包含关于刚刚发生的事件的信息。
+
+例如，如果你想知道被点击的链接，你可以询问`target`。清单 6-4 给出了一个例子。
+
+```js
+document.addEventListener("DOMContentLoaded",onPageLoad);
+
+function onPageLoad(){
+let  theButton = document.getElementById("myLink");
+       theButton. addEventListener("click", function(evt){
+        evt.preventDefault();
+        console.log(evt);
+       console.log(evt.target);
+});
+// Listing 6-4 Finding the Object That Was Clicked
+```
+
+这个例子类似于前面的例子，在前面的例子中，当加载文档时，click 事件侦听器通过它的 id 被添加到 HTML 页面中的 anchor 标记。
+
+单击后，一个事件对象被传递给包含刚刚发生的事件信息的函数。这个对象拥有的方法之一是`preventDefault`方法。它阻止浏览器访问分配给该链接的 URL。
+
+还可以通过使用`console.log`方法查看整个事件对象。它在浏览器开发工具中打印结果。
+
+下一行显示`target`。这是调度事件的对象。在您的情况下，它是被点击的项目。开发者工具显示目标的 HTML。
+
+表格提交后通常会转到另一页。如果您想在提交前对表单内容进行验证，可以阻止表单向服务器提交内容。这将使您有机会在发送数据之前验证表单。
+
+当使用 JavaScript 阻止浏览器在内容被验证之前提交表单时，也可以使用`preventDefault`方法。见清单 6-5。
+
+```js
+document.addEventListener("DOMContentLoaded",onPageLoad);
+
+function onPageLoad(){
+    let myForm = document.querySelector("form");
+         myForm.addEventListener("submit", onSubmit);
+}
+
+function onSubmit(evt){
+   console.log("form submitted");
+  evt.,preventDefault();
+}
+// Listing 6-5 Using the preventDefault Method with a Form
+```
+
+使用其他例子中的一些代码，等待`DOMContentLoaded`事件发生。一旦事件发生，就调用`onPageLoad`函数。
+
+方法搜索 HTML 页面中的表单对象。然后在表单中添加一个事件侦听器，希望知道它何时会尝试提交任何数据。
+
+当点击提交按钮时，提交事件触发`onSubmit`函数。这将覆盖试图提交数据并通过使用`preventDefault`方法转到另一个 HTML 页面的浏览器。
+
+它还在控制台中打印消息“表单已提交”。使用这种方法将确保浏览器不会做任何意外的事情。
+
+### 面试问题
+
+如何阻止浏览器执行其正常功能？
+
+您已经看到了可以控制浏览器正常工作方式的例子。这使您有机会在提交之前评估数据，或者创建一个单页面应用，而无需转到另一个 HTML 页面。
+
+浏览器中的大量工作都与事件相关联。需要理解的一个重要概念是`事件传播`。事件传播是指您希望同时讨论事件的冒泡阶段和捕获阶段。下一节将详细解释这一点。
+
+## 事件传播
+
+事件传播处理浏览器中的各种对象如何能够接收事件。在上一节中，我展示了如何将侦听器分配给一个对象。该对象将等待事件发生，然后调用一个函数来处理该事件。
+
+传播的一个阶段是`事件冒泡`。这种情况的一个例子是点击`div`中的一个按钮。点击的`target`是按钮本身。
+
+但是，事件会从按钮向上传播到其父级。这个过程将继续，直到事件遇到`window`对象。清单 6-6 展示了这是如何工作的。
+
+```js
+document.addEventListener("DOMContentLoaded",onPageLoad);
+
+function onPageLoad(){
+  let myButton  = document.getElementById("myButton");
+        myButton.addEventListener("click", onButtonClick);
+
+ let container = document.getElelmentById("container");
+       container.addEventeListener("click", onContainerClick);
+
+     document.addEventListener("click", onDocumentClick);
+     window.addEventListener("click", onWindowClick);
+
+}
+
+function onButtonClick (evt){
+   console.log("button clicked");
+}
+
+function onContainerClick (evt){
+   console.log("container clicked");
+}
+function onDocumentClick (evt){
+   console.log("document clicked");
+}
+
+function onWindowClick (evt){
+   console.log("window clicked");
+}
+
+// Listing 6-6 Illustrating Event Bubbling
+```
+
+一种模式正在形成:您等待文档加载，然后将事件侦听器分配给 HTML 文档中的项目。
+
+在本例中，您正在寻找 ID 为`myButton`的按钮。当侦听器被添加时，它调用函数`onButtonClick`并在控制台中打印出按钮被单击的消息。
+
+由于事件冒泡，事件上升到`div`标记，它的事件监听器处理该事件。
+
+从这里开始，`document`和`window`对象都可以处理事件。
+
+您可以在浏览器控制台中看到结果:
+
+```js
+button click
+container click
+documnnt click
+window click
+```
+
+您可以看到，一旦按钮被单击，事件就传播到窗口对象，而无需您做任何事情。这是浏览器处理事件的默认方式。您可以通过使用`stopPropagation`方法来阻止这种情况发生。它防止其他对象在事件冒泡时监听事件。
+
+清单 6-7 与清单 6-6 大部分相同。唯一的区别是在`div`标签接收事件后添加了`stopPropagation`方法。这使得`document`和`window`无法接收事件。
+
+```js
+function onContainerClick(evt){
+  console.log("container clicked");
+  evt.stopPropagation();
+}
+
+// Listing 6-7 Using the stopPropagation Method
+```
+
+这不是代码的完整示例；我只是展示了重要的部分来说明这个例子。当调用事件时，事件对象被发送到事件处理程序。您使用这个对象来调用`stopPropagation`方法。
+
+这将阻止链中更高位置的任何其他对象接收该事件，即使它们有该事件的侦听器。
+
+浏览器处理事件的另一种方式是通过`事件捕获`。这与冒泡正好相反，在冒泡中，浏览器从文档顶部开始，一路向下到达目标。
+
+要让浏览器使用这种处理事件的方法，您需要告诉`addEventListener`方法使用捕获而不是冒泡。清单 6-8 显示了事件如何从`window`对象向下传播。
+
+```js
+function onPageLoad(){
+   let myButton = document.getElementById("myButton");
+        myButton.addEventListener("click", onButtonClick, true);
+
+ let container = document.getElementById("container");
+      container.addEventListener("click", onContainerClick, true);
+
+      document.addEventListener("click", onDocumentClick, true);
+    window.addEventListener("click", onWinowClick, true);
+}
+
+// Listing 6-8 Using Event Capturing
+```
+
+将最后一个属性添加到`addEventListener`方法告诉浏览器启用`事件捕获`。然后堆栈从上到下开始:
+
+```js
+window click
+documnnt click
+container click
+button click
+```
+
+将最后一个属性添加到`addEventListener`方法告诉浏览器启用`事件捕获`。然后堆栈从上往下开始。
+
+这两个例子展示了事件如何在浏览器中移动，要么从事件源移动到顶部，要么从`window`对象向下。
+
+此时，您使用的事件已经构建到环境中。有时，您可能需要制作一个自定义事件。下一节将介绍如何实现这一点。
+
+### 面试问题
+
+事件冒泡和捕获有什么区别？你如何防止它们发生？
+
+### 创建自定义事件
+
+大多数情况下，当您需要知道应用中发生了什么事情时，您可以使用环境中已经内置的事件。但是，可能会出现内置事件不总是符合您的需求的情况。这就是自定义事件的用武之地。
+
+你工作过的大部分都是一样的。您需要侦听一个事件，并且该事件需要被调度。这里的一个不同之处是，您将调度自己的自定义事件。清单 6-9 是一个定制事件的例子。
+
+```js
+function onPageLoad(){
+   let myButton = document.getElementById("myButton");
+        myButton.addEventListener("click", onButtonClick, true);
+        myButton.addEventLIstener("WORLD_ENDING_EVENT", onWorldEnd);
+
+ }
+
+function onButtonClick(evt){
+    let custEvent = new CustomEvent("WORLD_ENDING_EVENT", {
+     detail: message: { "And I feel fine"}
+     });
+
+    let myButton = document.getElementById("myButton");
+          myButton.dispatchEvent(custEvent);
+
+};
+
+functon onWorldEnd(evt){
+   console.log(evt); // returns  CustomEvent {isTrusted: false, detail: {...}, type: "WORLD_ENDING_EVENT", target: button#myButton, currentTarget: button#myButton, ...}
+   console.log(evt.type); //returns WORLD_ENDING_EVENT
+   console.log(evt.detail); //returns {message: "And I feel fine"}
+}
+
+Listing 6-9Creating and Using Custom Events
+
+```
+
+该按钮监听两种不同类型的事件。一个是正常的点击事件，一个是自定义的`WORLD_ENDING_EVENT`。因为它不在环境或 JavaScript 语言提供的事件列表中，所以它必须是一个自定义事件。
+
+监听此事件的代码与监听任何其他事件的代码相同。添加名称，然后添加事件发生时将执行的事件处理函数。
+
+在这种情况下，该函数被称为`onWorldEnd`，它打印出发送给该函数的事件对象的不同值。第一个示例打印出整个事件对象。第二个输出事件对象的类型属性。最后一个输出了从定制事件发送的细节对象的值。
+
+### 面试问题
+
+如何实现自定义事件？
+
+## 摘要
+
+事件是应用开发的重要组成部分。事件可以让您了解环境中正在发生什么，以及您的用户正在做什么。
+
+本章讲述了什么是事件，环境中的一些事件，以及如何创建自己的自定义事件。您现在知道了如何侦听事件，并且知道了自定义事件和本机事件之间没有区别。
+
+事件处理程序可以使用匿名函数和命名函数。事件对象被传递给函数处理程序来描述函数刚刚发生的一切。使用 event 对象，您可以看到哪个 HTML 元素调度了该事件，并且您能够阻止浏览器执行某些本机操作。您还可以更清楚地了解事件如何通过浏览器传播以及如何控制它们。
+
+下一章将介绍 JavaScript 中继承的概念。您将学习如何创建一个类，以及组合和继承之间的区别。

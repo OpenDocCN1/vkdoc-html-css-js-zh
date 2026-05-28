@@ -1,0 +1,805 @@
+# 十一、JavaScript 和应用框架：Angular
+
+为了使讨论简单，当我提到应用框架时，我指的是任何能帮助你快速开发完整 web 应用的库或框架。这可能包括但不限于 Angular、React、Vue 和 Polymer。
+
+其中一些库被认为是完整的框架，而另一些只是库。本章的目标不是将两者对立起来，也不是描述各自的优缺点。这一章的目的是展示你如何利用前几章学到的知识来开发使用这些框架的应用。
+
+在上一章中，您开发了一个 API，它发送一个描述行政区的 JSON 对象。您使用 MySQL 和 NodeJS 的组合让服务器查询数据库并返回查询结果。
+
+本章将介绍如何使用 Angular 开发一个 web 应用，下一章将介绍 React。这两个应用都能够访问上一章开发的 API。
+
+本章的前半部分将介绍如何使用命令行界面(CLI)快速开发 Angular 应用，以生成从 API 检索数据所需的所有文件。
+
+一旦您能够检索和显示您的信息，您就可以创建一个可以在数据库中添加或更新信息的表单。
+
+## 安装角形
+
+如果你真的想从整体上对 Angular 框架有一个很好的了解，最好去的地方是项目主页( [`https://angular.io`](https://angular.io) )。
+
+既然您将使用命令行界面来开发这个应用，那么您应该查看的下一个站点是 CLI 开发的主页( [`https://cli.angular.io`](https://cli.angular.io) )。
+
+使用 CLI 与直接使用 Node 时的最后几个示例非常相似。
+
+如果您尚未打开终端窗口，请将其打开，并使用节点软件包管理器将 Angular 加载到您的计算机上。
+
+在命令行中，键入
+
+```js
+npm install -g  @angular/cli
+```
+
+该命令在全局级别安装角度命令行工具。安装完成后，您可以在硬盘上的任何文件夹中创建 Angular 项目。
+
+Angular 将自己描述为一个在 Web 上构建应用的平台。注意，我们说的不是 AngularJS，俗称 Angular 1。我们只打算讨论 Angular 的最新版本，俗称 Angular 2+。在撰写本文时，Angular 的最新版本是 7。
+
+Angular 是一个开源的、基于类型脚本的平台，由 Google 的 Angular 团队领导。TypeScript 是微软维护的开源语言。
+
+## 什么是 TypeScript？
+
+TypeScript 是 JavaScript 的超集，这意味着除了将 JavaScript 用作强类型语言之外，您还可以使用 JavaScript 内置的更高级的功能。
+
+TypeScript 和 JavaScript 的区别之一是 JavaScript 不强制数据类型，也就是说你不能强制一个变量只能处理字符串或数字。JavaScript 在处理不同类型的数据时非常灵活。
+
+TypeScript 还具有以下功能:
+
+*   接口
+
+*   无商标消费品
+
+*   名称空间
+
+*   装饰者(实验性特征)
+
+其他语言强调，一旦你将一个变量声明为某种类型，改变该类型将会产生错误。
+
+如果您使用过 Java 或 Scala 之类的语言，语法看起来很相似。声明变量时，可以显式指示编译器将变量视为仅使用特定类型的数据:
+
+```js
+let x: number = 42;
+```
+
+这段代码强制 TypeScript 编译器确保赋给 `x` 的任何变量都是数字。试图分配任何其他类型的数据将在编译时被捕获，并将产生错误。这里有一个例子:`let x:number = 42;`
+
+```js
+x = "Fourty Two" //produces an error
+```
+
+TypeScript 语言有一个将 TypeScript 转换成 JavaScript 的编译器。新创建的 JavaScript 可以被多种浏览器理解。作为开发人员，您可以利用 JavaScript 中并非所有浏览器都能理解的高级特性。使用 TypeScript 的另一个好处是能够在编译时发现错误。TypeScript 为您提供了许多来自面向对象语言的人所期望的特性。
+
+在下一节中，您将使用 CLI 创建一个 Angular 项目，并在浏览器中运行它。
+
+## 开发角度应用
+
+至此，您已经能够安装 Angular CLI 工具。使用这些工具将帮助您使用 Angular 框架开发应用。Angular 将下载构建应用所需的所有文件，并创建基本 Angular 应用所需的所有文件夹。
+
+在命令行中，键入以下命令创建一个名为 `my-app` 的应用:
+
+```js
+ng new my-app
+```
+
+这一条命令会产生一些关于如何开发应用的问题。您可以随时在以后更新应用，但现在让我们来看一下 CLI 询问的一些问题。
+
+第一个问题是，“您想添加角度路由吗？”用 Angular 路由就像用 Node 路由一样。这个想法是将一个路径传递到浏览器中，该路径将显示站点的某个部分。这里最大的不同是 Angular 将处理路由，而不是服务器。
+
+这种区别非常重要，因为两个应用都会尝试解析路由。服务器将使用该路径查找包含基于该路径的文件的文件夹，然后尝试将结果发送回浏览器。因为服务器上不存在这些文件和文件夹，所以结果将是 404 或文件未找到错误。
+
+对于您的示例，我们同意将其添加到您的应用中。在命令提示符下键入 `Y`，然后继续回答下一个问题。
+
+下一个问题是，“您希望使用哪种样式表格式？”呈现的不同格式有
+
+*   半铸钢ˌ钢性铸铁(Cast Semi-Steel)
+
+*   半导体色敏传感器
+
+*   厚颜无耻
+
+*   较少的
+
+*   唱针
+
+第一种选择应该直截了当。接下来的四个在处理样式表的方式上都是相似的。
+
+这个列表中的前两个是最相似的，在理解了前两个试图解决的问题之后，其他的就很容易理解了。
+
+Sass 和 SCSS 都是预处理语言，这意味着它们会编译成你的浏览器能理解的 CSS。唯一真正的区别是语法。
+
+Sass 使用缩进来表示选择器的嵌套。以下是 Sass 语法的一个示例:
+
+```js
+//sass example
+$backgroundColor: #C0C0C0; //silver
+.container {
+      h1{
+  background-color: $backgroundColor;
+;     }
+}
+```
+
+当编译这段代码时，Sass 知道根据文件顶部的变量将容器类中的 `h1` 元素设置为背景色，
+
+Sass 还通过添加嵌套规则扩展了该语言。这些规则被称为混合规则；有了 mixins，除了其他特性之外，您还可以进行数学运算。
+
+扩展名为 `.scss` 的文件具有更灵活的语法。这包括直接写 CSS。它还让您能够使用如下功能。清单 11-1 展示了一个 SCSS 的例子。
+
+```js
+//scss example
+$textColor: 'red';
+p{
+ color: $textColor;
+}
+
+Listing 11-1Creating a Variable to Be Used Later in Your SCSS File
+```
+
+LESS 也是一个会转换成 CSS 的预处理程序。这里的区别在于，LESS 是用 JavaScript 编写的，需要 Node。
+
+创建变量时，语法有细微的差别。萨斯和 SCSS 使用美元符号(`$`)来创建变量，而 LESS 使用 at 符号(`@`)。
+
+列表中的最后一个选项是手写笔。受 Sass 和 LESS 的启发，它与普通 CSS 的不同之处在于花括号和分号是可选的。变量不需要用美元符号(`$`)或 at 符号(`@`)声明。
+
+所有这些选项对于管理和缩放 CSS 都是有效的；对于你的项目，你可以选择你最喜欢的。在本例中，我们选择 Sass。
+
+做出选择后，CLI 将创建 Angular 项目所需的所有文件和文件夹。您现在应该有一个名为 `my-app` 的文件夹。进入该文件夹并启动应用类型:
+
+```js
+cd my-app
+ng serve
+```
+
+一旦进入应用文件夹，您就可以运行该应用。当应用完成编译时，您可以通过打开浏览器并键入 `localhost:4200` 在浏览器中看到它。你的浏览器应该如图 11-1 所示。
+
+![img/313453_3_En_11_Fig1_HTML.jpg](img/313453_3_En_11_Fig1_HTML.jpg)
+
+图 11-1
+
+在本地机器上运行的 Angular 应用
+
+这是使用 CLI 创建的任何 Angular 应用的默认页面。现在，您可以开始为您认为合适的任何目的定制这个默认应用。
+
+当启动这个应用时，使用命令 `ng serve`；这是特定于角度的。通过使用一系列以 `ng` 开头的命令，您可以使用 CLI 来做一些事情，比如添加文件、运行您的测试套件，以及为生产构建最终版本。它甚至可以自己更新库和依赖项。要查看完整列表，请键入 `ng help`。
+
+现在您的应用已经构建好了，让我们更好地理解它是如何组织的。
+
+## Angular 的建筑
+
+像 Angular 和 React 这样的框架都有一个*组件*的概念。组件仅仅是放置应用不同部分的 HTML 和 CSS 的地方。
+
+# Angular 模块与组件开发
+
+这方面的一个例子是标题。页眉可以有公司徽标和登录按钮。一旦一个人被认证，标题应该显示一个注销按钮。所有这些特性都应该存在于 `header` 组件中，应用逻辑应该决定什么应该可见以及何时可见。
+
+Angular 还有一个概念叫做 `模块`。Angular 中的模块与 JavaScript 模块不同。在这种情况下，Angular 中的模块为您提供了放置某个函数的所有相关代码的地方。你可以用页眉作为例子。头文件模块包括使头文件在应用中正常工作所需的所有文件。
+
+所有角度应用都有一个 `根` 模块；这个模块启动应用。`app.module.ts` 文件位于 `src/app` 文件夹中。它是启动应用的模块。
+
+在上一章中，您使用 Node 创建了一个 API。您现在可以创建一个模块，它将使您能够从 Node 发出请求并显示结果。
+
+在命令行中，您将创建一个模块，然后可以在其上进行构建。这个模块将很快让你有一个组件来保存你所有的显示信息。它还将利用表单和服务来连接到您的 API。
+
+您的第一个练习是创建一个带有按钮的组件，该组件将向节点服务器发出请求，并在 Angular 应用中显示结果。
+
+要创建一个模块，在命令行中键入 `ng g module boroughs`。这段代码创建了一个新的模块，您可以在其上进行构建。
+
+一旦命令被执行，你需要得到更大的角度应用，以意识到这个模块现在是可用的。为此，打开 `app.module.ts` 文件。在这里，您将模块导入到主应用模块中。
+
+在 `app.module.ts` 文件中是一个 `imports` 数组。这个数组允许您将新模块添加到主应用中。如果你正在使用一个类似 Visual Studio 代码的应用，你可以开始直接将你的模块添加到 `imports` 数组中。Visual Studio 和其他开发应用一样，会知道你想把这个添加到应用中，并自动在文档顶部添加 `import` 语句。
+
+`app.module.ts` 文件的导入部分现在应该看起来像清单 11-2 。
+
+```js
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    BoroughsModule //this is the new module
+  ],
+```
+
+**Listing 11-2** Adding a New Module to the app.module.ts File
+
+既然主应用知道了您的定制模块，那么您需要向该模块添加一个组件。我提到过组件是应用的视图层。这是您与应用交互并查看来自数据库的结果的方式。
+
+要创建一个将成为行政区模块一部分的组件，您需要确保文件是在您的 `boroughs` 文件夹中生成的。在命令行中，键入
+
+`ng g component boroughs/list-boroughs`
+
+这将在 `boroughs` 文件夹中创建创建该组件所需的所有文件。它还更新了 `boroughs.module.ts` 文件，让该模块知道它现在可以访问组件了。
+
+使用 CLI 创建组件时，`declarations` 数组会更新。`declarations` 数组跟踪这个模块中使用的所有组件。
+
+为了让您的组件在浏览器中可见，您需要创建一个 `exports` 数组并将该组件添加到其中。见清单 11-3 。
+
+```js
+@NgModule({
+  declarations: [ListBoroughsComponent],
+  imports: [
+    CommonModule
+  ],
+  exports: [
+    ListBoroughsComponent
+  ]
+})
+```
+
+**Listing 11-3** The Updated boroughs Module
+
+现在组件可以导出了，您可以在应用中将它作为 HTML 元素使用。在 `list-boroughs.component.ts` 文件中有一个叫做 `选择器` 的部分。选择器是你定制的 HTML 元素的名字。
+
+您可以将该元素添加到您的 HTML 页面中，就像它是任何其他本机 HTML 元素一样。Angular 编译器将确保该元素在浏览器中正确呈现。
+
+要查看这一过程，请打开 `app.component.html`。这里是您在主页上看到的所有信息。您将删除它并添加新的自定义 HTML 元素。最后，`app.component.html` 应该看起来像清单 11-4 。
+
+```html
+<!--The content below is only a placeholder and can be replaced.-->
+<div style="text-align:center">
+  <app-list-boroughs></app-list-boroughs>
+</div>
+<router-outlet></router-outlet>
+```
+
+**Listing 11-4** Adding the app-list-boroughs Component to the app.component.html File
+
+一旦这个文件被更新，你应该看到应用编译所有的代码，并在浏览器中显示一个新的结果。页面应该如图 11-2 所示。
+
+![img/313453_3_En_11_Fig2_HTML.jpg](img/313453_3_En_11_Fig2_HTML.jpg)
+
+**图 11-2** Chrome 渲染更新后的 app.component.html 文件
+
+现在，您已经拥有了由 Angular 渲染的自定义组件。在下一节中，您将创建一个调用节点应用并在页面中显示结果的服务。
+
+## 创建角度服务
+
+至此，您已经使用 Angular CLI 创建了一个应用并开发了一个定制组件。所有这些都可以在本地机器的浏览器中看到，而不需要上传到远程服务器。
+
+组件用于显示信息和处理用户交互。组件不应该被用来做像从数据库获取数据这样的事情。
+
+在 Angular 中，您使用服务来执行像从数据库获取数据这样的操作。服务可以注入到任何组件中。这提供了为特定动作编写一个服务并在不同的组件中重用它的能力。您将使用 CLI 来创建服务。您的服务将首先连接到一个远程服务器作为测试。
+
+在您知道它正在工作之后，您将连接到运行您在上一章中创建的节点应用的本地机器。
+
+您将使用 CLI 来创建服务。该服务将位于一个名为 `service/borough` 的文件夹中。文件本身将被称为 `borough.service`。
+
+在命令行中，键入
+
+```bash
+ng generate service service/borough/borough
+```
+
+这将把 `service` 文件夹添加到 `src/app` 文件夹中。然后它添加了一个 `boroughs` 文件夹；在该文件夹中，它创建了一个 `borough.service.ts` 文件。
+
+创建好服务后，您现在可以让您的定制组件访问它；之后，您可以配置您的组件，以便它可以调用远程服务。
+
+我讨论了服务必须在多个组件中可用的能力。这是因为服务可以被添加或“注入”到多个组件中。让我们将您的服务添加到 `list-boroughts.component.ts` 文件中。
+
+打开文件并导入服务。导入服务后，您可以通过在组件内部使用 `constructor` 方法来创建这个类的实例。JavaScript 和 TypeScript 都有类的概念。当创建一个类时，你定义了一个对象类型应该如何工作的“蓝图”。
+
+使用该蓝图，您可以根据自己的需要创建尽可能多的对象。创建类时，首先声明类及其名称。在该声明中，您定义了 `constructor` 函数。这个函数用于创建或初始化一个类中的对象。
+
+在清单 11-5 中，您首先导入服务。然后使用 `constructor` 函数创建一个对象。
+
+```typescript
+import { Component, OnInit } from '@angular/core';
+import { BoroughService } from '../../service/borough/borough.service';
+
+@Component ({
+      selector:'app-list-boroughs',
+     templateUrl:'./list-boroughs.component.html',
+      styleUrls: ['./list-boroughs.component.sass']
+ })
+export class ListBoroughsComponent implements OnInit{
+  constructor (private boroughService: BoroughService){}
+      ngOnInit(){
+          this.boroughService.getBoroughs().subscribe((data) => {
+         console.log(data);
+        });
+     }
+}
+```
+
+**Listing 11-5** Importing the BoroughService into the ListBoroughsComponent
+
+这段代码中有很多东西需要解开。我还没有讨论组件是如何工作的。您只是创建了它们，并添加了在屏幕上显示它们的功能。现在您需要添加一个服务，让我们详细了解一下组件是如何工作的，以及这个示例中发生了什么。
+
+# Angular 组件与生命周期钩子
+
+组件表示角度应用的可见部分。组件类有一种叫做生命周期挂钩的东西。这些钩子由 Angular 管理，它们让你知道在给定的时间内任何组件发生了什么。
+
+比如你这里用的生命周期钩子是`OnInit`。当在一个类中使用时，生命周期挂钩以`ng`开始，所以您将使用的函数是`ngOnInit`函数。
+
+第一行导入使角度组件工作所需的两个项目。首先是组件装饰器。你可以在这个例子中看到。`@Component` decorator 是第一个使它不同于常规 TypeScript 或 ES6 类的东西。它让 Angular 编译器知道这个类是 Angular 框架的一部分。
+
+在这个装饰器中，您创建了一个对象，该对象描述了视觉细节以及它将如何在应用中实现。
+
+从上到下，`@Component`首先描述选择器。这是您在另一个示例中使用的自定义 HTML 标记，用于使该组件在文档中可见。
+
+这个对象中的第二个元素是`templateUrl`。它指向这个组件将要使用的 HTML 文件。
+
+最后一节是`styleUrls`。它指向一个样式表数组，其中一个文件设置为默认值。
+
+使用`@Component`装饰器，你现在可以添加所有的元数据(你将在文档中看到的一个术语),描述这个组件如何在更大的应用中工作。
+
+回到文件的第一行，导入代码的第二件事是一个名为`OnInt`的生命周期事件。您可以在类声明中看到这一点。你的类`implements OnInit`作为类的一部分。
+
+TypeScript 中的这个关键字`implements`很重要。你告诉编译器这个类将在类内部使用方法`OnInit`。如果你告诉这个类你将要实现某个东西，然后你没有在类中使用它，你会得到一个错误。
+
+在你声明了你的类之后，你有了一个`constructor`函数。这些函数在 JavaScript 和 TypeScript 中都存在。`Constructor`函数在一个类中只能使用一次。在 TypeScript 中，你可以在`constructor`函数中创建一个对象。在这个实例中，您创建了一个私有对象，它的类型是`BoroughService`。
+
+当你声明某个东西`private`时，意味着其他对象不能从外部访问这个对象的任何方法或属性。有几个关键字可用于控制其他对象对您正在使用的对象的方法和属性的访问级别；现在，你将和`private`呆在一起。
+
+使用完你的`constructor`函数，就可以使用生命周期法`ngOnInit`。当组件初始化时，`constructor`创建对`boroughService`对象的访问，并运行`getBoroughs`方法。
+
+您使用`subscribe`方法告诉 Angular 您将检索从服务返回的任何结果。您将结果分配给一个名为`data`的变量，并运行一个函数，将结果显示在浏览器的控制台窗口中。
+
+现在，您引用了作为服务一部分的函数。`getBoroughs`函数应该返回一个结果。此时，您尚未更新服务。根据您用来编写代码的环境，您可以使用 Control 键或 Command 键(如果您使用的是 MacOS)并单击`boroughService`。
+
+这将打开该文件，并允许您直接访问该服务。您可以在这里更新您的服务。下一节将展示如何添加调用外部资源并将数据传递回组件的能力。
+
+## 更新您的角度服务
+
+最后一节展示了如何使用 CLI 创建服务并在组件中使用它。本节将向您展示如何让这个服务访问外部资源，并将结果发送回组件进行显示。
+
+如果您使用 CLI 创建文件，请确保该文件已打开。您只需在这个文件中添加一些项，就可以调用远程 API 了。当您完成时，服务应该看起来如清单 11-6 所示。
+
+```js
+import { Injectiable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+
+@Injectable ({
+      providedIn:root
+})
+export class BoroughService {
+  constructor (private http: HttpClient){}
+      getBoroughs() `Observable<any>{
+          retun this.http.get('https://jsonplaceholder.typicode.com/todos/1')
+     }
+}
+
+Listing 11-6The BoroughService Class
+```
+
+在大多数情况下，您将要使用的格式与您创建组件时的格式相同。您将其他类导入到您的类中。有一个`constructor`函数用于创建一个对象，您向该类添加一个公共方法，该方法将供组件将来使用。
+
+服务中使用的类似于组件的东西之一是`@Injectable`装饰器。这个装饰器使你的类能够被添加或被注入多个组件中。利用该功能，您可以编写一个服务并重用它。
+
+装饰器里面是线`providedIn: 'root'`。这优化了 Angular 使用所谓的依赖注入的能力。通过将服务注入到应用的根中，Angular 可以使用该服务的一个实例，并将该服务从不使用它的组件中删除。您还可以指定希望服务在哪个模块中可用。一旦加载了该模块，就可以使用该服务了。在每种情况下，您都不需要将服务添加到模块中的提供者阵列。
+
+您需要添加到服务中的第二行是`HttpClient`。这允许您对任何远程服务进行 HTTP 调用。因为您正在向服务器发出请求，所以您将使用 REST 动词`GET`。这将让服务器知道您只想检索一个响应，而不想添加或更新数据库中的任何信息。
+
+该方法内部是您想要从中获取信息的 URL。在这种情况下，您使用的是一个名为`JSONPlaceHolder`的站点。这个站点将返回一些 JSON，让您知道一个请求检索到了一个结果。
+
+`getBoroughs`方法中的第一行告诉 TypeScript 它需要将这一行返回给调用该方法的类，在您的例子中是`ListBoroughsComponent`类。
+
+现在您已经设置了服务，您需要在应用中再添加一个，这样您就可以使用您的`HttpClient`类了。在`app.module.ts`文件中，你需要添加一行
+
+```js
+import the HttpClientModule from '@angular/common/http'
+```
+
+此外，将`HttpClientModule`添加到`imports`数组中。
+
+现在，您有了一个可以注入到组件中的服务。当组件初始化时，它将在服务上运行`getBoroughs`方法，并在浏览器的控制台中打印结果。当调用`boroughService`上的方法时，它将向`JSONPlaceHolder`发出一个`GET`请求并返回结果。
+
+当您运行 Angular 应用时，浏览器窗口看起来应该是一样的；然而，当您查看控制台日志时，您应该会看到一个包含 REST 调用结果的对象。见图 11-3 。
+
+![img/313453_3_En_11_Fig3_HTML.jpg](img/313453_3_En_11_Fig3_HTML.jpg)
+
+图 11-3
+
+来自市镇服务的 REST 调用的结果
+
+既然您已经验证了有从 web 服务返回的结果，那么您可以将这些结果显示在屏幕上。
+
+现在，您将对组件进行小的更新。通过这些更新，您可以在页面加载时在页面上显示 REST 调用的结果。
+
+打开组件。在这里，您将为您的类创建一个属性。当在浏览器中显示值时，模板将读取该属性。
+
+您将添加一个名为`results`的属性。然后，您将把从服务返回的数据分配给这个属性。
+
+代码应该如下所示:
+
+```js
+private results: any;
+constructor (private boroughService: BouroughService) {
+
+}
+ ngOnInit() {
+        this.boroughService.getBroroughs().subscribe((data) => {
+           cosole.log(data);
+        this.results = data;
+        });
+}
+```
+
+现在，您的函数能够将结果分配给类中的一个属性，您可以在屏幕上显示结果。
+
+打开`list-boroughs-components.html`。在这里，您可以添加组成组件的所有 HTML。默认情况下，有一个包含一些文本的段落。您将在其下创建三个新的`div`元素来显示 REST 调用的结果。更新后的页面应该如下所示:
+
+```js
+<p>
+  list-boroughs works!
+</p>
+<div> results.title {{results.title}} </div>
+<div> results.Id {{results.userId}} </div>
+<div> results.id {{results.id}} </div>
+```
+
+如果您的应用当前正在运行，您的浏览器窗口应该如图 11-4 所示。
+
+![img/313453_3_En_11_Fig4_HTML.jpg](img/313453_3_En_11_Fig4_HTML.jpg)
+
+图 11-4 在浏览器中显示 REST 调用的结果
+
+你现在可以在屏幕上看到结果。这个例子让你使用一个占位符来获取结果并显示在屏幕上。在下一节中，您将利用您创建的节点 API。因为您的节点应用和角度应用都运行在同一台机器上，所以您需要开发一种方法让它们相互通信。
+
+## 为本地角度应用创建代理
+
+在上一章中，您创建了一个带有 `Node` 的 API。您的 API 从 `MySQL` 服务器发出请求，并将结果返回给浏览器。
+
+本节将介绍如何让您的 `Angular` 应用向您的节点服务器发出相同的请求，即使它们运行在同一台计算机上。
+
+从 `Angular` 应用的角度来看，它不知道它正在与一个单独的服务器进行对话。它将每个调用视为与本地服务器对话。
+
+设置代理的好处之一是，在开发应用时，您可以连接到本地服务器(如本例所示)或远程服务器。代理文件将确保您指向正确的位置。
+
+`Angular` 和 `React` 都依赖 `Webpack` 来完成诸如将 `TypeScript` 转换成 `JavaScript` 和运行本地开发服务器之类的事情。`Webpack` 还能够让您添加一个文件，这样您就可以解决这个问题。
+
+在`package.json`文件的同一层上，创建一个名为`proxy.conf.json`的新文件。这个文件告诉 `Angular` 当它试图调用一个 `REST` 服务时应该去哪里查看。呼叫将被重新路由到您在此文件中指定的服务器。
+
+一旦创建了这个文件，添加一个 `JSON` 对象，该对象指向您想要使用的端点、服务器的 `URL`，以及这是否是一个安全调用。您的代码应该类似于清单 11-7 。
+
+```json
+{
+     "/boroughts/*":{
+           "target": http://localhost:3000/boroughs,
+            "secure": false,
+           "loglevel": "debug",
+            "changeOrigin":  true,
+            "pathRewrite": {"^/boroughs": ""}
+        }
+}
+```
+
+Listing 11-7 The Body of the `proxy.confg.json` File
+
+有了这个文件，您现在需要告诉 `Angular` 应用它需要在开发中使用这个文件。这样，当您在本地机器上测试您的 `web` 服务时，您可以在 `Angular` 应用中获得结果。
+
+为此，您需要打开`angular.json`来更新应用在开发模式下的运行方式。你可以搜索“服务”这个名字在`options`对象中，可以在`browserTarget`属性下添加一个产权。这一行应该是这样的:
+
+```json
+"proxyConfig":  "proxy.conf.json"
+```
+
+记住保存文件，如果需要，重新启动应用。
+
+在高层次上，您已经使应用知道，当服务调用`/boroughs`端点时，使用代理并将调用重新路由到具有相同端点的节点服务器。
+
+重要的是要记住，即使你的 `Angular` 应用和 `Node` 应用运行在同一台机器上，它们也是两个独立的应用。
+
+`Angular` 应用自己的服务器在开发人员的机器上显示站点。`Node` 应用也运行在自己的服务器上。这两个应用不知道对方正在运行。通过使用代理，您能够在这两个服务器之间架起一座桥梁，并将结果从一个应用返回到另一个应用。
+
+此示例适用于本地开发，您可以将 `Angular` 应用指向本地服务器，甚至远程服务器来检索您的数据；当您将应用部署到生产环境中时，情况就不同了。有关如何将您的应用部署到生产环境中的更多信息，请查看位于 [`https://angular.io/guide/deployment`](https://angular.io/guide/deployment) 的 `Angular` 文档的部署部分。
+
+现在，代理使您能够连接两个服务器，您可以更新组件中的结果，并显示从节点服务器返回的信息。
+
+在服务中，将您的`GET`方法的 URL 更改为`/boroughs`。无需做任何更改，现在您可以在浏览器中查看控制台，并看到节点 `API` 发送回一个对象数组作为结果。在您的例子中，数组中只有一个对象。见图 11-5 。
+
+![img/313453_3_En_11_Fig5_HTML.jpg](img/313453_3_En_11_Fig5_HTML.jpg)
+
+图 11-5 浏览器控制台中显示的节点 API 的结果
+
+来自节点服务器的结果为您提供了一组要处理的对象。在这种情况下，因为只有一个结果返回，所以很容易将第一个元素(元素 0)的值赋给变量，然后显示该对象的属性。
+
+虽然这可行，但它不可扩展。如果要在数据库中添加更多的项目，该实例中的代码将不会考虑所有需要显示的新项目。您可以做的是分配一个循环来显示所有可用的结果。
+
+在 `HTML` 文件中为你的组件(`list-boroughs-component.html`)，你需要更新内容。在这里，您将从角度查看您的数组，并遍历结果。
+
+对于这个例子，您将使用`*ngFor`指令来循环处理结果，并在屏幕上显示它们。当您更新文档时，页面应该类似于清单 11-8 。
+
+```html
+<div *ngFor="let result of results">
+ Id = {{ result.id }}
+</div>
+
+<div *ngFor="let result of results">
+ name = {{ result.name }}
+</div>
+
+<div *ngFor="let result of results">
+ state = {{ result.state }}
+</div>
+```
+
+Listing 11-8 Updated `list-boroughs-component.html` Using the `*ngFor` Directive
+
+这里有三个实例将为这个对象的每个属性生成`div`标签。浏览器中的结果应该如图 11-6 所示。
+
+![img/313453_3_En_11_Fig6_HTML.jpg](img/313453_3_En_11_Fig6_HTML.jpg)
+
+图 11-6 使用 `*ngFor` 指令时浏览器中的结果
+
+现在您有了一个 `Angular` 应用，它可以使用服务从 `web` 服务请求信息。在开发应用时，您可以使用代理文件将请求重定向到能够满足请求的节点服务器。
+
+当结果返回到组件时，您会收到一个对象数组。然后使用`*ngFor`指令显示结果列表。
+
+既然您已经能够连接到您的服务，那么您应该做一些事情。第一件事是制作一些视觉效果。您可以添加 `Twitter Bootstrap` 作为可视化框架，以帮助您的应用看起来更好。
+
+您要做的最后一件事是创建一个允许您在数据库中创建新信息的表单。这将需要对节点应用和角度应用进行一些更新。
+
+首先，让我们使用 `Twitter Bootstrap` 添加一些样式。下一节将展示如何将这个可视化框架添加到 `Angular` 应用中。
+
+## 将 Twitter Bootstrap 添加到 Angular 应用中
+
+`Twitter` 创建了一个开源框架，让你为你的网站创建一致的视觉效果。`Bootstrap` 使您能够开发一个具有一致的排版、表单和按钮的站点。
+
+本节将展示如何将 `Bootstrap` 添加到您的应用中。您还将创建一个表单元素，该元素将使用 `Bootstrap` 来赋予它样式。为了更好地了解 `Bootstrap` 以及您可以用它做什么，请访问主页 [`https://getbootstrap.com/`](https://getbootstrap.com/) 。
+
+为了让您的 `Angular` 应用具有 `Bootstrap` 所能提供的视觉一致性，您需要将它安装到应用中。
+
+在命令行中，使用 `NPM` 安装 `Bootstrap`、`jQuery` 和 `Popper`。在应用的基础上，在命令行中键入以下内容:
+
+```bash
+npm install bootstrap jquery popper
+```
+
+安装完成后，打开`angular.json`文件。样式和测试部分需要更新，以引用 `Bootstrap` 提供的 `CSS` 文件。这可以在`node_modules`文件夹中找到。在脚本部分，添加引导节点模块的路径。样式和脚本部分应该如下所示:
+
+```json
+"styles":{
+   "src/styles.scss",
+   "node_modules/bootstrap/dist/css/bootstrap.min.css"
+}
+
+"scripts":{
+   "node_modules/jquery/dist/jquery.min.js",
+   "node_modules/bootstrap/dist/js/bootstrap.min.js"
+}
+```
+
+重新启动应用，你应该会看到字体的变化。为了确保这是可行的，将其中一个`div`标签改为一个`h1`标签。当应用重启时，你的页面应该如图 11-7 所示。
+
+![img/313453_3_En_11_Fig7_HTML.jpg](img/313453_3_En_11_Fig7_HTML.jpg)
+
+图 11-7
+
+# 在组件中使用 Bootstrap 的 H1 标签
+
+现在，Bootstrap 已经成为应用的一部分。您可以利用 Bootstrap 提供的布局和格式化功能。在下一节中，您将创建一个表单。该表单将是您在数据库中添加新信息的方式。
+
+## 在 Angular 中创建一个简单的表单，并用 Bootstrap 对其进行样式化
+
+你在这一章中取得了很大的成就。您创建了自己的应用，开发了 UI 组件，并创建了一个调用节点服务器的服务。进行调用时，Node 会将结果发送回 Angular 应用，您可以在屏幕上显示结果。
+
+现在，您将向该应用添加表单。Angular 有两种不同的表单处理方式:反应式表单和模板驱动表单。这个例子将使用模板驱动的表单。
+
+当您赋予应用调用远程服务器的能力时，您必须将`HttpClientModule`添加到`app.module.ts`文件中。这增强了整个应用的功能。对于这个例子，您需要对表单做同样的事情。
+
+重新打开`app.module.ts`文件，从`@angular/forms`导入`FormsModule`。将`imports`语句与其他语句一起添加到文档的顶部。
+
+```js
+Import { FormsModule } from '@angular/forms';
+
+```
+
+还将模块添加到`imports`数组中。一旦完成，在`boroughs.module.ts`文件中做同样的事情。
+
+现在，您可以返回组件，使用普通的 HTML 5 语法添加表单。你的表格会很简单。您希望有人在两个字段中输入文本，`name`和`state`。你将使用 Bootstrap 给这个表单添加一些形状。见清单 11-9 。
+
+```js
+<div class="container-fluid">
+      <form #boroughForm="ngForm" (ngSubmit)="submitForm(boroughForm.form);">
+              <div class="row">
+            <div class="col">
+                  <label for="boroughName">
+                  Borough Name:
+                      <input type="text" [(ngModel)] = "model.boroughName"  id="boroughName" name="boroughName">
+                </label>
+            </div>
+
+            <div class="col">
+                <label for="state">
+                   State:
+                         <input types="text" [(ngModel)] = "model.state"  id="state" name="state">
+              </label>
+            </div>
+
+            <div class="col">
+                   <button class="btn btn-primary" type="submit">Submit</button>
+            </div>
+             </div>
+      </form>
+</div>
+
+Listing 11-9Updating list-borough-component.html with a HTML 5 Form and Using the ngModel Directive
+
+```
+
+这是您表单的模板。您正在使用 Bootstrap 创建行和列，就像网格一样。你也可以使用 Bootstrap 的 CSS 类来赋予你的 Submit 按钮一些风格。
+
+在`form`标签中，使用 Angular 语法创建一个名为`boroughForm`的变量；在那之后，你给事件`onSubmit`分配一个函数。
+
+当点击提交按钮时，该事件被触发并调用函数`submitBorough`。当这个函数被调用时，你传递你的变量对象和`form`属性。您的函数在组件内部被解析。
+
+您还有一个使用角度指令`ngModel`的表单。它将模板绑定到组件内部的一个对象。这个对象有两个属性，`boroughName`和`state`。
+
+现在创建一个具有这两种属性的类。然后，您可以将代码连接到模板。
+
+在命令行中，创建一个类。这个类有两个与模板匹配的属性。类型
+
+```js
+ng generate class boroughs/model/borough
+
+```
+
+这将进入`boroughs`文件夹，创建一个名为`models`的文件夹，并生成一个名为`borough.ts`的文件。在这个类中，你需要添加两个公共属性。
+
+打开文件。在构造函数之前，添加两个公共属性。它应该类似于清单 11-10 。
+
+```js
+export class Borough {
+        public boroughName:string;
+       public state:string;
+      constructor (){
+
+        }
+}
+
+Listing 11-10Creating a borough Class
+
+```
+
+这个类为您提供了一个保存输入到表单中的值的地方。接下来，将这个类导入到`list-boroughs.component.ts`文件中，就像其他类一样，然后创建一个名为`model`的类实例来匹配模板。
+
+下面是代码的一部分:
+
+```js
+import { Borough } from ../model/borough;
+
+private model: Borough = new Borough();
+constructor (private boroughService: BoroughService) {
+}
+
+submitBorough(value) {
+    console,log(value);
+}
+
+```
+
+您的类现在应该已经导入了新创建的`borough`类。如果您单击 Submit 按钮，结果应该会显示在浏览器内的控制台中。通过使用`ngModel`，您可以将表单的值直接绑定到对象，而无需编写任何额外的代码。然后结果变成控制台中的一个对象，该对象应该包含表单中的值。
+
+有很多种函数可以添加到表单中。可以添加验证和用户反馈，以确保在提交给服务器之前，有人在字段中键入了某些内容，以及任何符合您需要的格式的内容。
+
+在这种情况下，您只想确保从表单中捕获数据，并让 Angular 控制它。在下一节中，您将把数据传递回本地节点服务器并更新数据库。
+
+## 将信息从角度传递到节点
+
+你已经准备好了你的前端。Bootstrap 为你的页面结构和表单提供了一些风格。您无需编写任何自定义 CSS 就可以获得这一点。
+
+使用 Angular 的一些指令，您可以将 HTML 模板中的数据绑定到 Typescript 组件代码，并检测表单的 Submit 按钮何时被单击。
+
+在前面的例子中，您创建了一个从本地 MySQL 数据库中检索数据的服务。现在，您需要在服务中创建一个新的函数，将信息发送回节点。然后，服务器将提取数据并将其插入数据库。
+
+您需要向您的 Express 应用添加一个库，以便它可以接受传入的数据。你所有的节点例子都是基于第十章所做的工作。如果这些看起来不熟悉，请参考那一章。如果您正在运行 Node，您可以停止服务器。在命令行中，添加该库:
+
+```js
+npm install body-parser –save
+
+```
+
+当 Angular 发出 POST 请求时，这个库允许 Node 检索进入服务器的数据。
+
+我已经介绍了 REST 动词的概念，比如使用`GET`从数据库中检索信息，现在您可以使用`POST`向数据库中添加新信息。
+
+将这个库安装到您的节点应用中后，您现在可以更新您的`app.js`文件来利用它。以下是更新的部分视图:
+
+```js
+const bodyParser = require('body-parser');
+
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true });
+
+```
+
+您现在需要的是让服务器接受 Angular 应用发出的`POST`调用。为此，从`controllers`文件夹中打开`boroughs.js`文件。
+
+这里有您的原始代码，它响应了一个`GET`请求。您现在可以添加响应`POST`请求的能力。
+
+在您的新函数中，您将提取发送过来的信息，并将其分配给局部变量。您还将创建一个对象来表示正在更新的列和数据。最后，您将运行 SQL 查询来更新数据库。
+
+更新后的`boroughs.js`文件应包含以下代码:
+
+# Angular 与 Node.js 集成：数据插入与显示
+
+```js
+router.post('/' , (req, res) => {
+        let boroughName = req.body.boroughName;
+       let state = req.body.state;
+       let records = {name: boroughName, state: state};
+       pool.query('INSERT INTO boroughs SET ?', records, (error, results) => {
+      if (error) throw error;
+        });
+});
+```
+
+您创建了一个允许您与节点服务器对话的代理。对于本地开发，您继续使用该代理连接到节点服务器，并传递来自 Angular 表单的数据。在节点端，提交到表单中的数据现在变成了`body`对象的属性。
+
+属性包含键入表单的值。现在，您可以提取这些值，并将它们保存为局部变量。
+
+然后，您可以创建一个对象，该对象将把列与要插入到数据库中的值相匹配。最后一件事是运行 SQL 查询。
+
+当您从数据库中获取数据时，其中一项是数据库中该项的 ID。通过在查询中使用`INSERT`来添加新数据，数据库将自动为添加到数据库中的每个项目创建一个新的 ID 号。这很重要，因为这意味着您不需要跟踪每个项目的唯一 ID。
+
+数据库准备好插入新数据，节点服务器准备好接收新数据，现在需要更新 Angular 应用来发送信息。打开`borough.service.ts`，添加一个名为`addBorough`的函数。它应该是这样的:
+
+```js
+addBorough(value) {
+  return this.http.post('/boroughs', value,value);
+}
+```
+
+就像`GET`示例一样，您使用 Angular 提供的 HTTP 客户端来进行您的`POST`调用。然后你把你的参数`value`，它是一个对象(你可以把名字改成任何你喜欢的)。这个对象有一个名为`value`的属性，这就是你发送给服务器的内容。
+
+您需要更新您的组件，以便它可以向服务发送数据。打开`list-boroughs.component.ts`。最近添加的功能是`submitBorough`。您需要更新此功能，以便利用更新后的服务。该函数现在应该如下所示:
+
+```js
+submitBorough(value) {
+//console.log(value);
+this,.boroughService.addBorough(value).subscribe((results) => {
+       console.log(results);
+  });
+}
+```
+
+现在，当提交表单时，在文本字段中键入的信息将被发送到服务器。然后，服务器会在数据库中添加一条新记录。
+
+当您测试应用时，您应该看到数据库已经更新。为了确保数据库已经更新，您可以查看 PHPMyAdmin 并查找之前创建的表。您还可以更新模板，以便获得数据库中的所有结果。
+
+您要进行的最后一次更新是将新数据检索到同一页面中。这时，让我们把原来在`ngOnInit`中的函数移到一个名为`getBoroughs`的新函数中。你可以把这个电话作为一个整体，转移到你的新功能。它应该是这样的:
+
+```js
+getBoroughs(){
+   this.boroughService.getBoroughs().subscribe((data) => {
+           this.results = data;
+   });
+}
+```
+
+您有一个函数，当它被激活时，将进行相同的调用并检索数据库中的所有信息。最后，您需要更新 HTML 模板，以便在屏幕上显示所有结果。本次更新将利用上一课的内容。您将添加一个具有新按钮的新行，当该按钮被单击时，它将调用您的新函数并更新模板的后半部分。
+
+新行应该如下所示:
+
+```html
+<div class="row">
+    <div class="col-1">
+        <button class="btn btn-primary" (click) = 'getBoroughs()'>Get Boroughs</button>
+   <div>
+   <div class="col-11">
+       <div *ngFor = "let result of results">
+          id = {{ result.id }}
+          name = {{ result.name }}
+          state = {{ result.state }}
+      </div>
+   </div>
+</div>
+```
+
+新行中有一些小的不同。Bootstrap 的工作原理是将屏幕分成 12 列网格。因此，您在第一列中添加按钮，结果在一列中横跨其他 11 列的宽度。
+
+您使用与上一个示例相同的循环。当你的用户点击按钮时，Angular 会看到点击事件发生了。它将调用组件中定义的`getBoroughs`函数。你应该在屏幕上看到结果，类似于图 11-8 。
+
+![img/313453_3_En_11_Fig8_HTML.jpg](img/313453_3_En_11_Fig8_HTML.jpg)
+
+图 11-8
+
+角度插入和显示信息
+
+## 摘要
+
+这一章涵盖了很多内容。你被介绍到了角度框架。您了解了 Typescript 与 JavaScript 的细微差别，以及如何在 Angular 应用中使用它。
+
+您使用命令行界面为您的应用创建了一个新的 Angular 应用、组件、类和服务。您还创建了一个代理，允许您的 Angular 应用与您的节点服务器对话，就好像它们运行在同一个端口上，而不是两个独立的实例。
+
+使用 Express 框架，您找到了一种连接到 MySQL 数据库并运行查询的方法，该查询将结果发送回 Angular 应用。您还运行了一个查询，将数据从 Angular 应用插入到数据库中。
+
+Angular 提供了一长串现成的函数，可以用来构建应用。
+
+下一章将介绍如何使用 React 做同样的事情。React 没有 Angular 拥有的所有特性，但它是一个值得学习的技能。
