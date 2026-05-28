@@ -1,0 +1,804 @@
+# 五、文件和数据
+
+几乎每个产品都有一些数据需要确保在设备重启时可用，即使断电也是如此。在微控制器上，闪存通常用于这种非易失性存储(NVS)存储器。保存应用程序代码的同一闪存也存储应用程序使用的数据和它创建的数据。以下是您的应用程序可能存储的一些数据类型:
+
+*   只读数据，例如构成产品用户界面的图像或包含由嵌入式 web 服务器提供的静态网页的文件
+*   读写的小块数据—例如，用户偏好和其他长期状态
+*   产品监控操作时创建的大量数据，例如，从传感器收集数据时
+
+在计算机和移动设备上，通常使用文件系统来满足大多数(如果不是全部)数据存储需求。然而，由于嵌入式系统的限制——代码大小限制、高度受限的 RAM 和严格的性能约束——固件通常甚至不包括文件系统。
+
+本章解释了在嵌入式系统上处理存储数据的三种不同方式:文件、首选项和资源。最后一节介绍对闪存的直接访问，这是一种提供最大灵活性的高级技术。
+
+构建产品时，选择最符合您需求的数据存储方法。在假设文件是正确的选择之前，请考虑首选项和资源，它们是处理存储数据的轻量级方式。
+
+## 安装文件和数据主机
+
+你可以按照第一章中描述的模式运行本章提到的所有示例:使用`mcconfig`在你的设备上安装主机，然后使用`mcrun`安装示例应用。
+
+主机在`$EXAMPLES/ch5-files/host`目录中。从命令行导航到这个目录，用`mcconfig`安装它。
+
+## 文件
+
+ESP32 和 ESP8266 使用`SPIFFS`(串行外设接口闪存文件系统)作为其闪存中的文件系统。`SPIFFS`专门设计用于许多微控制器使用的`NOR`(非或)闪存。虽然`SPIFFS`的功能远不如计算机上的文件系统全面，但它提供了您需要的所有基本功能。
+
+在嵌入式设备上使用文件时，一定要记住文件系统实现的这些限制:
+
+*   `SPIFFS`是一个平面文件系统，这意味着没有真正的目录。所有文件都在`SPIFFS`根目录下。
+*   文件名限制为 32 个字节。
+*   没有文件权限或锁定。所有文件都可以被读取、写入和删除。
+*   写操作的时间长度是不可预测的。它通常很快，但是当文件系统需要整合数据块时，它可能会阻塞一段时间。
+
+本节重点介绍如何使用`SPIFFS`访问文件，`SPIFFS`不需要添加任何硬件，代码量相对较小。在 ESP32 上，这些相同的 API 也可用于访问使用`FAT32`文件系统格式化的 SD 存储卡。
+
+### 文件类别
+
+对文件系统的所有访问都是使用`file`模块中的类来完成的:
+
+```js
+import {File, Iterator, System} from "file";
+```
+
+`file`模块导出这三个类，下面几节将详细解释:
+
+*   `File`类对单个文件执行操作，包括读、写、删除和重命名。
+*   `Iterator`类返回目录的内容。在`SPIFFS`这样的平面文件系统上，`Iterator`只对根目录可用。
+*   `System`类提供关于文件系统存储的信息，包括存储总量和可用空间。
+
+### 文件路径
+
+文件路径是用来标识文件和目录的字符串。`file`模块使用斜杠字符(`/`)来分隔路径的各个部分，就像在`/spiffs/data.txt`中一样。
+
+虽然`SPIFFS`是一个没有子目录的平面文件系统，但它是通过根`/spiffs/`而不是`/`来访问的，以支持具有多个文件系统的嵌入式设备——例如，内置的闪存文件系统和外部 SD 卡。
+
+在桌面模拟器上，根因主机平台而异。比如在 macOS 上，默认的文件系统根目录是`/Users/Shared/`。当您编写想要在多个环境中工作的代码时，您可以使用`mc/config`模块中的预定义值来查找您的主机平台的根。
+
+```js
+import config from "mc/config";
+
+const root = config.file.root;
+```
+
+因为可能有多个文件系统，这个根目录只是一个方便的文件默认位置，不一定是唯一可用的文件系统。
+
+每个文件系统对文件名或目录名的长度可能有不同的限制。使用`System.config`静态方法检索指定根中名称的最大长度。
+
+```js
+const spiffsConfig = System.config("/spiffs/");
+let name = "this is a very long file name.txt";
+if (name.length > spiffsConfig.maxPathLength)
+    throw new Error("file name too long");
+```
+
+### 文件操作
+
+本节描述对文件执行操作的方法，包括删除、创建和打开。没有方法来读取或写入文件的全部内容，因为这通常会由于内存限制而失败；后面的章节介绍了阅读和写作的技巧。
+
+#### 确定文件是否存在
+
+使用`File`类的静态`exists`方法来确定文件是否存在:
+
+```js
+if (File.exists(root + "test.txt"))
+    trace("file exists\n");
+else
+    trace("files does not exist\n");
+```
+
+#### 删除文件
+
+要删除一个文件，使用`File`类的静态`delete`方法:
+
+```js
+File.delete(root + "goaway.txt");
+```
+
+如果成功，`delete`方法返回`true`,否则返回`false`。如果文件不存在，`delete`会返回`true`而不是抛出一个错误，所以不需要用`try` / `catch`块包围它的调用。如果删除操作失败，方法确实会引发错误，但这种情况只在极少数情况下发生，例如当闪存磨损或文件系统数据结构损坏时。
+
+#### 重命名文件
+
+要重命名文件，使用`File`类的静态`rename`方法。第一个参数是要重命名的文件的完整路径，而第二个参数只是新名称。
+
+```js
+File.rename(root + "oldname.txt", "newname.txt");
+```
+
+**Note**
+
+`rename`方法仅用于重命名文件。在支持子目录的文件系统上，`rename`不能用于将文件从一个目录移动到另一个目录。
+
+#### 打开文件
+
+要打开一个文件，创建一个`File`类的实例。`File`构造函数的第一个参数是要打开的文件的完整路径。可选的第二个参数是以写模式打开的`true`(如果文件不存在，则创建文件),或者不存在，或者是以读模式打开的`false`。以下是以读取模式打开文件的示例:
+
+```js
+let file = new File(root + "test.txt");
+```
+
+以下示例以写模式打开一个文件，如果该文件不存在，则创建该文件:
+
+```js
+let file = new File(root + "test.txt", true);
+```
+
+如果打开文件时出现错误，比如试图以读取模式打开一个不存在的文件，那么`File`构造函数会抛出一个错误。
+
+访问完文件后，关闭文件实例以释放它正在使用的系统资源:
+
+```js
+file.close();
+```
+
+### 写入文件
+
+本节介绍将数据写入文件的技术。您可以使用`File`类来写入文本和二进制数据。文件必须以写模式打开，否则写操作将引发错误。要以写模式打开，将`true`作为第二个参数传递给`File`构造函数。
+
+当您写入的数据超过当前大小时，文件系统会自动增大文件。不支持截断文件。要减小文件的大小，请创建另一个文件，并将所需数据从原始文件复制到其中。
+
+#### 书写文本
+
+`File`类的`write`方法根据您传递给调用的 JavaScript 对象的类型来确定您想要写入的数据类型。若要写入文本，请传递一个字符串。以下来自`$EXAMPLES/ch5-files/files`示例的代码将单个字符串写入文件:
+
+```js
+let file = new File(root + "test.txt", true);
+file.write("this is a test");
+file.close();
+```
+
+字符串总是被写成 UTF 8 数据。
+
+#### 写入二进制数据
+
+要将二进制数据写入文件，请将一个`ArrayBuffer`传递给`write`。以下来自`$EXAMPLES/ch5-files/files`示例的代码将五个 32 位无符号整数写入一个文件。这些值在一个`Uint32Array`中，它使用一个`ArrayBuffer`进行存储。对`write`的调用从`bytes`数组的`buffer`属性中获取`ArrayBuffer`。
+
+```js
+let bytes = Uint32Array.of(0, 1, 2, 3, 4);
+let file = new File(root + "test.bin", true);
+file.write(bytes.buffer);
+file.close();
+```
+
+要写字节(8 位无符号值)，传递一个整数值作为参数(参见清单 5-1 )。
+
+```markdown
+### 获取文件大小
+
+要确定文件的字节大小，首先要打开文件，然后检查它的`length`属性：
+
+```js
+let file = new File(root + "test.txt");
+let length = file.length;
+trace(`test.txt is ${length} bytes\n`);
+file.close();
+```
+
+`length`属性是只读的。不能设置它来更改文件的大小。
+
+### 编写混合类型
+
+`write`方法允许您传递多个参数，以便在一次调用中写入几段数据。这样执行起来会快一点，代码也会小一点。以下示例在对`write`的一次调用中写入一个`ArrayBuffer`、四个字节和一个字符串：
+
+```js
+let bytes = Uint32Array.of(0x01020304, 0x05060708);
+let file = new File(root + "test.bin", true);
+file.write(bytes.buffer, 9, 10, 11 12, "ONE TWO!");
+file.close();
+```
+
+写入后文件的十六进制转储如下所示：
+
+```js
+04 03 02 01 08 07 06 05   .... ....
+09 0A 0B 0C 79 78 69 32   .... ONE
+84 87 79 33               TWO!
+```
+
+您可能希望前四个字节是`01 02 03 04`，但是请记住，包含`Uint32Array`的`TypedArray`的实例是按照主机平台的字节顺序存储的，而 ESP32 和 ESP8266 微控制器都是小端设备。
+
+## 从文件中读取
+
+本节介绍从文件中检索数据的技术。您可以使用`File`类来读取文本和二进制数据。大多数文件都是二进制或文本数据，尽管这不是必需的。
+
+`File`类支持分段读取文件，这使您能够控制从文件读取时使用的最大内存。
+
+### 阅读文本
+
+有时，将文件的全部内容作为一个文本字符串进行检索是很有用的。您可以通过调用带有单个参数`String`的`read`方法来实现这一点，该方法告诉文件实例从当前位置读取到文件末尾，并将结果放入一个字符串中。下面来自`$EXAMPLES/ch5-files/files`示例的代码从前面创建的`test.txt`文件中读取内容：
+
+```js
+let file = new File(root + "test.txt");
+let string = file.read(String);
+trace(string + "\n");
+file.close();
+```
+
+`read`方法总是从当前位置开始读取。在这种情况下，由于文件刚刚被打开，所以当前位置是 0，即文件的开头。
+
+### 分段阅读文本
+
+您还可以使用`read`方法来检索文件的一部分，以最大限度地减少峰值内存的使用。`read`的可选第二个参数表示要读取的最大字节数。这是读取的字节数，但有一个例外：如果读取请求的字节数会超过文件的结尾，则从当前位置到文件结尾的文本被读取。
+
+清单 5-2 中的例子读取一个十字节的文件并跟踪它们到控制台。它将`position`属性与`length`属性进行比较，以确定何时从文件中读取了所有数据。
+
+```js
+let file = new File(root + "test.txt");
+while (file.position < file.length) {
+    let string = file.read(String, 10);
+    trace(string + "\n");
+}
+file.close();
+```
+
+在计算机上，你可以对文件进行内存映射以简化对数据的访问；然而，这种方法在微控制器上通常不可用，因为它们通常缺少 MMU（内存管理单元）来执行映射。如果你想对只读数据进行内存映射，资源是一个很好的选择，这将在本章后面解释。
+
+### 读取二进制数据
+
+要将整个文件作为二进制数据读取，请使用单个参数`ArrayBuffer`调用`read`。下面来自`$EXAMPLES/ch5-files/files`示例的代码从前面创建的`test.bin`文件中读取内容：
+
+```js
+let file = new File(root + "test.bin");
+let buffer = file.read(ArrayBuffer);
+file.close();
+```
+
+与读取文本时一样，二进制读取从当前位置（文件打开时为 0）开始，一直持续到文件的末尾。数据在`ArrayBuffer`中返回。以下示例将返回的缓冲区包装在一个`Uint8Array`中，并在控制台上显示十六进制字节值：
+
+```js
+let bytes = new Uint8Array(buffer);
+for (let i = 0; i < bytes.length; i++)
+    trace(bytes[i].toString(16).padStart(2, "0"), "\n");
+```
+
+### 分段读取二进制数据
+
+`read`方法也可以用来从文件中的任意位置获取二进制数据。清单 5-3 中的例子读取文件的最后四个字节，并将结果显示为一个 32 位无符号整数。读取位置是通过将`position`属性设置为距离文件末尾四个字节来指定的。
+
+```js
+let file = new File(root + "test.bin");
+file.position = file.length - 4;
+let buffer = file.read(ArrayBuffer, 4);
+file.close();
+let value = (new Uint32(buffer))[0];
+```
+
+## 目录
+
+SPIFFS 文件系统只实现一个目录，即根目录。其他文件系统，比如 FAT32，支持任意数量的子目录。在所有情况下，都使用`file`模块的`Iterator`类来列出目录中包含的文件和子目录。
+
+### 遍历目录
+
+检索目录中的项目列表是一个两步过程。首先，为要迭代的目录创建一个`Iterator`类的实例；然后调用迭代器的`next`方法来检索每一项。当所有条目都被返回时，迭代器返回`undefined`。来自`$EXAMPLES/ch5-files/files`示例的清单 5-4 跟踪根目录中包含的文件和目录到控制台。
+
+```js
+let iterator = new Iterator(root);
+let item;
+while (item = iterator.next()) {
+    if (undefined === item.length)
+        trace(`${item.name.padEnd(32)} directory\n`);
+    else
+        trace(`${item.name.padEnd(32)} file ${item.length}` +
+              "bytes\n");
+}
+```
+
+`next`方法返回一个具有描述该项目的属性的对象。`name`属性总是存在。`length`属性只存在于文件中，表示文件中的字节数。没有单独的属性来指示该项是文件还是目录，因为有了`length`属性就足够了。
+
+迭代器实例有一个`close`方法，可以调用它来释放迭代器使用的系统资源。然而，这通常是不必要的，因为迭代器实现在到达项目末尾时会自动释放所有系统资源。
+
+`Iterator`类一次返回一个项目，而不是所有项目的列表，以保持内存使用最小化。项目返回的顺序取决于底层文件系统的实现。例如，在一般情况下，您不能假定项目是按字母顺序返回的，或者目录是在文件之前返回的。
+
+### 用 JavaScript 迭代器迭代
+
+JavaScript 语言提供了迭代器特性，使得编写使用迭代器的代码更加容易。例如，您可以使用`for`-`of`循环语法来遍历条目。这个语言特性适用于任何实现了*迭代器协议*的实例，而`file`模块的`Iterator`类就是这样做的。这种方法对您来说更简洁，但代价是使用更多的内存和 CPU 时间。清单 5-5 改编清单 5-4 以使用 JavaScript 迭代器。
+
+```js
+for (let item of new Iterator(root)) {
+    if (undefined === item.length)
+        trace(`${item.name.padEnd(32)} directory\n`);
+    else
+        trace(`${item.name.padEnd(32)} file ${item.length}` +
+              "bytes\n");
+}
+```
+
+迭代器真正出彩的地方是作为操作迭代器的函数的输入。例如，如果您需要一个包含目录中所有项目的数组，您可以简单地将迭代器实例传递给`Array.from`。
+
+```js
+let items = Array.from(new Iterator(root));
+```
+
+### 获取文件系统信息
+
+`file`模块的`System`对象包含一个`info`方法来提供关于每个文件系统根的信息。您可以使用此方法来确定可用存储的总字节数和当前使用的字节数。
+
+```js
+let info = System.info(root);
+trace(`Used ${info.used} of ${info.total}\n`);
+```
+
+## 首选项
+
+首选项是在物联网产品的微控制器上存储数据的另一个工具。它们比文件更有效，但也更有限。文件非常适合存储大量信息，而首选项只存储少量信息。通常在你的产品中，你只需要记录少量的用户设置，在这些情况下你只需要偏好；您甚至可以将文件系统从您的产品中完全排除。
+
+使用首选项的另一个优点是它们的可靠性。ESP32 和 ESP8266 首选项的实现采取措施确保首选项数据不会被破坏，即使在更新首选项时断电也是如此。在文件系统中更难达到这种级别的可靠性，因为数据结构更复杂。
+
+### `Preference`类
+
+`preference`模块提供对首选项的访问。要在代码中使用首选项，请从`preference`模块中导入`Preference`类。
+
+```js
+import Preference from "preference";
+```
+
+本章介绍的 JavaScript 首选项 API 在微控制器之间是相同的；然而，底层实现是不同的。例如，在 ESP32 上，首选项是使用 ESP32 IDF SDK 中的 NVS 库实现的，而在 ESP8266 上，首选项是由可修改的 SDK 实现的，因为没有系统提供的等效项。因为实现不同，所以行为也不同。以下部分指出了您需要记住的差异。
+
+### 首选项名称
+
+每个首选项由两个值标识，一个域和一个名称。这些类似于一个简单的文件系统路径:域就像目录名，名称就像文件名。例如，考虑一个 Wi-Fi 灯，您想要保存用户设置以便在打开电源时恢复。你可以使用一个`light`域作为所有灯光状态的首选项，用`on`、`brightness`和`color`作为名称。灯可以将统计数据(例如灯被打开的次数)保存在另一个域中，例如`stats`。
+
+首选项的域名和名称值始终是字符串。ESP32 上的名称限制为 15 个字节，ESP8266 上的名称限制为 31 个字节。
+
+### 偏好数据
+
+首选项不是用来替换文件系统的；试图那样使用它们是一个常见的错误。因为每个单个首选项的大小是有限的，所有首选项可用的总存储空间也是有限的，所以它们远不如文件系统通用。
+
+每个首选项都有一个数据类型:布尔值、32 位有符号整数、字符串或`ArrayBuffer`。不支持浮点数值。字符串类型通常是最方便使用的类型，但也是存储空间使用效率最低的类型。如果您需要在一个首选项中组合几个值，可以考虑使用一个`ArrayBuffer`。
+
+当您写入一个值时，该值的类型是基于所提供的数据建立的。要更改类型，请再次写入值。当您读取一个值时，返回的值与写入的值具有相同的类型。
+
+请注意 ESP32 和 ESP8266 上的偏好数据之间的差异:
+
+*   在 ESP32 上，首选项数据空间是可配置的，在本书使用的主机中设置为 16 KB。在 ESP8266 上，偏好数据的空间为 4 KB。
+
+*   在 ESP32 上，每个首选项最多可以有 4，000 字节的数据；在 ESP8266 上，该值限制为 64 字节。如果您正在编写希望在几种不同的微控制器平台上运行的代码，您需要为 64 字节数据大小设计您的首选值。
+
+### 阅读和写作偏好
+
+因为首选项只是具有某种类型的小块数据，所以它们比文件更容易读取和写入。来自`$EXAMPLES/ch5-files/preferences`示例的清单 5-6 将四个首选项写入`example`域。每个值的类型用作首选项名称。`set`实现基于第三个参数中传递的值来确定首选项的类型。
+
+```js
+Preference.set("example", "boolean", true);
+Preference.set("example", "integer", 1);
+Preference.set("example", "string", "my value");
+Preference.set("example", "arraybuffer",
+               Uint8Array.of(1, 2, 3).buffer);
+
+Listing 5-6.
+```
+
+使用静态的`get`调用来检索偏好值，如清单 5-7 所示。返回值的类型与`set`调用中使用的值的类型相匹配。
+
+```js
+let a = Preference.get("example", "boolean");     // true
+let b = Preference.get("example", "integer");     // 1
+let c = Preference.get("example", "string");      // "my value"
+let d = Preference.get("example", "arraybuffer");
+        // ArrayBuffer of [1, 2, 3]
+
+Listing 5-7.
+```
+
+如果没有找到具有指定域名和名称的首选项，`get`调用返回`undefined`:
+
+```js
+let on = Preference.get("light", "on");
+if (undefined === on)
+    on = false;
+```
+
+### 删除首选项
+
+使用`delete`方法删除首选项:
+
+```js
+Preference.delete("example", "integer");
+```
+
+如果找不到具有指定域名和名称的首选项，则不会引发错误。如果在更新闪存以删除首选项时出现错误，`delete`会抛出一个错误。
+
+### 不要用 JSON
+
+当用 JavaScript 为 web 或计算机构建产品时，通常使用 JSON 存储参数——这是一种非常容易编码且非常灵活的方法。当使用 JavaScript 创建一个嵌入式产品时，很容易做同样的事情；然而，尽管它在某些产品中有效，但并不推荐使用，因为它更有可能在开发过程的后期导致失败。请考虑以下几点:
+
+*   将首选项存储在 JSON 文件中要求您的项目包含一个文件系统——大量代码会占用您的闪存中有限的空间。
+
+*   JSON 对象必须一次加载到内存中，这意味着访问一个参数值需要足够的内存来保存所有参数值。
+
+*   从文件中加载 JSON 字符串数据，然后将它解析成 JavaScript 对象，这比只从首选项中加载一个值要花费更多的时间。
+
+*   文件系统对电源故障的容错能力通常不如首选项。因此，用户设置丢失的可能性更大。
+
+使用 JSON 似乎也是在单个首选项中存储多个值的好方法。这确实有效，但是它有两个限制，这使得它在许多情况下不是一个明智的选择。首先，因为在某些设备上，首选项数据被限制为只有 64 个字节，所以不能以这种方式组合很多值。其次，JSON 格式的开销几乎肯定意味着偏好数据比其他方法使用更多的存储空间。例如，以下代码使用 24 字节的存储空间将三个小整数值存储为 JSON:
+
+```js
+Preference.set("example", "json",
+               JSON.stringify({a: 1, b: 2, c: 3}));
+```
+
+相比之下，这个例子通过使用`Uint8Array`只需要三个字节:
+
+```js
+Preference.set("example", "bytes",
+               Uint8Array.of(1, 2, 3).buffer);
+```
+
+从 JSON 版本中读取值更容易:
+
+```js
+let pref = JSON.parse(Preference.get("example", "json"));
+```
+
+从存储效率更高的版本中读取值需要一行额外的代码:
+
+```js
+let pref = new Uint8Array(Preference.get("example", "bytes"));
+pref = {a: pref[0], b: pref[1], c: pref[2]};
+```
+
+### 安全
+
+`preference`模块不保证偏好数据的安全性。域、名称和值可以“明文”存储，无需任何加密或混淆。与文件中的用户数据一样，您应该在产品中采取适当的步骤来确保用户数据得到充分的保护。物联网产品中通常存储的敏感用户数据包括 Wi-Fi 密码和云服务帐户标识符。至少，您应该考虑对这些值应用某种形式的加密，以便扫描设备闪存的攻击者无法读取它们。
+
+一些主机确实为偏好数据提供加密存储。例如，通过额外的配置，这在 ESP32 上是可用的。
+
+## 资源
+
+资源是处理只读数据的工具。它们是在项目中嵌入大量数据的最有效方式。资源通常在存储它们的闪存中就地访问，因此无论资源数据有多大，都不使用 RAM。可修改的 SDK 将资源用于许多不同的目的，包括 TLS 证书、图像和音频，但是对可以存储在资源中的数据种类没有限制。
+
+`$EXAMPLES/ch5-files/resources`示例托管一个由`mydata.dat`定义的简单 web 页面，它作为一个资源包含在内。运行该示例后，打开 web 浏览器并输入设备的 IP 地址，您将看到一个显示“Hello，world”的网页。
+
+### 向项目添加资源
+
+在项目中包含资源需要两个步骤:
+
+1.  将包含资源数据的文件添加到项目中。资源文件通常放在子目录中，比如`assets`、`data`或者`resources`，但是你可以把它们放在你喜欢的任何地方。
+
+2.  您将文件添加到清单的`resources`部分，告诉构建工具将文件的数据复制到资源中。
+
+清单 5-8 来自`resources`示例的清单。它只包括一个资源`mydata.dat`，来自包含清单的目录。
+
+```js
+"resources": {
+    "*": [
+        "./mydata"
+    ],
+},
+
+Listing 5-8.
+```
+
+数据文件必须有一个`.dat`扩展名。但是，清单中的文件名不得包含扩展名；构建工具会自动定位扩展名为`.dat`的文件。重要的是，不要包含几个同名但扩展名不同的文件(例如，`mydata.dat`和`mydata.bin`)，因为工具可能无法首先找到您期望的文件。
+
+本章描述了直接从输入文件复制到输出二进制文件的资源数据，没有任何改变。构建工具还能够对数据进行转换，例如将图像转换为针对目标微控制器优化的格式；第八章解释了如何使用资源转换。
+
+### 访问资源
+
+要访问资源，从`resource`模块导入`Resource`类:
+
+```js
+import Resource from "resource";
+```
+
+使用清单中的资源路径调用`Resource`类构造函数。注意，在这种情况下，路径总是包含文件扩展名— `.dat`。
+
+```js
+let data = new Resource("mydata.dat");
+```
+
+如果`Resource`构造函数找不到请求的资源，就会抛出一个错误。如果您想在调用构造函数之前检查资源是否存在，请使用静态的`exists`方法:
+
+```js
+if (Resource.exists("mydata.dat")) {
+    let data = new Resource("mydata.dat");
+    ...
+}
+```
+
+### 使用资源
+
+`Resource`构造函数将二进制数据作为`HostBuffer`返回。`HostBuffer`类似于`ArrayBuffer`，但与`ArrayBuffer`不同的是，`HostBuffer`的数据可能是只读的，因此可能位于闪存中。
+
+要获得资源中的字节数，使用`byteLength`属性，就像使用`ArrayBuffer`一样:
+
+```js
+let r1 = new Resource("mydata.dat");
+let length = r1.byteLength;
+```
+
+与`ArrayBuffer`一样，您不能直接访问`HostBuffer`的数据，而必须将其包装在类型化数组或数据视图中。以下示例将资源包装在一个`Uint8Array`中，并将值跟踪到控制台:
+
+```js
+let r1 = new Resource("mydata.dat");
+let bytes = new Uint8Array(r1);
+for (let i = 0; i < bytes.length; i++)
+    trace(bytes[i], "\n");
+```
+
+此示例将资源包装在一个`DataView`对象中，以大端 32 位无符号整数的形式访问其内容:
+
+```js
+let r1 = new Resource("mydata.dat");
+let view = new DataView(r1);
+for (let i = 0; i < view.byteLength; i += 4)
+    trace(view.getUint32(i, false), "\n");
+```
+
+有时您想要修改资源中的数据。因为数据是只读的，你需要做一个拷贝。由`Resource`构造函数返回的`HostBuffer`有一个`slice`方法，可以用来复制资源数据，与`ArrayBuffer`实例上的`slice`方法相同。例如，您可以将整个资源复制到 RAM 中的`ArrayBuffer`中，如下所示:
+
+```js
+let r1 = new Resource("mydata.dat");
+let clone = r1.slice(0);
+```
+
+`slice`的第一个参数是要复制的数据的起始偏移量。可选的第二个参数是要复制的结束偏移量；如果省略，数据将复制到资源的末尾。以下示例从字节 20 开始提取 10 个字节的资源数据:
+
+```js
+let r1 = new Resource("mydata.dat");
+let fragment = r1.slice(20, 30);
+```
+
+`slice`方法支持可选的第三个参数，`ArrayBuffer`没有提供这个参数。该参数控制是否将数据复制到 RAM 中。如果它被设置为`false`，那么`slice`返回一个`HostBuffer`，引用资源数据的一个片段，这在您想要将资源的一部分与一个对象相关联而不将其数据复制到 RAM 中时非常有用。例如，如果在资源的偏移量 32 处有一个包含五个无符号 16 位数据的数组，您可以创建一个引用它的`Uint16Array`，如下所示:
+
+```js
+let r1 = new Resource("mydata.dat");
+let values = new Uint16Array(r1.slice(32, 10, false));
+```
+
+您可以通过使用`Uint16Array`构造函数的可选参数`byteOffset`和`length`获得类似的结果:
+
+```js
+let r1 = new Resource("mydata.dat");
+let values = new Uint16Array(r1, 32, 10);
+```
+
+使用`slice`的优点是它确保了不受信任的代码无法使用全部资源来访问`values`数组。在前面两个例子的第一个中，`values.buffer`可以访问整个资源，而在第二个例子中，它只能用来访问`Uint16Array`中的五个值。
+
+### 直接访问闪存
+
+本章中描述的所有用于存储和检索数据的模块— `files`、`preferences`和`resources`—都使用连接到控制器的闪存来存储数据。每种处理闪存中数据的方法都有自己的优点和局限性。在大多数情况下，这些方法中的一种非常适合您的产品需求；在某些情况下，更专业的方法可能更有效。`flash`模块可让您直接访问闪存。用好它需要更多的工作，但在某些情况下这是值得的。
+
+> **Warning**
+>
+> 这是一个高级话题。直接访问闪存是危险的。您可能会使设备崩溃或损坏您的数据。您甚至可能损坏闪存，使您的设备无法使用。小心行事！
+
+#### 闪存硬件基础
+
+为了能够使用由`flash`模块提供的 API，理解闪存硬件的基础很重要。
+
+ESP32 和 ESP8266 微控制器使用的闪存通过 SPI(串行外设接口)总线连接。虽然访问速度相当快，但仍然比访问 RAM 中的数据慢很多倍。
+
+闪存被组织成*块*(也称为“扇区”)。块的大小取决于所使用的闪存组件。常见的值是 4，096 字节。当你读写闪存时，你通常不需要知道块的大小。然而，在初始化闪存时，块的大小很重要。
+
+闪存使用 NOR 技术来存储数据。这有一个奇怪的含义，即闪存的一个擦除字节的所有位都设置为 1，而通常认为擦除存储器设置为 0。您可能认为可以简单地将新擦除的字节设置为全零，但正如您将看到的，这对于 NOR 闪存来说并不是一个好主意。
+
+当写入 NOR 闪存时，您只写入 0 位。因为闪存被擦除为全 1 位，所以这在第一次写入时无关紧要。考虑两个字节(16 位)的闪存。它们开始时被擦除为全 1 位。
+
+```js
+11111111 11111111
+```
+
+向其中写入两个字节，1 和 2，结果很简单:
+
+```js
+00000001 00000010
+```
+
+接下来就是结果出乎意料的地方了。下面是将两个字节 2 和 1 写入同一位置时的情况:
+
+```js
+00000000 00000000
+```
+
+结果是两个字节都被设置为 0。为什么呢？请记住，对于 NOR 闪存，写操作仅设置 0 位。flash 存储器中已经设置为 0 的任何位都不能通过写操作变回 1。
+
+*   闪 0。写入 0 = >闪存 0。
+
+*   闪 0。写入 1 = >闪存 0。
+
+*   闪电侠 1。写入 0 = >闪存 0。
+
+*   闪电侠 1。写入 1 = >闪存 1。
+
+如果写操作只能将位从 1 更改为 0，位如何从 0 更改为 1？你用 flash `erase` 方法做到这一点。与 `read` 和 `write` 可以直接访问闪存中的任何字节不同，`erase` 是一个批量操作，将闪存块中的所有位设置为 1。擦除与块大小边界对齐的块，这意味着字节 0 到 4，095 或字节 4，096 到 8，191，而不是 1 到 4，096，因为它们没有与块的开始对齐，也不是字节 1 到 2，因为它们不是完整的块。
+
+如果你想改变一个位，你可以将整个块读入 RAM，擦除块，改变 RAM 中的位，然后将块写回。这可行，但是很慢，因为 `erase` 是一个相对较慢的操作——比 `read` 和 `write` 慢很多倍。这种方法还需要足够的 RAM 来容纳一个完整的模块，而在资源受限的微控制器上并不总是有那么多内存。然而，最大的问题是闪存会磨损。每个块仅可被擦除特定次数，此后该块不再可靠地存储数据；为了保护设备，您需要尽量减少擦除每个块的次数。
+
+好消息是，您的 ESP32 或 ESP8266 中的闪存支持成千上万的擦除操作。`preference` 和 `file` 模块实施了解 NOR 闪存的限制和特性，并采取措施尽量减少擦除。如果你在一个打算使用多年的产品中直接访问闪存，你也需要这样做。
+
+一种常用的策略是增量写入。在这种方法中，当前值被置零，新值被写入块中的零之后。这使得单个值可以多次更新，而无需擦除。此方法由 `preference` 模块使用。本节后面频繁更新的整数示例探究了增量写入的详细信息。
+
+另一种常见策略是损耗均衡。这种方法试图在产品的生命周期内以相同的次数擦除每个闪存存储块，以确保没有任何块(例如，第一个块)会因为更频繁的访问而比其他块磨损得更快。模块底层的 SPIFFS 文件系统使用了这种技术。
+
+### 访问闪存分区
+
+使用 `flash` 模块中的 `Flash` 类访问微控制器可用的闪存:
+
+```js
+import Flash from "flash";
+```
+
+闪存分为称为 `分区` 的段。例如，一个分区包含您的项目代码，另一个包含偏好数据，另一个存储 SPIFFS 文件系统。每个分区由一个名称标识。
+
+要访问分区中的字节，用分区名实例化 `Flash` 类。当您使用第一章中介绍的 `mcrun` 安装示例应用程序时，应用程序的字节码存储在 `xs` 分区中。下面一行实例化了 `Flash` 类来访问它:
+
+```js
+let xsPartition = new Flash("xs");
+```
+
+代码可用的分区根据微控制器和主机实现而有所不同。包含用 `mcrun` 安装的应用程序的 `xs` 分区总是可用的。用于 SPIFFS 文件系统的区域名为 `storage`，通常也总是可用的；如果您的项目中没有使用 SPIFFS 文件系统，您可以将它用于其他目的。尽管这些分区都存在，但它们的大小因设备而异。
+
+在 ESP32 上，来自 Espressif 的 ESP32 IDF 定义了分区。IDF 提供了一种灵活的分区机制，使您可以定义自己的分区。在 ESP8266 上，可修改的 SDK 定义了分区，并且它们不容易重新配置。
+
+在 ESP32 上，`Flash` 构造函数搜索 IDF 分区图以匹配所请求的分区名。因此，您可以访问包含 ESP32 首选项(在 NVS 库中实现)的分区，其名称为 `nvs`，如分区图中所声明的(IDF 项目中的 `partitions.csv` 文件)。
+
+```js
+let nvsPartition = new Flash("nvs");
+```
+
+#### 获取分区信息
+
+`Flash` 类的一个实例有两个只读属性，提供关于分区的重要信息:`blockSize` 和 `byteLength`。
+
+`blockSize` 属性表示闪存硬件的单个块中的字节数。这个值通常是 4，096，但是为了保证健壮性，您应该使用 `blockSize` 属性，而不是在代码中硬编码一个常量值。这样，您的代码可以在包含不同 flash 硬件组件的硬件上不加更改地工作。
+
+```js
+let storagePartition = new Flash("storage");
+let blockSize = storagePartition.blockSize;
+```
+
+`blockSize` 属性很重要，因为它告诉您分区上擦除操作的对齐方式和大小。
+
+`byteLength` 属性提供分区中可用的字节总数。以下示例计算分区中的块数:
+
+```js
+let blocks = storagePartition.byteLength / blockSize;
+```
+
+`byteLength` 属性的值总是 `blockSize` 属性的值的整数倍，所以块数总是整数。
+
+#### 从闪存分区读取
+
+使用 `read` 方法从闪存分区获取字节。`read` 方法有两个参数:分区中的偏移量和要读取的字节数。`read` 调用的结果是一个 `ArrayBuffer`。以下是摘自 `$EXAMPLES/ch5-files/flash-readwrite` 的例子:
+
+```js
+let buffer = partition.read(0, 10);
+let bytes = new Uint8Array(buffer);
+for (let i = 0; i < bytes.byteLength; i++)
+    trace(bytes[i] + "\n");
+```
+
+这段代码从分区中检索前十个字节。它将返回的 `ArrayBuffer` 包装在一个 `Uint8Array` 中，以跟踪到控制台的字节值。
+
+除了需要在分区内之外，对偏移量和要读取的字节数没有限制。具体来说，对 `read` 的单次调用可能会跨越块边界。
+
+`read` 调用将请求的数据从分区复制到新的 `ArrayBuffer`。因此，您应该以小片段读取闪存，以尽可能少地使用 RAM。
+
+#### 擦除闪存分区
+
+使用 `erase` 方法将闪存分区中的所有位重置为 1。该方法采用一个参数，即要重置的块数。这一行擦除分区的第一个块:
+
+```js
+partition.erase(0);
+```
+
+下面的代码重置整个分区。擦除操作相对较慢；对于大型分区，例如 ESP8266 上的存储分区，此操作需要几秒钟的时间。
+
+```js
+let blocks = partition.byteLength / partition.blockSize;
+for (let block = 0; block < blocks; block++)
+    partition.erase(block);
+```
+
+#### 写入闪存分区
+
+使用 `write` 方法改变闪存分区中存储的值。这个方法有三个参数:将数据写入分区的偏移量、要写入的字节数和包含数据的 `ArrayBuffer`。当要写入的字节数小于 `ArrayBuffer` 的大小时，只写入该数量的字节。以下示例将分区的前十个字节设置为 1 到 10 之间的整数:
+
+```js
+let buffer = Uint8Array.of(1, 2, 3, 4, 5, 6, 7, 8, 9, 10).buffer;
+partition.write(0, 10, buffer);
+```
+
+请记住，写操作只会设置 0 位，如“闪存硬件基础”部分所述。因此，可能有必要在调用 `write` 之前执行擦除。
+
+#### 映射闪存分区
+
+在 ESP32 上，您可以选择内存映射分区，这允许您使用类型化数组或数据视图构造函数对分区的内容进行只读访问。要对一个分区进行内存映射，调用 `map` 方法。以下代码摘自 `$EXAMPLES/ch5-files/flash-map` 示例:
+
+```js
+let partition = new Flash("storage");
+let buffer = partition.map();
+let bytes = new Uint8Array(buffer);
+```
+
+`map` 属性返回一个 `HostBuffer`，它可以被传递给类型化数组或数据视图构造函数来访问数据。在某些情况下，内存映射分区是比 `read` 调用更方便的数据访问方式。此外，因为分区中的数据不是通过 `map` 方法复制到 RAM 的，所以 RAM 的使用被最小化。
+
+由于硬件限制，ES8266 上的 `map` 方法不可用，硬件限制只允许闪存第一兆字节的内存映射，这是为存储固件而保留的区域。
+
+### 示例:频繁更新的整数
+
+本节给出了一个直接访问 flash 存储器的例子，与使用文件或首选项相比，它可以更有效地维护 32 位值。该示例适用于您的产品需要频繁更新闪存存储中的值，以确保在产品重启后仍能可靠地维护该值的情况。
+
+该示例使用单块闪存。这通常是 4，096 字节，比存储的 32 位(4 字节)值大 1，024 倍。该示例利用附加存储来减少擦除操作的次数，从而延长闪存的寿命。为了方便起见，使用的块是 `storage` 分区的第一个块，这使得这个例子不能用于 SPIFFS 文件系统。
+
+完整的频繁更新整数示例可在 `$EXAMPLES/ch5-files/flash-frequentupdate` 获得。
+
+#### 正在初始化块
+
+第一步是打开存储分区:
+
+```js
+let partition = new Flash("storage");
+```
+
+如清单 5-9 所示，下一步是检查该块是否已经初始化。这是通过在块的开始处寻找唯一的签名来完成的。如果找不到签名，则擦除该块并写入签名。
+
+```js
+const SIGNATURE = 0xa82aa82a;
+
+let signature = partition.read(0, 4);
+signature = (new Uint32Array(signature))[0];
+if (signature !== SIGNATURE)
+    initialize(partition);
+
+function initialize(partition) {
+    let signature = Uint32Array.of(SIGNATURE);
+
+    partition.erase(0);
+    partition.write(0, 4, signature.buffer);
+}
+```
+
+Listing 5-9.
+
+### 更新值
+
+签名后，该块有空间存储计数器的 1023 个副本。清单 5-10 显示了一个更新计数器值的`write`函数。它在块中搜索第一个未使用的 32 位整数，并将值写入其中。回想一下，当一个块被擦除时，所有的位都被设置为 1。这意味着任何未使用的条目都包含值`0xFFFFFFFF`(一个所有位都设置为 1 的 32 位整数)。如果该块已满，它会重新初始化该块，并将值写入第一个空闲位置。
+
+```js
+function write(partition, newValue) {
+    for (let i = 1; i < 1024; i++) {
+        let currentValue = partition.read(i * 4, 4);
+        currentValue = (new Uint32Array(currentValue))[0];
+        if (0xFFFFFFFF === currentValue) {
+            partition.write(i * 4, 4, Uint32Array.of(newValue).buffer);
+            return;
+        }
+    }
+    initialize(partition);
+    partition.write(4, 4, Uint32Array.of(newValue).buffer);
+}
+```
+
+Listing 5-10.
+
+### 读取数值
+
+最后一部分是`read`函数，如清单 5-11 所示。像`write`函数一样，它搜索第一个自由条目。找到后，`read`返回前一个条目的值。如果搜索到达了块的末尾，则返回块中的最后一个值。
+
+```js
+function read(partition) {
+    let i;
+
+    for (i = 1; i < 1024; i++) {
+        let currentValue = partition.read(i * 4, 4);
+        currentValue = (new Uint32Array(currentValue))[0];
+        if (0xFFFFFFFF === currentValue)
+            break;
+    }
+
+    let result = partition.read((i - 1) * 4, 4);
+    return (new Uint32Array(result))[0];
+}
+```
+
+Listing 5-11.
+
+### 益处和未来工作
+
+这个例子有效地将一个整数值存储在闪存中。在该块需要被擦除之前，该值可以被更新 1023 次。为了理解这种影响，考虑一个每分钟更新一次该值的产品。这相当于每年 514 次擦除操作(60 * 24 * 365，即每年 525，600 分钟，除以每次擦除的 1，023 次更新，结果为 514 次)。使用支持 10，000 次擦除操作(保守估计)的闪存芯片，该产品的寿命约为 19.5 年。如果每次写入操作都需要擦除，则同一产品仅用 7 天就会耗尽(60 * 24 * 7 等于每周 10，080 次写入)。
+
+细心的读者注意到了这个例子的两个局限性:如果在擦除之后和写入之前在`write`函数中断电，那么当前值将会丢失；并且该值不能被设置为`0xffffffff`，因为该值用于标识块中未使用的条目。这些缺点的解决方案是可能的，留给读者作为练习。
+
+## 结论
+
+在本章中，您学习了在嵌入式产品中存储信息的几种不同方法。文件、首选项和资源是存储数据的三种主要方式，每种方式都针对不同的存储用途进行了优化。您可以在您的产品中使用这些方法的任意组合。设计产品时，请考虑您的存储需求，以确定使用哪种方法来最佳利用可用存储。有些情况非常特殊，没有一种标准存储技术是最佳的；为了解决这些情况，本章展示了闪存如何工作，以便您可以创建自己的存储方法。
