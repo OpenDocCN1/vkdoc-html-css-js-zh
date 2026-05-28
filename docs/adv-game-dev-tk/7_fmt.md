@@ -1,0 +1,690 @@
+# 七、基于磁贴的更有趣的游戏
+
+本书的大部分内容都在探索基于图块的游戏设计方法如何帮助你以简单高效的方式解决一些复杂的问题。它可以帮助你改善和简化一切，从关卡设计，碰撞，游戏逻辑，人工智能到寻路。但是如果没有对另外两个基于磁贴的设计策略的探索，这本书就不完整，你肯定会发现它们在你的游戏中有很多用处:
+
+*   **隐藏游戏数据**:你可以在地图单元格中隐藏游戏的特殊信息，这些信息可以用来创建复杂的人工智能实体。在本章中，您将看到如何为一个简单的赛车游戏原型创建一辆自动驾驶汽车。
+
+*   **宽相位碰撞检测**:通过只检查可能发生碰撞的物体之间的碰撞，提高基于计算密集型物理的游戏的性能。你将通过实现一个被称为**空间网格**的通用轻量级碰撞系统来学习如何操作。
+
+所以，系好安全带，发动引擎——我们准备上路了！
+
+## 为人工智能系统使用额外的游戏数据
+
+我们将从如何为赛车驾驶游戏创建一辆计算机控制的汽车开始这一章。但在此之前，让我们来看看如何创建一辆人类控制的赛车，它可以使用键盘在赛道上导航。运行本章源文件中的`drivingGame.html`文件，得到一个工作原型，如图 7-1 所示。使用键盘驾驶汽车在赛道上行驶。
+
+![A346816_1_En_7_Fig1_HTML.jpg](img/A346816_1_En_7_Fig1_HTML.jpg)
+
+图 7-1。使用键盘驾驶汽车在赛道上行驶，但注意不要陷入草地
+
+这个小原型还实现了驾驶游戏最令人讨厌的必备功能之一:如果你开出了赛道，你的车就会陷在草丛里，减速。感谢我们基于瓷砖的设计系统的优雅，这是一个非常容易实现的特性，您将在前面的章节中找到所有关于它的内容。但首先，让我们快速看一下这个小原型是如何组装的。
+
+下面你会找到让这个游戏运行的整个 JavaScript 文件。大部分代码都非常熟悉，所以可以把它看作是对基于磁贴的游戏世界构建基础的快速回顾。新的是玩家车的控制系统。代码监听键盘箭头键的按下:如果按下了向上箭头，则一个`moveForward`布尔值被设置为`true`。如果左右箭头键被按下，汽车的转速被设置。这些值然后在游戏循环(`playing`函数)中使用，以旋转和移动汽车。下面是完整的代码清单，带有解释一切工作原理的注释。
+
+```javascript
+// 完整的JavaScript代码清单
+```
+
+# 游戏代码示例
+
+```js
+//Load any assets used in this game
+let thingsToLoad = [
+  "img/tileSet.png",
+];
+
+//Create a new Hexi instance, and start it
+let g = hexi(640, 512, setup, thingsToLoad);
+
+//Scale the canvas to the maximum browser dimensions
+g.scaleToWindow();
+
+//Start the game engine
+g.start();
+
+//Intiialize variables
+let car, world;
+
+function setup() {
+  //Create the `world` container that defines our tile-based world
+  world = g.group();
+
+  //Set the `tileWidth` and `tileHeight` of each tile, in pixels
+  world.tileWidth = 64;
+  world.tileHeight = 64;
+
+  //Define the width and height of the world, in tiles
+  world.widthInTiles = 10;
+  world.heightInTiles = 8;
+
+  //Create the world layers
+  world.layers = [
+    //The environment layer. `1` represents the grass,
+    //`2` represents the track
+    [
+      1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+      1, 2, 2, 2, 2, 2, 2, 2, 2, 1,
+      1, 2, 2, 2, 2, 2, 2, 2, 2, 1,
+      1, 2, 2, 1, 1, 1, 1, 2, 2, 1,
+      1, 2, 2, 1, 1, 1, 1, 2, 2, 1,
+      1, 2, 2, 2, 2, 2, 2, 2, 2, 1,
+      1, 2, 2, 2, 2, 2, 2, 2, 2, 1,
+      1, 1, 1, 1, 1, 1, 1, 1, 1, 1
+    ],
+    //The character layer. `3` represents the car
+    //`0` represents an empty cell which won't contain any
+    //sprites
+    [
+      0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+      0, 0, 3, 0, 0, 0, 0, 0, 0, 0,
+      0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+      0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+      0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+      0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+      0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+      0, 0, 0, 0, 0, 0, 0, 0, 0, 0
+    ]
+  ];
+
+  //Build the game world by looping through each
+  //of the layer arrays one after the other
+  world.layers.forEach(layer => {
+    //Loop through each array element
+    layer.forEach((gid, index) => {
+      //If the cell isn't empty (0) then create a sprite
+      if (gid !== 0) {
+        //Find the column and row that the sprite is on and also
+        //its x and y pixel values that match column and row position
+        let column, row, x, y;
+        column = index % world.widthInTiles;
+        row = Math.floor(index / world.widthInTiles);
+        x = column * world.tileWidth;
+        y = row * world.tileHeight;
+
+        //Next, create a different sprite based on what its
+        //`gid` number is
+        let sprite;
+        switch (gid) {
+          //The track
+          case 1:
+            sprite = g.sprite(g.frame("img/tileSet.png", 192, 64, 64, 64));
+            break;
+          //The grass
+          case 2:
+            sprite = g.sprite(g.frame("img/tileSet.png", 192, 0, 64, 64));
+            break;
+          //The car
+          case 3:
+            sprite = g.sprite(g.frame("img/tileSet.png", 192, 192, 48, 48));
+            car = sprite;
+        }
+
+        //Position the sprite using the calculated `x` and `y` values
+        //that match its column and row in the tile map
+        sprite.x = x;
+        sprite.y = y;
+
+        //Add the sprite to the `world` container
+        world.addChild(sprite);
+      }
+    });
+  });
+
+  //Add some physics properties to the car
+  car.vx = 0;
+  car.vy = 0;
+  car.accelerationX = 0.2;
+  car.accelerationY = 0.2;
+  car.rotationSpeed = 0;
+  car.friction = 0.96;
+  car.speed = 0;
+
+  //Set the car's center rotation point to the middle of the sprite
+  car.setPivot(0.5, 0.5);
+
+  //Whether or not the car should move forward
+  car.moveForward = false;
+
+  //Define the arrow keys to move the car
+  let leftArrow = g.keyboard(37),
+    upArrow = g.keyboard(38),
+    rightArrow = g.keyboard(39),
+    downArrow = g.keyboard(40);
+
+  //Set the car's `rotationSpeed` to -0.1 (to rotate left) if the
+  //left arrow key is being pressed
+  leftArrow.press = () => {
+    car.rotationSpeed = -0.05;
+  };
+
+  //If the left arrow key is released and the right arrow
+  //key isn't being pressed down, set the `rotationSpeed` to 0
+  leftArrow.release = () => {
+    if (!rightArrow.isDown) car.rotationSpeed = 0;
+  };
+
+  //Do the same for the right arrow key, but set
+  //the `rotationSpeed` to 0.1 (to rotate right)
+  rightArrow.press = () => {
+    car.rotationSpeed = 0.05;
+  };
+
+  rightArrow.release = () => {
+    if (!leftArrow.isDown) car.rotationSpeed = 0;
+  };
+
+  //Set `car.moveForward` to `true` if the up arrow key is
+  //pressed, and set it to `false` if it's released
+  upArrow.press = () => {
+    car.moveForward = true;
+  };
+  upArrow.release = () => {
+    car.moveForward = false;
+  };
+
+  //Start the game loop by setting the game state to `play`
+  g.state = play;
+}
+
+//The game loop
+function play() {
+  //Use the `rotationSpeed` to set the car's rotation
+  car.rotation += car.rotationSpeed;
+
+  //If `car.moveForward` is `true`, increase the speed
+  if (car.moveForward) {
+    car.speed += 0.05;
+  }
+  //If `car.moveForward` is `false`, use
+  //friction to slow the car down
+  else {
+    car.speed *= car.friction;
+  }
+
+  //Use the `speed` value to figure out the acceleration in the
+  //direction of the car’s rotation
+  car.accelerationX = car.speed * Math.cos(car.rotation);
+  car.accelerationY = car.speed * Math.sin(car.rotation);
+
+  //Apply the acceleration and friction to the car's velocity
+  car.vx = car.accelerationX;
+  car.vy = car.accelerationY;
+  car.vx *= car.friction;
+  car.vy *= car.friction;
+
+  //Apply the car's velocity to its position to make the car move
+  car.x += car.vx;
+  car.y += car.vy;
+
+  //Slow the car down if it's stuck in the grass
+
+  //First find the car's map index position (using
+  //the `getIndex` helper function)
+  let carIndex = getIndex(car.x, car.y, 64, 64, 10);
+
+  //Get a reference to the race track map
+  let trackMap = world.layers[0];
+
+  //Slow the car if it's on a grass tile (gid 1) by setting
+  //the car's friction to 0.25, to make it sluggish
+  if (trackMap[carIndex] === 1) {
+    car.friction = 0.25;
+  }
+  //If the car isn't on a grass tile, restore its
+  //original friction value
+  else {
+    car.friction = 0.96;
+  }
+}
+```
+
+上面的最后几行是当汽车驶入草地时减速的原因。代码比较汽车在地图上的索引位置。如果它在草地上(`gid` 为 1)，那么通过将乘数设置为 0.25 来增加汽车的摩擦力。否则车必须在赛道上，所以摩擦乘数设为正常，0.96。
+
+### 在数组中存储隐藏的游戏数据
+
+下一步是添加一辆人工智能控制的汽车，它可以自己在赛道上导航。为了做到这一点，我们将创建一个新的地图数组来存储关于 AI 汽车应该转向哪个方向的信息，这取决于它在赛道上的位置。这些数据是“隐藏的”，因为游戏的玩家并不知道它的存在——它只是被游戏的人工智能系统用来做决定。
+
+您已经看到了地图数组不仅仅用于绘制地图，还可以帮助解释游戏世界。在我们刚刚看到的驾驶游戏示例中，数组中的草地数据不仅有助于在屏幕上绘制草地瓷砖，而且在游戏逻辑中也起着至关重要的作用。基于图块的游戏的强大之处在于，地图数组数据包含有意义的信息，这些信息可以在游戏中用于从显示器到 AI 系统的所有事情。
+
+你可以更进一步。如果你在数组中存储的数据包含更多关于游戏世界的信息，而不仅仅是你在屏幕上看到的信息，那会怎么样？
+
+假设您正在创建一个幻想角色扮演游戏，玩家可以施放影响游戏世界一部分的法术。吟游诗人角色施放了一个不和谐的咒语，使得所有的敌人从施放该咒语的游戏地图区域逃跑。你将如何向游戏描述这些信息？
+
+你可以创建一个“法术地图”来匹配游戏世界的大小。你可以用某种代码，比如 1，来标记世界上所有受到不和谐声音影响的地方。
+
+```js
+let spellMap = [
+  0,0,0,0,0,0,0,0,0,0,
+  0,0,0,0,0,0,0,0,0,0,
+  0,0,0,0,1,0,0,0,0,0,
+  0,0,0,1,1,1,0,0,0,0,
+  0,0,0,1,1,1,0,0,0,0,
+  0,0,0,0,1,0,0,0,0,0,
+  0,0,0,0,0,0,0,0,0,0,
+  0,0,0,0,0,0,0,0,0,0
+];
+```
+
+然后，敌人可以考虑这些信息，并决定他们是否要冒着耳膜破裂的风险进入这些瓷砖。
+
+这些信息是不可见的；只是被游戏的逻辑所利用。当你开始习惯于用基于瓦片的方式思考你的游戏时，你会发现许多复杂的问题可以用这样的游戏数据数组轻松解决。
+
+那么，我们如何才能像这样添加一些隐藏的游戏数据来帮助我们创建一个人工智能控制的赛车呢？
+
+### 添加人工智能控制的汽车
+
+运行`aiDrivingGame.html`程序，如图 7-2 所示。现在你有了一个对手：一辆由人工智能控制的机器人汽车，它尽最大努力让你在赛道上比赛。
+
+![A346816_1_En_7_Fig2_HTML.jpg](img/A346816_1_En_7_Fig2_HTML.jpg)
+
+###### 图 7-2。一辆 AI 对手车在赛道上比赛
+
+人工智能汽车没有遵循预先编写的动画，也没有专用的人工智能控制器。相反，它正在读取一组数字，告诉它应该如何根据它所在的地图单元来尝试调整自己的角度。它在跟随一张看不见的“角度地图”，角度地图是游戏的第三个地图层，它定义了地图中每个单元的角度，以度为单位。
+
+```js
+[
+  45,   45,  45,  45,  45,  45,  45,  45, 135, 135,
+  315,   0,   0,   0,   0,   0,   0,  90, 135, 135,
+  315,   0,   0,   0,   0,   0,   0,  90, 135, 135,
+  315, 315, 270, 315, 315, 315, 315,  90,  90, 135,
+  315, 315, 270, 135, 135, 135, 135,  90,  90, 135,
+  315, 315, 270, 180, 180, 180, 180, 180, 225, 135,
+  315, 315, 270, 180, 180, 180, 180, 180, 225, 135,
+  315, 270, 270, 225, 225, 225, 225, 225, 225, 225
+]
+```
+
+这些角度告诉人工智能汽车应该根据它所在的单元尝试确定自己的方向。(0 度直接指向右边，3 点钟位置。)你可以把这些角度值想象成指向 AI 汽车行驶方向的小箭头，如图 7-3 所示。
+
+![A346816_1_En_7_Fig3_HTML.jpg](img/A346816_1_En_7_Fig3_HTML.jpg)
+
+###### 图 7-3。一系列的角度决定了人工智能汽车应该尝试的方向和自己的方向
+
+所有的人工智能汽车需要做的就是在赛道上行驶，将自己旋转到当前所处的最佳角度。而且，只是为了好玩，代码给这些角度增加了一点随机变化，在正负 20 度之内。这种随机性使得人工智能汽车的驾驶看起来更加自然，就像一个不完美的人类司机。让我们浏览一下实现这一点的新代码。
+
+代码首先声明三个新的全局变量：`aiCar`、`previousMapAngle` 和 `targetAngle`。
+
+```js
+let car, world, aiCar, previousMapAngle, targetAngle;
+```
+
+然后设置函数创建游戏需要的新数据。AI 汽车被添加到世界对象的第二个地图层，用数字 4 表示。
+
+```js
+[
+  0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+  0, 0, 3, 0, 0, 0, 0, 0, 0, 0,
+  0, 0, 4, 0, 0, 0, 0, 0, 0, 0,
+  0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+  0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+  0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+  0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+  0, 0, 0, 0, 0, 0, 0, 0, 0, 0
+],
+```
+
+然后，角度数组被添加为世界对象的第三个贴图层。
+
+```js
+[
+   45,  45,  45,  45,  45,  45,  45,  45, 135, 135,
+  315,   0,   0,   0,   0,   0,   0,  90, 135, 135,
+  315,   0,   0,   0,   0,   0,   0,  90, 135, 135,
+  315, 315, 270, 315, 315, 315, 315,  90,  90, 135,
+  315, 315, 270, 135, 135, 135, 135,  90,  90, 135,
+  315, 315, 270, 180, 180, 180, 180, 180, 180, 135,
+  315, 315, 270, 180, 180, 180, 180, 180, 180, 135,
+  315, 270, 270, 225, 225, 225, 225, 225, 225, 225
+]
+```
+
+构建世界的 `switch` 语句创建了新的 `aiCar` sprite，如下所示。
+
+```js
+case 4:
+  sprite = g.sprite(g.frame("img/tileSet.png", 192, 128, 48, 48));
+  aiCar = sprite;
+```
+
+然后初始化两个汽车精灵的属性。
+
+```js
+//A function to add physics properties to the cars
+let addCarProperties = carSprite => {
+  carSprite.vx = 0;
+  carSprite.vy = 0;
+  carSprite.accelerationX = 0.2;
+  carSprite.accelerationY = 0.2;
+  carSprite.rotationSpeed = 0;
+  carSprite.friction = 0.96;
+  carSprite.speed = 0;
+
+  //Center the rotation point
+  carSprite.setPivot(0.5, 0.5);
+
+  //Whether or not the car should move forward
+  carSprite.moveForward = false;
+};
+
+//Add physics properties to the player's car
+addCarProperties(car);
+
+//Add physics properties and set it to move forward
+//when the game begins
+addCarProperties(aiCar);
+aiCar.moveForward = true;
+```
+
+新代码的其余部分在 `play` 函数中。它计算出 AI 汽车的新目标角度应该是什么，试图将汽车旋转到该角度，添加一些随机变化，并使用其物理属性移动汽车。这段代码如何工作的所有细节都在注释中。
+
+```js
+//If `aICar.moveForward` is `true`, increase the speed as long
+//it is under the maximum speed limit of 3
+if (aiCar.moveForward && aiCar.speed <= 3) {
+  aiCar.speed += 0.08;
+}
+
+//Find the AI car's current angle, in degrees
+let currentAngle = aiCar.rotation * (180 / Math.PI);
+
+//Constrain the calculated angle to a value between 0 and 360
+currentAngle = currentAngle + Math.ceil(-currentAngle / 360) * 360;
+
+//Find out its index position on the map
+let aiCarIndex = getIndex(aiCar.x, aiCar.y, 64, 64, 10);
+
+//Find out what the target angle is for that map position
+let angleMap = world.layers[2];
+let mapAngle = angleMap[aiCarIndex];
+
+//Add an optional random variation of 20 degrees each time the aiCar
+//encounters a new map angle
+if (mapAngle !== previousMapAngle) {
+  targetAngle = mapAngle + randomInt(-20, 20);
+  previousMapAngle = mapAngle;
+}
+
+//If you don't want any random variation in the iaCar's angle
+//replace the above if statement with this line of code:
+//targetAngle = mapAngle;
+
+//Calculate the difference between the current
+//angle and the target angle
+let difference = currentAngle - targetAngle;
+
+//Figure out whether to turn the car left or right
+if (difference > 0 && difference < 180) {
+
+//Turn left
+  aiCar.rotationSpeed = -0.03;
+} else {
+
+//Turn right
+  aiCar.rotationSpeed = 0.03;
+}
+
+//Use the `rotationSpeed` to set the car's rotation
+aiCar.rotation += aiCar.rotationSpeed;
+
+//Use the `speed` value to figure out the acceleration in the
+//direction of the aiCar’s rotation
+aiCar.accelerationX = aiCar.speed * Math.cos(aiCar.rotation);
+aiCar.accelerationY = aiCar.speed * Math.sin(aiCar.rotation);
+
+//Apply the acceleration and friction to the aiCar's velocity
+aiCar.vx = aiCar.accelerationX
+aiCar.vy = aiCar.accelerationY
+aiCar.vx *= aiCar.friction;
+aiCar.vy *= aiCar.friction;
+
+//Apply the aiCar's velocity to its position to make the aiCar move
+aiCar.x += aiCar.vx;
+aiCar.y += aiCar.vy;
+```
+
+但是还有一件事！为了使这成为一个公平的游戏，如果 AI 车跑进草地，我们也需要减慢它的速度。这段代码在播放函数的末尾，完成了这项工作。
+
+```js
+//Get a reference to the race track map
+let trackMap = world.layers[0];
+
+//Slow the aiCar if it's on a grass tile (gid 1) by setting
+//its friction to 0.25, to make it sluggish
+if (trackMap[aiCarIndex] === 1) {
+  aiCar.friction = 0.25;
+
+//If the car isn't on a grass tile, restore its
+//original friction value
+} else {
+  aiCar.friction = 0.96;
+}
+```
+
+运行示例文件，你会发现看着人工智能汽车驶入草地并奋力挣脱是非常有趣的。
+
+这个基本原型封装了你需要知道的所有基本技术，以建立一个与 AI 对手的全功能赛车游戏。以下是一些你可以用来进一步发展这些想法的想法:
+
+*   仅仅通过改变或随机改变转速数，就可以在不同的技能水平下制造各种各样的 AI 汽车。
+
+*   让不同的 AI 汽车使用不同的角度地图来改变难度，让人类玩家无法预测事情。
+
+*   分析人类玩家在每场比赛后的表现，并增加或减少游戏难度以保持其挑战性。
+
+*   给人工智能汽车一个防撞系统，这样如果它们太靠近其他汽车，它们就可以避开它们。你可以在这本书的配套书中找到构建这样一个系统所需要的一切，*用 HTML5 和 JavaScript 的高级游戏设计* (Apress，2015)。
+
+一旦你开始考虑用你在本章中学到的方法来存储和使用游戏数据，你肯定会找到无数个解决棘手问题的方法。
+
+## 宽相和窄相碰撞
+
+有两种不同的通用方法来处理游戏中的碰撞检测，称为**宽相位**和**窄相位**碰撞。
+
+*   **宽相位碰撞**:检查小精灵是否在碰撞的大致区域内，例如我们在前面章节中详细检查过的基于图块的碰撞。它的优点是这是一种非常高效的检查大量精灵之间碰撞的方法。这是因为它只做简单的数组查找，不需要做任何繁重的数学处理。
+
+*   **窄相位碰撞**:检查精灵的精确几何图形，找出它们的形状是否重叠。它的优点是，因为它非常精确，窄相位碰撞对于物理模拟是必不可少的，例如检查两个台球之间的碰撞。它的缺点是，因为它用大量的数学运算来加重 CPU 的负担，所以对性能要求很高。如果你检查大量精灵之间的碰撞，会很慢。虽然如何实现窄相位碰撞系统没有在本书中涉及，但是你可以在*用 HTML5 和 JavaScript* 进行高级游戏设计中找到从头构建这样一个系统所需要知道的一切。
+
+这两个碰撞系统代表了所有视频游戏中碰撞检测的基础。你如何决定使用哪一个？通常选择很容易:如果你需要物理，使用窄相位；否则使用 broadphase。但是有一个灰色地带！
+
+如果你在做一个游戏，游戏中有成千上万个圆圈需要互相弹跳，那该怎么办？你尝试实现一个物理密集的窄相位碰撞系统，但是你的帧速率下降到每秒 5 帧。太慢了！所以你实现了一个宽相位碰撞系统，很容易得到每秒 60 帧。但是现在你的圆圈在弹开之前明显地互相重叠，这看起来非常不精确。你该怎么办？
+
+同时使用宽相位*和*窄相位碰撞！将你的碰撞系统分解成两个步骤:
+
+1.  **Broadphase 检查**:首先使用 Broadphase 碰撞来找出你感兴趣的精灵是否在彼此的大致附近，并且在这个动画帧期间实际上可能足够接近以至于可以接触到。
+
+2.  **窄相位检查**:如果你的宽相位检查确定，是的，碰撞是可能的，运行一个更精确，但更多 CPU 开销的窄相位检查。
+
+有许多方法可以实现这种两阶段碰撞策略，但我将向您展示最简单、最有用、通常也是性能效率最高的方法:空间网格。
+
+### 空间网格
+
+要创建一个空间网格，将你的游戏世界划分成单元。这些细胞应该有多大？它应该和你的一个精灵在一个动画帧中可能移动的一样大。例如，假设您正在创建一个大理石游戏，并且您确定没有一个大理石精灵的移动速度会超过每秒 64 帧。这意味着您可以使用一个空间网格，其中每个单元格都是 64 像素宽和 64 像素高。图 7-4 显示了如果你的游戏屏幕是 512 乘 512 像素，这个网格看起来会是什么样子。
+
+![A346816_1_En_7_Fig4_HTML.jpg](img/A346816_1_En_7_Fig4_HTML.jpg)
+
+###### 图 7-4。将你的世界分成细胞
+
+在一个标准的窄相位碰撞系统中，在整个游戏中，每个精灵都将被检查是否与其他精灵发生碰撞。这是一种浪费，因为位于屏幕完全相反两侧的精灵之间的碰撞将被检查，即使它们没有碰撞的机会。但是，如果使用空间栅格，碰撞检查会更加集中。对于每个精灵，你只需要检查它和与其直接相邻的单元中的精灵之间的碰撞。
+
+比如看一下图 7-5 。在屏幕的左中间是一个大的白色圆圈。白色圆圈所在的单元，加上围绕它的八个单元，代表圆圈的`碰撞区域`。这个碰撞区域是屏幕上这个精灵有机会与任何其他精灵碰撞的唯一区域。
+
+![A346816_1_En_7_Fig5_HTML.jpg](img/A346816_1_En_7_Fig5_HTML.jpg)
+
+###### 图 7-5。只需检查同一碰撞区域中精灵之间的碰撞
+
+因此，我们不需要检查大的白色圆圈和屏幕上其他 24 个圆圈之间的碰撞，我们只需要检查它和碰撞区域右上角的 2 个较小的圆圈之间的碰撞。这减少了大约 90%的碰撞检查次数！
+
+这就是全部了！但是你如何用代码创建一个这样的空间网格系统并在游戏中使用它呢？
+
+### 实现空间网格
+
+运行本章源文件中的`spatialGrid.html`文件作为工作示例。这是一个简单的弹珠游戏。用鼠标选择一个弹球，拖动并释放。观看弹珠在屏幕上反弹并与其他弹珠碰撞，如图 7-6 所示。
+
+![A346816_1_En_7_Fig6_HTML.jpg](img/A346816_1_En_7_Fig6_HTML.jpg)
+
+###### 图 7-6。单击、拖动并释放鼠标，观看弹球在屏幕上弹跳
+
+请看完整的源代码，了解这个小游戏原型如何工作的细节。出于我们的目的，我们只是对空间网格碰撞系统如何工作感兴趣。但是，关于代码，有两件事你需要知道，我们将提前了解:
+
+*   它在游戏循环中运行，所以每一帧都会更新。
+*   所有的圆形精灵在一个名为`marbles.children`的数组中被引用。
+
+好的，明白了吗？现在让我们来看看代码！
+
+### 编码空间网格
+
+我们需要做的第一件事是创建网格。这只是一个 2D 数组，其中的单元格与我们想要的网格的行数和列数相匹配。数组首先用空元素初始化。然后，代码循环遍历所有精灵，并使用我们良好的旧`getIndex`函数根据每个精灵的 x/y 像素坐标将它们插入到正确的单元格中。我们的代码在一个名为`spatialGrid`的函数中完成所有这些工作，该函数允许您以像素为单位指定网格的大小和每个单元格的大小。
+
+```js
+let spatialGrid = (widthInPixels, heightInPixels, cellSizeInPixels, spritesArray) => {
+
+//Find out how many cells we need and how long the 
+//grid array should be 
+  let width = widthInPixels / cellSizeInPixels,
+    height = heightInPixels / cellSizeInPixels,
+    length = width * height;
+
+//Initialize an empty grid 
+  let gridArray = [];
+
+//Add empty sub-arrays to the element 
+  for (let i = 0; i < length; i++) {
+
+//Add empty arrays to each element. This is where 
+//we're going to store sprite references 
+    gridArray.push([]);
+  }
+
+//Add the sprites to the grid 
+  spritesArray.forEach(sprite => {
+
+//Find out the sprite's current map index position 
+    let index = getIndex(sprite.x, sprite.y, cellSizeInPixels, cellSizeInPixels, width);
+
+//Add the sprite to the array at that index position 
+    gridArray[index].push(sprite);
+  });
+
+//Return the array 
+  return gridArray;
+};
+
+//Create the spatial grid and add the marble sprites to it 
+let grid = spatialGrid(512, 512, 64, marbles.children);
+```
+
+我们现在有一个叫做`grid`的 2D 阵列。它包含的每个子数组要么是空的，要么以匹配屏幕上子画面位置的方式包含对子画面的引用。例如，您可能有一个如下所示的数组:
+
+```js
+[
+  [],[circle1],[],[],[],[],[],[circle2],[],
+  [circle3],[],[circle4],[circle5],[],[],[],[],[],
+  [],[],[],[],[],[],[],[],[circle6],
+  [],[],[],[circle7],[circle8],[],[],[],[],
+  [],[circle9],[],[circle10],[],[circle11],[],[],[],
+  [circle12, circle13],[],[],[],[],[],[circle14],[circle15],[],
+  [circle16],[circle17],[],[],[],[circle18],[],[],[],
+  [],[],[circle19],[],[],[circle20],[],[],[circle21],
+  [],[circle20],[circle23],[],[],[],[],[circle24],[circle25]
+]
+```
+
+(精灵的实际名称，例如`circle1`和`circle2`，只是为了说明的目的——这些名称实际上并不是由代码产生的。)
+
+图 7-7 显示了这个数组如何与相同精灵的屏幕位置进行比较。
+
+![A346816_1_En_7_Fig7_HTML.jpg](img/A346816_1_En_7_Fig7_HTML.jpg)
+
+###### 图 7-7。精灵在数组中的位置与它们的屏幕位置相匹配
+
+在一个有密集精灵的游戏中，你可能有许多单元格引用了不止一个精灵。
+
+下一步是遍历所有的精灵，并找出是否有任何其他精灵在其碰撞区。(记住，碰撞区域是精灵周围的八个单元，加上精灵本身所占据的单元。)如果碰撞区域中有任何精灵，代码会使用一个名为`movingCircleCollision`的自定义函数进行窄阶段碰撞检查，以将精灵弹开(有关`movingCircleCollision`如何工作的详细信息，请参见*使用 HTML5 和 JavaScript 的基础游戏设计* (Apress，2012)。)最后，被检查的当前子画面从网格阵列中移除，因为它的所有可能的碰撞已经被检查，并且我们想要防止其他子画面在循环的稍后迭代中试图重新检查它。
+
+```js
+//Loop through all the sprites
+for (let i = 0; i < marbles.children.length; i++) {
+
+  //Get a reference to the current sprite in the loop
+  let sprite = marbles.children[i];
+
+  //Find out the sprite's current map index position
+  let gridWidthInTiles = 512 / 64;
+  let index = getIndex(sprite.x, sprite.y, 64, 64, gridWidthInTiles);
+
+  //Find out what the surrounding cells contain, including those that
+  //might be beyond the borders of the grid
+  let allSurroundingCells = [
+    grid[index - gridWidthInTiles - 1],
+    grid[index - gridWidthInTiles],
+    grid[index - gridWidthInTiles + 1],
+    grid[index - 1],
+    grid[index],
+    grid[index + 1],
+    grid[index + gridWidthInTiles - 1],
+    grid[index + gridWidthInTiles],
+    grid[index + gridWidthInTiles + 1]
+  ];
+
+  //Find all the sprites that might be colliding with this current sprite
+  for (let j = 0; j < allSurroundingCells.length; j++) {
+
+    //Get a reference to the current surrounding cell
+    let cell = allSurroundingCells[j]
+
+    //If the cell isn't `undefined` (beyond the grid borders)
+    //and it's not empty, check for a collision between
+    //the current sprite and sprites in the cell
+    if (cell && cell.length !== 0) {
+
+      //Loop through all the sprites in the cell
+      for (let k = 0; k < cell.length; k++) {
+
+        //Get a reference to the current sprite being checked
+        //in the cell
+        let surroundingSprite = cell[k];
+
+        //If the sprite in the cell is not the same as the current
+        //sprite in the main loop, then check for a collision
+        //between those sprites
+        if (surroundingSprite !== sprite) {
+
+          //Perform a narrow-phase collision check to bounce
+          //the sprites apart
+          g.movingCircleCollision(sprite, surroundingSprite);
+        }
+      }
+    }
+  }
+
+  //Finally, remove this current sprite from the current
+  //spatial grid cell because all possible collisions
+  //involving this sprite have been checked
+  grid[index] = grid[index].filter(x => x !== sprite);
+}
+```
+
+这就是全部了！通过首先进行有效的宽相位检查，然后在可能发生碰撞的情况下只进行高性能的窄相位检查，我们大大提高了碰撞系统的效率。
+
+为什么这段代码使用老式的 `for` 循环，而不是更圆滑、更现代的 `forEach` 循环？`for` 循环往往更有效率。通常，这种差异不足以支持 `for` 循环，但是因为碰撞检测是游戏中对性能要求最高的任务之一，所以在这种情况下使用 `for` 循环通常会为您赢得一点点性能提升。
+
+### 其他宽相位碰撞策略
+
+空间网格是一个优秀的多用途宽相位碰撞检测系统，是游戏设计者的主食。简单、快速和低开销很难被击败。然而，有许多其他的宽相位碰撞策略，每一个都有其独特的问题。以下是最受欢迎的四种:
+
+*   **分级网格**:在固定大小的空间网格中，比如我们在本章中使用的，单元大小必须和最大的对象一样大。但是如果你有一个游戏，里面有几个很大的物体和很多很小的物体呢？单元的大小需要足够大，以容纳那些大的对象，即使它们不是很多。您最终会遇到这样一种情况:每个单元格都充满了许多小对象，每个小对象都在互相进行昂贵的距离检查。分级网格通过创建两个或更多不同大小的单元网格来解决这个可能的问题。它为大对象创建一个具有大单元的网格，为小对象创建另一个网格，并在两者之间创建任何范围的不同单元大小的网格。小对象之间的碰撞检查在小单元网格中处理，大对象之间的碰撞在大单元网格中处理。如果一个小物体需要检查与一个大物体的碰撞，系统检查对应于两个网格的单元。
+
+*   **四叉树**:一种特定类型的层次网格。游戏世界被分成 4 个矩形，依次再分成 4 个矩形，结果是 16 个。这 16 个矩形中的每一个又被分成 4 个更小的矩形，这取决于你需要多少细节。每个较小的矩形都是较大的父矩形的子矩形。四叉树系统根据对象在层次结构中的级别来计算出要测试碰撞的对象。四叉树的 3D 版本被称为八叉树。
+
+*   **排序和扫描**:根据 x 和 y 位置对数组中的对象进行排序。检查 x 轴和 y 轴上的重叠，如果发现，进行更精确的距离检查。因为物体首先被空间排序，可能的碰撞候选者首先出现在最前面。
+
+*   **BSP 树**:空间以一种紧密匹配游戏对象几何形状的方式被划分。这很有用，因为这意味着分区既可以用于碰撞，也可以用于定义环境边界。二进制空间划分(BSP)树与四叉树密切相关，但是它们更加通用。BSP 树广泛用于 3D 游戏的碰撞检测。
+
+我建议你花些时间研究这些其他的宽相位碰撞策略。你可能会发现其中一个对你可能面临的复杂碰撞问题有特别好的解决方案。
+
+关于游戏碰撞的权威参考文本是 Christer Ericson 的经典《实时碰撞检测》(Morgan Kaufman，2004。)虽然源代码示例是用 C++(JavaScript 的近亲)编写的，但算法可以适用于任何编程语言或技术实现。
+
+但是请记住:在你需要之前，不要试图先发制人地优化你的碰撞系统！如果你的游戏在所有的目标平台上都运行良好，而不需要使用空间网格或四叉树，那就不要去管它——这很好！
+
+## 摘要
+
+在这一章中，你已经学习了如何在数组中添加隐藏的游戏信息，并使用这些信息来增加游戏世界的丰富性和复杂性。AI 赛车向你展示了如何用最少、最简单的代码创建一个行为复杂、智能且不可预测的游戏实体。您还了解了如何创建和使用最好的通用且低开销的宽相位碰撞策略:空间网格。使用空间网格极大地减少了游戏需要进行的碰撞检查的数量，并且很容易根据需要进行修改和调整。
+
+而且，我们已经到了书的结尾！你现在已经掌握了开始制作各种类型的 2D 动作游戏所需的所有技能。从关卡设计，到碰撞检测，到寻路和基于图块的架构的惊人效率，您现在已经掌握了游戏设计者的所有经典技术。现在去做一些伟大的游戏吧！
