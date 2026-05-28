@@ -1,0 +1,1167 @@
+# 五、了解运行时
+
+糟糕的程序员和优秀的程序员的区别在于理解。也就是说，差的程序员不懂自己在做什么，好的程序员懂。—马克斯·卡纳特-亚历山大
+
+一旦你的 TypeScript 程序被编译成普通的 JavaScript，你可以在任何地方运行它。JavaScript 愉快地运行在浏览器或服务器上；您只需要记住，可用的特性根据代码运行的位置而有所不同。本章解释了浏览器运行时和服务器运行时之间的一些差异，还解释了所有运行时共有的一些重要概念，如事件循环、范围和事件。
+
+## 运行时功能
+
+即使是过时的浏览器也能让您访问文档对象模型(DOM)、鼠标和键盘事件、表单和导航。现代浏览器将添加离线存储、索引数据库、HTTP 请求、地理定位和设备传感器(如光线、加速度计和接近度)的应用编程接口(API)套件。JavaScript 不仅仅是网络浏览器中最常见的语言；自 20 世纪 90 年代初以来，它一直在服务器上运行。JavaScript 作为服务器端语言的突出地位真正受到了 NodeJS 的关注，NodeJS 是一种构建在 V8 JavaScript 引擎上的服务器技术。在服务器上运行可以让您访问数据库、文件系统、加密、域名解析、流和无数其他模块和实用程序。图 5-1 展示了浏览器或服务器提供的 API 如何使 JavaScript 语言变得强大。
+
+除非您显式使用允许线程创建的 API，如 web workers 或子进程，否则程序中的语句将排队在单个线程上执行。在单线程上运行程序消除了许多由多个线程试图操纵同一状态而引起的麻烦，但这确实意味着您需要记住您的代码可能会被排队。长时间运行的事件处理程序可以阻止其他事件及时触发，队列的执行顺序也有细微的变化。队列通常按照先进先出的顺序进行处理，但是不同的运行时环境可能会在不同的时间重新访问队列。例如，一个环境可以仅在函数已经完成时返回队列，但是另一个环境可以在函数转移控制时重新访问队列，例如通过调用另一个函数。在后一种情况下，在调用第二个函数之前，可能会执行另一个语句。尽管这些潜在差异的性质令人担忧，但很少发现它们在实践中引起任何问题。
+
+除了处理包含所有事件的队列之外，运行时可能还有其他需要在同一线程上处理的任务要执行；例如，浏览器可能需要重绘屏幕。如果有一个函数运行时间过长，可能会影响浏览器的重绘速度。要让浏览器每秒绘制 60 帧，您需要将任何函数的执行保持在 17 毫秒以内。在实践中，保持函数快速运行非常容易，除非您处理带有阻塞调用的 API，如`localStorage`，或者您执行一个长时间运行的循环。
+
+![A323824_2_En_5_Fig1_HTML.jpg](img/A323824_2_En_5_Fig1_HTML.jpg)
+
+图 5-1。JavaScript features in browser vs. server environments
+
+单线程方法在运行时最常见的副作用之一是，时间间隔和计时器的执行时间可能会比指定的时间长。这是因为它们必须在队列中等待被执行。清单 5-1 显示了一个测试函数，它对延迟日志记录语句的执行进行计时。调用`test`函数设置 50 毫秒定时器，并测量它需要多长时间启动。多次运行这段代码会显示您得到的结果在 50 到 52 毫秒之间，这是您所期望的。
+
+```js
+function test() {
+    const testStart = performance.now();
+
+    window.setTimeout(function () {
+        console.log(performance.now() - testStart);
+    }, 50);
+}
+
+test();
+```
+
+清单 5-1. Queued timer
+
+为了模拟长时间运行的流程，在清单 5-2 中的`test`函数中添加了一个运行 100 毫秒的循环。这个循环在定时器设置好之后开始，但是因为在最初的`test`函数完成之前没有任何东西被排队，所以定时器的执行比以前晚了很多。本例中记录的时间通常在 118 到 130 毫秒的范围内
+
+```js
+function test() {
+    const testStart = performance.now();
+
+    window.setTimeout(function () {
+        console.log(performance.now() - testStart);
+    }, 50);
+
+    // Simulated long running process
+    const start = +new Date();
+
+    while (+new Date() - start < 100) {
+
+        // Delay for 100ms
+
+    }
+
+}
+
+test();
+```
+
+清单 5-2. Queued timer, delayed, waiting for the test method to finish
+
+**Note**
+
+所有主流浏览器的最新版本都支持`performance.now`高分辨率定时器。这种测量执行时间的方法比使用`Date`对象更准确。日期基于系统时钟，系统时钟每 15 分钟同步一次。如果在计时操作时发生同步，将会影响结果。`performance.now`值来自一个可以测量亚毫秒级时间间隔的高分辨率计时器，在页面开始加载时从`0`开始，在同步过程中不进行调整。
+
+## 范围
+
+术语范围是指在给定的上下文中可以解析的一组可用标识符。在大多数类 C 语言中，标识符是块范围的，这意味着它们可以在定义它们的同一组花括号中使用。花括号内声明的变量在花括号外不可用，但花括号内的语句可以访问花括号外声明的变量。清单 5-3 展示了这种一般的类似 C 的作用域。
+
+当您在 JavaScript 中使用`var`关键字时，情况并非如此(因此，TypeScript 也是如此)。如果清单 5-3 中的代码是在 JavaScript 运行时中执行的，那么两条语句中记录的值将是相同的；特别是，您会看到“外部:2”，而不是“外部:1”。这是因为用`var`关键字创建的变量范围是由函数定义的，而不是由块定义的。
+
+```js
+var scope = 1;
+
+{
+    var scope = 2;
+
+    // Inner: 2
+    console.log('Inner: ' + scope);
+}
+
+// Outer: 1
+console.log('Outer: ' + scope);
+```
+
+清单 5-3. C-like scope
+
+清单 5-4 显示了相同的例子，但是使用了一个函数来为内部变量提供范围。该函数创建一个新的上下文，使内部范围变量独立于外部范围变量。在这个例子中，日志语句像在其他类似 C 语言中一样工作。
+
+```js
+var scope = 1;
+
+(function () {
+    var scope = 2;
+
+    // Inner: 2
+    console.log('Inner: ' + scope);
+}());
+
+// Outer: 1
+console.log('Outer: ' + scope);
+```
+
+清单 5-4. Functional scope
+
+ECMAScript 规范中有两个新的变量声明，`let`和`const`。`let`和`const`都是块范围的，可以避免函数范围变量的许多陷阱。`const`关键字还有一个额外的好处，就是防止重新赋值，这意味着变量不能被覆盖(尽管它的值可以改变)。
+
+您可以在 TypeScript 代码中同时使用 let 和 const。如果您的目标是旧版本的 JavaScript，编译器将使用低级编译来重命名变量，以防止它们受到上下文变化的影响。清单 5-5 回顾了最初的例子，使用 const 关键字代替 var 关键字，导致正确记录“Inner: 2”和“Outer: 1”。
+
+```js
+const scope = 1;
+
+{
+    const scope = 2;
+
+    // Inner: 2
+    console.log('Inner: ' + scope);
+}
+
+// Outer: 1
+console.log('Outer: ' + scope);
+```
+
+清单 5-5. Block-level scope
+
+清单 5-5 的底层编译用`var`关键字替换了`const`关键字，但重命名了第二个变量`scope_1`，如清单 5-6 所示；这可以防止内部变量覆盖外部变量。编译器足够聪明，可以避免命名冲突，所以如果您已经有了一个已经命名为`scope_1`的变量，编译器会选择一个不同的名称。
+
+```js
+var scope = 1;
+{
+    var scope_1 = 2;
+    // Inner: 2
+    console.log('Inner: ' + scope_1);
+}
+// Outer: 1
+console.log('Outer: ' + scope);
+```
+
+清单 5-6. Down-level compilation of block-scoped variables
+
+# 变量作用域与回调函数
+
+因为无论目标运行时如何，您都可以在 TypeScript 中使用块作用域的变量，所以没有理由在您的 TypeScript 程序中使用`var`关键字。
+
+> **Note**
+> 如第一章所述，推荐的编码风格是对所有变量使用`const`关键字，如果你决定允许的话，只使用`let`关键字打开一个变量进行重新赋值。
+
+使用块作用域的变量还会阻止变量提升，这种提升会将所有变量视为在其作用域的顶部声明。这在技术上允许在声明变量的代码行之前使用变量，尽管它们的值是未定义的。清单 5-7 显示了一个`var`提升的例子。
+
+```js
+function lemur() {
+    // undefined, but technically allowable
+    console.log(kind);
+
+    var kind = 'Ruffed Lemur';
+}
+
+lemur();
+```
+
+**清单 5-7. 变量提升**
+
+如果您在声明块级变量之前访问它，TypeScript 编译器将发出警告，防止这种微妙的错误，以及清单 5-8 中更令人困惑的错误，其中您可能期望在`log`语句中使用全局变量。当使用关键字`var`时，在更广的范围内巧合地重用一个名字导致了一些我职业生涯中调查过的最著名的棘手的错误。
+
+```js
+var kind = 'Ring Tailed Lemur';
+
+function lemur() {
+    // undefined, not 'Ring Tailed Lemur'
+    console.log(kind);
+
+    var kind = 'Ruffed Lemur';
+}
+
+lemur();
+```
+
+**清单 5-8. 变量提升与全局作用域混淆**
+
+> **Note**
+> 在你的程序中，避免混乱的最好方法是尽可能避免增加全局范围。缺少全局变量意味着 TypeScript 编译器可以在声明变量之前警告您变量的用法，以及意外遗漏`var`或`let`关键字。
+
+## 回收
+
+几乎所有现代的 JavaScript APIs，包括提供对设备传感器读数的访问的新浏览器 API，都通过接受一个回调来避免阻塞，该回调将在操作完成后执行。回调只是一个作为参数传递的函数，当操作完成时调用它。
+
+为了说明回调的好处，图 5-2 显示了等待阻塞传感器响应请求时的程序流程。因为请求在请求期间阻塞了主线程，所以不能执行其他语句。阻塞事件队列超过几毫秒是不可取的，对于长时间操作必须避免。涉及调用文件系统、硬件设备或通过网络连接调用的操作都有可能在不可接受的时间长度内阻塞您的程序。
+
+![A323824_2_En_5_Fig2_HTML.jpg](img/A323824_2_En_5_Fig2_HTML.jpg)
+
+**图 5-2. 阻塞调用**
+
+回调对于避免这些阻塞请求非常有用。图 5-3 展示了如何使用这种模式来避免在长时间运行的进程中阻塞主线程。当发出请求时，函数会随请求一起传递。然后，主线程能够正常处理事件队列。当长时间运行的进程结束时，回调函数被调用，并被传递任何相关的参数。这将回调添加到事件队列中，并依次执行。
+
+![A323824_2_En_5_Fig3_HTML.jpg](img/A323824_2_En_5_Fig3_HTML.jpg)
+
+**图 5-3. 使用回调**
+
+虽然回调通常用于避免在长时间运行的过程中阻塞程序，但是您可以在程序中的任何地方自由地将函数作为参数传递。清单 5-9 展示了这一点。`go`函数接受一个函数参数。`callback`参数有一个类型注释，它限制了只能传递给那些接受`string`参数的函数。`callbackFunction`满足这个类型注释。
+
+在`go`函数体中，回调是使用`call`方法执行的，该方法在 JavaScript 中的所有函数上都可用。
+
+```js
+function go(callback: (arg: string) => void) {
+    callback.call(this, 'Example Argument');
+}
+
+function callbackFunction(arg: string) {
+    alert(arg);
+}
+
+go(callbackFunction);
+```
+
+**清单 5-9. 将函数作为参数传递**
+
+从`go`函数中执行回调有三种常见的方法。在清单 5-9 中，使用了`call`方法。当您使用`call`时，您必须提供一个变量，该变量将用于设置回调中`this`关键字的上下文。您可以在上下文参数后面加上任意数量的附加参数；这些将被传递到回调中。您还可以使用`apply`方法，这与`call`几乎相同，除了您将参数作为数组传递，如清单 5-10 所示。如果您的结果已经是一个数组，这将导致值被分解为单独的参数。
+
+```js
+function go(callback: (arg: string) => void) {
+    callback.apply(this, ['Example Argument']);
+}
+
+function callbackFunction(arg: string) {
+    alert(arg);
+}
+
+go(callbackFunction);
+```
+
+**清单 5-10. 使用`apply`**
+
+执行回调的第三种方法是简单地调用带括号的函数，如清单 5-11 所示。这种技术不允许设置上下文，因此根据上下文，范围可能与您的预期不同。
+
+```js
+function go(callback: (arg: string) => void) {
+    callback('Example Argument');
+}
+
+function callbackFunction(arg: string) {
+    alert(arg);
+}
+
+go(callbackFunction);
+```
+
+**清单 5-11. 简单的函数调用**
+
+在回调上下文之外，`apply`方法还有一个额外的用途。因为它接受包含参数的数组，所以您可以使用`apply`从数组中提取参数。清单 5-12 展示了这一点。要找到`numbers`数组中的最大数，要么编写一个循环来测试每个值，要么使用每个索引将每个值单独传递给`Math.max`函数。使用`apply`方法意味着您可以简单地传递`numbers`数组，并让`apply`方法将数组转换成参数列表。因为没有使用`apply`来修改范围，所以可以将`null`作为第一个参数传递。
+
+```js
+const numbers = [3, 11, 5, 7, 2];
+
+// A fragile way of finding the maximum number
+// const max = Math.max(numbers[0], numbers[1], numbers[2], numbers[3], numbers[4]);
+
+// A solid way to find the maximum
+const max = Math.max.apply(null, numbers);
+
+// 11
+console.log(max);
+```
+
+**清单 5-12. 使用`apply`将数组转换为参数**
+
+使用回调的模式是函数作为参数传递的一个例子。下一节将描述这种语言特性有多强大，以及如何以其他方式使用它。
+
+## 将函数作为参数传递
+
+函数在 JavaScript 中是一等公民，这意味着它们可以作为参数传递，作为返回值从另一个函数返回，赋给变量，并作为属性存储在对象上。将函数作为参数传递是用于提供回调的机制。
+
+您可以使用将函数作为参数传递的能力来创建 observer 模式的简单实现，从单个类中存储订阅者集合并向他们发布事件。这个简单的观察器设计如清单 5-13 所示。可以添加任意数量的订阅者，当发布者收到消息时，它会将其分发给所有订阅者。
+
+```markdown
+```js
+interface Subscriber {
+    (message: string): void;
+}
+
+class Publisher {
+    private subscribers: Subscriber[] = [];
+
+    addSubscriber(subscriber: Subscriber) {
+        this.subscribers.push(subscriber);
+    }
+
+    notify(message: string) {
+        for (let subscriber of this.subscribers) {
+            subscriber(message);
+        }
+    }
+}
+
+const publisher = new Publisher();
+
+// Using an arrow function
+publisher.addSubscriber((message) => console.log('A: ' + message));
+
+// Using an inline function
+publisher.addSubscriber(function (message) {
+    console.log('B: ' + message);
+});
+
+// A: Test message
+// B: Test message
+publisher.notify('Test message');
+
+Listing 5-13.Simple observer
+```
+
+**Note**
+
+当你传递一个函数作为参数时，你必须省略括号；比如`go(callbackFunction)`而不是`go(callbackFunction())`；否则，将执行该函数，并传递返回值。
+
+一级函数是任何语言中最强大的特性之一。您可以创建接受函数作为参数并返回函数作为结果的高阶函数；这使得您的程序具有更大的灵活性和粒度代码可重用性。你也可以参考第一章找到更多关于函数曲线和箭头函数的信息。
+
+### 承诺
+
+引入承诺是为了减少回调导致的一些问题。当使用回调链时，代码会变得嵌套很深，难以理解。当考虑错误处理时，回调经常重复错误处理代码，进一步增加了理解程序的认知开销。
+
+本机 `Promise` 对象仅在版本 5 之后的 `ECMAScript` 版本中可用。如果您的目标是这些规范的最新版本，那么您可以使用 promises 的纯本地版本。否则，您需要应用聚合填充来添加所需的要素。
+
+为了充分探索承诺，我们需要通过一个相当实际的例子。本练习结束时，你将理解如何消费承诺，以及如何创造承诺。尽管本节中的例子非常简单(它们只是将一些数据记录到控制台)，但是您将能够看到回调链引起的问题，以及 promises 如何修复嵌套和可读性。
+
+#### 简单回调
+
+第一个例子涉及简单的回调。此示例允许在异步操作完成后使用回调将控制权返回给调用代码。我们将很快改进这个程序来解决各种问题。
+
+清单 5-14 是我们虚构的异步获取一些数据的 API 的起点。`getData` 方法接受一个 `id` 和一个回调，一旦数据可用，这个回调就会被执行。依赖数据的代码必须放在这个回调函数中。
+
+```js
+interface FictitiousData {
+    id: number;
+    name: string;
+}
+
+class FictitiousAPI {
+    static data: { [index: number]: FictitiousData } = {
+        1: { id: 1, name: 'Aramis' },
+        2: { id: 2, name: 'Athos' },
+        3: { id: 3, name: 'Porthos' },
+        4: { id: 4, name: 'D\'Artagnan' }
+    };
+
+    static getData(id: number, callback: (data: FictitiousData) => void) {
+        // Simulating async data access with a timeout
+        window.setTimeout(() => {
+            const result = this.data[id];
+
+            if (typeof result == 'undefined') {
+                throw new Error('No matching record');
+            }
+
+            callback(result);
+        }, 200);
+    }
+}
+
+Listing 5-14.
+Fictitious API v1.0
+```
+
+清单 5-15 显示了 API 的一个简单用法。一旦异步 `getData` 函数准备就绪，它就执行回调函数，将数据记录到控制台。
+
+```js
+// Single call: 'Aramis'
+FictitiousAPI.getData(1, function (data) {
+    console.log(data.name);
+});
+
+Listing 5-15.
+Single call
+```
+
+与回调模式相关的一个问题是，不可能处理异步代码中发生的任何异常。无论您在哪里插入 `try/catch` 语句，您都无法处理这个版本的 API 中的错误。
+
+```js
+// Error handling (doesn't work)
+try {
+    FictitiousAPI.getData(5, function (data) {
+        console.log(data.name);
+    })
+} catch (ex) {
+    console.log('This statement is not reached, the error is not caught!');
+}
+Listing 5-16.
+Error Handling
+```
+
+当您需要使用回调来链接几个调用时，代码很快就会变成嵌套的，难以阅读。清单 5-17 是获取数据的类似调用的嵌套，但是当您需要使用几个不同的异步 API 时，嵌套回调也可能发生。
+
+```js
+FictitiousAPI.getData(1, (data) => {
+    console.log(data.name);
+
+    FictitiousAPI.getData(2, (data) => {
+
+        if (data.name == 'Athos') {
+            console.log(data.id + ' ' + data.name);
+        } else {
+            console.log(data.name);
+        }
+
+        FictitiousAPI.getData(3, (data) => {
+            console.log(data.name);
+
+            FictitiousAPI.getData(4, (data) => {
+                console.log(data.name);
+
+                FictitiousAPI.getData(5, (data) => {
+                    console.log(data.name);
+                })
+            });
+        });
+    });
+});
+
+Listing 5-17.
+Nested callbacks
+```
+
+该程序的输出如下所示:
+
+```js
+==== OUTPUT ====
+Aramis
+2 Athos
+Porthos
+D'Artagnan
+Error: No matching record
+```
+
+发展这段代码的第一步是使处理 API 中发生的错误成为可能。在这之后，我们可以用承诺来改善它。
+
+#### 回调和错误处理
+
+为了解决错误处理的问题，我们将为回调函数引入一个额外的参数。这是广泛使用回调的程序中的常见模式。通过将错误参数放在第一位，成功条件可以具有可变数量的参数，而不会影响调用代码应该在哪里找到有关问题的信息。
+
+清单 5-18 显示了 API 的完整的第二个版本，现在包含了错误字符串作为第一个参数。出现问题时，错误消息不是引发错误，而是作为第一个参数传递。在成功的情况下，不会传递错误字符串。
+```
+
+# 错误处理与承诺
+
+为了将这种新的错误处理模式付诸实践，清单 5-19 中的简单调用现在需要在使用数据参数之前测试错误。
+
+```js
+// Single call: 'Aramis'
+FictitiousAPI.getData(1, function (error, data) {
+    if (error) {
+        console.log('Caught ' + error);
+        return;
+    }
+
+    console.log(data.name);
+});
+
+Listing 5-19.Single call with error handling
+```
+
+同样的测试出现在清单 5-20 中，并成功处理了以前不可能处理的错误。我们现在可以对成功和错误采取不同的行动。
+
+```js
+// Error handling
+FictitiousAPI.getData(5, function (error, data) {
+    if (error) {
+        console.log('Caught ' + error);
+        return;
+    }
+
+    console.log(data.name);
+});
+
+Listing 5-20.Working error handling
+```
+
+这种模式的缺点是错误处理代码的激增，这使得我们的嵌套回调情况更加冗长，如清单 5-21 所示。尽管这个代码示例仍然满足一个非常基本的功能，但它现在是一个很难理解的复杂清单。
+
+```js
+FictitiousAPI.getData(1, (error, data) => {
+    if (error) {
+        console.log('Caught ' + error);
+        return;
+    }
+
+    console.log(data.name);
+
+    FictitiousAPI.getData(2, (error, data) => {
+        if (error) {
+            console.log('Caught ' + error);
+            return;
+        }
+
+        if (data.name == 'Athos') {
+            console.log(data.id + ' ' + data.name);
+        } else {
+            console.log(data.name);
+        }
+
+        FictitiousAPI.getData(3, (error, data) => {
+            if (error) {
+                console.log('Caught ' + error);
+                return;
+            }
+
+            console.log(data.name);
+
+            FictitiousAPI.getData(4, (error, data) => {
+                if (error) {
+                    console.log('Caught ' + error);
+                    return;
+                }
+
+                console.log(data.name);
+
+                FictitiousAPI.getData(5, (error, data) => {
+                    if (error) {
+                        console.log('Caught ' + error);
+                        return;
+                    }
+
+                    console.log(data.name);
+                })
+            });
+        });
+    });
+
+});
+
+Listing 5-21.Nested callbacks with error handling
+```
+
+该程序的输出与之前基本相似，如下所示，唯一的区别是现在错误得到了处理:
+
+```js
+==== OUTPUT ====
+Aramis
+2 Athos
+Porthos
+D'Artagnan
+Caught No matching record
+```
+
+进化这段代码的下一步是使用 promises 来极大地提高它的可读性。
+
+### 承诺
+
+将承诺引入 API 是一项非常简单的任务。在清单 5-22 中，`getData`方法的签名已经通过移除所有为回调引入的参数而被清除。这使得签名更好地描述了执行操作所需的内容:在这种情况下，只有 id。
+
+该方法的主体被包装在一个新的 promise 对象中，该对象总是有一个带有两个函数参数的签名。当请求成功时，第一个函数将用于履行承诺。第二个函数用于在出现错误时拒绝承诺。所有的承诺都有这个签名，但是在 TypeScript 中，您可以用更具体的类型信息来进一步增强这些功能。
+
+在清单 5-22 中，`fulfill`函数有一个类型化参数`data`，它将包含`FicitiousData`，`reject`函数有一个字符串`reason`。这里的类型注释将确保自动完成成员在使用该承诺的代码中是正确的。您还可以在创建承诺时使用类型参数来添加这种类型信息。
+
+# Promise
+
+当我们调用 `getData` 方法时，我们现在得到了一个承诺，如清单 5-23 所示。代替回调，promise 对象有一个接受函数的 `then` 方法。在这个简单的例子中，承诺的主要好处是它分离了 `getData` 签名和 `then` 签名的关注点。更多实质性的好处还在后头。
+
+```js
+// Single call: 'Aramis'
+FictitiousAPI.getData(1)
+    .then(function (data) {
+        console.log(data.name);
+    });
+```
+
+**Listing 5-23.** Single call with `then`
+
+为了处理履行承诺时出现的错误，可以使用 `catch` 方法，如清单 5-24 所示。我们现在有三个项目都处理单独的关注点，而不是以前的回调设计，其中关注点都是混合在一起的。
+
+```js
+// Error handling (works)
+FictitiousAPI.getData(5)
+    .then(function (data) {
+        console.log(data.name);
+    })
+    .catch(function (error) {
+        console.log('Caught ' + error);
+    })
+```
+
+**Listing 5-24.** Error handling with `catch`
+
+为了更好地展示这些优势，完整的承诺链如清单 5-25 所示。代码是最低限度嵌套的(最多两层，相比之下，以前的版本使用带有错误处理的回调有五层)。每个 `then` 函数都比较容易理解，所有的异常处理都包含在一个 `catch` 中。
+
+```js
+FictitiousAPI.getData(1)
+    .then((data) => {
+        console.log(data.name);
+        return FictitiousAPI.getData(2);
+    })
+    .then((data) => {
+        if (data.name == 'Athos') {
+            console.log(data.id + ' ' + data.name);
+        } else {
+            console.log(data.name);
+        }
+
+        return FictitiousAPI.getData(3);
+    })
+    .then((data) => {
+        console.log(data.name);
+        return FictitiousAPI.getData(4);
+    })
+    .then((data) => {
+        console.log(data.name);
+        return FictitiousAPI.getData(5);
+    })
+    .catch((error) => {
+        console.log('Caught ' + error);
+    });
+```
+
+**Listing 5-25.** Promise chain
+
+更新后的程序的输出与之前的相同，但是程序更容易阅读。
+
+```js
+==== OUTPUT ====
+Aramis
+2 Athos
+Porthos
+D'Artagnan
+Caught No matching record
+```
+
+虽然此示例使用了单个 `catch`，但为了重现原始回调示例的行为，如果您希望以后继续处理该链，可以插入额外的 `catch` 块，以便在链的早期处理错误。在这方面，承诺是非常灵活的。
+
+即使在嵌套和错误处理的情况下，承诺也不仅仅是回调的匹配，但是承诺还有一些其他的好处，这些好处是回调所不能提供的。
+
+### 多重承诺
+
+链接多个承诺的另一种方法是用一个包装承诺聚合它们的结果，该包装承诺负责从各个子承诺中获取值。promises 中内置了一种机制，允许通过简单地调用 `Promise.all` 来实现这一点。
+
+清单 5-26 显示了来自清单 5-25 的承诺链折叠成对 `Promise.all` 的调用。一旦所有的承诺都已解决，然后执行块的结果。如果有任何错误，将立即调用 `catch` 块；这是一种快速失效机制。这是一个很好的方式来表达你的代码需要所有的承诺来实现才能继续。
+
+```js
+Promise.all([
+    FictitiousAPI.getData(1),
+    FictitiousAPI.getData(2),
+    FictitiousAPI.getData(3),
+    FictitiousAPI.getData(4)
+]).then((values) => {
+    for (let val of values) {
+        console.log(val.name);
+    }
+}).catch((error) => {
+    console.log('Caught ' + error);
+});
+```
+
+**Listing 5-26.** `Promise.all`
+
+无论每个单独的承诺需要多长时间来实现，在 `then` 块中传递的值都将按照承诺的顺序进行排序。在列表 5-26 的情况下，结果将总是按阿拉米斯、阿索斯、波尔多斯、达达尼昂的顺序排列，即使异步操作以不同的顺序成功。
+
+### 最快的承诺
+
+如果您正在调用几个异步操作，并且只对获得最快的结果感兴趣，那么您可以使用 `Promise.race` 方法。
+
+清单 5-27 显示了清单 5-25 中的承诺链，用于承诺竞赛。第一个解决的承诺导致比赛也以最快的承诺的实现值或拒绝原因来解决。即使第一个结果立即可用，在后台的其他操作继续，这意味着他们仍然消耗资源，即使你的比赛有一个赢家。
+
+```js
+Promise.race([
+    FictitiousAPI.getData(1),
+    FictitiousAPI.getData(2),
+    FictitiousAPI.getData(3),
+    FictitiousAPI.getData(4)
+]).then((data) => {
+    console.log(data.name);
+}).catch((error) => {
+    console.log('Caught ' + error);
+});
+```
+
+**Listing 5-27.** Fastest promise
+
+Promises 为处理异步链、减少嵌套以及简化和标准化错误处理提供了一种更好的机制。还有一些有用的标准承诺组合，允许您启动许多异步操作，并在承诺全部实现时集中在一个 `then` 块上。
+
+承诺将成为异步 API 的事实机制，浏览器将实现基于承诺的特性改进。例如，清单 5-28 中所示的 XMLHttpRequest 机制很可能被替换为一个 fetch API，该 API 使用承诺来执行相同的操作。
+
+# XMLHttpRequest 与 Fetch API
+
+## XMLHttpRequest
+
+```js
+const request = new XMLHttpRequest();
+
+request.onload = function() {
+    if (request.status !== 200) {
+        // Status code not likely to be usable, i.e. a redirect
+        console.log('Status Code:', request.status);
+        return;
+    }
+
+    const data = JSON.parse(request.responseText);
+    console.log(data);
+};
+
+request.onerror = (error) => {
+    // Network failure or status code is error
+    console.log('Error making request: ', error);
+};
+
+request.open('get', './api/musketeers.json', true);
+request.send();
+```
+
+**Listing 5-28. XMLHttpRequest**
+
+## Fetch API
+
+清单 5-29 中显示了 `fetch` API 的等价物。虽然在撰写本文时这个特性还处于试验阶段，但是它的引入已经迫在眉睫。请注意，最终规格可能与此示例不同。
+
+```js
+fetch('./api/musketeers.json')
+    .then((response) => {
+        if (response.status !== 200) {
+            // Status code not likely to be usable, i.e. a redirect or an error
+            console.log('Status Code:', response.status);
+            return;
+        }
+
+        return response.json();
+    }).then((data) => {
+        console.log(data);
+    })
+    .catch((error) => {
+        // i.e. network failure
+        console.log('Error making request', error);
+    });
+```
+
+**Listing 5-29. Fetch API**
+
+随着 promise 模式变得越来越熟悉，`Fetch` API 等变化将使交互变得更加熟悉和可预测。与 `XMLHttpRequest` 不同，`XMLHttpRequest` 几乎总是让程序员反复检查文档，您可以通过 `Fetch` API 遵循这种模式，因为它只是一个承诺链。任何提供异步操作的 API 都会有类似的变化。
+
+## 事件
+
+事件是 JavaScript 运行时中的一个基本概念，因此任何 TypeScript 程序员都对它们很感兴趣。事件侦听器通常附加到用户发起的事件，如触摸、单击、按键和网页上的其他交互，但事件也可以用作一种机制，用于分离需要触发处理的代码和承担工作的代码。
+
+事件分两个不同的阶段处理——捕获和冒泡。
+
+1.  在捕获过程中，事件首先被发送到文档层次结构中最顶层的元素，然后被发送到嵌套更深的元素。
+
+2.  在冒泡期间，它首先被发送到目标元素，然后被发送到其祖先。
+
+阶段作为事件参数的属性提供，可以使用 `e.eventPhase` 访问，其中事件参数被命名为 `e`。
+
+冒着夸大在单个线程上运行事件循环的风险，值得记住的是，附加到同一事件的多个事件侦听器将顺序执行，而不是并行执行，并且长时间运行的侦听器可能会延迟附加到同一事件的后续侦听器的执行。当一个事件被触发时，每个事件监听器按照它被附加的顺序排队；如果第一个侦听器花费 2 s 来运行，那么第二个侦听器将被阻塞至少 2 s，并且只有在到达事件队列顶部时才会执行。
+
+```js
+class ClickLogger {
+    constructor() {
+        document.addEventListener('click', this.eventListener);
+    }
+
+    eventListener(e: Event) {
+        // 3 (Bubbling Phase)
+        const phase = e.eventPhase;
+
+        const tag = (<HTMLElement>e.target).tagName;
+
+        console.log(`Click event in phase ${phase} detected on element ${tag} by ClickLogger.`);
+    }
+}
+
+const clickLogger = new ClickLogger();
+```
+
+**Listing 5-30. Event listeners**
+
+清单 5-30 展示了一个将它的方法之一 `eventListener` 附加到文档上的 `click` 事件的类。当与清单 5-31 中的 HTML 页面结合使用时；这个 `ClickLogger` 类将根据点击的元素输出消息，例如:
+
+*   ClickLogger 在元素 DIV 上检测到 Click 事件。
+
+*   ClickLogger 在元素 P 上检测到 Click 事件。
+
+*   ClickLogger 在元素 BLOCKQUOTE 上检测到 Click 事件。
+
+*   ClickLogger 在元素页脚检测到 Click 事件。
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>Event Demo</title>
+</head>
+<body>
+    <div>
+        Clicking on different parts of this document logs appropriate messages.
+        <blockquote>
+            <p>
+                Any fool can write code that a computer can understand.
+                Good programmers write code that humans can understand.
+            </p>
+            <footer>
+                -Martin Fowler
+            </footer>
+        </blockquote>
+    </div>
+</body>
+</html>
+```
+
+**Listing 5-31. Example document**
+
+**Note**
+
+添加事件监听器的正确方法是 `addEventListener` 调用。版本 9 之前的 Internet Explorer 版本使用另一种 `attachEvent` 方法。您可以使用清单 5-32 中所示的自定义 `addEventCrossBrowser` 函数来实现这两种附加事件的方法。该功能的改进版本出现在第五章中。
+
+```js
+function addEventCrossBrowser(element, eventName, listener) {
+    if (element.addEventListener) {
+        element.addEventListener(eventName, listener, false);
+    } else if (element.attachEvent) {
+        element.attachEvent('on' + eventName, listener);
+    }
+}
+
+class ClickLogger {
+    constructor() {
+        addEventCrossBrowser(document, 'click', this.eventListener);
+    }
+
+    eventListener(e: Event) {
+        // 3 (Bubbling Phase)
+        const phase = e.eventPhase;
+
+        const tag = (<HTMLElement>e.target).tagName;
+
+        console.log('Click event detected on element ' + tag + ' by ClickLogger.');
+    }
+}
+
+const clickLogger = new ClickLogger();
+```
+
+**Listing 5-32. Cross-browser events**
+
+在任何给定的运行时，您都不会受限于受支持事件的有限列表；您也可以监听并发送您自己的自定义事件。
+
+### TypeScript 的自定义事件机制
+
+清单 5-33 显示了自定义事件机制。在某些环境下，使用`addEventListener`和`dispatchEvent`就很简单。您可以将自定义数据作为事件的一部分进行传递，以便在侦听器中使用。
+
+```js
+// Polyfill for CustomEvent:
+// https://developer.mozilla.org/en/docs/Web/API/CustomEvent
+(function () {
+    function CustomEvent(event, params) {
+        params = params || { bubbles: false, cancelable: false, detail: undefined };
+        const evt = <any>document.createEvent('CustomEvent');
+        evt.initCustomEvent(event, params.bubbles, params.cancelable, params.detail);
+        return evt;
+    };
+
+    CustomEvent.prototype = (<any>window).Event.prototype;
+
+    (<any>window).CustomEvent = CustomEvent;
+})();
+
+// Fix for lib.d.ts
+interface StandardEvent {
+    new(name: string, obj: {}): CustomEvent;
+}
+var StandardEvent = <StandardEvent><any>CustomEvent;
+
+// Code for custom events is below:
+
+enum EventType {
+    MyCustomEvent
+}
+
+class Trigger {
+    static customEvent(name: string, detail: {}) {
+        const event = new StandardEvent(name, detail);
+
+        document.dispatchEvent(event);
+    }
+}
+
+class ListeningClass {
+    constructor() {
+        document.addEventListener(
+            EventType[EventType.MyCustomEvent],
+            this.eventListener,
+            false);
+    }
+
+    eventListener(e: Event) {
+        console.log(EventType[EventType.MyCustomEvent] + ' detected by ClickLogger.');
+        console.log('Information passed: ' + (<any>e).detail.example);
+    }
+}
+
+var customLogger = new ListeningClass();
+
+Trigger.customEvent(
+    EventType[EventType.MyCustomEvent],
+    {
+        "detail": {
+            "example": "Example Value"
+        }
+    }
+);
+```
+
+清单 5-33. 自定义事件
+
+您可以选择使用事件或代码事件，比如清单 5-13 中的简单观察者，来在整个程序中分配工作。
+
+### 事件阶段
+
+事件沿着从文档根到目标元素的传播路径被分派到事件目标。沿着从根元素到目标元素的路径的每个进展都是事件的捕获阶段的一部分，并且阶段将是 1。然后事件到达事件目标，阶段变为目标阶段，即阶段 2。最后，在冒泡阶段，即阶段 3，事件以相反的方向从事件目标流回根。
+
+这些事件阶段如图 5-4 所示。blockquote 中的附加元素不属于根和事件目标之间的层次结构，因此它们不包含在传播路径中。
+
+![A323824_2_En_5_Fig4_HTML.jpg](img/A323824_2_En_5_Fig4_HTML.jpg)
+
+图 5-4. 事件阶段
+
+事件为分离程序中的代码提供了强大的机制。如果您触发事件而不是直接调用代码来执行某个操作，那么将该操作划分为具有单一职责的小事件侦听器是一项简单的任务。以后添加额外的侦听器也是小事一桩。
+
+## 扩展对象
+
+JavaScript 中的几乎所有东西都是由一组属性组成的对象。每个属性都是一个键-值对，带有任意类型的字符串键和值，包括基本类型、对象和函数。如果值是一个函数，它通常被称为方法。每当您在 TypeScript 中创建一个类时，它都使用 JavaScript 对象来表示，但是也有许多您可以使用的内置对象。
+
+本地对象都保持开放，这意味着您可以像扩展自己的对象一样轻松地扩展它们。出于以下原因，在扩展本机对象时需要小心:
+
+*   如果每个人都扩展本机对象，那么扩展很可能会互相覆盖或者以不兼容的方式组合。
+
+*   本机对象定义以后可能会与您的冲突，并且您的实现将隐藏本机实现。
+
+因此，尽管扩展本机对象是可能的，但一般来说，它只是作为一种技术被推荐用作`polyfill`，这是一种向旧的运行时添加当前特性的方法。尽管您可能决定遵循限制较少的规则，但以`polyfill`的样式编写本机对象的扩展是值得的，这样您至少可以检测到下列情况之一何时发生:
+
+*   添加的本机功能的名称与您的扩展冲突。
+
+*   另一个程序员添加了另一个同名的扩展。
+
+*   第三方库或框架添加了同名的扩展。
+
+第三条特别建议，如果你打算把你的程序作为一个库供其他程序员使用，你就不应该编写本地对象扩展。如果库作者例行公事地扩展本地对象，那么冲突的可能性会很高，胜者将是最后加载的扩展，因为它将覆盖所有以前的扩展。
+
+> **Note**
+>
+> 术语`polyfill`(以一种称为`poly fill`的墙壁平滑和裂缝填充水泥命名)是由 Remy Sharp ([`http://remysharp.com/2010/10/08/what-is-a-polyfill/`](http://remysharp.com/2010/10/08/what-is-a-polyfill/), 2010 年)创造的，作为一个术语来描述一种用于添加缺失的本机行为的技术，当本机实现可用时，该技术会遵从本机实现。例如，您可能会尝试检测浏览器中的功能，并且只在它丢失时添加。
+
+### 扩展原型
+
+在清单 5-34 中，包含一个 HTML 元素列表的原生`NodeList`被扩展为添加一个`each`方法，为列表中的每个元素执行一个回调函数。扩展被添加到`NodeList.prototype`，这意味着它将在所有`NodeList`实例上可用。调用`document.querySelectorAll`返回一个匹配元素的`NodeList`，现在可以使用`each`方法通过`getParagraphText`函数显示每个元素的内容。使用`each`方法意味着`for`循环可以在一个地方定义。
+
+`call`方法用于将元素绑定到函数的上下文，而不是将每个元素作为参数传递给回调函数，这意味着`getParagraphText`函数可以使用`this`关键字来引用元素。
+
+```js
+NodeList.prototype.each = function (callback) {
+    for (let node of this) {
+        callback.call(node);
+    }};
+
+const getParagraphText = function () {
+    console.log(this.innerHTML);
+};
+
+const paragraphs = document.querySelectorAll('p');
+paragraphs.each(getParagraphText);
+```
+
+清单 5-34. 在 JavaScript 中扩展对象
+
+当您将这段代码添加到 TypeScript 程序中时，将会生成错误，警告您在`NodeList`接口上不存在`each`方法。您可以通过在程序中添加接口来消除这些错误并获得智能自动完成，如清单 5-35 所示。额外的好处是，如果本机对象的更新方式与您的扩展冲突，TypeScript 编译器将警告您存在重复声明。
+
+# TypeScript 中的对象扩展与封装
+
+```js
+interface NodeList {
+    each(callback: () => any): void;
+}
+
+NodeList.prototype.each = function (callback) {
+    for (let node of this) {
+        callback.call(node);
+    }
+};
+
+const getParagraphText = function () {
+    console.log(this.innerHTML);
+};
+
+const paragraphs = document.querySelectorAll('p');
+paragraphs.each(getParagraphText);
+
+// Listing 5-35. Extending objects in TypeScript
+```
+
+在这个例子中，`each`方法中的`this`关键字没有类型，因为它不能被推断出来。这可以改进，如清单 5-36 所示。通过将上下文关键字`this`中的元素移入参数，程序中的自动完成和类型检查得到了改进。这也意味着可以更容易地重用该函数。`NodeList`和通用`NodeListOf`接口都被扩展，以提供尽可能严格的类型检查。
+
+```js
+interface NodeList {
+    each(callback: (element: HTMLElement) => any): void;
+}
+
+interface NodeListOf<TNode extends Node> {
+    each(callback: (element: TNode) => any): void;
+}
+
+NodeList.prototype.each = function (callback: (elem: HTMLElement) => any) {
+    for (let node of this) {
+        callback.call(node, node);
+    }
+};
+
+const getParagraphText = function (elem: HTMLParagraphElement) {
+    console.log(elem.innerHTML);
+};
+
+const paragraphs = document.querySelectorAll('p');
+paragraphs.each(getParagraphText);
+
+// Listing 5-36. Improved TypeScript object extensions
+```
+
+为了使这个解决方案更像一个 polyfill，代码应该在添加它之前检查是否存在`each`方法。这就是如何添加一个已经计划好但在目标运行时上还不可用的临时特性。您可以在清单 5-37 中看到这一点。
+
+```js
+if (!NodeList.prototype.each) {
+
+    NodeList.prototype.each = function (callback: (elem: HTMLElement) => any) {
+        for (let node of this) {
+            callback.call(node, node);
+        }
+    };
+
+}
+
+// Listing 5-37. Turning an extension into a polyfill
+```
+
+通过原型扩展对象是一种可以在 TypeScript 中的任何对象上使用的技术，甚至是您自己的对象，除非它是密封的。扩展原型是向受您控制的对象添加行为的一种复杂方式。您可能会尝试使用该技术来扩展您所使用的库，因为它允许您在以后升级库时不会丢失您自己添加的内容。
+
+### 密封物体
+
+如果您担心您的代码被扩展，您可以通过使用`Object.seal`来防止对您的实例进行扩展。清单 5-38 展示了其他人可能对你的代码进行的典型扩展，清单 5-39 展示了如何防止它。`Object.seal`防止添加新属性，并将所有现有属性标记为不可配置。仍然可以修改现有属性的值。
+
+```js
+class Lemur {
+    constructor(public name: string) {
+
+    }
+}
+
+const lemur = new Lemur('Sloth Lemur');
+
+// new property
+lemur.isExtinct = true;
+
+// true
+console.log(lemur.isExtinct);
+
+// Listing 5-38. Extended instance
+```
+
+```js
+class Lemur {
+    constructor(public name: string) {
+
+    }
+}
+
+const lemur = new Lemur('Sloth Lemur');
+
+Object.seal(lemur);
+
+// new property
+lemur.isExtinct = true;
+
+// undefined
+console.log(lemur.isExtinct);
+
+// Listing 5-39. Sealing an instance
+```
+
+您可以使用`Object.isSealed`方法检查一个对象是否被密封，传入您想要检查的对象。有一系列类似的操作可能是有用的——每一个都可以用在清单 5-38 中来代替`Object.seal`调用，以获得下面示例中描述的结果。
+
+*   `Object.preventExtensions` / `Object.isExtensible`是`Object.seal`的一个更宽松的版本，允许属性被删除和添加到原型中。
+
+*   `Object.freeze` / `Object.isFrozen`是对`Object.seal`的一个更严格的替代，它防止属性被添加或删除，也防止值被改变。
+
+Mark Daggett (Apress，2013)的《专家 JavaScript》中有一篇关于创建、扩展和封装 JavaScript 对象的精彩概述。
+
+### 扩展的替代方案
+
+建议不要扩展原生对象而不提出问题的替代解决方案是有点不负责任的。本节展示了一个在现代 web 浏览器中 HTML 元素上可用的`classList`属性的例子。显示了 polyfill，然后提供了一个替代解决方案，它使用一个外观来封送本机`classList`或替代版本之间的调用。
+
+清单 5-40 显示了一个从元素中获取类列表的调用，这个调用在旧浏览器中会失败。`classList` API 实际上提供了添加、删除和切换类的选项——但是在这个例子中，只显示了对类名数组的检索。
+
+```js
+const elem = document.getElementById('example');
+
+console.log(elem.classList);
+
+// Listing 5-40. Using the native classList
+```
+
+解决这一潜在缺陷的一个常见方法是使用聚合填充物。清单 5-41 显示了一个简单的聚合填充，它测试`classList` API 的存在，然后将它添加到`HTMLElement`或`Element`原型中。替换函数拆分类名字符串以创建一个数组，或者如果没有类名，它返回一个空数组。
+
+```js
+if (typeof document !== "undefined" && !("classList" in document.documentElement)) {
+    const elementPrototype = (HTMLElement || Element).prototype;
+    if (elementPrototype) {
+        Object.defineProperty(elementPrototype, 'classList', {
+            get: function () {
+                const list = this.className ? this.className.split(/\s+/) : [];
+                console.log('Polyfill: ' + list);
+            }
+        });
+    }
+}
+
+const elem = document.getElementById('example');
+
+console.log(elem.classList);
+
+// Listing 5-41. ClassList Polyfill
+```
+
+虽然在这种特殊情况下使用 polyfill 是正确的解决方案(因为它与本机行为和安全检查非常匹配，确保它不会覆盖本机实现，如果它存在的话)，但也值得考虑替代设计。在许多情况下，清单 5-42 中的解决方案是一个更稳定的选择，因为它不会与本机或库代码冲突。这种方法的缺点是必须修改调用代码来引用外观。
+
+```js
+class Elements {
+    static getClassList(elem: HTMLElement) {
+        if ('classList' in elem) {
+            return elem.classList;
+        }
+        return elem.className ? elem.className.split(/\s+/) : [];
+    }
+}
+
+const elem = document.getElementById('example');
+
+console.log(Elements.getClassList(elem));
+
+// Listing 5-42.ClassList Façade
+```
+
+除了比多面填充更好的隔离之外，立面选项还有一个主要的好处。这段代码的意图很清楚。当涉及到维护代码时，`Elements`类中更简单明了的方法总是胜过 polyfill。干净且可维护的代码总是比聪明但复杂的解决方案更可取。
+
+## 摘要
+
+JavaScript 运行时以其古怪和令人惊讶而闻名，但总的来说，`TypeScript` 编译器将保护您免受大多数常见的失礼行为。使用块级变量声明并保持全局范围清晰将有助于编译器帮助您，因此值得使用 `TypeScript` 的结构特性(如类以及模块或命名空间)来封装函数和变量。
+
+您的大部分代码将在单个线程上执行，回调和承诺都有助于避免在长时间运行的操作中阻塞该线程。承诺比回访更具可读性，有助于区分不同的关注点。保持函数简短不仅使您的程序更容易维护，还可以使您的程序响应更快，因为每次调用函数时，它都被添加到事件队列的后面，运行时有机会在队列中最早的条目过期之前处理它。
+
+您可以侦听本机事件并创建自定义事件，也可以使用观察者模式在程序中调度和侦听自定义事件。
+
+您可以扩展对象，包括本机对象，但是使用中介代码来封送调用以避免与其他库或将来对本机代码的扩展发生冲突通常更合适。您可以通过密封、冻结或防止扩展来防止自己的对象扩展。
+
+## 要点
+
+*   避免使用函数作用域的`var`关键字，因为 `TypeScript` 使得块级变量甚至可以用于旧版本的 `JavaScript`。
+
+*   回调可以帮助避免阻塞主线程。
+
+*   无论是使用本机事件还是您自己的发布者，事件都可以防止紧密耦合。
+
+*   您可以扩展所有 `JavaScript` 对象，`JavaScript` 中的几乎所有内容都是对象。
+
+*   您可以密封或冻结对象以防止进一步的更改。
+
+*   您可以填充缺失的行为，使新功能在旧平台上可用。

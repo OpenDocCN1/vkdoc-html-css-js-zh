@@ -1,0 +1,348 @@
+# 九、使用 JavaScript 库
+
+我并不是说使用现有的软件或库不好。我的意思是，总是要在一方面最小化工作和另一方面最小化冗余代码之间进行权衡。我的意思是，当您需要的现有库中的特性很少时(比如说少于 20%)，您应该考虑编写自己的代码。也许永远背负额外的 80%是不值得的。—利·韦鲁
+
+在编写框架、工具包、有用的函数和有用的代码片段方面，JavaScript 社区是最繁忙的社区之一。如果您搜索任何类型的框架或工具包，您可能会找到大量选项。事实上，选项的数量既是一件好事也是一件坏事，尽管你可以毫不费力地找到行为驱动的测试框架、单元测试框架、模型视图控制器(MVC)框架、模型视图视图模型(MVVM)框架、网络工具包、浏览器填充等等。从无数选项中选择一个来使用并不是一件容易的事情。
+
+一旦你权衡了你的选择，你就可以开始在你的 TypeScript 程序中使用这个框架了。在运行时，你的程序和框架都是普通的 JavaScript，但是在设计时和编译时，你将把你的类型脚本代码和普通的 JavaScript 库混合在一起。因为 TypeScript 编译器不知道 JavaScript 文件中提供的操作，所以您需要以类型定义的形式提供提示，以获得与 TypeScript 库相同级别的工具支持。
+
+编译器使用类型定义检查程序，语言服务使用类型定义在开发工具中提供自动完成功能。所有的类型定义都被编译器删除了，这意味着它们不会给你的产品代码增加任何负担。本章包括一个示例应用，演示当您需要在 TypeScript 程序中包含第三方 JavaScript 代码时，如何为其创建类型定义。
+
+为了说明类型定义对现有代码的好处，让我们来看看在普通 JavaScript 中使用 jQuery 的典型开发工作流程。
+
+*   键入一个选择器和方法，如`$('#elem').on(`
+*   在 jQuery 文档中搜索`on`方法的签名
+*   在代码和文档之间切换，以完成代码行
+
+这是 jQuery 中除了最常见的操作之外的所有操作的典型表示，我很大方地没有提到任何复制和粘贴示例的操作(我们都做过)。如果我们的开发人员工作流程甚至包括在文档和代码之间切换，那么一定有更好的方法。类型定义是更好的方法。
+
+通过包含 jQuery 的类型定义，您将获得 jQuery 成员的智能自动完成，从而节省了编辑器和文档之间的切换。GitHub 上有一个官方的类型定义库(明确类型化)。所有这些定义都可以从 NPM 的类型组织中安装，如图 9-1 所示，或者通过运行清单 9-1 中的命令来安装。
+
+![A323824_2_En_9_Fig1_HTML.jpg](img/A323824_2_En_9_Fig1_HTML.jpg)
+
+图 9-1。Adding the jQuery type definition
+
+请注意，在这两种情况下，类型定义都保存为开发依赖项，因为它们在运行时是不需要的。
+
+```js
+npm install @types/jquery --save-dev
+```
+
+Listing 9-1. NPM install command for type definitions
+
+但是，在我们通过检索现有的类型定义走得太远之前，让我们从头开始，涵盖可能没有可用定义的场景。这意味着你可以处理你自己的 JavaScript 代码，或者还没有社区贡献的利基库，就像流行的框架一样容易。
+
+## 创建类型定义
+
+为了说明类型定义的创建，本章使用 Knockout 作为 JavaScript 库的例子。Knockout 是一个 MVVM 框架，它通过将模型映射到视图来简化动态用户界面，并在发生变化时保持两者同步。尽管 Knockout 用于演示从头创建类型定义的过程，但这种技术可以用来以 TypeScript 能够理解的方式描述任何 JavaScript 代码，甚至是您自己的遗留库。
+
+当然，如果你要在你的程序中添加一个流行的库，比如 Knockout，很可能有人已经开始创建类型定义了。因此，在你花时间做一个你自己的之前，检查一下明确类型项目的清单或者通过 NPM(在那里你会找到`@types/knockout`)。
+
+[`http://definitelytyped.org/`](http://definitelytyped.org/)
+
+如果你正在使用一个没有列出的开源库，在你创建了一个类型定义之后，你可以把它提交给明确类型化项目，以便将来帮助其他程序员。
+
+图 9-2 中显示了一个正在运行的应用示例。该应用允许您预订座位并从一系列食物选项中进行选择。
+
+![A323824_2_En_9_Fig2_HTML.jpg](img/A323824_2_En_9_Fig2_HTML.jpg)
+
+图 9-2。Knockout application
+
+### 使用挖空创建 TypeScript 应用
+
+本章中的应用允许乘客在航空公司预订座位和机上餐食。该应用由一个 HTML 页面和一个包含将数据绑定到视图的剔除代码的`app.ts`文件组成。清单 9-2 中显示的 HTML 页面提供了应用的视图，来自于
+
+[`http://learn.knockoutjs.com/`](http://learn.knockoutjs.com/)
+
+这个例子中有趣的部分是 Knockout 用来将视图模型绑定到 HTML 页面的`data-bind`属性。每个`data-bind`属性都有一个表达式，描述数据应该绑定到元素的什么位置，例如`value`属性或内部`text`，以及应该显示哪些数据。
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>Knockout App</title>
+    <link rel="stylesheet" href="app.css" type="text/css" />
+</head>
+<body>
+    <h1>Your seat reservations (<span data-bind="text: seats().length"></span>)</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Passenger name</th>
+                <th>Meal</th>
+                <th>Surcharge</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody data-bind="foreach: seats">
+            <tr>
+                <td><input data-bind="value: name" /></td>
+                <td><select data-bind="options: $root.availableMeals, value: meal, optionsText: 'mealName'"></select></td>
+                <td data-bind="text: formattedPrice"></td>
+                <td><a href="#" data-bind="click: $root.removeSeat">Remove</a></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <button data-bind="click: addSeat, enable: seats().length < 5">Reserve another seat</button>
+
+    <h2 data-bind="visible: totalSurcharge() > 0">
+        Total surcharge: $<span data-bind="text: totalSurcharge().toFixed(2)"></span>
+    </h2>
+    <script src="knockout.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
+```
+
+Listing 9-2. The HTML page
+
+`app.ts`文件包含使用 Knockout 将数据绑定到视图的代码，如清单 9-3 所示。在本节中，该文件不会被更改，但它将用于排除类型定义，这些定义是克服编译器错误并为剔除提供高质量的自动完成和类型检查所必需的。
+
+```markdown
+# Knockout.js 类型定义与 TypeScript 集成
+
+## 让编译器静音
+
+如果您只是对让编译器沉默感兴趣，您只需要提供一个快速提示，告诉编译器您将对使用`ko`变量导致所有错误的所有代码负责。提供这个提示的类型定义如清单 9-4 所示。
+
+类型定义通常放在名为`knockout.d.ts`的文件中，并在`app.ts`中使用引用注释或导入语句进行引用。
+
+```js
+declare var ko: any;
+```
+
+**Listing 9-4.** The quick type definition fix
+
+当你使用这种类型定义时，你拒绝了编译器检查你的程序的提议，你将不会得到自动完成。尽管这是一个简单的快速解决方案，但是您可能想要编写一个更全面的类型定义。
+
+![A323824_2_En_9_Fig4_HTML.jpg](img/A323824_2_En_9_Fig4_HTML.jpg)
+
+**图 9-4.** The first iteration
+
+图 9-4 显示编辑器中的类型信息还没有用，但是所有的错误都消失了。
+
+## 迭代改进类型定义
+
+编写类型定义的一个好处是，您可以以很小的增量编写它们。这意味着您可以决定在类型定义上投入多少努力，以换取每次增量提供的类型检查和自动完成的好处。
+
+清单 9-5 展示了敲除类型定义的一个小的增量改进。`Knockout`接口为应用中使用的所有一级属性提供类型信息:`applyBindings`、`computed`、`observable`和`observableArray`。没有给出这四个属性的具体细节；它们被简单地指定为`any`类型。
+
+声明的`ko`变量被更新以使用新的`Knockout`接口，而不是用于使编译器静默的`any`类型。
+
+```js
+interface Knockout {
+    applyBindings: any;
+    computed: any;
+    observable: any;
+    observableArray: any;
+}
+
+declare var ko: Knockout;
+```
+
+**Listing 9-5.** First-level type definition
+
+尽管这个更新的定义很简单，但它可以防止许多常见的错误，否则在应用中注意到不正确的行为之前，这些错误是不会被发现的。清单 9-6 显示了编译器根据这个一级类型定义捕捉到的两个错误示例。
+
+```js
+// Spelling error caught by the compiler
+self.meal = ko.observabel(initialMeal);
+
+// Non-existent method caught by compiler
+ko.apply(new ReservationsViewModel(), document.body);
+```
+
+**Listing 9-6.** Compiler errors for incorrect code
+
+在应该使用`observable`的地方拼错了`observabel`，在应该使用`applyBindings`的地方拼错了不存在的`apply`调用，都会导致编译器错误。这是编译器所能做到的最大限度，因为在接口中只指定了名称，而没有指定方法签名。
+
+图 9-5 显示了带有更新定义的改进的自动完成功能。虽然列出了成员，但尚未提供它们的类型信息。
+
+![A323824_2_En_9_Fig5_HTML.jpg](img/A323824_2_En_9_Fig5_HTML.jpg)
+
+**图 9-5.** The second iteration
+
+为了增加类型定义的细节，值得参考库的官方文档。通过在创建定义时引用它一次，您可以省去每次编写代码时都要做的工作。在`applyBindings`的情况下，文档说明该方法可以接受以下一个或两个参数:
+
+*   `viewModel`—您希望与其激活的声明性绑定一起使用的视图模型对象。
+
+*   `rootNode`(可选)—要在其中搜索数据绑定属性的文档部分。
+
+换句话说，`viewModel`是一个对象，必须被提供，而`rootNode`是一个`HTMLElement`，是可选的。清单 9-7 中显示了更新后的`Knockout`界面，其中包含了额外的类型信息。
+
+```js
+interface Knockout {
+    applyBindings(viewModel: {}, rootNode?: HTMLElement): void;
+    computed: any;
+    observable: any;
+    observableArray: any;
+}
+
+declare var ko: Knockout;
+```
+
+**Listing 9-7.** `applyBindings` definition
+
+**Note**
+
+即使您还不知道库中函数或对象的确切签名，将类型限制为一般的`Function`或`Object`类型将防止许多可能的错误，例如简单类型的传递。
+
+这个更新的类型定义提供了更全面的类型检查，确保至少有一个参数被传递给`applyBindings`，并且所有传递的参数都是正确的类型。它还允许开发工具提供有用的类型提示和自动完成，如图 9-6 所示。
+
+![A323824_2_En_9_Fig6_HTML.jpg](img/A323824_2_En_9_Fig6_HTML.jpg)
+
+**图 9-6.** Autocompletion for the `applyBindings` method
+```
+
+另一种扩展类型信息的技术是提供一个签名，您可以从自己对库的使用中推断出这个签名。应用中的两个实例`ko.computed`都被传递了一个执行计算的函数。您可以更新类型定义来表明`computed`方法期望提供一个函数，如清单 9-8 所示。
+
+如果求值器的返回类型是固定的，可以在括号内的类型定义中指定。同样，如果需要使用从`computed`方法返回的值，可以更新括号外的返回类型，以提供返回类型的详细信息。
+
+```js
+interface Knockout {
+    applyBindings(viewModel: any, rootNode?: any): void;
+    computed: (evaluator: () => any) => any;
+    observable: any;
+    observableArray: any;
+}
+
+declare var ko: Knockout;
+
+Listing 9-8.‘computed’ definition
+```
+
+您可以使用官方文档或通过基于示例推断类型来继续扩展定义，以创建清单 9-9 中所示的`Knockout`接口。这既有一级类型信息，也有二级类型信息。
+
+```js
+interface Knockout {
+    applyBindings(viewModel: {}, rootNode?: HTMLElement): void;
+    computed: (evaluator: () => any) => any;
+    observable: (value: any) => any;
+    observableArray: (value: any[]) => any;
+}
+
+declare var ko: Knockout;
+
+Listing 9-9.Complete second-level definition
+```
+
+要完成类型定义，您需要重复将每次使用的`any`转换成更详细的类型的过程，直到您不再依赖于隐藏动态类型的细节。每当一个定义扩展到不可管理的大小时，您可以使用一个额外的接口来划分它，以帮助限制定义中任何特定部分的复杂性。
+
+清单 9-10 通过将`applyBindings`方法的细节转移到一个单独的`KnockoutApplyBindings`接口中，展示了“分而治之”的技术。然后在`Knockout`接口中使用它将类型信息绑定到方法。
+
+```js
+interface KnockoutApplyBindings {
+    (viewModel: {}, rootNode?: HTMLElement): void;
+}
+
+interface Knockout {
+    applyBindings: KnockoutApplyBindings;
+    computed: (evaluator: () => any) => any;
+    observable: (value: any) => any;
+    observableArray: (value: any[]) => any;
+}
+
+declare var ko: Knockout;
+
+Listing 9-10.Dividing type definitions into interfaces
+```
+
+尽管这个`Knockout`的类型定义还远未完成，但它涵盖了运行示例应用所需的所有`Knockout`特性。您可以根据需要添加更多类型的信息，只有在获得合理回报时才进行投资。
+
+## 转换 JavaScript 应用
+
+如果您有一个现有的 JavaScript 应用，并且正在切换到 TypeScript，那么有三种潜在的策略来处理您的旧代码:
+
+*   编写类型定义
+
+*   将您的 JavaScript 文件添加到编译中
+
+*   将 JavaScript 代码添加到 TypeScript 文件中
+
+为您自己的 JavaScript 代码编写类型定义是最不理想的解决方案，因为您将重复或浪费大量的精力。允许编译器包含您的 JavaScript 代码允许您开始将代码迁移到 TypeScript 的过程；并将它移动到 TypeScript 文件中就完成了这个过程。
+
+为了说明迁移 JavaScript 代码的过程，我们将使用清单 9-11 中所示的非常基本的 JavaScript 文件。这个文件包含一些我们想在新的 TypeScript 程序中使用的任意的旧处理代码。
+
+```js
+function old_process(name) {
+    return name + ' processed';
+}
+Listing 9-11.An old JavaScript file
+```
+
+调用旧 JavaScript 的新代码如清单 9-12 所示。
+
+```js
+class NewProcessor {
+    process(name: string) {
+        return old_process(name);
+    }
+}
+Listing 9-12.The new code
+```
+
+当您尝试编译 TypeScript 文件时，将会看到错误“mynewlib.ts(3，16):错误 TS2304:找不到名称“old_process”这是因为编译器看不到旧代码。
+
+```js
+tsc mynewlib.ts --outDir ./dist
+Listing 9-13.Compilation of just the new code
+```
+
+在编写类型定义或试图将旧库升级到 TypeScript 之前，可以使用包含的 JavaScript 重新编译。在编译中包含 JavaScript 文件时，最好将输出重定向到一个单独的文件夹，因为 JavaScript 输入文件不能被覆盖。清单 9-14 显示了允许编译 JavaScript 文件的编译器命令，并在编译中包括旧的 JavaScript 文件和新的 TypeScript 文件。
+
+```js
+tsc myoldlib.js mynewlib.ts --allowJs --outDir ./dist
+Listing 9-14.Compilation including JavaScript
+```
+
+通过在编译中包含 JavaScript 文件，编译器可以在许多情况下推断类型信息，现在编译器错误已经消失了。
+
+您可以进一步改进这一点，如清单 9-15 所示，其中 JavaScript 依赖关系在 TypeScript 文件中是显式的。
+
+```js
+///<reference path="myoldlib.js" />
+
+class NewProcessor {
+    process(name: string) {
+        return old_process(name);
+    }
+}
+
+Listing 9-15.JavaScript dependency
+```
+
+有了引用注释，您不再需要在编译中指定 JavaScript 文件。此外，您的编辑器现在将提供推断的类型信息作为自动完成提示。
+
+```js
+tsc mynewlib.ts --allowJs --outDir ./dist
+Listing 9-16.TypeScript and JavaScript compilation with reference comment
+```
+
+为了进一步改善开发人员的体验，您可以开始将您的 JavaScript 移动到 TypeScript 文件中，这允许您添加类型注释来改进类型信息，并在编译器无法理解类型的地方为其提供帮助。如果您的 JavaScript 代码特别晦涩难懂，编译器可能无法推断出许多类型。
+
+如果有大量 JavaScript 文件需要升级，可以先将低级依赖项升级到 TypeScript，而依赖于它们的其他 JavaScript 文件继续引用 TypeScript 文件的编译输出。在运行时，只要只添加类型注释而不重新构造程序，文件最初是用 TypeScript 还是 JavaScript 编写的都没有区别。
+
+最好在用 TypeScript 编写整个程序之前保存任何重构工作，因为对 TypeScript 的重构支持更加智能。
+
+## 摘要
+
+几乎每一个流行的 JavaScript 库都已经有一个类型定义列在 NPM 的类型组织上，但是如果你遇到一个更奇特的库或者一个全新的库没有列出，你可以创建你自己的类型定义。使用迭代/增量方法编写类型定义可以让您获得投入的时间和精力的最佳回报，并且您可以使用库的文档来查找类型信息或通过阅读示例来推断它。
+
+您可以使用创建类型定义的相同技术来重用您自己的 JavaScript 代码，但是简单地将您的 JavaScript 移动到一个 TypeScript 文件中并添加编译器无法为您推断的任何类型注释可能会花费较少的时间。
+
+无论您是编写类型定义还是将 JavaScript 升级到 TypeScript，编译器都可能会发现您从来不知道存在的错误——您可能会对以前遗漏的内容感到惊讶。
+
+### 要点
+
+*   类型定义通常放在扩展名为`.d.ts`的文件中。
+
+*   您可以增量地创建新的类型定义——您不需要花费时间一次为整个库生成类型信息。
+
+*   您可以在 TypeScript 编译中包含 JavaScript 文件。
+
+*   将文件从`JavaScript`升级到`TypeScript`通常比创建类型定义文件更容易。
+
+*   因为`JavaScript`完全是动态的，所以当您升级到`TypeScript`时，您可能会发现并修复您不知道存在的错误。
