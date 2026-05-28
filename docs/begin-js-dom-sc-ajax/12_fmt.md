@@ -1,0 +1,505 @@
+# 十二、附录 A：调试 JavaScript
+
+在本附录中，我将向您介绍一些调试 JavaScript 代码的技巧和工具。熟悉调试工具是非常重要的，因为编程在很大程度上是试图找出在特定时间出了什么问题。一些浏览器帮助你解决这个问题；其他人通过隐藏他们的调试工具或者返回含糊的错误消息来增加难度，这些错误消息带来的困惑多于帮助。我最喜欢的一些哲学著作包括“未定义的就是未定义的”或微软 IE 标准“对象不支持这个属性或方法。”
+
+## 常见的 JavaScript 错误
+
+让我们从可能每个 JavaScript 开发人员都犯过的一些常见错误开始。当你检查一个失败的脚本时，在你的大脑后面有这些可能会让你更快的发现问题。
+
+### 拼写错误和区分大小写问题
+
+最容易发现的错误是 JavaScript 方法名或属性的拼写错误。经典的有 `getElementByTagName()` 代替 `getElementsByTagname()`，`getElementById()` 代替 `getElementByID()`，`node.style.colour`（针对英国英语作家）。很多时候，问题也可能是区分大小写，例如，用混合大小写而不是小写来写关键字。
+
+```js
+If( elm.href ) {
+  var url = elm.href;
+}
+```
+
+没有一个关键字叫做 `if`，但是有一个叫做 `If`。同样的区分大小写问题也适用于变量名：
+
+```js
+var FamilyGuy = 'Peter';
+var FamilyGuyWife = 'Lois';
+alert('The Griffins:\n'+ familyGuy + ' and ' + FamilyGuyWife );
+```
+
+这会导致一条错误消息，指出“`familyGuy` 未定义”，因为有一个名为 `FamilyGuy` 的变量，但没有一个名为 `familyGuy` 的变量。
+
+### 试图访问未定义的变量
+
+我在这本书的第二章中谈到过：你可以通过声明变量来定义变量，可以使用或不使用额外的 `var` 关键字。（后者是定义变量范围所必需的。）请记住，严格模式会阻止您隐式声明变量（没有 `var` 关键字的变量）。因此，建议您对每个变量使用 `var` 关键字。
+
+```js
+Stewie = "Son of Peter and Lois";
+var Chris = "Older Son of Peter and Lois";
+```
+
+如果你试图访问一个还没有定义的变量，你会得到一个错误。以下脚本中的 `alert()` 引发了一个错误，因为 `Meg` 尚未定义：
+
+```js
+Peter = "The Family Guy";
+Lois = "The Family Guy's Wife";
+Brian = "The Dog";
+Stewie = "Son of Peter and Lois";
+Chris = "Older Son of Peter and Lois";
+alert( Meg );
+Meg = "The Daughter of Peter and Lois";
+```
+
+当它是一个像这样明显的例子时，这很容易，但是试着猜测下一个例子中的错误在哪里呢？
+
+`exampleFamilies.html`
+
+```js
+function getFamilyData( outptID, isTree, familyName ) {
+  var father, mother, child;
+  switch( familyName ) {
+    case 'Griffin':
+      father = "Peter";
+      mother = "Lois";
+      child = "Chris";
+    break;
+    case 'Flintstone':
+      father = "Fred";
+      mother = "Wilma";
+      child = "Pebbles";
+    break;
+  }
+  var out = document.getElementById( outputID );
+  if( isTree ) {
+    var newUL = document.createElement( 'ul' );
+    newUL.appendChild( makeLI( father ) );
+    newUL.appendChild( makeLI( mother ) );
+    newUL.appendChild( makeLI( child ) );
+    out.appendChild( newUL );
+  } else {
+    var str = father + ' ' + mother + ' ' + child;
+    out.appendChild( document.createTextNode( str ) );
+  }
+}
+getFamilyData( 'tree', true, 'Griffin' );
+```
+
+Chrome 的开发者工具会告诉你第 23 行有一个错误——“没有定义‘`output id`’”，如图 A-1 所示。
+
+![9781430250920_AppA-01.jpg](img/9781430250920_AppA-01.jpg)
+
+图 A-1 。Chrome 在第 23 行显示一个错误
+
+但是，如果你看看第 23 行的代码，如图 A-2 所示，似乎没什么问题。
+
+![9781430250920_AppA-02.jpg](img/9781430250920_AppA-02.jpg)
+
+图 A-2 。代码在第 23 行高亮显示
+
+罪魁祸首是函数参数中的拼写错误，在图 A-3 中突出显示，这意味着没有定义 `outputID`，但定义了 `output id`。
+
+![9781430250920_AppA-03.jpg](img/9781430250920_AppA-03.jpg)
+
+图 A-3 。导致错误的拼错的函数参数
+
+参数中的拼写错误是一个非常令人困惑的错误，因为浏览器会告诉你错误发生在使用变量的那一行，而不是你犯错误的地方。
+
+### 右大括号和圆括号的数量不正确
+
+另一个常见的错误是在删除一些行时，代码中没有使用右花括号或保留一个孤立的右花括号。比方说，您不再需要 `isTree` 选项，并将其从代码中删除：
+
+`exampleCurly.html`
+
+```js
+function getFamilyData( outputID, familyName ) {
+  var father, mother, child;
+  switch( familyName ) {
+    case 'Griffin':
+      father = "Peter";
+      mother = "Lois";
+      child = "Chris";
+    break;
+    case 'Flintstone':
+      father = "Fred";
+      mother = "Wilma";
+      child = "Pebbles";
+    break;
+  }
+  var out = document.getElementById( outputID );
+  var newUL = document.createElement( 'ul' );
+  newUL.appendChild( makeListElement( father ) );
+  newUL.appendChild( makeListElement( mother ) );
+  newUL.appendChild( makeListElement( child ) );
+  out.appendChild( newUL );
+  }
+}
+getFamilyData( 'tree', true, 'Griffin' );
+```
+
+孤立的右大括号导致 Chrome 出现“未捕获的语法错误:意外标记”错误。当您没有关闭一个构造中的所有大括号时，也会出现同样的问题，这是一个在您没有缩进代码时很容易发生的错误：
+
+`exampleMissingCurly.html`
+
+```js
+function testRange( x, start, end ) {
+if( x <= end && x >= start ) {
+if( x == start ) {
+alert( x + ' is the start of the range');
+}
+if( x == end ) {
+alert(x + ' is the end of the range');
+}
+if( x! = start && x != end ) {
+alert(x + ' is in the range');
+} else {
+alert(x + ' is not in the range');
+}
+}
+```
+
+运行此示例会导致“未捕获的 SyntaxError:意外的输入结束”错误，这是脚本块的最后一行。这意味着在条件结构中的某个地方，你忘记了添加一个右花括号。缺少的大括号应该在哪里很难找到，但是当代码适当缩进时就容易找到了。
+
+`exampleMissingCurlyFixed.html`
+
+## JavaScript 常见错误与调试技巧
+
+### 缺少括号
+
+先前丢失的花括号以粗体显示（在“在范围内”警告消息之后）。
+
+缺少/最高级括号是另一个常见问题。当您在 `if()` 条件中嵌套函数，然后删除其中一些函数时，就会发生这种情况。例如：
+
+```js
+if (all = parseInt(getTotal()){ doStuff(); }
+```
+
+这将导致一个错误，因为您忘记了关闭条件本身的左括号。它应该是这样的：
+
+```js
+if (all = parseInt(getTotal())){ ... }
+```
+
+当您嵌套太多方法和返回时，也会发生这种情况：
+
+```js
+var elm=grab(get(file).match(/<id>(\w+)<\/id>/)[1];
+```
+
+这个在 `[1]` 后面缺少右括号：
+
+```js
+var elm=grab(get(file).match(/<id>(\w+)<\/id>/)[1]);
+```
+
+一般来说，这种函数的串联不是好的编码风格，但是有些情况下你会遇到像这样的例子。诀窍是从左到右计算左括号和右括号——好的编辑器还会自动突出显示左括号和右括号。有些编辑会为您添加右括号、花括号或引号；其他人不知道，所以在你打字的时候要注意。
+
+您也可以编写一个实用函数来帮您完成这项工作，这本身就是对您在编码语法方面对细节关注的一个测试：
+
+*exampleTestingCodeLine.html*
+
+```js
+function testCodeLine( c ) {
+  if( c.match( /\(/g ).length !=
+     c.match( /\)/g) .length ) {
+    alert( 'closing ) missing' );
+  }
+}
+c = "var elm=grab(get('demo.xml')" +
+  ".match( /<id>(\w+)<\/id>/ )[1] );";
+testCodeLine( c );
+```
+
+### 串联错误
+
+当你使用 JavaScript 输出 HTML 时，串联经常发生。请确保不要忘记不同部分之间的加号（`+`）以连接成一个整体：
+
+```js
+father = "Peter";
+mother = "Lois";
+child = "Chris";
+family = father+" "+mother+" "child;
+```
+
+前面的代码在 `child` 变量前缺少一个加号。相反，它应该如下所示：
+
+```js
+father = "Peter";
+mother = "Lois";
+child = "Chris";
+family = father+" "+mother+" "+child;
+```
+
+另一个障碍是确保不要连接错误的数据类型：
+
+```js
+father = "Peter";
+fAge = 40;
+mother = "Lois";
+mAge = 38;
+child = "Chris";
+cAge = 12;
+family = father + ", " + mother +  " and " + child + " Total Age: " + fAge + mAge + cAge;
+alert( family );
+```
+
+这不会显示预期的结果。相反，它将显示以下内容：
+
+彼得、洛伊斯和克里斯总年龄:403812
+
+错误在于您串联了字符串和数字，因为运算符是从左到右工作的。您需要在年龄术语两边加上括号：
+
+```js
+father = "Peter";
+fAge = 40;
+mother = "Lois";
+mAge = 38;
+child = "Chris";
+cAge = 12;
+family = father + ", " + mother + " and " + child + " Total Age: " + (fAge + mAge + cAge);
+alert(family);
+```
+
+这导致了预期的结果：
+
+彼得、洛伊斯和克里斯总年龄:90 岁
+
+### 赋值而不是测试变量的值
+
+当测试一个变量的值时，很容易赋值而不是测试它：你需要做的就是忘记一个等号：
+
+```js
+if(Stewie = "talking") {
+  Brian.hear();
+}
+```
+
+这个代码诱使布莱恩一直听，不仅仅是当 Stewie 有话要说的时候；然而，添加一个等号确实使 Brian 只在 Stewie 说话时听到：
+
+```js
+if(Stewie == "talking") {
+  Brian.hear();
+}
+```
+
+### 用 `alert()` 和“Console”元素跟踪错误
+
+跟踪错误最简单的方法是在需要测试某个值的地方使用 `alert()`。`alert()` 方法停止脚本执行（Ajax 调用除外，它可能仍在后台运行），并为您提供关于某个变量的值的信息。您可以推断该值是否正确，或者它是否是错误的原因。在某些情况下，使用 `alert()` 并不是正确的选择，例如，如果您想在遍历数组时跟踪几个值的变化。根据数组的大小，这可能会变得很繁琐，因为每次想要消除警告并开始下一个数组项时，都需要按 Enter 键。
+
+解决此问题的方法是使用您自己的调试控制台或日志记录元素，或者使用浏览器中的调试功能。我们在本书中放在一起的 `DOMhelp` 库包含调试特性。您可以使用 `initDebug()`、`setDebug()` 和 `stopDebug()` 方法来模拟调试控制台。只需为 ID 为 `DOMhelpDebug` 的元素添加一个样式，并使用这些方法来显示元素并向其中写入内容。例如：
+
+*exampleDebugTest.html（节选）*
+
+```css
+#DOMhelpdebug{
+  position:absolute;
+  top:0;
+  right:0;
+  width:300px;
+  height:200px;
+  overflow:scroll;
+  background:#000;
+  color:#0F9;
+  white-space:pre;
+  font-family:courier,monospace;
+  padding:1em;
+}
+html>body #DOMhelpdebug{
+  position:fixed;
+  min-height:200px;
+  height:200px;
+  overflow:auto;
+}
+```
+
+*exampleDebugTest.html（节选）*
+
+```html
+<script type="text/javascript"
+  src="../DOMhelp.js"></script>
+<script type="text/javascript">
+  function DOMDebugTest(){
+    DOMhelp.initDebug();
+    for(var i = 0; i < 300; i++ ) {
+      DOMhelp.setDebug( i + ' : ' + ( i % 3 == 0 ) + '\n' );
+    }
+  }
+  DOMhelp.addEvent( window, 'load', DOMDebugTest, false );
+</script>
+```
+
+本示例遍历数字 0 到 299，并显示该数字能否被 3 整除而不产生浮点数。不用按 300 次 Enter 键，你只需要在你用早期样式创建的“控制台窗口”中滚动就可以看到结果。
+
+### 使用 `try` 和 `catch()` 进行错误处理
+
+您可以使用 `try` 来测试脚本...`catch` 构造。只需在 `try` 条件中添加想要测试的代码，如果有错误，就会执行 `catch()` 中的代码。例如：
+
+*示例 TryCatch.js*
+
+```js
+try{
+  isNaN(age);
+} catch(error) {
+    console.log(error);
+    console.log(error.message);
+    console.log(error.name);
+    console.log(error.fileName);
+    console.log(error.lineNumber);
+}
+```
+
+# 浏览器调试工具与JavaScript调试
+
+## try/catch 错误处理
+
+当 `try` 语句中出现错误时，`catch()` 方法将异常对象作为参数进行检索。您可以给这个对象取任何变量名；在这个例子中，我们称之为误差。根据错误和浏览器的不同，该对象将具有不同的属性，并且跨浏览器相同的属性将具有不同的值。例如，Chrome、Firefox、IE 和 Safari 中的 `message` 属性都返回一个值，但在 Safari 中它有一个不同的结果。要查看结果，请确保在开发人员工具中打开控制台面板。我们将在附录的后面提供更多关于开发者工具的细节。
+
+Chrome:年龄未定义
+
+火狐:年龄未定义
+
+例如:“年龄”未定义
+
+Safari:找不到变量:年龄
+
+在调试过程中使用 `try` and `catch` 非常有用，根据浏览器的不同，使用它们可以很容易地发现问题。
+
+## 顺序取消注释
+
+跟踪错误的另一个简单方法是注释掉整个脚本，并逐个函数地取消注释，或者—如果是单个函数—逐行取消注释。每次通过在浏览器中重新加载来取消对一行的注释时，都要对脚本进行测试，这样可以快速找到导致错误的原因。虽然这需要时间，但是知道错误发生的大致位置会容易得多，这就是为什么您需要依靠浏览器来提供这些信息。
+
+## 内置开发工具
+
+在浏览器中调试代码已经有了很大的改进。现在所有的浏览器都内置了开发工具，使您能够直接从浏览器中检查、更新和保存代码。但是首先，你如何在每个浏览器中访问开发者工具？
+
+### 微软互联网浏览器
+
+如果您单击浏览器右上角的齿轮图标，然后选择“F12 开发者工具”，Internet Explorer 将显示其开发者工具您也可以按键盘上的 `F12` 来显示这些工具。(见图 A-4 。)
+
+![9781430250920_AppA-04.jpg](img/9781430250920_AppA-04.jpg)
+
+图 A-4 。Microsoft Internet Explorer 中的 F12 开发人员工具
+
+你会注意到内置工具有很多相似的特性。这些特性包括一个面板，用于检查页面的每个部分、HTML、CSS 和 JavaScript，以及一个分析器和一个网络监视器。除了所有这些特性之外，还有一个控制台，您可以在其中直接编写 JavaScript。
+
+### Safari
+
+默认情况下，Safari 中的调试工具不可用。若要打开它们，请前往 Safari、偏好设置、高级，然后选择“在菜单栏中显示开发菜单”
+
+这将启用开发下拉菜单。一些可用的特性允许您快速关闭 JavaScript 或更改用户代理来测试您的页面在使用另一个浏览器时的外观。(参见图 A-5 。)Safari 也有开发者工具。通过选择开发，显示 Web 检查器，您可以打开开发工具。
+
+![9781430250920_AppA-05.jpg](img/9781430250920_AppA-05.jpg)
+
+图 A-5 。Safari 的调试菜单
+
+### 歌剧
+
+Opera 中的调试工具被称为蜻蜓。(参见图 A-6 。)要访问它们，请进入“工具”、“高级”、“蜻蜓歌剧院”。访问它们的另一种方法是去查看，开发者工具，Opera 蜻蜓。
+
+![9781430250920_AppA-06.jpg](img/9781430250920_AppA-06.jpg)
+
+图 A-6 。在 Opera 中展示蜻蜓开发者工具
+
+### Firefox
+
+Firefox 的工作方式略有不同。工具是有的，但它们看起来与其他浏览器非常不同，这可能会引起一点混乱。要访问它们，请转到“工具”、“Web 开发人员”、“开发人员工具栏”。(见图 A-7 。)一旦你打开工具栏，它就会出现在屏幕的底部。在这里，您可以通过单击 `inspect` 按钮来检查文档中的 HTML。要检查 CSS 或 JavaScript，请单击 Web 控制台按钮。您可以单击调试器按钮在 JavaScript 中设置断点。
+
+![9781430250920_AppA-07.jpg](img/9781430250920_AppA-07.jpg)
+
+图 A-7 。展示 Firefox 中的 JavaScript 控制台
+
+### 铬合金
+
+Chrome 在视图、开发人员、开发人员工具下有自己的工具。(参见图 A-8 。)
+
+![9781430250920_AppA-08.jpg](img/9781430250920_AppA-08.jpg)
+
+图 A-8 。在 Chrome 中展示开发者工具
+
+## 检查和调试您的代码
+
+在所有这些浏览器中，你都有能力钻研和查看代码。当试图在你的页面中挑出一些东西时，你可以在你的浏览器中右键单击(或者按住 control 键单击)一些东西，然后选择“检查元素”这将打开大多数浏览器中的调试工具，并将您带到您感兴趣的 HTML 元素。
+
+您也可以直接在开发工具中更新 HTML。通过双击任何 HTML 元素，您可以更新文本，添加 CSS，添加或删除 HTML 元素，或者做任何您想做的事情，并在浏览器中获得实时结果。(参见图 A-9 。)
+
+![9781430250920_AppA-09.jpg](img/9781430250920_AppA-09.jpg)
+
+图 A-9 。直接在 Chrome 中编辑 HTML
+
+CSS 也是如此。通过使用右侧的样式面板(如图 A-10 所示)，您可以直接在浏览器中关闭、编辑或添加 CSS，并立即看到结果。
+
+![9781430250920_AppA-10.jpg](img/9781430250920_AppA-10.jpg)
+
+图 A-10 。使用样式面板直接在 Chrome 中编辑 CSS
+
+在进行这些更改时，您只需更新浏览器中当前加载的代码。编辑器中的原始代码没有被更新。要覆盖该代码，您可以保存(`control/command–S`)并用更新后的文件覆盖原始文件。
+
+因为本书的重点是 JavaScript，所以让我们来看看一些调试特性。
+
+在代码中设置断点使您能够实时看到发生了什么。当修复一个问题时，你会发现让浏览器在它正在做的事情中间停下来并向你解释诸如变量的当前值之类的事情会有很大的帮助。
+
+通过在 Chrome 中选择源代码(或者在 Firefox 中选择调试器，在 Safari 的调试器中选择文件)，您可以看到 JavaScript 代码。在左边，你有行号，如果你点击其中的任何一个，你会得到一个断点。(参见图 A-11 。)
+
+![9781430250920_AppA-11.jpg](img/9781430250920_AppA-11.jpg)
+
+图 A-11 。在 Chrome 中设置断点
+
+当您刷新页面时，调试器会运行到该点的所有 JavaScript 并停止。然后，这些工具可以帮助您查看变量的当前值，或者让您查看使用调用堆栈将您带到该点的所有函数调用。它还有很多其他的特性，这些特性是开发者在没有扩展的情况下无法获得的。
+
+## 控制台
+
+通过查看所有这些浏览器，您可能已经进入了控制台。您在 `try/catch` 示例中引用了它，现在您将更深入地研究它。
+
+控制台的有趣之处在于，你可以把它想象成命令行 JavaScript——不需要编辑器或外部文件。你可以在你的页面上快速测试一些东西，看看它是否如预期的那样工作。此外，控制台具有代码完成功能(如图图 A-12 所示)。如果您知道某个东西应该如何工作，但不记得具体要写什么，您可以使用控制台来帮助。
+
+![9781430250920_AppA-12.jpg](img/9781430250920_AppA-12.jpg)
+
+图 A-12 。控制台具有代码完成功能，就像编辑器一样
+
+从控制台，您可以访问文档中的所有 JavaScript 代码。浏览器中内置的每个对象和您在代码中编写的每个对象都是可用的，并且可以从控制台执行。
+
+例如，使用第五章中的一个文件，假设我写了以下内容:
+
+```js
+sc.init
+```
+
+组成该功能的代码打印在控制台中。
+
+但是，假设我键入了以下内容:
+
+```js
+sc.init();
+```
+
+此时，代码在浏览器中执行。
+
+您可以按需添加事件侦听器、创建警报窗口、创建和更改变量值。(参见图 A-13 。)
+
+![9781430250920_AppA-13.jpg](img/9781430250920_AppA-13.jpg)
+
+图 A-13 。您可以使用控制台检查从您的站点加载的 JavaScript
+
+当您编写 JavaScript 时，有一个命令您可能会比其他任何命令使用得都多，以确保事情按照您认为应该的方式运行:
+
+```js
+console.log();
+```
+
+您在 `try/catch` 示例中使用了这一点。如果您打开了控制台，您可以在控制台中看到这些语句的结果。在其他语言中，这可能是 ActionScript 中的 *print* 语句或 *trace* 。这给了你打印信息的能力。
+
+例如，假设您需要知道您的代码执行到某一点或变量的当前值(显示 image *x* of 10)。您可以在不停止应用运行的情况下做到这一点，就像使用断点时一样。
+
+## JSLint 和 Jasmine
+
+一些独立于浏览器的工具也可以帮助您进行 JavaScript 开发。一个是在线 JavaScript 验证器 `JSLint`，由道格拉斯·克洛克福特开发，在 `http://www.jslint.com/lint.html` 可以找到。`JSLint` 是用 JavaScript 编写的工具，它根据语法有效性来验证脚本，并试图确保良好的编码风格。因为“良好的编码风格”是一个主观的问题，所以您可能希望对 `JSLint` 报告有所保留。JavaScript 开发大多发生在浏览器环境中，有时您需要变通规则或抄近路来使脚本运行得更快或解决浏览器问题。也就是说，如果你不需要偷工减料的话，它仍然是一个很好的工具，可以用来寻找优化你的脚本的方法。`JSLint` 的伟大之处在于它为您提供了对脚本的全面分析，包括关于全局变量和不同函数被调用次数的报告。
+
+如果你来自后端编码环境，你可能已经使用过或者至少听说过`单元测试`（【http://en.wikipedia.org/wiki/Unit_testing】??）。简而言之，单元测试意味着你为你所有的方法和函数编写测试用例，并且当你按下一个按钮时，你使用一个测试工具来连续运行所有这些测试。这样，您可以确保您的代码在开发代码之前，在您定义它必须完成的测试用例时能够正常工作。单元测试框架可用于许多不同的语言，包括 Java、PHP、ActionScript 和 JavaScript。
+
+Pivotal Labs 创建了一个名为 `Jasmine` 的测试框架，它不依赖于浏览器。你可以从 gitHub 获得关于 `Jasmine` 的信息：[`pivotal.github.io/jasmine/`](http://pivotal.github.io/jasmine/)。
+
+在 Adobe Developer Connection 上还有一个关于用 `Jasmine` 进行单元测试的教程，网址是 `http://www.adobe.com/devnet/html5/articles/unit-test-JavaScript-applications-with-Jasmine.html`。
+
+总而言之，现在调试 JavaScript 比几年前容易多了。浏览器内置的开发人员工具使得在您试图追踪某些东西不工作的原因时，这个过程变得容易得多。
+
+也有一些编辑器会在你写代码的时候试图指出潜在的问题。
+
+有一个由谷歌赞助的 Code School 开发的优秀实践课程，教你如何使用 Chrome 中的开发者工具。课程位于 [`discover-devtools.codeschool.com/`](http://discover-devtools.codeschool.com/)，免费。
+
+面向移动开发者的调试也得到了改进。`Weinre`（发音为 *wine-er* 或 *winery*）可以让你在桌面上远程调试移动设备中的浏览器。信息可以在 `http://prople.apache.org/∼pmuellr/weinre/docs/latest/` 找到。Adobe 有一个类似的产品，叫做 `Edge Inspect`，它也可以让你在多种设备上调试你的站点。你可以在 `http://html.adobe.com/edge/inspect/` 找到它。

@@ -1,0 +1,765 @@
+# 十一、使用第三方 JavaScript
+
+现在您可能已经意识到，当您创建一个 JavaScript 应用时，您不需要每次都从头开始重新发明轮子并重新编码所有的功能——JavaScript 有很多很多的函数可供您使用，您也可以创建自己的可重用函数和对象。但是它甚至比那更进一步——你也可以利用第三方代码库和 API，现在在网上有很多。知道在哪里、为什么以及如何使用它们是关键，这就是本章的内容。
+
+在这一章中，我们将看看 `jQuery`——一个众所周知的强大的 JavaScript 库，它可以帮助你更快地完成工作。我们还将看看如何使用 Twitter 的 REST API 从 Twitter 中检索数据。此外，我们将使用 Google Maps API，最后看看 `Twitter Bootstrap`。
+
+## 网络为你提供了什么
+
+作为开发者，我们生活在一个非常激动人心的时代。在过去的几年里，公司对共享内容和技术的态度发生了巨大的变化。过去，每个公司都像保护白金一样保护自己的内容和代码，获得任何关于系统工作情况或如何与之沟通的信息都是一个漫长而痛苦的过程，包括价格谈判、非工作演示、PowerPoint 演示、预览代码和其他营销宣传材料。
+
+这一切都变了。几乎每个公司现在都有某种公共/私人合作关系来吸引开发者。例如，Adobe 有一个名为 *括号* 的开源 HTML 编辑器，其中所有的源代码都可以在 GitHub (`https://github.com/adobe/brackets`) 上获得。这段代码的一个分叉用来制作 Adobe Edge 代码，它是公司的 creative cloud 包的一部分。
+
+除了为开发者提供软件，公司现在还吹嘘可以提供数据。让开发人员获得数据可以促进创新和对公司的忠诚，尤其是如果开发人员能够找到赚钱的方法。对公司来说，另一个好处是有机会吸引人才，这些人才可以在以后的阶段被聘用。
+
+网络上还有无数的第三方 JavaScript 库，可以下载并插入到您的应用中，让您不费吹灰之力就能获得许多强大的功能。在本章的后面，当我们讨论 `jQuery`、Google Maps 和 `Twitter Bootstrap` 时，你会看到一些例子。
+
+## REST APIs 和库
+
+![image](img/sq.jpg) **注** 一个应用编程接口 (API) (`en.wikipedia.org/wiki/Application_programming_interface`) 是一组用于构建软件应用的例程和工具。基本上，您有一组方法、对象和属性，用于搭载另一个程序甚至操作系统的功能。从某种意义上说，您在本书中使用了很多 API——您用来访问 `window` 对象及其所有方法的浏览器 API，以及允许您修改和读取文档的 DOM。
+
+REST API 的一个例子来自 Twitter (细节可以在 `dev.twitter.com/` 找到)，它允许你把一个 URL 放在一起搜索某个用户的推文。结果以 JSON 格式返回。在这个例子中，`%40` 是 `@` 符号的 URL 内码：`http://search.twitter.com/search.json?q=%40twitterapi`。
+
+以下是如何使用 API 的其他示例：
+
+*   这个 URL 搜索关于“@ twitterapi”的推文，但是将结果限制在两页 (大约 3000 个结果)：`search.twitter.com/search.json?q=%40twitterapi&page=2`。
+*   该 URL 返回任何包含单词“Brooklyn”的推文：`search.twitter.com/search.json?q=brooklyn`。
+*   这个例子用一页结果返回关于日文 JavaScript 的推文：`search.twitter.com/search.json?q=javascript&lang=ja&page=1`。
+
+关于 REST 的细节可以写满一整本书，所以详细的讨论不在这里讨论范围之内。如果你有兴趣，你可以在维基百科 (`en.wikipedia.org/wiki/Representational_State_Transfer`) 上详细了解一下。REST APIs 允许你在 URL 中定义任何你想要的信息。这可能很简单，例如，向 URL 添加不同的数据，以访问维基百科的不同条目：
+
+*   `en.wikipedia.org/wiki/JavaScript`
+*   `en.wikipedia.org/wiki/DOM_scripting`
+
+通过将回调函数名作为参数发送给 API，您可以在 JavaScript 中直接使用这些信息：
+
+*twitterSearch.html (节选)*
+
+```js
+<script>
+  function results(d) {
+          var resultArray = new Array()
+          resultArray = d.results;
+    for(var i = 0; i< resultArray.length; i++) {
+           document.write( resultArray[i].from_user +"<br>" )
+           document.write("<img src=”+resultArray[i].profile_image_url +"><br>");
+           document.write( resultArray[i].text +"<br><br>" )
+    }
+}
+</script>
+<script src="http://search.twitter.com/search.json?q=brooklyn&callback=results"></script>
+```
+
+简而言之，您可以使用 REST API 以最简单的形式 (通过组装静态 URL) 和最复杂的形式 (发送参数以定制数据的输出格式，并调用不同的方法来检索不同种类的数据) 从系统中检索信息。
+
+## 使用库：Short，Shorter，jQuery
+
+拥有代码库的一个主要原因是，开发人员希望让其他开发人员更容易完成日常的编码任务。在本书中，您已经使用 `DOMhelp` 库通过创建实用程序方法来解决浏览器不一致的问题，并解决重复出现的任务。除了 DOM 之外，您还没有提供自己的编码语法或任何其他方法来访问页面中的元素。如果您这样做了，您可以得到更短的代码，但是您也牺牲了“普通”JavaScript 语法的识别效果，并使开发依赖于对库的了解。
+
+`jQuery` (`jquery.com/`) 包含一个只有 32K 重的 JavaScript 文件，您可以将它添加到文档的开头。它为您提供了大量实用的方法来完成特定于 web 的任务。对于 JavaScript 初学者或尚未涉足 Ruby、Python 或 Java 等语言的开发人员来说，使用 `jQuery` 必须编写的代码非常令人困惑。然而，一旦你理解了它，你会发现它非常强大。
+
+`jQuery` 的概念是提供对文档中任何元素的快速访问，为了获得这种访问，您有一个名为 `$` (of all things) 的实用方法，该方法采用下列方法之一：
+
+*   一个 DOM 构造，例如 `$(document.body)`
+*   CSS 选择器——例如 `$('p a')`，它是文档中段落内的每个链接
+*   一个 XPath 表达式，例如 `$("//a[@rel='nofollow']")`，它将文档中的每个链接与一个名为 `rel` 且值为 `nofollow` 的属性进行匹配
+
+![image](img/sq.jpg)
+
+**注意** XPath 是一种万维网联盟(W3C)标准语言，旨在访问 XML 文档的各个部分。它通常与 XSLT 或 XPOINTER 结合使用([`www.w3.org/TR/xpath`](http://www.w3.org/TR/xpath))。因为现代 HTML 应该符合 XML 语法规则(所有标记都是封闭的，所有元素都是小写的，属性值用引号括起来，单个属性定义为名称/值对)，所以也可以使用 XPath 来查找 HTML 文档的各个部分。与 XSLT 一起，它是将一种 XML 格式转换成另一种格式的非常强大的工具。
+
+jQuery 实现非常短代码的另一个技巧是一个叫做*可链接方法*的概念，你已经从 DOM 中知道了。您可以将每个方法添加到最后一个方法中，方法是用句号将它们连接起来。代替
+
+```js
+$p = $('p');
+$p.addClass('test');
+$p.show();
+$p.html('example' );
+```
+
+你可以用
+
+```js
+$( 'p' ).addClass( 'test' ).show().html( 'example' );
+```
+
+这两个例子做的是相同的事情:它们获取文档的每个段落，添加一个名为 `test` 的 CSS 类，显示该段落(以防它被隐藏)，并将该段落的 HTML 内容更改为“example”。jQuery 为您提供了数量惊人的这些简称方法，它们是为完成日常 web 应用开发任务而定制的。jQuery 网站上有很好的文档和示例([`api.jquery.com/`](http://api.jquery.com/))。
+
+### exampleJQuery.html(节选)
+
+让我们看一个例子。如果你是一名开发人员，你写教程，你经常需要在 HTML 页面中显示代码示例。您将它们包装在 `PRE` 和 `CODE` 元素中，以使代码中的空白以正确的格式出现，如下所示:
+
+```js
+<h1>Showing and hiding a code example with jQuery</h1>
+<p>The code</p>
+<pre><code>
+  [... code example ...]
+</code></pre>
+<p>The CSS</p>
+<pre><code>
+  [... code example ...]
+</code></pre>
+```
+
+现在让我们在 jQuery 中编写一个脚本，在代码示例之前生成链接，允许扩展和折叠示例，而不是简单地显示它们，如图 11-1 所示。
+
+![9781430250920_Fig11-01.jpg](img/9781430250920_Fig11-01.jpg)
+
+图 11-1 。用 jQuery 显示和隐藏代码示例
+
+### jqueryTest.js
+
+```js
+$(document).ready (
+  function() {
+    $('pre').before('<p><a class="trigger" href="#">Show code</a></p>');
+    $('pre').hide();
+    $('a.trigger').toggle (
+      function() {
+        $(this.parentNode.nextSibling).slideDown('slow');
+        $(this).html('Hide Code');
+      },
+      function() {
+        $(this.parentNode.nextSibling).slideUp('slow');
+        $(this).html('Show Code');
+      }
+    )
+  }
+)
+```
+
+正如您所看到的，代码非常短，但是在语法方面也相当复杂。让我们一点一点地看一下这个例子，这样您就可以理解发生了什么:
+
+### jqueryTest.js (excerpt)
+
+```js
+$(document).ready (
+  function() {
+```
+
+`$(文档)。ready ()` 方法是一个事件处理程序，当文档准备好被操作时，它调用作为参数提供的函数(在本例中是一个匿名函数)。这意味着该脚本中的所有内容都会在文档加载后执行——这意味着只是文档，而不是其中所有的嵌入资源(如图像)。你可能还记得，我们在第五章中讨论过页面内容在隐藏之前显示出来的丑陋效果。这种方法可以解决这个问题。
+
+### jqueryTest.js(续)
+
+```js
+$('pre').before('<p><a class="trigger" href="#">Show code</a></p>');
+$('pre').hide();
+```
+
+您获取文档中的每个 `PRE` 元素，并使用 `before()` 方法在 DOM 树中的这个元素之前添加一个 HTML 字符串——在本例中，是一个带有类触发器的嵌入式链接的段落。使用 jQuery 的 `hide()` 方法来隐藏所有 `PRE` 元素。(`hide()` 将 CSS 属性显示设置为无。)
+
+### jqueryTest.js(续)
+
+```js
+$('a.trigger').toggle (
+```
+
+您使用 CSS 选择器 `a.trigger` 来匹配带有类触发器的所有链接(应该只是脚本通过 `before()` 方法添加的链接),而使用 `toggle()` 方法。当用户单击元素时，该方法交替执行作为参数提供的两个函数。第一个参数是一个匿名函数，它显示了之前隐藏的代码示例，并将链接文本更改为“Hide Code ”,反之亦然。
+
+### jqueryTest.js(续)
+
+```js
+function() {
+  $(this.parentNode.nextSibling).slideDown('slow');
+  $(this).html('Hide Code');
+},
+```
+
+可以使用几种 jQuery 方法来显示和隐藏元素，最基本的方法是 `show()` 和 `hide()`。使用 `slideDown()` 和 `slideUp()` 可以产生更高级的效果，它们以逐行动画的方式显示元素。这两种方法都有一个指示动画速度的参数，可以是慢、正常或快。要显示或隐藏 `PRE` 元素，需要使用 `$(this)` 构造，它返回 `toggle()` 的事件目标。这意味着您可以使用 `this.parentNode.nextSibling` 到达 `PRE`，因为链接嵌套在一个段落中。您可以通过 `$(this)` 和 `html()` 方法更改链接本身的内容，该方法将 HTML 字符串作为唯一的参数，并更改元素的 `innerHTML` 属性。
+
+### jqueryTest.js(续)
+
+```js
+      function() {
+        $(this.parentNode.nextSibling).slideUp('slow');
+        $(this).html('Show Code');
+      }
+    )
+  }
+)
+```
+
+本例中 `toggle()` 的另一种情况是使用 `slideUp()` 慢慢隐藏代码示例，并将链接的文本改回“显示代码”。
+
+jQuery 也允许简单的 Ajax 请求。jQuery 使用 `load()`，`$.get()` 和 `$.post()` 方法，在[`api.jquery.com/category/ajax/`](http://api.jquery.com/category/ajax/)解释。例如，如果您想要创建 `PRE` 元素，并在用户单击链接时将真实的代码示例加载到其中，这是非常容易做到的。查看演示 `exampleJQueryAjax.html`，了解以下脚本的运行情况:
+
+### jquery test jax . js
+
+# 让我们一步步来看这个脚本:
+
+```js
+$(document).ready (
+  function() {
+    $('a.codeExample').each (
+      function( i ) {
+        $(this).after('<pre class="codeExample"><code></code></pre>');
+      }
+    )
+    $('pre.codeExample').hide();
+    $('a.codeExample').toggle (
+      function() {
+        if(!this.old){
+          this.old = $(this).html();
+        }
+        $(this).html('Hide Code');
+        parseCode(this);
+      },
+      function() {
+        $(this).html(this.old);
+        $(this.nextSibling).hide();
+      }
+    )
+    function parseCode(o){
+      if(!o.nextSibling.hascode){
+          $.get (o.href,
+            function(code){
+              code=code.replace(/&/mg,'&');
+              code=code.replace(/</mg,'<');
+              code=code.replace(/>/mg,'>');
+              code=code.replace(/\"/mg,'"');
+              code=code.replace(/\r?\n/g,'<br>');
+              code=code.replace(/<br><br>/g,'<br>');
+              code=code.replace(/ /g,'&nbsp;');
+              o.nextSibling.innerHTML='<code>'+code+'</code>';
+              o.nextSibling.hascode=true;
+            }
+          );
+      }
+      $(o.nextSibling).show();
+    }
+  }
+)
+```
+
+`jquery test jax . js(excerpt)`
+
+```js
+$(document).ready (
+  function() {
+```
+
+您再次从 `ready()` 方法和一个匿名函数开始。(您也可以创建一个命名函数，并通过 `ready()` 方法调用它。)
+
+`jqueryTestAjax.js(续)`
+
+```js
+$('a.codeExample').each (
+  function(i) {
+    $(this).after( '<pre class="codeExample"><code></code></pre>' );
+  }
+)
+$('pre.codeExample').hide();
+```
+
+使用 jQuery 的迭代器方法 `each()` 遍历所有包含 CSS 类 `codeExample` 的链接。然后，在使用 jQuery 的 `hide()` 方法隐藏 `codeExample` 类的所有 `PRE` 元素之前，通过 `after()` 方法和 `$(this)` 选择器，使用 `codeExample` 类创建 `PRE` 元素，并在每个链接后嵌入代码元素。
+
+`jqueryTestAjax.js(续)`
+
+```js
+$('a.codeExample').toggle (
+  function() {
+    if(!this.old){
+      this.old = $(this).html();
+    }
+    $(this).html('Hide Code');
+    parseCode(this);
+  },
+  function() {
+    $(this).html(this.old);
+    $(this.nextSibling).hide();
+  }
+)
+```
+
+使用 `toggle()` 来显示和隐藏代码示例；但是，与上一个脚本不同的是，当您显示代码并用“Hide Code”替换链接文本时，您将链接的原始文本存储在一个名为 `old` 的属性中。然后，在显示代码时，调用函数 `parseCode()`，将链接作为参数。隐藏代码时，在使用 jQuery 的 `hide()` 方法隐藏 `PRE` 元素之前，通过将链接文本设置回旧参数中存储的值来恢复原始链接文本。
+
+`jqueryTestAjax.js(续)`
+
+```js
+function parseCode(o){
+  if(!o.nextSibling.hascode){
+      $.get (o.href,
+        function(code){
+```
+
+这个函数测试链接后面的 `PRE` 元素(它的下一个兄弟元素)是否有一个名为 `hascode` 的属性，这个属性将在第一次加载代码时设置。这对于避免脚本在用户每次单击链接时加载代码是必要的，因为它只加载一次。然后，您可以使用 `$.get()` 方法，将链接的 `href` 属性值和一个匿名函数作为参数。这实际上发送了一个加载链接文档的请求，并在文档加载后调用函数。您发送一个名为 `code` 的参数，该参数包含通过 XHR 加载的文档内容。
+
+`jqueryTestAjax.js(续)`
+
+```js
+code=code.replace( /&/mg, '&' );
+code=code.replace( /</mg, '<' );
+code=code.replace( />/mg, '>' );
+code=code.replace( /\"/mg, '"' );
+code=code.replace( /\r?\n/g, '<br>' );
+code=code.replace( /<br><br>/g, '<br>' );
+code=code.replace( / /g, '&nbsp;' );
+o.nextSibling.innerHTML = '<code>'+code+'</code>';
+o.nextSibling.hascode = true;
+```
+
+然后，在将结果作为 `PRE` 元素的 `innerHTML` 属性添加到 `CODE` 元素中之前，使用正则表达式将所有&符号、标记括号和引号替换为它们的编号 HTML 实体，将换行符替换为 `<br>` 并将空格替换为它们的 HTML 实体。您将 `hascode` 属性设置为 `true`，以确保下次用户单击链接显示代码时跳过 `$.get()` 构造。
+
+`jqueryTestAjax.js(续)`
+
+```js
+            }
+          );
+      }
+      $(o.nextSibling).show();
+    }
+  }
+)
+```
+
+剩下要做的就是使用 jQuery 的 `show()` 方法显示 `PRE` 元素。请注意，您需要在 `$.get()` 该构造之外这样做，以确保代码在用户选择显示代码的第二次和后续时间得到显示。
+
+## jQuery 和其他库使用自己的语法的危险
+
+令人惊讶的是，使用 jQuery 可以轻松快速地执行许多日常 web 应用和 web 开发任务。然而，如果你把这个文档交给第三方开发人员来维护，她必须知道 jQuery，否则她会完全不知所措。这是使用库的危险之一。您不必依赖 JavaScript 语法和规则，而是在这个过程中添加了一层额外的必要知识。由你来决定图书馆提供的好处是否值得。
+
+库的存在是为了使开发过程更快更容易，而不是让我们依赖它们或者重复我们过去已经使用库犯过的错误——创建没有 JavaScript 就无法运行的应用和网站。
+
+接下来，我们将看看如何使用 Google Maps API 来创建地图应用。
+
+## 使用 API:用谷歌地图给你的网站添加地图
+
+谷歌地图(`maps.google.com`)可能是让整个 Ajax 热潮滚滚而来的网络应用。它为用户提供了可以移动、缩放的地图，如果实现允许，甚至可以添加注释。你可以用地图、卫星图片或者两者的混合来显示你想看的地点。
+
+谷歌允许网络开发者通过 API 在他们自己的网站上使用谷歌地图。要使用这个 API，你需要在它的主页上注册一个免费的开发者密钥:`developers.google.com/maps/`。在这里你还可以找到如何使用谷歌地图的文档和许多例子。该密钥将使您能够在单个域或该域的子文件夹中使用地图。本章中的例子使用了一个适用于 `localhost` 的密钥，这意味着您需要通过 `localhost/` 在本地服务器上运行它们，而不是从文件系统运行。
+
+# Google Maps API 使用指南
+
+一旦获得了开发者密钥，就可以链接到包含文档头中所有地图代码的 JavaScript。粗体显示的“您的密钥”应替换为您从 Google 获得的密钥:
+
+```js
+<script src="https://maps.googleapis.com/maps/api/js?key=yourkey&sensor=true&callback=initialize
+" type="text/javascript">
+</script>
+```
+
+![image](img/sq.jpg) **注意**这个 URL 将来可能会改变，所以如果你的例子突然失败了，一定要查看 API 主页。
+
+## 获取位置坐标
+
+下一步需要做的是获取想要显示的位置的纬度和经度值。如果你在谷歌中输入你感兴趣的位置，然后添加“纬度”一词(例如“埼玉日本纬度”)，你就可以获得你需要添加到地图代码中的信息。
+
+有了这些信息后，您就可以开始在网站上添加自己的地图了。作为一个国际位置的例子，让我们使用日本的埼玉县。坐标是纬度 `35.8617`，经度 `139.6453`。使用这些信息和 API 为您提供的方法，很容易显示东京附近一个好地方的地图。
+
+## 创建地图
+
+从包含地图的 HTML 元素开始。您可以在这个元素中添加 JavaScript 不可用或浏览器不支持时显示的内容。该内容可以是任何 HTML、文本，甚至是同一地图的静态图像。静态图像是确保向后兼容性的一个很好的选择；您只需要确保不要在文本的任何地方告诉用户地图是动态的，因为它可能不是动态的。
+
+*exampleGoogleMaps.html(节选)*
+
+```js
+<div id="map_canvas" style="width:100%; height:100%">
+  <p>Here you should see an interactive map, but you
+  either have scripting disabled or your browser
+  is not supported by Google Maps.</p>
+</div>
+```
+
+Google 提供的示例 CSS 代码将使您的地图全屏显示。
+
+*谷歌地图. css*
+
+```js
+html { height: 100% }
+body { height: 100%; margin: 0; padding: 0 }
+#map_canvas { height: 100% }
+```
+
+接下来，您需要添加将地图放入文档的 JavaScript。
+
+*谷歌地图. js*
+
+```js
+function loadMapAPI(){
+var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src = "https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&sensor=true&callback=initialize";
+};
+  document.body.appendChild(script);
+}
+
+function initialize() {
+var mapOptions = {
+      center: new google.maps.LatLng(35.8617, 139.6453 ),
+      zoom: 8,
+     mapTypeId: google.maps.MapTypeId.ROADMAP
+    var map = new google.maps.Map(document.getElementById("map_canvas"),mapOptions);
+  }
+
+document.addEventListener("DOMContentLoaded", loadMapAPI,false);
+```
+
+一旦 DOM 被加载，事件监听器就调用 `loadMapAPI` 函数。然后，该函数创建一个脚本元素，并添加类型和源属性。在这种情况下，源是地图 API 的 URL。注意，在 URL 中有一个回调参数，它告诉浏览器在哪里返回结果——在我们的例子中，是 `initialize` 函数。
+
+`initialize` 函数创建 `mapOptions` 对象文本。在这个对象中，您可以添加选项，例如将地图集中在特定点并缩放，这将设置地图的分辨率(0 表示地球视图)。地图类型属性告诉 Google 它应该显示哪种地图:
+
+*   路线图—默认 2D 地图
+*   卫星摄影图片
+*   混合——路线图和卫星的混合，用于道路和城市等显著特征
+*   地形-显示山脉和河流等高程和水域要素
+
+最后，创建地图对象。创建 `map` 实例时，需要在 HTML 文档中指定一个包含 `map` 的 `div` 元素。此外，您可以传递包含参数的 `mapOptions` 对象来定制地图。上面例子中的代码应该会给你一张锡塔马县的地图，如图图 11-2 所示。
+
+![9781430250920_Fig11-02.jpg](img/9781430250920_Fig11-02.jpg)
+
+图 11-2 。埼玉县的谷歌地图
+
+## 添加标记
+
+地图正在工作，但是在当前的视图下，很难确切地说出你应该注意什么。要解决这个问题，您需要添加一个标记。创建标记类似于创建地图。您创建一个标记对象，并在构造函数中添加一个对象文字，该对象文字具有您希望该标记具有的所有属性:
+
+*googleMapsMarker.js(节选)*
+
+```js
+function initialize() {
+var myLatlng = new google.maps.LatLng(35.8617, 139.6453 );
+var mapOptions = {
+    center: myLatlng,
+    zoom: 8,
+    mapTypeId: google.maps.MapTypeId.ROADMAP
+};
+    var map = new google.maps.Map(document.getElementById("map_canvas"),mapOptions);
+    var marker = new google.maps.Marker({
+        position: myLatlng,
+        animation: google.maps.Animation.DROP,
+        map: map
+       });
+}
+```
+
+这一改变在您定义的位置创建了一个红色标记图标，如图图 11-3 所示。代码还添加了动画参数，以便标记在显示时有一个反弹。
+
+![9781430250920_Fig11-03.jpg](img/9781430250920_Fig11-03.jpg)
+
+图 11-3 。有标记的地图
+
+## 信息窗口
+
+您还可以使用 API 来显示单击标记时出现的窗口。这有助于向用户提供必要的信息以及相关网站的链接。在本例中，您创建了一个名为 `contentString` 的变量。在这个变量中，添加一个 HTML 格式的文本字符串。这将在信息窗口中正确呈现。
+
+接下来的几个步骤类似于您用来创建标记对象的步骤。您创建一个 `InfoWindow` 对象并传递一个带有属性 `content` 的对象文本，它将具有您的变量的值。最后，将一个监听器添加到您之前创建的标记中。因此，当标记接收到一个点击时，就会调用 `InfoWindow` 对象上的 `open` 方法，然后您就可以传递这个窗口所关联的地图和标记了。图 11-4 中显示了一个例子。
+
+![9781430250920_Fig11-04.jpg](img/9781430250920_Fig11-04.jpg)
+
+图 11-4 。带有标记和信息窗口的地图
+
+*示例谷歌地图标记 event . js(except)*
+
+# Google Maps API 高级功能与 Twitter Bootstrap 集成
+
+## 地图平移功能实现
+
+您将添加的最后一个功能是平移到另一个位置的能力。在本例中，关闭 `infoWindow` 后，`map` 对象使用 `panTo()` 方法将地图移动到另一个位置。
+
+首先，您需要向 `infowindow` 对象添加一个侦听器，就像您处理标记一样。单击时，侦听器调用一个函数，该函数创建一个名为 `newLatLng` 的新对象，该对象保存要将地图移动到的新位置。然后与 `map` 对象对话并调用它的 `panTo()` 方法。在 `panTo` 方法中，使用 `newLatLng` 对象传递一个新位置。
+
+接下来，创建一个 `newContentString` 变量，其段落为“欢迎来到秋田县”。将创建 `newInfoWindow` 对象。它还将有一个 object literal，带有一个名为 `content` 的属性，该属性引用 `newContentString` 变量。
+
+最后，`newMarker` 对象中添加了一个事件。单击时，它将与 `newInfoWindow` 对象对话，并使用其 `open` 方法显示新的 info 窗口。
+
+*googleMapsPan.js*
+
+```js
+var contentString = '<div id="content">'+
+    '<p><b>Saitama</b> is the capital and the most populous city '+
+    'of Saitama Prefecture in Japan, situated in the south-east of  the prefecture. '+
+    'Being in the Greater Tokyo Area and lying 15 - 30 kilometres north of central Tokyo,'+
+    'many of its residents commute into Tokyo.</p>'+
+    '<p>Source: <a href="http://en.wikipedia.org/wiki/Saitama,_Saitama">'+
+    'http://en.wikipedia.org/wiki/Saitama,_Saitama</a>.</p>'+
+    '</div>';
+
+var infowindow = new google.maps.InfoWindow({
+    content: contentString
+});
+var marker = new google.maps.Marker({
+    position: myLatlng,
+    animation: google.maps.Animation.DROP,
+    map: map
+});
+google.maps.event.addListener(marker, 'click', function() {
+    infowindow.open(map,marker);
+});
+}
+document.addEventListener("DOMContentLoaded", loadMapAPI, false);
+```
+
+```js
+google.maps.event.addListener(infowindow, 'closeclick', function() {
+    var newLatLng = new google.maps.LatLng(39.7158,140.1058);
+    map.panTo(newLatLng);
+
+    var newMarker = new google.maps.Marker({
+        position: newLatLng,
+        animation: google.maps.Animation.DROP,
+        map: map
+    });
+    var newContentString= '<p>Welcome to Akita Prefecture</p>';
+
+    var newInfoWindow = new google.maps.InfoWindow({
+        content: newContentString
+    });
+
+    google.maps.event.addListener(newMarker, 'click', function() {
+        newInfoWindow.open(map,newMarker);
+    });
+});
+```
+
+结果如图图 11-5 所示。
+
+![9781430250920_Fig11-05.jpg](img/9781430250920_Fig11-05.jpg)
+
+图 11-5 。从一个地图位置平移到另一个位置
+
+## 全面服务：引入 Twitter Bootstrap
+
+在本章的前面，您看了一下 Twitter 的 REST API 的一部分。除了提供对其数据访问的 REST API，Twitter 还发布了 Twitter Bootstrap（位于[`twitter.github.com/bootstrap/`](http://twitter.github.com/bootstrap/)）。Bootstrap 是一个免费的工具集，用于使用 HTML、CSS 和可选的 JavaScript 扩展创建网站和应用。Bootstrap 是 GitHub 上最受欢迎的项目，大公司和初创公司都使用它。
+
+Twitter Bootstrap 的一些特性包括:
+
+*   设置全局版式
+*   使用网格系统进行页面布局，并支持响应式设计
+*   包括 HTML 元素的样式，如表单、按钮和表格
+*   提供内置图标
+*   提供可重用的 UI 组件
+
+向 HTML 文档添加引导代码很简单。下载 .zip 文件，让我们看看它的内容。
+
+### 将引导程序添加到您的站点
+
+当您解压缩 `bootstrap.zip` 时，您会发现一个类似于您组织自己的网站的文件结构。图 11-6 显示了它的样子。
+
+![9781430250920_Fig11-06.jpg](img/9781430250920_Fig11-06.jpg)
+
+图 11-6 。从引导页面解压缩 Twitter 引导后的文件夹布局的屏幕截图
+
+这些文件可以被复制到您的站点中，并在您的 HTML 文档中引用。要开始，请使用以下代码:
+
+*exampleBootstrapTemplate.html*
+
+```html
+<!doctype html>
+<html>
+  <head>
+    <title>Bootstrap Template</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
+    <script src="http://code.jquery.com/jquery.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+  </head>
+  <body>
+    <h1>This is my header</h1>
+  </body>
+</html>
+```
+
+当在浏览器中查看您的页面时，您应该会看到 `h1` 标签的字体有所不同。它现在使用 helvetica 作为默认字体。我们可以看到 `h1` 标签是左对齐的，因为 bootstrap 删除了文档主体中所有默认的空白空间。图 11-7 向你展示了此时你的应用应该是什么样子。
+
+![9781430250920_Fig11-07.jpg](img/9781430250920_Fig11-07.jpg)
+
+图 11-7 。一旦引导程序开始工作，Helvetica 就是页面的默认字体
+
+现在您已经知道 bootstrap 正在工作，您可以使用它的一些特性了。首先，您可以将标题放在使用 `container` 类的 `div` 中。接下来你可以添加一个段落，声明接下来是你的按钮。在这个段落中，您使用 `text-info` 类来赋予它样式。之后，可以用 `btn` 类添加一个 `button` 元素。当在浏览器中查看时，你应该把你的文本从左边移过来，你的新副本和按钮准备好了。
+
+*exampleBootstrapButton.html*
+
+```markdown
+# Bootstrap 组件示例
+
+## 基础模板
+
+```html
+<!doctype html>
+<html>
+  <head>
+    <title>Bootstrap Template</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
+    <script src="http://code.jquery.com/jquery.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+  </head>
+  <body>
+    <div class="container">
+      <h1>This is my header</h1>
+      <p class="text-info">This is my Button</p>
+      <button class="btn">Click Me</button>
+    </div>
+  </body>
+</html>
+```
+
+按钮就位后，你现在可以把它变成一个下拉菜单。因为你下载了默认的引导程序。zip 文件，不需要下载下拉插件。Bootstrap 的插件是为 jQuery 设计的，因为你也把它添加到了你的文档中，所以只需要添加必要的 HTML 和 CSS 就可以了。
+
+`exampleBootstrapDropdown.html(节选)`
+
+```html
+<div class="btn-group">
+    <button class="btn ">Click Me</button>
+    <button class="btn dropdown-toggle" data-toggle="dropdown ">
+        <span class="caret "></span>
+    </button>
+    <ul class="dropdown-menu">
+        <li><a href="#">Depeche Mode</a></li>
+        <li><a href="#">Information Society</a></li>
+        <li><a href="#">The Cure</a></li>
+        <li><a href="#">Erasure</a></li>
+    </ul>
+</div>
+```
+
+在图 11-8 中，你可以看到一个由 Twitter Bootstrap 驱动的下拉菜单。没有编写额外的 JavaScript。
+
+![9781430250920_Fig11-08.jpg](img/9781430250920_Fig11-08.jpg)
+
+图 11-8 。Twitter Bootstrap 支持的下拉菜单
+
+正如您所看到的，Bootstrap 的一个好处是您不需要添加 JavaScript 就可以工作。如果您想对文档有更多的控制，您可以添加自己的 JavaScript。在这个例子中，您将使用内置代码添加一个模态窗口。
+
+`exampleBootstrapModalNoJs.html(节选)`
+
+```html
+<button type="button" data-toggle="modal" data-target="#myModal">Launch modal</button>
+<div id="myModal" class="modal hide fade">
+   <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
+      <h3 id="myModalLabel">My Modal header</h3>
+    </div>
+    <div class="modal-body">
+        <p>The body of the window</p>
+    </div>
+   <div class="modal-footer">
+       <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+       <button class="btn btn-primary">Save changes</button>
+   </div>
+```
+
+这将弹出一个模态窗口。按钮标签有一个指向 ID `myModal` 的数据目标属性。通过使用属性，模式窗口无需任何附加代码即可工作。要禁用数据 API，请在代码中添加一行代码，该代码将查看文档并禁用对数据 API 的所有引用。对于单个组件也可以这样做。之后，您需要使用 jQuery 插件让模型工作。在本例中，您添加一些 jQuery 代码，首先禁用数据 API，然后检测现在称为 `launchButton` (使用 ID 属性)的按钮何时被单击。当单击 `launchButton` 时，`myModal` 将像以前一样出现。
+
+`exampleBootstrapModal.html(节选)`
+
+```html
+<button type="button" data-toggle="modal" id="launchButton" data-target="#myModal">Launch modal</button>
+```
+
+```javascript
+exampleBootstrapModal.js
+$(document).ready(function(e) {
+  $(document).off('.data-api');
+  $('#launchButton').click(function(){
+        $('#myModal').modal({ show: true});  //if you comment this out, the modal will not work
+  });
+});
+```
+
+通过以这种方式控制模态，您可以更好地控制事物的工作方式。例如，如果您想在模式出现之前进行一些表单验证，您可以运行表单验证代码，然后显示带有自定义消息的窗口。要控制一个手风琴，你有类似的代码。
+
+`exampleBootstrapAccordion.html(节选)`
+
+```html
+<div class="accordion-heading">
+  <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseOne" id="header1">
+            Menu Item 1
+  </a>
+</div>
+...
+<div class="accordion-heading">
+    <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseTwo" id="header2">
+         Menu Item 2
+      </a>
+</div>
+```
+
+`示例 BootstrapAccordion.js`
+
+```javascript
+$(document).ready(function(e) {
+    $(document).off('.data-api');
+
+    $('#header1').click(function(){
+        $('#collapseOne').collapse('toggle');
+    });
+
+    $('#header2').click(function(){
+        $('#collapseTwo').collapse('toggle');
+    });
+});
+```
+
+在这里，您关闭了数据 API。然后将 click 事件分配给两个 HTML 元素，称为 `header1` 和 `header2`。当单击任一元素时，可以使用 bootstrap API 并调用 `collapse` 方法。这个方法可以接收一些不同的值。在这种情况下，您发送 `toggle`。这将自动为您展开或折叠内容。下一个例子展示了如何使用 bootstrap API 来控制 carousel 。
+
+`示例 BootstrapCarousel.js`
+```
+
+# Bootstrap 轮播控制代码
+
+```js
+$(document).ready(function(e) {
+    $(document).off('.data-api');
+
+    $('.carousel-control').click(function(e){
+        switch(e.target.getAttribute("data-slide")){
+            case 'prev':
+                $('.carousel').carousel('prev');
+                break;
+            case "next":
+                $('.carousel').carousel('next');
+                break;
+        }
+    });
+
+    $('.carousel-indicators').click( function(e){
+        switch(e.target.getAttribute("data-slide-to")){
+            case '0':
+                $('.carousel').carousel(0);
+                break;
+            case '1':
+                $('.carousel').carousel(1);
+                break;
+            case '2':
+                $('.carousel').carousel(2);
+                break;
+        }
+    });
+});
+```
+
+这里有两个函数，每个函数寻找 `carousel` 正在使用的 CSS 类。在每种情况下，他们都在寻找正在使用的 HTML 标签中的属性的详细信息。第一个是查看 HTML 标记中的 `data-slide` 属性。
+
+*exampleBootstrapCarousel.html(节选)*
+
+```js
+<a class="carousel-control left" href="#myCarousel" data-slide="prev">&lsaquo;</a>
+<a class="carousel-control right" href="#myCarousel" data-slide="next">&rsaquo;</a>
+```
+
+在 HTML 文档中，该属性与用于向前或向后移动转盘的锚标记相关联。当单击这些元素中的任何一个时，JavaScript 会检查 `switch` 语句中的值。一旦找到匹配，它就调用 `carousel` 方法，并传递一个值`"prev"`或`"next"`。
+
+第二个函数以类似的方式工作。它寻找当一个元素使用 CSS 类`.carousel-indicators`已被点击。HTML 文档有一个使用该类的列表:
+
+*exampleBootstrapCarousel.html(节选)*
+
+```js
+<ol class="carousel-indicators">
+  <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+  <li data-target="#myCarousel" data-slide-to="1"></li>
+  <li data-target="#myCarousel" data-slide-to="2"></li>
+</ol>
+```
+
+`switch` 语句查找 `data-slide-to` 的值。与前面的 `switch` 语句一样，一旦找到值，就调用 `carousel` 方法，并传递数字(图像计数就像一个从 0 开始的数组)以使图像可见。完成后的转盘如图图 11-9 所示。
+
+![9781430250920_Fig11-09.jpg](img/9781430250920_Fig11-09.jpg)
+
+图 11-9 。完工的旋转木马
+
+## 摘要
+
+这一章已经让你体验了一些目前对你来说不可行的服务，我确信这仅仅是你使用共享内容、信息和服务的漫长经历的开始。许多开发人员花费大量时间来创建精彩的代码，只是为了意识到已经有另一个产品在做同样的事情，但是做得更好。然而，这并不是什么大问题——正是通过交流和反复试验，我们才能在工作中做得更好。
+
+通过睁大眼睛观察可用的服务，您可以学到很多东西，并对开发社区有很大的帮助。就一些服务或库的易用性给出反馈尤其重要。认为自己的代码完美实在是太诱人了，有时直到别人告诉你如何破解它，你才意识到它并不完美。这是双向的。你不应该因为自己的缺点而退缩——坚持下去，你会变得更好。不要害羞——继续参与 JavaScript 社区。
