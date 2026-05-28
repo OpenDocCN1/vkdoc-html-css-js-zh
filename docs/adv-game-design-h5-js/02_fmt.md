@@ -1,0 +1,988 @@
+# 二、画布绘制 API
+
+画布绘制 API 是 HTML5 游戏设计师最好的朋友。它易于使用，功能强大，可用于所有平台，速度非常快。不仅如此，学习 Canvas Drawing API 还为您提供了一个很好的低级图形编程入门，您将能够将其应用于各种不同的游戏设计技术。作为学习 HTML5 游戏设计艺术的核心技术，这是最好的起点。
+
+![Image](img/image00500.jpeg) **注**什么是 API？它代表应用程序编程接口。它只是一个函数和对象的代码库，帮助您执行一组特定的任务，如绘制形状。
+
+在这一章中，你将得到一个在画布上绘制线条、形状、图像和文本的快速速成课程，这样你就可以开始使用它们来为你的游戏制作组件。我们将看看制作和修改线条和形状的所有基本方法。
+
+## 搭建画布
+
+在你开始画画之前，你需要一个可以画画的表面。下面介绍如何使用 JavaScript 创建一个画布 HTML 元素和一个绘图上下文。
+
+```js
+let canvas = document.createElement("canvas");
+canvas.setAttribute("width", "256");
+canvas.setAttribute("height", "256");
+canvas.style.border = "1px dashed black";
+document.body.appendChild(canvas);
+let ctx = canvas.getContext("2d");
+```
+
+这段代码是做什么的？它在 HTML 文档的主体中创建一个`<canvas>` HTML 标记，如下所示:
+
+```js
+<canvas id="canvas" width="256" height="256" style="border:1px dashed #000000;"></canvas>
+```
+
+您可以将`canvas`标签视为包含绘图表面的框架。这段代码创建的画布的宽度和高度是 256px，周围有一个 1 像素宽的虚线边框。
+
+实际的绘制是在画布的 drawing `context` 上完成的。你可以把上下文想象成一种位于画布框架内部的可编程绘图表面。上下文在此代码中表示为`ctx`:
+
+```js
+let ctx = canvas.getContext("2d");
+```
+
+现在，您已经准备好开始绘制线条和形状了。
+
+![Image](img/image00500.jpeg) **注意**你会注意到本书中大多数图像的宽度和高度尺寸都是 2 的幂，比如 32、64、128 和 256。这是因为图形处理器在历史上处理 2 的幂大小的图像非常有效:这与二进制图形数据存储在计算机内存中的格式相同。你会发现，如果你把你的游戏图像保持在 2 的幂的大小，它们将整齐地适合大多数计算机和设备的屏幕。
+
+## 画线
+
+让我们从最简单的图形元素开始:一条线。下面是如何从画布的左上角(0，0)到其中点(128，128)画一条线。线条为黑色，3 像素宽:
+
+```js
+//1\. Set the line style options
+ctx.strokeStyle = "black";
+ctx.lineWidth = 3;
+
+//2\. Draw the line
+ctx.beginPath();
+ctx.moveTo(0, 0);
+ctx.lineTo(128, 128);
+ctx.stroke();
+```
+
+图 2-1 显示了这段代码所创建的内容。
+
+![9781430258001_Fig02-01.jpg](img/image00505.jpeg)
+
+图 2-1 。在画布上画一条线
+
+它是这样工作的。首先，我们设置线条样式选项。`strokeStyle`允许您设置线条的颜色，可以是任何 RGB、十六进制或预定义的 CSS 字符串颜色名称，如`"black"`。
+
+```js
+ctx.strokeStyle = "black";
+```
+
+然后给它一个`lineWidth`，以像素为单位。下面是如何分配 3 个像素的线宽:
+
+```js
+ctx.lineWidth = 3;
+```
+
+现在您已经设置了线条选项，您可以开始用`beginPath`方法绘制路径。这只是一种说“我们现在要开始划清界限了！”
+
+```js
+ctx.beginPath();
+```
+
+用`moveTo`设置线的起始 *x，y* 位置。0，0 是画布的左上角。(左上角的 *x* 和 *y* 值都为零。)
+
+```js
+ctx.moveTo(0, 0);
+```
+
+然后使用`lineTo`定义线条的终点。在这种情况下，它将在画布中间的 *x，y* 位置 128 处结束。(记住，我们的画布是 256×256 像素。)
+
+```js
+ctx.lineTo(128, 128);
+```
+
+当你画完形状后，你可以选择使用`closePath`来自动连接路径中的最后一个点和第一个点。
+
+```js
+ctx.closePath();
+```
+
+最后，我们需要使用`stroke`方法使这条线可见。这将应用我们之前设置的线条颜色和粗细选项，因此我们可以在画布上看到线条:
+
+```js
+ctx.stroke();
+```
+
+这些都是开始使用绘图 API 需要知道的基础知识。接下来你会看到我们如何将线条连接在一起形成形状，并用颜色填充这些形状。
+
+## 线帽
+
+您可以很好地控制行尾的外观。`lineCap`属性有三个选项可以使用:`"square"`、`"round"`和`"butt"`。(注意，引号是字面意思。)您可以使用以下语法应用这些样式中的任何一种:
+
+```js
+ctx.lineCap = "round";
+```
+
+(这行代码必须出现在我们调用`ctx.stroke()`方法之前。)
+
+图 2-2 显示了这些风格的效果。你需要一条相当粗的线来看这些线条的不同。
+
+![9781430258001_Fig02-02.jpg](img/image00506.jpeg)
+
+图 2-2 。线帽样式
+
+## 连接线条以创建形状
+
+您可以将线条连接在一起形成形状，并用颜色填充这些形状。使用上下文的`fillStyle`属性定义要填充形状的颜色。下面的例子展示了如何将`fillStyle`设置为透明的灰色 RGBA 颜色:
+
+```js
+ctx.fillStyle = "rgba(128, 128, 128, 0.5)";
+```
+
+color 是以 RGBA、十六进制或 HLSA 格式描述颜色的字符串。它也可以是 HTML/CSS 规范中的 140 个颜色词中的任何一个，比如“蓝色”或“红色”。
+
+用线条画出形状的轮廓后，使用上下文的`fill`方法用`fillStyle`颜色填充形状:
+
+```js
+ctx.fill();
+```
+
+下面是如何在画布中央画一个三角形，并赋予其透明的灰色填充颜色。图 2-3 显示了你将会看到的，以及用来创建它的`moveTo`和`lineTo`命令。
+
+![9781430258001_Fig02-03.jpg](img/image00507.jpeg)
+
+图 2-3 。画一个三角形
+
+```js
+//Set the line and fill style options
+ctx.strokeStyle = "black";
+ctx.lineWidth = 3;
+ctx.fillStyle = "rgba(128, 128, 128, 0.5)";
+
+//Connect lines together to form a triangle in the center of the canvas
+ctx.beginPath();
+ctx.moveTo(128, 85);
+ctx.lineTo(170, 170);
+ctx.lineTo(85, 170);
+ctx.lineTo(128, 85);
+ctx.fill();
+ctx.stroke();
+```
+
+## 绘制复杂形状
+
+如果您的形状很复杂，您可以将其定义为点的 2D 数组，并使用循环将这些点连接在一起。这里有一个由 *x* 、 *y* 点坐标组成的 2D 数组，它形成了与上一个例子中相同的三角形:
+
+```js
+let triangle = [
+  [128, 85],
+  [170, 170],
+  [85, 170]
+];
+```
+
+接下来，定义一个循环遍历这些点并使用`moveTo`和`lineTo`连接它们的函数。我们可以保持代码尽可能简单，从最后一点开始，然后从那里顺时针连接这些点:
+
+```js
+function drawPath(shape) {
+
+  //Start drawing from the last point
+  let lastPoint = shape.length - 1;
+  ctx.moveTo(
+    shape[lastPoint][0],
+    shape[lastPoint][1]
+  );
+
+  //Use a loop to plot each point
+  shape.forEach(point => {
+    ctx.lineTo(point[0], point[1]);
+  });
+}
+```
+
+你现在可以使用这个`drawPath`函数来绘制形状，就像这样:
+
+# Canvas 绘图技术
+
+## 线条连接
+
+您可以设置线条与其他线条的连接方式。使用`lineJoin`属性可以做到这一点。您可以使用下列选项中的任何一个来设置它：`"round"`、`"mitre"`或`"bevel"`（同样，引号是文字）。下面是要使用的格式：
+
+```js
+ctx.lineJoin = "round";
+```
+
+图 2-4 显示了这些风格的效果。
+
+![9781430258001_Fig02-04.jpg](img/image00508.jpeg)
+
+图 2-4 。线条连接样式
+
+## 画正方形和长方形
+
+使用`rect`方法快速创建一个矩形。它具有以下格式：
+
+```js
+rect(x, y, width, height)
+```
+
+下面是如何制作一个 *x* 位置为 50、 *y* 位置为 49、宽度为 70、高度为 90 的矩形：
+
+```js
+ctx.rect(50, 40, 70, 90);
+```
+
+设置线条和填充样式选项，绘制如图 2-5 所示的矩形。
+
+![9781430258001_Fig02-05.jpg](img/image00509.jpeg)
+
+图 2-5 。画一个长方形
+
+```js
+//Set the line and fill style options
+ctx.strokeStyle = "black";
+ctx.lineWidth = 3;
+ctx.fillStyle = "rgba(128, 128, 128, 0.5)";
+
+//Draw the rectangle
+ctx.beginPath();
+ctx.rect(50, 40, 70, 90);
+ctx.stroke();
+ctx.fill();
+```
+
+图 2-6 说明了如何使用尺寸和位置值来绘制矩形。
+
+![9781430258001_Fig02-06.jpg](img/image00510.jpeg)
+
+图 2-6 。x、y 位置以及矩形的宽度和高度
+
+或者，您可以使用快捷方式`strokeRect`和`fillRect`方法绘制一个矩形。下面介绍如何使用它们来绘制如图 2-7 所示的矩形。
+
+```js
+ctx.strokeStyle = "black";
+ctx.lineWidth = 3;
+ctx.fillStyle = "rgba(128, 128, 128, 0.5)";
+ctx.strokeRect(110, 170, 100, 50);
+ctx.fillRect(110, 170, 100, 50);
+```
+
+![9781430258001_Fig02-07.jpg](img/image00511.jpeg)
+
+图 2-7 。使用`strokeRect`和`fillRect`绘制一个矩形
+
+## 梯度
+
+您可以创建两种类型的渐变：**线性** 或**径向**。
+
+要创建线性渐变，使用`createLinearGradient`方法。它需要四个参数。前两个参数是画布上渐变开始点的 *x* 、 *y* 坐标。后两个参数是渐变终点的 *x* 、 *y* 坐标。
+
+```js
+let gradient = ctx.createLinearGradient(startX, startY, endX, endY);
+```
+
+这在画布上定义了一条渐变应该遵循的线。
+
+接下来，你需要添加**色站**。这些是渐变将混合在一起以创建色调平滑过渡的颜色。`addColorStop`方法使用两个参数进行混合。第一个是渐变上颜色应该开始的位置。这可以是 0（开始位置）和 1（结束位置）之间的任何数字。第二个参数是颜色（这是一个 RGBA、十六进制或 HLSA 格式的字符串，或者是 140 个 HTML 颜色词中的一个）。
+
+以下是如何在从白色过渡到黑色的渐变的起点和终点添加两个色标。
+
+```js
+gradient.addColorStop(0, "white");
+gradient.addColorStop(1, "black");
+```
+
+（如果您想在这两种颜色之间添加第三种颜色，您可以使用 0 到 1 之间的任何数字。值为 0.5 时，第三种颜色介于 0 和 1 之间。）
+
+最后，将渐变应用到上下文的`fillStyle`以能够使用它来填充形状：
+
+```js
+ctx.fillStyle = gradient;
+```
+
+这是一个填充正方形的渐变的例子。渐变从正方形的左上角开始，到它的右下角结束。图 2-8 显示了这段代码产生的结果。
+
+![9781430258001_Fig02-08.jpg](img/image00512.jpeg)
+
+图 2-8 。用线性渐变填充形状
+
+```js
+//Set the line style options
+ctx.strokeStyle = "black";
+ctx.lineWidth = 3;
+
+//Create a linear gradient
+let gradient = ctx.createLinearGradient(64, 64, 192, 192);
+gradient.addColorStop(0, "white");
+gradient.addColorStop(1, "black");
+ctx.fillStyle = gradient;
+
+//Draw the rectangle
+ctx.beginPath();
+ctx.rect(64, 64, 128, 128);
+ctx.stroke();
+ctx.fill();
+```
+
+在这个例子中，我使渐变比正方形稍微大一点，只是为了稍微柔化效果：
+
+```js
+ctx.createLinearGradient(64, 64, 192, 192)
+```
+
+只有落在矩形内的前四分之三的渐变区域是可见的。
+
+要创建径向渐变，使用`createRadialGradient`方法。它需要六个参数：前三个是渐变的起始圆的位置及其大小，后三个是渐变的结束圆的位置及其大小。
+
+```js
+let gradient = ctx.createRadialGradient(x, y, startCircleSize, x, y, endCircleSize);
+```
+
+开始圆和结束圆通常具有相同的位置；只是尺寸会有所不同。
+
+您可以添加色标并将渐变应用到画布`fillStyle`上，就像处理线性渐变一样。以下是用径向渐变填充正方形的方法：
+
+```js
+let gradient = ctx.createRadialGradient(128, 128, 10, 128, 128, 96);
+```
+
+128 的渐变的 *x* 和 *y* 位置匹配画布中正方形的中心点。图 2-9 显示了结果。
+
+![9781430258001_Fig02-09.jpg](img/image00513.jpeg)
+
+图 2-9 。径向梯度
+
+## 画圆和圆弧
+
+使用`arc`方法画圆。以下是可以使用的参数：
+
+```js
+arc(centerX, centerY, circleRadius, startAngle, endAngle, false)
+```
+
+中心 *x* ， *y* 坐标是画布上确定圆中心点的点。`circleRadius`是一个以像素为单位的数字，它决定了圆的半径（其宽度的一半）。`startAngle`和`endAngle`是以弧度表示的数字，它们决定了圆的完整程度。对于一整圈，使用 0 的`startAngle`和 6.28 的`endAngle`（`2 * Math.PI`）。（`startAngle`的 0 位置在圆圈的 3 点钟位置。）最后一个参数`false`，表示应该从`startAngle`开始顺时针画圆。
+
+以下是如何在画布中心绘制一个半径为 64 像素的完整圆：
+
+```js
+ctx.arc(128, 128, 64, 0, 2*Math.PI, false)
+```
+
+图 2-10 显示了一个带有渐变填充的圆，你可以用下面的代码创建它。
+
+![9781430258001_Fig02-10.jpg](img/image00514.jpeg)
+
+图 2-10 。画一个带渐变的圆
+
+```js
+//Set the line style options
+ctx.strokeStyle = "black";
+ctx.lineWidth = 3;
+
+//Create a radial gradient
+let gradient = ctx.createRadialGradient(96, 96, 12, 128, 128, 96);
+gradient.addColorStop(0, "white");
+gradient.addColorStop(1, "black");
+ctx.fillStyle = gradient;
+
+//Draw the circle
+ctx.beginPath();
+ctx.arc(128, 128, 64, 0, 2*Math.PI, false);
+ctx.stroke();
+ctx.fill();
+```
+
+![Image](img/image00500.jpeg) **注意** `弧度`是圆的度量单位，在数学上比度数更容易处理。1 弧度是当你把半径绕在圆的边缘时得到的度量。3.14 弧度等于半个圆，非常方便，等于π(3.14)。一个完整的圆是 6.28 弧度(π* 2)。一弧度约等于 57.3 度，如果您需要将度转换为弧度，或将弧度转换为度，请使用以下公式:
+
+弧度 = 度 * (π / 180)
+度 = 弧度 * (180 / π)
+
+## 画弧线
+
+可以用同样的`arc`方法轻松画出一个圆弧(不完整的圆)。使用大于 0 的`startAngle`和小于 6.28 的`endAngle`(`2 * Math.PI`)即可。下面是一些绘制 3.14 到 5 弧度的圆弧的代码，如图图 2-11 所示。
+
+![9781430258001_Fig02-11.jpg](img/image00515.jpeg)
+
+图 2-11 。画一个弧线
+
+```js
+ctx.strokeStyle = "black";
+ctx.lineWidth = 3;
+ctx.beginPath();
+ctx.arc(128, 128, 64, 3.14, 5, false)
+ctx.stroke();
+```
+
+如果你需要绘制曲线，画布绘制 API 有一些高级选项，我们接下来会看到。
+
+## 画曲线
+
+可以画的曲线有两种:`二次曲线`和`贝塞尔曲线`。
+
+### 二次曲线
+
+要绘制二次曲线，使用`quadraticCurveTo`方法。下面的代码产生了你在图 2-12 中看到的曲线。
+
+![9781430258001_Fig02-12.jpg](img/image00516.jpeg)
+
+图 2-12 。二次曲线
+
+```js
+ctx.moveTo(32, 128);
+ctx.quadraticCurveTo(128, 20, 224, 128);
+```
+
+代码本身就令人困惑，但借助图表很容易理解。你需要做的第一件事是使用`moveTo`定义线条的起点，靠近画布的左中心边缘:
+
+```js
+ctx.moveTo(32, 128);
+```
+
+然后使用`quadraticCurveTo`方法定义曲线。前两个参数定义了所谓的`控制点`。你可以把控制点想象成一种无形的引力点，把线拉向它。在本例中，控制点靠近画布的中心顶部，在 128 的 *x* 位置和 20 的 *y* 位置，我已经在这里突出显示了:
+
+```js
+ctx.quadraticCurveTo(128, 20, 224, 128);
+```
+
+最后两个参数是线条的终点，靠近画布的中右边缘:
+
+```js
+ctx.quadraticCurveTo(128, 20, 224, 128);
+```
+
+你能在图 2-12 中看到这些点是如何一起创造曲线的吗？
+
+### 贝塞尔曲线
+
+贝塞尔曲线类似，但增加了第二个控制点:
+
+```js
+bezierCurveTo(control1X, control1Y, control2X, control2Y, endX, endY);
+```
+
+再说一次，除非你看到一个清晰的例子，否则很难理解这是如何工作的。图 2-13 显示了一条贝塞尔曲线和用来创建它的四个点。下面是生成该曲线的代码:
+
+```js
+ctx.moveTo(32, 128);
+ctx.bezierCurveTo(32, 20, 224, 20, 224, 128);
+```
+
+![9781430258001_Fig02-13.jpg](img/image00517.jpeg)
+
+图 2-13 。贝塞尔曲线
+
+将代码与图表进行比较，并尝试制作一些自己的曲线，直到您对二次曲线和贝塞尔曲线的工作原理有所了解。如果您闭合这些线条，使它们在同一点开始和结束，您将生成一个可以用颜色或渐变填充的形状。
+
+## 阴影
+
+您可以使用`shadowColor`、`shadowOffsetX`、`shadowOffsetY`和`shadowBlur`属性为任何线条或形状添加阴影。图 2-14 显示一个带有浅灰色、略显模糊的圆形阴影。下面是生成它的代码:
+
+```js
+ctx.shadowColor = "rgba(128, 128, 128, 0.9)";
+ctx.shadowOffsetX = 10;
+ctx.shadowOffsetY = 10;
+ctx.shadowBlur = 10;
+```
+
+![9781430258001_Fig02-14.jpg](img/image00518.jpeg)
+
+图 2-14 。添加阴影
+
+`shadowColor`可以是任何 RGBA(如本例所示)、HSLA、十六进制或 CSS 颜色字符串名称。赋予阴影透明的 alpha 颜色(在本例中为 0.9)会使它们在覆盖另一个对象时看起来更真实。`shadowOffsetX`和`shadowOffsetY`决定阴影从形状偏移多少像素。`shadowBlur`是阴影应模糊的像素数，以产生漫射光效果。尝试这些值，直到你找到一个能产生你喜欢的效果的组合。像这样的投影适用于任何形状、线条或文本。
+
+## 旋转
+
+画布绘制 API 没有任何内置方法来旋转单个形状。相反，您必须旋转整个画布，将形状绘制到旋转后的状态，然后再次旋转整个画布。您还必须移动绘图上下文的坐标空间。它的 *x* ， *y* 0，0 点通常是画布的左上角，您需要将其重新定位到形状的中心点。
+
+起初，这似乎是画布绘制 API 的一个疯狂、糟糕的特性。实际上，这是最好的功能之一。正如你将在第四章中看到的，它允许你用最少的代码在形状之间创建非常有用的嵌套父子关系。但要理解发生了什么，首先确实需要一点概念上的飞跃。所以让我们来看看画布旋转是如何工作的。
+
+下面的代码画了一个旋转后的正方形，如图图 2-15 所示。在代码清单之后，我将向您详细介绍它是如何工作的。
+
+![9781430258001_Fig02-15.jpg](img/image00519.jpeg)
+
+图 2-15 。旋转形状
+
+```js
+//Set the line and fill style options
+ctx.strokeStyle = "black";
+ctx.lineWidth = 3;
+ctx.fillStyle = "rgba(128, 128, 128, 0.5)";
+
+//Save the current state of the drawing context before it's rotated
+ctx.save();
+
+//Shift the drawing context's 0,0 point from the canvas's top left
+//corner to the center of the canvas. This will be the
+//square's center point
+ctx.translate(128, 128);
+
+//Rotate the drawing context's coordinate system 0.5 radians
+ctx.rotate(0.5);
+
+//Draw the square from -64 x and -64 y. That will mean its center
+//point will be at exactly 0, which is also the center of the
+//context's coordinate system
+ctx.beginPath();
+ctx.rect(-64, -64, 128, 128);
+ctx.stroke();
+ctx.fill();
+
+//Restore the drawing context to
+//its original position and rotation
+ctx.restore();
+```
+
+这就是所有这些是如何工作的。我们需要做的第一件事是保存绘图上下文的当前状态:
+
+```js
+ctx.save();
+```
+
+这很重要，因为我们要移动和旋转整个上下文。`save`方法让我们记住它的原始状态，这样我们可以在画完旋转的正方形后恢复它。
+
+接下来，`translate`方法移动上下文的坐标空间，使位置 0，0 位于画布上与我们将要绘制的正方形中心相同的点上。正方形的中心将有一个 128 的 *x* 位置和一个 128 的 *y* 位置，将其放置在画布的正中心。
+
+```js
+ctx.translate(128, 128);
+```
+
+这意味着上下文的 0，0 位置不是在画布的左上角，而是向右移动了 128 像素，向下移动了 128 像素。这将是正方形的中心点。图 2-16 显示了坐标空间是如何移动的。如果我们不这样做，正方形看起来不会绕着它的中心旋转。相反，它会围绕画布的左上角旋转。图 2-16 显示了这段代码对上下文坐标位置的不可见但重要的影响。
+
+![9781430258001_Fig02-16.jpg](img/image00520.jpeg)
+
+图 2-16 。将上下文的坐标空间移动到画布的中心
+
+接下来，将上下文的整个坐标空间顺时针旋转 0.5 弧度(28.6 度)，如图图 2-17 所示。
+
+```js
+ctx.rotate(0.5);
+```
+
+![9781430258001_Fig02-17.jpg](img/image00521.jpeg)
+
+图 2-17 。旋转上下文
+
+下一步是围绕上下文的中心点绘制矩形。这意味着你必须将矩形的宽度和高度各偏移一半。这个正方形的宽和高都是 128 像素，所以它的 `x`、`y` 位置都需要是–64。
+
+```js
+ctx.beginPath();
+ctx.rect(-64, -64, 128, 128);
+ctx.stroke();
+ctx.fill();
+```
+
+这是令人困惑的，所以看一看图 2-18 来弄清楚发生了什么。您可以看到，绘制矩形后，其中心点落在上下文的 0，0 点上。并且因为上下文被旋转了，所以正方形看起来也旋转了。
+
+![9781430258001_Fig02-18.jpg](img/image00522.jpeg)
+
+图 2-18 。绘制正方形，使其位于上下文旋转中心点的中心
+
+最后，我们必须将上下文恢复到移动和旋转之前的状态:
+
+```js
+ctx.restore();
+```
+
+这让我们可以在这一点之后添加更多的线条或形状，它们不会被旋转。图 2-19 显示了最终恢复后的状态。
+
+![9781430258001_Fig02-19.jpg](img/image00523.jpeg)
+
+图 2-19 。旋转后将画布的状态恢复到正常状态
+
+即使上下文的位置和旋转已经恢复，正方形仍然保持在它被绘制的相同位置。
+
+保存上下文的状态、移动它、旋转它、在它上面绘制形状，以及恢复它的整个过程发生在几分之一毫秒内。它真的很快，你永远不会看到它发生。但是，对于要旋转的每条线或形状，您必须一步一步地遵循相同的过程。像这样手动完成是很乏味的，但是在第四章中，你将学习如何用一个自定义的形状精灵和`render`函数来自动完成这个过程。
+
+## 标度
+
+canvas context 的`scale`方法让您可以轻松地沿着 `x`/`y` 轴缩放形状的宽度和高度:
+
+```js
+ctx.scale(scaleX, scaleY)
+```
+
+0 到 1 之间的`scaleX`和`scaleY`值将在 0 到 100%的原始大小之间缩放形状。这意味着如果你设置`scaleX`和`scaleY`为 0.5，形状将被缩放到其大小的 50%。
+
+```js
+ctx.scale(0.5, 0.5)
+```
+
+将这些值设置为 2 会将形状缩放到其原始大小的 200%:
+
+```js
+ctx.scale(2, 2)
+```
+
+最后，`scaleX`和`scaleY`值为 1 会将形状设置为其原始比例。
+
+图 2-20 显示了这些比例值对前面例子中旋转矩形的影响。
+
+![9781430258001_Fig02-20.jpg](img/image00524.jpeg)
+
+图 2-20 。相对于形状的大小缩放形状
+
+就像旋转一样，实际上缩放的不是形状，而是整个画布背景。上下文的缩放量与当前正在绘制的线条、形状或图像的宽度和高度有关。因此，就像你处理旋转一样，你需要在一对`save`和`restore`方法之间插入`scale`方法，这样上下文将返回到它的原始比例，用于它需要绘制的下一个东西。虽然这看起来是一种笨拙的方式，但在第四章中，你会看到它是如何让我们用很少的代码轻松创建一个复杂的嵌套精灵层次的。
+
+## 让事情变得透明
+
+有两种方法可以使画布元素透明。第一种方法是使用 RGBA 或 HSLA 颜色，并将 alpha 值(参数中的最后一个数字)设置为小于 1 的数字，这在前面的示例中已经看到了。(Alpha 是透明度的图形设计术语。)第二种方法是使用画布上下文的`globalAlpha`属性。`globalAlpha`与`rotate`相似，都会影响整个画布。这意味着只对一个形状应用透明度，你需要将`globalAlpha`夹在`save`和`restore`之间，如下例所示:
+
+```js
+ctx.save();
+ctx.globalAlpha = 0.5;
+
+//...Draw your line or shape...
+
+ctx.restore();
+```
+
+`globalAlpha`取 0(完全透明)和 1(完全不透明)之间的一个数字。图 2-21 显示了一个用`globalAlpha`做成半透明的正方形和圆形。下图是执行此操作的代码。
+
+![9781430258001_Fig02-21.jpg](img/image00525.jpeg)
+
+图 2-21 。用`globalAlpha`使形状透明
+
+```js
+//Set the fill style options
+ctx.fillStyle = "black";
+
+//Draw the rectangle
+ctx.save();
+ctx.beginPath();
+ctx.globalAlpha = 0.6;
+ctx.rect(32, 32, 128, 128);
+ctx.fill();
+ctx.restore();
+
+//Draw the circle
+ctx.save();
+ctx.beginPath();
+ctx.globalAlpha = 0.3;
+ctx.arc(160, 160, 64, 0, Math.PI * 2, false)
+ctx.fill();
+ctx.restore();
+```
+
+## 使用混合模式
+
+画布上下文有一个`globalCompositeOperation`属性，允许您将一个混合模式分配给画布。混合模式决定了两个相交形状或图像的颜色应该如何组合。有 16 种混合模式可供选择，它们与 Photoshop 等图像编辑软件中的相同混合模式具有相同的效果。根据您使用的混合模式和形状或图像的颜色，效果可以是从微妙的透明到生动的颜色反转。
+
+以下是如何使用`globalCompositeOperation`将混合模式设置为`multiply`:
+
+```js
+ctx.globalCompositeOperation = "multiply";
+```
+
+乘法是一种对比效果，它使用一个公式将重叠颜色的值相乘来生成一种新颜色。图 2-22 显示了蓝色圆圈重叠红色方块的效果。
+
+![9781430258001_Fig02-22.jpg](img/image00526.jpeg)
+
+图 2-22 。使用混合模式来组合重叠图像的颜色
+
+下面是产生这种效果的代码:
+
+```js
+//Set the blend mode
+ctx.globalCompositeOperation = "multiply";
+
+//Draw the rectangle
+ctx.save();
+ctx.fillStyle = "red";
+ctx.beginPath();
+ctx.rect(32, 32, 128, 128);
+ctx.fill();
+ctx.restore();
+
+//Draw the circle
+ctx.save();
+ctx.fillStyle = "blue";
+ctx.beginPath();
+ctx.arc(160, 160, 64, 0, Math.PI*2, false)
+ctx.fill();
+ctx.restore();
+```
+
+以下是您可以使用的混合模式的完整列表，以及每种模式产生的效果:
+
+*   **无融合** : `"normal"`
+*   **对比** : `"soft-light"`，`"hard-light"`，`"overlay"`
+*   **点亮** : `"lighten"`，`"color-dodge"`，`"screen"`
+*   **变暗** : `"darken"`，`"color-burn"`，`"multiply"`
+*   **颜色反转** : `"difference"`，`"exclusion"`
+*   **复杂调配** : `"hue"`，`"saturation"`，`"color"`，`"luminosity"`
+
+欣赏这些效果的最佳方式是打开您最喜欢的图像编辑器，并观察这些混合模式对两个重叠图像的影响。使用画布绘制 API 的效果是一样的。关于这些混合模式如何工作的更多细节，W3C 令人惊讶的可读规范是一个很好的起点:`dev.w3.org/fxtf/compositing-1`。
+
+## 合成效果
+
+`globalCompositeOperation`方法也可以让你详细控制重叠的形状应该如何组合。有十二种波特-达夫运算可以应用到形状上；它们涵盖了两种形状组合的所有可能方式。
+
+注意波特-达夫操作是以托马斯·波特和汤姆·达夫的名字命名的，他们在为*星球大战*电影做视觉特效时开发了它们。
+
+应用波特-达夫运算的方式与应用混合模式的方式相同:
+
+```js
+ctx.globalCompositeOperation = "source-over";
+```
+
+图 2-23 说明了这些操作的效果，下表(表 2-1 )简要描述了每个操作的作用。
+
+![9781430258001_Fig02-23.jpg](img/image00527.jpeg)
+
+图 2-23 。使用复合操作来合并和遮罩重叠的形状
+
+表 2-1 。画布合成效果
+
+| 复合操作 | 它的作用 |
+| --- | --- |
+| `"source-over"` | 在第二个形状前面绘制第一个形状。 |
+| `"destination-over"` | 在第一个形状前面绘制第二个形状。 |
+
+## 用图像填充形状
+
+您可以使用`createPattern`方法用图像填充形状。图 2-24 显示了一只猫的图像是如何被用来填充一个正方形的。
+
+![9781430258001_Fig02-24.jpg](img/image00528.jpeg)
+
+图 2-24 。用图像填充形状
+
+这是通过用`rect`方法画一个正方形，然后使用图像`pattern`作为`fillStyle`来完成的。边框是可选的；如果不使用描边样式，图像周围就不会有边框。此外，如果您希望图像的左上角与形状的左上角匹配，您需要偏移画布以匹配形状的*x*，*y*位置。这和我们在前面的例子中使用的技巧是一样的，但是更简单一点，因为我们没有旋转任何东西。我将在前面解释这是如何工作的。下面是产生这种效果的代码:
+
+```js
+//Load an image
+let catImage = new Image();
+catImage.addEventListener("load", loadHandler, false);
+catImage.src = "img/cat.png";
+
+//The loadHandler is called when the image has loaded
+function loadHandler() {
+
+  //Set the line style options
+  ctx.strokeStyle = "black";
+  ctx.lineWidth = 3;
+
+  //Draw the rectangle
+  ctx.beginPath();
+  ctx.rect(64, 64, 128, 128);
+
+  //Set the pattern to the image, and the fillStyle to the pattern
+  let pattern = ctx.createPattern(catImage, "no-repeat");
+  ctx.fillStyle = pattern;
+
+  //Offset the canvas to match the rectangle's x and y position,
+  //then start the image fill from that point
+  ctx.save();
+  ctx.translate(64, 64);
+  ctx.stroke();
+  ctx.fill();
+  ctx.restore();
+}
+```
+
+加载图像时，代码在画布上绘制并定位矩形，如您在前面的示例中所见:
+
+```js
+ctx.beginPath();
+ctx.rect(64, 64, 128, 128);
+```
+
+然后，它使用`createPattern`方法将加载的图像转换成形状图像模式。该模式存储在名为`pattern`的变量中，然后分配给`fillStyle`:
+
+```js
+let pattern = ctx.createPattern(catImage, "no-repeat");
+ctx.fillStyle = pattern;
+```
+
+在本例中，模式被设置为`"no-repeat"`。如果您想要具有纹理图案效果的形状，您可以使用较小的图像，并使其在形状的整个区域重复。除了`"no-repeat"`之外，还有另外三个选项可以使用:`"repeat"`用图案的连续重复图像覆盖形状的表面，而`"repeat-x"`和`"repeat-y"`只是沿着一个轴重复图像。
+
+在这个例子中，我希望猫图像的左上角与矩形的左上角精确对齐。为了实现这一点，我需要在设置`fillStyle`之前用`translate`方法偏移画布。偏移量匹配矩形的*x*、*y*位置(64 乘 64 像素):
+
+```js
+ctx.save();
+ctx.translate(64, 64);
+ctx.stroke();
+ctx.fill();
+ctx.restore();
+```
+
+`save`和`restore`方法用于在用图像填充形状后将画布重置回其原始位置。如果不这样做，图像将从画布左上角的位置 0，0 绘制，而不是从形状左上角的位置 64，64 绘制。
+
+## 绘制图像
+
+如果您只想在画布上显示图像，上下文的`drawImage`方法是一种简单的方法。图像加载后，使用`ctx.drawImage`定义图像名称、其*x*位置和其*y*位置:
+
+```js
+ctx.drawImage(imageObject, xPosition, yPosition);
+```
+
+下面是如何预加载一只猫的图像，并使用`drawImage`将其显示在画布中央。图 2-25 显示了结果。
+
+```js
+//Load an image
+let catImage = new Image();
+catImage.addEventListener("load", loadHandler, false);
+catImage.src = "img/cat.png";
+
+//The loadHandler is called when the image has loaded
+function loadHandler() {
+  ctx.drawImage(catImage, 64, 64);
+}
+```
+
+![9781430258001_Fig02-25.jpg](img/image00529.jpeg)
+
+图 2-25 。在画布上画一幅图像
+
+像这样使用`drawImage`既快速又简单。但是对于大多数游戏项目来说，你会希望使用稍微灵活一点的方式来显示游戏图像，我们一会儿就会谈到这一点。首先，快速进入掩蔽。
+
+## 遮蔽图像
+
+一个**面具**就像一个窗框。蒙版下的任何图像将仅在蒙版区域内可见。超出蒙版区域的图像部分不会显示在框架之外。您可以使用`clip`方法将任何形状变成遮罩。
+
+图 2-26 显示了我们的猫被一个圆形遮住的图像。
+
+![9781430258001_Fig02-26.jpg](img/image00530.jpeg)
+
+图 2-26 。使用`clip`方法将形状变成遮罩
+
+要创建一个蒙版，画一个形状，然后使用`clip`方法，而不是`stroke`或`fill`。在`clip`之后绘制的图像或形状中的任何内容都将被遮罩。下面是生成图 2-26 中图像的代码:
+
+```js
+//Draw the circle as a mask
+ctx.beginPath();
+ctx.arc(128, 128, 64, 0, Math.PI * 2, false);
+ctx.clip();
+
+//Draw the image
+ctx.drawImage(catImage, 64, 64);
+```
+
+您可以像遮罩图像一样轻松地遮罩形状。
+
+## 将图像传送到画布上
+
+在画布上只显示图像的一部分非常有用。这一功能对于制作游戏来说非常重要，因为这意味着你可以将所有的游戏角色和对象存储在一个名为`tileset`或`sprite sheet`的图像文件中。然后，通过有选择地在画布上只显示和定位 tileset 中您需要的那些部分来构建您的游戏世界。这是一种真正快速且节省资源的渲染游戏图形的方式，称为`blitting`。
+
+在下一个例子中，我们将使用一个包含许多游戏角色和对象的 tileset，并且只显示其中一个对象:一艘火箭船。图 2-27 显示了我们将要加载的 tileset，以及我们将要在画布上显示的单火箭船。
+
+![9781430258001_Fig02-27.jpg](img/image00531.jpeg)
+
+图 2-27 。将部分图像文件复制到画布上
+
+代码使用了`drawImage`方法来完成这个任务。`drawImage`需要知道我们要显示的 tileset 部分的原点*x*和*y*位置，以及它的高度和宽度。然后，它需要知道目的地*x*、*y*、宽度和高度值，以便在画布上绘制图像。
+
+```markdown
+## 正文
+
+```js
+//Load the tileset image
+let tileset = new Image();
+tileset.addEventListener("load", loadHandler, false);
+tileset.src = "img/tileset.png";
+
+//The loadHandler is called when the image has loaded
+function loadHandler() {
+  ctx.drawImage(
+    tileset,     //The image file
+    192, 128,    //The source x and y position
+    64, 64,      //The source height and width
+    96, 96,      //The destination x and y position
+    64, 64       //The destination height and width
+  );
+}
+```
+
+`tileset.png`图像文件为 384×384 像素。火箭船的图像向右 192 像素，向下 128 像素。这是它的 `x` 、 `y` 源位置。它的宽度和高度都是 64 像素，所以这是它的源宽度和高度值。火箭船被绘制到画布上的 `x` ， `y` 位置为 96，使用相同的宽度和高度值(64)。这些是它的目标值。图 2-28 通过选择 tileset 的正确部分并将其显示在画布上，展示了这段代码是如何工作的。
+
+![9781430258001_Fig02-28.jpg](img/image00532.jpeg)
+
+图 2-28 。blitting 的工作原理
+
+如果您不熟悉 blitting，可以在源文件的工作示例中使用这些数字，您会很快发现在画布上的任何位置以任何大小显示您想要的图像是多么容易。
+
+![Image](img/image00500.jpeg) **注意**“blit”一词来自“位块传输”，这是一个早期的计算机图形术语，指的是这种技术。
+
+我们已经介绍了线条、形状和图像，现在让我们来看看画布拼图的最后一块:文本。
+
+画布绘制 API 几乎没有有用的属性和方法来帮助您绘制文本。下一个例子展示了如何使用它们来显示单词“Hello world！”用红色粗体字表示，位于画布中央。图 2-29 显示了以下代码产生的结果。
+
+![9781430258001_Fig02-29.jpg](img/image00533.jpeg)
+
+图 2-29 。在画布上显示文本
+
+```js
+//Create a text string defines the content you want to display
+let content = "Hello World!";
+
+//Assign the font to the canvas context.
+//The first value is the font size, followed by the names of the
+//font families that should be tried:
+//1st choice, fall-back font, and system font fall-back
+ctx.font = "24px 'Rockwell Extra Bold', 'Futura', sans-serif";
+
+//Set the font color to red
+ctx.fillStyle = "red";
+
+//Figure out the width and height of the text
+let width = ctx.measureText(content).width,
+    height = ctx.measureText("M").width;
+
+//Set the text's x/y registration point to its top left corner
+ctx.textBaseline = "top";
+
+//Use `fillText` to Draw the text in the center of the canvas
+ctx.fillText(
+  content,                         //The text string
+  canvas.width / 2 - width / 2,    //The x position
+  canvas.height / 2 - height / 2   //The y position
+);
+```
+
+让我们来看看这是如何工作的。
+
+画布上下文的`font`属性允许您使用以下格式定义字体大小和字体系列:
+
+```js
+ctx.font = "24px 'Rockwell Extra Bold', 'Futura', sans-serif";
+```
+
+第一个字体系列名称 Rockwell Extra Bold 是应该使用的主要字体。如果由于某种原因它不可用，`font`属性将返回到 Futura。如果 Futura 也不可用，将使用好的旧系统字体 sans-serif。
+
+![Image](img/image00500.jpeg) **注意**在这个例子中，我使用了一些可靠的网络安全字体，这些字体在所有现代网络浏览器上都可以找到。(你可以在`cssfontstack.com`找到网页安全字体列表。)在第三章中，你将学习如何使用 CSS `@font-face` 规则从文件中预加载自定义字体。
+
+你可以使用`measureText`方法计算出文本的宽度，以像素为单位，如下所示:
+
+```js
+width = ctx.measureText(content).width
+```
+
+在字体样式被分配后，你需要做这个,以便根据特定字体的字母大小和磅值正确测量文本。
+
+`measureText`方法没有匹配的*高度*属性来告诉你文本的像素高度。相反，您可以使用这个非常可靠且广泛使用的方法来计算它:测量一个大写字母 M 的宽度:
+
+```js
+height = ctx.measureText("M").width
+```
+
+令人惊讶的是，这与大多数字体的文本像素高度完全匹配。
+
+您还需要定义一个**文本基线**，它告诉上下文文本的 `x` ， `y` 0 点应该在哪里。要定义文本左上角的 x/y 点，将`textBaseline`设置为`top`:
+
+```js
+ctx.textBaseline = "top";
+```
+
+将左上角设置为文本的 `x` 、 `y` 注册点，可以使文本的坐标与圆形、矩形和图像的坐标保持一致。
+
+除了"`top`"之外，您可以分配给`textBaseline`的其他值有"`hanging`"、"`middle`"、"`alphabetic`"、"`ideographic`"和"`bottom`。这些选项比你可能需要的要多，但是图 2-30 说明了每个选项是如何影响文本对齐的。
+
+![9781430258001_Fig02-30.jpg](img/image00534.jpeg)
+
+图 2-30 。文本基线选项
+
+`fillText`用于绘制特定 x/y 位置的字符串内容。如果您知道文本的宽度和高度，您可以使用`fillText`使文本在画布中居中，如下所示:
+
+```js
+ctx.fillText(
+  content,                         //The text string
+  canvas.width / 2 - width / 2,    //The x position
+  canvas.height / 2 - height / 2   //The y position
+);
+```
+
+这些是你需要知道的在画布上显示文本的最重要的技术。
+
+## 摘要
+
+现在，您已经了解了使用画布绘制 API 绘制线条和形状的基本知识。画布绘制 API 是游戏设计师需要了解的最有用和最灵活的工具之一。它有一个简单的优雅，允许你用最少的代码创建大量的复杂性。现代 JavaScript 运行时系统(如 web 浏览器)使用 GPU 对画布绘制调用进行硬件加速，因此您会发现，即使与 WebGL 相比，画布绘制对于大多数 2D 动作游戏来说也足够快了。
+
+绘图 API 是相当低级的，这意味着如果你想快速简单地在游戏中创建许多形状，你需要构建一些辅助函数和对象。但在我们学习如何做到这一点之前，让我们先来看看如何有效地加载图像，字体，数据文件和其他有用的素材到我们的游戏中。
+```
