@@ -1,0 +1,487 @@
+# 三、JavaScript 数字
+
+本章将重点介绍 JavaScript 数字运算、数字表示、`Number`对象、常用数字算法和随机数生成。在本章结束时，你将理解如何在 JavaScript 中处理数字，以及如何实现质因数分解，这是加密的基础。
+
+编程语言的数字运算允许你计算数值。以下是 JavaScript 中的数字运算符:
+
+```js
++ : addition
+- : subtraction
+/ : division
+* : multiplication
+% : modulus
+```
+
+这些操作符在其他编程语言中普遍使用，并不特定于 JavaScript。
+
+## 数系
+
+JavaScript 对数字使用 32 位浮点表示，如图 3-1 所示。在本例中，该值为 0.15625。如果符号位为 1，符号位(第 31 位)表示数字为负。接下来的 8 位(第 30 位至第 23 位)表示指数值，即 `e`。最后，剩余的 23 位表示分数值。
+
+![img/465726_1_En_3_Fig1_HTML.jpg](img/465726_1_En_3_Fig1_HTML.jpg)
+
+图 3-1
+
+32 位浮点数系统
+
+对于 32 位，该值通过以下深奥的公式计算:
+
+![$$ \mathrm{value}={\left(-1\right)}^{\mathrm{sign}}\times {2}^{\mathrm{e}-127}\times \left(1+\sum \limits_{t=1}^{23}{b}_{23-t}{2}^{-t}\right) $$](img/465726_1_En_3_Chapter_TeX_Equa.png)
+
+图 3-1 显示了 32 位的如下分解:
+
+符号= 0
+
+`e` = (0111100) <sub>2</sub> = 124(以 10 为基数)
+
+![$$ 1+\sum \limits_{i=1}^{23}{b}_{23-i}{2}^{-i}=1+0+0.25+0 $$](img/465726_1_En_3_Chapter_TeX_Equb.png)
+
+这将导致以下结果:
+
+值= 1 x 2<sup>124-127</sup>x 1.25 = 1 x 2<sup>-3</sup>x 1.25 = 0.15625
+
+对于小数，这种浮点数系统会在 JavaScript 中导致一些舍入错误。例如，0.1 和 0.2 无法精确表示。
+
+因此，`0.1 + 0.2 === 0.3` 得出 `false`。
+
+```js
+0.1 + 0.2 === 0.3; // prints 'false'
+```
+
+要真正理解为什么 0.1 不能正确地表示为 32 位浮点数，必须理解二进制。用二进制表示许多小数需要无限多的位数。这是因为二进制数由 2 <sup>*n*</sup> 表示，其中 *n* 是整数。
+
+在努力计算 0.1 的同时，长除法会一直进行下去。如图 3-2 所示，1010 在二进制中代表 10。试图计算 0.1 (1/10)会导致小数点位数不确定。
+
+![img/465726_1_En_3_Fig2_HTML.jpg](img/465726_1_En_3_Fig2_HTML.jpg)
+
+图 3-2
+
+长除法为 0.1
+
+## JavaScript 数字对象
+
+幸运的是，JavaScript 中有一些 `Number` 对象的内置属性可以帮助解决这个问题。
+
+### 整数舍入
+
+由于 JavaScript 使用浮点来表示所有数字，因此整数除法不起作用。
+
+像 Java 这样的编程语言中的整数除法只是简单地计算除法表达式的商。
+
+例如，Java 中的 `5/4` 是 1，因为商是 1(尽管还有 1 的余数)。但是，在 JavaScript 中，它是一个浮点。
+
+```js
+5/4; // 1.25
+```
+
+这是因为 Java 要求您将整数显式地输入为整数。因此，结果不能是浮点。但是，如果 JavaScript 开发人员想要实现整数除法，他们可以执行以下操作之一:
+
+```js
+Math.floor - rounds down to nearest integer
+Math.round - rounds to nearest integer
+Math.ceil  - rounds up to nearest integer
+
+Math.floor(0.9); // 0
+Math.floor(1.1); // 1
+
+Math.round(0.49); // 0
+Math.round(0.5); // 1
+
+Math.round(2.9); // 3
+Math.ceil(0.1); // 1 Math.ceil(0.9); // 1 Math.ceil(21); // 21 Math.ceil(21.01); // 22
+```
+
+### 号码。希腊语字母之第五字
+
+`Number.EPSILON` 返回两个可表示数字之间的最小间隔。这对于浮点近似的问题很有用。
+
+```js
+function numberEquals(x, y) {
+    return Math.abs(x - y) < Number.EPSILON;
+}
+
+numberEquals(0.1 + 0.2, 0.3); // true
+```
+
+该功能通过检查两个数字之间的差值是否小于 `Number.EPSILON` 来工作。记住 `Number.EPSILON` 是两个*可表示的*数之间的最小差值。`0.1+0.2` 和 `0.3` 的差别会比 `Number.EPSILON` 小。
+
+### 最大限度
+
+`Number.MAX_SAFE_INTEGER` 返回最大整数。
+
+```js
+Number.MAX_SAFE_INTEGER + 1 === Number.MAX_SAFE_INTEGER + 2; // true
+```
+
+这会返回 `true`，因为它不能再高了。但是，它不适用于浮点小数。
+
+```js
+Number.MAX_SAFE_INTEGER + 1.111 === Number.MAX_SAFE_INTEGER + 2.022; // false
+```
+
+`Number.MAX_VALUE` 返回可能的最大浮点数。
+
+`Number.MAX_VALUE` 等于 1.7976931348623157e+308。
+
+```js
+Number.MAX_VALUE + 1 === Number.MAX_VALUE + 2; // true
+```
+
+与 like `Number.MAX_SAFE_INTEGER` 不同，它使用双精度浮点表示，也适用于浮点。
+
+```js
+Number.MAX_VALUE + 1.111 === Number.MAX_VALUE + 2.022; // true
+```
+
+### 最低限度
+
+`Number.MIN_SAFE_INTEGER` 返回最小的整数。
+
+`Number.MIN_SAFE_INTEGER` 等于-9007199254740991。
+
+```js
+Number.MIN_SAFE_INTEGER - 1 === Number.MIN_SAFE_INTEGER - 2; // true
+```
+
+这将返回 `true`，因为它不能再小了。但是，它不适用于浮点小数。
+
+```js
+Number.MIN_SAFE_INTEGER - 1.111 === Number.MIN_SAFE_INTEGER - 2.022; // false
+```
+
+`Number.MIN_VALUE` 返回可能的最小浮点数。
+
+`Number.MIN_VALUE` 等于 5e-324。这不是一个负数，因为它是最小的*浮点数*，这意味着 `Number.MIN_VALUE` 实际上大于 `Number.MIN_- SAFE_INTEGER`。
+
+`Number.MIN_VALUE` 也是最接近零的浮点。
+
+```js
+Number.MIN_VALUE - 1 == -1; // true
+```
+
+这是因为这类似于写 `0 - 1 == -1`。
+
+#### 无穷
+
+唯一大于 `Number.MAX_VALUE` 的是 `Infinity`，唯一小于 `Number.MAX_SAFE_INTEGER` 的是 `-Infinity`。
+
+```js
+Infinity > Number.MAX_SAFE_INTEGER; // true
+-Infinity < Number.MAX_SAFE_INTEGER // true;
+-Infinity -32323323 == -Infinity -1; // true
+```
+
+这等于 `true`，因为没有比 `-Infinity` 更小的了。
+
+### 尺寸汇总
+
+这个不等式总结了 JavaScript 数字从最小(左)到最大(右)的大小:
+
+```js
+-Infinity < Number.MIN_SAFE_INTEGER < Number.MIN_VALUE < 0 < Number.MAX_SAFE_IN- TEGER < Number.MAX_VALUE < Infinity
+```
+
+### 数字算法
+
+讨论最多的涉及数字的算法之一是测试一个数字是否是质数。现在我们来回顾一下。
+
+#### 素性检验
+
+素性测试可以通过从 2 到 `n` 的迭代来完成，检查模除(余数)是否等于零。
+
+```js
+ 1  function isPrime(n){
+ 2      if (n <= 1) {
+ 3              return false;
+ 4      }
+ 5
+ 6      // check from 2 to n-1
+ 7      for (var i=2; i<n; i++) {
+ 8              if (n%i == 0) {
+ 9                      return false;
+10          }
+11      }
+12
+13      return true;
+14  }
+```
+
+**时间复杂度:** O(`n`)
+
+时间复杂度为 O(`n`)，因为该算法检查从 0 到 `n` 的所有数。
+
+这是一个很容易改进的算法的例子。想想这个方法是怎么迭代 2 到 `n` 的。有没有可能找到一个模式，让算法更快？首先，可以忽略 2 的任何倍数，但可能有更多的优化。
+
+让我们列出一些质数。
+
+```js
+2,3,5,7,11,13,17,19,23,29,31,37,41,43,47,53,59,61,67,71,73,79,83,89,97
+```
+
+这很难注意到，但是所有的素数都是 6k ^ 1 的形式，除了 2 和 3，其中 k 是某个整数。这里有一个例子:
+
+```js
+5 = (6-1) , 7 = ((1*6) + 1), 13 = ((2*6) + 1) etc
+```
+
+还要认识到，为了测试质数 `n`，循环只需测试到 `n` 的平方根。这是因为如果 `n` 的平方根不是素数，`n` 就不是数学定义上的素数。
+
+```js
+ 1  function isPrime(n){
+ 2      if (n <= 1) return false;
+ 3      if (n <= 3) return true;
+ 4
+ 5      // This is checked so that we can skip
+ 6      // middle five numbers in below loop
+ 7      if (n%2 == 0 || n%3 == 0) return false;
+ 8
+ 9      for (var i=5; i*i<=n; i=i+6){
+10          if (n%i == 0 || n%(i+2) == 0)
+11             return false;
+12      }
+13
+14      return true;
+15  }
+```
+
+**时间复杂度:** O(`sqrt(n)`)
+
+这个改进的解决方案大大降低了时间复杂度。
+
+### 质因数分解
+
+另一个需要理解的有用算法是确定一个数的质因数分解。质数是加密(在第四章中介绍)和哈希(在第十一章中介绍)的基础，而*质因数分解*是确定哪些质数乘以一个给定的数的过程。给定 10，它将打印 5 和 2。
+
+```js
+ 1  function primeFactors(n){
+ 2          // Print the number of 2s that divide n
+ 3          while (n%2 == 0) {
+ 4              console.log(2);
+ 5              n = n/2;
+ 6          }
+ 7
+ 8          // n must be odd at this point. So we can skip one element (Note i = i +2)
+ 9          for (var i = 3; i*i <= n; i = i+2) {
+10             // While i divides n, print i and divide n
+11              while (n%i == 0) {
+12                  console.log(i);
+13                  n = n/i;
+14              }
+15          }
+16          // This condition is to handle the case when n is a prime number
+17          // greater than 2
+18          if (n > 2) {
+19                  console.log(n);
+20          }
+21  }
+22  primeFactors(10); // prints '5' and '2'
+```
+
+**时间复杂度:** O(`sqrt(n)`)
+
+这种算法的工作原理是打印任何能被 I 整除且没有余数的数。如果一个质数被传递到这个函数中，它将通过打印 `n` 是否大于 2 来处理。
+
+### 随机数生成器
+
+随机数生成对于模拟条件很重要。JavaScript 内置了生成数字的函数:`Math.random()`。
+
+*   `Math.random()`返回一个介于 0 和 1 之间的浮点数。
+
+你可能想知道如何得到大于 1 的随机整数。
+
+要获得高于 1 的浮点，只需将`Math.random()`乘以范围。加上或减去它来设定基数。
+
+```js
+Math.random() * 100; // floats between 0  and  100
+Math.random() * 25 + 5; // floats between 5  and  30
+Math.random() * 10 - 100; // floats between -100 and -90
+```
+
+要获得随机整数，只需使用`Math.floor()`、`Math.round()`或`Math.ceil()`舍入到一个整数。
+
+```js
+Math.floor(Math.random() * 100); // integer between 0 and 99
+Math.round(Math.random() * 25) + 5; // integer between 5 and 30
+Math.ceil(Math.random() * 10) - 100; // integer between -100 and -90
+```
+
+### 练习
+
+*   `maxDivide(数，除数)` : O(对数<sub>除数</sub>(数))的时间复杂度
+
+*   `maxDivide` 的时间复杂度是一个对数函数，它依赖于除数和个数。当测试 2、3 和 5 的素数时，2 的对数(log <sub>2</sub> (`n`))产生最高的时间复杂度。
+
+*   `isUgly` 的时间复杂度 : O(log <sub>2</sub> (`n`))
+
+*   数组编号的时间复杂度 : O(`n`(对数 <sub>2</sub> (`n`))
+
+1.  给定三个数 x、y 和 p，计算(xˇy)% p(这是模幂运算。)
+
+    这里，x 是底数，y 是指数，p 是模数。
+
+    模幂运算是对一个模数执行的一种幂运算，它在计算机科学中很有用，并用于公钥加密算法领域。
+
+    At first, this problem seems simple. Calculating this is a one-line solution, as shown here:
+
+    ```js
+    1  function modularExponentiation ( base, exponent, modulus ) {
+    2          return Math.pow(base,exponent) % modulus;
+    3  }
+    ```
+
+    这正是问题所要求的。然而，它不能处理大指数。
+
+    记住这是用加密算法实现的。在强密码术中，基数通常至少是 256 位(78 位)。
+
+    例如，考虑这种情况:
+
+    基数:6 `x` 10 <sup>77</sup> ，指数:27，模数:497
+
+    在这种情况下，(6`x`10<sup>77</sup>)<sup>27</sup>是一个非常大的数，不能存储在 32 位浮点中。
+
+    还有另一种方法，涉及到一些数学。人们必须观察以下数学性质:
+
+    For arbitrary `a` and `b`,
+
+    ```js
+    c % m = (a  b) % m
+    c % m = [(a % m)  (b % m)] % m
+    ```
+
+    使用这个数学属性，您可以迭代 1 的指数，每次通过将当前模数值乘以上一次模数值来重新计算。
+
+    Here is the pseudocode:
+
+## 摘要
+
+回想一下，JavaScript 中的所有数字都是 32 位浮点格式。为了获得尽可能小的浮点增量，应该使用`Number.EPILSON`。JavaScript 的最大和最小数量可以用下面的不等式来概括:
+
+```
+-Infinity < Number.MIN_SAFE_INTEGER < Number.MIN_VALUE < 0
+< Number.MAX_SAFE_INTEGER < Number.MAX_VALUE < Infinity
+```
+
+质数验证和质因数分解是在各种计算机科学应用中使用的概念，比如加密，在第四章中有介绍。最后，JavaScript 中的随机数生成通过`Math.random()`工作。
+
+---
+
+### 1. 模幂运算
+
+```js
+1  Set value = 1, current exponent = 0.
+2  Increment current exponent by 1.
+3  Set value = (base  value) mod modulus until current exponent is reached exponent
+```
+
+例如:基数:4，指数:3，模数:5
+
+`4% 3% 5 = 64% 5 = 4`
+
+值=(最后值 x 基数)%模数:
+
+`值= (1 x 4) % 5 = 4 % 5 = 4`
+
+`值= (4 x 4) % 5 = 16 % 5 = 1`
+
+`值= (1 x 4) % 5 = 4 % 5 = 4`
+
+Finally, here is the code:
+
+```js
+1  function modularExponentiation ( base, exponent, modulus ) {
+2          if (modulus == 1) return 0;
+3
+4          var value = 1;
+5
+6          for ( var i=0; i<exponent; i++ ){
+7                  value = (value * base) % modulus;
+8          }
+9          return value;
+10  }
+```
+
+**时间复杂度:** O( *n* )
+
+时间复杂度为 O( *n* )，其中 *n* 等于指数值。
+
+### 2. 打印所有小于 n 的质数
+
+To do this, use the `isPrime` function covered in this chapter. Simply iterate from 0 to *n* and print any prime numbers where `isPrime()` evaluates to `true`.
+
+```js
+1  function allPrimesLessThanN(n){
+2          for (var i=0; i<n; i++) {
+3                  if (isPrime(i)){
+4                          console.log(i);
+5                  }
+6          }
+7  }
+8
+9  function isPrime(n){
+10      if (n <= 1) return false;
+11      if (n <= 3) return true;
+12
+13      // This is checked so that we can skip
+14      // middle five numbers in below loop
+15      if (n%2 == 0 || n%3 == 0) return false;
+16
+17      for (var i=5; i*i<=n; i=i+6){
+18          if (n%i == 0 || n%(i+2) == 0)
+19             return false;
+20      }
+21
+22      return true;
+23  }
+24
+25  allPrimesLessThanN(15);
+26
+27  // prints 2, 3, 5, 7, 11, 13
+```
+
+**时间复杂度:** O( *nsqrt* ( *n* ))
+
+这是因为时间复杂度为 O( *sqrt* ( *n* ))的`isPrime`(本章前面已经介绍过)运行了 *n* 次。
+
+### 3. 检查一组质因数
+
+让我们把难看的数字定义为那些唯一的质因数是 2、3 或 5 的数字。序列 1，2，3，4，5，6，8，9，10，12，15，…显示了前 11 个难看的数字。按照惯例，包含 1。
+
+To do this, divide the number by the divisors (2, 3, 5) until it cannot be divided without a remainder. If the number can be divided by all the divisors, it should be 1 after dividing everything.
+
+```js
+1  function maxDivide (number, divisor) {
+2          while (number % divisor == 0) {
+3                  number /= divisor;
+4          }
+5          return number;
+6  }
+7
+8  function isUgly (number){
+9          number = maxDivide(number, 2);
+10          number = maxDivide(number, 3);
+11          number = maxDivide(number, 5);
+12          return number === 1;
+13  }
+```
+
+Iterate this over *n*, and now the list of ugly numbers can be returned.
+
+```js
+1  function arrayNUglyNumbers (n) {
+2          var counter = 0, currentNumber = 1, uglyNumbers = [];
+3
+4          while ( counter != n ) {
+5
+6                  if ( isUgly(currentNumber) ) {
+7                          counter++;
+8                          uglyNumbers.push(currentNumber);
+9                  }
+10
+11                  currentNumber++;
+12          }
+13
+14          return uglyNumbers;
+15  }
+```
+
+`isUgly`功能受限于`maxDivide(number, 2)`的时间复杂度。因此，`arrayNUglyNumbers`有 *n* 倍的时间复杂度。

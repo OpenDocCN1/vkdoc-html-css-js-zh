@@ -1,0 +1,278 @@
+# 二、JavaScript：独特的部分
+
+本章将简要讨论 JavaScript 的语法和行为的一些例外和案例。作为一种动态的解释型编程语言，它的语法不同于传统的面向对象编程语言。这些概念是 JavaScript 的基础，将帮助您更好地理解用 JavaScript 设计算法的过程。
+
+## JavaScript 范围
+
+`范围`定义了对 JavaScript 变量的访问。在 JavaScript 中，变量可以属于全局范围，也可以属于局部范围。全局变量是属于全局范围的变量，可以从程序的任何地方访问。
+
+### 全球声明:全球范围
+
+在 JavaScript 中，可以不使用任何运算符来声明变量。这里有一个例子:
+
+```js
+1  test = "sss";
+2  console.log(test); // prints "sss"
+```
+
+然而，这会创建一个全局变量，这是 JavaScript 中最糟糕的做法之一。不惜一切代价避免这样做。总是使用`var`或`let`来声明变量。最后，当声明不会被修改的变量时，使用`const`。
+
+### 带变量的声明:功能范围
+
+在 JavaScript 中，`var`是一个用于声明变量的关键字。这些变量声明一直“浮动”到顶部。这就是所谓的`可变提升`。脚本底部声明的变量不会是 JavaScript 程序运行时最后执行的东西。
+
+这里有一个例子:
+
+```js
+1  function scope1(){
+2          var top = "top";
+3          bottom = "bottom";
+4          console.log(bottom);
+5
+6          var bottom;
+7  }
+8  scope1(); // prints "bottom" - no error
+```
+
+这是如何工作的？前面的和下面写的是一样的:
+
+```js
+1  function scope1(){
+2          var top = "top";
+3          var  bottom;
+4          bottom = "bottom"
+5          console.log(bottom);
+6  }
+7  scope1(); // prints "bottom" - no error
+```
+
+位于函数最后一行的`bottom`变量声明被浮动到顶部，记录变量就可以了。
+
+关于`var`关键字要注意的关键是变量的作用域是最近的函数作用域。这是什么意思？
+
+在下面的代码中，`scope2`函数是最接近`print`变量的函数范围:
+
+```js
+1  function scope2(print){
+2          if(print){
+3                   var insideIf = '12';
+4          }
+5          console.log(insideIf);
+6  }
+7  scope2(true); // prints '12' - no error
+```
+
+举例来说，前面的函数相当于以下函数:
+
+```js
+1  function scope2(print){
+2          var insideIf;
+3
+4          if(print){
+5                   insideIf = '12';
+6          }
+7          console.log(insideIf);
+8  }
+9  scope2(true); // prints '12' - no error
+```
+
+在 Java 中，这种语法会抛出一个错误，因为`insideIf`变量通常只在那个`if`语句块中可用，而不在它之外。
+
+这是另一个例子:
+
+```js
+1  var a = 1;
+2  function four() {
+3    if (true) {
+4      var a = 4;
+5    }
+6
+7    console.log(a); // prints '4'
+8  }
+```
+
+`4`被打印，而不是`1`的全局值，因为它被重新声明并在该范围内可用。
+
+### 带字母的声明: Block Scope
+
+另一个可以用来声明变量的关键字是`let`。以这种方式声明的任何变量都在最近的块范围内(意味着在声明它们的`{}`内)。
+
+```js
+1  function scope3(print){
+2          if(print){
+3                   let insideIf = '12';
+4          }
+5          console.log(insideIf);
+6  }
+7  scope3(true); // prints ''
+```
+
+在这个例子中，没有任何东西被记录到控制台，因为`insideIf`变量只在`if`语句块中可用。
+
+## 等式和类型
+
+JavaScript 的数据类型与 Java 等传统语言不同。让我们探讨一下这是如何影响诸如相等比较之类的事情的。
+
+### 变量类型
+
+在 JavaScript 中，有七种基本数据类型:布尔型、数字型、字符串型、未定义型、对象型、函数型和符号型(不讨论符号)。这里突出的一点是，undefined 是一个赋给刚刚声明的变量的原始值。`typeof`是用于返回变量类型的原始运算符。
+
+```js
+ 1  var is20 = false; // boolean
+ 2  typeof is20; // boolean
+ 3
+ 4  var  age = 19;
+ 5  typeof age; // number
+ 6
+ 7  var  lastName = "Bae";
+ 8  typeof lastName; // string
+ 9
+10  var fruits = ["Apple", "Banana", "Kiwi"];
+11  typeof fruits; // object
+12
+13  var me = {firstName:"Sammie", lastName:"Bae"};
+14  typeof me; // object
+15
+16  var nullVar = null;
+17  typeof nullVar; // object
+18
+19  var function1 = function(){
+20          console.log(1);
+21  }
+22  typeof function1 // function
+23
+24  var blank;
+25  typeof blank; // undefined
+```
+
+### 真假检验
+
+真/假检查用于`if`语句。在许多语言中，`if()`函数中的参数必须是布尔类型。然而，JavaScript(和其他动态类型语言)在这方面更加灵活。这里有一个例子:
+
+```js
+1  if(node){
+2          ...
+3  }
+```
+
+这里，`node`是一些变量。如果该变量为空、null 或未定义，它将被评估为`false`。
+
+以下是评估为`false`的常用表达式:
+
+*   `false`
+*   `Zero`
+*   空字符串(`''`和`""`)
+*   `NaN`
+*   `undefined`
+*   `null`
+
+以下是评估为`true`的常用表达式:
+
+*   `true`
+*   0 以外的任何数字
+*   非空字符串
+*   非空对象
+
+这里有一个例子:
+
+```js
+1  var printIfTrue = ";
+2
+3  if (printIfTrue) {
+4          console.log('truthy');
+5  } else {
+6          console.log('falsey'); // prints 'falsey'
+7  }
+```
+
+### === vs ==
+
+JavaScript 是一种脚本语言，变量在声明时不会被赋予类型。相反，类型在代码运行时被解释。
+
+因此，`===`用于比`==`更严格地检查相等性。`===`检查类型和值，而`==`只检查值。
+
+```js
+1  "5" == 5 // returns true
+2  "5" === 5 // returns false
+```
+
+`"5" == 5`返回`true`，因为`"5"`在比较之前被强制为一个数字。另一方面，`"5" === 5`返回`false`，因为`"5"`的类型是字符串，而 5 是数字。
+
+### 目标
+
+大多数强类型语言如 Java 使用`isEquals()`来检查两个对象是否相同。您可能想简单地使用`==`操作符来检查 JavaScript 中的两个对象是否相同。
+
+但是，这不会计算到`true`。
+
+```js
+1  var o1 = {};
+2  var o2 = {};
+3
+4  o1 == o2 // returns false
+5  o1 === o2 // returns false
+```
+
+虽然这些对象是等价的(相同的属性和值)，但它们并不相等。也就是说，变量在内存中有不同的地址。
+
+这就是为什么大多数 JavaScript 应用程序使用具有`isEqual(object1, object2)`函数的实用程序库如 lodash<sup>1</sup>或下划线<sup>2</sup>来严格检查两个对象或值。这是通过实现一些基于属性的相等性检查来实现的，其中比较对象的每个属性。
+
+在此示例中，将比较每个属性以获得准确的对象相等结果。
+
+```js
+function isEquivalent(a, b) {
+    // arrays of property names
+    var aProps = Object.getOwnPropertyNames(a);
+    var bProps = Object.getOwnPropertyNames(b);
+
+    // If their property lengths are different, they're different objects
+    if (aProps.length != bProps.length) {
+        return false;
+    }
+
+    for (var i = 0; i < aProps.length; i++) {
+        var propName = aProps[i];
+
+        // If the values of the property are different, not equal
+        if (a[propName] !== b[propName]) {
+            return false;
+        }
+    }
+
+    // If everything matched, correct
+    return true;
+}
+isEquivalent({'hi':12},{'hi':12}); // returns true
+```
+
+但是，这对于只有字符串或数字作为属性的对象仍然有效。
+
+```js
+var obj1 = {'prop1': 'test','prop2': function (){} };
+var obj2 = {'prop1': 'test','prop2': function (){} };
+
+isEquivalent(obj1,obj2); // returns false
+```
+
+这是因为函数和数组不能简单地使用`==`操作符来检查相等性。
+
+```js
+var function1 = function(){console.log(2)};
+var function2 = function(){console.log(2)};
+console.log(function1 == function2); // prints 'false'
+```
+
+虽然这两个函数执行相同的操作，但是函数在内存中有不同的地址，因此相等运算符返回`false`。基本的相等检查操作符`==`和`===`只能用于字符串和数字。要实现对象的等价性检查，需要检查对象中的每个属性。
+
+## 摘要
+
+JavaScript 有一种不同于大多数编程语言的变量声明技术。`var`在函数范围内声明变量，`let`在块范围内声明变量，变量在全局范围内可以不用任何运算符声明；然而，任何时候都应该避免全局范围。对于类型检查，应该使用`typeof`来验证预期的类型。最后，对于相等性检查，使用`==`检查值，使用`===`检查类型和值。但是，只能在数字、字符串和布尔值等非对象类型上使用它们。
+
+<aside class="FootnoteSection" epub:type="footnotes">Footnotes 1
+
+[`https://lodash.com/`](https://lodash.com/)
+
+ 2
+
+[`http://underscorejs.org/`](http://underscorejs.org/)
+
+</aside>
