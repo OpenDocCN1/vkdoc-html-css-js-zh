@@ -1,0 +1,132 @@
+# 七、反应式的未来
+
+> 未来属于今天为它做准备的人。—马尔孔十世
+
+Is this the end of our journey of Reactive architectures? I have to say that’s not the end at all, and probably it’s just the beginning! In this book I tried to collect some information to be really productive with Reactive Programming. Often you can find resources that explain how to use Reactive Programming with `Rx.JS`, for instance, but none of them clearly present concrete examples on how to implement Reactive Architectures in practice. Reactive Architectures as well as Reactive Programming are just at the beginning of their life cycle, and there are plenty of other things to discover: viewing Reactive concepts from different angles and probably learning from the mistakes made at the beginning of this journey. Embracing Reactive architectures right now could provide you a competitive advantage for the future of your projects and/or career. I personally think Reactive Programming is going to impact the way we are thinking about software programming, and this paradigm has a learning curve that is far from being the easiest one, but once we understand a few key concepts, every line of code we write will become better and better. Another important value provided by Reactive Programming is the fact we can “mix and match” with existing architectures, enhancing our projects and moving them to the next step forward, enhancing objects encapsulation and the single responsibility principles. I don’t want to spend an entire chapter talking about how I embraced the Reactive paradigm because I think it’s clear that I really get into it; however I thought it would be beneficial hearing also some stories from the most active developers in the Reactive ecosystem. Therefore, I decided to interview them and share how they envision the future of this paradigm on front-end development. Following, you will be able to read the answers to a questionnaire I prepared for the following:
+
+*   本·莱什-`Rx.JS` 5 创建者
+
+*   Michel Weststrate - `MobX` creator
+
+I hope you will enjoy what these gurus have to say on the topic and that you have enjoyed this journey of Reactive Front-End Architectures.
+
+## 本·莱什
+
+## Can you give us a brief introduction of yourself?
+My name is Ben Lesh, and I’m an engineer at Google, formerly at Netflix, and I’m the development lead for `RxJS`.
+
+## What are you doing for the reactive community?
+I’m working on making `RxJS` smaller, faster, and more ergonomic.
+
+## Why should a company or a developer embrace Reactive Programming?
+Reactive programming enables a lot of agility in code by being able to quickly, declaratively define almost any behavior with very little code.
+
+## In your opinion, what are the Pros and the Cons of Reactive Programming?
+The biggest pro is that you have a single type that can represent pretty much anything. Values that are either synchronous or asynchronous. A single value, many values, or no values at all. And because this type represents a set, there are a great number of transformations, joins, and queries you can perform on them. The biggest con is that in order to do all of the above, you have to learn a vernacular that is particular to reactive programming. This means learning terms like `mergeMap` or `switchMap`, etc.
+
+## Which is the most important benefit provided by Reactive Programming?
+The biggest benefit of reactive programming is being able to break applications down into smaller pieces of work that are truly independent from one another.
+
+## Talking about Reactive architectures, do you think there will be an evolution from where we are now? If so, which one?
+I think we’re about to see a lot of reactive languages start popping up. I know of two off the top of my head right now. One is a server-side reactive programming language that Facebook is working on. Another is a client-side reactive programming language being worked on by a colleague of mine.
+
+## Which framework or architecture do you usually use for your Reactive projects and why?
+Over the last three years I have used Ember, React, and `Angular`. `Angular` has first-class handling for `rxjs` observables. Since I work on an end of the project at Google, I use `Angular`, but I have no favorite. However the `Angular` Team itself is one of my favorite groups of people so I guess I give them a little favoritism.
+
+## What is missing in the Reactive panorama?
+We need more tooling for debugging in the browser. You can only do so much within a library, and it would be nice to have better tools built into Chrome to divide some of the more hairy scenarios in `rxjs`.
+
+## What would you change in the Reactive ecosystem?
+I wish we had more contributors. I particularly wish we had a more diverse set of contributors. When I say contributors I mean pretty much anything from engineering talent to community organization. The reactive programming Community is very small even though `RxJS` is widely used.
+
+## Which is the best approach to start working with Reactive Programming?
+I think it’s best just to pull it into something like jsbin and start using it and playing with it. Try a few operators and start with things like `filter`, `map`, and `scan`, then move on to something like `mergeMap`.
+
+## Talking about the library you created, can you share with us your vision for its future?
+Well in the not-too-distant future we’re going to be moving away from prototype patching and using more functional-based operators. So basically we’re going to have higher-order functions that return a function you can use in the let operator. There will also be more utility around that. This will allow better tree shaking, which means smaller bundles for people using `rxjs` with something like webpack. I’m also working very hard on reducing the size of the library.
+
+## If you could change one thing right now in your library, what would it be?
+I’m already working on it. Mostly I just wish it was less work so I could be done already. Haha.
+
+## Can you share one trick of your library that few developers understand or are using in this moment?
+I think I talked about this in my talk at AngularConnect last year. But it’s important for people to realize what they’re doing is setting up a chain of Observers. And that observers all have the guarantee that if error or complete is called on them they can no longer next. So if you want to handle an error and keep an observable alive, you need to isolate that Observer chain in a merge map and punctuated with a catch or a retry.
+
+## Reactive programming in 10 years, what is your prevision?
+I predict that it’ll be a little bit more mainstream than it is now. It’s one of those infectious ideas that’s hard to convey to people but once they get it they can’t help but tell other people.
+
+## Anything else to add?
+I’d really like to thank Eric Meijer, Matt Podwysocki for creating `RxJS`, and the rest of the Rx community for supporting `RxJS` these last few years.
+
+## 米歇尔·韦斯特
+
+## Can you give us a brief introduction of yourself?
+
+I have been programming for almost 20 years, and 10 years professionally. Started with Pascal, Object Pascal as a kid, then went to C# and Java and finally ended up doing mainly JavaScript / TypeScript. The pace of innovation in the JavaScript and TypeScript world makes it a very interesting environment.
+
+## What are you doing for the reactive community?
+
+Over a year ago I open sourced the MobX reactive programming library. It was initially developed for Mendix, but it solves many of the problems present in the React community (although it is generically applicable and used without the React community as well).
+
+## Why should a company or a developer embrace Reactive Programming?
+
+If reactive programming is well applied, it increases decoupling and increases the declarativity of the code. This is the result of the fact that Reactive Programming separates the description of behavior from the enforcement of that behavior; with Reactive Programming, behavior of a value is declared once, while the consistent execution of that behavior is enforced by the Reactive Programming library.
+
+I often compare it with civil laws versus laws of nature. The former state a wish, but they need law enforcement to ensure the behavior is applied in the majority of the cases. Laws of nature, on the other hand, cannot be violated intentionally or accidentally. The system simply guarantees consistency.
+
+As an example, MobX guarantees that any React component that renders a piece of data will update as soon as that data is changed. It doesn’t matter how the component got the data. It will update. Like towing a skateboard with a cart; if the car starts moving, so will the skateboard. Simply because you introduced a rope tying the two things together. You don’t bother enforcing that relation. The relation is no longer the idea of a relation, it is an actual one. And nature, or MobX, will always do its job.
+
+## In your opinion, what are the Pros and the Cons of Reactive Programming?
+
+Pro: More declarative in nature. You just specify what should happen. Then it is up to the system to figure out when it should happen.
+Pro: Inversion of control: You don’t care about who is listening to the event you are emitting, or the value you are changing. This increases decoupling significantly. Eases refactoring, etc.
+Pro: Better scalable architecture: Because producer and consumer are strictly separated, you are more flexible in changing either of them. It avoids the spaghetti code related to all the effects that need to happen when updating a value, which is so typical for large imperative projects.
+Con: Inversion of control also means an additional level of indirection. So when doing using Reactive Programming, between the event emitted or the value changed, there is always some library internals you have to debug through, before you arrive at the effect they cause. (Some libraries will even run the effects on a different stack, making this significantly harder.)
+Con: Reactive Programming code is often harder to grasp. Especially when using observable streams, you need to know the meaning of a whole range of stream-specific operators before you are able to read what was intended.
+
+## Which is the most important benefit provided by Reactive Programming?
+
+Decoupling, then declarativity.
+
+## Talking about Reactive architectures, do you think there will be an evolution from where we are now? If so, which one?
+
+I think reactivity across system boundaries is an area that will evolve significantly in the future. Meteor did some groundbreaking work here in the past, and we see this idea still in horizonDB, firebase, and GraphQL subscriptions. I think that in the future we will consume and react to events in the database just as easily as we react to events in the client-side state.
+
+Another dream I have is to introduce a reactive (virtual?) filesystem and build our build tools on top of that. If each file is just a reactive stream of data, we will able to combine the efficiency of Makefiles with real-time updates we have started to appreciate so much in file watchers. With proper dependency analysis, we will remove all the quirks where a chained watcher will build too much, too early, or in the wrong order.
+
+## Which framework or architecture do you usually use for your Reactive projects and why?
+
+There are two mainstream categories of reactivity: Reactive streams and Reactive values (or cells). Reactive streams are very powerful if the derivation of a value requires knowledge of the past or time. Examples of this are debouncing events, network requests etc., producing values from a sliding window of past values etc. In these cases the Rx* family provides very powerful tools.
+
+However, when deriving values, it only requires knowledge of the present, reactive data cells are much more convenient to work with. This is the mechanism that made spreadsheets so popular. With reactive data cells, one does often not need to set up explicit subscriptions, and one can use all the first-class operators of the language, rather than having stream-specific libraries. This mechanism makes libraries like Knockout, Meteor, Vuejs, and MobX so approachable.
+
+## What is missing in the Reactive panorama?
+
+Reactive file system interactions.
+
+## What would you change in the Reactive ecosystem?
+
+There are two important mainstream categories of reactive systems: Reactive streams, and (transparent) reactive cells (or values). They both solve quite different problems, but failing to recognize the distinction leads to quite some confusion.
+
+## Which is the best approach to start working with Reactive Programming?
+
+Build a web application with React and MobX to manage the client-side state. Then add RxJS to debounce search queries and network requests.
+
+## Talking about the library you created, can you share with us your vision for its future?
+
+MobX is barely visible in your code; it is mostly there at the background. I want to make it even more invisible when Proxies are standardized in browsers.
+
+## If you could change one thing right now in your library, what would it be?
+
+Separate the reactivity algorithms and core api from the observable data collections. That would make it easier to target different environments (e.g., ES3 or Proxy-supporting environments) and make MobX more accessible for those who don’t like the property wrapping it like it does on objects.
+
+## Can you share one trick of your library that few developers understand or are using in this moment?
+
+Keep side effects really small. But derive as much data as possible. It’s often surprising how much one can derive from the state. It keeps imperative code to a minimum.
+
+## Reactive programming in 10 years, what is your prevision?
+
+More closely connected front-end / back-end architectures where the notion of client-side state largely disappears for domain data.
+
+## Anything else to add?
+
+Can you send me a copy of the book :)
