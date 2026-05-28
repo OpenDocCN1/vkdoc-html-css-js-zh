@@ -1,0 +1,521 @@
+# 十、Angular 和测试
+
+在前一章中，你学习了如何使用当前的一套工具来快速组合一个站点，并使用版本控制来跟踪你使用的所有文件以及它们之间的差异。在这一章中，我们将深入研究并理解像 Angular 这样的框架是如何工作的。
+
+简而言之，框架帮助你以一种更有组织性和更容易维护的方式构建大型应用。使用框架的另一个好处是团队的学习曲线更短。一旦新成员学会了这个框架，他们对整个网站的工作原理就有了更好的理解。在我们的例子中，我们将对 AngularJS 进行高层次的观察。
+
+在撰写本文时，Angular 的当前版本是 1.4.1。信息可以在`https://angularjs.org/`找到。关于 Angular 2 的信息可以在`https://angular.io/`找到。
+
+Angular 试图解决的问题之一是使开发动态应用变得容易。HTML 本身并不是为制作单页应用而设计的。Angular 提供了一种以快速学习的方式开发现代 web 应用的方法。它通过将应用的每个部分保持独立来实现这一点，这样每个部分都可以独立于其他部分进行更新。这种架构模式被称为模型-视图-控制器(MVC)。你会发现其他框架，如 Backbone 和 Ember，也是以类似的方式工作的。
+
+在第九章中，我们介绍了一些可以帮助我们提高效率的开发工具。自耕农 (`http://yeomanio/`)。)使用社区构建的生成器快速开发基本站点运行所需的所有文件和文件夹。Grunt (`http://gruntjs.com/`)用于自动化任务，例如为生产就绪的站点进行单元测试和优化文件。本章假设两种工具都已安装。请参考上一章或列出的站点，了解有关安装它们的信息。
+
+要创建新的 Angular 项目，键入`your angular`。作为回应，约曼问了一些关于你想如何建立这个项目的问题:
+
+*   `Would you like to use Sass (with Compass)?` Sass (`http://sass-lang.com/`)stands for Syntactically Awesome Style Sheets. Sass gives you features like nesting selectors and using variables to develop style sheets. Compass is a tool written in Ruby that uses Sass files and adds features like generating sprite sheets out of a series of images.
+
+    同意这个选项，你将得到一个默认使用 Twitter Bootstrap 风格的 SCSS 文件。如果你选择否，Yeoman 会给你一个普通的 CSS 文件，使用相同的 CSS 选择器。
+
+*   `Would you like to include Bootstrap?` Twitter Bootstrap (`http://getbootstrap.com/``)` helps you develop the user interface for your website. Bootstrap can help make your site responsive so it can look good on multiple devices and gives you items like buttons, an image carousel, and other user interface components.
+
+    如果您选择使用这个工具，那么 Yeoman 会询问是否使用 Sass 版本的 Bootstrap。
+
+*   `你想包括哪些模块？`模块给予角额外的能力。例如，`angular-aria`模块提供可访问性特性，而`angular-route`给你添加深度链接特性的能力。您可以选择添加或删除任何模块。模块也可以在以后手动添加。
+
+一旦你回答了这些问题，所有需要的文件都将被下载，Grunt 将启动一个本地服务器，加载默认的浏览器`http://localhost:9000`，如图图 10-1 所示。
+
+![9781430263913_Fig10-01.jpg](img/image00253.jpeg)
+
+图 10-1 。港口 9000 开始运行
+
+从这里我们可以看到构成这个项目的文件夹。`app`文件夹包含了我们的主应用，这是我们将要开始的地方。
+
+这些文件夹是非常标准的，你可以在 HTML 站点中找到。在`scripts`文件夹中，事情开始变得有趣起来。
+
+`scripts` f 的根源是`app.js`年长。这是 Angular 的主要应用文件。打开这个文件来看看 Angular 是如何被引导的。在图 10-2 中，你会发现应用的名称`chapter10app` (因为这是创建该应用的文件夹的名称)。这与`index.html`中的`ng-app`指令一起工作。指令赋予 DOM 元素额外的能力。在这种情况下，它告诉 Angular 应用从这里开始，并被称为`chapter10app`。
+
+![9781430263913_Fig10-02.jpg](img/image00254.jpeg)
+
+图 10-2 。使用`ng-app`指令告诉 Angular 应用的根元素在哪里。
+
+当你查看`app.js`时，你会看到在应用的名字后面加载了许多模块，这给 Angular 提供了额外的能力。其中一个模块被命名为`ngRoute`；它将允许您处理应用的 URL。`.config`方法使用`$routeProvider`来理解 URL，并通过使用一系列`when`语句用控制器加载正确的模板。
+
+`when`语句使您能够为应用定制 URL。在这个例子中，如果你输入`/about`，Angular 会知道加载`about.html`模板并使用`AboutCtrl`作为控制器。我们来详细解释一下这是什么意思。
+
+## 视图和控制器
+
+我们已经讨论过 Angular，像其他框架一样，使用 MVC 模式。这意味着应用被分成三个不同的部分。
+
+*   模型:存储应用的数据。
+
+*   视图:创建模型数据的表示；例如，生成图表来表示数据。
+
+*   控制器:向模型发送命令以更新数据。还向视图发送命令以更新模型数据的显示。
+
+文件夹`views`包含 HTML 模板，可以用来自模型的数据更新。`controllers`文件夹包含与模型和视图文件通信的 JavaScript 文件。
+
+我们来看一下`about.html`文件。这里我们将添加一个按钮，并让控制器使用它。
+
+打开`about.html`，在`views`文件夹中找到。在它的内部，添加一个按钮标签。在这个按钮标签中，我们将使用另一个指令，它将让 Angular 知道按钮何时被点击。
+
+我们需要添加指令到按钮上。如清单 10-1 中的所示，键入`ng-click='onButtonClick()'`。这将由我们的控制器解决，让我们分离应用的可视部分和业务逻辑。
+
+***清单 10-1*** 。使用`ng-click`指令定义方法
+
+```js
+<button ng-click="onButtonClick()">Button</button>
+```
+
+打开`controllers`文件夹中的`about.js`。控制器允许您添加应用这一部分工作所需的所有业务逻辑。在`controller`方法中，你可以看到名字`AboutCtrl`，它与我们在`app.js`文件中看到的相匹配。您在控制器方法中看到的另一个东西是 `$scope`属性。
+
+`$scope`允许您向正在使用的视图添加方法或属性。这里我们将处理一个在 HTML 文件中声明的函数。因为`ng-click="onButtonClick()"`是在 HTML 代码中定义的，所以它是这个控制器范围的一部分。
+
+清单 10-2 显示了我们如何让控制器和 HTML 一起工作。
+
+***清单 10-2*** 。使用控制器定义 HTML 文件中声明的函数
+
+```js
+angular.module('chapter10App')
+.controller('AboutCtrl', function ($scope, $http) {
+    $scope.awesomeThings = [
+      'HTML5 Boilerplate',
+      'AngularJS',
+      'Karma'
+    ];
+  $scope.onButtonClick = function(){
+    console.log('hello world');
+  };
+   });
+```
+
+如果应用目前正在浏览器中运行，它应该会看到 JavaScript 文件已经更新，并重新编译一切。完成后，您可以单击按钮，查看控制台，并看到消息。
+
+否则，转到命令行，在应用的主文件夹中键入`grunt serve`。
+
+这仅仅是能够将应用的视图与其业务逻辑分离的开始。例如，如果您想要显示一个项目列表，该怎么办？
+
+回到控制器，我们将在我们的作用域中添加一个 JSON 对象；清单 10-3 显示了代码。
+
+***清单 10-3*** 。分配给`about`控制器范围的数据
+
+# 远程数据源
+
+让我们以按钮方法为例，用它来获取一些远程数据。
+
+我们将使用`$http`服务，它将为我们处理远程呼叫。这类似于 JQuery 中的 AJAX 方法。为了利用该服务，我们首先需要将其添加到`controller`方法中。
+
+在`controller`方法中添加`$http`服务。它现在看起来应该类似于清单 10-5 。
+
+***清单 10-5*** 。将`$http`服务添加到`AboutCtrl`控制器
+
+```js
+.controller('AboutCtrl', function($scope, $http){
+$scope.awesomeThings = [
+'HTML5 Boilerplate',
+'AngularJS',
+'Karma'
+];
+});
+```
+
+现在控制器可以使用服务了，我们可以通过`onButtonClick`方法来使用它。我们将使用`get`方法，它匹配其余的`get`动词。有关 REST 方法的更多信息，请查看这篇维基百科文章:
+
+```js
+http://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol#Request_methods
+```
+
+我们还将使用 JSONPlaceholder，这是一个让您测试 REST 请求并返回假数据的服务。在`onButtonClick`方法中，删除现有代码并添加清单 10-6 中的代码。
+
+***清单 10-6*** 。进行 HTTP 调用并将结果分配给`results`属性
+
+```js
+$http.get('http://jsonplaceholder.typicode.com/photos').success(function(data){
+    $scope.results = data;
+});
+```
+
+查看这段代码，我们看到我们正在使用`get`方法，但是我们也在监听`success`事件。如果调用成功，我们使用一个匿名函数将结果赋给一个名为`results`的属性。
+
+现在我们有了结果，我们可以更新模板，不仅显示文本，还显示从服务返回的缩略图。我们通过对`image`标签使用另一个指令来做到这一点。
+
+打开`about.html`并更新现有代码。删除之前的列表，并将清单 10-7 中的代码添加到模板中。
+
+***清单 10-7*** 。基于 REST 服务返回的结果创建一个无序列表
+
+```js
+<ul>
+    <li ng-repeat="result in results">
+    <p>ID: {{result.id}}</p>
+    <p>{{result.title}}</p>
+    <p><img ng-src="{{result.thumbnailUrl}}"/></p>
+</li>
+</ul>
+```
+
+这里我们使用了`ng-src`指令来告诉`image`标签在哪里可以找到列表中的每张图片。就像前面的例子一样，这将遍历整个结果列表，并将它们全部显示在屏幕上。使用这个指令的一个好处是`image`标签在收到数据之前不会尝试显示图像。所以我们只需要从 REST 服务中获取结果。
+
+此时，页面看起来应该类似于图 10-4 。
+
+![9781430263913_Fig10-04.jpg](img/image00256.jpeg)
+
+图 10-4 。显示 REST 服务的结果
+
+只需几个步骤，我们就有了一个能够从远程数据源检索数据并在需要时将其呈现给浏览器的站点。Angular 有很多特性，但是我们还会介绍一个。我们的下一课将涵盖路线。
+
+# 路线
+
+*Routes* 允许用户为我们的应用创建自定义的 URL，并给我们标记一个页面的能力，以便我们以后可以直接访问它。
+
+我们在`app.js`文件中看到了一个这样的例子。`.config`方法使用了`$routeProvider` API。在一系列的`when`语句中，我们能够计算出将加载什么样的 HTML 模板，以及哪个控制器将与该模板一起使用。
+
+既然我们已经很好地理解了它是如何工作的，那么如果您想将参数传递给应用呢？例如，假设我们只想显示上一个例子中的一篇文章。在这里，我们将创建一条路由来实现这一目的。
+
+如果您在前面的课程中使用 Yeoman 创建了该应用，请转到命令行并键入:
+
+```js
+yo angular:route post
+```
+
+使用该命令，Yeoman 将通过添加一条新路线来更新`app.js`文件。它还将为您的控制器创建一个新的 JavaScript 文件，并为视图创建一个 HTML 文件。对于一个命令来说还不错。
+
+如果应用正在运行，您可以转到浏览器并键入:
+
+```js
+http://localhost:9000/#/post
+```
+
+您应该看到 post 视图已经准备好了。
+
+这里的目标是根据添加到我们的 URL 的数量来加载一篇文章。例如，如果 URL 看起来像这样:
+
+```js
+http://localhost:9000/#/post/4
+```
+
+基于我们在上一个例子中使用的服务，您应该会看到列表中的第四篇文章。
+
+## 路线参数
+
+为了实现这一点，我们需要让我们的路由功能更加灵活。打开`app.js`；这里我们将更新 post route，这样它就可以在 URL 中加入变量。
+
+它应该从:
+
+```js
+/post
+```
+
+致:
+
+```js
+/post/:postId
+```
+
+通过添加`:postId`，我们创建了一个可以在控制器中使用的变量。这个变量将代表 URL 中的数字。为了说明这一点，让我们更新控制器。
+
+打开`post.js`，你会看到在`controller`方法中有一个使用`$scope`的匿名函数。在我们的其他例子中，我们看到`$scope`给了我们控制 HTML 模板的能力。我们将添加一个名为`$routeParams`的额外参数，这样我们就可以在 URL 中访问我们的变量。
+
+现在我们可以从 URL 中获取变量，并将其分配给`$scope`。这将使我们能够在更新模板后显示它。
+
+在`controller`方法中键入以下内容:
+
+```js
+$scope.postId = $routeParams.postId;
+```
+
+要在屏幕上看到我们的号码，我们可以快速更新模板。
+
+打开`views`文件夹中的`post.html`文件。在这里我们可以快速更新这个模板。首先删除段落标记之间的副本，使其看起来像这样:
+
+```js
+<p>{{postId}}</p>
+```
+
+完成后，你可以在`url`中输入一个数字，并看到它显示在屏幕上。此时，浏览器应该看起来像图 10-5 。
+
+![9781430263913_Fig10-05.jpg](img/image00257.jpeg)
+
+图 10-5 。基于 URL 在屏幕上显示变量
+
+还不算太糟。所以现在我们只需要将它连接到一个 GET 请求并显示结果。这里的代码将与我们之前所做的非常相似。在 post 控件中，我们需要添加`$http`服务，这样我们就可以进行 REST 调用。清单 10-8 显示了代码。
+
+***清单 10-8*** 。添加了`$routeParams`和`$http`服务的完整 PostCtrl
+
+```js
+.controller('PostCtrl', function($scope, $routeParams, $http){
+$scope.awesomeThings = [
+'HTML5 Boilerplate',
+'AngularJS',
+'Karma'
+];
+});
+```
+
+就在这个下面，我们将像以前一样进行相同的 REST 调用，但是这次添加了`postId`变量，如清单 10-9 中的所示。
+
+***清单 10-9*** 。使用`$http`服务和`routeParam`获得一个结果
+
+```markdown
+# 应用测试
+
+当您阅读 Angular 的文档时，您将会看到如何编写覆盖您正在构建的应用的不同部分的测试。
+
+测试有助于确保您编写的代码始终是稳定的。例如，如果您需要对一个函数进行更改，即使您更改了该函数的工作方式，它仍然会给出相同的结果。如果这种改变在应用的其他地方产生了意外的结果，测试应该让你知道。
+
+因此，在这种情况下，如何测试 Angular 应用呢？我们将考虑两种类型的测试：`单元测试`和`端到端(E2E)测试`。
+
+## 单元测试
+
+当你写一个函数时，你要考虑它应该接收什么参数，它用这些信息做什么，以及结果应该是什么。对该代码单元进行测试将确保它按照您期望的方式运行。
+
+如果你一直在使用前几章中的约曼生成的 Angular 版本，我们需要安装一些额外的项目来让测试工作。转到命令行并键入
+
+```js
+npm install grunt-karma -–save-dev
+```
+
+这将安装 Karma。
+
+Karma 在 Angular developer guide 中被描述为“一个 JavaScript 命令行工具，可用于生成一个 web 服务器，该服务器加载应用的源代码并执行测试。”简而言之，Karma 将启动浏览器，根据您编写的测试运行代码，并给出结果。如果你没有安装想要测试的浏览器(例如，如果你使用的是 Mac)，你可以使用 BrowserStack (`https://www.browserstack.com/`)或 Sauce Labs (`https://saucelabs.com/`)这样的服务。关于 Karma 的最新信息，请访问`http://karma-runner.github.io/`。
+
+接下来我们需要安装 PhantomJS。类型
+
+```js
+npm install karma-phantomjs-launcher -–save-dev
+```
+
+在命令行中。
+
+PhantomJS 是一个无头浏览器，一个没有用户界面的浏览器。通过包含它，您可以在浏览器中运行您的应用，并且所有命令都将从命令行执行。有关 PhantomJS 的最新信息，请访问`http://phantomjs.org/`。
+
+最后，键入
+
+```js
+npm install karma-jasmine -–save-dev
+```
+
+在命令行。这将安装 Jasmine，我们将使用它来测试我们的应用。您可以在`http://jasmine.github.io/`找到文档。
+
+现在，让我们通过输入`grunt test`来确保一切正常。这将运行`test`文件夹中的测试。
+
+### 添加新测试
+
+使用 Yeoman 的一个好处是，当您创建新的控制器时，它也会为单元测试创建相应的文件。
+
+看主文件夹。在那里你会找到一个`test`文件夹。在这个文件夹中将会有一个`spec`文件夹，包含一个`controllers`文件夹，其中包含了对已经创建的每个控制器进行单元测试的文件。
+
+打开`about.js`让我们看看如何测试控制器。
+
+在我们开始编写测试之前，让我们先看看现有的代码，了解一下发生了什么。
+
+在顶部有一个`describe`方法，用于谈论即将编写的测试。`describe`方法可以用来在高层次上描述将要测试的一切。
+
+接下来有一个`beforeEach`方法，它将在每次测试之前运行。这使我们能够通过将应用作为一个模块加载来访问整个应用。
+
+创建两个变量，`AboutCtrl`和`scope`；然后我们创建另一个`beforeEach`方法，它给变量分配控制器的值和控制器内部的范围，就像我们直接使用控制器一样。
+
+最后，我们可以编写我们的测试，我们用一系列的`it`方法来描述。这有助于使测试易于文档化。在这里你描述这个函数应该如何工作。
+
+默认测试有消息`"should attach a list of awesomeThings to the scope"`；然后它用一个`expect`方法运行一个函数。这种方法很重要，因为它给你一个测试预期结果的机会。在这种情况下，我们检查数组`awesomeThings`的长度，预计它是 3。如果不是，测试将失败。
+
+我们现在可以测试之前创建的数组带的长度。添加一个新的`it`方法，如清单 10-11 中的所示。
+
+***清单 10-11*** 。对应该在 `about`控制器中的波段数进行单元测试
+
+```js
+it('should have at least 3 bands', function(){
+    expect(scope.bands.length).toBe(3);
+});
+```
+
+如果您在命令行输入`grunt test`，这个测试应该会通过。如果在`expect`方法中有不同的数字，例如 2，测试将会失败。你可以在图 10-7 中看到。
+
+![9781430263913_Fig10-07.jpg](img/image00259.jpeg)
+
+图 10-7 。测试预期两个项目，但收到三个项目
+
+我们还可以检查数组中某一项的值(清单 10-12 )。
+
+***清单 10-12*** 。检查数组中的值的单元测试
+
+```js
+it('should have the second album be Wish', function(){
+    expect(scope.bands[1].album).toEqual('Wish');
+});
+```
+
+这是一个如何测试控制器的快速概述。从这里，您可以测试已经编写的方法并评估结果。Jasmine 给了你很多方法来确保你写的代码是可靠的。让我们再来看看测试，打开`post.js`并测试我们的 HTTP 请求。
+
+### 使用`$httpBackend`测试 HTTP 请求
+
+在前面的例子中，我们测试了一些与控制器相关的数据。在这种情况下，数据来自控制器内部。在大多数应用中，您将从远程数据源获取数据。那么，如何在无法控制数据源的情况下编写测试呢？在这种情况下，您使用`$httpBackend`来确保您创建的请求独立于服务工作。
+
+这个测试将重现我们对`$routeParams`所做的一切。它将是独立的，实际上不会调用服务器。
+
+首先，我们将添加几个变量。除了`PostCtrl`和`scope`，再增加`httpBackend`和`routeParams`。在这种情况下，我们不引用指令，所以您不需要添加美元(`$`)符号。
+
+第二个`beforeEach`方法是我们当前初始化控制器的地方。这是我们将添加指令的地方，就像在真正的控制器中一样；这里加上`$httpBackend`和`$routeParams`。
+
+现在我们给之前创建的变量赋值。在浏览器中，我们可以通过给 URL 中的`postId`赋值来获得一篇文章。我们模拟它，如清单 10-13 所示。
+
+***清单 10-13*** 。赋值，这样我们就可以模拟从浏览器中获取值(第一部分)
+
+```js
+beforeEach(inject(function($controller,$rootScope,$httpBackend,$routeParams){
+  scope = $rootScope.$new();
+  routeParams = $routeParams;
+  routeParams.postId = 1;
+  httpBackend = $httpBackend;
+  httpBackend.expectGet('http://jsonplaceholder.typicode.com/photos/'+routeParams.postId).respond({id:'1', title:'title 1', thumbnailUrl:'myImage.png'});
+  PostCtrl = $controller('PostCtrl', {
+    $scope: scope
+  });
+  httpBackend.flush();
+}));
+```
+```
+
+因为我们没有将它加载到浏览器中以确保它能够工作，所以我们将把`postId`的值硬编码为 1。然后，使用`httpBackend`，我们以与控制器中相同的方式模拟调用。在这种情况下我们使用`expectGet`的方法。这将模拟一个 HTTP `GET`请求。如果你想做一个`POST`请求，你可以使用`expectPost`方法。
+
+`response`方法给了我们可以测试的有效负载。这里我们传回一个简单的对象，就像 API 所传递的一样。
+
+在范围被分配后，我们再次看到使用`flush`方法的`httpBackend`对象。这将使响应可用于测试，就像您进行了 HTTP 调用一样。
+
+现在开始测试。正如在另一个例子中一样，一系列的`it`方法描述了您所期望的。
+
+让我们首先确保我们只从服务器返回一个结果(清单 10-14 )。
+
+***清单 10-14*** 。赋值，这样我们就可以模拟从浏览器中获取值(第二部分)
+
+```js
+it('should be a single post', function(){
+    expect(scope.results).not.toBeGreaterThan(1);
+});
+```
+
+Jasmine 使测试易于阅读。我们有结果，只是想确定我们只有一个对象。
+
+如果我们想确保这个对象有一个 ID 属性，我们可以使用清单 10-15 中的代码。
+
+***清单 10-15*** 。检查 ID 属性
+
+```js
+it('should have an id', function(){
+    expect(scope.results.id).toBeDefined();
+}
+```
+
+就像以前一样，我们可以添加测试，当我们向控制器添加更多功能时，这些测试将允许我们理解控制器。开发代码时首先编写测试的过程被称为 *测试驱动开发*。在这种方法中，您首先编写一个测试，知道它会失败，然后返回并编写最少的代码来使测试工作。之后，您可以根据需要进行重构。Jasmine 用于测试代码单元。它还用于测试与浏览器的集成。那么如何在多个浏览器上模拟按钮点击呢？毕竟，从 web 开发的历史来看，我们知道即使是看起来简单的东西有时在某些浏览器中也是行不通的。这就是量角器的用武之地。
+
+## 用量角器进行端到端测试
+
+量角器 ( `http://angular.github.io/protractor`)是一个让你运行真正的浏览器并在其中运行测试的工具。例如，您可以确保当一个按钮被单击时，它提交一个表单。与测试小代码单元的单元测试不同，端到端(E2E)测试 让你可以针对 HTTP 服务器测试应用的所有部分。这类似于你在浏览器中打开网站，并确保一切正常。这种方法的好处在于它是自动化的。
+
+像这样的任务应该自动化。量角器能够做到这一点，因为它是建立在 WebDriver 之上的，web driver 是一种用于在浏览器内部自动测试的工具。量角器也有支持 Angular 的特性，所以你只需要很少的配置。
+
+让我们安装量角器并进行一些测试。在命令行中，键入:
+
+```js
+npm install –g protractor –-save-dev
+```
+
+和其他节点包一样，该行将在全球范围内安装量角器，因此您可以在其他项目中使用它。
+
+我们需要做一些配置来让它工作。让我们创建`config`文件。
+
+创建一个新文件，我们将其命名为`protractor.conf.js`，并保存在紧挨着`karma.config.js`文件的`test`文件夹中。
+
+在这个文件中，我们将向量角器提供一些关于在哪里可以找到 Selenium 服务器、运行什么浏览器以及测试文件在哪里的信息。清单 10-16 显示了代码。
+
+***清单 10-16*** 。量角器的基本配置文件
+
+```js
+export.config = {
+    seleniumAddress: 'http://localhost:4444/wd/hub',
+    multiCapabilities: [{browserName: ‘firefox’},{browserName: ‘chrome’}],
+    baseUrl: 'http://localhost.9000',
+    framework: 'jasmine',
+    specs: ['protractor/*.js']
+};
+```
+
+这里有几个东西要解包，我们来看看。
+
+`seleniumAddress`属性告诉量角器 Selenium 服务器在哪里运行。接下来，`multiCapabilities`属性告诉量角器在哪些浏览器上运行测试。如您所见，这是一个对象数组，列出了每个浏览器的名称。
+
+因为我们是在本地测试，所以我们只能测试安装在机器上的浏览器。所以你运行的是 Mac 就不能测试 IE。如果您需要测试像 IE 或移动浏览器这样的浏览器，您可以添加允许您连接到 SauceLabs 或 BrowserStack 的属性。
+
+接下来我们有`baseUrl`属性，它告诉量角器哪个服务器正在托管被测试的应用。当您运行测试时，站点运行在本地服务器上是很重要的。`framework`属性被设置为`Jasmine`，因为这是我们测试使用的框架。
+
+`specs`属性很重要，因为它告诉量角器哪个文件夹中有测试。在我们的例子中，它在`protractor`文件夹中，我们使用通配符告诉它查看该文件夹中的任何 JavaScript 文件。
+
+我们现在有量角器设置。是时候写一些测试了。在`tests`文件夹中创建一个`Protractor`文件夹。这里我们将编写一个基本的测试。
+
+在`Protractor`文件夹中创建一个名为`app-spec.js`的文件。格式将与我们在前面的例子中所做的非常相似。
+
+我们从将要运行的测试套件的`describe`方法开始。紧接着是我们的一组`it`语句(清单 10-17 )。为了简单起见，我们将使用量角器网站上的例子。
+
+***清单 10-17*** 。`It`检查站点是否有标题的方法
+
+```js
+it('should have a title', function(){
+    browser.get('http://juliemr.github.io/protractor-demo');
+    expect(browser.getTitle()).toEqual('Super Calculator');
+});
+```
+
+我们现在需要的东西都有了。我们将从命令行运行它。如果您还没有运行`serve`任务并在本地查看站点，请键入:
+
+```js
+grunt serve
+```
+
+这将让你从本地服务器的端口 9000 运行网站，这是我们告诉量角器运行测试时要查看的地方。
+
+现在打字
+
+```js
+protractor test/protractor.conf.js
+```
+
+这将在`test`文件夹中查找，运行配置文件，并启动浏览器，以便它可以运行测试。
+
+如图 10-8 所示，我们应该会得到一个通过的结果。
+
+![9781430263913_Fig10-08.jpg](img/image00260.jpeg)
+
+图 10-8 。火狐和 Chrome 都通过了量角器测试
+
+这将引导浏览器找到 URL 并检查标题。很简单。
+
+现在让我们编写一个测试，我们可以使用同一个计算器将两个值相加，然后检查结果。清单 10-18 显示了代码。
+
+***清单 10-18*** 。键入两个文本字段，然后测试结果
+
+```js
+describe('Protractor Demo App', function() {
+  it('should add one and two', function() {
+    browser.get('http://juliemr.github.io/protractor-demo/');
+    element(by.model('first')).sendKeys(1);
+    element(by.model('second')).sendKeys(2);
+
+    element(by.id('gobutton')).click();
+
+    expect(element(by.binding('latest')).getText()).
+      toEqual('3');
+  });
+});
+```
+
+在这里，我们可以直接看到 Angular 的`ng-model`指令来访问文本字段并给它们赋值。然后我们可以通过它的 ID 找到按钮并点击它。该点击触发方法`doAddition`。最后，我们能够查看和检查由该方法的结果更新的值。
+
+## 摘要
+
+这是对 AngularJS 以及编写单元测试和端到端测试的一个非常高层次的审视。这两个主题都可以成为他们自己的书。
+
+随着您的项目变得越来越大，越来越复杂，拥有一个框架可以帮助您保持一切井井有条。此外，能够测试您的代码会让您对自己编写的代码更有信心。
+
+单元测试让您知道您的前端代码正在按预期工作。集成测试让您知道相同的代码是否适用于不同的浏览器。
+
+Moo ( `www.yearofmoo.com/2013/09/advanced-testing-and-debugging-in-angularjs.html`)的站点年有一个用 Angular 进行测试和调试的优秀细分。它涵盖了诸如何时应该编写测试、在旧浏览器中测试以及测试什么和不测试什么等主题。
+
+现在可以放心重构了，知道自己写的东西不会弄坏 app 如果有，你会尽快知道。

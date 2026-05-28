@@ -1,0 +1,628 @@
+# 三、创建可重用代码
+
+在上一章的介绍中，我们讨论了作为 JavaScript 基本单位的对象。讨论完 JavaScript 对象字面量后，我们将用本章的大部分时间来研究这些对象如何与面向对象编程交互。在这里，JavaScript 存在于经典编程和 JavaScript 自身近乎独特的能力之间的紧张状态中。
+
+从将代码组织成对象开始，我们将看看管理代码的其他模式。我们希望确保不污染全局名称空间，或者(过度)依赖全局变量。这意味着我们将从名称空间的讨论开始，但名称空间只是冰山一角，一些更新的调用模式可以帮助我们正确地保护我们的代码:模块，以及稍后立即调用的函数表达式 (IIFEs 或“iffies)。
+
+一旦我们在单个文件中很好地组织了我们的代码，看看可用于管理多个 JavaScript 文件的工具是有意义的。当然，对于我们可能使用的一些库，我们可以依赖内容交付网络。但是我们也应该考虑加载我们自己的 JavaScript 文件的最佳方式，以免我们最终得到的 HTML 文件包含一个又一个脚本标签。
+
+## 面向对象的 JavaScript
+
+JavaScript 是一种原型语言，而不是经典语言。让我们先把这一点说清楚。Java 是一种经典语言，因为 Java 中的一切都需要一个类。另一方面，在 JavaScript 中，一切都有原型；因此它是原型。但是，正如道格拉斯·克洛克福特和其他人所说，它的原型性质是“矛盾的”。像一些不情愿的超级英雄一样，JavaScript 有时不想从其他编程语言的人群中脱颖而出，让它的能力大放异彩。好吧，让我们给它一个斗篷，看看会发生什么！
+
+首先，我们重申一下，JavaScript 不是经典语言。有许多书籍、博客文章、指南、幻灯片和库试图在 JavaScript 上强加基于类的语言结构。我们欢迎您深入研究它们，但请记住，这样做时，尽管意图良好，但它们的作者是在试图将一个方钉钉进一个圆孔。我们在这里不打算这样做。本章不会讨论如何让 JavaScript 像 Java 一样运行。相反，我们将关注 JavaScript 与面向对象理论中概述的功能的交集，以及它如何有时达不到预期，有时又超出预期。
+
+最终，我们为什么要使用面向对象编程？它提供了允许简化代码重用的使用模式，消除了重复劳动。此外，面向对象风格的编程有助于我们更深入地思考我们正在处理的代码。它提供了一个轮廓，一张地图，我们可以按照它来成功地实现。但这不是唯一的地图。JavaScript 的原型是一种相似但不同的方式来达到我们的目的。
+
+### 先从原型本身说起
+
+JavaScript 中的每种类型(对象、函数、日期等等)都有一个原型。ECMAScript 标准 规定这个属性是隐藏的，称为`[[Prototype]]`。到目前为止，您可以通过两种方式之一访问该属性:非标准的`__proto__`属性和`prototype`属性。起初，暴露`__proto__`并不可靠地跨浏览器可用，即使可用也不总是以相同的方式实现。[脚注:令人震惊的是，浏览器会以不同的方式实现 JavaScript 的关键部分！]与 ECMAScript 6(即将在您身边的浏览器中推出！)，`__proto__`将成为类型的正式属性，并将可用于任何符合的实现。但未来还不是现在。
+
+### 还可以访问某些类型的`prototype`属性
+
+所有核心 JavaScript 类型(日期、字符串、数组等等)都有一个公共的`prototype`属性。任何从函数构造函数创建的 JavaScript 类型也有一个公共的`prototype`属性。但是这些类型的实例，不管是字符串、日期还是其他，都有`而不是`属性。这是因为`prototype`属性在实例上不可用。我们也不会在这里使用`prototype`属性，因为我们不会使用函数作为构造函数。我们将使用对象作为构造函数。
+
+没错；我们将使用一个对象文字作为其他对象的基础。如果这听起来很像类和实例，那么有一些相似之处，但是，正如你所料，也有一些不同之处。考虑一个人对象，如清单 3-1 中的所示。
+
+***清单 3-1*** 。一个人对象
+
+```js
+var Person = {
+    firstName : 'John',
+    lastName : 'Connolly',
+    birthDate : new Date('1964-09-05'),
+    gender: 'male',
+    getAge : function() {
+        var today = new Date();
+        var diff = today.getTime() - this.birthDate.getTime();
+        var year = 1000 * 60 * 60 * 24 * 365.25;
+        return Math.floor(diff / year);
+    }
+};
+```
+
+这里没什么特别的:一个人有名字、姓氏、性别、出生日期和计算年龄的方法。这个人是一个字面上的对象，不是我们认为的类。但是我们想把这个人当作一个类来使用。我们想创造更多的符合这个人提出的结构的物体。为了保持无类 JavaScript 和有类的面向对象语言之间的区别，我们将 `Person` 称为一种类型(类似于 `Date`、`Array` 和 `RegExp` 都是类型的方式)。我们想要创建 `Person` 类型的实例:为此，我们可以使用`Object.create` ( 清单 3-2 )。
+
+***清单 3-2*** 。创造人
+
+```js
+var Person = {
+    firstName : 'John',
+    lastName : 'Connolly',
+    birthDate : new Date( '1964-09-05' ),
+    gender : 'male',
+    getAge : function () {
+        var today = new Date();
+        var diff = today.getTime() - this.birthDate.getTime();
+        var year = 1000 * 60 * 60 * 24 * 365.25;
+        return Math.floor( diff / year );
+    },
+
+    toString : function () {
+        return this.firstName + ' ' + this.lastName + ' is a ' + this.getAge() +
+            ' year-old ' + this.gender;
+    }
+};
+
+var bob = Object.create( Person );
+bob.firstName = 'Bob';
+bob.lastName = 'Sabatelli';
+bob.birthDate = new Date( '1969-06-07' );
+console.log( bob.toString() );
+```
+
+已经从 `Person` 对象创建了一个实例。我们将 `Person` 的一个实例存储在变量`bob`中。没有课。但是在我们创建的 `Person` 对象和 `Person` 类型之间有一个链接。这个链接在`[[Prototype]]`属性 y 之上。如果你运行的是足够现代的浏览器(在我写这篇文章的时候，这个可以在 IE11、Firefox 27 和 Chrome 33 上运行)，你可以在开发者工具中打开控制台，查看`bob`上的`__proto__`属性。您会注意到它指向 `Person` 对象。事实上，你可以通过检查`bob.__proto__ === Person`来测试这一点。
+
+在 ECMAScript 5 中，`Object.create`被添加到 JavaScript 中，表面上是为了简化和阐明对象之间的关系，特别是哪些对象通过它们的原型相关联。但是在这样做的时候，它允许一个简单的，一步到位的创建对象之间的关系。这种关系非常类似于类和实例的面向对象思想。但是因为 JavaScript 没有类，所以我们只有相互之间有关系的对象。
+
+这种关系通常被称为原型链。在 JavaScript 中，原型链是解析对象成员值的两个地方之一。也就是说，当你引用`foo.bar`或`foo[bar]`时，JavaScript 引擎在两个潜在的地方查找`bar`的值:在`foo`本身上，或者在`foo`的原型链上。
+
+在他关于面向对象 JavaScript 的三篇文章中，Kyle Simpson 就我们应该如何看待这个过程提出了一个优雅的观点。不要把`bob`与人的关系看作是实例与类的关系，或者孩子与父母的关系，我们应该把它看作是行为委托的一种情况。`bob`对象有自己的`firstName`和`lastName`，但它没有任何`getAge`功能。委托给某人。通过使用`Object.create` 建立委托关系。原型链是这种委托的机制，允许我们将行为委托给链上更远的东西。从`bob`的角度来看，当我们连续调用`Object.create`时，功能会累积，在附加功能上分层。
+
+顺便说一下，你可能会担心你的浏览器不支持 ECMAScript 5，或者至少没有它的 `Object.create` 版本。这不是问题；`Object.create` 可以很容易地在任何带有 JavaScript 引擎的浏览器中填充，如清单 3-3 中的所示。
+
+### 清单 3-3。多孔填料
+
+```js
+if ( typeof Object.create !== 'function' ) {
+    Object.create = function ( o ) {
+        function F() {
+        }
+        F.prototype = o;
+        return new F();
+    };
+}
+```
+
+最后，有些人不喜欢不断使用 `Object.create` 来创建对象。如果是这样的话，考虑一下对清单 3-4 中的 `Person` 对象的快速修改，它提供了一个生成更多 `Person` 的工厂方法。
+
+### 清单 3-4。使用工厂方法的 Person 对象
+
+```js
+var Person = {
+    firstName : 'John',
+    lastName : 'Connolly',
+    birthDate : new Date( '1964-09-05' ),
+    gender : 'male',
+    getAge : function () {
+        var today = new Date();
+        var diff = today.getTime() - this.birthDate.getTime();
+        var year = 1000 * 60 * 60 * 24 * 365.25;
+        return Math.floor( diff / year );
+    },
+
+    toString : function () {
+        return this.firstName + ' ' + this.lastName + ' is a ' + this.getAge() +
+            ' year-old ' + this.gender;
+    },
+
+    extend : function ( config ) {
+        var tmp = Object.create( this );
+        for ( var key in config ) {
+            if ( config.hasOwnProperty( key ) ) {
+                tmp[key] = config[key];
+            }
+        }
+        return tmp;
+    }
+};
+
+var bob = Person.extend( {
+    firstName : 'Bob',
+    lastName : 'Sabatelli',
+    birthDate : new Date( '1969-06-07' )
+} );
+
+console.log( bob.toString() );
+```
+
+这里，`extend` 函数封装了对 `Object.create` 的调用。当 `extend` 被调用时，它在内部调用 `Object.create`。大概，`extend` 是通过一个传入的配置对象调用的，这是一个相当典型的 JavaScript 使用模式。通过循环遍历 `tmp` 中的属性，`extend` 函数还确保只有已经存在于 `tmp` 对象上的 `config` 的属性被扩展到新创建的 `tmp` 对象上。一旦我们将属性从 `config` 复制到 `tmp`，我们就可以返回 `tmp`，一个人的实例。
+
+既然我们已经看到了在 JavaScript 中建立对象间关系的新风格，让我们看看它如何影响 JavaScript 与典型的面向对象概念的交互。
+
+## 继承
+
+到目前为止，最大的问题是继承。面向对象代码的主要目的是通过从一般的父类到更具体的子类来重用功能。我们已经看到，用 `Object.create` 很容易在两个对象之间建立关系。我们可以简单地扩展这种用法来创建我们喜欢的任何类型的继承层次。(好吧，不管我们喜欢哪种单一继承层次结构。`Object.create` 不允许多重继承。)记住我们是在委托行为的想法；当我们用 `Object.create` 创建子类时，它们将自己的一些行为委托给原型链上更高的类型。用 `Object.create` 继承更倾向于自底向上，而不是典型的自顶向下的面向对象风格。
+
+继承其实很简单:使用 `Object.create`。具体来说，使用 `Object.create` 在“父”类型和“子”类型之间创建一个关系。子类型可以添加功能、删除功能或覆盖现有功能。用一个参数调用 `Object.create`，无论你决定哪个对象是你的“父”类型，返回值都是你决定的“子”类型。然后重复清单 3-4 中的模式，并使用 `extend` 方法(或重用 `Object.create`！)来创建那个子类型(清单 3-5 )的实例。
+
+### 清单 3-5。人是老师的父母
+
+```js
+var Person = {
+    firstName : 'John',
+    lastName : 'Connolly',
+    birthDate : new Date( '1964-09-05' ),
+    gender : 'male',
+    getAge : function () {
+        var today = new Date();
+        var diff = today.getTime() - this.birthDate.getTime();
+        var year = 1000 * 60 * 60 * 24 * 365.25;
+        return Math.floor( diff / year );
+    },
+
+    toString : function () {
+        return this.firstName + ' ' + this.lastName + ' is a ' + this.getAge() +
+            ' year-old ' + this.gender; 
+    },
+
+    extend : function ( config ) {
+        var tmp = Object.create( this );
+        for ( var key in config ) {
+            if ( config.hasOwnProperty( key ) ) {
+                tmp[key] = config[key];
+            }
+        }
+        return tmp;
+    }
+};
+
+var Teacher = Person.extend( {
+    job : 'teacher',
+    subject : 'English Literature',
+    yearsExp : 5,
+    toString : function () {
+        return this.firstName + ' ' + this.lastName + ' is a ' + this.getAge() +
+            ' year-old ' + this.gender + ' ' + this.subject + ' teacher.';
+    }
+} );
+
+var patty = Teacher.extend( {
+    firstName : 'Patricia',
+    lastName : 'Hannon',
+    subject: 'chemistry',
+    yearsExp : 20,
+    gender : 'female'
+} );
+
+console.log( patty.toString() );
+```
+
+`Object.create` 在老师的 `[[Prototype]]` 和人的 `[[Prototype]]` 之间建立了联系。如果您有前面提到的现代浏览器之一，您应该能够查看 `Teacher` 的 `__proto__` 属性，并看到它指向 `Person`。
+
+在第二章的中，我们谈到了 `instanceof` 作为一种发现一个对象是否是一个类型的实例的方法。`instanceof` 操作员不会在这里工作。它依赖于显式的 `prototype` 属性来跟踪对象与类型的关系。更简单地说，`instanceof` 的右边操作数必须是一个函数(尽管很可能是一个函数构造函数)。左边的操作数必须是从函数构造函数创建的(虽然不一定是右边的函数构造函数)。那么我们如何判断一个对象是否是一个类型的实例呢？进入 `isPrototypeOf` 功能。
+
+可以在任何对象上调用`isPrototypeOf`函数。它出现在所有 JavaScript 对象上，很像`toString`。在完成该类型角色的对象上调用它(到目前为止，在我们的例子中是 `Person` 或 `Teacher`)，并向它传递完成实例角色的对象的参数(`bob`或`patty`)。因此，`Teacher.isPrototypeOf(patty)`将返回真实，如你所料。清单 3-6 提供了查看教师、人员、`bob`和`patty`的组合以及`isPrototypeOf`调用的代码。
+
+### 清单 3-6 。`isPrototypeOf()`功能
+
+```js
+var Person = {
+    firstName : 'John',
+    lastName : 'Connolly',
+    birthDate : new Date( '1964-09-05' ),
+    gender : 'male',
+    getAge : function () {
+        var today = new Date();
+        var diff = today.getTime() - this.birthDate.getTime();
+        var year = 1000 * 60 * 60 * 24 * 365.25;
+        return Math.floor( diff / year );
+    },
+
+    toString : function () {
+        return this.firstName + ' ' + this.lastName + ' is a ' + this.getAge() +
+            ' year-old ' + this.gender;
+    },
+
+    extend : function ( config ) {
+        var tmp = Object.create( this );
+        for ( var key in config ) {
+            if ( config.hasOwnProperty( key ) ) {
+                tmp[key] = config[key];
+            }
+        }
+        return tmp;
+    }
+};
+
+var Teacher = Person.extend( {
+    job : 'teacher',
+    subject : 'English Literature',
+    yearsExp : 5,
+    toString : function () {
+        return this.firstName + ' ' + this.lastName + ' is a ' + this.getAge() +
+            ' year-old ' + this.gender + ' ' + this.subject + ' teacher.';
+    }
+} );
+
+var bob = Person.extend( {
+    firstName : 'Bob',
+    lastName : 'Sabatelli',
+    birthDate : new Date( '1969-06-07' )
+} );
+
+var patty = Teacher.extend( {
+    firstName : 'Patricia',
+    lastName : 'Hannon',
+    subject: 'chemistry',
+    yearsExp : 20,
+    gender : 'female'
+} );
+
+console.log( 'Is bob an instance of Person? ' + Person.isPrototypeOf(bob) );          // true
+console.log( 'Is bob an instance of Teacher? ' + Teacher.isPrototypeOf( bob ) );      // false
+console.log( 'Is patty an instance of Teacher? ' + Teacher.isPrototypeOf( patty ) );  // true
+console.log( 'Is patty an instance of Person? ' + Person.isPrototypeOf( patty ) );    // true
+```
+
+有一个伴随函数给`isPrototypeOf`；它名叫`getPrototypeOf`。被称为`Object.getPrototypeOf(obj)`，它返回一个对类型的引用，该类型是当前对象的基础。如前所述，您还可以查看(目前是非标准的，但很快将成为标准的)`__proto__`属性来获得相同的信息(清单 3-7 )。
+
+### 清单 3-7 。getPrototypeOf
+
+```js
+console.log( 'The prototype of bob is Person' + Object.getPrototypeOf( bob ) );
+```
+
+访问被覆盖的方法呢？当然，在子对象中重写父对象的方法是可能的。这种能力没有什么特别的，任何面向对象的系统都应该有这种能力。但是在大多数面向对象的系统中，被覆盖的方法可以通过类似于`super`的属性或访问器访问父方法。也就是说，当您正在重写一个方法时，您通常可以通过一个特殊的关键字调用您正在重写的方法。
+
+我们这里没有那个。JavaScript 的基于原型的面向对象代码根本没有`super()`特性。一般来说，有三种方法可以解决这个问题。首先，您可以编写一些代码来重新实现`super`。这将涉及遍历原型链，可能用`getPrototypeOf`，在继承链中找到拥有你正在重写的方法的前一版本的对象。(请记住，您并不总是覆盖父类中的某些内容；它可能是来自“祖父”类的东西，或者是原型链上更远的东西。)那么您将需要某种方法来访问该方法，并使用传递给覆盖方法的相同参数集来调用它。这当然是可能的，但是它往往是丑陋的，同时也是非常低效的。
+
+作为第二个解决方案，你可以显式调用父方法，如清单 3-8 所示。
+
+### 清单 3-8 。再现功能的效果
+
+# 成员可见性
+
+在面向对象的代码中，我们经常希望控制对象数据的可见性。我们的大多数成员，无论是函数还是属性，都是公共的，与 JavaScript 的实现保持一致。但是如果我们需要私有函数或者私有属性呢？JavaScript 没有简单直接的可见性修饰符（如“私有”、“受保护”或“公共”）来控制谁可以访问属性的成员。但是你可以有私人会员的效果。此外，你可以通过道格拉斯·克洛克福特所谓的特权函数为这些私有成员提供特殊的访问权限。
+
+回想一下，JavaScript 只有两个作用域：全局作用域和当前执行函数的作用域。在前一章中，我们利用闭包利用了这一点，闭包是实现私有成员特权访问的关键部分。它是这样工作的：在构建对象的函数中使用`var`创建私有成员。（那些私有成员是函数还是属性由你决定。）在同一个作用域内，创建一个函数；它将隐含对私有数据的访问，因为函数和私有数据都属于同一个范围。将这个新函数添加到对象本身，使函数（而不是私有数据）成为公共的。因为该函数来自相同的作用域，所以它仍然可以间接访问该数据。详见清单 3-9。
+
+`清单 3-9`。私人成员
+
+```js
+var Person = {
+    firstName : 'John',
+    lastName : 'Connolly',
+    birthDate : new Date( '1964-09-05' ),
+    gender : 'male',
+    getAge : function () {
+        var today = new Date();
+        var diff = today.getTime() - this.birthDate.getTime();
+        var year = 1000 * 60 * 60 * 24 * 365.25;
+        return Math.floor( diff / year );
+    },
+
+    toString : function () {
+        return this.firstName + ' ' + this.lastName + ' is a ' + this.getAge() +
+            ' year-old ' + this.gender;
+    },
+
+    extend : function ( config ) {
+        var tmp = Object.create( this );
+
+        for ( var key in config ) {
+            if ( config.hasOwnProperty( key ) ) {
+                tmp[key] = config[key];
+            }
+        }
+
+        // When was this object created?
+        var creationTime = new Date();
+
+        // An accessor, at the moment, it's private
+        var getCreationTime = function() {
+            return creationTime;
+        };
+
+        tmp.getCreationTime = getCreationTime; 
+        return tmp;
+    }
+};
+
+var Teacher = Person.extend( {
+    job : 'teacher',
+    subject : 'English Literature',
+    yearsExp : 5,
+    toString : function () {
+        var originalStr = Person.toString.call(this);
+        return originalStr + ' ' + this.subject + ' teacher.';
+    }
+} );
+
+var patty = Teacher.extend( {
+    firstName : 'Patricia',
+    lastName : 'Hannon',
+    subject: 'chemistry',
+    yearsExp : 20,
+    gender : 'female'
+} );
+
+console.log( patty.toString() ); 
+console.log( 'The Teacher object was created at %s', patty.getCreationTime() );
+```
+
+如您所见，`creationTime`变量是`extend`函数的局部变量。它在该功能之外不可用。如果你在控制台上用`console.dir`检查人，你不会看到`creationTime`被列为人的公共属性。最初，`getCreationTime`也是如此。它是在与`creationTime`相同的作用域中创建的函数，因此该函数可以访问`creationTime`。使用简单赋值，我们将`getCreationTime`附加到我们返回的对象实例上。现在，`getCreationTime`是一个公共方法，可以特权访问`creationTime`中的私有数据。
+
+请特别注意教师中的`toString`方法。您会注意到，教师的`toString`函数显式调用了个人的`toString`函数。许多面向对象的设计者会认为我们不应该硬编码人和老师之间的关系。但是作为达到目的的一种简单方法，这样做确实可以快速、灵活、有效地解决问题。另一方面，它不便于携带。这种方法只适用于与父对象有某种关系的对象。
+
+第三种可能性是，我们根本不用担心我们是否有`super`。是的，JavaScript 这种语言缺乏`super`特性，这在许多其他面向对象语言中都存在。但是这个特性并不是面向对象代码的全部。也许在将来，JavaScript 会有一个带有适当功能的`super`关键字。（实际上，我们知道在 ECMAScript 6 中，对象有一个`super`属性。）但就目前而言，没有它我们也能过得相当好。
+
+```js
+var Person = {
+    firstName : 'John',
+    lastName : 'Connolly',
+    birthDate : new Date( '1964-09-05' ),
+    gender : 'male',
+    getAge : function () {
+        var today = new Date();
+        var diff = today.getTime() - this.birthDate.getTime();
+        var year = 1000 * 60 * 60 * 24 * 365.25;
+        return Math.floor( diff / year );
+    },
+
+    toString : function () {
+        return this.firstName + ' ' + this.lastName + ' is a ' + this.getAge() +
+            ' year-old ' + this.gender; 
+    },
+
+    extend : function ( config ) {
+        var tmp = Object.create( this );
+        for ( var key in config ) {
+            if ( config.hasOwnProperty( key ) ) {
+                tmp[key] = config[key];
+            }
+        }
+        return tmp;
+    }
+};
+
+var Teacher = Person.extend( {
+    job : 'teacher',
+    subject : 'English Literature',
+    yearsExp : 5,
+    toString : function () {
+        var originalStr = Person.toString.call(this);
+        return originalStr + ' ' + this.subject + ' teacher.';
+    }
+} );
+
+var patty = Teacher.extend( {
+    firstName : 'Patricia',
+    lastName : 'Hannon',
+    subject: 'chemistry',
+    yearsExp : 20,
+    gender : 'female'
+} );
+
+console.log( patty.toString() );
+```
+
+一个小警告：这不是最有效的模式。每当您创建`Person`的实例或它的任何子类型时，您将创建一个全新的函数，它可以访问创建`Person`实例的调用`extend`的执行上下文。相比之下，当我们使用`Object.create`时，我们的公共函数是对我们传递给`Object.create`的类型的引用。在我们这里处理的小范围内，特权函数并不是特别低效。但是，如果您添加更多的特权方法，它们都将保留对该执行上下文的引用，并且都将是该特权方法的自己的实例。内存成本会迅速增加。谨慎使用特权方法，将它们留给需要严格访问控制的数据。否则，就接受 JavaScript 中的大多数数据都是公共的这一观点吧。
+
+## 面向对象 JavaScript 的未来
+
+我们忽略了 ECMAScript 6 给面向对象的 JavaScript 带来了一些变化。这些变化中最重要的是引入了一个有效的关键字`class`。`class`关键字将用于定义 JavaScript 类型（不是类，因为 JavaScript 仍然没有类！）。它还将包括使用关键字`extends`创建继承关系的附带条件。最后，当在一个子类型中重写函数时，ECMAScript 6 留出`super`关键字来引用原型链上的函数版本。
+
+然而，所有这些都是语法上的糖。当这些结构被 JavaScript 引擎分解后，它们被揭示为函数构造函数的使用。这些新特性实际上并没有建立新的功能：它们只是引入了一种其他面向对象语言的程序员更容易接受的习惯用法。更糟糕的是，他们继续掩盖 JavaScript 的一些最佳特性，试图让它符合其他语言对“真正的”面向对象语言应该是什么样子的概念。有时，JavaScript 似乎仍然有点羞于在使用其强大功能之前穿上斗篷和紧身衣。
+
+## 封装 JavaScript
+
+从面向对象的 JavaScript 向外发展，我们应该考虑如何组织我们的代码以便广泛重用。我们需要一套工具来正确封装我们的代码，防止意外使用全局上下文，以及使我们的代码可重用和可再分发的方法。让我们按顺序解决各种需求。
+
+### 名称空间
+
+到目前为止，我们已经声明了我们的类型（以及更早的函数和变量）是全局上下文的一部分。我们没有明确地这样做，但是由于我们没有将这些对象和变量声明为任何其他上下文的一部分。我们希望将函数、变量、对象、类型等封装到一个单独的上下文中，以便不依赖于全局上下文。为此，我们将（最初）依赖于名称空间。
+
+名称空间并不是 JavaScript 独有的，但是，就像 JavaScript 中的许多东西一样，它们与您可能期望的有些不同。命名空间为变量和函数提供了上下文。当然，名称空间本身很可能是全局的。这是两害相权取其轻的方法。我们可以有一个属于窗口的变量，然后各种数据和功能属于那个变量，而不是有许多属于窗口的变量和函数。实现很简单：使用一个对象文字来封装你想要从全局上下文中隐藏的代码（清单 3-10）。
+
+#### 清单 3-10。命名空间
+
+```js
+// Namespaces example
+
+var FOO = {};
+
+// Add a variable
+FOO.x = 10;
+
+// Add a function
+FOO.addEmUp = function(x, y) {
+    return x + y; 
+};
+```
+
+名称空间最好用作封装无关代码的专用解决方案。如果我们试图在所有的代码中使用名称空间，随着它们增加越来越多的功能和数据，名称空间会很快变得难以使用。您可能会尝试在名称空间中设置名称空间，模拟包与 Java 一起工作的方式。Ext JS 库很好地使用了这种技术，值得一提。但是他们也花了很多时间考虑如何组织他们的功能，什么代码属于什么名称空间或子名称空间，等等。大量使用名称空间是有代价的。
+
+此外，名称空间名称是硬编码的：`FOO`，在前面提到的库 Ext JS 中是`Ext`，在同样流行的 YUI 库中是`YAHOO`。这些名称空间实际上是这些库的保留字。如果两个或更多的库使用同一个名称空间（就像 jQuery 的使用`$`作为名称空间一样），会发生什么呢？潜在的冲突。JQuery 已经添加了显式代码来处理这种可能性，如果它到来的话。虽然这个问题在您自己的代码中不太可能出现，但这是一个必须考虑的可能性。在团队环境中尤其如此，在团队环境中，多个程序员可以访问名称空间，这增加了意外覆盖或删除另一个程序员的名称空间的可能性。
+
+### 模块模式
+
+我们有一些工具来改进我们使用名称空间的方式。我们可以使用模块模式，它将命名空间的生成封装在一个函数中。这允许多种改进，包括为名称空间包含的函数和数据建立基线，在生成器函数中使用私有变量，这可能使某些功能的实现更容易，以及简单地让函数生成名称空间，这意味着我们可以让 JavaScript 在运行时而不是编译时动态生成部分或全部名称空间。
+
+模块可以根据您的喜好简单或复杂。清单 3-11 提供了一个非常简单的创建模块的例子。
+
+#### 清单 3-11。创建一个模块
+
+```js
+function getModule() {
+    // Namespaces example
+    var FOO = {};
+
+    // Add a variable
+    FOO.x = 10;
+
+    // Add a function
+    FOO.addEmUp = function ( x, y ) {
+        return x + y;
+    };
+
+    return FOO;
+}
+
+var myNamespace = getModule();
+```
+
+我们已经将名称空间代码封装在一个函数中。因此，当我们最初设置`FOO`对象时，它是`getModule`函数的私有对象。然后，我们可以将`FOO`返回给任何调用`getModule`的人，他们可以按照自己认为合适的方式使用封装的结构，包括随意命名。
+
+这种模式的另一个优点是，我们可以再次利用我们的朋友闭包来设置只对名称空间私有的数据。如果我们的名称空间，我们封装的代码，需要有内部数据或内部函数，我们可以添加它们而不用担心公开它们（清单 3-12）。
+
+#### 清单 3-12。带有私有数据的模块
+
+```js
+function getModule() {
+    // Namespaces example
+    var FOO = {};
+
+    // Add a variable
+    FOO.x = 10;
+
+    // Add a function
+    FOO.addEmUp = function ( x, y ) {
+        return x + y;
+    };
+
+    // A private variable
+    var events = [];
+
+    FOO.addEvent = function(eventName, target, fn) {
+        events.push({eventName: eventName, target: target, fn: fn});
+    };
+
+    FOO.listEvents = function(eventName) {
+        return events.filter(function(evtObj) {
+            return evtObj.eventName === eventName
+        });
+    };
+
+    return FOO;
+}
+
+var myNamespace = getModule();
+```
+
+在这个例子中，我们实现了一个公共接口，用于添加某种带有`addEvents`的事件跟踪。稍后，我们可能希望通过`listEvents`按事件名称取回事件引用。但是实际的`events`集合是私有的，由我们提供给它的公共 API 管理，但是对直接访问是隐藏的。
+
+像名称空间一样，模块也有两害相权取其轻的问题。我们用一个全局变量交换了我们的名称空间，换来了一个全局函数`getModule`。如果我们可以完全控制在全局名称空间中结束的内容，而不必使用全局范围的对象或函数来这样做，这不是很好吗？幸运的是，我们即将看到一种工具可以帮助我们做到这一点。
+
+### 立即调用的函数表达式
+
+如果我们想避免污染全局名称空间，函数是合乎逻辑的解决方案。函数在运行时会创建自己的执行上下文，它从属于全局名称空间，但与全局名称空间相隔离。当函数完成运行时，执行上下文可用于垃圾收集，并且专用于它的资源可以被回收。但是我们所有的函数要么是全局的，要么是名称空间的一部分，而名称空间本身就是全局的。我们希望有一个可以立即执行的函数，不需要命名，也不需要成为全局或其他名称空间或上下文的一部分。然后，在这个函数中，我们可以构建我们需要的模块。我们可以返回这样一个对象，导出它，并使它可用，但我们不需要一个公共函数来占用生成它的资源。这就是立即调用的函数表达式（`life`）背后的思想。
+
+到目前为止，我们使用的所有函数都是*函数声明*。无论我们将它们定义为`function funcName { ... }`还是`var funcName = function() { ... }`，我们都是在声明函数，将它们的用法留待以后使用。我们是否可以创建一个*函数表达式*，这个函数可以一次性创建并执行？答案是肯定的，但是这样做需要一定程度的语法勇气。
+
+# 函数执行与立即调用的函数表达式
+
+## 如何执行函数
+
+我们如何执行函数？通常，对于一个已命名的函数，我们打印函数的名称，然后在后面附加一些括号，表明我们想要执行与该名称相关的代码。我们不能对函数定义本身做同样的事情。结果将是一个语法错误，显然不是我们想要的。
+
+但是我们可以将函数声明放在一组括号内，这是对解析器的一个提示，表明这不是一个语句，而是一个表达式。圆括号中不能包含语句，只能包含作为表达式计算的代码，这是我们希望从函数中得到的。我们还需要一点语法来实现这一点，另一组括号，通常在函数声明本身的末尾。清单 3-13 将阐明完整的语法。
+
+### 清单 3-13：立即调用的函数表达式
+
+```js
+// A regular function
+function foo() {
+    console.log( 'Called foo!' );
+}
+
+// Function assignment
+var bar = function () {
+    console.log( 'Called bar!' );
+};
+
+// Function expression
+(function () {
+    console.log( 'This function was invoked immediately!' )
+})();
+
+// Alternate syntax
+(function () {
+    console.log( 'This function was ALSO invoked immediately!' )
+}());
+```
+
+将前两个函数（函数声明）与后两个函数（函数表达式）进行比较。表达式用圆括号括起来，以便“表达式化”（或者，如果您愿意的话：“反声明”），然后使用第二组圆括号来调用表达式。俏皮！
+
+顺便说一下，有各种各样的 JavaScript 语法粒子会导致 IIFEs：函数作为逻辑求值的组件，一元运算符作为函数声明的前缀，等等。“牛仔”本·阿尔曼关于生命的文章（`http://benalman.com/news/2010/11/immediately-invoked-function-expression/`）包含了关于有效语法的极好的细节，并深入到生命是如何工作的以及它们是如何形成的。
+
+## IIFE 的应用：模块生成
+
+既然我们知道如何创造生活，我们该如何利用它呢？生命有许多应用，但我们在这里关心的是模块的生成。我们能把一个生命的结果捕捉到一个变量中吗？当然可以！所以我们可以将我们的模块生成器包装在一个生命中，并让它返回模块（清单 3-14）。
+
+### 清单 3-14：生命模块生成器
+
+```js
+var myModule = (function () {
+    // A private variable
+    var events = [];
+
+    return {
+        x : 10,
+        addEmUp : function ( x, y ) {
+            return x + y;
+        },
+        addEvent : function ( eventName, target, fn ) {
+            events.push( {eventName : eventName, target : target, fn : fn} );
+        },
+        listEvents : function ( eventName ) {
+            return events.filter( function ( evtObj ) {
+                return evtObj.eventName === eventName
+            } );
+        }
+    };
+
+})();
+```
+
+在最后一个例子中，我们做了一些改动。首先，也是最简单的，我们现在在`myModule`而不是`myNamespace`中捕获我们工厂生活的输出。第二，我们不是创建一个对象然后返回它，而是直接返回对象。这简化了我们的代码，减少了为我们最终不会使用的对象保留空间。
+
+## 传递参数与使用库
+
+IIFE 模式开辟了许多新的可能性，包括根据需要使用库或其他工具。函数表达式末尾的括号与常规函数调用中的括号相同。因此，我们可以将争论传递到我们的生活中，并在生活中使用它们。想象一下可以使用 jQuery 功能的生活（清单 3-15）。
+
+### 清单 3-15：给生命传递论据
+
+```js
+// Here, the $ refers to jQuery and jQuery only for the entire
+// scope of the module
+var myModule = (function ($) {
+    // A private variable
+    var events = [];
+
+    return {
+        x : 10,
+        addEmUp : function ( x, y ) {
+            return x + y;
+        },
+        addEvent : function ( eventName, target, fn ) {
+            events.push( {eventName : eventName, target : target, fn : fn} );
+            $( target ).on( eventName, fn );
+        },
+        listEvents : function ( eventName ) {
+            return events.filter( function ( evtObj ) {
+                return evtObj.eventName === eventName
+            } );
+        }
+    };
+
+})(jQuery); // Assumes that we had included jQuery earlier
+```
+
+我们将 jQuery 传递到我们的生活中，然后在整个生活中将其称为`$`。在内部，它在`addEvent`函数中被用来向 DOM 添加一个事件处理程序。（不用担心语法没有意义；这不是例子的核心！）
+
+基于这段代码，您可能会想象一个系统，在这个系统中，由 IIFEs 生成的模块相互对话，来回传递参数并使用库，所有这些都不需要在全局级别上进行交互。事实上，这也是下一章的内容之一。
+
+## 摘要
+
+本章开始时摆在我们面前的问题是代码管理问题。我们如何按照良好的面向对象准则编写代码，以及如何封装代码以实现可重用性？在前一种情况下，我们专注于 JavaScript 的原型性质，用它来生成类似于类和实例的东西，但带有独特的 JavaScript 旋转。这种实现比试图强迫 JavaScript 像 C#或 Java 那样运行要简单得多。对于后一个需求，我们通过各种解决方案来封装我们的代码：名称空间、模块和立即调用的函数表达式。最终，这三者的结合为我们提供了最少使用全局环境的最佳解决方案。
