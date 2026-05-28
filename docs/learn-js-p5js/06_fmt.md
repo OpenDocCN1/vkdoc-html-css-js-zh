@@ -1,0 +1,183 @@
+# 六、更多 p5.js 变量
+
+在前一章中，我们学习了 p5.js `frameCount` 变量，它为我们提供了一个数字，表示调用 `draw` 函数的次数。我们可以在 p5.js 中使用很多其他非常有用的变量。我们将在本章中学习更多。
+
+## 老鼠被压迫
+
+`mouseIsPressed` 是我们将看到的第一个 p5.js 变量，它允许我们为程序添加一些交互性。`mouseIsPressed` 是一个 p5.js 变量，当鼠标点击画布区域时，该变量取值为 `true`，其他时间取值为 `false`。让我们改变第 4 (清单 4-10 )章中的一个例子，来快速看看我们如何使用这个变量(清单 6-1 )。
+
+```js
+function setup() {
+        createCanvas(800, 300);
+        rectMode(CENTER);
+}
+
+function draw() {
+        background(1, 186, 240);
+
+        // declaration of variables
+        var x = width / 2;
+        var y = height / 2;
+        var size = 200; // control the size of the shapes
+
+        // circle
+        fill(237, 34, 93);
+        noStroke();
+        ellipse(x, y, size, size);
+
+        // conditionally display rectangle on mouse press
+        if (mouseIsPressed === true) {
+                fill(255);
+                rect(x, y, size*0.75, size*0.15);
+        }
+}
+```
+
+**清单 6-1** 条件显示圆圈内的矩形
+
+单击画布区域将会显示圆圈内的矩形。通过使用 `mouseIsPressed` p5.js 变量，我们使得矩形的显示以鼠标被按下为条件。
+
+基于鼠标点击切换事物的状态可能是一个更复杂的例子，所以让我们看看如何解决这个问题。假设我们想在每次单击鼠标按钮时改变草图的背景颜色。在清单 6-2 中，我们将让它在两种颜色之间切换。
+
+```js
+var toggle = true;
+function setup() {
+        createCanvas(800, 300);
+        rectMode(CENTER);
+}
+
+function draw() {
+        // change the toggle value based on mouse press.
+        if (mouseIsPressed === true) {
+                toggle = !toggle;
+        }
+
+        // display a different bg color based on the toggle value
+        if (toggle === true) {
+                background(1, 186, 240);
+        } else {
+                background(250, 150, 50);
+        }
+
+        // declaration of variables
+        var x = width / 2;
+        var y = height / 2;
+        var size = 200;
+
+        // circle
+        fill(237, 34, 93);
+        noStroke();
+        ellipse(x, y, size, size);
+
+        // rectangle
+        fill(255);
+        rect(x, y, size * 0.75, size * 0.15);
+}
+```
+
+**清单 6-2** 鼠标点击时切换显示
+
+在这个例子中，我们正在创建一个名为 `toggle` 的全局变量，它将存储一个 `Boolean` 值。然后我们通过使用感叹号操作符，使这个 `Boolean` 值改变为与每次鼠标点击相反的值。当感叹号用在一个 `Boolean` 值的前面时，感叹号简单地反转该值，这意味着它会使 `true` 变成 `false`，反之亦然。
+
+您可能会注意到，`mouseIsPressed` 变量在捕捉我们的点击时似乎不太好用。这是因为 `draw` 函数在一秒钟内被调用了无数次，这使得很难使用条件来检测鼠标点击。稍后，我们将看到使用 p5.js `Events` 检测鼠标点击的更好方法。
+
+## mouseX 和 mouseY
+
+p5.js 变量 `mouseX` 保存鼠标当前的水平位置，`mouseY` 保存当前的垂直位置。这听起来很简单，但是它们有可能在我们的程序中实现大量的用户交互，因此是非常有用的变量。如果我们将这些值作为一个形状的 x 和 y 坐标提供，那么当我们在屏幕上移动光标时，我们实际上也在移动这个形状。
+
+让我们用之前程序的简化版本来尝试一下(清单 6-1 )。清单 6-3 和图 6-1 显示了它的一个版本，只是在屏幕中间画了一个圆。
+
+![A462229_1_En_6_Fig1_HTML.jpg](img/A462229_1_En_6_Fig1_HTML.jpg)
+
+**图 6-1** 绘制一个圆
+
+```js
+function setup() {
+        createCanvas(800, 300);
+}
+
+function draw() {
+        background(1, 75, 100);
+
+        // declaration of variables
+        var x = width / 2;
+        var y = height / 2;
+        var size = 50;
+
+        // circle
+        fill(237, 34, 93);
+        noStroke();
+        ellipse(x, y, size, size);
+}
+```
+
+**清单 6-3** 在屏幕上绘制一个简单的圆
+
+现在让我们使用 `mouseX` 和 `mouseY` 变量来表示清单 6-4 中的 x 和 y 值。
+
+```js
+function setup() {
+        createCanvas(800, 300);
+}
+
+function draw() {
+        background(1, 75, 100);
+
+        // declaration of variables
+        var x = mouseX;
+        var y = mouseY;
+        var size = 50;
+
+        // circle
+        fill(237, 34, 93);
+        noStroke();
+        ellipse(x, y, size, size);
+}
+```
+
+**清单 6-4** 使用 `mouseX` 和 `mouseY` 变量
+
+尝试在画布上移动鼠标。这不是很神奇吗？通过使用两个内置变量，我们将原本静态的草图变成了用户可以与之交互的东西。
+
+你有没有想过为什么我们要在 `draw` 函数中设置 `background` 函数？我们似乎只需要设置这个值一次，所以你可能认为它应该去 `setup` 函数。
+
+将 `background` 函数放在 `draw` 函数中允许我们用纯色覆盖前一帧中绘制的所有内容。如果没有该声明，在该帧的开始，您会注意到来自前一帧的绘图会保留在屏幕上。但是对于某些用例，这可能正是您想要的。
+
+清单 6-5 和图 6-2 显示了之前的示例(清单 6-4 ),具有更小的圆尺寸、更低的形状颜色不透明度，并且 `background` 仅在 `setup` 函数中声明一次。
+
+![A462229_1_En_6_Fig2_HTML.jpg](img/A462229_1_En_6_Fig2_HTML.jpg)
+
+**图 6-2** 使用 `mouseX` 和 `mouseY` 变量在屏幕上绘制
+
+```js
+function setup() {
+        createCanvas(800, 300);
+        background(1, 75, 100);
+}
+
+function draw() {
+        // declaration of variables
+        var x = mouseX;
+        var y = mouseY;
+        var size = 25;
+
+        // circle
+        fill(237, 34, 93, 100);
+        noStroke();
+        ellipse(x, y, size, size);
+}
+```
+
+### Listing 6-5 Persisting the drawing on the screen
+
+## 摘要
+
+在这一章中，我们学习了更多的 p5.js 内置变量，它们特别有助于我们创建交互式程序:可以响应用户动作的程序。
+
+我们学习了 p5.js `mouseIsPressed`变量，每当鼠标被点击时，该变量都假定一个`true`值。但是我们也了解到这个变量可能不是处理用户输入的最佳方式。我们稍后将在 p5.js 中看到`Event`s的概念，它在处理用户输入方面要好得多。
+
+我们还看到了`mouseX`和`mouseY`变量，以及如何使用它们来根据鼠标光标位置制作对象动画，这使我们能够以一种简单的方式为程序添加大量的交互性。
+
+## 实践
+
+构建一个脚本，在每次鼠标点击时，在屏幕上鼠标光标的位置绘制一个矩形。
