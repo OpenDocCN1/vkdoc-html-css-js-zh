@@ -1,0 +1,626 @@
+# 九、深入了解单子
+
+在前一章中，我们看到了函子是什么以及它们如何对我们有用。在这一章中，我们将继续讨论函子，学习一个叫做单子的新函子。不要害怕条款；这些概念很容易理解。
+
+我们将从检索和显示搜索查询的 Reddit 评论的问题开始。最初我们打算用函子，尤其是可能函子，来解决这个问题。当我们解决这个问题时，我们会遇到一些关于可能函子的问题。然后我们将继续创建一种特殊类型的函子，称为*单子*。
+
+### 注意
+
+章节示例和库源代码在第九章分支中。回购的网址是[`github.com/antsmartian/functional-es8.git`](https://github.com/antsmartian/functional-es8.git)。一旦你检查出代码，请检查分支第九章:
+
+```
+git checkout -b 第九章来源/第九章
+```
+
+对于运行代码，与之前一样，运行:
+
+```
+npm 跑步游乐场
+```
+
+## 为我们的搜索查询获取 Reddit 评论
+
+从上一章开始，我们一直在使用 Reddit API。在本节中，我们使用相同的 Reddit API 来搜索带有查询的帖子，并获得每个搜索结果的评论列表。这个问题我们要用 `MayBe`，正如我们在前一章看到的，`MayBe` 允许我们专注于问题，而不用担心空值/未定义值。
+
+### 注意
+
+你可能想知道为什么我们在当前的问题中不使用任一函子，因为正如我们在上一章中看到的，`MayBe` 有一些缺点，当分支时不能捕获错误。没错，但是我们选择也许主要是为了让事情简单。正如你所看到的，我们也将把同样的想法扩展到这两者中。
+
+## 问题
+
+在我们开始实现解决方案之前，让我们看看问题及其相关的 Reddit API 端点。问题包含两个步骤：
+
+1.  为了搜索特定的帖子和评论，我们需要点击 Reddit API 端点:
+
+    [`www.reddit.com/search.json?q=<搜索 _ 字符串>`](https://www.reddit.com/search.json%253Fq=%253CSEARCH_STRING%253E)
+
+    并传递 `SEARCH_STRING`。例如，如果我们像这样搜索字符串函数式编程:
+
+    [`www.reddit.com/search.json?q =功能编程`](https://www.reddit.com/search.json?q=functional%2520programming)
+
+    我们得到的结果如清单 9-1 所示。
+
+    ```
+    { kind: 'Listing',
+      data:
+       { facets: {},
+         modhash: ",
+         children:
+          [ [Object],
+            [Object],
+            [Object],
+            [Object],
+            [Object],
+            [Object],
+            . . .
+            [Object],
+            [Object] ],
+         after: 't3_terth',
+         before: null } }
+    ```
+
+    *Listing 9-1 Reddit 响应的结构*
+
+    每个 `children` 对象看起来像这样:
+
+    ```
+    { kind: 't3',
+      data:
+       { contest_mode: false,
+         banned_by: null,
+         domain: 'self.compsci',
+         . . .
+         downs: 0,
+         mod_reports: [],
+         archived: true,
+         media_embed: {},
+         is_self: true,
+         hide_score: false,
+         permalink: '/r/compsci/comments/3mecup/eli5_what_is_functional_programming_and_how_is_it/?ref=search_posts',
+         locked: false,
+         stickied: false,
+         . . .
+         visited: false,
+         num_reports: null,
+         ups: 134 } }
+    ```
+
+    这些对象指定了与我们的搜索查询匹配的结果。
+
+2.  一旦我们有了搜索结果，我们需要得到每个搜索结果的评论。我们如何做到这一点？正如前面提到的，每个子对象都是我们的搜索结果。这些对象有一个名为 `permalink` 的字段，如下所示:
+
+    ```
+    permalink: '/r/compsci/comments/3mecup/eli5_what_is_functional_programming_and_how_is_it/?ref=search_posts',
+    ```
+
+    我们需要导航到前面的 URL: `GET: https://www.reddit.com//r/compsci/comments/3mecup/eli5_what_is_functional_programming_and_how_is_it/.json`。这将返回如下所示的评论数组: `[Object,Object,..,Object]`，其中每个对象给出关于注释的信息。
+
+    一旦我们得到评论对象，我们需要将结果与标题合并并返回一个新对象:
+
+    ```
+    {
+            title : Functional programming in plain English,
+            comments : [Object,Object,..,Object]
+    }
+    ```
+
+    其中标题是我们从第一步得到的标题。现在有了对问题的理解，让我们来实现逻辑。
+
+### 第一步的实施
+
+在本节中，我们实现了第一步的解决方案，这涉及到向 Reddit 搜索 API 端点发出一个请求以及我们的搜索查询。因为我们需要触发 HTTP GET 调用，所以我们将需要我们在前一章中使用的 `sync-request` 模块。
+
+让我们拉出模块并将其保存在一个变量中以备将来使用:
+
+```javascript
+let request = require('sync-request');
+```
+
+现在有了 `request` 函数，我们可以向 Reddit 搜索 API 端点发起 HTTP GET 调用。让我们将搜索步骤包装在一个特定的函数中，我们称之为 `searchReddit`（清单 9-2）。
+
+```javascript
+let searchReddit = (search) => {
+    let response
+    try{
+       response = JSON.parse(request('GET',"https://www.reddit.com/search.json?q=" + encodeURI(search)).getBody('utf8'))
+    }catch(err) {
+        response = { message: "Something went wrong" , errorCode: err['statusCode'] }
+    }
+    return response
+}
+```
+
+*Listing 9-2 `searchReddit` 函数定义*
+
+现在我们将逐步讲解代码。
+
+1.  我们向 URL 端点 [`www.reddit.com/search.json?q=`](https://www.reddit.com/search.json?q=) 发起搜索请求，如下所示:
+
+    ```javascript
+    response = JSON.parse(request('GET',"https://www.reddit.com/search.json?q=" + encodeURI(search)).getBody('utf8'))
+    ```
+
+    注意，我们使用 `encodeURI` 方法对搜索字符串中的特殊字符进行转义。
+
+2.  一旦响应成功，我们就返回该值。
+
+如果出现错误，我们将在 `catch` 块中捕获它，并获取错误代码，然后像这样返回错误响应：`catch(err) { response = { message:“出错”，错误代码:err['statusCode'] } }`。
+
+With our little function in place, we go ahead and test it: `searchReddit("Functional Programming")` This will return the following result:
+```
+{ kind: 'Listing', 
+   data: 
+    { facets: {}, 
+      modhash: ", 
+      children: 
+       [ [Object], 
+         [Object], 
+         [Object], 
+         [Object], 
+         [Object], 
+         [Object], 
+         [Object], 
+         [Object], 
+         . . . 
+      after: 't3_terth', 
+      before: null } }
+```
+
+太完美了。我们完成了步骤 1。让我们实现第二步。
+
+## 实现第二步
+
+Implementing the second step for each search children object, we need to get its `permalink` value to get the list of comments. We can write a separate method for getting a list of comments for the given URL. We call this method `getComments`. The implementation of `getComments` is simple, as shown in Listing 9-3.
+
+```javascript
+let getComments = (link) => { 
+    let response 
+    try { 
+        response = JSON.parse(request('GET',"https://www.reddit.com/" + link).getBody('utf8')) 
+    } catch(err) { 
+        response = { message: "Something went wrong" , errorCode: err['statusCode'] } 
+    } 
+    return response 
+}
+```
+**Listing 9-3** `getComments` 函数定义
+
+The `getComments` implementation is very similar to our `searchReddit`. Let’s walk through the steps and see what `getComments` does.
+
+1.  It fires the HTTP GET call for the given `link` value. For example, if the `link` value is passed as: `r/IAmA/comments/3wyb3m/we_are_the_team_working_on_react_native_ask_us/.json`
+
+    然后 `getComments` 将对 URL 发出一个 HTTP GET 调用:
+
+    `www.reddit.com/r/IAmA/comments/3wyb3m/we_are_the_team_working_on_react_native_ask_us/.json`
+
+它将返回注释数组。和以前一样，我们在这里有点防御性，在我们最喜欢的 `catch` 块中捕捉 `getComments` 方法中的任何错误。最后，我们返回响应。
+
+Quickly we’ll test our `getComments` by passing the following link value: `r/IAmA/comments/3wyb3m/we_are_the_team_working_on_react_native_ask_us/.json`
+
+```javascript
+getComments('r/IAmA/comments/3wyb3m/we_are_the_team_working_on_react_native_ask_us/.json')
+```
+
+For this call we get back this result:
+```
+[ { kind: 'Listing', 
+    data: { modhash: ", children: [Object], after: null, before: null } }, 
+  { kind: 'Listing', 
+    data: { modhash: ", children: [Object], after: null, before: null } } ]
+```
+
+现在两个 API 都准备好了，是时候合并这些结果了。
+
+### 合并 Reddit 呼叫
+
+现在我们已经定义了两个函数，即 `searchReddit` 和 `getComments` (分别为清单 9-2 和清单 9-3)，它们执行各自的任务并返回前面章节中看到的响应。在本节中，让我们编写一个更高级的函数，它占用搜索文本并使用这两个函数来实现我们的最终目标。
+
+We’ll call the function we create `mergeViaMayBe` and its implementation looks like Listing 9-4.
+
+```javascript
+let mergeViaMayBe = (searchText) => { 
+    let redditMayBe = MayBe.of(searchReddit(searchText)) 
+    let ans = redditMayBe 
+               .map((arr) => arr['data']) 
+               .map((arr) => arr['children']) 
+               .map((arr) => arrayUtils.map(arr, (x) => { 
+                        return { 
+                            title : x['data'].title, 
+                            permalink : x['data'].permalink 
+                        } 
+                    } 
+                )) 
+               .map((obj) => arrayUtils.map(obj, (x) => { 
+                    return { 
+                        title: x.title, 
+                       comments: MayBe.of(getComments(x.permalink.replace("?ref=search_posts",".json"))) 
+                    } 
+               })); 
+   return ans; 
+}
+```
+**Listing 9-4** `mergeViaMayBe` 函数定义
+
+Let’s quickly check our function by passing the search text `functional programming`:
+
+```javascript
+mergeViaMayBe('functional programming')
+```
+
+That call will give this result:
+```
+MayBe { 
+  value: 
+  [ { title: 'ELI5: what is functional programming and how is it different from OOP', 
+      comments: [Object] }, 
+    { title: 'ELI5 why functional programming seems to be "on the rise" and how it differs from OOP', 
+      comments: [Object] } ] }
+```
+
+### 注意
+
+为了更加清晰，我们减少了该调用输出中的结果数量。默认调用将返回 25 个结果，这将需要几页来输入 `mergeViaMayBe` 的输出。从这里开始，我们在书中只显示最小的输出。不过，请注意，源代码示例确实调用并打印了所有 25 个结果。
+
+# 深入理解 `mergeViaMayBe` 函数
+
+现在，让我们退一步，详细理解 `mergeViaMayBe` 函数的作用。该函数首先使用 `searchText` 值调用 `searchReddit`。调用的结果被包装在 `MayBe` 中：`let redditMayBe = MayBe.of(searchReddit(searchText))`
+
+一旦结果被包装在一个 `MayBe` 类型中，我们就可以自由地映射它，正如您在代码中看到的那样。
+
+为了提醒我们搜索查询（我们的 `searchReddit` 将调用它），它会以以下结构返回结果：
+```javascript
+{
+  kind: 'Listing',
+  data: {
+    facets: {},
+    modhash: ",
+    children: [
+      [Object],
+      [Object],
+      [Object],
+      [Object],
+      [Object],
+      [Object],
+      . . .
+      [Object],
+      [Object]
+    ],
+    after: 't3_terth',
+    before: null
+  }
+}
+```
+要获取永久链接（它位于我们的 `children` 对象中），我们需要导航到 `data.children`。这在代码中演示如下：
+```javascript
+redditMayBe
+  .map((arr) => arr['data'])
+  .map((arr) => arr['children'])
+```
+现在我们已经掌握了 `children` 数组，请记住每个 `children` 都有一个具有以下结构的对象：
+```javascript
+{
+  kind: 't3',
+  data: {
+    contest_mode: false,
+    banned_by: null,
+    domain: 'self.compsci',
+    . . .
+    permalink: '/r/compsci/comments/3mecup/eli5_what_is_functional_programming_and_how_is_it/?ref=search_posts',
+    locked: false,
+    stickied: false,
+    . . .
+    visited: false,
+    num_reports: null,
+    ups: 134
+  }
+}
+```
+我们只需要从中获取 `title` 和 `permalink`；因为它是一个数组，所以我们对它运行 `Array` 的 `map` 函数：
+```javascript
+.map((arr) => arrayUtils.map(arr, (x) => {
+  return {
+    title : x['data'].title,
+    permalink : x['data'].permalink
+  }
+}))
+```
+现在我们有了 `title` 和 `permalink`，我们的最后一步是获取 `permalink` 并将其传递给我们的 `getComments` 函数，该函数将为传递的值获取评论列表。这在代码中如下所示：
+```javascript
+.map((obj) => arrayUtils.map(obj, (x) => {
+  return {
+    title: x.title,
+    comments: MayBe.of(getComments(x.permalink.replace("?ref=search_posts",".json")))
+  }
+}));
+```
+因为 `getComments` 的调用可能得到一个错误值，所以我们再次将其包装在 `MayBe` 中：
+```javascript
+. . .
+comments: MayBe.of(getComments(x.permalink.replace("?ref=search_posts",".json")))
+. . .
+```
+
+### 注意
+
+我们正在将永久链接值 `?ref=search_posts` 替换为 `.json`，因为搜索结果追加的值 `?ref=search_posts` 不是 `getComments` API 调用的正确格式。
+
+在整个过程中，我们没有超出我们的 `MayBe` 类型。我们在 `MayBe` 类型上愉快地运行所有的 `map` 函数，而不用太担心它。我们用 `MayBe` 很优雅地解决了问题，不是吗？不过，这样使用的 `MayBe` 函子有一个小问题。下一节再说吧。
+
+### 嵌套/多地图问题
+
+如果你在 `mergeViaMayBe` 函数中计算我们 `MayBe` 上的 `map` 调用次数，是 4 次。您可能想知道为什么我们关心 `map` 调用的数量。
+
+让我们试着理解许多*链式* `map` 调用的问题，就像在 `mergeViaMayBe` 中一样。想象一下，我们想要获取从 `mergeViaMayBe` 返回的评论数组。我们将在 `mergeViaMayBe` 函数中传递我们的搜索文本 "functional programming"：
+```javascript
+let answer = mergeViaMayBe("functional programming")
+```
+调用后，`answer` 的值为：
+```javascript
+MayBe {
+  value: [
+    {
+      title: 'ELI5: what is functional programming and how is it different from OOP',
+      comments: [Object]
+    },
+    {
+      title: 'ELI5 why functional programming seems to be "on the rise" and how it differs from OOP',
+      comments: [Object]
+    }
+  ]
+}
+```
+现在让我们获取 `comments` 对象进行处理。因为返回值是 `MayBe`，我们可以对它进行 `map`：
+```javascript
+answer.map((result) => {
+  //process result.
+})
+```
+结果（即 `MayBe` 的值）是一个包含 `title` 和 `comments` 的数组，所以让我们使用 `Array` 的 `map` 来映射它：
+```javascript
+answer.map((result) => {
+  arrayUtils.map(result,(mergeResults) => {
+    //mergeResults
+  })
+})
+```
+每个 `mergeResults` 是一个对象，它包含 `title` 和 `comments`。请记住，`comments` 也是一个 `MayBe`。因此，要获取评论，我们需要对我们的 `comments` 进行 `map`：
+```javascript
+answer.map((result) => {
+  arrayUtils.map(result,(mergeResults) => {
+    mergeResults.comments.map(comment => {
+      //finally got the comment object
+    })
+  })
+})
+```
+看起来我们做了更多的工作来获得评论列表。假设有人正在使用我们的 `mergeViaMayBe` API 来获取评论列表。使用已经显示的嵌套 `map` 返回结果，他们会非常恼火。我们能让我们的合并更好吗？是的，我们可以：满足单子。
+
+## 通过连接解决问题
+
+在前面的章节中，我们已经看到了，为了得到我们想要的结果，我们必须深入我们的内心。编写这样的 API 对我们没有帮助，反而会激怒其他开发人员。为了解决这些深层问题，让我们在 `MayBe` 函子中添加 `join`。
+
+### 加入实现
+
+让我们开始实现 `join` 函数。`join` 函数很简单，看起来像清单 9-5。
+
+```javascript
+MayBe.prototype.join = function() {
+    return this.isNothing() ? MayBe.of(null) : this.value;
+}
+```
+
+**清单 9-5 连接函数定义**
+
+`join` 非常简单，它只是返回容器内部的值（如果存在值的话）；否则，它返回 `MayBe.of(null)`。`join` 很简单，但它帮助我们解包嵌套的 `MayBe`：
+
+```javascript
+let joinExample = MayBe.of(MayBe.of(5))
+// => MayBe { value: MayBe { value: 5 } }
+
+joinExample.join()
+// => MayBe { value: 5 }
+```
+
+如本例所示，它将嵌套结构解包为单层。假设我们想在 `joinExample` `MayBe` 中的值上加 4。让我们试一试：
+
+```javascript
+joinExample.map((outsideMayBe) => {
+    return outsideMayBe.map((value) => value + 4)
+})
+```
+
+这段代码返回以下内容：
+
+```
+MayBe { value: MayBe { value: 9 } }
+```
+
+尽管值是正确的，但我们映射了两次才得到结果。同样，我们得到的结果最终处于一个嵌套结构中。现在让我们通过 `join` 来做同样的事情：
+
+```javascript
+joinExample.join().map((v) => v + 4)
+// => MayBe { value: 9 }
+```
+
+这段代码非常优雅。`join` 的调用返回内部 `MayBe`，其值为 5；一旦我们有了它，我们就通过 `map` 运行它，然后加上值 4。现在结果值在一个扁平结构中，`MayBe { value: 9 }`。
+
+现在有了 `join`，让我们尝试处理 `mergeViaMayBe` 返回的嵌套结构。我们将代码更改为清单 9-6。
+
+```javascript
+let mergeViaJoin = (searchText) => {
+    let redditMayBe = MayBe.of(searchReddit(searchText))
+    let ans = redditMayBe.map((arr) => arr['data'])
+               .map((arr) => arr['children'])
+               .map((arr) => arrayUtils.map(arr, (x) => {
+                    return {
+                        title : x['data'].title,
+                        permalink : x['data'].permalink
+                    }
+                }))
+               .map((obj) => arrayUtils.map(obj, (x) => {
+                    return {
+                        title: x.title,
+                        comments: MayBe.of(getComments(x.permalink.replace("?ref=search_posts",".json"))).join()
+                    }
+                }))
+               .join()
+    return ans;
+}
+```
+
+**清单 9-6 合并可能使用连接**
+
+如您所见，我们刚刚在代码中添加了两个 `join`。一个是在注释部分，在那里我们创建了一个嵌套的 `MayBe`，另一个是在我们的所有 `map` 操作之后。
+
+现在有了 `mergeViaJoin`，让我们实现从结果中获取评论数组的相同逻辑。首先让我们快速查看 `mergeViaJoin` 返回的响应：
+
+```javascript
+mergeViaJoin("functional programming")
+```
+
+这将返回以下内容：
+
+```json
+[
+  {
+    "title": "ELI5: what is functional programming and how is it different from OOP",
+    "comments": [ [Object], [Object] ]
+  },
+  {
+    "title": "ELI5 why functional programming seems to be \"on the rise\" and how it differs from OOP",
+    "comments": [ [Object], [Object] ]
+  }
+]
+```
+
+将该结果与我们旧的 `mergeViaMayBe` 进行比较：
+
+```
+MayBe {
+  value:
+   [ { title: 'ELI5: what is functional programming and how is it different from OOP',
+       comments: [Object] },
+     { title: 'ELI5 why functional programming seems to be "on the rise" and how it differs from OOP',
+       comments: [Object] } ] }
+```
+
+如您所见，`join` 已经取出了 `MayBe` 的值并将其返回。现在让我们看看如何使用评论数组进行我们的处理任务。因为 `mergeViaJoin` 返回的值是一个数组，我们可以使用我们的 `Arrays map` 来映射它：
+
+```javascript
+arrayUtils.map(result, mergeResult => {
+    //mergeResult
+})
+```
+
+现在每个 `mergeResult` 变量直接指向具有 `title` 和 `comments` 的对象。请注意，我们在 `getComments` 的 `MayBe` 调用中调用了 `join`，所以 `comments` 对象只是一个简单的数组。考虑到这一点，要从迭代中获取评论列表，我们只需要调用 `mergeResult.comments`：
+
+```javascript
+arrayUtils.map(result, mergeResult => {
+    //mergeResult.comments has the comments array
+})
+```
+
+这看起来很有希望，因为我们已经得到了我们的 `MayBe` 的全部好处，也得到一个很好的数据结构来返回结果，这很容易处理。
+
+### 链式实现
+
+Have a look at the code in Listing 9-6. As you can guess, we need to call `join` always after `map`. Let’s wrap this logic inside a method called `chain`, as shown in Listing 9-7.
+
+```javascript
+MayBe.prototype.chain = function(f){
+    return this.map(f).join()
+}
+```
+
+Listing 9-7: 链式函数定义
+
+Once `chain` is in place, we can make our merge function logic look like Listing 9-8.
+
+```javascript
+let mergeViaChain = (searchText) => {
+    let redditMayBe = MayBe.of(searchReddit(searchText))
+    let ans = redditMayBe.map((arr) => arr['data'])
+                .map((arr) => arr['children'])
+                .map((arr) => arrayUtils.map(arr, (x) => {
+                    return {
+                        title : x['data'].title,
+                        permalink : x['data'].permalink
+                    }
+                }))
+                .chain((obj) => arrayUtils.map(obj, (x) => {
+                    return {
+                        title: x.title,
+                        comments: MayBe.of(getComments(x.permalink.replace("?ref=search_posts",".json"))).join()
+                    }
+                }))
+    return ans;
+}
+```
+
+Listing 9-8: 合并可能使用链
+
+The output is going to be exactly the same via `chain`, too. Play around with this function. In fact, with `chain` in place, we can move the logic of counting the number of comments to an in-place operation, as shown in Listing 9-9.
+
+```javascript
+let mergeViaChain = (searchText) => {
+    let redditMayBe = MayBe.of(searchReddit(searchText))
+    let ans = redditMayBe.map((arr) => arr['data'])
+                .map((arr) => arr['children'])
+                .map((arr) => arrayUtils.map(arr, (x) => {
+                    return {
+                        title : x['data'].title,
+                        permalink : x['data'].permalink
+                    }
+                }))
+                .chain((obj) => arrayUtils.map(obj, (x) => {
+                    return {
+                        title: x.title,
+                        comments: MayBe.of(getComments(x.permalink.replace("?ref=search_posts",".json"))).chain(x => {
+                            return x.length
+                        })
+                    }
+                }))
+    return ans;
+}
+```
+
+Listing 9-9: 对 `mergeViaChain` 进行改进
+
+Now calling this code:
+
+```javascript
+mergeViaChain("functional programming")
+```
+
+will return the following:
+
+```json
+[
+  {
+    "title": "ELI5: what is functional programming and how is it different from OOP",
+    "comments": 2
+  },
+  {
+    "title": "ELI5 why functional programming seems to be \"on the rise\" and how it differs from OOP",
+    "comments": 2
+  }
+]
+```
+
+解决方案看起来如此优雅，但我们仍然没有看到一个单子，不是吗？
+
+## 什么是单子？
+
+你可能想知道为什么我们在这一章开始承诺教你单子，但仍然没有定义单子是什么。我们很抱歉没有定义单子，但你已经看到了它的作用。(什么？)
+
+是的，单子是一个有链式方法的函子；就是这样，单子就是这样。正如您已经看到的，我们已经扩展了我们最喜欢的 `MayBe` 函子，添加了一个 `chain`（当然还有一个连接函数），使它成为一个单子。
+
+我们从一个用函子来解决一个正在进行的问题的例子开始，最终在没有意识到使用它的情况下，用一个单子解决了这个问题。这是我们有意为之的，因为我们想看到单子背后的直觉（它用函子解决的问题）。我们可以从一个简单的单子定义开始，但是尽管这显示了*单子是什么*，它不会显示*为什么*应该使用单子。
+
+### 注意
+
+你可能会对 `MayBe` 是单子还是函子感到困惑。不要搞混了：也许 with only `of` 和 `map` 是一个函子。带链的函子是单子。
+
+## 摘要
+
+在这一章中，我们已经看到了一个新的函子类型，称为单子。我们讨论了重复映射如何导致嵌套值的问题，这在以后变得难以处理。我们引入了一个名为 `chain` 的新函数，它有助于扁平化可能的数据。我们看到有链的尖函子叫做单子。在本章中，我们使用第三方库来创建 Ajax 调用。在下一章，我们将看到一种思考异步调用的新方法。
