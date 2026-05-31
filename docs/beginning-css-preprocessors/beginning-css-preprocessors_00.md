@@ -1,3 +1,0 @@
-
-![](img/cover.jpeg)
-

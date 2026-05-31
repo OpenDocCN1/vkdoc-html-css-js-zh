@@ -1,6 +1,0 @@
-+   [ActionScript 3.0 游戏设计基础](`README.md`)
-+   [目录](`foundation-game-design-with-actionscript-30_1.md`)
-+   [目录](`foundation-game-design-with-actionscript-30_2.md`)
-+   [目录](`foundation-game-design-with-actionscript-30_3.md`)
-+   [本书使用的软件](`foundation-game-design-with-actionscript-30_4.md`)
-+   [编程索引（节选）](`foundation-game-design-with-actionscript-30_5.md`)

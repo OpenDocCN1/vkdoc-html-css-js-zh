@@ -1,5 +1,0 @@
-+   [Web 开发者的 JavaScript](README.md)
-+   [引言](javascript-for-web-developers_1.md)
-+   [环境搭建](javascript-for-web-developers_2.md)
-+   [1. 使用 JavaScript 工作](javascript-for-web-developers_3.md)
-+   [排版后的文档](javascript-for-web-developers_4.md)
