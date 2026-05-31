@@ -1,6 +1,0 @@
-+   [Android 4 高级指南](README.md)
-+   [Pro Android 4（专业 Android 4 开发）](pro-android-4-pro-android-four_1.md)
-+   [目录](pro-android-4-pro-android-four_2.md)
-+   [Android 计算平台简介](pro-android-4-pro-android-four_3.md)
-+   [第 7 章](pro-android-4-pro-android-four_4.md)
-+   [使用菜单](pro-android-4-pro-android-four_5.md)
