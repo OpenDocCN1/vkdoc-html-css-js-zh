@@ -67,3 +67,73 @@ animate()
 1. 我们创建一个渲染器。渲染器的作用是将 PixiJS 抽象（精灵、纹理等）转换为 canvas 或 WebGL 图形。我们不需要与它们交互，但必须有一个渲染器才能显示我们的 PixiJS 内容。我们告诉渲染器要占满浏览器窗口的整个宽度和高度。我们还告诉它对我们的图形进行抗锯齿处理，并将其提升到视网膜分辨率。我们让它拥有透明背景，并调整所有图形以适应屏幕。
 2. 然后，我们使用之前创建的 PNG 图像创建一个新的 `PIXI.Sprite` 实例。默认情况下，它的位置是 `x = 0` 和 `y = 0`。我们可以将其定位到屏幕中心。我们必须创建一个根精灵容器（通常称为舞台），并将精灵附加到舞台上。这并没有听起来那么复杂。可以把它想象成 HTML 文档，它们有一个根 `html` 元素，我们将所有其他元素添加到其中。这是类似的事情。
 3. 最后，我们创建一个动画函数，并确保渲染器渲染我们的舞台和精灵。我们使用 `requestAnimationFrame` 函数作为一种在不阻塞 JavaScript 线程的情况下进行渲染的方式。关于这一点，我们可以进行长时间的讨论。目前，只需要知道 `requestAnimationFrame` 每秒执行很多次就足够了。我们的游戏目标是每秒渲染 30 到 60 帧，同时在后台进行各种玩家和世界的计算。要实现这一切的顺畅运行，我们就需要使用这个函数。
+
+# 游戏循环
+
+游戏循环将控制我们游戏的流程。这是一个重复的过程：读取输入、计算状态变化、并将输出渲染到屏幕上。
+
+到目前为止，我们已经搭建了很多脚手架，但所做的一切只是渲染一个静态图像。让我们让它动起来吧！首先，我们将创建一个 `Player` 类，这样我们就可以追踪玩家的位置了：
+
+```
+class Player {
+constructor(sprite, x, y) {
+this.sprite = sprite
+this.x = x
+this.y = y
+this.sprite.x = this.x
+this.sprite.y = this.y
+}
+animate(state) {
+this.x += 5
+if (this.x > window.innerWidth) {
+this.x = 0
+}
+this.sprite.x = this.x
+this.sprite.y = this.y
+}
+}
+```
+
+这段代码来自 [`codepen.io/assertchris/pen/qaobAz`](http://codepen.io/assertchris/pen/qaobAz)。
+
+这就是 ES2015 及更高版本中 JavaScript 类的写法。`Player` 类有一个构造函数，我们用它来存储对精灵的引用，以及初始的 `x` 和 `y` 位置。
+
+它还有一个 `animate` 方法，我们每秒会调用很多次。我们可以用这个方法来判断玩家是否需要改变位置或执行其他操作。在这个例子中，我们将精灵的 `x` 坐标稍微增加了一点。如果玩家/精灵移出了屏幕右侧，我们就把它移回屏幕左侧。
+
+我们还必须改变创建精灵的方式：
+
+```
+const player = new Player(
+sprite,
+window.innerWidth / 2,
+window.innerHeight / 2,
+)
+stage.addChild(sprite)
+let state = {
+"renderer": renderer,
+"stage": stage,
+}
+const animate = function() {
+requestAnimationFrame(animate)
+player.animate(state)
+renderer.render(stage)
+}
+```
+
+这段代码来自 [`codepen.io/assertchris/pen/qaobAz`](http://codepen.io/assertchris/pen/qaobAz)。
+
+现在我们开始看到游戏中的循环了。正如图 2-3 所示，我们每秒多次告诉我们的玩家去执行动画。玩家会根据一些内部逻辑进行调整，并更新其精灵。渲染器渲染输出，我们看到的就是一个流畅的动画。
+
+![A435434_1_En_2_Fig3_HTML.jpg](img/A435434_1_En_2_Fig3_HTML.jpg)
+
+图 2-3. 移动精灵
+
+我们目前唯一缺少的就是输入，但我们很快就会讲到……
+
+## 总结
+
+在本章中，我们成功搭建了一个游戏环境（使用 CodePen）。我们简要介绍了 PixiJS，并了解了如何将玩家的精灵渲染到屏幕上。
+
+我们还为玩家的精灵添加了动画，并学会了如何使用 `requestAnimationFrame` 函数。
+
+花点时间为你的游戏寻找精灵图形。派生 (Fork) 这个 CodePen，并稍作自定义。感受一下创建和操控精灵的过程非常重要。这就是你游戏的开始！
