@@ -1,0 +1,25 @@
+chapter_starts:
+- 'no': 11997
+  confidence: 0.95
+  final_reason: 语义特征极强，包含“第 10 章”字样，符合最高层级章节标识。尽管标记为 H2，但在该书语境下 H2 对应章级，且上下文（前一节结束，后跟新内容）支持分章。
+  accepted_evidence:
+  - 包含明确的章序号“第 10 章”
+  - 位于前文小节（如“捕获按键”）结束后
+  - 后续内容涉及新游戏的完整实现逻辑
+  rejected_evidence:
+  - Markdown 层级为 H2，可能被误认为子节，但“第 X 章”字样具有决定性优先级
+  need_human_review: false
+- 'no': 14473
+  confidence: 0.98
+  final_reason: 规则明确规定文末索引划分为一章。该行为 H2 级别，与确认的章标题同级，且位于全文末尾，符合索引特征。
+  accepted_evidence:
+  - 标题为“索引”
+  - 位于书籍最后部分
+  - 符合“文末索引也划分为一章”的硬性规则
+  rejected_evidence: []
+  need_human_review: false
+rejected_lines:
+- 'no': 12847
+  reason: 复核方指出其为 H3 级别，低于已确认的章标题（H2）。根据“只划分最高层级大章”及“X.Y 等子层级不划分”的原则，H3 属于 H2 的子层级或排版不一致的低级标题，不应分章。虽然语义上附录独立，但层级证据（H3
+    < H2）更支持将其视为节或非最高层级。
+  need_human_review: false
