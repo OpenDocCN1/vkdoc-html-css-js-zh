@@ -1,0 +1,57 @@
+chapter_starts:
+- 'no': 6246
+  confidence: 0.95
+  final_reason: 双方一致确认。该行包含'第三部分'，符合判断规则中'如果存在标题为第 X 部分，那么该书为部分-章节模式，遇到部分和章标题时，都要划分新章'的要求。且后续内容列举了第9-15章，证实这是部分标题。
+  accepted_evidence:
+  - 文本'第三部分'符合部分-章节模式的最高层级特征
+  - 后续列表涵盖了第9章至第15章，表明该部分统领这些章节
+  - 前后文衔接自然，前文为第8章总结，此处开启新部分
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 6264
+  confidence: 0.95
+  final_reason: 双方一致确认。该行包含'第 9 章'，是全书最高层级的章节标题。虽然使用了Markdown二级标题符号'##'，但语义上'第 X 章'优先级高于格式层级，且序号连贯（承接第三部分介绍）。
+  accepted_evidence:
+  - 文本明确包含'第 9 章'
+  - 内容为CSS选择器，与前一章节（HTML表单）主题不同，属新章起始
+  - 序号9紧随第三部分介绍，逻辑连贯
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 6664
+  confidence: 0.95
+  final_reason: 双方一致确认。该行包含'第十章'（即第10章），符合最高层级章节标题特征。尽管使用'##'符号，但语义上的'第 X 章'指示这是新章节的开端，且前文第9章已结束。
+  accepted_evidence:
+  - 文本'## 第十章：定位内容'明确标识第10章
+  - 内容从CSS选择器转向布局定位，主题切换
+  - 序号10与第9章连贯
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 7402
+  confidence: 0.95
+  final_reason: 双方一致确认。该行包含'第 11 章'，是最高层级章节标题。前文第10章以'在下一章中，我将解释可用于主要格式化文本内容的 CSS
+    特性'结束，此处正是文本样式章节的开始。
+  accepted_evidence:
+  - 文本'## 第 11 章 文本样式'明确标识第11章
+  - 前文第10章结尾预告了下一章内容，此处吻合
+  - 序号11与第10章连贯
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 8115
+  confidence: 0.95
+  final_reason: 双方一致确认。该行包含'第 12 章'，使用一级标题符号'#'，是最高层级章节标题。前文第11章以总结结束，此处开启新的边框与背景主题。
+  accepted_evidence:
+  - 文本'# 第 12 章 边框与背景'明确标识第12章
+  - 前文第11章总结后，开启新主题
+  - 序号12与第11章连贯
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 8809
+  confidence: 0.95
+  final_reason: 双方一致确认。该行包含'第 13 章'，虽标题文字较短，但结合下一行的'# 表格样式设计'可确定完整章节名。前文第12章总结后，此处开启表格章节。序号13连贯。
+  accepted_evidence:
+  - 文本'# 第 13 章'与后续'# 表格样式设计'共同构成章节标题
+  - 前文第12章总结'在下一章中，我将介绍如何使用表格来排列和格式化内容'，此处吻合
+  - 序号13与第12章连贯
+  rejected_evidence: []
+  need_human_review: false
+rejected_lines: []

@@ -1,0 +1,315 @@
+chapter_starts:
+- 'no': 5
+  confidence: 0.95
+  final_reason: 全书起始，包含书名与版权页，属于前置部分起始
+  accepted_evidence:
+  - Markdown一级标题
+  - 书籍主标题与版权信息页
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 137
+  confidence: 0.85
+  final_reason: 位于目录与第3章（159行）之间，作为该区域唯一的最高层级标题（#），语义上代表第2章内容的起始（尽管标题名称与目录略有差异，但符合上下文分章逻辑）
+  accepted_evidence:
+  - 'Markdown一级标题 #'
+  - 上下文位置处于第3章之前
+  - 复核方确认维持分章
+  rejected_evidence:
+  - 标题未包含'第2章'字样，与目录名称不完全一致
+  need_human_review: false
+- 'no': 159
+  confidence: 1.0
+  final_reason: 明确的一级标题 '第 3 章：理解 Android 资源'
+  accepted_evidence:
+  - Markdown一级标题
+  - 包含'第 X 章'编号特征
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 193
+  confidence: 1.0
+  final_reason: 明确的一级标题 '第 4 章：理解内容提供者'
+  accepted_evidence:
+  - Markdown一级标题
+  - 包含'第 X 章'编号特征
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 259
+  confidence: 1.0
+  final_reason: 明确的一级标题 '第 5 章：理解 Intent'
+  accepted_evidence:
+  - Markdown一级标题
+  - 包含'第 X 章'编号特征
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 293
+  confidence: 1.0
+  final_reason: 明确的一级标题 '第 6 章：构建用户界面与使用控件'
+  accepted_evidence:
+  - Markdown一级标题
+  - 包含'第 X 章'编号特征
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 363
+  confidence: 1.0
+  final_reason: 明确的一级标题 '第 7 章：使用菜单'
+  accepted_evidence:
+  - Markdown一级标题
+  - 包含'第 X 章'编号特征
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 407
+  confidence: 1.0
+  final_reason: 明确的一级标题 '第 8 章：面向平板电脑及其他设备的 Fragment'
+  accepted_evidence:
+  - Markdown一级标题
+  - 包含'第 X 章'编号特征
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 449
+  confidence: 1.0
+  final_reason: 明确的一级标题 '第 9 章：使用对话框'
+  accepted_evidence:
+  - Markdown一级标题
+  - 包含'第 X 章'编号特征
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 471
+  confidence: 1.0
+  final_reason: 明确的一级标题 '第 10 章：探索 ActionBar'
+  accepted_evidence:
+  - Markdown一级标题
+  - 包含'第 X 章'编号特征
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 495
+  confidence: 1.0
+  final_reason: 明确的一级标题 '第 11 章：高级调试与分析'
+  accepted_evidence:
+  - Markdown一级标题
+  - 包含'第 X 章'编号特征
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 529
+  confidence: 1.0
+  final_reason: 明确的一级标题 '第 12 章：响应配置变更'
+  accepted_evidence:
+  - Markdown一级标题
+  - 包含'第 X 章'编号特征
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 549
+  confidence: 1.0
+  final_reason: 明确的一级标题 '第 13 章：使用首选项与保存状态'
+  accepted_evidence:
+  - Markdown一级标题
+  - 包含'第 X 章'编号特征
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 581
+  confidence: 1.0
+  final_reason: 明确的一级标题 '第 14 章：探索安全与权限'
+  accepted_evidence:
+  - Markdown一级标题
+  - 包含'第 X 章'编号特征
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 649
+  confidence: 1.0
+  final_reason: 明确的一级标题 '第 15 章：构建与使用服务'
+  accepted_evidence:
+  - Markdown一级标题
+  - 包含'第 X 章'编号特征
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 697
+  confidence: 1.0
+  final_reason: 明确的一级标题 '第 16 章：探索包'
+  accepted_evidence:
+  - Markdown一级标题
+  - 包含'第 X 章'编号特征
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 747
+  confidence: 1.0
+  final_reason: 明确的一级标题 '第 17 章：探索处理器'
+  accepted_evidence:
+  - Markdown一级标题
+  - 包含'第 X 章'编号特征
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 803
+  confidence: 1.0
+  final_reason: 明确的一级标题 '第 18 章：探索 AsyncTask'
+  accepted_evidence:
+  - Markdown一级标题
+  - 包含'第 X 章'编号特征
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 839
+  confidence: 1.0
+  final_reason: 明确的一级标题 '第 19 章：广播接收器与长时间运行的服务'
+  accepted_evidence:
+  - Markdown一级标题
+  - 包含'第 X 章'编号特征
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 909
+  confidence: 1.0
+  final_reason: 明确的一级标题 '第 20 章：探索闹钟管理器'
+  accepted_evidence:
+  - Markdown一级标题
+  - 包含'第 X 章'编号特征
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 947
+  confidence: 1.0
+  final_reason: 明确的一级标题 '第 21 章：探索 2D 动画'
+  accepted_evidence:
+  - Markdown一级标题
+  - 包含'第 X 章'编号特征
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 1013
+  confidence: 1.0
+  final_reason: 明确的一级标题 '第 22 章：探索地图与基于位置的服务'
+  accepted_evidence:
+  - Markdown一级标题
+  - 包含'第 X 章'编号特征
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 1043
+  confidence: 1.0
+  final_reason: 明确的一级标题 '第 23 章：使用电话 API'
+  accepted_evidence:
+  - Markdown一级标题
+  - 包含'第 X 章'编号特征
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 1071
+  confidence: 1.0
+  final_reason: 明确的一级标题 '第 24 章：理解媒体框架'
+  accepted_evidence:
+  - Markdown一级标题
+  - 包含'第 X 章'编号特征
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 1107
+  confidence: 1.0
+  final_reason: 明确的一级标题 '第 25 章：主屏幕小部件'
+  accepted_evidence:
+  - Markdown一级标题
+  - 包含'第 X 章'编号特征
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 1145
+  confidence: 1.0
+  final_reason: 明确的一级标题 '第 26 章：探索列表小部件'
+  accepted_evidence:
+  - Markdown一级标题
+  - 包含'第 X 章'编号特征
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 1185
+  confidence: 0.95
+  final_reason: '尽管使用二级标记 ##，但语义上为 ''第 27 章''，且前后章节（26、28）连贯，确认为章节起始'
+  accepted_evidence:
+  - 包含'第 X 章'字样
+  - 前后章节编号连贯
+  - 复核方确认为章节标题
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 1203
+  confidence: 0.95
+  final_reason: '尽管使用二级标记 ##，但语义上为 ''第 28 章''，且前后章节（27、29）连贯，确认为章节起始'
+  accepted_evidence:
+  - 包含'第 X 章'字样
+  - 前后章节编号连贯
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 1217
+  confidence: 0.95
+  final_reason: '尽管使用二级标记 ##，但语义上为 ''第 29 章''，且前后章节（28、30）连贯，确认为章节起始'
+  accepted_evidence:
+  - 包含'第 X 章'字样
+  - 前后章节编号连贯
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 1243
+  confidence: 0.95
+  final_reason: '尽管使用二级标记 ##，但语义上为 ''第 30 章''，且前后章节（29、31）连贯，确认为章节起始'
+  accepted_evidence:
+  - 包含'第 X 章'字样
+  - 前后章节编号连贯
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 1280
+  confidence: 0.95
+  final_reason: '尽管使用二级标记 ##，但语义上为 ''第 31 章''，且为正文最后章节，确认为章节起始'
+  accepted_evidence:
+  - 包含'第 X 章'字样
+  - 前后章节编号连贯
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 1308
+  confidence: 0.9
+  final_reason: 文末索引章节，符合规则中“文末索引也划分为一章”的要求
+  accepted_evidence:
+  - 语义为索引
+  - 独立于正文后
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 1312
+  confidence: 0.9
+  final_reason: 后置内容“关于作者”，符合规则中“关于作者等...统一划分为一章”的要求
+  accepted_evidence:
+  - 语义为关于作者
+  - 独立章节
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 1318
+  confidence: 0.9
+  final_reason: 后置内容“关于技术审校”，独立章节
+  accepted_evidence:
+  - 语义为技术审校
+  - 独立章节
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 1328
+  confidence: 0.9
+  final_reason: 前置内容“前言”，符合规则中“前言...统一划分为一章”的要求
+  accepted_evidence:
+  - 语义为前言
+  - 独立章节
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 1342
+  confidence: 0.95
+  final_reason: 第1章的起始标记，与后续标题共同构成章节头
+  accepted_evidence:
+  - 语义为第1章编号
+  - 后续紧跟章节主标题
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 1891
+  confidence: 0.95
+  final_reason: 第2章的起始标记，尽管使用二级标记，但语义明确且后续内容对应第2章
+  accepted_evidence:
+  - 语义为第2章编号
+  - 后续内容对应第2章子节
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 2366
+  confidence: 1.0
+  final_reason: 第3章的再次出现（可能是全文本中的重复或不同版本部分），语义明确为第3章起始
+  accepted_evidence:
+  - 语义为第3章编号
+  - 后续紧跟章节主标题
+  rejected_evidence: []
+  need_human_review: false
+rejected_lines:
+- 'no': 55
+  reason: 复核方指出其为二级标题（##），且目录属于前置部分内部结构，不应单独分章，全书最高层级为#
+  need_human_review: false
+- 'no': 95
+  reason: 复核方指出其为二级标题（##），目录属于前置部分内部结构，不应单独分章
+  need_human_review: false

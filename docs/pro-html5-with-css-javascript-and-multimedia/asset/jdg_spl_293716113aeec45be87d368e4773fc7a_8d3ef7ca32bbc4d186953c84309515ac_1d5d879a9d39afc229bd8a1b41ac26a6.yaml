@@ -1,0 +1,63 @@
+chapter_starts:
+- 'no': 9593
+  confidence: 0.98
+  final_reason: 双方一致 + 格式语义符合。复核方虽指出前文有噪声，但确认该行标记第14章开始，前文为第13章结束，逻辑连贯。
+  accepted_evidence:
+  - Markdown 一级标题 `# 第 14 章 Flexbox`
+  - 序号连贯（13 -> 14）
+  - 前文（行9979）为第13章总结
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 9983
+  confidence: 0.99
+  final_reason: 双方一致 + 格式标准。分隔线后的一级标题，明确标记第15章。
+  accepted_evidence:
+  - Markdown 一级标题 `# 第 15 章`
+  - 前有空行和 `---` 分隔符
+  - 后续紧跟子节标题 `## 动画与变换`
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 10511
+  confidence: 0.99
+  final_reason: 双方一致 + 部分-章节模式规则。检测到“第X部分”标题，根据规则，部分标题需单独分章。
+  accepted_evidence:
+  - Markdown 一级标题 `# 第四部分`
+  - 属于“部分-章节”模式
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 10527
+  confidence: 0.99
+  final_reason: 双方一致 + 章节起始。位于第四部分标题之后，标记第16章开始。
+  accepted_evidence:
+  - Markdown 一级标题 `# 第 16 章`
+  - 前文为部分标题
+  - 后续内容为第16章正文
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 11438
+  confidence: 0.9
+  final_reason: 双方一致 + 语义优先。虽然标记为二级标题 `##`，但内容为最高层级章节“第18章”，且前文为第17章小结，确认为新章起始。
+  accepted_evidence:
+  - 文本内容为 `## 第 18 章`
+  - 前文（行11434）为第17章总结
+  - 序号连贯
+  rejected_evidence:
+  - 复核方指出其Markdown层级为二级（`##`），可能是排版错误，但语义特征支持分章
+  need_human_review: false
+- 'no': 11795
+  confidence: 0.9
+  final_reason: 双方一致 + 语义确认。标记为第19章起始，尽管数字格式（中文“十九”）与前文（阿拉伯“16”、“18”）不一致，但语义明确。
+  accepted_evidence:
+  - Markdown 一级标题 `# 第十九章：动态样式`
+  - 前文（行11793）预示下一章内容
+  - 序号连贯
+  rejected_evidence:
+  - 复核方指出数字格式不一致（中文vs阿拉伯），可能为排版遗留，但不影响其作为新章起始的判定
+  need_human_review: false
+rejected_lines:
+- 'no': 9152
+  reason: 复核方证据成立：该行出现在第13章内容中间（后续仍有 `## 使用 CSS 创建表格` 等），且第13章实际起始点在更前位置（约行8883或之前），此处为重复标记或页眉残留，不应分章。
+  need_human_review: false
+- 'no': 9535
+  reason: 复核方证据成立：该行位于第13章内容深处（紧接 `## 排版后的内容` 之后），属于中间穿插的页眉或排版噪声，非新章起始。
+  need_human_review: false

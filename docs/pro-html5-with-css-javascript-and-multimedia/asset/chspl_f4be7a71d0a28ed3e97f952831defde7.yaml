@@ -1,0 +1,19 @@
+chapter_starts:
+- 'no': 12247
+  confidence: 0.99
+  reason: 第 20 章起始，编号特征明显，格式独立成行
+- 'no': 12537
+  confidence: 0.98
+  reason: 第 V 部分（Part V）起始，属于部分-章节模式中的部分标题
+- 'no': 12553
+  confidence: 0.99
+  reason: 第 21 章起始，编号特征明显，虽标题分离但语义指向清晰
+- 'no': 12852
+  confidence: 0.99
+  reason: 第 22 章起始，包含章号及标题“可缩放矢量图形”
+- 'no': 13634
+  confidence: 0.95
+  reason: 第 23 章起始，虽无直接章号标题行，但前文小结结束，此处开始 Canvas 章节内容，且后续出现页眉“第 23 章”佐证
+- 'no': 14635
+  confidence: 0.98
+  reason: 第 24 章起始，包含章号及标题“拖放”

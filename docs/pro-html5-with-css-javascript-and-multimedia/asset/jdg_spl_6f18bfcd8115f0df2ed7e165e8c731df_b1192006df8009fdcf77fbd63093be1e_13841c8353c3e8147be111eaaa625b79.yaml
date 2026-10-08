@@ -1,0 +1,65 @@
+chapter_starts:
+- 'no': 2980
+  confidence: 0.95
+  final_reason: 双方一致 + 排版语义均符合
+  accepted_evidence:
+  - 格式为 '# 第 3 章 JavaScript 要点'，符合最高层级章标题特征
+  - 前文为代码块结束，后文为 'map()' 方法介绍，上下文连贯
+  - 序号连贯（虽然跳过了第2章，但规则指出只需划分，无视其他）
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 3068
+  confidence: 0.98
+  final_reason: 双方一致 + 部分-章节模式规则
+  accepted_evidence:
+  - 格式为 '# 第二部分 - HTML'，明显为部分标题
+  - 规则规定：如果存在'第 X 部分'，则遇到部分和章标题时都要划分新章
+  - 该部分统领后续第4-8章内容
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 3088
+  confidence: 0.9
+  final_reason: 双方一致 + 部分-章节模式规则
+  accepted_evidence:
+  - 格式为 '## 第 4 章：HTML 结构元素'，虽为二级标题，但语义为章标题
+  - 在部分-章节模式下，章标题需划分新章
+  - 序号连贯（第4章）
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 3841
+  confidence: 0.95
+  final_reason: 双方一致 + 排版语义均符合
+  accepted_evidence:
+  - 格式为 '# 第 5 章'，符合最高层级章标题特征
+  - 前文为第4章小结结束，后文为第5章概述
+  - 序号连贯（第4章后为第5章）
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 4502
+  confidence: 0.95
+  final_reason: 双方一致 + 排版语义均符合
+  accepted_evidence:
+  - 格式为 '# 第 6 章：表格 HTML 元素'，符合最高层级章标题特征
+  - 前文为第5章小结结束，后文为第6章概述
+  - 序号连贯（第5章后为第6章）
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 4952
+  confidence: 0.95
+  final_reason: 双方一致 + 排版语义均符合
+  accepted_evidence:
+  - 格式为 '# 第 7 章：嵌入 HTML 元素'，符合最高层级章标题特征
+  - 前文为第6章小结结束，后文为第7章概述
+  - 序号连贯（第6章后为第7章）
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 5415
+  confidence: 0.9
+  final_reason: 双方一致 + 部分-章节模式规则
+  accepted_evidence:
+  - 格式为 '## 第 8 章'，虽为二级标题，但语义为章标题
+  - 在部分-章节模式下，章标题需划分新章
+  - 序号连贯（第7章后为第8章）
+  rejected_evidence: []
+  need_human_review: false
+rejected_lines: []

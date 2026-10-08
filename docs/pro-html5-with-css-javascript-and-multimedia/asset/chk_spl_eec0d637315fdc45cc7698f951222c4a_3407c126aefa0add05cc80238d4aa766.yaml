@@ -1,0 +1,43 @@
+reviews:
+- 'no': 6246
+  overturn_probability: 0.0
+  alternative: 章节标题
+  counter_evidence:
+  - 该行明确包含“第三部分”字样，符合部分-章节结构中的最高层级划分标志。
+  - 上下文显示该行后紧跟着“## CSS”等下级标题及章节列表，符合部分标题统领后续内容的特征。
+  keep_split: true
+- 'no': 6264
+  overturn_probability: 0.0
+  alternative: 章节标题
+  counter_evidence:
+  - 该行包含“第 9 章”字样，属于全书最高层级的章节划分。
+  - 后续内容围绕CSS选择器展开，且序号与前后章节连贯，符合分章标准。
+  keep_split: true
+- 'no': 6664
+  overturn_probability: 0.0
+  alternative: 章节标题
+  counter_evidence:
+  - 该行格式为“## 第十章：定位内容”，其中“第十章”明确标识了新的章节层级。
+  - 尽管使用了Markdown的二级标题符号`##`，但语义上“第 X 章”通常被视为最高层级的大章划分点，且后续内容均围绕定位展开。
+  keep_split: true
+- 'no': 7402
+  overturn_probability: 0.0
+  alternative: 章节标题
+  counter_evidence:
+  - 该行文本为“## 第 11 章 文本样式”，明确包含“第 11 章”字样。
+  - 上下文中前文第10章已总结，此处开启新主题，且序号连贯，符合分章逻辑。
+  keep_split: true
+- 'no': 8115
+  overturn_probability: 0.0
+  alternative: 章节标题
+  counter_evidence:
+  - 该行文本为“# 第 12 章 边框与背景”，使用了Markdown一级标题符号`#`并包含“第 12 章”字样。
+  - 这是典型的最顶层章节标题，后续内容均涉及边框和背景样式，符合分章标准。
+  keep_split: true
+- 'no': 8809
+  overturn_probability: 0.0
+  alternative: 章节标题
+  counter_evidence:
+  - 该行文本为“# 第 13 章”，紧随其后的是“# 表格样式设计”，两者结合构成完整的章节标题。
+  - 序号13符合章节连贯性，且位于上一章节（第12章）结束标志之后，是新章节的起始。
+  keep_split: true

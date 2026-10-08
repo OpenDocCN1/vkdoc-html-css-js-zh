@@ -1,0 +1,42 @@
+chapter_starts:
+- 'no': 15623
+  confidence: 0.98
+  final_reason: 双方一致确认为第25章起始。格式为最高层级标题“# 第 25 章 ■ Indexed DB”，前文为第24章结尾总结，语义连贯，符合章节划分标准。
+  accepted_evidence:
+  - 判断方：明确的第25章标题，前文为第24章总结
+  - 复核方：keep_split=true，指出格式符合最高层级特征，上下文符合章节结束特征
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 16712
+  confidence: 0.98
+  final_reason: 双方一致确认为第26章起始。格式为最高层级标题“# 第 26 章 ■ 地理定位与地图”，前文为第25章结尾，语义连贯，符合章节划分标准。
+  accepted_evidence:
+  - 判断方：明确的第26章标题，前文为第25章结束
+  - 复核方：keep_split=true，指出前文预告下一章，符合章节结束特征
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 17123
+  confidence: 0.9
+  final_reason: 双方一致确认为附录A起始。虽使用二级标题符号`##`，但“附录”在图书结构中通常视为独立的主要部分（等同于章），且前文为第26章小结，逻辑上开启新的独立内容单元。
+  accepted_evidence:
+  - 判断方：附录作为独立的参考部分应划分为新章
+  - 复核方：keep_split=true，指出附录通常被视为独立的逻辑单元
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 17223
+  confidence: 0.95
+  final_reason: 双方一致确认为附录B起始。格式为最高层级标题“# 附录 B：拖放源代码”，内容独立（代码清单），前文为附录A结束，符合分章标准。
+  accepted_evidence:
+  - 判断方：明确标记为新的附录部分
+  - 复核方：keep_split=true，指出内容包含独立代码列表，自然分隔出附录B
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 17651
+  confidence: 0.95
+  final_reason: 双方一致确认为附录C起始。格式为最高层级标题“# 附录 C”，后续为参考文献列表，属于典型的独立附录/索引内容，符合分章标准。
+  accepted_evidence:
+  - 判断方：附录C起始，后续列出参考文献
+  - 复核方：keep_split=true，指出后续内容为参考文献，前文为附录B结束
+  rejected_evidence: []
+  need_human_review: false
+rejected_lines: []

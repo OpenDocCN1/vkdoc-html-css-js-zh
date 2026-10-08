@@ -1,0 +1,25 @@
+chapter_starts:
+- 'no': 9152
+  confidence: 0.98
+  reason: Markdown 一级标题 `# 第 13 章 表格样式设计`，符合最高层级章节特征，且前文为第13章内容的结束部分。
+- 'no': 9535
+  confidence: 0.98
+  reason: Markdown 一级标题 `# 第 13 章 表格样式`，位于第13章末尾总结之后，作为该章节在目录结构中的正式起始标记或重复标记，属于最高层级。
+- 'no': 9593
+  confidence: 0.99
+  reason: Markdown 一级标题 `# 第 14 章 Flexbox`，明确标志着第14章的开始，紧随第13章总结之后。
+- 'no': 9983
+  confidence: 0.99
+  reason: Markdown 一级标题 `# 第 15 章`，紧随第14章总结之后，标志着第15章的开始。
+- 'no': 10511
+  confidence: 0.99
+  reason: Markdown 一级标题 `# 第四部分`，属于“部分-章节”模式中的部分标题，根据规则应划分为新章。
+- 'no': 10527
+  confidence: 0.99
+  reason: Markdown 一级标题 `# 第 16 章`，标志着第16章的开始。
+- 'no': 11438
+  confidence: 0.99
+  reason: Markdown 一级标题 `## 第 18 章`，虽然使用了二级标记，但内容为最高层级章节号（第18章），且前文为第17章小结，符合新章起始特征。
+- 'no': 11795
+  confidence: 0.99
+  reason: Markdown 一级标题 `# 第十九章：动态样式`，标志着第19章的开始。

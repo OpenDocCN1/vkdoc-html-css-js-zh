@@ -1,0 +1,62 @@
+chapter_starts:
+- 'no': 12247
+  confidence: 0.99
+  final_reason: 双方一致。该行内容为 `## 第 20 章：事件`，是典型的章标题，序号连贯，后续内容均为事件相关，前文为第19章小结，符合分章特征。
+  accepted_evidence:
+  - 编号特征明显：'第 20 章'
+  - 语义特征：统领后续内容
+  - 上下文特征：位于第19章结束后
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 12537
+  confidence: 0.98
+  final_reason: 双方一致。该行内容为 `# 第 V 部分`，属于“部分-章节”模式中的部分标题。根据规则，遇到部分标题时也要划分新章。
+  accepted_evidence:
+  - 规则明确规定：存在部分标题时，部分和章标题都要划分
+  - 语义特征：统领后续高级应用章节
+  - 格式特征：一级标题 `#`
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 12553
+  confidence: 0.99
+  final_reason: 双方一致。该行 `# 第 21 章` 与下一行 `# 音频与视频` 共同构成完整的章标题，序号连贯，是第V部分下的第一个章。
+  accepted_evidence:
+  - 编号特征：'第 21 章'
+  - 格式特征：独立成行
+  - 上下文特征：位于部分标题之后，作为新章开始
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 12852
+  confidence: 0.99
+  final_reason: 双方一致。该行内容为 `# 第 22 章 可缩放矢量图形`，包含明确章号及主题，格式独立，后续内容均涉及SVG，是第21章之后的新章。
+  accepted_evidence:
+  - 编号特征：'第 22 章'
+  - 语义特征：统领SVG内容
+  - 格式特征：一级标题 `#`
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 13634
+  confidence: 0.2
+  final_reason: 复核方证据强，予以采纳。该行 `## 创建一个棋盘` 仅为第23章内部的小节标题（Section），而非章标题（Chapter）。第23章的真正章标题（如
+    `# 第 23 章 Canvas`）在文本中缺失或被遗漏。根据“宁可漏分不可误分”原则，不应将小节误判为章。
+  accepted_evidence:
+  - 复核方指出：`##` 级别通常表示节而非章
+  - 对比第22章有明确的 `#` 章标题，此处缺失
+  - 上下文：该行前是第22章总结，后是第23章正文，但该行本身只是正文第一个小节的标题
+  rejected_evidence:
+  - 判断方认为此处是第23章起始，但证据仅为“前文小结结束”，未证明该行本身是章标题
+  need_human_review: true
+- 'no': 14635
+  confidence: 0.95
+  final_reason: 双方一致。该行 `## 第 24 章 ■ 拖放` 紧随第23章小结之后，且后续内容均为拖放相关。虽然带有 `■` 符号易被误认为页眉，但结合前文语境（章节过渡语）及后续内容，可确认为章标题。后文出现的相同字符串（如14644行）更可能是页眉重复或排版错误，不影响此处作为章起始的判断。
+  accepted_evidence:
+  - 编号特征：'第 24 章'
+  - 上下文特征：位于第23章结束处
+  - 语义特征：统领后续拖放内容
+  - 复核方认可分章
+  rejected_evidence: []
+  need_human_review: false
+rejected_lines:
+- 'no': 13634
+  reason: 该行是第23章内的小节标题（## 创建一个棋盘），而非章标题。第23章章标题缺失，不应以小节代替。
+  need_human_review: true

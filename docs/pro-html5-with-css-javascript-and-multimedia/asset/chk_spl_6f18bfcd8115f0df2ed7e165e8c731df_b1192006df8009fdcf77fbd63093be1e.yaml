@@ -1,0 +1,64 @@
+reviews:
+- 'no': 2980
+  overturn_probability: 0.05
+  alternative: 章标题（非分章理由不充分）
+  counter_evidence:
+  - 该行格式为 `# 第 3 章`，符合最高层级章标题特征。
+  - 前文为第2章内容结尾，后文为第3章概述，上下文连贯。
+  - 序号从2章跳到3章，虽然中间缺2章但根据规则只需划分，不影响其为章标题的判断。
+  keep_split: true
+- 'no': 3068
+  overturn_probability: 0.05
+  alternative: 部分标题（非分章理由不充分）
+  counter_evidence:
+  - 该行内容为 `# 第二部分 - HTML`。
+  - 根据规则：“如果存在标题为‘第 X 部分’，那么该书为部分-章节模式，遇到部分和章标题时，都要划分新章。”
+  - 此处明确出现“第二部分”，因此应划分为新章。
+  keep_split: true
+- 'no': 3088
+  overturn_probability: 0.1
+  alternative: 子章标题（非分章理由不充分）
+  counter_evidence:
+  - 该行内容为 `## 第 4 章：HTML 结构元素`。
+  - 虽然Markdown标记为二级标题（##），但文本内容包含“第 4 章”。
+  - 在“部分-章节”模式下，部分和章都需划分。此处“第4章”是部分内的章，应划分为新章。
+  - 注意：通常Markdown中 `#` 是一级，`##` 是二级。若全书最高层级是 `#`，则 `##` 可能是子层级。但规则指出“部分”和“章”都要分。如果“第二部分”是
+    `#`，而“第4章”是 `##`，说明章节层级低于部分。规则规定“遇到部分和章标题时，都要划分新章”。因此，第4章应分章。
+  keep_split: true
+- 'no': 3841
+  overturn_probability: 0.05
+  alternative: 章标题
+  counter_evidence:
+  - 该行内容为 `# 第 5 章`。
+  - 这是最高层级标题。
+  - 前文结束于第4章内容。
+  - 序号连贯（第4章后为第5章）。
+  - 明显是章标题，应分章。
+  keep_split: true
+- 'no': 4502
+  overturn_probability: 0.05
+  alternative: 章标题
+  counter_evidence:
+  - 该行内容为 `# 第 6 章：表格 HTML 元素`。
+  - 最高层级标题。
+  - 序号连贯。
+  - 应分章。
+  keep_split: true
+- 'no': 4952
+  overturn_probability: 0.05
+  alternative: 章标题
+  counter_evidence:
+  - 该行内容为 `# 第 7 章：嵌入 HTML 元素`。
+  - 最高层级标题。
+  - 序号连贯。
+  - 应分章。
+  keep_split: true
+- 'no': 5415
+  overturn_probability: 0.1
+  alternative: 子章标题（非分章理由不充分）
+  counter_evidence:
+  - 该行内容为 `## 第 8 章`。
+  - 同样，在部分-章节模式下，章标题需分章。
+  - 虽然标记为 `##`，但语义上是“第8章”，且前文第7章结束后，这里是第8章的起始。
+  - 根据规则，章标题需分章。
+  keep_split: true

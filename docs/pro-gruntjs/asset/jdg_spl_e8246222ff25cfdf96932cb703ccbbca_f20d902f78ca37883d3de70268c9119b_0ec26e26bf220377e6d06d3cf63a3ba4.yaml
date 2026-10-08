@@ -1,0 +1,42 @@
+chapter_starts:
+- 'no': 3167
+  confidence: 0.98
+  final_reason: 双方一致同意。该行 '# 第 5 章' 符合最高层级章节编号特征，前文为第4章总结，后续为新章内容，证据充分。
+  accepted_evidence:
+  - 判断方：标记为 '第 5 章'，符合章标题编号特征，且后续有章节标题，前文为第4章总结
+  - 复核方：反方证据（其实支持方）指出符合最高层级编号，前文为章末总结，结构完整
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 3667
+  confidence: 0.98
+  final_reason: 双方一致同意。该行 '# 第 6 章' 符合最高层级章节编号特征，前文为第5章总结，后续为新章内容，证据充分。
+  accepted_evidence:
+  - 判断方：标记为 '第 6 章'，符合章标题编号特征，前文为第5章总结
+  - 复核方：确认符合最高层级编号，前文为章末总结，结构连贯
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 4624
+  confidence: 0.98
+  final_reason: 双方一致同意。该行 '# 第 7 章' 符合最高层级章节编号特征，前文为第6章总结，后续为新章内容，证据充分。
+  accepted_evidence:
+  - 判断方：标记为 '第 7 章'，符合章标题编号特征，前文为第6章总结
+  - 复核方：确认符合最高层级编号，前文为章末总结，结构连贯
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 5247
+  confidence: 0.95
+  final_reason: 双方一致同意。虽使用 '##' 标记，但根据规则“文末索引也划分为一章”，且前文为第7章总结，作为独立辅助内容章节处理是合理的。
+  accepted_evidence:
+  - 判断方：标记为 '索引'，属于文末辅助内容，根据规则应划分为独立一章
+  - 复核方：虽怀疑层级，但确认前文为总结，索引通常单独成章，keep_split=true
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 5361
+  confidence: 0.9
+  final_reason: 双方一致同意。该行 '# 前端构建工具与开发实践术语表' 为一级标题，位于索引之后，属于独立的附录/术语表部分，符合语义判断分章规则。
+  accepted_evidence:
+  - 判断方：一级标题，内容独立，视为附录划分为新章节
+  - 复核方：一级标题通常代表最高层级，作为紧随索引后的另一辅助部分，划分新章符合逻辑
+  rejected_evidence: []
+  need_human_review: false
+rejected_lines: []

@@ -1,0 +1,41 @@
+reviews:
+- 'no': 15623
+  overturn_probability: 0.0
+  alternative: 排版噪声或重复页眉
+  counter_evidence:
+  - 该行格式为“# 第 25 章 ■ Indexed DB”，符合最高层级章节标题特征（编号+章名）
+  - 上下文显示前文（15621-15622）为第24章的结尾总结，提及下一章内容，符合章节结束特征
+  - 后续内容（15625起）开始介绍Indexed DB，与标题语义一致
+  keep_split: true
+- 'no': 16712
+  overturn_probability: 0.0
+  alternative: 排版噪声或重复页眉
+  counter_evidence:
+  - 该行格式为“# 第 26 章 ■ 地理定位与地图”，符合最高层级章节标题特征
+  - 前文（16708-16710）为第25章的总结，并预告下一章（16708：“下一章将演示...”），符合章节结束特征
+  - 后续内容开始介绍地理定位，与标题语义一致
+  keep_split: true
+- 'no': 17123
+  overturn_probability: 0.1
+  alternative: 附录作为独立章节
+  counter_evidence:
+  - 该行格式为“## 附录 A”，使用了二级标题符号 `##`，而正文最高层级章节通常使用 `#` 或“第 X 章”格式
+  - 根据判断规则，“文末索引也划分为一章”，附录通常被视为独立的逻辑单元，即使其Markdown层级较低，在图书结构中常等同于章
+  - 前文（17121-17122）为第26章的小结，之后直接进入附录，符合附录起始特征
+  keep_split: true
+- 'no': 17223
+  overturn_probability: 0.1
+  alternative: 附录B起始
+  counter_evidence:
+  - 该行格式为“# 附录 B：拖放源代码”，使用了最高层级 `#` 符号，且明确标示“附录 B”
+  - 内容包含独立的代码列表（清单 B-1），属于独立的参考部分
+  - 前文（17221-17222）为附录A的代码结束，此处自然分隔出附录B
+  keep_split: true
+- 'no': 17651
+  overturn_probability: 0.1
+  alternative: 附录C起始
+  counter_evidence:
+  - 该行格式为“# 附录 C”，使用了最高层级 `#` 符号，明确标示“附录 C”
+  - 后续内容（17653起）为“参考文献”，属于典型的附录/索引内容
+  - 前文（17648-17649）为附录B的代码结束，此处自然分隔出附录C
+  keep_split: true
