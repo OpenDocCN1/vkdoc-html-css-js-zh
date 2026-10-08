@@ -1,8 +1,4 @@
-# 第 5 章
-
-![image](img/frontdot.jpg)
-
-## Compass 简介
+# 第 5 章 Compass 简介
 
 在前面的章节中，您了解了两种著名的预编译语言——Sass 和 Less，并学习了它们提供的各种特性。现在，您将了解一个基于 Sass 的著名 CSS 框架，名为 Compass。
 
