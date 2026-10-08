@@ -2,7 +2,7 @@
 +   [CLI 编程之道](the-cli-book_0.md)
 +   [前言](the-cli-book_1.md)
 +   [致谢](the-cli-book_2.md)
-+   [什么是好的 CLI？](the-cli-book_3.md)
++   [1. 什么是好的 CLI？](the-cli-book_3.md)
 +   [2. 使用 Node.js 编写数据库管理工具](the-cli-book_4.md)
 +   [3. 让我们的 CLI 工具更易上手](the-cli-book_5.md)
 +   [4. 使用流迁移大量数据](the-cli-book_6.md)
