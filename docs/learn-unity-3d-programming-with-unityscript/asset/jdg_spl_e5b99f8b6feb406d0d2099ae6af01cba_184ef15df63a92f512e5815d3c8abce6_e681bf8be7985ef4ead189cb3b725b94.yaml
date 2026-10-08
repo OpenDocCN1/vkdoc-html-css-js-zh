@@ -1,0 +1,38 @@
+chapter_starts:
+- 'no': 6009
+  confidence: 0.98
+  final_reason: 双方一致。格式为 Markdown 一级标题 `#`，包含明确的章序号 '9.'，前文有第 8 章总结，后文为第 9 章概述，符合所有章标题特征。
+  accepted_evidence:
+  - 包含最高层级编号 '9.'
+  - 前文（6007行）预告了下一章内容
+  - 后续内容包含 '##' 级子章节，结构完整
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 6433
+  confidence: 0.95
+  final_reason: 双方一致。虽无显式数字序号，但作为一级标题 `#`，且后续内容包含 '图 10-x' 编号，逻辑上紧接第 9 章（序号推断为 10），体量独立，确认为新章。
+  accepted_evidence:
+  - 一级标题格式
+  - 后续插图编号为 '10-x'，证实为第 10 章
+  - 前文（6425行）为第 9 章总结
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 7567
+  confidence: 0.98
+  final_reason: 双方一致。格式为一级标题 `#`，包含明确的章序号 '11.'，序号连贯（承接第 10 章），前文为第 10 章总结。
+  accepted_evidence:
+  - 包含最高层级编号 '11.'
+  - 前文（7559行）为第 10 章总结
+  - 后续内容包含多个 '##' 级子章节
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 8484
+  confidence: 0.98
+  final_reason: 双方一致。格式为一级标题 `#`，包含明确的章序号 '12.'，序号连贯（承接第 11 章），前文为第 11 章总结。
+  accepted_evidence:
+  - 包含最高层级编号 '12.'
+  - 前文（8478行）为第 11 章总结
+  - 后续内容涉及性能优化等独立主题
+  rejected_evidence: []
+  need_human_review: false
+rejected_lines: []

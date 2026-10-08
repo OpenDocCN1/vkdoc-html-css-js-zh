@@ -1,0 +1,14 @@
+reviews:
+- 'no': 8937
+  overturn_probability: 0.0
+  alternative: 正文小标题或段落标题（若强行找理由）
+  counter_evidence:
+  - 该行使用 Markdown 一级标题符号 `#`，在本书上下文中（对比第 8861 行的 `##`），`#` 代表最高层级，即章节级别。
+  - 行首包含数字序号 `13.`，且前文第 12 章（图 12-xx）结束于 8936 行，序号连贯，符合“第 X 章”的特征。
+  keep_split: true
+- 'no': 9261
+  overturn_probability: 0.0
+  alternative: 列表项或页眉（若强行找理由）
+  counter_evidence:
+  - 规则明确指出：“文末索引也划分为一章”。该行位于全书正文结束后，且以“索引 A”开头，紧接着是字母索引列表（B, C, D...），明确标识了索引部分的开始。
+  keep_split: true

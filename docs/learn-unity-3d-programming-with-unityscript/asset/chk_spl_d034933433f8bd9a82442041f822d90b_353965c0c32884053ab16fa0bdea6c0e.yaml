@@ -1,0 +1,112 @@
+reviews:
+- 'no': 0
+  overturn_probability: 0.1
+  alternative: 文档元数据/封面标题
+  counter_evidence:
+  - 作为文档的第一行且为Markdown一级标题（#），通常代表整个文档的最高层级标题
+  - 包含了完整的书名信息，符合前置内容（Frontmatter）起始部分的特征
+  - 后续行包含版权、作者、ISBN等典型的书籍前置信息，支持将其视为一个独立章节的开头
+  keep_split: true
+- 'no': 54
+  overturn_probability: 0.2
+  alternative: 前置说明性章节标题
+  counter_evidence:
+  - '''关于作者''是标准的非正文前置章节'
+  - 根据规则，前言、序言、关于作者等内容应统一划分为一章
+  - 其级别为二级标题（##），但在Markdown导出的书籍结构常因层级映射问题导致标题级别不一致，语义上它是独立的章节块
+  keep_split: true
+- 'no': 62
+  overturn_probability: 0.3
+  alternative: 前置说明性章节标题
+  counter_evidence:
+  - '''关于技术审校''同样是前置说明内容'
+  - 它与'关于作者'类似，属于书籍前置部分的一个独立小节
+  - 若将整个前置部分视为一大章，则此处不应分章；但原判断将其单独分章，这通常取决于审查粒度。鉴于规则要求排除子层级，且这是同级并列的前置块，单独分章略显冗余但可接受
+  keep_split: true
+- 'no': 76
+  overturn_probability: 0.1
+  alternative: 引言/前言标题
+  counter_evidence:
+  - '''引言''是典型的书籍前置或起始章节'
+  - 单独成行，无句号，具有统领性
+  - 后文紧接着是关于本书目标、术语定义的概述性段落，符合章节特征
+  keep_split: true
+- 'no': 94
+  overturn_probability: 0.1
+  alternative: 致谢标题
+  counter_evidence:
+  - '''致谢''是独立的功能性章节'
+  - 位于引言之后，目录之前
+  - 内容是对出版团队的感谢，属于独立板块
+  keep_split: true
+- 'no': 98
+  overturn_probability: 0.1
+  alternative: 目录标题
+  counter_evidence:
+  - '''目录''是导航章节'
+  - 后续列出了第1至第13章的标题及页码
+  - 作为一个独立的导航区块，分章是合理的
+  keep_split: true
+- 'no': 580
+  overturn_probability: 0.2
+  alternative: 索引标题
+  counter_evidence:
+  - '''索引''位于文末'
+  - 规则明确指出：'文末索引也划分为一章'
+  - 虽然行 580 只是单词'索引'，但结合上下文（前文是第13章内容结束或内容概览），它是独立的附录部分
+  keep_split: true
+- 'no': 582
+  overturn_probability: 0.4
+  alternative: 内容概览/摘要目录
+  counter_evidence:
+  - '''内容概览''紧随''索引''之后（或作为目录的重复/简化版）'
+  - 它列出了所有章节的标题和页码
+  - 这在结构上更接近'目录'而非一个独立的阅读章节，但它确实是一个独立的块
+  - 原判断将其分章可能是为了区分'索引'和'目录/概览'两个不同的导航区块
+  keep_split: true
+- 'no': 610
+  overturn_probability: 0.05
+  alternative: 第1章正文标题
+  counter_evidence:
+  - 标题为'# Unity 入门指南'
+  - 对应目录中的'第1章：Unity 入门'
+  - 是正式正文的开始
+  - 具有统领性，后续内容是关于Unity基础的教程
+  - 一级标题在Markdown中通常对应主章节
+  keep_split: true
+- 'no': 887
+  overturn_probability: 0.1
+  alternative: 第2章正文标题
+  counter_evidence:
+  - 标题为'# 游戏编程入门'
+  - 对应目录中的'第2章：游戏编程入门'
+  - 位于第1章内容（Unity编辑器界面介绍）结束后
+  - 是独立的主章节
+  keep_split: true
+- 'no': 1751
+  overturn_probability: 0.1
+  alternative: 第3章正文标题
+  counter_evidence:
+  - 标题为'# 3. 制作一个简单场景'
+  - 带有序号'3.'，明确指示章节编号
+  - 对应目录中的'第3章：创建简单场景'
+  - 是独立的主章节
+  keep_split: true
+- 'no': 2128
+  overturn_probability: 0.1
+  alternative: 第4章正文标题
+  counter_evidence:
+  - 标题为'# 4. 使用脚本与游戏对象'
+  - 带有序号'4.'
+  - 对应目录中的'第4章：使用脚本和游戏对象'
+  - 是独立的主章节
+  keep_split: true
+- 'no': 2761
+  overturn_probability: 0.1
+  alternative: 第5章正文标题
+  counter_evidence:
+  - 标题为'# 5. 移动游戏对象'
+  - 带有序号'5.'
+  - 对应目录中的'第5章：移动游戏对象'
+  - 是独立的主章节
+  keep_split: true

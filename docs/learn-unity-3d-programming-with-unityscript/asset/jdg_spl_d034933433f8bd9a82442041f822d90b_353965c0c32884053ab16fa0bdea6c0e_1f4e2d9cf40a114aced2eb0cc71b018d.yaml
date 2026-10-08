@@ -1,0 +1,113 @@
+chapter_starts:
+- 'no': 0
+  confidence: 0.95
+  final_reason: 双方一致 + 作为文档起始及前置内容（Frontmatter）的独立起始块，符合分章规则
+  accepted_evidence:
+  - 文档第一行，Markdown一级标题
+  - 包含书名、作者、ISBN、版权信息等典型前置内容
+  - 后续内容直至第54行前均为版权/出版信息，构成独立逻辑块
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 54
+  confidence: 0.9
+  final_reason: 双方一致 + 前置说明性内容，语义上独立于版权页，作为新章处理
+  accepted_evidence:
+  - 标题为“## 关于作者”
+  - 属于前言/致谢类前置内容，通常独立分章
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 62
+  confidence: 0.85
+  final_reason: 双方一致 + 独立的前置说明模块“关于技术审校”，与“关于作者”并列
+  accepted_evidence:
+  - 标题为“# 关于技术审校”
+  - 内容独立介绍审校人员，属于前置内容的一部分
+  rejected_evidence:
+  - 复核方认为若整体视为一章则此处冗余，但鉴于其独立性强且为一级/二级标题变化，单独分章可接受
+  need_human_review: false
+- 'no': 76
+  confidence: 0.95
+  final_reason: 双方一致 + 典型的书籍前置章节“引言”，具有统领性
+  accepted_evidence:
+  - 标题为“# 引言”
+  - 后续为正文前的导读内容，独立于版权页和作者介绍
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 94
+  confidence: 0.95
+  final_reason: 双方一致 + 典型的书籍前置章节“致谢”
+  accepted_evidence:
+  - 标题为“# 致谢”
+  - 内容为感谢语，位于目录之前，独立功能块
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 98
+  confidence: 0.95
+  final_reason: 双方一致 + 目录是独立的导航章节
+  accepted_evidence:
+  - 标题为“# 目录”
+  - 包含全书章节列表及页码，属于标准分章位置
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 580
+  confidence: 0.95
+  final_reason: 双方一致 + 文末索引，规则明确指定为独立章节
+  accepted_evidence:
+  - 行内容为“索引”
+  - 位于正文结束、内容概览之后，属于附录性质
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 582
+  confidence: 0.8
+  final_reason: 双方一致 + 内容概览/目录列表，作为独立的结构块识别
+  accepted_evidence:
+  - 标题为“# 内容概览”
+  - 列出第1-13章的简要列表，与前面的详细目录或索引在视觉和结构上形成新区块
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 610
+  confidence: 0.95
+  final_reason: 双方一致 + 第1章正文标题，对应目录中的第1章
+  accepted_evidence:
+  - 标题为“# Unity 入门指南”
+  - 标志正式正文开始，后续为Unity基础介绍
+  - 对应目录中“第1章：Unity 入门”
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 887
+  confidence: 0.95
+  final_reason: 双方一致 + 第2章正文标题，对应目录中的第2章
+  accepted_evidence:
+  - 标题为“# 游戏编程入门”
+  - 位于第1章内容结束（总结部分）之后
+  - 对应目录中“第2章：游戏编程入门”
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 1751
+  confidence: 0.95
+  final_reason: 双方一致 + 第3章正文标题，带有序号，对应目录中的第3章
+  accepted_evidence:
+  - 标题为“# 3. 制作一个简单场景”
+  - 明确带有序号“3.”，指示主章节层级
+  - 对应目录中“第3章：创建简单场景”
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 2128
+  confidence: 0.95
+  final_reason: 双方一致 + 第4章正文标题，带有序号，对应目录中的第4章
+  accepted_evidence:
+  - 标题为“# 4. 使用脚本与游戏对象”
+  - 明确带有序号“4.”，指示主章节层级
+  - 对应目录中“第4章：使用脚本和游戏对象”
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 2761
+  confidence: 0.95
+  final_reason: 双方一致 + 第5章正文标题，带有序号，对应目录中的第5章
+  accepted_evidence:
+  - 标题为“# 5. 移动游戏对象”
+  - 明确带有序号“5.”，指示主章节层级
+  - 对应目录中“第5章：移动游戏对象”
+  rejected_evidence: []
+  need_human_review: false
+rejected_lines: []
