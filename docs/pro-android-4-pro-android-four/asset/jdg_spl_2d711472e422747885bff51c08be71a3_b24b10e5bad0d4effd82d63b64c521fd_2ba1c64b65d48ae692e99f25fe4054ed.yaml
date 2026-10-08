@@ -1,0 +1,20 @@
+chapter_starts:
+- 'no': 9428
+  confidence: 0.98
+  final_reason: 双方一致同意分章。该行内容为 '# 第 9 章'，符合最高层级章节标题的语义和格式特征。后续内容涉及对话框（Dialogs）与本章主题一致。
+  accepted_evidence:
+  - 包含明确的章节编号 '第 9 章'
+  - Markdown 一级标题 '#' 通常对应最高层级
+  - 后续内容开启了关于对话框的新主题
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 10227
+  confidence: 0.98
+  final_reason: 双方一致同意分章。尽管使用二级标题 '##'，但内容 '第 10 章' 具有最高层级章节的语义特征。根据规则“第 X 章”应划分为新章，且后续内容“探索操作栏”是全新主题。
+  accepted_evidence:
+  - 包含明确的章节编号 '第 10 章'
+  - 语义上指示新的一级章节的开始
+  - 后续内容主题与前文（对话框）无关，符合新章节特征
+  rejected_evidence: []
+  need_human_review: false
+rejected_lines: []

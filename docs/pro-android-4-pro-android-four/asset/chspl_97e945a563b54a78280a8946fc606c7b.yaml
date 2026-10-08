@@ -1,0 +1,126 @@
+chapter_starts:
+- 'no': 5
+  confidence: 0.95
+  reason: 书名/封面信息页，属于前置部分起始
+- 'no': 55
+  confidence: 0.9
+  reason: 目录总览部分起始
+- 'no': 95
+  confidence: 0.9
+  reason: 详细目录部分起始
+- 'no': 137
+  confidence: 0.85
+  reason: 二级标题 'Hello World'，结合上下文看是第2章内容的开始或独立章节标识（但根据规则，通常只分最高层级。然而这里没有 '第2章' 的明确一级标题，只有
+    'Hello World'。观察后续 '第3章' 在159行。137行 'Hello World' 实际上可能是第2章的正文标题。但仔细看137行是 `#
+    Hello World`，而159行是 `# 第 3 章...`。通常 `#` 是一级标题。如果该书模式是 '第X章' 为一级，那么 'Hello World'
+    可能只是第2章的标题。但137行前是目录结束。让我们看159行之前是否有 '第2章'。没有。137行 `# Hello World` 很可能是第2章的标题（对应目录中的
+    '第 2 章：搭建开发环境'，但这里标题变了？或者目录和正文不一致？。再看2366行 `# 第 3 章`。说明137行应该是第2章。但题目要求划分'新的一章'。137行是
+    `#` 一级标题，且内容是 'Hello World'，这与目录中 '第 2 章' 的位置吻合（前置内容后）。因此137行应视为第2章的起始。
+- 'no': 159
+  confidence: 1.0
+  reason: 明确的一级标题 '第 3 章：理解 Android 资源'
+- 'no': 193
+  confidence: 1.0
+  reason: 明确的一级标题 '第 4 章：理解内容提供者'
+- 'no': 259
+  confidence: 1.0
+  reason: 明确的一级标题 '第 5 章：理解 Intent'
+- 'no': 293
+  confidence: 1.0
+  reason: 明确的一级标题 '第 6 章：构建用户界面与使用控件'
+- 'no': 363
+  confidence: 1.0
+  reason: 明确的一级标题 '第 7 章：使用菜单'
+- 'no': 407
+  confidence: 1.0
+  reason: 明确的一级标题 '第 8 章：面向平板电脑及其他设备的 Fragment'
+- 'no': 449
+  confidence: 1.0
+  reason: 明确的一级标题 '第 9 章：使用对话框'
+- 'no': 471
+  confidence: 1.0
+  reason: 明确的一级标题 '第 10 章：探索 ActionBar'
+- 'no': 495
+  confidence: 1.0
+  reason: 明确的一级标题 '第 11 章：高级调试与分析'
+- 'no': 529
+  confidence: 1.0
+  reason: 明确的一级标题 '第 12 章：响应配置变更'
+- 'no': 549
+  confidence: 1.0
+  reason: 明确的一级标题 '第 13 章：使用首选项与保存状态'
+- 'no': 581
+  confidence: 1.0
+  reason: 明确的一级标题 '第 14 章：探索安全与权限'
+- 'no': 649
+  confidence: 1.0
+  reason: 明确的一级标题 '第 15 章：构建与使用服务'
+- 'no': 697
+  confidence: 1.0
+  reason: 明确的一级标题 '第 16 章：探索包'
+- 'no': 747
+  confidence: 1.0
+  reason: 明确的一级标题 '第 17 章：探索处理器'
+- 'no': 803
+  confidence: 1.0
+  reason: 明确的一级标题 '第 18 章：探索 AsyncTask'
+- 'no': 839
+  confidence: 1.0
+  reason: 明确的一级标题 '第 19 章：广播接收器与长时间运行的服务'
+- 'no': 909
+  confidence: 1.0
+  reason: 明确的一级标题 '第 20 章：探索闹钟管理器'
+- 'no': 947
+  confidence: 1.0
+  reason: 明确的一级标题 '第 21 章：探索 2D 动画'
+- 'no': 1013
+  confidence: 1.0
+  reason: 明确的一级标题 '第 22 章：探索地图与基于位置的服务'
+- 'no': 1043
+  confidence: 1.0
+  reason: 明确的一级标题 '第 23 章：使用电话 API'
+- 'no': 1071
+  confidence: 1.0
+  reason: 明确的一级标题 '第 24 章：理解媒体框架'
+- 'no': 1107
+  confidence: 1.0
+  reason: 明确的一级标题 '第 25 章：主屏幕小部件'
+- 'no': 1145
+  confidence: 1.0
+  reason: 明确的一级标题 '第 26 章：探索列表小部件'
+- 'no': 1185
+  confidence: 0.8
+  reason: 二级标题 '第 27 章：触摸屏'，前文有 '第 26 章'，且后续章节均为二级标题格式（## 第X章），在此上下文中视为章节起始
+- 'no': 1203
+  confidence: 0.8
+  reason: 二级标题 '第 28 章：实现拖放功能'，视为章节起始
+- 'no': 1217
+  confidence: 0.8
+  reason: 二级标题 '第 29 章：使用传感器'，视为章节起始
+- 'no': 1243
+  confidence: 0.8
+  reason: 二级标题 '第 30 章：探索联系人 API'，视为章节起始
+- 'no': 1280
+  confidence: 0.8
+  reason: 二级标题 '第 31 章：发布你的应用：Android Market 及其他'，视为章节起始
+- 'no': 1308
+  confidence: 0.9
+  reason: 二级标题 '索引'，属于文末索引章节
+- 'no': 1312
+  confidence: 0.9
+  reason: 二级标题 '关于作者'，属于后置内容章节
+- 'no': 1318
+  confidence: 0.9
+  reason: 二级标题 '关于技术审校'，属于后置内容章节
+- 'no': 1328
+  confidence: 0.9
+  reason: 二级标题 '前言'，属于前置内容章节
+- 'no': 1342
+  confidence: 0.95
+  reason: 一级标题 '第 1 章' 的起始标记（虽然下一行是副标题，但此处 '第 1 章' 本身是章节标识）
+- 'no': 1891
+  confidence: 0.95
+  reason: 二级标题 '第 2 章' 的起始标记
+- 'no': 2366
+  confidence: 1.0
+  reason: 一级标题 '第 3 章' 的起始标记

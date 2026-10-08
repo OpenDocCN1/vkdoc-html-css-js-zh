@@ -1,0 +1,20 @@
+chapter_starts:
+- 'no': 7887
+  confidence: 0.98
+  final_reason: 明确的“第 7 章”编号标题，且为一级标题（#），符合最高层级章节划分标准。前文第7885行提到“在下一章中……”，标志着第6章内容的结束和新章的开始。双方一致确认。
+  accepted_evidence:
+  - 行内容包含‘第 7 章’，符合‘第 X 章’的最高层级编号特征
+  - 使用一级标题符号 `#`，语义层级最高
+  - 前文（第7885行）为章节结束过渡语，上下文逻辑连贯
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 8732
+  confidence: 0.98
+  final_reason: 明确的“第 8 章”编号标题，且为一级标题（#），符合最高层级章节划分标准。前文第8730行结束了第7章的面试题部分，标志着新章的开始。双方一致确认。
+  accepted_evidence:
+  - 行内容包含‘第 8 章：面向平板电脑及更大屏幕的 Fragment’，符合‘第 X 章’的最高层级编号特征
+  - 使用一级标题符号 `#`，语义层级最高
+  - 前文（第8730行）为第7章内容的完整收尾（面试题列表结束），上下文逻辑连贯
+  rejected_evidence: []
+  need_human_review: false
+rejected_lines: []

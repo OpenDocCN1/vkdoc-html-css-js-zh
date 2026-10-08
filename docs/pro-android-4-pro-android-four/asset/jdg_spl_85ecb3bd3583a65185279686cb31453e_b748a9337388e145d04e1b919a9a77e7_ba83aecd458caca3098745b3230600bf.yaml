@@ -1,0 +1,27 @@
+chapter_starts:
+- 'no': 3471
+  confidence: 0.98
+  final_reason: 双方一致。格式为“# 第 4 章”，符合最高层级大章特征；前文有分隔线，后接二级标题，语义连贯。
+  accepted_evidence:
+  - 判断方识别为顶级章标题
+  - 复核方确认前文上下文（面试题结束、分隔线）支持新章开始
+  - 后文紧跟二级标题“## 理解内容提供者”
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 4955
+  confidence: 0.98
+  final_reason: 双方一致。格式为“# 第 5 章”，序号连贯（接第4章），符合最高层级大章特征。
+  accepted_evidence:
+  - 判断方识别为顶级章标题
+  - 复核方确认前文第4章内容结束，序号从4到5连贯
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 5801
+  confidence: 0.95
+  final_reason: 双方一致。虽然Markdown标记为“##”，但语义内容为“第 6 章”，且序号连贯（接第5章）。根据规则，语义优先于格式层级标记的轻微不一致，确认为新章。
+  accepted_evidence:
+  - 判断方指出虽为二级标记但语义为顶级章节
+  - 复核方确认前文第5章内容结束，序号6连贯，尽管下级标题层级跳跃，但“第 X 章”的语义权重最高
+  rejected_evidence: []
+  need_human_review: false
+rejected_lines: []
