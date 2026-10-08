@@ -1,4 +1,4 @@
-# Backbone.js 简介
+# 1. Backbone.js 简介
 
 ## 摘要
 
