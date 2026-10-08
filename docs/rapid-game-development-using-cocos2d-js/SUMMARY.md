@@ -1,6 +1,6 @@
 +   [Cocos2d-JS 快速游戏开发指南](README.md)
 +   [使用 Cocos2d-JS 快速开发游戏](rapid-game-development-using-cocos2d-js_1_fmt.md)
-+   [开始使用](rapid-game-development-using-cocos2d-js_2_fmt.md)
++   [1. 开始使用](rapid-game-development-using-cocos2d-js_2_fmt.md)
 +   [2. 架构概述](rapid-game-development-using-cocos2d-js_3_fmt.md)
 +   [3. 深入了解精灵](rapid-game-development-using-cocos2d-js_4_fmt.md)
 +   [4. 处理输入和事件](rapid-game-development-using-cocos2d-js_5_fmt.md)
