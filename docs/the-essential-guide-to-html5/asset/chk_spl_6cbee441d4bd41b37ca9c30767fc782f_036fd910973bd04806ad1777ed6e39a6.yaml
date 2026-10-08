@@ -1,0 +1,85 @@
+reviews:
+- 'no': 14753
+  overturn_probability: 0.05
+  alternative: 索引部分的起始标记行，属于文档结构层级而非内容分章
+  counter_evidence:
+  - 根据规则'文末索引也划分为一章'，该行确实是索引部分的开始
+  - 但需注意：若原审查员将'索引'本身视为章节标题，则其语义为导航性标签，不满足'具有统领性、概括性，能覆盖后续内容'的章标题特征；它仅是索引部分的起始标识，后续内容为纯索引列表项，无子章节结构
+  keep_split: true
+- 'no': 15157
+  overturn_probability: 0.1
+  alternative: 目录部分的起始标题，属于文档导航结构而非正文章节
+  counter_evidence:
+  - 规则要求只划分'全书最高层级的大章'，而目录（Table of Contents）是文档结构元素，不属于内容章节
+  - 目录部分仅列出章节名称与页码，无实际内容段落，不满足'标题的后1~3行通常是概述段落'的上下文特征
+  - 若将目录视为独立章节，会导致分章粒度过细，与'只划分最高层级大章'的原则冲突
+  keep_split: false
+- 'no': 15165
+  overturn_probability: 0.0
+  alternative: 第1章正文起始标题
+  counter_evidence:
+  - 序号连贯（第1至第10章完整），格式符合'第X章'最高层级特征
+  - 后续行包含关键词、引言、关键要求等概述性内容，符合章节标题上下文特征
+  keep_split: true
+- 'no': 15179
+  overturn_probability: 0.0
+  alternative: 第2章正文起始标题
+  counter_evidence:
+  - 序号连贯，格式符合最高层级章标题特征
+  - 后续内容结构完整，包含引言、关键要求、小结等标准章节要素
+  keep_split: true
+- 'no': 15198
+  overturn_probability: 0.0
+  alternative: 第3章正文起始标题
+  counter_evidence:
+  - 序号连贯，格式与内容结构均符合最高层级章标题判定标准
+  keep_split: true
+- 'no': 15216
+  overturn_probability: 0.0
+  alternative: 第4章正文起始标题
+  counter_evidence:
+  - 序号连贯，格式与内容结构均符合最高层级章标题判定标准
+  keep_split: true
+- 'no': 15225
+  overturn_probability: 0.0
+  alternative: 第5章正文起始标题
+  counter_evidence:
+  - 序号连贯，Markdown使用'#'一级标题，符合最高层级特征
+  keep_split: true
+- 'no': 15255
+  overturn_probability: 0.0
+  alternative: 第6章正文起始标题
+  counter_evidence:
+  - 序号连贯，Markdown使用'#'一级标题，符合最高层级特征
+  keep_split: true
+- 'no': 15281
+  overturn_probability: 0.0
+  alternative: 第7章正文起始标题
+  counter_evidence:
+  - 序号连贯，Markdown使用'#'一级标题，符合最高层级特征
+  keep_split: true
+- 'no': 15313
+  overturn_probability: 0.0
+  alternative: 第8章正文起始标题
+  counter_evidence:
+  - 序号连贯，Markdown使用'#'一级标题，符合最高层级特征
+  keep_split: true
+- 'no': 15337
+  overturn_probability: 0.0
+  alternative: 第9章正文起始标题
+  counter_evidence:
+  - 序号连贯，Markdown使用'#'一级标题，符合最高层级特征
+  keep_split: true
+- 'no': 15361
+  overturn_probability: 0.0
+  alternative: 第10章正文起始标题
+  counter_evidence:
+  - 序号连贯，Markdown使用'#'一级标题，符合最高层级特征
+  keep_split: true
+- 'no': 15389
+  overturn_probability: 0.05
+  alternative: 附录部分的起始标题，属于文档补充结构
+  counter_evidence:
+  - 附录虽非编号章节，但具有统领性结构（包含圆与箭头、跨越一条线等子主题），后续内容完整且独立
+  - 作为正文后的补充部分，语义上可视为独立章节单位，与规则中'前言、序言等正文之前内容统一划分为一章'的逻辑对称
+  keep_split: true

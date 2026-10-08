@@ -1,0 +1,47 @@
+chapter_starts:
+- 'no': 3109
+  confidence: 0.98
+  final_reason: 双方一致 + 格式语义均符合
+  accepted_evidence:
+  - 格式特征：‘# 6. 领域概览’符合‘X. 标题’的最高层级章节编号规则
+  - 上下文特征：前文为第5章的‘总结’和‘脚注’（行3092-3108），后文为第6章正文，符合章节更替特征
+  - 语义特征：标题具有统领性，涵盖后续关于RxJS等库的内容
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 3604
+  confidence: 0.98
+  final_reason: 双方一致 + 格式语义均符合
+  accepted_evidence:
+  - 格式特征：‘# 7. 编写你自己的 FRP 库’符合最高层级章节编号规则
+  - 上下文特征：前文（行3580-3603）为第6章的‘总结’和‘小结’，语义上承接‘进入下一章’的提示
+  - 序号连贯：紧随第6章之后，序号为7
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 4633
+  confidence: 0.98
+  final_reason: 双方一致 + 格式语义均符合
+  accepted_evidence:
+  - 格式特征：‘# 8. 实践概览’符合最高层级章节编号规则
+  - 上下文特征：前文（行4621-4632）为第7章的‘总结’，提到‘在下一章中...’，语义连贯
+  - 序号连贯：紧随第7章之后，序号为8
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 5154
+  confidence: 0.98
+  final_reason: 双方一致 + 格式语义均符合
+  accepted_evidence:
+  - 格式特征：‘# 9. 扩展你的响应式编程系统’符合最高层级章节编号规则
+  - 上下文特征：前文（行5148-5153）为第8章的‘总结’，提到‘在下一章也是最后一章中...’，语义连贯
+  - 序号连贯：紧随第8章之后，序号为9
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 5460
+  confidence: 0.95
+  final_reason: 双方一致 + 规则明确 + 语义符合
+  accepted_evidence:
+  - 规则依据：题目规则明确指出‘文末索引也划分为一章’
+  - 格式特征：‘# 索引’为Markdown一级标题，独立成行
+  - 上下文特征：位于全书正文（第9章总结）之后，后续内容为标准的字母顺序索引列表
+  rejected_evidence: []
+  need_human_review: false
+rejected_lines: []

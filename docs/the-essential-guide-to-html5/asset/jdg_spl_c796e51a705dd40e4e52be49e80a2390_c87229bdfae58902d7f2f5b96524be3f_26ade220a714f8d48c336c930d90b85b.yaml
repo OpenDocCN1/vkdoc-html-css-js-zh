@@ -1,0 +1,32 @@
+chapter_starts:
+- 'no': 9981
+  confidence: 0.95
+  final_reason: 双方一致认定为第8章起始。上下文显示前文为第7章小结，后文为第8章引言及内容概述，且该位置仅出现一次，后续出现的“第8章”多为页眉残留。
+  accepted_evidence:
+  - 前文 9957-9977 是第 7 章 '本章小结' 部分
+  - 9981 行之后 9983 是 '石头、剪刀、布' 章名
+  - 9985 行是 '在本章中，我们将涵盖以下内容' 章节概述，符合新章节起始的上下文特征
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 10836
+  confidence: 0.95
+  final_reason: 双方一致认定为第9章起始。上下文显示前文为第8章总结，后文为第9章引言及内容概述，结构特征明显。
+  accepted_evidence:
+  - 前文 10818-10835 是第 8 章 '总结' 部分
+  - 10836 之后 10838 是 '猜词游戏'
+  - 10840 是 '本章内容涵盖' 章节概述，符合新章节起始特征
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 11608
+  confidence: 0.95
+  final_reason: 双方一致认定为第10章起始。上下文显示前文为第9章总结，后文为第10章引言及内容概述，主题切换明显。
+  accepted_evidence:
+  - 前文 11591-11606 是第 9 章 '总结' 及收尾段落
+  - 11608 之后 11610 是 '在本章中，我们将介绍以下内容' 概述
+  - 尽管 11622 行又出现重复标题，但 11608 行在结构上是真正的章节边界
+  rejected_evidence: []
+  need_human_review: false
+rejected_lines:
+- 'no': 9573
+  reason: 复核方指出该行处于表格内容中间（表 7-3 的跨页部分），且“第 7 章”在同一章节内多次出现，属于书籍排版中的页眉残留（running header），而非真正的章节起始。判断方证据不足，采纳复核方意见。
+  need_human_review: false

@@ -1,0 +1,20 @@
+chapter_starts:
+- 'no': 3127
+  confidence: 0.98
+  final_reason: 双方一致认定为一级章节标题。该行以 '#' 开头且包含明确的大章序号 '11.'，符合全书最高层级分章规则。前文为上一章节总结，后文为章节概述，上下文特征完全符合分章逻辑。
+  accepted_evidence:
+  - 编号特征：包含明确的大章序号 '11.'
+  - 格式特征：一级标题符号 '#'，单独成行，短小精悍
+  - 上下文特征：前文（3115-3126）为章节总结，后文（3129）为章节概述
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 3243
+  confidence: 0.99
+  final_reason: 双方一致认定为文末索引章节。该行内容为 '# 索引'，位于正文结束后。根据规则‘文末索引也划分为一章’，必须分章。后续内容为典型的字母索引列表，确认其属性。
+  accepted_evidence:
+  - 规则指定：文末索引统一划分为一章
+  - 格式特征：一级标题符号 '# 索引'
+  - 语义特征：作为书籍末尾的索引部分
+  rejected_evidence: []
+  need_human_review: false
+rejected_lines: []

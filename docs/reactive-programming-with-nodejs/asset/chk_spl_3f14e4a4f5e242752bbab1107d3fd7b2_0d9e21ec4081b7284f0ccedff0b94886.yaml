@@ -1,0 +1,74 @@
+reviews:
+- 'no': 2
+  overturn_probability: 0.05
+  alternative: 书籍封面/版权页的总标题（非章节标题），属于前置内容
+  counter_evidence:
+  - 该行是整本书的总标题（Book Title），通常位于封面或版权页，在排版上不属于正文的‘章节’结构。
+  - 在Markdown转出的文本中，书籍总标题往往作为文档的最开始部分，后续紧跟作者名、ISBN等信息，这些内容通常被归类为‘前言/版权页’整体，或者如果不分章则直接归入第一章。将其单独标记为‘分章’起点在逻辑上稍显冗余，因为紧接着的第30行‘引言’才是真正的前言类章节起始。
+  - 根据规则‘前言、序言...统一划分为一章’，如果将第2行视为一章的起始，那么第30行‘引言’和第40行‘致谢’是否也应独立分章？通常版权页/封面内容不单独成章，而是附着于前面的元数据或归入第一章。
+  keep_split: true
+- 'no': 30
+  overturn_probability: 0.1
+  alternative: 前言部分的小节标题（Introduction/Preface），属于前置内容
+  counter_evidence:
+  - 规则指出‘前言、序言...统一划分为一章’。如果‘引言’和后面的‘致谢’、‘目录’都分别独立分章，可能会导致前置内容被切分得过于碎片化。通常书籍的前置部分（Front
+    Matter）可以作为一个整体章节，或者至少‘引言’有时会被并入第一正文章之前。
+  - '但在很多严格的分章逻辑中，‘引言’确实是一个独立的阅读单元。然而，考虑到‘致谢’（no: 40）紧随其后且性质类似，两者是否应该合并？原判断将两者都分章，这在某些标准下是可接受的，但也存在将‘引言’视为第一章前奏而非独立章节的可能性。'
+  keep_split: true
+- 'no': 40
+  overturn_probability: 0.1
+  alternative: 前言部分的小节标题（Acknowledgments），属于前置内容
+  counter_evidence:
+  - 同no:30的证据。‘致谢’通常篇幅很短，有时会被合并进‘引言’或作为版权页的一部分，而不单独视为一个‘章’。如果全书的分章粒度非常细，则保留；如果粒度较粗，则可能不单独分章。
+  keep_split: true
+- 'no': 46
+  overturn_probability: 0.05
+  alternative: 目录页（Table of Contents），属于前置内容
+  counter_evidence:
+  - 目录（TOC）在电子书或PDF中通常独立存在，但在逻辑分章时，它往往被视为‘前置内容’的一部分，或者不被视为正文的‘章’。然而，鉴于其结构化特征明显且独立，将其作为一章的起始以便导航是合理的。
+  keep_split: true
+- 'no': 296
+  overturn_probability: 0.05
+  alternative: 前置内容标题（About Author/Reviewer），属于前置部分
+  counter_evidence:
+  - 该行标题为‘关于作者与技术审校’，位于正文第一章（no:302）之前。根据规则‘正文之前的内容...统一划分为一章’，如果前面的‘引言’、‘致谢’、‘目录’已经各自独立成章，那么‘关于作者’作为另一个独立的前置单元分章也是符合逻辑的。
+  keep_split: true
+- 'no': 302
+  overturn_probability: 0.0
+  alternative: 正文第一章标题（Chapter 1）
+  counter_evidence:
+  - 行内容为‘# React 式编程入门’，对应目录中的‘第 1 章：响应式编程 101’。
+  - 虽然标题文字与目录中的‘响应式编程 101’略有不同（可能是翻译或版本差异），但其位置在前置内容之后，且后续内容（no:306-380）确实是关于响应式编程的基础介绍。
+  - 格式为H1标题（#），独立成行，无句号，长度适中。
+  - 紧随其后的是正文段落，符合章标题的特征。
+  keep_split: true
+- 'no': 589
+  overturn_probability: 0.0
+  alternative: 正文第二章标题（Chapter 2）
+  counter_evidence:
+  - 行内容为‘# 2. 成为响应式’，带有明确的数字编号‘2.’，对应目录中的‘第 2 章：成为响应式’。
+  - 格式为H1标题，独立成行。
+  - 前一行（no:588）是空白，前文是第一章的总结部分，符合章标题出现在上章结束后的特征。
+  keep_split: true
+- 'no': 892
+  overturn_probability: 0.0
+  alternative: 正文第三章标题（Chapter 3）
+  counter_evidence:
+  - 行内容为‘# 3. 函数式响应式编程’，带有明确的数字编号‘3.’，对应目录中的‘第 3 章：函数式响应式编程’。
+  - 格式为H1标题，独立成行。
+  - 前文是第二章的内容，符合章节交替规律。
+  keep_split: true
+- 'no': 1734
+  overturn_probability: 0.0
+  alternative: 正文第四章标题（Chapter 4）
+  counter_evidence:
+  - 行内容为‘# 4. 后端响应式编程’，带有明确的数字编号‘4.’，对应目录中的‘第 4 章：后端响应式编程’。
+  - 格式为H1标题，独立成行。
+  keep_split: true
+- 'no': 2382
+  overturn_probability: 0.0
+  alternative: 正文第五章标题（Chapter 5）
+  counter_evidence:
+  - 行内容为‘# 5. 进入 Node.js’，带有明确的数字编号‘5.’，对应目录中的‘第 5 章：走进 Node.js’（标题略有差异，但序号一致）。
+  - 格式为H1标题，独立成行。
+  keep_split: true

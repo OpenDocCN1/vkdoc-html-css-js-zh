@@ -1,0 +1,10 @@
+chapter_starts:
+- 'no': 6246
+  confidence: 0.9
+  reason: Markdown一级标题 '# 宽相位与窄相位碰撞'，符合顶级章节划分规则
+- 'no': 6310
+  confidence: 0.8
+  reason: Markdown一级标题 '# 空间网格与碰撞检测'，位于代码块结束后，符合顶级章节划分规则
+- 'no': 6441
+  confidence: 0.95
+  reason: Markdown二级标题 '## 索引'，根据规则“文末索引也划分为一章”，作为独立章节处理

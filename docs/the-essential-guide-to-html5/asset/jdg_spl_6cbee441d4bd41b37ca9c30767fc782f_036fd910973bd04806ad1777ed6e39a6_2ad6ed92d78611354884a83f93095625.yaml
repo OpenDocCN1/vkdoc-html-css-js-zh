@@ -1,0 +1,101 @@
+chapter_starts:
+- 'no': 14753
+  confidence: 0.98
+  final_reason: 复核方保留分章判断。虽然'索引'是导航标签，但根据规则'文末索引也划分为一章'，该部分作为独立的末尾结构块，应与正文分开。
+  accepted_evidence:
+  - 规则明确说明：'文末索引也划分为一章'
+  - 该行位于全书末尾，后续内容为纯索引列表，与正文有明显界限
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 15165
+  confidence: 0.99
+  final_reason: 双方一致。'第 1 章：基础知识'是标准的最高层级章标题，序号连贯，结构完整。
+  accepted_evidence:
+  - 符合'第 X 章'编号特征
+  - 后续包含引言、关键要求等标准章节内容
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 15179
+  confidence: 0.99
+  final_reason: 双方一致。'第 2 章：骰子游戏'是标准的最高层级章标题，序号连贯，结构完整。
+  accepted_evidence:
+  - 符合'第 X 章'编号特征
+  - 后续包含引言、关键要求等标准章节内容
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 15198
+  confidence: 0.99
+  final_reason: 双方一致。'第 3 章：弹跳球'是标准的最高层级章标题，序号连贯，结构完整。
+  accepted_evidence:
+  - 符合'第 X 章'编号特征
+  - 后续包含引言、关键要求等标准章节内容
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 15216
+  confidence: 0.99
+  final_reason: 双方一致。'第 4 章：炮弹与弹弓'是标准的最高层级章标题，序号连贯，结构完整。
+  accepted_evidence:
+  - 符合'第 X 章'编号特征
+  - 后续包含引言、关键要求等标准章节内容
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 15225
+  confidence: 0.99
+  final_reason: 双方一致。'第5章：记忆（又称配对）游戏'使用一级标题 '#'，语义明确为最高层级章节，序号连贯。
+  accepted_evidence:
+  - 使用 Markdown 一级标题 '#'，符合最高层级特征
+  - 序号从 4 跳到 5，连贯且正确
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 15255
+  confidence: 0.99
+  final_reason: 双方一致。'第6章：问答游戏'使用一级标题 '#'，语义明确为最高层级章节，序号连贯。
+  accepted_evidence:
+  - 使用 Markdown 一级标题 '#'，符合最高层级特征
+  - 序号从 5 到 6，连贯且正确
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 15281
+  confidence: 0.99
+  final_reason: 双方一致。'第7章：迷宫'使用一级标题 '#'，语义明确为最高层级章节，序号连贯。
+  accepted_evidence:
+  - 使用 Markdown 一级标题 '#'，符合最高层级特征
+  - 序号从 6 到 7，连贯且正确
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 15313
+  confidence: 0.99
+  final_reason: 双方一致。'第8章：石头剪刀布'使用一级标题 '#'，语义明确为最高层级章节，序号连贯。
+  accepted_evidence:
+  - 使用 Markdown 一级标题 '#'，符合最高层级特征
+  - 序号从 7 到 8，连贯且正确
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 15337
+  confidence: 0.99
+  final_reason: 双方一致。'第9章：猜单词'使用一级标题 '#'，语义明确为最高层级章节，序号连贯。
+  accepted_evidence:
+  - 使用 Markdown 一级标题 '#'，符合最高层级特征
+  - 序号从 8 到 9，连贯且正确
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 15361
+  confidence: 0.99
+  final_reason: 双方一致。'第10章：21 点'使用一级标题 '#'，语义明确为最高层级章节，序号连贯。
+  accepted_evidence:
+  - 使用 Markdown 一级标题 '#'，符合最高层级特征
+  - 序号从 9 到 10，连贯且正确
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 15389
+  confidence: 0.95
+  final_reason: 双方一致。'附录'虽无编号，但作为独立的补充内容部分，具有统领性，且包含子标题结构，应划分为一章。
+  accepted_evidence:
+  - 语义上为独立的补充部分，与正文分离
+  - 后续包含'圆与箭头'、'跨越一条线'等子主题，结构独立
+  rejected_evidence: []
+  need_human_review: false
+rejected_lines:
+- 'no': 15157
+  reason: 复核方指出'目录'属于文档导航结构，非正文章节；判断方虽认为应分章，但根据'宁可漏分，不可误分'原则，目录通常不作为独立的内容章节处理，且其内容仅为章节列表，不具备实质内容统领性。
+  need_human_review: false

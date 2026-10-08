@@ -1,0 +1,68 @@
+reviews:
+- 'no': 4
+  overturn_probability: 0.0
+  alternative: 前言/版权页部分标题
+  counter_evidence:
+  - 根据规则，'前言、序言、致谢、关于作者等正文之前的内容，统一划分为一章'。该行位于ISBN和封面图之后，第1章标题之前，且包含'关于作者'和'关于技术审校'两个二级标题，符合前置内容的特征。原判断正确。
+  keep_split: true
+- 'no': 10
+  overturn_probability: 0.0
+  alternative: 正文小标题
+  counter_evidence:
+  - 该行内容为'# 1. 正则表达式入门'，带有明确的章序号'1.'，且位于前置内容之后，符合最高层级大章特征。后续内容为该章引言。原判断正确。
+  keep_split: true
+- 'no': 159
+  overturn_probability: 0.0
+  alternative: 正文小标题/排版断行
+  counter_evidence:
+  - 该行内容为'# 正则表达式语法 101'。虽然缺少显式序号'2.'，但其Markdown级别为一级标题（#），且紧随第1章末尾的脚注（第157行）之后。前一章为'#
+    1.'，后一章为'# 3.'，根据序号连贯性推断此处缺失的'2.'即为该章序号。语义上统领了后续的'构建表达式'等子节。原判断正确。
+  keep_split: true
+- 'no': 479
+  overturn_probability: 0.0
+  alternative: 正文小标题
+  counter_evidence:
+  - 该行内容为'# 3. 执行正则表达式'，带有明确的章序号'3.'，符合最高层级大章特征。原判断正确。
+  keep_split: true
+- 'no': 1250
+  overturn_probability: 0.0
+  alternative: 正文小标题
+  counter_evidence:
+  - 该行内容为'# 使用有限状态机可视化正则表达式执行'。位于第3章末尾（第1248行脚注）之后，Markdown级别为一级标题（#）。前后章节分别为第3章和第5章（第1468行），根据上下文顺序和层级判断，此处应为第4章。原判断正确。
+  keep_split: true
+- 'no': 1468
+  overturn_probability: 0.0
+  alternative: 正文小标题
+  counter_evidence:
+  - 该行内容为'# 5. 重复修饰符'，带有明确的章序号'5.'，符合最高层级大章特征。原判断正确。
+  keep_split: true
+- 'no': 1805
+  overturn_probability: 0.0
+  alternative: 正文小标题
+  counter_evidence:
+  - 该行内容为'# 6. 字符集与字符类'，带有明确的章序号'6.'，符合最高层级大章特征。原判断正确。
+  keep_split: true
+- 'no': 2048
+  overturn_probability: 0.0
+  alternative: 正文小标题
+  counter_evidence:
+  - 该行内容为'# 从正则表达式中提取子串'。位于第6章末尾（第2034行总结，第2046行脚注之前）之后。前后章节分别为第6章和第8章（第2435行），根据Markdown一级标题层级及章节顺序，推断其为第7章。原判断正确。
+  keep_split: true
+- 'no': 2435
+  overturn_probability: 0.0
+  alternative: 正文小标题
+  counter_evidence:
+  - 该行内容为'# 8. 前瞻与后顾'，带有明确的章序号'8.'，符合最高层级大章特征。原判断正确。
+  keep_split: true
+- 'no': 2551
+  overturn_probability: 0.0
+  alternative: 正文小标题
+  counter_evidence:
+  - 该行内容为'# 9. 维护正则表达式'，带有明确的章序号'9.'，符合最高层级大章特征。原判断正确。
+  keep_split: true
+- 'no': 2918
+  overturn_probability: 0.0
+  alternative: 正文小标题
+  counter_evidence:
+  - 该行内容为'# 10. 优化正则表达式'，带有明确的章序号'10.'，符合最高层级大章特征。原判断正确。
+  keep_split: true

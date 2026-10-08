@@ -1,0 +1,22 @@
+reviews:
+- 'no': 3794
+  overturn_probability: 0.05
+  alternative: 正文部分标题（Part Title）或误排的内部章级标题
+  counter_evidence:
+  - '文档中存在其他无序号的 # 级标题（如行 4566, 5200）位于章节内部，表明 # 级别可能未被严格用于章节划分，存在层级混淆。'
+  - 标题前紧随版权/引用信息（行 3790-3792），虽然通常支持章节开始，但也可能是大型分卷（Part）开始时的元数据残留，需结合全书结构判断是否为章。
+  keep_split: true
+- 'no': 4773
+  overturn_probability: 0.05
+  alternative: 正文部分标题（Part Title）或误排的内部章级标题
+  counter_evidence:
+  - '同样存在无序号 # 标题混用的情况（如行 5200），削弱了 # 作为唯一章标题依据的可靠性。'
+  - 标题前带有版权信息，可能暗示这是书中某一大板块（Part）的起始，而非单纯的章（Chapter），尽管其内容看起来像章。
+  keep_split: true
+- 'no': 5789
+  overturn_probability: 0.05
+  alternative: 正文部分标题（Part Title）或误排的内部章级标题
+  counter_evidence:
+  - '同前，文档中 # 标记使用不一致，存在内部 # 标题干扰。'
+  - 若全书结构包含 'Part' 层级，该标题可能属于 Part 7 而非 Chapter 7，但在缺乏 Part 明确标识的情况下，将其视为章是合理的默认选择，故推翻证据较弱。
+  keep_split: true

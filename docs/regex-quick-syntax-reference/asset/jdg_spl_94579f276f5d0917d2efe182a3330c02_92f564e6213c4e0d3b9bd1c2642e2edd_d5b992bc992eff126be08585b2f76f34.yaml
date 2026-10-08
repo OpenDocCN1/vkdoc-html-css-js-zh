@@ -1,0 +1,90 @@
+chapter_starts:
+- 'no': 4
+  confidence: 0.95
+  final_reason: 双方一致认定为前置内容章节。位于封面和ISBN之后，第1章之前，包含“关于作者”和“技术审校”，符合规则中“前言、序言、致谢、关于作者等正文之前的内容，统一划分为一章”的规定。
+  accepted_evidence:
+  - 判断方：前言部分标题，属于正文之前的内容
+  - 复核方：位于ISBN和封面图之后，第1章标题之前，包含二级标题，符合前置内容特征
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 10
+  confidence: 0.99
+  final_reason: 双方一致认定为第1章。Markdown一级标题，带有明确编号“1.”，语义明确，后续内容为该章正文。
+  accepted_evidence:
+  - 判断方：顶层章节标题，编号为 '1. 正则表达式入门'
+  - 复核方：带有明确的章序号'1.'，符合最高层级大章特征
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 159
+  confidence: 0.98
+  final_reason: 双方一致认定为第2章。虽然缺少显式数字“2.”，但作为Markdown一级标题，位于第1章脚注之后、第3章（line 479）之前，且语义统领后续内容，根据上下文推断为第2章。
+  accepted_evidence:
+  - 判断方：顶层章节标题，语义为 '正则表达式语法 101'，紧随第1章之后
+  - 复核方：Markdown级别为一级标题，位于第1章末尾脚注之后，前后章节序号推断此处为第2章
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 479
+  confidence: 0.99
+  final_reason: 双方一致认定为第3章。Markdown一级标题，带有明确编号“3.”，语义明确。
+  accepted_evidence:
+  - 判断方：顶层章节标题，编号为 '3. 执行正则表达式'
+  - 复核方：带有明确的章序号'3.'，符合最高层级大章特征
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 1250
+  confidence: 0.98
+  final_reason: 双方一致认定为第4章。Markdown一级标题，位于第3章脚注之后、第5章（line 1468）之前，语义统领后续内容，根据上下文推断为第4章。
+  accepted_evidence:
+  - 判断方：顶层章节标题，语义为 '使用有限状态机可视化正则表达式执行'，根据上下文顺序判断为第4章
+  - 复核方：位于第3章末尾脚注之后，前后章节分别为第3章和第5章，推断为第4章
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 1468
+  confidence: 0.99
+  final_reason: 双方一致认定为第5章。Markdown一级标题，带有明确编号“5.”，语义明确。
+  accepted_evidence:
+  - 判断方：顶层章节标题，编号为 '5. 重复修饰符'
+  - 复核方：带有明确的章序号'5.'，符合最高层级大章特征
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 1805
+  confidence: 0.99
+  final_reason: 双方一致认定为第6章。Markdown一级标题，带有明确编号“6.”，语义明确。
+  accepted_evidence:
+  - 判断方：顶层章节标题，编号为 '6. 字符集与字符类'
+  - 复核方：带有明确的章序号'6.'，符合最高层级大章特征
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 2048
+  confidence: 0.98
+  final_reason: 双方一致认定为第7章。Markdown一级标题，位于第6章总结之后、第8章（line 2435）之前，语义统领后续内容，根据上下文推断为第7章。
+  accepted_evidence:
+  - 判断方：顶层章节标题，语义为 '从正则表达式中提取子串'，根据上下文顺序判断为第7章
+  - 复核方：位于第6章末尾之后，前后章节分别为第6章和第8章，推断为第7章
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 2435
+  confidence: 0.99
+  final_reason: 双方一致认定为第8章。Markdown一级标题，带有明确编号“8.”，语义明确。
+  accepted_evidence:
+  - 判断方：顶层章节标题，编号为 '8. 前瞻与后顾'
+  - 复核方：带有明确的章序号'8.'，符合最高层级大章特征
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 2551
+  confidence: 0.99
+  final_reason: 双方一致认定为第9章。Markdown一级标题，带有明确编号“9.”，语义明确。
+  accepted_evidence:
+  - 判断方：顶层章节标题，编号为 '9. 维护正则表达式'
+  - 复核方：带有明确的章序号'9.'，符合最高层级大章特征
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 2918
+  confidence: 0.99
+  final_reason: 双方一致认定为第10章。Markdown一级标题，带有明确编号“10.”，语义明确。
+  accepted_evidence:
+  - 判断方：顶层章节标题，编号为 '10. 优化正则表达式'
+  - 复核方：带有明确的章序号'10.'，符合最高层级大章特征
+  rejected_evidence: []
+  need_human_review: false
+rejected_lines: []

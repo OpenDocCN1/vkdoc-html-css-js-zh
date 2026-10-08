@@ -1,0 +1,31 @@
+chapter_starts:
+- 'no': 2
+  confidence: 0.95
+  reason: 书籍封面/版权页标题，作为前言类内容的第一章起始
+- 'no': 30
+  confidence: 0.9
+  reason: 引言（Preface/Introduction），属于前言部分，独立成章
+- 'no': 40
+  confidence: 0.9
+  reason: 致谢（Acknowledgments），属于前言部分，独立成章
+- 'no': 46
+  confidence: 0.9
+  reason: 目录（Table of Contents），属于前置内容，独立成章
+- 'no': 296
+  confidence: 0.9
+  reason: 关于作者与技术审校，属于前置内容，独立成章
+- 'no': 302
+  confidence: 0.95
+  reason: 顶级标题“React 式编程入门”，对应目录中的第1章内容（响应式编程 101），是正文第一章
+- 'no': 589
+  confidence: 0.95
+  reason: 编号“2. 成为响应式”，对应目录第2章，层级为顶级章节
+- 'no': 892
+  confidence: 0.95
+  reason: 编号“3. 函数式响应式编程”，对应目录第3章，层级为顶级章节
+- 'no': 1734
+  confidence: 0.95
+  reason: 编号“4. 后端响应式编程”，对应目录第4章，层级为顶级章节
+- 'no': 2382
+  confidence: 0.95
+  reason: 编号“5. 进入 Node.js”，对应目录第5章（走进 Node.js），层级为顶级章节

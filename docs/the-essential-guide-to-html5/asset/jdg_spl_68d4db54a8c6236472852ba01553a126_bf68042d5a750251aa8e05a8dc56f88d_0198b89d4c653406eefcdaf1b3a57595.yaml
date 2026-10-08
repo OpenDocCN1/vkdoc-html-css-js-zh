@@ -1,0 +1,23 @@
+chapter_starts:
+- 'no': 3014
+  confidence: 0.98
+  final_reason: 双方一致判定为一级章节标题。该行使用一级标题语法“# 第三章 弹跳球”，位于前一章代码块结束后，后续跟随二级标题“## 使用匿名函数...”及正文，符合新章起始的语义与结构特征。虽然文中存在其他重复的“#
+    第 3 章”页眉残留，但本行是逻辑上第三章实际内容的起点。
+  accepted_evidence:
+  - 一级 Markdown 标题语法（'#'）
+  - 内容为“第三章 弹跳球”，属于最高层级章节编号
+  - 上下文前文为代码块结束，后续紧跟二级标题和章节正文
+  - 复核方确认该行为章节起始，overturn_probability 为 0.0
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 3931
+  confidence: 0.98
+  final_reason: 双方一致判定为一级章节标题。该行使用一级标题语法“# 第 4 章：炮弹与弹弓”，位于第三章“本章小结”之后，后续跟随“## 引言”及新章节内容，符合章节更替的逻辑。
+  accepted_evidence:
+  - 一级 Markdown 标题语法（'#'）
+  - 内容为“第 4 章：炮弹与弹弓”，明确标识新的最高层级章节
+  - 前文为第三章结尾，后续为新章节引言，结构清晰
+  - 复核方确认该行为章节起始，overturn_probability 为 0.0
+  rejected_evidence: []
+  need_human_review: false
+rejected_lines: []

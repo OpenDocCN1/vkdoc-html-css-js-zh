@@ -1,0 +1,29 @@
+chapter_starts:
+- 'no': 3794
+  confidence: 0.98
+  final_reason: 双方一致 + 排版语义均符合
+  accepted_evidence:
+  - 标题 `# 5. 寻路基础` 具有最高层级 Markdown 标记（#），序号为 5，符合全书最高层级大章特征。
+  - 前文行 3784-3792 为第 4 章的总结及版权信息，语义上第 4 章已结束，此处开启新章节。
+  rejected_evidence:
+  - '复核方指出内部可能存在无序号 # 标题干扰，但本章标题带有明确编号 ''5''，且上下文连贯，误分风险极低。'
+  need_human_review: false
+- 'no': 4773
+  confidence: 0.98
+  final_reason: 双方一致 + 排版语义均符合
+  accepted_evidence:
+  - 标题 `# 6. 寻找最短路径` 具有最高层级 Markdown 标记（#），序号为 6，紧随第 5 章结束。
+  - 前文行 4763-4771 为第 5 章的总结及版权信息，语义上第 5 章已结束，此处开启新章节。
+  rejected_evidence:
+  - 复核方关于层级混淆的担忧在已有明确编号的情况下不构成强反驳。
+  need_human_review: false
+- 'no': 5789
+  confidence: 0.98
+  final_reason: 双方一致 + 排版语义均符合
+  accepted_evidence:
+  - 标题 `# 7. 基于瓦片的游戏：更多乐趣` 具有最高层级 Markdown 标记（#），序号为 7，紧随第 6 章结束。
+  - 前文行 5779-5787 为第 6 章的小结及版权信息，语义上第 6 章已结束，此处开启新章节。
+  rejected_evidence:
+  - 复核方关于 Part 层级的猜测缺乏证据，且标题编号连贯，视为章是合理默认。
+  need_human_review: false
+rejected_lines: []

@@ -1,0 +1,23 @@
+chapter_starts:
+- 'no': 6246
+  confidence: 0.95
+  final_reason: Markdown一级标题，位于正文之后、新大主题之前，符合顶级章节特征，双方一致。
+  accepted_evidence:
+  - 格式为 `# 宽相位与窄相位碰撞`，是一级标题。
+  - 前文是上一节内容的结束，后文开启新的技术主题，符合章节起始语境。
+  - 复核方确认其代表新的顶级章节或部分，支持分章。
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 6441
+  confidence: 0.98
+  final_reason: 文末索引标题，根据规则“文末索引也划分为一章”，明确分章。
+  accepted_evidence:
+  - 格式为 `## 索引`，且位于全书正文结束（行 6439 提及“到达了本书的结尾”）之后。
+  - 后续内容均为 A-Z 索引条目，无正文。
+  - 双方一致同意作为独立章节处理。
+  rejected_evidence: []
+  need_human_review: false
+rejected_lines:
+- 'no': 6310
+  reason: 复核方指出该行 `# 空间网格与碰撞检测` 出现位置突兀（夹在代码片段之间），且逻辑上应为同一章下的子话题而非独立顶级章节；判断方证据不足，遵循“宁可漏分”原则，不予分章。
+  need_human_review: true

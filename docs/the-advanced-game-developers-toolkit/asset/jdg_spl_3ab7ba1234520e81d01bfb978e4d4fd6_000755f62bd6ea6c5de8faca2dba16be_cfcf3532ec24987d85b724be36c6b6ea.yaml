@@ -1,0 +1,67 @@
+chapter_starts:
+- 'no': 2
+  confidence: 0.95
+  final_reason: 双方一致：书籍标题页，作为前置内容的起始，划分为一章。
+  accepted_evidence:
+  - 标题行 '# 高级游戏开发者工具包'
+  - 位于文档开头，属于前言/版权信息等前置内容
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 38
+  confidence: 0.9
+  final_reason: 双方一致：目录标题，属于导航内容，划分为一章。
+  accepted_evidence:
+  - 标题行 '# 目录'
+  - 后续包含章节列表（第42行起）
+  - 尽管第40行重复，但38行是明确的起始标记
+  rejected_evidence:
+  - 复核方指出第40行重复，但38行仍是逻辑块起始
+  need_human_review: false
+- 'no': 260
+  confidence: 0.95
+  final_reason: 双方一致：关于作者与审校者，属于正文前的介绍性内容，划分为一章。
+  accepted_evidence:
+  - 标题行 '# 关于作者与关于技术审校者'
+  - 符合“前言、序言、致谢、关于作者等正文之前的内容”规则
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 278
+  confidence: 0.98
+  final_reason: 双方一致：第一章正文开始，标题为“1. 入门指南”，符合最高层级章节特征。
+  accepted_evidence:
+  - 标题行 '## 1. 入门指南'
+  - 位于前置内容之后，正文第一章起点
+  - 后续内容为章节正文
+  rejected_evidence:
+  - 'Markdown 级别为 ## 而非 #，但语义上为章标题'
+  need_human_review: false
+- 'no': 368
+  confidence: 0.98
+  final_reason: 双方一致：第二章正文开始，标题为“2. 使用 Tiled Editor”，符合最高层级章节特征。
+  accepted_evidence:
+  - 标题行 '## 2. 使用 Tiled Editor'
+  - 第一章结束后的自然章节切换
+  rejected_evidence:
+  - Markdown 级别不一致，但语义连贯
+  need_human_review: false
+- 'no': 1204
+  confidence: 0.98
+  final_reason: 双方一致：第三章正文开始，标题为“3. 基于瓦片的碰撞检测”，符合最高层级章节特征。
+  accepted_evidence:
+  - 标题行 '# 3. 基于瓦片的碰撞检测'
+  - 章节序号连贯（第2章到第3章）
+  rejected_evidence:
+  - 'Markdown 级别跳回 #，但语义正确'
+  need_human_review: false
+- 'no': 2324
+  confidence: 0.98
+  final_reason: 双方一致：第四章正文开始，标题为“4. 等距地图”，符合最高层级章节特征。
+  accepted_evidence:
+  - 标题行 '# 4. 等距地图'
+  - 章节序号连贯（第3章到第4章）
+  rejected_evidence: []
+  need_human_review: false
+rejected_lines:
+- 'no': 246
+  reason: 复核方指出其为目录项/列表项，且位于索引之后，逻辑位置混乱，前文已有目录章节，故不分章。
+  need_human_review: false

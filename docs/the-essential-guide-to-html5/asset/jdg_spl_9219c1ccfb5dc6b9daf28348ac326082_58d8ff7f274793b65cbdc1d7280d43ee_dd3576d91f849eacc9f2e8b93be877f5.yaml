@@ -1,0 +1,36 @@
+chapter_starts:
+- 'no': 0
+  confidence: 0.98
+  final_reason: 双方一致：文档起始行，包含封面、版权、目录等前置内容，按规则统一划分为一章。
+  accepted_evidence:
+  - 判断方：文档起始部分，包含封面、版权信息、目录等前置内容，统一划分为一章。
+  - 复核方：该行是文档的起始行（封面图片），根据规则“前言、序言...统一划分为一章”，作为文档开始，它必然标记为第一个章节的起始位置。
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 326
+  confidence: 0.95
+  final_reason: 双方一致：该行为“## 第 1 章：基础”，语义明确为正式章节标题，后续内容涵盖HTML基础、CSS、JS等，具有统领性。尽管Markdown层级为二级，但结合上下文（前言结束，正文开始），确认为大章起点。
+  accepted_evidence:
+  - 判断方：正式章节标题 '## 第 1 章：基础'，具有最高层级编号特征。
+  - 复核方：虽然格式为##，但语义明确为第1章起点，keep_split=true。
+  rejected_evidence:
+  - 复核方曾提出若严格依据`#`为最高层级则可能是子层级，但鉴于本书Markdown层级不规范混用，且该处确为第1章开始，语义优先于格式，故不予采纳反方证据。
+  need_human_review: false
+- 'no': 900
+  confidence: 0.95
+  final_reason: 双方一致：第900行“# 第 2 章”与第902行“# 骰子游戏”共同构成第2章标题。第900行作为编号行，紧随其后的行补充了副标题，确认为新章起始。
+  accepted_evidence:
+  - 判断方：正式章节标题 '# 第 2 章'，紧随其后的行补充了副标题，构成完整章标题。
+  - 复核方：鉴于它是章节开始标记，分章判断本身不错误，keep_split=true。
+  rejected_evidence:
+  - 复核方曾指出孤立编号行可能被视为排版断行，但结合下一行及目录信息，确认其为章标题的一部分，故采纳为章起点。
+  need_human_review: false
+- 'no': 2496
+  confidence: 0.95
+  final_reason: 双方一致：该行为“# 第 3 章：弹跳的球”，语义明确为第3章起点，符合编号与语义特征。
+  accepted_evidence:
+  - 判断方：正式章节标题 '# 第 3 章：弹跳的球'，具有最高层级编号特征。
+  - 复核方：该行使用了 `#` 一级标题，且包含“第 3 章”字样，符合章标题特征，keep_split=true。
+  rejected_evidence: []
+  need_human_review: false
+rejected_lines: []

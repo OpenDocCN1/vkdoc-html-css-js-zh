@@ -1,0 +1,25 @@
+chapter_starts:
+- 'no': 2
+  confidence: 0.95
+  reason: 书籍标题页，作为前言/版权信息等前置内容的起始，划分为一章。
+- 'no': 38
+  confidence: 0.95
+  reason: 目录标题，属于正文前的导航内容，划分为一章。
+- 'no': 246
+  confidence: 0.9
+  reason: 内容概览，属于正文前的辅助信息，划分为一章。
+- 'no': 260
+  confidence: 0.95
+  reason: 关于作者与审校者，属于正文前的介绍性内容，划分为一章。
+- 'no': 278
+  confidence: 0.98
+  reason: 第一章正文开始，标题为“1. 入门指南”，符合最高层级章节特征。
+- 'no': 368
+  confidence: 0.98
+  reason: 第二章正文开始，标题为“2. 使用 Tiled Editor”，符合最高层级章节特征。
+- 'no': 1204
+  confidence: 0.98
+  reason: 第三章正文开始，标题为“3. 基于瓦片的碰撞检测”，符合最高层级章节特征。
+- 'no': 2324
+  confidence: 0.98
+  reason: 第四章正文开始，标题为“4. 等距地图”，符合最高层级章节特征。

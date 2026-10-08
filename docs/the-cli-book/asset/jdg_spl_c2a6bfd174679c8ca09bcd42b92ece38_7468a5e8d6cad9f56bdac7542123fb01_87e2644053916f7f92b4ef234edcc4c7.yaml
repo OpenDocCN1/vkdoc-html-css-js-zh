@@ -1,0 +1,69 @@
+chapter_starts:
+- 'no': 32
+  confidence: 0.95
+  final_reason: “前言”属于正文前的前置内容，依据规则统一划分为一章。
+  accepted_evidence:
+  - 格式特征：二级标题，独立成行，语义概括性明确。
+  - 语义特征：作为书籍前言，统领后续致谢等前置内容。
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 48
+  confidence: 0.95
+  final_reason: “致谢”属于正文前的前置内容，依据规则统一划分为一章。
+  accepted_evidence:
+  - 格式特征：二级标题，独立成行。
+  - 语义特征：作为致谢章节，独立于前言和正文。
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 182
+  confidence: 0.98
+  final_reason: “什么是好的 CLI？”是第1章的标题（对应目录中的“第 1 章”），具有统领性语义，且后续跟随子节（如“## CLI 基础”），符合章标题特征。
+  accepted_evidence:
+  - 编号特征：一级标题（#），对应目录中的第1章。
+  - 上下文特征：前文为前置内容（关于作者），后文为子节结构。
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 479
+  confidence: 0.98
+  final_reason: “2. 使用 Node.js 编写数据库管理工具”是第2章的标题，编号连贯，语义概括性强，后续有子节结构。
+  accepted_evidence:
+  - 编号特征：一级标题（#），包含序号“2”，与目录对应。
+  - 上下文特征：前文为第1章结尾，后文为第2章内容。
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 1166
+  confidence: 0.98
+  final_reason: “3. 让我们的 CLI 工具更易上手”是第3章的标题，编号连贯，语义概括性强，后续有子节结构。
+  accepted_evidence:
+  - 编号特征：一级标题（#），包含序号“3”，与目录对应。
+  - 上下文特征：前文为第2章结尾，后文为第3章内容。
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 2198
+  confidence: 0.98
+  final_reason: “4. 使用流迁移大量数据”是第4章的标题，编号连贯，语义概括性强，后续有子节结构。
+  accepted_evidence:
+  - 编号特征：一级标题（#），包含序号“4”，与目录对应。
+  - 上下文特征：前文为第3章结尾，后文为第4章内容。
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 2756
+  confidence: 0.95
+  final_reason: “附录 A：技巧与建议”是附录标题，属于最高层级划分，且后续包含具体小节（如“## 测试”、“## Greenkeeper”等）。
+  accepted_evidence:
+  - 编号特征：一级标题（#），标记为附录A，独立于正文章节。
+  - 语义特征：涵盖附录内容，具有独立完整性。
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 2778
+  confidence: 0.9
+  final_reason: “索引”是文末内容，依据规则统一划分为一章。
+  accepted_evidence:
+  - 格式特征：二级标题，位于全书末尾。
+  - 语义特征：索引作为独立部分，通常单独成章。
+  rejected_evidence: []
+  need_human_review: false
+rejected_lines:
+- 'no': 176
+  reason: 复核方指出该行位于目录之后、正文之前，且格式为二级标题（##），极可能是目录残留或非主体碎片。依据规则“前言、致谢等统一划分为一章”，此类短小前置内容不宜单独作为新章起始点，且其层级较低，不如直接合并或忽略。鉴于“宁可漏分不可误分”原则，不将其视为章起点。
+  need_human_review: false
