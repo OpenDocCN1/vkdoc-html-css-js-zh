@@ -14,5 +14,3 @@
 +   [第 9 章 物理、循环、数组和声音](foundation-game-design-with-actionscript-30_14.md)
 +   [第 10 章 高级对象与角色控制](foundation-game-design-with-actionscript-30_15.md)
 +   [索引](foundation-game-design-with-actionscript-30_16.md)
-+   [索引](foundation-game-design-with-actionscript-30_17.md)
-+   [概述](foundation-game-design-with-actionscript-30_18.md)
