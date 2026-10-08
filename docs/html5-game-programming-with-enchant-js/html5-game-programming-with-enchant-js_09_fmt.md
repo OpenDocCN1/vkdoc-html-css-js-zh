@@ -1,10 +1,3 @@
-# 使用 enchant.js 进行 HTML5 游戏编程
-
-**作者：** Brandon McInnis, Ryo Shimizu, Hidekazu Furukawa, Ryohei Fushimi, Ryo Tanaka, Kevin Kratzer
-
-**DOI：** 10.1007/978-1-4302-4744-9
-
-**出版商：** Apress 2013
 
 ## 索引
 

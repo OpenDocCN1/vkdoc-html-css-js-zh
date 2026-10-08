@@ -7,5 +7,5 @@
 +   [5. 游戏设计](html5-game-programming-with-enchant-js_05_fmt.md)
 +   [6. 创建街机射击游戏](html5-game-programming-with-enchant-js_06_fmt.md)
 +   [7. 制作一款独立的 3D 游戏](html5-game-programming-with-enchant-js_07_fmt.md)
-+   [类附录](html5-game-programming-with-enchant-js_08_fmt.md)
-+   [使用 enchant.js 进行 HTML5 游戏编程](html5-game-programming-with-enchant-js_09_fmt.md)
++   [8. 类附录](html5-game-programming-with-enchant-js_08_fmt.md)
++   [索引](html5-game-programming-with-enchant-js_09_fmt.md)
