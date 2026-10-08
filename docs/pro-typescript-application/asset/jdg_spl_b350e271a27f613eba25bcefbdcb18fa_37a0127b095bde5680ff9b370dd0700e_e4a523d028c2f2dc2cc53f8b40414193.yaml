@@ -1,0 +1,47 @@
+chapter_starts:
+- 'no': 5913
+  confidence: 0.95
+  final_reason: 双方一致认可。该行是一级标题 `#`，包含明确的章序号 '6.'，且后续内容（如 '清单 6-1'）证实其为第6章起始。前文为第5章的要点总结，符合分章上下文特征。
+  accepted_evidence:
+  - 一级标题标记 `#` 和章序号 '6.'
+  - 后续出现 '清单 6-1'、'图 6-1' 等第6章引用
+  - 前文（行5904-5911）为典型章节末尾总结
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 7126
+  confidence: 0.95
+  final_reason: 双方一致认可。该行是一级标题 `#`，虽无显式数字，但位于第6章总结之后，且后续内容（'清单 7-1'）明确指向第7章，具有统领性语义。
+  accepted_evidence:
+  - 一级标题标记 `#`
+  - 位于第6章总结（行7102-7124）之后
+  - 后续出现 '清单 7-1'、'清单 7-2' 等第7章引用
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 7802
+  confidence: 0.95
+  final_reason: 双方一致认可。该行是一级标题 `#`，位于第7章总结之后，且后续内容（'清单 8-1'）明确指向第8章，标志着新章节的开始。
+  accepted_evidence:
+  - 一级标题标记 `#`
+  - 位于第7章总结（行7780-7800）之后
+  - 后续出现 '清单 8-1'、'图 8-1' 等第8章引用
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 8243
+  confidence: 0.95
+  final_reason: 双方一致认可。该行是一级标题 `#`，包含明确的章序号 '9.'，且后续内容（'清单 9-1'）证实其为第9章起始。前文为第8章的要点总结。
+  accepted_evidence:
+  - 一级标题标记 `#` 和章序号 '9.'
+  - 后续出现 '清单 9-1' 等第9章引用
+  - 前文（行8224-8241）为第8章总结
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 8590
+  confidence: 0.95
+  final_reason: 双方一致认可。该行是一级标题 `#`，位于第9章总结之后，且后续内容（'清单 10-1'）明确指向第10章，标志着新章节的开始。
+  accepted_evidence:
+  - 一级标题标记 `#`
+  - 位于第9章总结（行8574-8588）之后
+  - 后续出现 '代码清单 10-1' 等第10章引用
+  rejected_evidence: []
+  need_human_review: false
+rejected_lines: []

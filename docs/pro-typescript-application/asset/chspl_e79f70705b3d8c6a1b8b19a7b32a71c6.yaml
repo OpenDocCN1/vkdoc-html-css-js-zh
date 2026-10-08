@@ -1,0 +1,13 @@
+chapter_starts:
+- 'no': 0
+  confidence: 0.95
+  reason: 封面及前言部分（Frontmatter），根据规则统一划分为第一章。
+- 'no': 232
+  confidence: 0.9
+  reason: 目录标题，通常作为独立章节处理，包含全书结构概览。
+- 'no': 502
+  confidence: 0.98
+  reason: 一级标题“# 1. TypeScript 语言特性”，是全书正文的第一章起始，编号为第1章。
+- 'no': 2818
+  confidence: 0.98
+  reason: 一级标题“# 2. 代码组织”，是全书正文的第二章起始，编号连贯。

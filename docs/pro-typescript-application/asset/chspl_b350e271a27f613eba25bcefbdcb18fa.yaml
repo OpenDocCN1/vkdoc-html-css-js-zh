@@ -1,0 +1,17 @@
+chapter_starts:
+- 'no': 5913
+  confidence: 0.95
+  reason: 该行内容为“# 6. 在浏览器中运行 TypeScript”，包含章序号“6.”且为一级标题（Markdown `#`），语义上开启新的主题章节。前文为上一章的要点总结，符合分章特征。
+- 'no': 7126
+  confidence: 0.95
+  reason: 该行内容为“# 在服务器上运行 TypeScript”，是一级标题（Markdown `#`），虽无显式数字，但根据上下文（前文为第6章结束），此处开启第7章（后续内容涉及第7章的列表如
+    `Listing 7-1`）。具有统领性语义。
+- 'no': 7802
+  confidence: 0.95
+  reason: 该行内容为“# 异常、内存与性能”，是一级标题（Markdown `#`），后续内容涉及第8章的列表（如 `Listing 8-1`），标志着第8章的开始。
+- 'no': 8243
+  confidence: 0.95
+  reason: 该行内容为“# 9. 使用 JavaScript 库”，包含章序号“9.”且为一级标题（Markdown `#`），标志着第9章的开始。
+- 'no': 8590
+  confidence: 0.95
+  reason: 该行内容为“# 自动化测试”，是一级标题（Markdown `#`），后续内容涉及第10章的列表（如 `Listing 10-1`），标志着第10章的开始。

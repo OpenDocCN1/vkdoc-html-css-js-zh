@@ -1,0 +1,42 @@
+chapter_starts:
+- 'no': 0
+  confidence: 0.95
+  final_reason: 全书起始行，包含封面及前言部分，根据规则统一划分为第一块内容（Frontmatter）。
+  accepted_evidence:
+  - 该行是图片标记 `![](...)`，作为Frontmatter的起始行。
+  - 规则规定前言、序言等正文前内容统一划分为一章，0行是这一块的开始。
+  rejected_evidence:
+  - 虽然该行本身不是文本标题，但作为逻辑分章的起始点（切分点）是合理的。
+  need_human_review: false
+- 'no': 230
+  confidence: 0.95
+  final_reason: 目录标题。原判断方误标为空行232，复核方指出真正的标题在230。目录作为独立功能块，符合一级标题特征，应划分为新章。
+  accepted_evidence:
+  - 行230内容为 `# 目录`，是一级标题。
+  - 目录内容独立，通常作为Frontmatter后的独立章节或Frontmatter的一部分，鉴于其长度和独立性，单独分章合理。
+  - 修正了原判断中定位在空行232的错误。
+  rejected_evidence:
+  - 原判断中的 no:232 是空行，非标题，予以修正为 230。
+  need_human_review: false
+- 'no': 502
+  confidence: 0.98
+  final_reason: 正文第一章标题 `# 1. TypeScript 语言特性`。符合一级标题特征，编号连贯，语义统领后续内容。
+  accepted_evidence:
+  - 行502内容为 `# 1. TypeScript 语言特性`。
+  - 格式符合章标题特征（一级标题，短，无句号）。
+  - 上下文特征：后续跟随子节（## 等），前文是目录/附录列表结束。
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 2818
+  confidence: 0.98
+  final_reason: 正文第二章标题 `# 2. 代码组织`。符合一级标题特征，编号从1连贯到2，前文为第1章小结。
+  accepted_evidence:
+  - 行2818内容为 `# 2. 代码组织`。
+  - 前文（2785-2815）包含第1章的总结和要点，符合章末特征。
+  - 编号连贯。
+  rejected_evidence: []
+  need_human_review: false
+rejected_lines:
+- 'no': 232
+  reason: 该行是空行，原判断方将其误标为章节起始。真正的目录标题在 no:230。已将该章节起始修正为 230，故 232 被拒绝。
+  need_human_review: false

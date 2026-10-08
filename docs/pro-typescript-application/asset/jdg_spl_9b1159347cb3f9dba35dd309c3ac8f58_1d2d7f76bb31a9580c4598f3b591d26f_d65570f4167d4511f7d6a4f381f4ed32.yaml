@@ -1,0 +1,34 @@
+chapter_starts:
+- 'no': 3504
+  confidence: 0.98
+  final_reason: 双方一致 + 排版语义均符合
+  accepted_evidence:
+  - 一级标题带有序号 '3.'，符合最高层级章节特征
+  - 前文为第2章总结，后文为第3章正文，序号连贯
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 3978
+  confidence: 0.98
+  final_reason: 双方一致 + 排版语义均符合
+  accepted_evidence:
+  - 一级标题带有序号 '4.'，符合最高层级章节特征
+  - 前文为第3章总结，后文为第4章正文，序号连贯
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 4930
+  confidence: 0.98
+  final_reason: 双方一致 + 排版语义均符合
+  accepted_evidence:
+  - 一级标题带有序号 '5.'，符合最高层级章节特征
+  - 前文为第4章总结，后文为第5章正文，序号连贯
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 5913
+  confidence: 0.98
+  final_reason: 双方一致 + 排版语义均符合
+  accepted_evidence:
+  - 一级标题带有序号 '6.'，符合最高层级章节特征
+  - 前文为第5章总结，后文为第6章正文，序号连贯
+  rejected_evidence: []
+  need_human_review: false
+rejected_lines: []

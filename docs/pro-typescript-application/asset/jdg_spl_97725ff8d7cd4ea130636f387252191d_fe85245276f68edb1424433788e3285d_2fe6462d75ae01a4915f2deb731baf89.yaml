@@ -1,0 +1,42 @@
+chapter_starts:
+- 'no': 8994
+  confidence: 0.95
+  final_reason: 双方一致 + 格式语义符合最高层级章节特征
+  accepted_evidence:
+  - 以 '# ' 开头的“附录 1：JavaScript 快速参考”，属于全书最高层级的独立章节。
+  - 前文为第10章结束，后文为附录1具体内容，边界清晰。
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 9346
+  confidence: 0.95
+  final_reason: 双方一致 + 格式语义符合最高层级章节特征
+  accepted_evidence:
+  - 以 '# ' 开头的“附录 2：TypeScript 编译器”，属于全书最高层级的独立章节。
+  - 前文为附录1结束，后文为附录2具体内容，边界清晰。
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 9696
+  confidence: 0.95
+  final_reason: 双方一致 + 格式语义符合最高层级章节特征
+  accepted_evidence:
+  - 以 '# ' 开头的“附录 3：位标志”，属于全书最高层级的独立章节。
+  - 前文为附录2结束，后文为附录3具体内容，边界清晰。
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 9796
+  confidence: 0.95
+  final_reason: 双方一致 + 格式语义符合最高层级章节特征
+  accepted_evidence:
+  - '以 ''# '' 开头的“附录 4: 编程空手道”，属于全书最高层级的独立章节。'
+  - 前文为附录3结束，后文为附录4具体内容，边界清晰。
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 9895
+  confidence: 0.95
+  final_reason: 双方一致 + 规则明确指定文末索引需独立成章
+  accepted_evidence:
+  - 以 '# ' 开头的“索引”，位于书籍末尾。
+  - 根据判断规则“文末索引也划分为一章”，需单独标记。
+  rejected_evidence: []
+  need_human_review: false
+rejected_lines: []
