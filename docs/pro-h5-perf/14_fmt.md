@@ -1,6 +1,6 @@
-The request was rejected because it was considered high risk
 
-# 控制
+
+# 十四、控制
 
 `price` 函数构建一个字符串，其中包含 HTML 元素和参数中指定的值，除了参数`$echo`。`$echo` 参数指示是将 HTML 字符串插入调用该函数的页面，还是将 HTML 作为字符串返回给其他函数。
 
