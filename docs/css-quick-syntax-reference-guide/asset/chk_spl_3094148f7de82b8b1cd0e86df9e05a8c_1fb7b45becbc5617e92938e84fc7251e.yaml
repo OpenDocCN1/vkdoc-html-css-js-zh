@@ -1,0 +1,145 @@
+reviews:
+- 'no': 402
+  overturn_probability: 0.1
+  alternative: 正文小节标题
+  counter_evidence:
+  - '该行位于目录（no: 96-332）和内容速览（no: 346-398）之后，符合正文章开始的位置。'
+  - 使用 Markdown 一级标题 `#`，且编号为 '1.'，与目录中的 '第 1 章' 对应，具有统领性。
+  keep_split: true
+- 'no': 522
+  overturn_probability: 0.8
+  alternative: Markdown 解析错误或正文子标题
+  counter_evidence:
+  - '该行使用的 Markdown 级别为二级标题 `##`，而前一个分章点 no: 402 是一级标题 `#`。根据规则，通常只划分最高层级的大章。'
+  - '在 no: 402 到 no: 522 之间，出现了多个二级标题（如 no: 406, 416, 426 等），如果 `##` 代表章节，那么前面的 `##
+    内部样式表` 等也应被视为章节，这与常规书籍结构（章>节>小节）不符。'
+  - '对比后续章节，no: 575 `# 类选择器...`、no: 663 `# 4. 属性选择器` 等均为一级标题 `#`。no: 522 单独使用 `##`
+    极有可能是 Markdown 转换时的格式错误（少加了一个 #），或者它实际上是一个节（Section）而非章（Chapter）。'
+  - '如果视 `##` 为章节，则本书章节层级不一致（有的是 `#`，有的是 `##`），破坏了结构的一致性。最合理的解释是全书章节统一使用 `#` 开头，而
+    no: 522 是误标或应归入前一章的下级标题。'
+  keep_split: false
+- 'no': 575
+  overturn_probability: 0.1
+  alternative: 正文小节标题
+  counter_evidence:
+  - '使用一级标题 `#`，与前文 no: 402 格式一致。'
+  - 对应目录中的 '第 3 章'，语义独立，统领后续内容。
+  keep_split: true
+- 'no': 663
+  overturn_probability: 0.1
+  alternative: 正文小节标题
+  counter_evidence:
+  - 使用一级标题 `#`，编号 '4.'，对应目录 '第 4 章'。
+  keep_split: true
+- 'no': 767
+  overturn_probability: 0.1
+  alternative: 正文小节标题
+  counter_evidence:
+  - 使用一级标题 `#`，编号 '5.'，对应目录 '第 5 章'。
+  keep_split: true
+- 'no': 1232
+  overturn_probability: 0.2
+  alternative: 正文小节标题（缺少编号）
+  counter_evidence:
+  - 使用一级标题 `#`，对应目录 '第 6 章'。
+  - 虽然标题文本中未显示数字 '6.'（可能被截断或格式不一致），但语义和层级符合章节特征。
+  keep_split: true
+- 'no': 1344
+  overturn_probability: 0.1
+  alternative: 正文小节标题
+  counter_evidence:
+  - 使用一级标题 `#`，编号 '7.'，对应目录 '第 7 章'。
+  keep_split: true
+- 'no': 1432
+  overturn_probability: 0.1
+  alternative: 正文小节标题
+  counter_evidence:
+  - 使用一级标题 `#`，编号 '8.'，对应目录 '第 8 章'。
+  keep_split: true
+- 'no': 1511
+  overturn_probability: 0.2
+  alternative: 正文小节标题（缺少编号）
+  counter_evidence:
+  - 使用一级标题 `#`，对应目录 '第 9 章：单位'。
+  - 标题文本仅为 '单位'，缺少编号 '9.'，但与上下文和目录完全匹配，且层级为最高级，故判断为章。
+  keep_split: true
+- 'no': 1613
+  overturn_probability: 0.2
+  alternative: 正文小节标题（缺少编号）
+  counter_evidence:
+  - 使用一级标题 `#`，对应目录 '第 10 章：CSS 属性'。
+  - 标题文本仅为 'CSS 属性'，缺少编号 '10.'，但层级和语义符合章标题。
+  keep_split: true
+- 'no': 1680
+  overturn_probability: 0.1
+  alternative: 正文小节标题
+  counter_evidence:
+  - 使用一级标题 `#`，编号 '11.'，对应目录 '第 11 章'。
+  keep_split: true
+- 'no': 1827
+  overturn_probability: 0.1
+  alternative: 正文小节标题
+  counter_evidence:
+  - 使用一级标题 `#`，编号 '12.'，对应目录 '第 12 章'。
+  keep_split: true
+- 'no': 1880
+  overturn_probability: 0.1
+  alternative: 正文小节标题
+  counter_evidence:
+  - 使用一级标题 `#`，编号 '13.'，对应目录 '第 13 章'。
+  keep_split: true
+- 'no': 1965
+  overturn_probability: 0.2
+  alternative: 正文小节标题（缺少编号）
+  counter_evidence:
+  - 使用一级标题 `#`，对应目录 '第 14 章：背景'。
+  - 标题文本仅为 '背景'，缺少编号 '14.'，但层级和语义符合章标题。
+  keep_split: true
+- 'no': 2163
+  overturn_probability: 0.1
+  alternative: 正文小节标题
+  counter_evidence:
+  - 使用一级标题 `#`，编号 '15.'，对应目录 '第 15 章'。
+  keep_split: true
+- 'no': 2305
+  overturn_probability: 0.1
+  alternative: 正文小节标题
+  counter_evidence:
+  - 使用一级标题 `#`，编号 '16.'，对应目录 '第 16 章'。
+  keep_split: true
+- 'no': 2359
+  overturn_probability: 0.1
+  alternative: 正文小节标题
+  counter_evidence:
+  - 使用一级标题 `#`，编号 '17.'，对应目录 '第 17 章'。
+  keep_split: true
+- 'no': 2495
+  overturn_probability: 0.1
+  alternative: 正文小节标题
+  counter_evidence:
+  - 使用一级标题 `#`，编号 '18.'，对应目录 '第 18 章'。
+  keep_split: true
+- 'no': 2574
+  overturn_probability: 0.1
+  alternative: 正文小节标题
+  counter_evidence:
+  - 使用一级标题 `#`，编号 '19.'，对应目录 '第 19 章'。
+  keep_split: true
+- 'no': 2653
+  overturn_probability: 0.1
+  alternative: 正文小节标题
+  counter_evidence:
+  - 使用一级标题 `#`，编号 '20.'，对应目录 '第 20 章'。
+  keep_split: true
+- 'no': 2758
+  overturn_probability: 0.1
+  alternative: 正文小节标题
+  counter_evidence:
+  - 使用一级标题 `#`，编号 '21.'，对应目录 '第 21 章'。
+  keep_split: true
+- 'no': 2993
+  overturn_probability: 0.1
+  alternative: 正文小节标题
+  counter_evidence:
+  - 使用一级标题 `#`，编号 '22.'，对应目录 '第 22 章'。
+  keep_split: true

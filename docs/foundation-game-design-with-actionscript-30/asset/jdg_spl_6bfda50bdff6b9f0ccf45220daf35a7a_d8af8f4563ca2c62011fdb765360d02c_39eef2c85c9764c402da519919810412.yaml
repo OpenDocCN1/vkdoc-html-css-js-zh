@@ -1,0 +1,11 @@
+chapter_starts:
+- 'no': 15953
+  confidence: 0.98
+  final_reason: 双方一致且证据充分。该行包含明确的顶级章节标识“第 9 章”，前文有第8章结束后的预告（“我们第 9 章见”）及章节分隔图，后文紧接新主题及子节，符合所有章节划分特征。
+  accepted_evidence:
+  - 包含最高层级编号“第 9 章”
+  - 上下文语义显示为新章节开始，前文为上一章节总结与预告
+  - 复核方确认keep_split为true
+  rejected_evidence: []
+  need_human_review: false
+rejected_lines: []

@@ -1,0 +1,19 @@
+chapter_starts:
+- 'no': 42
+  confidence: 0.9
+  reason: Markdown 二级标题 '## 引言'，位于前言/序言位置，根据规则将正文前的引言、致谢等统一划分为一章。
+- 'no': 108
+  confidence: 0.95
+  reason: Markdown 一级标题 '# 1. 初学者的路径'，符合'第 X 章'或'X. '编号特征，且位于正文开始处。
+- 'no': 428
+  confidence: 0.95
+  reason: Markdown 一级标题 '# 2. 编程入门'，符合最高层级章节编号特征，序号连贯。
+- 'no': 1359
+  confidence: 0.95
+  reason: Markdown 一级标题 '# 3. 关于 SVG 的一切'，符合最高层级章节编号特征，序号连贯。
+- 'no': 2046
+  confidence: 0.95
+  reason: Markdown 一级标题 '# 4. 随机性与规律性'，符合最高层级章节编号特征，序号连贯。
+- 'no': 2788
+  confidence: 0.95
+  reason: Markdown 一级标题 '# 5. 对噪声的需求'，符合最高层级章节编号特征，序号连贯。

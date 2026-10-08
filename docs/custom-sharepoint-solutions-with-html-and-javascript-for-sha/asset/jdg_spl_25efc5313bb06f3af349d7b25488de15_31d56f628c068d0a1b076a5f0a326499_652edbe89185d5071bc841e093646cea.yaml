@@ -1,0 +1,42 @@
+chapter_starts:
+- 'no': 5907
+  confidence: 0.95
+  final_reason: 根据规则“前言、序言、致谢、关于作者等正文之前的内容，统一划分为一章。文末索引也划分为一章”，该文本块为倒排索引（Index）部分，且
+    `## I` 是索引中字母分组的起始标志，具备明确的章节/部分起始语义，因此划分为独立章节。
+  accepted_evidence:
+  - 规则规定文末索引划分为一章
+  - 上下文为倒排索引结构，按字母顺序排列
+  - 复核方确认其为索引字母分组标记，支持作为章节起点
+  rejected_evidence: []
+  need_human_review: false
+rejected_lines:
+- 'no': 5927
+  reason: 属于索引内部的字母分组标记（J），而非全书最高层级的大章。索引整体已在 5907 处划分为一章，后续的字母标记（J, K, L...）视为该索引章节内的子层级或格式残留，不再单独分章。
+  need_human_review: false
+- 'no': 5948
+  reason: 属于索引内部的排版噪声或子层级标记，不具备独立章节的语义特征，且紧邻 5927（J 部分），不满足最高层级章节划分条件。
+  need_human_review: false
+- 'no': 5966
+  reason: 属于索引中的具体词条标题（jQuery），非最高层级章节。虽格式为一级标题 `#`，但语义上从属于整个索引部分，不应单独分章。
+  need_human_review: false
+- 'no': 5988
+  reason: 属于索引中的具体词条标题（JSLink 代码），非最高层级章节。
+  need_human_review: false
+- 'no': 5997
+  reason: 属于索引内部的字母分组标记（K），非最高层级章节。
+  need_human_review: false
+- 'no': 6001
+  reason: 属于索引内部的字母分组标记（L-M-N-O-P-Q），非最高层级章节。
+  need_human_review: false
+- 'no': 6026
+  reason: 属于索引内部的字母分组标记（R），非最高层级章节。
+  need_human_review: false
+- 'no': 6068
+  reason: 属于索引内部的字母分组标记（S-T-U），非最高层级章节。
+  need_human_review: false
+- 'no': 6082
+  reason: 属于索引内部的字母分组标记（V-W），非最高层级章节。
+  need_human_review: false
+- 'no': 6086
+  reason: 属于索引内部的字母分组标记（X-Y-Z），非最高层级章节。
+  need_human_review: false

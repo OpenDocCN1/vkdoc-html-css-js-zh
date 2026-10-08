@@ -1,0 +1,20 @@
+chapter_starts:
+- 'no': 6582
+  confidence: 0.98
+  final_reason: 双方一致。Markdown一级标题，包含序号“8”，前文为第7章展望，语义符合大章起始。
+  accepted_evidence:
+  - Markdown一级标题格式 `# 8. 显示和隐藏内容`
+  - 章节序号连贯（承接前文第7章）
+  - 前文（6578-6580行）为上一部分结尾，符合章节交替特征
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 7540
+  confidence: 0.98
+  final_reason: 双方一致。Markdown一级标题，包含序号“9”，前文为第8章展望，语义符合大章起始。
+  accepted_evidence:
+  - Markdown一级标题格式 `# 9. 项目：构建灯箱画廊`
+  - 章节序号连贯（承接前文第8章）
+  - 前文（7532-7538行）为上一部分结尾，明确提及后续章节，符合章节交替特征
+  rejected_evidence: []
+  need_human_review: false
+rejected_lines: []

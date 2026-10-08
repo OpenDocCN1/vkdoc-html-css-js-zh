@@ -1,0 +1,83 @@
+chapter_starts:
+- 'no': 6270
+  confidence: 0.98
+  final_reason: 双方一致 + 排版语义均符合
+  accepted_evidence:
+  - 该行内容为“# 第 12 章：使用下拉列表”，明确标注为“第 12 章”，符合最高层级章节标题特征
+  - 前文（6258-6268行）为第11章的总结部分，后文紧接着本章目标，上下文逻辑清晰
+  - 标题单独成行，长度适中，无句号，具备统领性
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 6860
+  confidence: 0.98
+  final_reason: 双方一致 + 序号连贯性支持
+  accepted_evidence:
+  - 该行内容为“# 13. 使用列表框”，序号“13”承接上一章“12”，符合序号连贯性
+  - 位于第12章结束后的内容之后，语义上开启新主题
+  - 使用一级标题标记 `#`，单独成行，无句号
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 7573
+  confidence: 0.98
+  final_reason: 双方一致 + 序号连贯性支持
+  accepted_evidence:
+  - 该行内容为“# 14. 高级导航：弹出菜单”，序号“14”承接上一章“13”，符合序号连贯性
+  - 位于第13章总结之后，上下文显示为新章节的开始
+  - 格式为标准的一级标题，无标点结尾
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 7764
+  confidence: 0.95
+  final_reason: 双方一致 + 部分-章节模式规则
+  accepted_evidence:
+  - 该行内容为“# 第四部分：进阶内容”，包含“第X部分”关键词
+  - 根据规则“如果存在标题为‘第 X 部分’，那么该书为部分-章节模式，遇到部分和章标题时，都要划分新章”，此处应划分为新章
+  - 位于第14章总结之后，作为新大块的起始
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 7766
+  confidence: 0.98
+  final_reason: 双方一致 + 部分-章节模式下的新章
+  accepted_evidence:
+  - 该行内容为“# 15. 操作向导与 JavaScript”，序号“15”承接上一章“14”，符合序号连贯性
+  - 位于“第四部分”标题之后，是部分下的第一个章节
+  - 格式为一级标题，单独成行
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 7994
+  confidence: 0.98
+  final_reason: 双方一致 + 序号连贯性支持
+  accepted_evidence:
+  - 该行内容为“# 16. 多状态复选框”，序号“16”承接上一章“15”，符合序号连贯性
+  - 位于第15章内容之后，语义开启新主题
+  - 格式为标准一级标题
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 8339
+  confidence: 0.98
+  final_reason: 双方一致 + 序号连贯性支持
+  accepted_evidence:
+  - 该行内容为“# 17. 向按钮中导入图像”，序号“17”承接上一章“16”，符合序号连贯性
+  - 位于第16章内容之后，语义开启新主题
+  - 格式为标准一级标题
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 8430
+  confidence: 0.98
+  final_reason: 双方一致 + 序号连贯性支持
+  accepted_evidence:
+  - 该行内容为“# 18. 多种格式设置”，序号“18”承接上一章“17”，符合序号连贯性
+  - 位于第17章内容之后，语义开启新主题
+  - 格式为标准一级标题
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 8839
+  confidence: 0.98
+  final_reason: 双方一致 + 序号连贯性支持
+  accepted_evidence:
+  - 该行内容为“# 19. 数字签名与条形码”，序号“19”承接上一章“18”，符合序号连贯性
+  - 位于第18章内容之后，语义开启新主题
+  - 格式为标准一级标题
+  rejected_evidence: []
+  need_human_review: false
+rejected_lines: []

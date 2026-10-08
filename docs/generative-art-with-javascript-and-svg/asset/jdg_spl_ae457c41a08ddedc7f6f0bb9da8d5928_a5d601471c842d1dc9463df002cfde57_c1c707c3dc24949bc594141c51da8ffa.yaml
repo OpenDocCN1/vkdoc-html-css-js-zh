@@ -1,0 +1,59 @@
+chapter_starts:
+- 'no': 42
+  confidence: 0.95
+  final_reason: 双方一致采纳。该行 '## 引言' 属于书籍前置内容（Front Matter），根据判断规则“前言、序言、致谢、关于作者等正文之前的内容，统一划分为一章”，故划分为独立章节。虽为二级标题，但语义上统领后续前置部分，且位于正式编号章节（#
+    1）之前，符合分章逻辑。
+  accepted_evidence:
+  - 复核方确认：引言属于前置内容，应单独成章
+  - 判断方指出：位于正文第一章（# 1）之前，语义独立
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 108
+  confidence: 0.98
+  final_reason: 双方一致采纳。该行 '# 1. 初学者的路径' 为一级标题，带有明确序号 '1.'，符合“全书最高层级大章”的编号特征。序号连贯（紧接前置内容后的正文起始），语义上统领本章关于
+    JS/SvJs 入门、SVG 基础及第一个草图的内容。
+  accepted_evidence:
+  - 格式特征：一级标题，独立成行
+  - 编号特征：'1.' 为最高层级章节编号
+  - 上下文特征：后续内容涵盖该章所有子节
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 428
+  confidence: 0.98
+  final_reason: 双方一致采纳。该行 '# 2. 编程入门' 为一级标题，序号 '2.' 紧随 '1.' 之后，连贯性良好。内容涉及 JavaScript
+    核心语法基础，与第 1 章的应用导向有明显区分，具备独立章节语义。
+  accepted_evidence:
+  - 格式特征：一级标题，独立成行
+  - 编号特征：'2.' 承接 '1.'，序号连贯
+  - 语义特征：概括了 JS 语法、值、变量、运算符等基础概念
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 1359
+  confidence: 0.98
+  final_reason: 双方一致采纳。该行 '# 3. 关于 SVG 的一切' 为一级标题，序号 '3.' 承接 '2.'，连贯。内容深入讲解 SVG 元素属性、形状绘制、视口等，是独立的知识模块，符合新章判断。
+  accepted_evidence:
+  - 格式特征：一级标题，独立成行
+  - 编号特征：'3.' 承接 '2.'，序号连贯
+  - 语义特征：统领 SVG 细节与 SvJs 高级用法
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 2046
+  confidence: 0.98
+  final_reason: 双方一致采纳。该行 '# 4. 随机性与规律性' 为一级标题，序号 '4.' 承接 '3.'，连贯。内容聚焦于随机数生成、网格算法、概率分布等生成艺术核心逻辑，具备独立章节的统领性。
+  accepted_evidence:
+  - 格式特征：一级标题，独立成行
+  - 编号特征：'4.' 承接 '3.'，序号连贯
+  - 语义特征：概括随机性、规则网格、概率分布等主题
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 2788
+  confidence: 0.98
+  final_reason: 双方一致采纳。该行 '# 5. 对噪声的需求' 为一级标题，序号 '5.' 承接 '4.'，连贯。内容专门讲解佩林噪声（Perlin
+    Noise）及其在生成艺术中的应用，是独立的最后章节（基于现有文本）。
+  accepted_evidence:
+  - 格式特征：一级标题，独立成行
+  - 编号特征：'5.' 承接 '4.'，序号连贯
+  - 语义特征：统领噪声模块的使用、映射及实战案例
+  rejected_evidence: []
+  need_human_review: false
+rejected_lines: []

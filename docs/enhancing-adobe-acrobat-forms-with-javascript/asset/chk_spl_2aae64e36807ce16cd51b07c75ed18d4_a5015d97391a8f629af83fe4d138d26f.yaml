@@ -1,0 +1,36 @@
+reviews:
+- 'no': 3271
+  overturn_probability: 0.0
+  alternative: 无（若必须解释，可能是正文中的引用标题或目录项，但在此上下文中明显是章节开始）
+  counter_evidence:
+  - 该行开头为 `#`，符合 Markdown 一级标题格式
+  - 内容包含明确的章节编号 `8.` 和概括性主题，且后续内容确实围绕 JavaScript 警报展开
+  keep_split: true
+- 'no': 3723
+  overturn_probability: 0.0
+  alternative: 无（若必须解释，可能是正文中的引用标题或目录项，但在此上下文中明显是章节开始）
+  counter_evidence:
+  - 该行开头为 `#`，符合 Markdown 一级标题格式
+  - 内容包含明确的章节编号 `9.` 和概括性主题，且后续内容确实围绕悬停文本和警报展开
+  keep_split: true
+- 'no': 4344
+  overturn_probability: 0.0
+  alternative: 无（若必须解释，可能是正文中的引用标题或目录项，但在此上下文中明显是章节开始）
+  counter_evidence:
+  - 该行开头为 `#`，符合 Markdown 一级标题格式
+  - 内容包含明确的章节编号 `10.` 和概括性主题，且后续内容确实围绕格式化展开
+  keep_split: true
+- 'no': 5284
+  overturn_probability: 0.1
+  alternative: 可能是 Markdown 渲染错误或排版残留，或者是非标准部分标题（通常部分标题不单独分章，除非全书为部分-章节模式）
+  counter_evidence:
+  - 规则指出“如果存在标题为‘第 X 部分’，那么该书为部分-章节模式，遇到部分和章标题时，都要划分新章”。但在许多技术书籍中，部分（Part）只是逻辑分组，不一定被视为独立的“章”实体，除非后续章节编号重置或结构明确支持此模式。
+  - 该行与下一行（第11章标题）之间没有明显的分隔或新的前言/序言，直接连续出现，可能被视为同一逻辑块内的层级切换而非独立章节。
+  keep_split: true
+- 'no': 5286
+  overturn_probability: 0.0
+  alternative: 无（若必须解释，可能是正文中的引用标题或目录项，但在此上下文中明显是章节开始）
+  counter_evidence:
+  - 该行开头为 `#`，符合 Markdown 一级标题格式
+  - 内容包含明确的章节编号 `11.` 和概括性主题，且后续内容确实围绕验证展开，是典型的章节开始
+  keep_split: true

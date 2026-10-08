@@ -1,0 +1,70 @@
+chapter_starts:
+- 'no': 0
+  confidence: 1.0
+  reason: 书籍封面/标题页，作为全书的第一章起始（通常涵盖版权、目录等前置内容）
+- 'no': 402
+  confidence: 0.9
+  reason: Markdown 一级标题 '# 1. 使用 CSS'，对应正文章第 1 章，具备编号和统领性语义
+- 'no': 522
+  confidence: 0.9
+  reason: Markdown 二级标题 '## 2. 分组'，虽格式为二级，但根据上下文特征（前文为第1章结尾，后文为子节'###'），且编号连贯，判定为第2章起始
+- 'no': 575
+  confidence: 0.9
+  reason: Markdown 一级标题 '# 类选择器与 ID 选择器'，对应目录中的第 3 章，语义概括性强
+- 'no': 663
+  confidence: 0.9
+  reason: Markdown 一级标题 '# 4. 属性选择器'，对应目录中的第 4 章
+- 'no': 767
+  confidence: 0.9
+  reason: Markdown 一级标题 '# 5. 伪选择器'，对应目录中的第 5 章
+- 'no': 1232
+  confidence: 0.9
+  reason: Markdown 一级标题 '# 关系选择器'，对应目录中的第 6 章
+- 'no': 1344
+  confidence: 0.9
+  reason: Markdown 一级标题 '# 7. 特指度'，对应目录中的第 7 章
+- 'no': 1432
+  confidence: 0.9
+  reason: Markdown 一级标题 '# 8. 颜色'，对应目录中的第 8 章
+- 'no': 1511
+  confidence: 0.9
+  reason: Markdown 一级标题 '# 单位'，对应目录中的第 9 章（无序号但语义匹配）
+- 'no': 1613
+  confidence: 0.9
+  reason: Markdown 一级标题 '# CSS 属性'，对应目录中的第 10 章
+- 'no': 1680
+  confidence: 0.9
+  reason: Markdown 一级标题 '# 11. 文本'，对应目录中的第 11 章
+- 'no': 1827
+  confidence: 0.9
+  reason: Markdown 一级标题 '# 12. 间距'，对应目录中的第 12 章
+- 'no': 1880
+  confidence: 0.9
+  reason: Markdown 一级标题 '# 13. 字体'，对应目录中的第 13 章
+- 'no': 1965
+  confidence: 0.9
+  reason: Markdown 一级标题 '# 背景'，对应目录中的第 14 章
+- 'no': 2163
+  confidence: 0.9
+  reason: Markdown 一级标题 '# 15. 渐变'，对应目录中的第 15 章
+- 'no': 2305
+  confidence: 0.9
+  reason: Markdown 一级标题 '# 16. 盒模型'，对应目录中的第 16 章
+- 'no': 2359
+  confidence: 0.9
+  reason: Markdown 一级标题 '# 17. 边框'，对应目录中的第 17 章
+- 'no': 2495
+  confidence: 0.9
+  reason: Markdown 一级标题 '# 18. 轮廓'，对应目录中的第 18 章
+- 'no': 2574
+  confidence: 0.9
+  reason: Markdown 一级标题 '# 19. 外边距和内边距'，对应目录中的第 19 章
+- 'no': 2653
+  confidence: 0.9
+  reason: Markdown 一级标题 '# 20. 尺寸'，对应目录中的第 20 章
+- 'no': 2758
+  confidence: 0.9
+  reason: Markdown 一级标题 '# 21. 定位'，对应目录中的第 21 章
+- 'no': 2993
+  confidence: 0.9
+  reason: Markdown 一级标题 '# 22. 分类'，对应目录中的第 22 章

@@ -1,0 +1,66 @@
+reviews:
+- 'no': 3187
+  overturn_probability: 0.0
+  alternative: 无法反驳，该行为真是一级章节标题
+  counter_evidence:
+  - 该行包含一级Markdown标记 `#` 和明确的章节编号 `9.`，且内容为“使用生成器与迭代器的可迭代序列”，语义上具有统领性。
+  - 前文第 3179-3185 行是上一章的“# 总结”和脚注，符合章节结束的排版特征；后文第 3189 行开始介绍新内容，符合新章节开始的特征。
+  - 序号连贯性：上一章推断为第8章（基于上下文推断或前文缺失，但此处9明显递增），且格式标准。
+  keep_split: true
+- 'no': 3693
+  overturn_probability: 0.0
+  alternative: 无法反驳，该行为真是一级章节标题
+  counter_evidence:
+  - 该行包含一级Markdown标记 `#` 和明确的章节编号 `10.`，内容为“用 Promise 避免回调”，语义清晰。
+  - 前文第 3685-3691 行是第9章的“# 总结”和脚注，标记了上一章节的结束。
+  - 后文第 3695 行开始介绍 Promise 的背景，属于新章节的开篇概述。
+  keep_split: true
+- 'no': 3906
+  overturn_probability: 0.0
+  alternative: 无法反驳，该行为真是一级章节标题
+  counter_evidence:
+  - 该行包含一级Markdown标记 `#` 和明确的章节编号 `11.`，内容为“使用类实现多重同类对象”。
+  - 前文第 3898-3904 行是第10章的“# 总结”和脚注。
+  - 后文第 3908 行开始讨论 JavaScript 中类的构建难点，属于新章节内容。
+  keep_split: true
+- 'no': 4143
+  overturn_probability: 0.0
+  alternative: 无法反驳，该行为真是一级章节标题
+  counter_evidence:
+  - 虽然该行缺少显式的数字编号（如“12.”），但它使用了最高层级的 `#` 标记，且位于第11章总结（第 4135-4141 行）之后，紧接着下一章是第13章（第
+    4579 行）。
+  - 根据序号连贯性，第11章之后的下一章逻辑上应为第12章。
+  - 内容“使用模块进行命名空间管理”具有概括性，且后文内容（4145行起）开始详细讲解 ES6 模块，符合章节定义。
+  keep_split: true
+- 'no': 4579
+  overturn_probability: 0.0
+  alternative: 无法反驳，该行为真是一级章节标题
+  counter_evidence:
+  - 该行包含一级Markdown标记 `#` 和明确的章节编号 `13.`，内容为“利用 Proxy 和 Reflect 实现变形”。
+  - 前文第 4571-4577 行是第12章（即上一行判定的章节）的“# 总结”和脚注。
+  - 后文第 4581 行开始介绍 Proxy 的背景，符合新章节开始。
+  keep_split: true
+- 'no': 5116
+  overturn_probability: 0.0
+  alternative: 无法反驳，该行为真是一级章节标题
+  counter_evidence:
+  - 该行包含一级Markdown标记 `#` 和明确的章节编号 `14.`，内容为“看似命令式的 `async` 与 `await`”。
+  - 前文第 5106-5114 行是第13章的“# 总结”和脚注。
+  - 后文第 5118 行开始讨论 Promise 的局限性和 async/await 的引入，符合新章节内容。
+  keep_split: true
+- 'no': 5417
+  overturn_probability: 0.0
+  alternative: 无法反驳，该行为真是一级章节标题
+  counter_evidence:
+  - 该行包含一级Markdown标记 `#` 和明确的章节编号 `15.`，内容为“异步迭代器和生成器——思想的碰撞”。
+  - 前文第 5409-5415 行是第14章的“# 总结”和脚注。
+  - 后文第 5419 行开始介绍生成器与异步操作的结合，符合新章节内容。
+  keep_split: true
+- 'no': 5751
+  overturn_probability: 0.0
+  alternative: 无法反驳，该行为真是文末索引标题
+  counter_evidence:
+  - 该行内容为 `# 索引`，使用了最高层级 `#` 标记。
+  - 位置在第15章总结（第 5747-5749 行）之后，是正文结束的标志。
+  - 根据规则，“文末索引也划分为一章”，且后续内容（5753行起）确实是按字母顺序排列的索引列表。
+  keep_split: true

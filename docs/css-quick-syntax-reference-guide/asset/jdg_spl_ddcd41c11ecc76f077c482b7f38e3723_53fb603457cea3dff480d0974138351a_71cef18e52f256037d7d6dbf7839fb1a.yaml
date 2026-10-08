@@ -1,0 +1,51 @@
+chapter_starts:
+- 'no': 2993
+  confidence: 0.95
+  final_reason: 双方一致。行内容为 '# 22. 分类'，符合 'Y. 标题' 的高层级编号特征，后续包含多个子节，语义统领性强。
+  accepted_evidence:
+  - 编号特征：'# 22.' 为顶级章节编号。
+  - 语义特征：统领后续关于 CSS 分类属性的内容。
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 3157
+  confidence: 0.95
+  final_reason: 双方一致。行内容为 '# 23. 列表（List）'，序号承接上一章，符合 'Y. 标题' 的高层级编号特征。
+  accepted_evidence:
+  - 编号特征：'# 23.' 为顶级章节编号，序号连贯。
+  - 语义特征：统领后续关于列表属性的内容。
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 3303
+  confidence: 0.95
+  final_reason: 双方一致。行内容为 '# 24. 表格'，序号承接上一章，符合 'Y. 标题' 的高层级编号特征。
+  accepted_evidence:
+  - 编号特征：'# 24.' 为顶级章节编号，序号连贯。
+  - 语义特征：统领后续关于表格属性的内容。
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 3392
+  confidence: 0.95
+  final_reason: 双方一致。行内容为 '# 25. 媒体'，序号承接上一章，符合 'Y. 标题' 的高层级编号特征。
+  accepted_evidence:
+  - 编号特征：'# 25.' 为顶级章节编号，序号连贯。
+  - 语义特征：统领后续关于媒体查询和响应式设计的内容。
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 3497
+  confidence: 0.9
+  final_reason: '双方一致。行内容为 ''# 最佳实践''，虽无数字编号，但作为一级标题（#），语义上开启了新的独立主题，且包含多个 ## 子节，符合无编号章节的判断规则。'
+  accepted_evidence:
+  - 格式特征：一级标题 '#'，单独成行，无句末标点。
+  - 语义特征：统领后续关于代码复用、命名约定、调试等最佳实践内容。
+  - 结构特征：后续跟随多个 '##' 子节。
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 3704
+  confidence: 0.95
+  final_reason: 双方一致。行内容为 '# CSS 属性与选择器索引'，属于文末索引，根据规则统一划分为一章。
+  accepted_evidence:
+  - 规则特征：文末索引划分为一章。
+  - 语义特征：内容为按字母排列的索引列表。
+  rejected_evidence: []
+  need_human_review: false
+rejected_lines: []

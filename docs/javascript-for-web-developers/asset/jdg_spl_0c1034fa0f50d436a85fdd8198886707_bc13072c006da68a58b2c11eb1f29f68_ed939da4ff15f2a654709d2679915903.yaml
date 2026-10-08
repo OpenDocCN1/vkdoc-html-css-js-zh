@@ -1,0 +1,21 @@
+chapter_starts:
+- 'no': 9229
+  confidence: 0.98
+  final_reason: 双方一致确认。该行 '# 10. 项目：Ajax 入门' 为一级标题，包含章节序号 10，且位于上一章总结结束之后，符合章节划分特征。
+  accepted_evidence:
+  - 最高层级 Markdown 标题 (#)
+  - 包含明确章节序号 10
+  - 前文为第 9 章总结，结构上暗示新章开始
+  - 复核方确认极不可能为正文小标题
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 10037
+  confidence: 0.98
+  final_reason: 双方一致确认。该行 '# 索引' 为一级标题，根据规则'文末索引也划分为一章'，应作为独立章节处理。
+  accepted_evidence:
+  - 最高层级 Markdown 标题 (#)
+  - 内容为全书末尾的索引
+  - 前文为第 10 章总结，位置符合文末特征
+  rejected_evidence: []
+  need_human_review: false
+rejected_lines: []

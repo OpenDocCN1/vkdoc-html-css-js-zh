@@ -1,0 +1,64 @@
+reviews:
+- 'no': 2959
+  overturn_probability: 0.05
+  alternative: 一级章节标题
+  counter_evidence:
+  - 该行 Markdown 格式为 `# 6. 创建与应用样式`，带有一级标题标记 `#` 和章节序号 `6.`，符合全书最高层级大章的特征。
+  - 后续内容包含 `## 6.1`、`## 6.2` 等子章节，语义上统领整个第6章内容，结构清晰。
+  keep_split: true
+- 'no': 3835
+  overturn_probability: 0.1
+  alternative: 部分标题（Part Header）
+  counter_evidence:
+  - 该行内容为 `## 第三部分`，虽 Markdown 级别为二级，但语义上属于“部分-章节”结构中的最高层级“部分”。
+  - 根据判断规则，“如果存在标题为‘第 X 部分’，那么该书为部分-章节模式，遇到部分和章标题时，都要划分新章”，因此维持分章是符合规则的。
+  keep_split: true
+- 'no': 3839
+  overturn_probability: 0.05
+  alternative: 一级章节标题
+  counter_evidence:
+  - 该行内容为 `# 7. 创建超链接`，带有一级标题标记和序号 `7.`，是标准的章节标题格式。
+  - 位于“第三部分”标题之后，属于该部分下的第一个具体章节，语义独立且统领性强。
+  keep_split: true
+- 'no': 4031
+  overturn_probability: 0.05
+  alternative: 一级章节标题
+  counter_evidence:
+  - 该行内容为 `# 8. 处理动画`，带有一级标题标记和序号 `8.`，符合章节标题特征。
+  - 前文第7章有明确的总结段，本章紧随其后，上下文连贯性支持新章划分。
+  keep_split: true
+- 'no': 4518
+  overturn_probability: 0.05
+  alternative: 一级章节标题
+  counter_evidence:
+  - 该行内容为 `# 9. 使用多状态对象更改对象视图`，带有一级标题标记和序号 `9.`，是标准的章节标题。
+  - 内容语义独立，后续有 9.1, 9.2 等子节，结构完整。
+  keep_split: true
+- 'no': 4860
+  overturn_probability: 0.05
+  alternative: 一级章节标题
+  counter_evidence:
+  - 该行内容为 `# 10. 使用富媒体`，带有一级标题标记和序号 `10.`，符合章节标题特征。
+  - 前文第9章有总结，本章开始新话题，上下文支持分章。
+  keep_split: true
+- 'no': 5174
+  overturn_probability: 0.1
+  alternative: 部分标题（Part Header）
+  counter_evidence:
+  - 该行内容为 `# 第四部分`，虽 Markdown 级别为一级，但语义上是“部分”标题。
+  - 根据规则，在部分-章节模式下，部分标题需划分新章。尽管它没有具体章节名，但作为结构分界点，划分新章有助于逻辑清晰。
+  keep_split: true
+- 'no': 5177
+  overturn_probability: 0.05
+  alternative: 一级章节标题
+  counter_evidence:
+  - 该行内容为 `# 11. 上传和下载文件`，带有一级标题标记和序号 `11.`，是标准的章节标题。
+  - 位于“第四部分”标题之后，是该部分的第一个章节，语义独立。
+  keep_split: true
+- 'no': 5373
+  overturn_probability: 0.2
+  alternative: 一级章节标题
+  counter_evidence:
+  - 该行内容为 `# 创建可重排 EPUB`，虽无数字序号，但使用了一级标题标记 `#`。
+  - 结合上下文，前一章是第11章，本章内容涉及 EPUB 创建，后续出现 `## 12.2` 等子节（虽然此处未显示12.1，但标题语义明显是第12章），且前文第11章有总结，此处为新章起始，语义统领性强。
+  keep_split: true

@@ -1,0 +1,17 @@
+chapter_starts:
+- 'no': 8941
+  confidence: 0.95
+  reason: Markdown 一级标题 '## Thorax'，位于第 10 章（根据图 10-x 推断）的子章节起始处，在技术文档结构中通常作为主要内容块的开始，且后续内容围绕
+    Thorax 框架展开，符合分章特征。
+- 'no': 9385
+  confidence: 1.0
+  reason: Markdown 一级标题 '# 11. Backbone 最佳实践'，带有明确的章节序号 11，是全书最高层级的大章。
+- 'no': 10218
+  confidence: 1.0
+  reason: Markdown 一级标题 '# 12. 创建可管理的 JavaScript 代码库'，带有明确的章节序号 12，是全书最高层级的大章。
+- 'no': 10913
+  confidence: 0.9
+  reason: Markdown 一级标题 '# 詹姆斯·萨格鲁'，为作者介绍部分，属于正文前的内容，统一划分为一章。
+- 'no': 10921
+  confidence: 1.0
+  reason: Markdown 二级标题 '## 索引'，明确标识为文末索引，按照规则划分为一章。

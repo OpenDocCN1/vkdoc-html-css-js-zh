@@ -1,0 +1,16 @@
+chapter_starts:
+- 'no': 3271
+  confidence: 0.95
+  reason: 顶级章节标题，格式为'第 X 章'，内容为'8. 各种 JavaScript 警报、注释和时间戳'
+- 'no': 3723
+  confidence: 0.95
+  reason: 顶级章节标题，格式为'第 X 章'，内容为'9. 使用悬停文本和警报为客户创建帮助'
+- 'no': 4344
+  confidence: 0.95
+  reason: 顶级章节标题，格式为'第 X 章'，内容为'10. 使用 JavaScript 进行各种类型的格式化'
+- 'no': 5284
+  confidence: 0.95
+  reason: 部分标题，格式为'第 X 部分'，根据规则部分标题也需划分新章
+- 'no': 5286
+  confidence: 0.95
+  reason: 顶级章节标题，紧跟部分标题之后，内容为'11. 文本框、提示框和单选按钮的验证'

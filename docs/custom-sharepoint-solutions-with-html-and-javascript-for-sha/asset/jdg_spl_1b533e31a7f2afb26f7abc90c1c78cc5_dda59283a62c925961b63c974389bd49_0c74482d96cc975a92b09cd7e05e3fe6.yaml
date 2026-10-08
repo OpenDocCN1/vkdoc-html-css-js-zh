@@ -1,0 +1,20 @@
+chapter_starts:
+- 'no': 4182
+  confidence: 0.98
+  final_reason: 双方一致。该行是一级标题“# 9. 使用 REST API”，符合最高层级章标题特征（数字编号、概括性强），且上下文显示这是新章节的开始（提及“上一章”），紧随其后是章节内容。
+  accepted_evidence:
+  - 包含数字序号“9.”，符合最高层级章节编号特征。
+  - 前文（4178行）是第8章的总结，此处自然开启第9章。
+  - 后续内容均为REST API相关，符合标题的统领性。
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 5740
+  confidence: 0.95
+  final_reason: 双方一致。该行是一级标题“# 索引”，根据规则“文末索引也划分为一章”，此处应作为独立章节起始。后续内容为按字母排序的索引条目。
+  accepted_evidence:
+  - 标题为“索引”，属于书籍末尾的参考部分。
+  - 后续行（5742行起）出现“## A”、“## B”等索引特有的子标题结构。
+  - 符合规则中关于索引分章的规定。
+  rejected_evidence: []
+  need_human_review: false
+rejected_lines: []

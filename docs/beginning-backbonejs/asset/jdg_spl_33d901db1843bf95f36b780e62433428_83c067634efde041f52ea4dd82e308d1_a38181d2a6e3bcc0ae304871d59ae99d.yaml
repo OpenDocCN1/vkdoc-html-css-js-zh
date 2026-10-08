@@ -1,0 +1,27 @@
+chapter_starts:
+- 'no': 3724
+  confidence: 0.95
+  final_reason: 双方一致 + 排版语义均符合
+  accepted_evidence:
+  - 一级Markdown标题 `# 路由器和事件`
+  - 前文第3720行是上一章节的 `# 总结`，符合章节结束特征
+  - 语义上开启了关于路由器和技术的全新技术主题
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 4376
+  confidence: 0.98
+  final_reason: 双方一致 + 排版语义均符合
+  accepted_evidence:
+  - 一级Markdown标题 `# 6. 从始到终：一个完整的应用示例`
+  - 包含章节编号 '6.'，符合最高层级章节特征
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 5398
+  confidence: 0.98
+  final_reason: 双方一致 + 排版语义均符合
+  accepted_evidence:
+  - 一级Markdown标题 `# 7. Backbone 生态系统`
+  - 包含章节编号 '7.'，符合最高层级章节特征
+  rejected_evidence: []
+  need_human_review: false
+rejected_lines: []

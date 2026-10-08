@@ -1,0 +1,12 @@
+chapter_starts:
+- 'no': 7527
+  confidence: 0.98
+  final_reason: 双方一致：该行包含“第五章”字样及一级标题标记，符合最高层级大章的划分规则；上下文显示第4章已结束（含总结、项目扩展等），此处为第5章正文的明确起始。
+  accepted_evidence:
+  - 行内容为 `# 第五章 控制玩家角色`，包含明确章序号
+  - Markdown 一级标题（#）通常对应最高层级章节
+  - 前文包含第4章的总结（line 7629）和项目扩展（line 7394），表明上一章已结束
+  - 后文（line 7529-7536）为本章主题概述，符合章标题后的语义特征
+  rejected_evidence: []
+  need_human_review: false
+rejected_lines: []

@@ -1,0 +1,45 @@
+reviews:
+- 'no': 2
+  overturn_probability: 0.0
+  alternative: 书名/主标题
+  counter_evidence:
+  - 该行使用了最高级 Markdown 标题 `#`，且内容为书籍主标题 '面向人类的 ES6'，符合全书最高层级大章（前言/封面部分）的特征。
+  keep_split: true
+- 'no': 364
+  overturn_probability: 0.0
+  alternative: 正文第1章标题
+  counter_evidence:
+  - 行内容为 `# 1\. ES6 入门指南`，包含明确的一级章节编号 '1.'，且后续内容涉及 ES6 规范、历史等具体章节内容，与目录中的 '第 1 章'
+    对应，属于全书最高层级大章。
+  keep_split: true
+- 'no': 695
+  overturn_probability: 0.0
+  alternative: 正文第2章标题
+  counter_evidence:
+  - 行内容为 `# ES6 中的新语法`，虽然缺少显式数字编号，但根据目录和上下文（前文为第1章结束，后文开始讲解新语法特性），该行为第2章的起始标题，属于全书最高层级大章。
+  keep_split: true
+- 'no': 1659
+  overturn_probability: 0.0
+  alternative: 正文第3章标题
+  counter_evidence:
+  - 行内容为 `# 3. 解构`，包含明确的一级章节编号 '3.'，且 '解构' 为独立的语法主题，对应目录中的 '第 3 章：解构'，属于全书最高层级大章。
+  keep_split: true
+- 'no': 2030
+  overturn_probability: 0.0
+  alternative: 正文第4章标题
+  counter_evidence:
+  - 行内容为 `# 4. ES6 中的类`，包含明确的一级章节编号 '4.'，且 '类' 为独立的面向对象主题，对应目录中的 '第 4 章：ES6 中的类'，属于全书最高层级大章。
+  keep_split: true
+- 'no': 2588
+  overturn_probability: 0.0
+  alternative: 正文第5章标题
+  counter_evidence:
+  - 行内容为 `# 5. 模块`，包含明确的一级章节编号 '5.'，且 '模块' 为独立的模块化开发主题，对应目录中的 '第 5 章：模块'，属于全书最高层级大章。
+  keep_split: true
+- 'no': 2925
+  overturn_probability: 0.0
+  alternative: 正文第6章标题
+  counter_evidence:
+  - 行内容为 `# ES6 中的 Symbol`，虽无显式数字，但根据前序章节编号（第5章为模块），此处应为第6章起始。'Symbol' 是 ES6 的重要独立特性，对应目录中的
+    '第 6 章：ES6 中的符号'，属于全书最高层级大章。
+  keep_split: true

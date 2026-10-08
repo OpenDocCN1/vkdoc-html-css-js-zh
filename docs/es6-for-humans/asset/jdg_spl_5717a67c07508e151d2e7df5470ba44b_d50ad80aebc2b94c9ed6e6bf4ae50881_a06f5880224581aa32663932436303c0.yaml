@@ -1,0 +1,84 @@
+chapter_starts:
+- 'no': 2
+  confidence: 0.95
+  final_reason: 双方一致：这是书的前导部分（封面、标题页、版权页、献词、致谢等）的起始点。根据规则，前言/序言/版权信息等统一划分为一章。该行是主标题，标志着这部分内容的开始。
+  accepted_evidence:
+  - 使用了最高级 Markdown 标题 `#`
+  - 内容为书名 '面向人类的 ES6'
+  - 后续内容为版权页、献词、致谢等前导内容
+  - 对应规则：前言、序言、致谢等正文之前的内容，统一划分为一章
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 364
+  confidence: 0.95
+  final_reason: 双方一致：这是正文第1章的起始。格式为 `# 1\. ES6 入门指南`，包含明确的章节编号 '1.'，且后续内容开始介绍 ES6
+    规范，符合最高层级章节特征。
+  accepted_evidence:
+  - 使用了最高级 Markdown 标题 `#`
+  - 包含章节编号 '1.'
+  - 内容为 'ES6 入门指南'
+  - 与目录中的 '第 1 章：ES6 入门' 对应
+  - 序号连贯性：后续章节编号递增
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 695
+  confidence: 0.95
+  final_reason: 双方一致：这是正文第2章的起始。虽然该行没有显式数字编号（显示为 `# ES6 中的新语法`），但根据上下文，前文是第1章的结束（摘要），后文开始讲解新语法（变量声明等），且与目录中的
+    '第 2 章：ES6 新语法' 严格对应。在 Markdown 转换或排版中，有时章节号会省略或格式不规范，但语义和上下文强烈支持这是新章的开始。
+  accepted_evidence:
+  - 使用了最高级 Markdown 标题 `#`
+  - 内容为 'ES6 中的新语法'
+  - 前文为第1章的 '## 摘要'
+  - 后续内容为 '变量声明'、'箭头函数' 等第2章核心主题
+  - 与目录中的 '第 2 章：ES6 新语法' 对应
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 1659
+  confidence: 0.95
+  final_reason: 双方一致：这是正文第3章的起始。格式为 `# 3. 解构`，包含明确的章节编号 '3.'，且 '解构' 是独立的核心语法主题，对应目录中的
+    '第 3 章：解构'。
+  accepted_evidence:
+  - 使用了最高级 Markdown 标题 `#`
+  - 包含章节编号 '3.'
+  - 内容为 '解构'
+  - 与目录中的 '第 3 章：解构' 对应
+  - 前文为第2章的 '## 总结'
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 2030
+  confidence: 0.95
+  final_reason: 双方一致：这是正文第4章的起始。格式为 `# 4. ES6 中的类`，包含明确的章节编号 '4.'，且 '类' 是独立的面向对象主题，对应目录中的
+    '第 4 章：ES6 中的类'。
+  accepted_evidence:
+  - 使用了最高级 Markdown 标题 `#`
+  - 包含章节编号 '4.'
+  - 内容为 'ES6 中的类'
+  - 与目录中的 '第 4 章：ES6 中的类' 对应
+  - 前文为第3章的 '## 总结'
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 2588
+  confidence: 0.95
+  final_reason: 双方一致：这是正文第5章的起始。格式为 `# 5. 模块`，包含明确的章节编号 '5.'，且 '模块' 是独立的模块化开发主题，对应目录中的
+    '第 5 章：模块'。
+  accepted_evidence:
+  - 使用了最高级 Markdown 标题 `#`
+  - 包含章节编号 '5.'
+  - 内容为 '模块'
+  - 与目录中的 '第 5 章：模块' 对应
+  - 前文为第4章的 '## 总结'
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 2925
+  confidence: 0.9
+  final_reason: 双方一致：这是正文第6章的起始。格式为 `# ES6 中的 Symbol`，虽无显式数字编号，但根据前序章节编号（第5章为模块），此处应为第6章起始。'Symbol'
+    是 ES6 的重要独立特性，对应目录中的 '第 6 章：ES6 中的符号'。
+  accepted_evidence:
+  - 使用了最高级 Markdown 标题 `#`
+  - 内容为 'ES6 中的 Symbol'
+  - 与目录中的 '第 6 章：ES6 中的符号' 对应
+  - 前文为第5章的 '## 总结'
+  - 序号逻辑推断：第5章后自然为第6章
+  rejected_evidence: []
+  need_human_review: false
+rejected_lines: []

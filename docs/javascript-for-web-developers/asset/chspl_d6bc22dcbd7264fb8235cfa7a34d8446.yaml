@@ -1,0 +1,19 @@
+chapter_starts:
+- 'no': 0
+  confidence: 0.95
+  reason: 文档起始部分，包含封面、ISBN及版权信息，属于前置内容章节。
+- 'no': 22
+  confidence: 0.95
+  reason: 一级标题“引言”，属于前言类内容，划分为一章。
+- 'no': 116
+  confidence: 0.95
+  reason: 一级标题“环境搭建”，属于正文前的准备工作章节。
+- 'no': 203
+  confidence: 0.95
+  reason: 一级标题“# 1. 使用 JavaScript 工作”，编号特征明确，为第1章起始。
+- 'no': 1824
+  confidence: 0.95
+  reason: 二级标题“## 2. 项目...”，虽格式为二级，但编号“2.”表明其为全书最高层级章节（第2章），且前文第1章已总结结束。
+- 'no': 2655
+  confidence: 0.95
+  reason: 一级标题“# 第 3 章 操作 HTML 元素”，编号特征明确，为第3章起始。

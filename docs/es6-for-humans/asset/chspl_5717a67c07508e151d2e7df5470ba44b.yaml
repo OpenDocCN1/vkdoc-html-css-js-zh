@@ -1,0 +1,22 @@
+chapter_starts:
+- 'no': 2
+  confidence: 0.95
+  reason: 封面与版权页起始，属于前言部分，统一划分为一章
+- 'no': 364
+  confidence: 0.95
+  reason: 正文第 1 章标题，编号为 1.，符合最高层级章节特征
+- 'no': 695
+  confidence: 0.95
+  reason: 正文第 2 章标题（ES6 中的新语法），对应目录中的第 2 章
+- 'no': 1659
+  confidence: 0.95
+  reason: 正文第 3 章标题，编号为 3.，符合最高层级章节特征
+- 'no': 2030
+  confidence: 0.95
+  reason: 正文第 4 章标题，编号为 4.，符合最高层级章节特征
+- 'no': 2588
+  confidence: 0.95
+  reason: 正文第 5 章标题，编号为 5.，符合最高层级章节特征
+- 'no': 2925
+  confidence: 0.9
+  reason: 正文第 6 章标题（ES6 中的 Symbol），语义上为独立章节，虽未显示编号但符合章节结构

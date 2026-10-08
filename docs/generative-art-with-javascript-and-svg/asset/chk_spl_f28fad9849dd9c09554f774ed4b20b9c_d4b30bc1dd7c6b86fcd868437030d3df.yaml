@@ -1,0 +1,35 @@
+reviews:
+- 'no': 3139
+  overturn_probability: 0.05
+  alternative: 正文小标题或排版噪声
+  counter_evidence:
+  - 该行格式为 `# 6. 全功能路径`，包含 Markdown H1 标记和章节序号 `6.`，且后文紧随该章节正文（`路径也许是 SVG 规范中...`），前文为上一章（第5章）的总结（`在下一章中，我们将介绍...`），符合章标题的上下文特征。
+  - 序号连贯性良好，从第5章自然过渡到第6章。
+  keep_split: true
+- 'no': 3736
+  overturn_probability: 0.05
+  alternative: 正文小标题或排版噪声
+  counter_evidence:
+  - 该行格式为 `# 7. 运动与交互性`，包含 Markdown H1 标记和章节序号 `7.`，前文为第6章的总结（`在下一章中，我们将探索...`），后文为该章正文（`##
+    交互式生成艺术的核心技术`），符合章标题定义。
+  keep_split: true
+- 'no': 4483
+  overturn_probability: 0.05
+  alternative: 正文小标题或排版噪声
+  counter_evidence:
+  - 该行格式为 `# 8. 滤镜效果`，包含 Markdown H1 标记和章节序号 `8.`，前文为第7章的总结（`在下一章也是最后一章中...`），后文为该章正文（`除了
+    SVG 提供的所有矢量功能...`），符合章标题定义。
+  keep_split: true
+- 'no': 5120
+  overturn_probability: 0.05
+  alternative: 正文小标题或排版噪声
+  counter_evidence:
+  - 该行格式为 `# 9. 生成之道`，包含 Markdown H1 标记和章节序号 `9.`，前文为第8章的总结（`在下一章中，我们将进行总结...`），后文为该章正文（`#
+    恭喜你走到这一步！...`，注意：虽然第9章内部紧接着有一个H1，但`# 9.`本身仍是全书最高层级章节的开始）。
+  keep_split: true
+- 'no': 5232
+  overturn_probability: 0.05
+  alternative: 正文小标题或排版噪声
+  counter_evidence:
+  - 该行内容为 `# 索引`，根据题目给定的判断规则：“文末索引也划分为一章”，因此应分章。前文为第9章的结语部分，后文为索引列表（`## A`, `## B`...），符合索引章节的特征。
+  keep_split: true

@@ -1,0 +1,40 @@
+chapter_starts:
+- 'no': 3305
+  confidence: 0.95
+  final_reason: 序号4与前文第3章总结连贯，虽Markdown为二级标题，但语义上为新章起始。复核方证据较弱。
+  accepted_evidence:
+  - 序号连贯性（第3章结束）
+  - 前文有总结章节
+  - 标题概括性强
+  rejected_evidence:
+  - Markdown级别为##可能被视为小节
+  need_human_review: false
+- 'no': 4497
+  confidence: 0.95
+  final_reason: 序号5与前文第4章总结连贯，确认为第5章起始。
+  accepted_evidence:
+  - 序号连贯性（第4章结束）
+  - 前文有总结章节
+  rejected_evidence:
+  - 格式不一致
+  need_human_review: false
+- 'no': 4677
+  confidence: 0.9
+  final_reason: 序号6标记新章，前文为第5章总结及预告。尽管Markdown级别跳变为#，但序号是主要依据。
+  accepted_evidence:
+  - 序号连贯性（第5章结束）
+  - 内容开启新项目
+  rejected_evidence:
+  - Markdown级别跳跃
+  - 前文存在无序号一级标题干扰
+  need_human_review: false
+- 'no': 5572
+  confidence: 0.9
+  final_reason: 序号7标记新章，前文为第6章总结及脚注。尽管Markdown级别为###，但序号独立且连贯，确认为第7章起始。
+  accepted_evidence:
+  - 序号连贯性（第6章结束）
+  - 前文有总结和脚注
+  rejected_evidence:
+  - Markdown级别较深
+  need_human_review: false
+rejected_lines: []

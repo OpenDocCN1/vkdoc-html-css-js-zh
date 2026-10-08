@@ -1,0 +1,68 @@
+reviews:
+- 'no': 5907
+  overturn_probability: 0.0
+  alternative: 目录（Index）中的字母分组标记，或书脊/索引页的章节跳转符号
+  counter_evidence:
+  - 该文本块（5900-6088）呈现出典型的倒排索引（Index）结构，包含 '参见' 等词汇及按字母顺序排列的条目，而非线性正文章节。
+  - '''## I''、''## J'' 等仅包含单字母，且后续内容为列表项（如 ''- Internet Explorer 11''），符合索引中按首字母分类的特征，而非正文章标题。'
+  keep_split: true
+- 'no': 5927
+  overturn_probability: 0.0
+  alternative: 目录（Index）中的字母分组标记
+  counter_evidence:
+  - 上下文显示这是索引部分，'## J' 后紧跟的是 JavaScript 相关的文件列表，属于索引条目，不具备统领正文内容的语义特征。
+  keep_split: true
+- 'no': 5948
+  overturn_probability: 0.0
+  alternative: 目录（Index）中的字母分组标记或排版噪声
+  counter_evidence:
+  - 该标记出现在列表中间，且与上一级 '## J' 内容不连贯，可能是索引转换过程中的格式残留或二级分组标记，仍属于索引结构的一部分。
+  keep_split: true
+- 'no': 5966
+  overturn_probability: 0.0
+  alternative: 目录（Index）中的词条标题
+  counter_evidence:
+  - '''# jQuery'' 作为单行标题，后跟具体的库引用、脚本选项等列表项，符合索引中详细词条（Term）的展示形式，而非正文章节。'
+  keep_split: true
+- 'no': 5988
+  overturn_probability: 0.0
+  alternative: 目录（Index）中的词条标题
+  counter_evidence:
+  - '''# `JSLink` 代码'' 带有 Markdown 代码块格式，且内容为列表项，属于索引中关于特定技术点的汇总，不是独立章节。'
+  keep_split: true
+- 'no': 5997
+  overturn_probability: 0.0
+  alternative: 目录（Index）中的字母分组标记
+  counter_evidence:
+  - 位于 '# jQuery' 之后，继续按字母顺序进行索引分类，逻辑上属于索引结构。
+  keep_split: true
+- 'no': 6001
+  overturn_probability: 0.0
+  alternative: 目录（Index）中的字母分组标记
+  counter_evidence:
+  - 合并多个无内容字母（L, M, N, O, P, Q）作为索引跳跃标记，典型索引排版习惯。
+  keep_split: true
+- 'no': 6026
+  overturn_probability: 0.0
+  alternative: 目录（Index）中的字母分组标记
+  counter_evidence:
+  - 索引中 R 部分的开始，后接 REST 相关条目。
+  keep_split: true
+- 'no': 6068
+  overturn_probability: 0.0
+  alternative: 目录（Index）中的字母分组标记
+  counter_evidence:
+  - 索引中 S, T, U 部分的开始。
+  keep_split: true
+- 'no': 6082
+  overturn_probability: 0.0
+  alternative: 目录（Index）中的字母分组标记
+  counter_evidence:
+  - 索引中 V, W 部分的开始。
+  keep_split: true
+- 'no': 6086
+  overturn_probability: 0.0
+  alternative: 目录（Index）中的字母分组标记
+  counter_evidence:
+  - 索引末尾 X, Y, Z 部分的开始。
+  keep_split: true

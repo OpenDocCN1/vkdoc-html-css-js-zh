@@ -1,0 +1,112 @@
+reviews:
+- 'no': 3125
+  overturn_probability: 0.0
+  alternative: 章节标题
+  counter_evidence:
+  - 该行包含一级标题标记 '#' 和数字编号 '7.'，内容为 '7. 数组与集合'，符合全书最高层级章节特征。
+  - 上下文显示前一段落是第6章的总结，且后续内容引入了新的主题域（数组与集合），语义上具有统领性。
+  keep_split: true
+- 'no': 3526
+  overturn_probability: 0.9
+  alternative: 排版噪声/层级混乱导致的误判
+  counter_evidence:
+  - 前文（行3510）讨论的是 Map 的创建和迭代，行3522 是 '### 检查键的相等性'，行3526 突然出现一级标题 'JavaScript 中的集合...'，这极有可能是原书中的一个子章节标题（如
+    '##' 或 '###'）在转换时错误地提升为一级标题（'#'）。
+  - 语义上，'JavaScript 中的集合：Map、WeakMap、Set 和 WeakSet' 是第7章 '数组与集合' 下的一个子部分，而非独立的大章。
+  - 后续行3528-3532 继续展示 Map 的代码示例，紧接着行3584 是 '### WeakMap'，说明 3526 行并非一个新的顶级章节，而是第7章内部关于
+    Map/WeakMap 讨论的延续或细分。
+  keep_split: false
+- 'no': 3713
+  overturn_probability: 0.0
+  alternative: 章节标题
+  counter_evidence:
+  - 该行包含一级标题标记 '#' 和数字编号 '8.'，内容为 '8. 迭代器和生成器'，符合全书最高层级章节特征。
+  - 前文（行3707）是第7章的总结，行3713 紧随其后，标志着新章节的开始。
+  keep_split: true
+- 'no': 3960
+  overturn_probability: 0.9
+  alternative: 正文小标题/层级混乱
+  counter_evidence:
+  - 前文（行3957）是 '#### 与生成器通信'，这是一个四级标题。行3959 是代码块结束。行3960 突然出现一级标题 '# 生成器与迭代器的高级用法'。
+  - 语义上，'高级用法' 是第8章 '迭代器和生成器' 内的一个子主题，不应该是一级章节。
+  - 后续内容（行3962）是 '## 通过 yield 向生成器传递值'，这是二级标题，说明 3960 行原本应该是二级或三级标题，被误标为一级。
+  - 根据规则，只有全书最高层级大章才分章，此标题明显属于子层级。
+  keep_split: false
+- 'no': 4119
+  overturn_probability: 0.0
+  alternative: 章节标题
+  counter_evidence:
+  - 该行包含一级标题标记 '#' 和数字编号 '9.'，内容为 '9. ES6 中的 Promise'，符合全书最高层级章节特征。
+  - 前文（行4113）是第8章的总结，行4119 标志着新章节的开始。
+  keep_split: true
+- 'no': 4273
+  overturn_probability: 0.9
+  alternative: 正文小标题/层级混乱
+  counter_evidence:
+  - 前文（行4267）讨论 .then() 和 .catch()，行4273 突然出现一级标题 '# `catch()` 方法与 Promise 链式调用'。
+  - 语义上，这是第9章 'ES6 中的 Promise' 内部关于错误处理和链式调用的具体知识点，属于子层级。
+  - 后续（行4277）是 '## Promise 的链式调用'，说明 4273 行应该是二级或更高级别的子标题，被误标为一级。
+  - 根据规则，非最高层级的子标题不应分章。
+  keep_split: false
+- 'no': 4365
+  overturn_probability: 0.0
+  alternative: 章节标题
+  counter_evidence:
+  - 该行包含一级标题标记 '#' 和数字编号 '10.'，内容为 '10. 元编程'，符合全书最高层级章节特征。
+  - 前文（行4361）是第9章的总结，行4365 标志着新章节的开始。
+  keep_split: true
+- 'no': 4702
+  overturn_probability: 0.8
+  alternative: 章节末尾的总结部分（非新章）
+  counter_evidence:
+  - 内容为 '摘要' 或 '总结'，且位于第10章（元编程）末尾，行4704 是对第10章内容的回顾（'ES6 中的元编程...'）。
+  - 规则指出：'前言、序言、致谢...统一划分为一章'，通常指书前的内容。章末的总结通常属于该章的一部分，或者作为该章的结尾，而不是独立的新章。
+  - 更重要的是，紧随其后的行4706 是 '# 11. 超越 ES6'。如果 4702 是分章点，那么第10章就只剩下一个总结。通常总结是上一章的一部分。
+  - 判断规则中 '必须排除的特征' 虽未明确列出章末总结，但语义上 '总结/摘要' 是收尾动作，不具备统领后续新内容的特性（后续直接跳到了第11章标题）。因此，它更可能是第10章的最后一部分，而非新章的开始。
+  keep_split: false
+- 'no': 4706
+  overturn_probability: 0.0
+  alternative: 章节标题
+  counter_evidence:
+  - 该行包含一级标题标记 '#' 和数字编号 '11.'，内容为 '11. 超越 ES6'，符合全书最高层级章节特征。
+  - 前文（行4704）是第10章的总结，行4706 标志着新章节的开始。
+  keep_split: true
+- 'no': 4797
+  overturn_probability: 0.9
+  alternative: 正文小标题/层级混乱
+  counter_evidence:
+  - 前文（行4791）是 '### 原子操作与共享内存'，属于 ES2017 的特性。
+  - 行4797 出现 '# Object.entries() 和 Object.values()'，这是 ES2017 的另一个特性。
+  - 语义上，这些特性都属于第11章 '超越 ES6' 的子部分。
+  - 后续（行4809）是 '# padStart 和 padEnd'，（行4827）是 '# Object.getOwnPropertyDescriptors()'。这一系列一级标题显然是原书在排版或转换时，将
+    '##' 或 '###' 级别的特性标题错误地提升为了 '#' 级别。
+  - 根据规则，非最高层级的子标题不应分章。这些内容都是第11章的具体知识点。
+  keep_split: false
+- 'no': 4809
+  overturn_probability: 0.9
+  alternative: 正文小标题/层级混乱
+  counter_evidence:
+  - 位于第11章 '超越 ES6' 内部。
+  - 内容是关于字符串方法 'padStart' 和 'padEnd' 的介绍，属于 ES2017 特性之一。
+  - 与行4797、4827 同级，均为被误标为一级标题的子章节标题。
+  - 根据规则，子层级标题不分章。
+  keep_split: false
+- 'no': 4827
+  overturn_probability: 0.9
+  alternative: 正文小标题/层级混乱
+  counter_evidence:
+  - 位于第11章 '超越 ES6' 内部。
+  - 内容是关于 'Object.getOwnPropertyDescriptors()' 的介绍，属于 ES2017 特性之一。
+  - 与行4797、4809 同级，均为被误标为一级标题的子章节标题。
+  - 根据规则，子层级标题不分章。
+  keep_split: false
+- 'no': 4865
+  overturn_probability: 0.8
+  alternative: 章节末尾的总结部分（非新章）
+  counter_evidence:
+  - 内容为 '总结'，位于第11章末尾。
+  - 行4867 是对本章内容的回顾（'本章我们探讨了...'）。
+  - 这是全书最后一个主要章节的结尾，随后是索引。
+  - 通常章末总结属于该章的一部分，不单独划分为新章，除非特别指定。
+  - 与行4702 类似，语义上是收尾，不具备统领新内容特性。
+  keep_split: false

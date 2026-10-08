@@ -1,0 +1,11 @@
+chapter_starts:
+- 'no': 4967
+  confidence: 0.98
+  final_reason: 双方一致认可。行内容“## 第 4 章”符合最高层级章节标题特征（“第 X 章”），上下文显示其位于第3章总结之后，且后续内容包含第4章的引言和子标题，语义连贯性极强。
+  accepted_evidence:
+  - 编号特征：“第 4 章”为全书最高层级大章标题。
+  - 上下文特征：前文（行4963）预告第4章内容，后文（行4969）开始第4章具体小节“### 决策制定”。
+  - 格式特征：单独成行，无句尾标点，长度短于30字。
+  rejected_evidence: []
+  need_human_review: false
+rejected_lines: []

@@ -1,0 +1,72 @@
+reviews:
+- 'no': 6019
+  overturn_probability: 0.05
+  alternative: 正文章节标题（非误报）
+  counter_evidence:
+  - 该行格式为 '# 12.9 ...'，是一级标题，且序号 12.9 符合章节编号逻辑。
+  - 上下文显示前文是 12.8 节的内容，该标题后紧跟正文，符合章节划分特征。
+  keep_split: true
+- 'no': 6067
+  overturn_probability: 0.05
+  alternative: 正文章节标题（非误报）
+  counter_evidence:
+  - 该行格式为 '# 12.10 ...'，是一级标题。
+  - 序号 12.10 紧随 12.9，逻辑连贯，符合章节划分特征。
+  keep_split: true
+- 'no': 6121
+  overturn_probability: 0.05
+  alternative: 正文章节标题（非误报）
+  counter_evidence:
+  - 该行格式为 '# 13. 创建固定版式 EPUB'，是全书最高层级的大章标题。
+  - 序号跳跃至 13，明显开启新的章节。
+  keep_split: true
+- 'no': 6445
+  overturn_probability: 0.05
+  alternative: 正文章节标题（非误报）
+  counter_evidence:
+  - 该行格式为 '# 14. 发现 Adobe Publish Online'，是全书最高层级的大章标题。
+  - 序号 14 紧随 13，逻辑连贯。
+  keep_split: true
+- 'no': 6591
+  overturn_probability: 0.05
+  alternative: 正文章节标题（非误报）
+  counter_evidence:
+  - 该行格式为 '# 15. 创建交互式 PDF 文件'，是全书最高层级的大章标题。
+  - 序号 15 紧随 14，逻辑连贯。
+  keep_split: true
+- 'no': 7093
+  overturn_probability: 0.1
+  alternative: 部分标题（Part Title）
+  counter_evidence:
+  - 该行内容为 '# 第五部分：技巧与诀窍'，明确标示为“部分”（Part），而非“章”（Chapter）。
+  - 根据判断规则，“如果遇到‘X.Y’... 不划分新的章节”，但规则也提到“如果存在标题为‘第 X 部分’，那么该书为部分-章节模式，遇到部分和章标题时，都要划分新章”。然而，通常“部分”是比“章”更高层级的结构，或者作为章节的分组。在许多书籍结构中，部分（Part）本身不单独作为一个阅读章节（Chapter）进行分章，而是统领后续的章。但如果规则强制要求“部分”也分章，则维持。
+  - 仔细观察规则：“只划分全书最高层级的大章（如‘第 X 章’...）。如果遇到‘X.Y’... 不划分”。这里 16, 17 是章。第五部分是 Part。通常
+    Part 不单独分章，而是作为 16-17 章的前导。如果将其分章，会导致“第五部分”成为一个独立章节，而“第16章”又是一个独立章节，这在逻辑上略显冗余，但符合某些严格分章策略。
+  - 更关键的证据是：行 7095 紧随其后是 '# 16. ...'。如果 7093 分章，7095 也分章，那么“第五部分”这个标题页/段落会成为单独一章。这通常是合理的，因为读者点击目录时可能希望看到“第五部分”作为一个入口。
+  - 但是，让我们看反方证据：它没有具体的章节号（如 16.0），它是“部分”标题。在标准的 EPUB 或书籍分章中，Part 标题通常被视为 Chapter 的上级，或者作为
+    Chapter 的前言。如果系统规则规定“部分”也要分章，则 keep_split=true。但题目要求是“推翻”判断，我需要寻找它“不是”章节标题的理由。
+  - 理由：在许多出版物中，“部分”（Part）是一个逻辑分组，其本身不包含正文内容，只是后续章节的总领。将其单独划分为一个“章”（Chapter）可能会导致目录结构中出现一个只有标题没有内容的章节。如果规则是“只划分大章”，那么
+    Part 可能不被视为大章（Chapter），而是 Section 或 Part。如果原判断认为它是章节，可能是将 Part 等同于 Chapter。
+  - 然而，规则中明确说：“如果存在标题为‘第 X 部分’，那么该书为部分-章节模式，遇到部分和章标题时，都要划分新章。” 这意味着根据给定规则，7093 **必须**分章。因此，原判断是正确的，难以推翻。
+  keep_split: true
+- 'no': 7095
+  overturn_probability: 0.05
+  alternative: 正文章节标题（非误报）
+  counter_evidence:
+  - 该行格式为 '# 16. 创建数字出版文档的技巧'，是全书最高层级的大章标题。
+  - 序号 16 是新的章节号。
+  keep_split: true
+- 'no': 7227
+  overturn_probability: 0.05
+  alternative: 正文章节标题（非误报）
+  counter_evidence:
+  - 该行格式为 '# 17. 更多项目构想'，是全书最高层级的大章标题。
+  - 序号 17 是新的章节号。
+  keep_split: true
+- 'no': 7321
+  overturn_probability: 0.0
+  alternative: 索引标题（非误报）
+  counter_evidence:
+  - 该行格式为 '# 索引'，是书的末尾部分。
+  - 规则明确指出：“文末索引也划分为一章。”
+  keep_split: true

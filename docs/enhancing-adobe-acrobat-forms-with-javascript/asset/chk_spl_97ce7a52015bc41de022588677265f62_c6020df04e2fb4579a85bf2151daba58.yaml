@@ -1,0 +1,71 @@
+reviews:
+- 'no': 0
+  overturn_probability: 0.0
+  alternative: 书籍封面及版权页信息（Frontmatter）
+  counter_evidence:
+  - '该行是图片引用，紧接着是ISBN、版权声明和出版商信息（no: 2-10），这些内容在标准书籍结构中属于前置部分（Frontmatter）。'
+  - 根据规则“前言、序言...统一划分为一章”，虽然前置页通常合并，但作为全书起始点，将其标记为第一个章节（索引0）是处理Markdown分章任务的常规做法，用于涵盖所有非正文内容。
+  keep_split: true
+- 'no': 12
+  overturn_probability: 0.1
+  alternative: 一级章节标题（引言/Introduction）
+  counter_evidence:
+  - '标题使用了 `#` 一级 Markdown 标记，且在语义上作为“引言”统领后续内容（no: 14-115），符合章节标题特征。'
+  - '虽然“引言”有时被视为前言的一部分，但在此文本结构中，它独立于前置版权页（no: 0-11），且后面跟着“第一部分”（no: 117），将其单独划分为一章或作为前言的一部分均合理，但鉴于其一级标题地位和独立内容块，维持分章判断在技术上无大碍，尽管可能不如合并进Frontmatter紧凑。'
+  keep_split: true
+- 'no': 117
+  overturn_probability: 0.0
+  alternative: 部分标题（Part 1）
+  counter_evidence:
+  - '文本中明确存在“第一部分”（no: 117）和“第二部分”（no: 2012）的结构。'
+  - 根据规则“如果存在标题为‘第 X 部分’，那么该书为部分-章节模式，遇到部分和章标题时，都要划分新章”，必须维持此分章判断。
+  keep_split: true
+- 'no': 119
+  overturn_probability: 0.0
+  alternative: 最高层级章标题（第1章）
+  counter_evidence:
+  - 标题为 `# 1. 表单基础入门`，带有数字序号，位于第一部分之下，是典型的最高层级章标题。
+  - 后续内容包含 `##` 子标题，结构清晰，符合章标题特征。
+  keep_split: true
+- 'no': 851
+  overturn_probability: 0.0
+  alternative: 最高层级章标题（第2章）
+  counter_evidence:
+  - 标题为 `# 2. 动作入门`，序号连贯（接第1章后），且包含 `##` 子节，符合章标题特征。
+  keep_split: true
+- 'no': 1161
+  overturn_probability: 0.0
+  alternative: 最高层级章标题（第3章）
+  counter_evidence:
+  - 标题为 `# 3. 创建二维码自定义图章`，序号连贯，结构标准。
+  keep_split: true
+- 'no': 1322
+  overturn_probability: 0.0
+  alternative: 最高层级章标题（第4章）
+  counter_evidence:
+  - 标题为 `# 4. 按钮、导航、表单与非表单操作`，序号连贯，结构标准。
+  keep_split: true
+- 'no': 2012
+  overturn_probability: 0.0
+  alternative: 部分标题（Part 2）
+  counter_evidence:
+  - 标题为 `# 第二部分：简化字段符号和基础 JavaScript`，属于部分-章节模式下的部分标题，规则明确要求划分。
+  keep_split: true
+- 'no': 2014
+  overturn_probability: 0.0
+  alternative: 最高层级章标题（第5章）
+  counter_evidence:
+  - 标题为 `# 5. 简化字段符号和 JavaScript 简介`，位于第二部分下，序号连贯。
+  keep_split: true
+- 'no': 2254
+  overturn_probability: 0.0
+  alternative: 最高层级章标题（第6章）
+  counter_evidence:
+  - 标题为 `# 6. 基本与复杂计算`，序号连贯。
+  keep_split: true
+- 'no': 2688
+  overturn_probability: 0.0
+  alternative: 最高层级章标题（第7章）
+  counter_evidence:
+  - 标题为 `# 7. 格式计算`，序号连贯。
+  keep_split: true

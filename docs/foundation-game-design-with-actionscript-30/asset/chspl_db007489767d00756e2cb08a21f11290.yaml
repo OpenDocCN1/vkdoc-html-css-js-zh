@@ -1,0 +1,7 @@
+chapter_starts:
+- 'no': 18212
+  confidence: 0.99
+  reason: 带有明确编号 '第 10 章' 的标题，符合最高层级大章特征。
+- 'no': 19707
+  confidence: 0.95
+  reason: 标题为 '索引'，属于文末索引部分，根据规则应划分为一章。

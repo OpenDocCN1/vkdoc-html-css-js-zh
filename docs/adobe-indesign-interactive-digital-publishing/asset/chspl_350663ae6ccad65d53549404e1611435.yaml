@@ -1,0 +1,28 @@
+chapter_starts:
+- 'no': 6019
+  confidence: 0.95
+  reason: 一级标题 '# 12.9 在设备上阅读 EPUB'，标记新的一章
+- 'no': 6067
+  confidence: 0.95
+  reason: 一级标题 '# 12.10 营销 EPUB'，标记新的一章
+- 'no': 6121
+  confidence: 0.95
+  reason: 一级标题 '# 13. 创建固定版式 EPUB'，标记新的一章
+- 'no': 6445
+  confidence: 0.95
+  reason: 一级标题 '# 14. 发现 Adobe Publish Online'，标记新的一章
+- 'no': 6591
+  confidence: 0.95
+  reason: 一级标题 '# 15. 创建交互式 PDF 文件'，标记新的一章
+- 'no': 7093
+  confidence: 0.95
+  reason: 一级标题 '# 第五部分：技巧与诀窍'，属于部分标题，根据规则需划分新章
+- 'no': 7095
+  confidence: 0.95
+  reason: 一级标题 '# 16. 创建数字出版文档的技巧'，标记新的一章
+- 'no': 7227
+  confidence: 0.95
+  reason: 一级标题 '# 17. 更多项目构想'，标记新的一章
+- 'no': 7321
+  confidence: 0.95
+  reason: 一级标题 '# 索引'，属于文末索引，需划分为一章

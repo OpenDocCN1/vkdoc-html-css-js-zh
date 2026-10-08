@@ -1,0 +1,29 @@
+reviews:
+- 'no': 6438
+  overturn_probability: 0.0
+  alternative: 若不分章，这行最可能是排版错误生成的伪标题，或者是目录索引条目，但极大概率是真正的章节标题。
+  counter_evidence:
+  - 该标题使用一级 Markdown 标题符号 `#`，在文档层级中属于最高优先级。
+  - 标题包含显式的章节编号 `8.`，且序号连贯（前文有第 7 章内容，此处为第 8 章），符合“最高层级大章”的特征。
+  - 标题内容“测试你的 Backbone.js 应用”具有强烈的统领性，概括了后续所有关于 QUnit、Jasmine、Sinon 等测试工具的内容。
+  - 标题前后均有空行，独立成行，符合章标题的格式规范。
+  keep_split: true
+- 'no': 7413
+  overturn_probability: 0.0
+  alternative: 若不分章，这行可能是关于 Grunt 工具使用的正文小标题，但结合编号判断为章标题。
+  counter_evidence:
+  - 该标题使用一级 Markdown 标题符号 `#`。
+  - 标题包含显式的章节编号 `9.`，且序号紧跟第 8 章，逻辑连贯。
+  - 标题内容“使用 Grunt 进行构建流程”概括了后续关于 Gruntfile 配置、任务添加、压缩、测试集成等内容，是典型的章级主题。
+  - 格式上独立成行，无标点符号，符合章标题特征。
+  keep_split: true
+- 'no': 8286
+  overturn_probability: 0.0
+  alternative: 若不分章，这行可能是关于 Marionette 框架的高级用法说明，但结合编号判断为章标题。
+  counter_evidence:
+  - 该标题使用一级 Markdown 标题符号 `#`。
+  - 标题包含显式的章节编号 `10.`，且序号紧跟第 9 章，逻辑连贯。
+  - 标题内容“使用 Marionette 和 Thorax 扩展 Backbone”概括了后续关于 Marionette 核心概念（Application, Region,
+    Layout, Views）及 Thorax 的内容，属于全书高层级的新主题。
+  - 格式规范，独立成行，无歧义。
+  keep_split: true

@@ -1,0 +1,26 @@
+chapter_starts:
+- 'no': 6438
+  confidence: 1.0
+  final_reason: 双方一致认定：该行包含显式章节序号 '8.' 和一级标题标记 '#'，内容概括性强，且上下文（前文为第7章结尾，后文为第8章具体内容）支持其为最高层级大章起始。
+  accepted_evidence:
+  - 判断方指出其具有明确的大章节序号 '8.' 和一级标题标记 '#'
+  - 复核方确认序号连贯（前文有第7章），且语义上统领后续关于测试的内容
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 7413
+  confidence: 1.0
+  final_reason: 双方一致认定：该行包含显式章节序号 '9.' 和一级标题标记 '#'，内容概括性强，且上下文支持其为最高层级大章起始。
+  accepted_evidence:
+  - 判断方指出其具有明确的大章节序号 '9.' 和一级标题标记 '#'
+  - 复核方确认序号紧跟第8章，逻辑连贯，且概括了后续关于 Grunt 构建的内容
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 8286
+  confidence: 1.0
+  final_reason: 双方一致认定：该行包含显式章节序号 '10.' 和一级标题标记 '#'，内容概括性强，且上下文支持其为最高层级大章起始。
+  accepted_evidence:
+  - 判断方指出其具有明确的大章节序号 '10.' 和一级标题标记 '#'
+  - 复核方确认序号紧跟第9章，逻辑连贯，且概括了后续关于 Marionette 框架的内容
+  rejected_evidence: []
+  need_human_review: false
+rejected_lines: []

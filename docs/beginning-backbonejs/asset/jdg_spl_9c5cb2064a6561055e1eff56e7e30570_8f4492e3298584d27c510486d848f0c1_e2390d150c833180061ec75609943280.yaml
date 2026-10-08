@@ -1,0 +1,41 @@
+chapter_starts:
+- 'no': 9385
+  confidence: 1.0
+  final_reason: 双方一致确认为一级标题 '# 11. Backbone 最佳实践'，带有明确章号，且后接子章节，符合最高层级大章特征。
+  accepted_evidence:
+  - 行号为 9385，内容为 '# 11. Backbone 最佳实践'
+  - 判断方认为是一级标题，序号 11 连贯
+  - 复核方确认为真正的章节标题，反驳概率 0.0
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 10218
+  confidence: 1.0
+  final_reason: 双方一致确认为一级标题 '# 12. 创建可管理的 JavaScript 代码库'，带有明确章号，且后接子章节，符合最高层级大章特征。
+  accepted_evidence:
+  - 行号为 10218，内容为 '# 12. 创建可管理的 JavaScript 代码库'
+  - 判断方认为是一级标题，序号 12 连贯
+  - 复核方确认为真正的章节标题，反驳概率 0.0
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 10913
+  confidence: 0.95
+  final_reason: 该行为一级标题 '# 詹姆斯·萨格鲁'，包含作者姓名、ISBN 及版权信息，属于书末的“关于作者/版权页”非正文部分。根据规则，此类内容统一划分为一章。
+  accepted_evidence:
+  - 行号为 10913，内容为 '# 詹姆斯·萨格鲁'
+  - 后续行包含 ISBN (10917) 和版权信息 (10919)，确认为版权/作者块
+  - 复核方支持保留分章，认为其属于非正文元数据
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 10921
+  confidence: 1.0
+  final_reason: '该行为 ''## 索引''，后文为按字母排列的索引条目（### A, ### B...）。根据规则，文末索引划分为一章。'
+  accepted_evidence:
+  - 行号为 10921，内容为 '## 索引'
+  - 后续内容确认为索引列表
+  - 复核方确认为文末索引，反驳概率 0.0
+  rejected_evidence: []
+  need_human_review: false
+rejected_lines:
+- 'no': 8941
+  reason: 复核方指出其为二级标题 '## Thorax'，而全书最高层级章节使用一级标题（如 '# 11', '# 12'）。根据规则只划分最高层级大章，故不分为新章。
+  need_human_review: false

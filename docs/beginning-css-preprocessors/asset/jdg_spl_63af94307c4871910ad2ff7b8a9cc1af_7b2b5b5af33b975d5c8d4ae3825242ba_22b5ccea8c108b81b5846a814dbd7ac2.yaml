@@ -1,0 +1,10 @@
+chapter_starts:
+- 'no': 6385
+  confidence: 0.99
+  final_reason: 双方一致认定。该行内容为‘# 索引’，属于Markdown一级标题。根据判断规则中‘文末索引也划分为一章’的明确规定，且上下文显示其位于‘本章小结’之后，符合书末独立章节特征。
+  accepted_evidence:
+  - 判断方指出其为一级标题且符合索引分章规则
+  - 复核方确认其属于特殊处理对象（文末索引），上下文逻辑独立，无反对证据
+  rejected_evidence: []
+  need_human_review: false
+rejected_lines: []

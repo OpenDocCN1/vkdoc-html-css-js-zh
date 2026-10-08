@@ -1,0 +1,218 @@
+chapter_starts:
+- 'no': 2
+  confidence: 0.95
+  final_reason: 双方一致认为属于前置内容。根据规则'前言、序言、致谢...统一划分为一章'，行2为书名页，作为前置内容整块（行2-117）的起始点，划分为第一章。
+  accepted_evidence:
+  - 该行是书名/封面标题，位于版权页、引言、目录、致谢之前。
+  - 复核方指出应将前置内容合并为一个章节，行2是该块的起始。
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 118
+  confidence: 0.95
+  final_reason: 双方一致。这是正文中第一部分（Part 1）的标题。根据部分-章节模式规则，部分标题需分章。
+  accepted_evidence:
+  - Markdown H1标题 `# 第一部分内容：数字出版基础`。
+  - 位于目录（TOC）结束、致谢之后，实际正文内容的开始。
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 120
+  confidence: 0.95
+  final_reason: 双方一致。这是第1章的章标题。
+  accepted_evidence:
+  - Markdown H2标题 `## 第 1 章：理解数字出版`。
+  - 序号连贯，位于第一部分标题之后。
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 140
+  confidence: 0.95
+  final_reason: 双方一致。这是第2章的章标题。
+  accepted_evidence:
+  - Markdown H2标题 `## 第 2 章：在 InDesign 中入门`。
+  - 序号连贯。
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 202
+  confidence: 0.95
+  final_reason: 双方一致。这是第二部分（Part 2）的标题。
+  accepted_evidence:
+  - Markdown H1标题 `# 第二部分：在 Adobe InDesign 中创建文档`。
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 204
+  confidence: 0.95
+  final_reason: 双方一致。这是第3章的章标题。
+  accepted_evidence:
+  - Markdown H2标题 `## 第 3 章：格式化文本`。
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 250
+  confidence: 0.95
+  final_reason: 双方一致。这是第4章的章标题。
+  accepted_evidence:
+  - Markdown H2标题 `## 第 4 章：处理图形`。
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 338
+  confidence: 0.95
+  final_reason: 双方一致。这是第5章的章标题。
+  accepted_evidence:
+  - Markdown H2标题 `## 第 5 章：创建表格`。
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 370
+  confidence: 0.95
+  final_reason: 双方一致。这是第6章的章标题。
+  accepted_evidence:
+  - Markdown H2标题 `## 第 6 章：创建和应用样式`。
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 390
+  confidence: 0.95
+  final_reason: 双方一致。这是第三部分（Part 3）的标题。
+  accepted_evidence:
+  - Markdown H1标题 `# 第三部分：添加交互性`。
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 392
+  confidence: 0.95
+  final_reason: 双方一致。这是第7章的章标题。
+  accepted_evidence:
+  - Markdown H2标题 `## 第 7 章：创建超链接`。
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 400
+  confidence: 0.95
+  final_reason: 双方一致。这是第8章的章标题。
+  accepted_evidence:
+  - Markdown H2标题 `## 第 8 章：使用动画`。
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 412
+  confidence: 0.95
+  final_reason: 双方一致。这是第9章的章标题。
+  accepted_evidence:
+  - Markdown H2标题 `## 第 9 章：使用多状态对象更改对象视图`。
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 422
+  confidence: 0.95
+  final_reason: 双方一致。这是第10章的章标题。
+  accepted_evidence:
+  - Markdown H2标题 `## 第 10 章：使用富媒体`。
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 431
+  confidence: 0.95
+  final_reason: 双方一致。这是第四部分（Part 4）的标题。
+  accepted_evidence:
+  - Markdown H1标题 `# 第四部分：发布文档`。
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 433
+  confidence: 0.95
+  final_reason: 双方一致。这是第11章的章标题。
+  accepted_evidence:
+  - Markdown H2标题 `## 第 11 章：上传和下载文件`。
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 441
+  confidence: 0.95
+  final_reason: 双方一致。这是第12章的章标题。
+  accepted_evidence:
+  - Markdown H2标题 `## 第 12 章：创建可重排 EPUB`。
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 453
+  confidence: 0.9
+  final_reason: 双方一致。这是正文中第一部分标题的重复出现（可能是排版错误导致目录和正文标题混合，或者正文确实有分部标题页）。鉴于它是H1级别且内容为'第一部分'，符合部分标题特征，故分章。
+  accepted_evidence:
+  - Markdown H1标题 `# 第一部分`。
+  - 后续紧跟第1章内容。
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 456
+  confidence: 0.9
+  final_reason: 双方一致。这是第1章标题的重复/实际正文开始处。H1级别，语义为章标题。
+  accepted_evidence:
+  - Markdown H1标题 `# 第 1 章 理解数字出版`。
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 630
+  confidence: 0.9
+  final_reason: 双方一致。这是第2章标题。使用了中文数字'第二章'，但语义明确为章标题。
+  accepted_evidence:
+  - Markdown H1标题 `# 第二章 开始使用 InDesign`。
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 1002
+  confidence: 0.9
+  final_reason: 双方一致。这是第二部分标题。
+  accepted_evidence:
+  - Markdown H1标题 `# 第二部分`。
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 1005
+  confidence: 0.9
+  final_reason: 双方一致。这是第3章标题。格式为'3. 格式化文本'，语义为章标题。
+  accepted_evidence:
+  - Markdown H1标题 `# 3. 格式化文本`。
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 1349
+  confidence: 0.9
+  final_reason: 双方一致。这是第4章标题。
+  accepted_evidence:
+  - Markdown H1标题 `# 4. 使用图形`。
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 2440
+  confidence: 0.9
+  final_reason: 双方一致。这是第5章标题。
+  accepted_evidence:
+  - Markdown H1标题 `# 5. 创建表格`。
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 2959
+  confidence: 0.9
+  final_reason: 双方一致。这是第6章标题。
+  accepted_evidence:
+  - Markdown H1标题 `# 6. 创建与应用样式`。
+  rejected_evidence: []
+  need_human_review: false
+rejected_lines:
+- 'no': 26
+  reason: 复核方指出'引言'属于前置内容，应与书名页合并为前置章节，不应单独分章。采纳复核方意见。
+  need_human_review: false
+- 'no': 46
+  reason: 复核方指出位于引言（行26）和正文第一部分（行118）之间，且后续行均为简短描述，判断为目录（TOC）条目。目录中的标题不作为分章点。采纳复核方意见。
+  need_human_review: false
+- 'no': 50
+  reason: 同上，属于目录条目。
+  need_human_review: false
+- 'no': 62
+  reason: 同上，属于目录条目。
+  need_human_review: false
+- 'no': 74
+  reason: 同上，属于目录条目。
+  need_human_review: false
+- 'no': 82
+  reason: 同上，属于目录条目。
+  need_human_review: false
+- 'no': 86
+  reason: 同上，属于目录条目。
+  need_human_review: false
+- 'no': 90
+  reason: 同上，属于目录条目。
+  need_human_review: false
+- 'no': 94
+  reason: 同上，属于目录条目。
+  need_human_review: false
+- 'no': 98
+  reason: 同上，属于目录条目。
+  need_human_review: false
+- 'no': 102
+  reason: 同上，属于目录条目。
+  need_human_review: false
+- 'no': 108
+  reason: 复核方指出'致谢'属于前置内容，不应单独分章，而应归入前置章节块（行2-117）。采纳复核方意见。
+  need_human_review: false

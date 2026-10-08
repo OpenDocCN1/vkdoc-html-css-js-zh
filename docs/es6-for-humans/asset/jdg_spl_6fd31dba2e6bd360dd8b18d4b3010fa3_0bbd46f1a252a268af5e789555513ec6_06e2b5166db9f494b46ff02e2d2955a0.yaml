@@ -1,0 +1,71 @@
+chapter_starts:
+- 'no': 3125
+  confidence: 1.0
+  final_reason: 双方一致确认。该行包含一级标题标记 '#' 和数字编号 '7.'，内容为 '7. 数组与集合'。前文（行3121）是第6章的总结，符合上下文特征。格式、编号、语义均符合最高层级章节特征。
+  accepted_evidence:
+  - 包含一级标题标记 '#' 和数字编号 '7.'
+  - 前一段落是上一章的总结
+  - 后续内容引入了新的主题域（数组与集合）
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 3713
+  confidence: 1.0
+  final_reason: 双方一致确认。该行包含一级标题标记 '#' 和数字编号 '8.'，内容为 '8. 迭代器和生成器'。前文（行3707）是第7章的总结，符合上下文特征。格式、编号、语义均符合最高层级章节特征。
+  accepted_evidence:
+  - 包含一级标题标记 '#' 和数字编号 '8.'
+  - 前一段落是上一章的总结
+  - 后续内容引入了新的主题域（迭代器）
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 4119
+  confidence: 1.0
+  final_reason: 双方一致确认。该行包含一级标题标记 '#' 和数字编号 '9.'，内容为 '9. ES6 中的 Promise'。前文（行4113）是第8章的总结，符合上下文特征。格式、编号、语义均符合最高层级章节特征。
+  accepted_evidence:
+  - 包含一级标题标记 '#' 和数字编号 '9.'
+  - 前一段落是上一章的总结
+  - 后续内容引入了新的主题域（Promise）
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 4365
+  confidence: 1.0
+  final_reason: 双方一致确认。该行包含一级标题标记 '#' 和数字编号 '10.'，内容为 '10. 元编程'。前文（行4361）是第9章的总结，符合上下文特征。格式、编号、语义均符合最高层级章节特征。
+  accepted_evidence:
+  - 包含一级标题标记 '#' 和数字编号 '10.'
+  - 前一段落是上一章的总结
+  - 后续内容引入了新的主题域（元编程）
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 4706
+  confidence: 1.0
+  final_reason: 双方一致确认。该行包含一级标题标记 '#' 和数字编号 '11.'，内容为 '11. 超越 ES6'。前文（行4702）是第10章的总结，符合上下文特征。格式、编号、语义均符合最高层级章节特征。
+  accepted_evidence:
+  - 包含一级标题标记 '#' 和数字编号 '11.'
+  - 前一段落是上一章的总结
+  - 后续内容引入了新的主题域（超越ES6特性）
+  rejected_evidence: []
+  need_human_review: false
+rejected_lines:
+- 'no': 3526
+  reason: 复核方指出该行为排版噪声/层级混乱导致的误判。虽然带有 '#' 标记，但语义上属于第7章内部的子部分（Map/WeakMap等集合），且上下文（前文为Map讨论，后文继续Map/WeakMap）表明其非最高层级大章。根据‘宁可漏分，不可误分’及‘非最高层级不分章’原则，不予分章。
+  need_human_review: false
+- 'no': 3960
+  reason: 复核方指出该行为正文小标题/层级混乱。内容‘生成器与迭代器的高级用法’是第8章内部的子主题，且后续跟随二级标题，表明其非最高层级。根据规则，子层级标题不分章。
+  need_human_review: false
+- 'no': 4273
+  reason: 复核方指出该行为正文小标题/层级混乱。内容‘catch() 方法与 Promise 链式调用’是第9章内部的具体知识点，属于子层级。根据规则，非最高层级的子标题不应分章。
+  need_human_review: false
+- 'no': 4702
+  reason: 复核方指出该行为章节末尾的总结部分。内容为‘摘要’，位于第10章末尾，不具备统领后续新内容的特性（后续直接跳到了第11章标题）。章末总结通常属于该章的一部分，不单独划分为新章。
+  need_human_review: false
+- 'no': 4797
+  reason: 复核方指出该行为正文小标题/层级混乱。内容‘Object.entries() 和 Object.values()’是第11章（超越ES6）下的具体特性介绍，属于子层级。尽管标记为一级标题，但语义和上下文表明其为子章节，不予分章。
+  need_human_review: false
+- 'no': 4809
+  reason: 复核方指出该行为正文小标题/层级混乱。内容‘padStart 和 padEnd’是第11章下的具体字符串方法介绍，属于子层级。与4797同级，均为被误标或层级混乱的子标题，不予分章。
+  need_human_review: false
+- 'no': 4827
+  reason: 复核方指出该行为正文小标题/层级混乱。内容‘Object.getOwnPropertyDescriptors()’是第11章下的具体对象方法介绍，属于子层级。与4797、4809同级，不予分章。
+  need_human_review: false
+- 'no': 4865
+  reason: 复核方指出该行为章节末尾的总结部分。内容为‘总结’，位于第11章末尾，是全书主要章节的收尾，不具备统领新内容的特性。通常章末总结属于该章的一部分，不单独划分为新章。
+  need_human_review: false

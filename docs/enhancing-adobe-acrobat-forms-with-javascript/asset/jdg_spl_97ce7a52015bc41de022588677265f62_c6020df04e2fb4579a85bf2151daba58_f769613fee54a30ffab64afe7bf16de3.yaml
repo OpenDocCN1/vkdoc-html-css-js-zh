@@ -1,0 +1,90 @@
+chapter_starts:
+- 'no': 0
+  confidence: 0.9
+  final_reason: 双方一致：封面及前置页（Frontmatter）作为全书起始章节，包含版权、ISBN等信息，符合前言/前置内容统一划分为一章的规则。
+  accepted_evidence:
+  - 判断方认为：封面及前置页（Frontmatter），作为全书起始章节处理。
+  - 复核方认为：该行是图片引用，紧接着是ISBN、版权声明和出版商信息，属于前置部分。
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 12
+  confidence: 0.95
+  final_reason: 双方一致：标题“# 引言”为一级标题，具有统领性，覆盖后续引言内容，且独立于前置版权页，符合章节标题特征。
+  accepted_evidence:
+  - 判断方认为：标题“# 引言”为一级标题，属于正文前的前言部分，根据规则统一划分为一章。
+  - 复核方认为：标题使用#一级标记，语义上统领后续内容，独立于前置页。
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 117
+  confidence: 0.95
+  final_reason: 双方一致：标题“# 第一部分：基础表单改进”为部分标题，该书为部分-章节模式，遇到部分标题需划分新章。
+  accepted_evidence:
+  - 判断方认为：标题为部分标题，该书为部分-章节模式，遇到部分标题需划分新章。
+  - 复核方认为：文本中存在“第一部分”和“第二部分”结构，规则要求部分标题划分新章。
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 119
+  confidence: 0.95
+  final_reason: 双方一致：标题“# 1. 表单基础入门”为最高层级章标题，序号1开始，位于第一部分下，结构清晰。
+  accepted_evidence:
+  - 判断方认为：标题为最高层级章标题，序号1开始。
+  - 复核方认为：标题带有数字序号，位于第一部分之下，后续包含子标题。
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 851
+  confidence: 0.95
+  final_reason: 双方一致：标题“# 2. 动作入门”为最高层级章标题，序号连贯，位于第一部分下。
+  accepted_evidence:
+  - 判断方认为：标题为最高层级章标题，序号连贯。
+  - 复核方认为：标题序号连贯（接第1章后），包含子节，符合章标题特征。
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 1161
+  confidence: 0.95
+  final_reason: 双方一致：标题“# 3. 创建二维码自定义图章”为最高层级章标题，序号连贯。
+  accepted_evidence:
+  - 判断方认为：标题为最高层级章标题，序号连贯。
+  - 复核方认为：标题序号连贯，结构标准。
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 1322
+  confidence: 0.95
+  final_reason: 双方一致：标题“# 4. 按钮、导航、表单与非表单操作”为最高层级章标题，序号连贯。
+  accepted_evidence:
+  - 判断方认为：标题为最高层级章标题，序号连贯。
+  - 复核方认为：标题序号连贯，结构标准。
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 2012
+  confidence: 0.95
+  final_reason: 双方一致：标题“# 第二部分：简化字段符号和基础 JavaScript”为部分标题，属于部分-章节模式，需划分新章。
+  accepted_evidence:
+  - 判断方认为：标题为部分标题，属于部分-章节模式，需划分新章。
+  - 复核方认为：标题为部分标题，规则明确要求划分。
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 2014
+  confidence: 0.95
+  final_reason: 双方一致：标题“# 5. 简化字段符号和 JavaScript 简介”为最高层级章标题，位于第二部分下，序号连贯。
+  accepted_evidence:
+  - 判断方认为：标题为最高层级章标题，序号连贯。
+  - 复核方认为：标题位于第二部分下，序号连贯。
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 2254
+  confidence: 0.95
+  final_reason: 双方一致：标题“# 6. 基本与复杂计算”为最高层级章标题，序号连贯。
+  accepted_evidence:
+  - 判断方认为：标题为最高层级章标题，序号连贯。
+  - 复核方认为：标题序号连贯。
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 2688
+  confidence: 0.95
+  final_reason: 双方一致：标题“# 7. 格式计算”为最高层级章标题，序号连贯。
+  accepted_evidence:
+  - 判断方认为：标题为最高层级章标题，序号连贯。
+  - 复核方认为：标题序号连贯。
+  rejected_evidence: []
+  need_human_review: false
+rejected_lines: []

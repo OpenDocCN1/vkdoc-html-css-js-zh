@@ -1,0 +1,228 @@
+reviews:
+- 'no': 2
+  overturn_probability: 0.9
+  alternative: 书名/封面标题（Book Title/Page Header）
+  counter_evidence:
+  - 该行内容为 Markdown 一级标题 `# Adobe InDesign 交互式数字出版`，这是书名而非章节标题。
+  - 根据规则，'前言、序言、致谢等正文之前的内容，统一划分为一章'。整本书的前置部分（封面、版权页、引言、目录、致谢）通常应合并为一个前置章节，或者如果严格区分，书名页本身不是'章节'。
+  - 行 2 到行 117 涵盖了版权页、引言（Preface/Intro）、目录（TOC）和致谢。如果将行 2 作为独立一章，会导致前置部分被过度切分。通常前置内容整体视为一章。
+  keep_split: false
+- 'no': 26
+  overturn_probability: 0.9
+  alternative: 引言/前言（Preface/Introduction Section）
+  counter_evidence:
+  - 行 26 是 `## 引言`。根据规则：'前言、序言、致谢、关于作者等正文之前的内容，统一划分为一章'。
+  - 它属于前置内容的一部分，不应与书名页或目录分离成独立的'章节'，而应与前置内容合并，或者被视为前置块的一部分。分章判断通常针对正文（Body Content）。
+  keep_split: false
+- 'no': 46
+  overturn_probability: 1.0
+  alternative: 目录项（Table of Contents Entry）
+  counter_evidence:
+  - 行 46 位于行 26（引言）和行 118（正文第一部分开始）之间。
+  - 观察上下文，行 46-48, 50-52, 62-72 等包含对章节内容的简短描述（如'第一部分将详细探讨...'），这是典型的目录（Table of Contents）或内容概要结构，而非正文中的实际章节标题。
+  - 真正的章节标题出现在行 118（`# 第一部分内容...`）之后。目录中的标题不应当作独立的分章点，因为它们只是索引。
+  keep_split: false
+- 'no': 50
+  overturn_probability: 1.0
+  alternative: 目录项（Table of Contents Entry）
+  counter_evidence:
+  - 同上行 46 的分析。这是目录列表中的条目，不是正文的实际章节标题。
+  keep_split: false
+- 'no': 62
+  overturn_probability: 1.0
+  alternative: 目录项（Table of Contents Entry）
+  counter_evidence:
+  - 同上行 46 的分析。这是目录列表中的条目。
+  keep_split: false
+- 'no': 74
+  overturn_probability: 1.0
+  alternative: 目录项（Table of Contents Entry）
+  counter_evidence:
+  - 同上行 46 的分析。这是目录列表中的条目。
+  keep_split: false
+- 'no': 82
+  overturn_probability: 1.0
+  alternative: 目录项（Table of Contents Entry）
+  counter_evidence:
+  - 同上行 46 的分析。这是目录列表中的条目。
+  keep_split: false
+- 'no': 86
+  overturn_probability: 1.0
+  alternative: 目录项（Table of Contents Entry）
+  counter_evidence:
+  - 同上行 46 的分析。这是目录列表中的条目。
+  keep_split: false
+- 'no': 90
+  overturn_probability: 1.0
+  alternative: 目录项（Table of Contents Entry）
+  counter_evidence:
+  - 同上行 46 的分析。这是目录列表中的条目。
+  keep_split: false
+- 'no': 94
+  overturn_probability: 1.0
+  alternative: 目录项（Table of Contents Entry）
+  counter_evidence:
+  - 同上行 46 的分析。这是目录列表中的条目。
+  keep_split: false
+- 'no': 98
+  overturn_probability: 1.0
+  alternative: 目录项（Table of Contents Entry）
+  counter_evidence:
+  - 同上行 46 的分析。这是目录列表中的条目。
+  keep_split: false
+- 'no': 102
+  overturn_probability: 1.0
+  alternative: 目录项（Table of Contents Entry）
+  counter_evidence:
+  - 同上行 46 的分析。这是目录列表中的条目。
+  keep_split: false
+- 'no': 108
+  overturn_probability: 0.9
+  alternative: 致谢（Acknowledgments - Front Matter）
+  counter_evidence:
+  - 根据规则：'前言、序言、致谢、关于作者等正文之前的内容，统一划分为一章'。
+  - 致谢属于前置内容，不应单独划分为一个'章'，而应与引言、目录等前置部分合并，或者作为前置块的一部分。如果必须分章，通常是将所有前置内容（从书名到正文开始前）视为一个整体，或者致谢紧随前置内容。原判断将其视为独立章节过于碎片化。
+  keep_split: false
+- 'no': 118
+  overturn_probability: 0.0
+  alternative: 部分标题（Part Title）
+  counter_evidence:
+  - 这是正文实际开始的地方（`# 第一部分内容`）。
+  - 该书采用'部分-章节'结构（Part-Chapter structure），'第一部分内容'是最高层级的结构单元之一，后续包含第1、2章。
+  - 根据规则：'如果存在标题为“第 X 部分”，那么该书为部分-章节模式，遇到部分和章标题时，都要划分新章'。
+  keep_split: true
+- 'no': 120
+  overturn_probability: 0.0
+  alternative: 章标题（Chapter Title）
+  counter_evidence:
+  - '`## 第 1 章` 是标准的章节标题格式，序号连贯（承接第一部分）。'
+  - 符合'章标题'的判断特征。
+  keep_split: true
+- 'no': 140
+  overturn_probability: 0.0
+  alternative: 章标题（Chapter Title）
+  counter_evidence:
+  - '`## 第 2 章` 是标准的章节标题格式，序号连贯。'
+  keep_split: true
+- 'no': 202
+  overturn_probability: 0.0
+  alternative: 部分标题（Part Title）
+  counter_evidence:
+  - '`# 第二部分` 是部分标题，在部分-章节模式下需分章。'
+  keep_split: true
+- 'no': 204
+  overturn_probability: 0.0
+  alternative: 章标题（Chapter Title）
+  counter_evidence:
+  - '`## 第 3 章` 是章节标题。'
+  keep_split: true
+- 'no': 250
+  overturn_probability: 0.0
+  alternative: 章标题（Chapter Title）
+  counter_evidence:
+  - '`## 第 4 章` 是章节标题。'
+  keep_split: true
+- 'no': 338
+  overturn_probability: 0.0
+  alternative: 章标题（Chapter Title）
+  counter_evidence:
+  - '`## 第 5 章` 是章节标题。'
+  keep_split: true
+- 'no': 370
+  overturn_probability: 0.0
+  alternative: 章标题（Chapter Title）
+  counter_evidence:
+  - '`## 第 6 章` 是章节标题。'
+  keep_split: true
+- 'no': 390
+  overturn_probability: 0.0
+  alternative: 部分标题（Part Title）
+  counter_evidence:
+  - '`# 第三部分` 是部分标题。'
+  keep_split: true
+- 'no': 392
+  overturn_probability: 0.0
+  alternative: 章标题（Chapter Title）
+  counter_evidence:
+  - '`## 第 7 章` 是章节标题。'
+  keep_split: true
+- 'no': 400
+  overturn_probability: 0.0
+  alternative: 章标题（Chapter Title）
+  counter_evidence:
+  - '`## 第 8 章` 是章节标题。'
+  keep_split: true
+- 'no': 412
+  overturn_probability: 0.0
+  alternative: 章标题（Chapter Title）
+  counter_evidence:
+  - '`## 第 9 章` 是章节标题。'
+  keep_split: true
+- 'no': 422
+  overturn_probability: 0.0
+  alternative: 章标题（Chapter Title）
+  counter_evidence:
+  - '`## 第 10 章` 是章节标题。'
+  keep_split: true
+- 'no': 431
+  overturn_probability: 0.0
+  alternative: 部分标题（Part Title）
+  counter_evidence:
+  - '`# 第四部分` 是部分标题。'
+  keep_split: true
+- 'no': 433
+  overturn_probability: 0.0
+  alternative: 章标题（Chapter Title）
+  counter_evidence:
+  - '`## 第 11 章` 是章节标题。'
+  keep_split: true
+- 'no': 441
+  overturn_probability: 0.0
+  alternative: 章标题（Chapter Title）
+  counter_evidence:
+  - '`## 第 12 章` 是章节标题。'
+  keep_split: true
+- 'no': 453
+  overturn_probability: 0.0
+  alternative: 部分标题（Part Title）
+  counter_evidence:
+  - '`# 第一部分` 出现在正文流中，虽然目录中已有，但这里是正文的实际部分标题（Markdown H1），且后续紧跟第1章正文。在部分-章节模式下，这是有效的分章点。'
+  keep_split: true
+- 'no': 456
+  overturn_probability: 0.0
+  alternative: 章标题（Chapter Title）
+  counter_evidence:
+  - '`# 第 1 章` 是章节标题。'
+  keep_split: true
+- 'no': 630
+  overturn_probability: 0.0
+  alternative: 章标题（Chapter Title）
+  counter_evidence:
+  - '`# 第二章` 是章节标题（格式略有不同，用中文数字，但语义明确）。'
+  keep_split: true
+- 'no': 1002
+  overturn_probability: 0.0
+  alternative: 部分标题（Part Title）
+  counter_evidence:
+  - '`# 第二部分` 是部分标题。'
+  keep_split: true
+- 'no': 1005
+  overturn_probability: 0.0
+  alternative: 章标题（Chapter Title）
+  counter_evidence: []
+  keep_split: true
+- 'no': 1349
+  overturn_probability: 0.0
+  alternative: 章标题（Chapter Title）
+  counter_evidence: []
+  keep_split: true
+- 'no': 2440
+  overturn_probability: 0.0
+  alternative: 章标题（Chapter Title）
+  counter_evidence: []
+  keep_split: true
+- 'no': 2959
+  overturn_probability: 0.0
+  alternative: 章标题（Chapter Title）
+  counter_evidence: []
+  keep_split: true

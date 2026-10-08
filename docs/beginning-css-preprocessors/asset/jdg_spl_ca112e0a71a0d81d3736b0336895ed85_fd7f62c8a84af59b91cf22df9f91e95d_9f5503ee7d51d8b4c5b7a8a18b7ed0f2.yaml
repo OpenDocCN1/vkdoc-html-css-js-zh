@@ -1,0 +1,18 @@
+chapter_starts:
+- 'no': 3077
+  confidence: 0.99
+  final_reason: 双方一致认可。该行内容为“# 第 4 章”，具备最高层级章节编号特征，且位于第3章总结之后，上下文逻辑严密，后续内容开启了新的主题。
+  accepted_evidence:
+  - 判断方与复核方均指出该行符合“第 X 章”的最高层级编号特征
+  - 复核方确认前文（行 3069-3075）为第3章总结，后文（行 3080起）为Less简介，结构连贯
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 4638
+  confidence: 0.99
+  final_reason: 双方一致认可。该行内容为“# 第 5 章”，具备最高层级章节编号特征，且位于第4章总结之后，上下文逻辑严密，后续内容开启了关于Compass的新主题。
+  accepted_evidence:
+  - 判断方与复核方均指出该行符合“第 X 章”的最高层级编号特征
+  - 复核方确认前文（行 4632-4636）为第4章总结，后文（行 4642起）为Compass简介，结构连贯
+  rejected_evidence: []
+  need_human_review: false
+rejected_lines: []

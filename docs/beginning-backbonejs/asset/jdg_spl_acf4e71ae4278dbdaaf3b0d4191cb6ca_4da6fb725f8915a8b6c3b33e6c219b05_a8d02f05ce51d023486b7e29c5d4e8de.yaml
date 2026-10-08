@@ -1,0 +1,83 @@
+chapter_starts:
+- 'no': 0
+  confidence: 0.95
+  final_reason: 双方一致。作为书籍封面及版权页信息的起始行，属于前置内容（Front Matter）的统一章节起点。
+  accepted_evidence:
+  - 判断方：书籍封面及版权页信息，属于正文前的前置内容，划分为第一章。
+  - 复核方：确认属于Front Matter起始，逻辑上独立于正文。
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 54
+  confidence: 0.95
+  final_reason: 双方一致。标题为“关于作者”，属于正文前的标准前置章节。
+  accepted_evidence:
+  - 判断方：属于正文前的前言类内容，根据规则独立划分为一章。
+  - 复核方：位于版权页之后，符合“关于作者等正文之前的内容”规则。
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 70
+  confidence: 0.95
+  final_reason: 双方一致。标题为“引言”，属于正文前的导言部分，独立成章。
+  accepted_evidence:
+  - 判断方：属于正文前的导言部分，独立划分为一章。
+  - 复核方：位于'关于技术审校'之后，是标准的引言部分。
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 128
+  confidence: 0.95
+  final_reason: 双方一致。标题为“致谢”，属于正文前的致谢部分，独立成章。
+  accepted_evidence:
+  - 判断方：属于正文前的致谢部分，独立划分为一章。
+  - 复核方：位于引言之后，目录之前，是标准的致谢部分。
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 140
+  confidence: 0.95
+  final_reason: 双方一致。标题为“目录”，属于前置索引内容，独立成章。
+  accepted_evidence:
+  - 判断方：属于正文前的索引目录部分，独立划分为一章。
+  - 复核方：位于致谢之后，正文第1章之前，是标准的目录。
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 427
+  confidence: 0.85
+  final_reason: 双方一致保留分章。标题为“内容索引速览”，虽紧邻目录章，但语义上提供了带页码的快速导航视图，视为独立的前置子章或索引预览章是合理的。
+  accepted_evidence:
+  - 判断方：属于正文前的索引预览，独立划分为一章。
+  - 复核方：内容为带页码的章节列表，与标准目录（no:140开始）性质略有不同，视为独立章节起点可接受。
+  rejected_evidence:
+  - 复核方曾质疑其可能只是目录章内的标题，但鉴于其独特性（带页码vs无页码）及层级特征，维持分章判断。
+  need_human_review: false
+- 'no': 455
+  confidence: 0.98
+  final_reason: 双方一致。一级标题“# Backbone.js 简介”，对应目录中的第1章，具备统领性，正文起始。
+  accepted_evidence:
+  - 判断方：对应第1章正文起始，一级标题，具有统领性。
+  - 复核方：全书正文部分的第一章，位于目录之后。
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 900
+  confidence: 0.98
+  final_reason: 双方一致。一级标题“# 2. 走向面向对象”，对应目录中的第2章，序号连贯。
+  accepted_evidence:
+  - 判断方：对应第2章正文起始，一级标题，序号连贯。
+  - 复核方：序号'2.'与第1章语义连贯，具备最高层级特征。
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 1752
+  confidence: 0.98
+  final_reason: 双方一致。一级标题“# 3. Backbone 模型与集合”，对应目录中的第3章，序号连贯。
+  accepted_evidence:
+  - 判断方：对应第3章正文起始，一级标题，序号连贯。
+  - 复核方：序号'3.'连贯，具备最高层级特征。
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 2926
+  confidence: 0.98
+  final_reason: 双方一致。一级标题“# 4. Backbone 视图与模板库”，对应目录中的第4章，序号连贯。
+  accepted_evidence:
+  - 判断方：对应第4章正文起始，一级标题，序号连贯。
+  - 复核方：序号'4.'连贯，具备最高层级特征。
+  rejected_evidence: []
+  need_human_review: false
+rejected_lines: []

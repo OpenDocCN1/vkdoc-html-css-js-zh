@@ -1,0 +1,20 @@
+chapter_starts:
+- 'no': 18212
+  confidence: 0.99
+  final_reason: 双方一致 + 排版语义均符合
+  accepted_evidence:
+  - 格式特征：Markdown 标题 '## 第 10 章 ...'，包含明确的最高层级章节序号 '第 10 章'。
+  - 上下文特征：前文行 18208 提及'下一章'，行 18210 为章节结束插图，后续内容开始介绍新技术，符合新章起始特征。
+  - 语义特征：标题具有统领性，概括了后续关于高级对象与角色控制的内容。
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 19707
+  confidence: 0.95
+  final_reason: 双方一致 + 符合文末索引分章规则
+  accepted_evidence:
+  - 内容特征：标题为 '# 索引'，位于正文结束后。
+  - 规则匹配：根据判断规则，'文末索引也划分为一章'。
+  - 上下文特征：后续内容开始罗列索引词条，证实为书籍索引部分。
+  rejected_evidence: []
+  need_human_review: false
+rejected_lines: []

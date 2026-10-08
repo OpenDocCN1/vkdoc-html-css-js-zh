@@ -1,0 +1,83 @@
+chapter_starts:
+- 'no': 6019
+  confidence: 0.95
+  final_reason: 双方一致 + 排版语义均符合
+  accepted_evidence:
+  - 一级标题 '# 12.9 在设备上阅读 EPUB'
+  - 序号 12.9 符合章节编号逻辑
+  - 复核方确认非误报
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 6067
+  confidence: 0.95
+  final_reason: 双方一致 + 排版语义均符合
+  accepted_evidence:
+  - 一级标题 '# 12.10 营销 EPUB'
+  - 序号 12.10 紧随 12.9，逻辑连贯
+  - 复核方确认非误报
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 6121
+  confidence: 0.95
+  final_reason: 双方一致 + 排版语义均符合
+  accepted_evidence:
+  - 一级标题 '# 13. 创建固定版式 EPUB'
+  - 序号 13 开启新的章节
+  - 复核方确认非误报
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 6445
+  confidence: 0.95
+  final_reason: 双方一致 + 排版语义均符合
+  accepted_evidence:
+  - 一级标题 '# 14. 发现 Adobe Publish Online'
+  - 序号 14 紧随 13，逻辑连贯
+  - 复核方确认非误报
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 6591
+  confidence: 0.95
+  final_reason: 双方一致 + 排版语义均符合
+  accepted_evidence:
+  - 一级标题 '# 15. 创建交互式 PDF 文件'
+  - 序号 15 紧随 14，逻辑连贯
+  - 复核方确认非误报
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 7093
+  confidence: 0.95
+  final_reason: 双方一致 + 符合部分-章节模式规则
+  accepted_evidence:
+  - 一级标题 '# 第五部分：技巧与诀窍'
+  - 规则指出若存在“第X部分”，则部分标题也需分章
+  - 复核方依据规则确认应保留分章
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 7095
+  confidence: 0.95
+  final_reason: 双方一致 + 排版语义均符合
+  accepted_evidence:
+  - 一级标题 '# 16. 创建数字出版文档的技巧'
+  - 序号 16 是新的章节号
+  - 复核方确认非误报
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 7227
+  confidence: 0.95
+  final_reason: 双方一致 + 排版语义均符合
+  accepted_evidence:
+  - 一级标题 '# 17. 更多项目构想'
+  - 序号 17 是新的章节号
+  - 复核方确认非误报
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 7321
+  confidence: 0.95
+  final_reason: 双方一致 + 符合索引分章规则
+  accepted_evidence:
+  - 一级标题 '# 索引'
+  - 规则明确指出文末索引划分为一章
+  - 复核方确认非误报
+  rejected_evidence: []
+  need_human_review: false
+rejected_lines: []

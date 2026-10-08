@@ -1,0 +1,81 @@
+chapter_starts:
+- 'no': 2
+  confidence: 0.95
+  final_reason: 双方一致，作为前置内容起始（版权页/封面后），划分为一章。
+  accepted_evidence:
+  - 原判断方提出
+  - 复核方未反驳
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 323
+  confidence: 0.95
+  final_reason: Markdown一级标题 `# 关于作者`，属于前置/后置独立部分，划分为一章。
+  accepted_evidence:
+  - 原判断方提出
+  - 复核方虽讨论321，但认可323为章节起点
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 329
+  confidence: 0.95
+  final_reason: Markdown一级标题 `# 关于技术审校者`，属于独立前置/后置部分，划分为一章。
+  accepted_evidence:
+  - 原判断方提出
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 333
+  confidence: 0.95
+  final_reason: Markdown一级标题 `# 致谢`，属于独立前置部分，划分为一章。
+  accepted_evidence:
+  - 原判断方提出
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 343
+  confidence: 0.95
+  final_reason: Markdown一级标题 `# 简介`（Preface/Introduction），属于引言部分，划分为一章。
+  accepted_evidence:
+  - 原判断方提出
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 361
+  confidence: 0.95
+  final_reason: Markdown一级标题 `# 第一章`，是正文大章起始，划分为一章。
+  accepted_evidence:
+  - 原判断方提出
+  - 语义特征符合
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 867
+  confidence: 0.95
+  final_reason: Markdown一级标题 `# 第 2 章`，序号连贯，划分为一章。
+  accepted_evidence:
+  - 原判断方提出
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 1763
+  confidence: 0.95
+  final_reason: Markdown一级标题 `# 第 3 章`，序号连贯，划分为一章。
+  accepted_evidence:
+  - 原判断方提出
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 207
+  confidence: 0.95
+  final_reason: Markdown一级标题 `# 第四章：使用 Less 进行开发`，序号连贯，划分为一章。
+  accepted_evidence:
+  - 原判断方提出
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 267
+  confidence: 0.95
+  final_reason: Markdown一级标题 `# 第五章：Compass 简介`，序号连贯，划分为一章。
+  accepted_evidence:
+  - 原判断方提出
+  rejected_evidence: []
+  need_human_review: false
+rejected_lines:
+- 'no': 76
+  reason: 复核方指出其为目录页标题，属于前置部分的导航列表，不具备统领后续正文内容的章节特征，且通常归入前置部分或忽略，不宜单独分章。
+  need_human_review: false
+- 'no': 321
+  reason: 复核方指出该行缺少Markdown标题标记（如#），且位于索引/前置内容混乱区域，可能是噪声或未格式化文本，证据不足支持其为独立章节。
+  need_human_review: true

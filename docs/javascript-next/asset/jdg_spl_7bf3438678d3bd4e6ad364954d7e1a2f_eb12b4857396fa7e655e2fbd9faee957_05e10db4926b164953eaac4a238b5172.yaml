@@ -1,0 +1,98 @@
+chapter_starts:
+- 'no': 0
+  confidence: 0.95
+  final_reason: 一级标题 `# 引言`，属于正文前的前置内容，根据规则统一划分为一章。
+  accepted_evidence:
+  - 格式为一级Markdown标题
+  - 语义为前言/引言，属于前置内容
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 55
+  confidence: 0.9
+  final_reason: 一级标题 `# 如何使用本书`，属于正文前的前置内容（使用指南），根据规则统一划分为一章。
+  accepted_evidence:
+  - 格式为一级Markdown标题
+  - 语义为使用指南，属于前置内容
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 87
+  confidence: 0.9
+  final_reason: 一级标题 `# 致谢`，属于正文前的前置内容，根据规则统一划分为一章。
+  accepted_evidence:
+  - 格式为一级Markdown标题
+  - 语义为致谢，属于前置内容
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 113
+  confidence: 0.98
+  final_reason: 一级标题 `# 1. ...`，带有全书最高层级序号，标志第一章正式内容开始。
+  accepted_evidence:
+  - 格式为一级Markdown标题
+  - 序号'1.'符合章标题特征
+  - 后续内容包含'##'二级子节，符合章节结构
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 414
+  confidence: 0.98
+  final_reason: 一级标题 `# 2. ...`，带有全书最高层级序号，标志第二章正式内容开始。
+  accepted_evidence:
+  - 格式为一级Markdown标题
+  - 序号'2.'连贯，符合章标题特征
+  - 后续内容包含'##'二级子节
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 788
+  confidence: 0.98
+  final_reason: 一级标题 `# 3. ...`，带有全书最高层级序号，标志第三章正式内容开始。
+  accepted_evidence:
+  - 格式为一级Markdown标题
+  - 序号'3.'连贯，符合章标题特征
+  - 后续内容包含'##'二级子节
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 1128
+  confidence: 0.98
+  final_reason: 一级标题 `# 4. ...`，带有全书最高层级序号，标志第四章正式内容开始。
+  accepted_evidence:
+  - 格式为一级Markdown标题
+  - 序号'4.'连贯，符合章标题特征
+  - 后续内容包含'##'二级子节
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 1785
+  confidence: 0.95
+  final_reason: 一级标题 `# 使用模板字符串格式化字符串`。虽无显式数字，但位于第4章（1128行）与第6章（2089行）之间，序号逻辑上填补第5章空缺；且采用一级标题格式，统领后续关于模板字面量的内容，符合章标题特征。
+  accepted_evidence:
+  - 上下文序号连贯性（4->5->6）
+  - 一级Markdown标题格式
+  - 语义具有统领性，覆盖后续'##'子节
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 2089
+  confidence: 0.98
+  final_reason: 一级标题 `# 6. ...`，带有全书最高层级序号，标志第六章正式内容开始。
+  accepted_evidence:
+  - 格式为一级Markdown标题
+  - 序号'6.'连贯，符合章标题特征
+  - 后续内容包含'##'二级子节
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 2527
+  confidence: 0.98
+  final_reason: 一级标题 `# 7. ...`，带有全书最高层级序号，标志第七章正式内容开始。
+  accepted_evidence:
+  - 格式为一级Markdown标题
+  - 序号'7.'连贯，符合章标题特征
+  - 后续内容包含'##'二级子节
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 2809
+  confidence: 0.98
+  final_reason: 一级标题 `# 8. ...`，带有全书最高层级序号，标志第八章正式内容开始。
+  accepted_evidence:
+  - 格式为一级Markdown标题
+  - 序号'8.'连贯，符合章标题特征
+  - 后续内容包含'##'二级子节
+  rejected_evidence: []
+  need_human_review: false
+rejected_lines: []

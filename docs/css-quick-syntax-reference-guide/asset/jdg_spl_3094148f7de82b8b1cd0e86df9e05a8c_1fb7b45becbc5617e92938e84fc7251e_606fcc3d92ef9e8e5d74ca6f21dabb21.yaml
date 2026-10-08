@@ -1,0 +1,182 @@
+chapter_starts:
+- 'no': 0
+  confidence: 1.0
+  final_reason: 书籍封面/标题页，作为全书的第一章起始（通常涵盖版权、目录等前置内容）
+  accepted_evidence:
+  - 行号为0，包含书名、作者、ISBN等前置元数据
+  - 后续包含献词、关于作者、引言、目录等前置部分
+  - 符合“前言、序言...统一划分为一章”的规则
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 402
+  confidence: 0.95
+  final_reason: 双方一致。Markdown 一级标题，编号 '1.'，位于目录之后，对应正文章第 1 章。
+  accepted_evidence:
+  - 复核方确认：位于目录和内容速览之后，符合正文开始位置
+  - 使用 Markdown 一级标题 `#`，编号与目录 '第 1 章' 对应
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 575
+  confidence: 0.95
+  final_reason: 双方一致。Markdown 一级标题，对应目录第 3 章，语义独立。
+  accepted_evidence:
+  - 使用一级标题 `#`，与前文格式一致
+  - 对应目录 '第 3 章：类选择器与 ID 选择器'
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 663
+  confidence: 0.95
+  final_reason: 双方一致。Markdown 一级标题，编号 '4.'，对应目录第 4 章。
+  accepted_evidence:
+  - 使用一级标题 `#`，编号 '4.'
+  - 对应目录 '第 4 章：属性选择器'
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 767
+  confidence: 0.95
+  final_reason: 双方一致。Markdown 一级标题，编号 '5.'，对应目录第 5 章。
+  accepted_evidence:
+  - 使用一级标题 `#`，编号 '5.'
+  - 对应目录 '第 5 章：伪选择器'
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 1232
+  confidence: 0.9
+  final_reason: 双方一致。Markdown 一级标题，对应目录第 6 章，虽缺编号但语义和层级符合。
+  accepted_evidence:
+  - 使用一级标题 `#` 关系选择器
+  - 对应目录 '第 6 章：关系选择器'
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 1344
+  confidence: 0.95
+  final_reason: 双方一致。Markdown 一级标题，编号 '7.'，对应目录第 7 章。
+  accepted_evidence:
+  - 使用一级标题 `#`，编号 '7.'
+  - 对应目录 '第 7 章：特异性'
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 1432
+  confidence: 0.95
+  final_reason: 双方一致。Markdown 一级标题，编号 '8.'，对应目录第 8 章。
+  accepted_evidence:
+  - 使用一级标题 `#`，编号 '8.'
+  - 对应目录 '第 8 章：颜色'
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 1511
+  confidence: 0.9
+  final_reason: 双方一致。Markdown 一级标题，对应目录第 9 章，虽缺编号但语义匹配。
+  accepted_evidence:
+  - 使用一级标题 `#` 单位
+  - 对应目录 '第 9 章：单位'
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 1613
+  confidence: 0.9
+  final_reason: 双方一致。Markdown 一级标题，对应目录第 10 章，虽缺编号但语义匹配。
+  accepted_evidence:
+  - 使用一级标题 `#` CSS 属性
+  - 对应目录 '第 10 章：CSS 属性'
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 1680
+  confidence: 0.95
+  final_reason: 双方一致。Markdown 一级标题，编号 '11.'，对应目录第 11 章。
+  accepted_evidence:
+  - 使用一级标题 `#`，编号 '11.'
+  - 对应目录 '第 11 章：文本'
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 1827
+  confidence: 0.95
+  final_reason: 双方一致。Markdown 一级标题，编号 '12.'，对应目录第 12 章。
+  accepted_evidence:
+  - 使用一级标题 `#`，编号 '12.'
+  - 对应目录 '第 12 章：间距'
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 1880
+  confidence: 0.95
+  final_reason: 双方一致。Markdown 一级标题，编号 '13.'，对应目录第 13 章。
+  accepted_evidence:
+  - 使用一级标题 `#`，编号 '13.'
+  - 对应目录 '第 13 章：字体'
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 1965
+  confidence: 0.9
+  final_reason: 双方一致。Markdown 一级标题，对应目录第 14 章，虽缺编号但语义匹配。
+  accepted_evidence:
+  - 使用一级标题 `#` 背景
+  - 对应目录 '第 14 章：背景'
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 2163
+  confidence: 0.95
+  final_reason: 双方一致。Markdown 一级标题，编号 '15.'，对应目录第 15 章。
+  accepted_evidence:
+  - 使用一级标题 `#`，编号 '15.'
+  - 对应目录 '第 15 章：渐变'
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 2305
+  confidence: 0.95
+  final_reason: 双方一致。Markdown 一级标题，编号 '16.'，对应目录第 16 章。
+  accepted_evidence:
+  - 使用一级标题 `#`，编号 '16.'
+  - 对应目录 '第 16 章：盒模型'
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 2359
+  confidence: 0.95
+  final_reason: 双方一致。Markdown 一级标题，编号 '17.'，对应目录第 17 章。
+  accepted_evidence:
+  - 使用一级标题 `#`，编号 '17.'
+  - 对应目录 '第 17 章：边框'
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 2495
+  confidence: 0.95
+  final_reason: 双方一致。Markdown 一级标题，编号 '18.'，对应目录第 18 章。
+  accepted_evidence:
+  - 使用一级标题 `#`，编号 '18.'
+  - 对应目录 '第 18 章：轮廓'
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 2574
+  confidence: 0.95
+  final_reason: 双方一致。Markdown 一级标题，编号 '19.'，对应目录第 19 章。
+  accepted_evidence:
+  - 使用一级标题 `#`，编号 '19.'
+  - 对应目录 '第 19 章：外边距与内边距'
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 2653
+  confidence: 0.95
+  final_reason: 双方一致。Markdown 一级标题，编号 '20.'，对应目录第 20 章。
+  accepted_evidence:
+  - 使用一级标题 `#`，编号 '20.'
+  - 对应目录 '第 20 章：尺寸'
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 2758
+  confidence: 0.95
+  final_reason: 双方一致。Markdown 一级标题，编号 '21.'，对应目录第 21 章。
+  accepted_evidence:
+  - 使用一级标题 `#`，编号 '21.'
+  - 对应目录 '第 21 章：定位'
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 2993
+  confidence: 0.95
+  final_reason: 双方一致。Markdown 一级标题，编号 '22.'，对应目录第 22 章。
+  accepted_evidence:
+  - 使用一级标题 `#`，编号 '22.'
+  - 对应目录 '第 22 章：分类'
+  rejected_evidence: []
+  need_human_review: false
+rejected_lines:
+- 'no': 522
+  reason: 判断方将其识别为第2章，但复核方指出其Markdown层级为二级(`##`)，与全书其他章标题(`#`)不一致，且同级下存在多个`##`小节标题，不符合最高层级章标题特征。依据“宁可漏分，不可误分”原则及复核方反方证据成立，不予分章。
+  need_human_review: true

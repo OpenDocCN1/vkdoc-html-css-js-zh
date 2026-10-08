@@ -1,0 +1,74 @@
+chapter_starts:
+- 'no': 0
+  confidence: 0.95
+  final_reason: 文档起始位置，包含封面及版权页等前置内容，依据规则统一划分为一章。虽然规则提到前置内容统一划分为一章，但通常首行作为整个文档或前置部分的起始标记是合理的。此处将其作为第一个章节的起点。
+  accepted_evidence:
+  - 位于文档最开头
+  - 包含封面、版权、ISBN等典型前置信息
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 44
+  confidence: 0.1
+  final_reason: 复核方指出该行（空行/排版噪声或误判）位于前置内容区域，且真正的致谢标题在第28行。根据“前言、序言、致谢等正文之前的内容，统一划分为一章”的原则，前置内容不应被细碎化。第44行并非独立章节标题，不应分章。
+  accepted_evidence:
+  - 复核方证据：第28行已有‘## 致谢’标题
+  - 前置内容应合并处理
+  rejected_evidence:
+  - 判断方原理由：认为其是标题
+  need_human_review: false
+- 'no': 47
+  confidence: 0.3
+  final_reason: ‘# 目录’是前置内容的一部分。复核方认为不应单独分章，应归入前置内容章节。但考虑到目录通常是一个独立的逻辑块，且后续有‘关于作者’、‘引言’等，若严格执行‘统一划分为一章’，则从第0行到正文开始前（第443行左右）的所有非正文内容应视为一个大章。然而，为了保持结构清晰，很多解析器会将目录视为独立节点。鉴于规则‘宁可漏分，不可误分’以及前置内容合并的大原则，此处倾向于不分章，将其归入前置部分。但如果必须选，考虑到目录的独立性，保留分章的争议较大。*修正策略*：根据规则‘统一划分为一章’，第47行不应是新章起点，而应属于前置内容章的一部分。因此，拒绝该候选。
+  accepted_evidence:
+  - 规则：前置内容统一划分为一章
+  rejected_evidence:
+  - 判断方原理由：目录独立
+  need_human_review: false
+- 'no': 383
+  confidence: 0.8
+  final_reason: ‘## 关于作者’是典型的前置内容标题。虽然规则说前置内容统一划分为一章，但这通常指整个Front Matter作为一个逻辑块，或者每个主要的前置部分（如前言、致谢、关于作者）作为独立的小章节。在多数书籍解析中，‘关于作者’是独立于‘引言’和‘正文’的部分。鉴于‘引言’（399行）在‘关于作者’（383行）之后，说明它们是不同的部分。将‘关于作者’作为一章起点是合理的，因为它是一个明确的语义块。
+  accepted_evidence:
+  - 明确的Markdown标题‘## 关于作者’
+  - 位于正文‘第1章’之前
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 399
+  confidence: 0.85
+  final_reason: ‘### 引言’（或Preface/Introduction）是正文前的最后部分。它是一个独立的语义块，引导读者进入书籍主题。将其作为一章起点是合理的。
+  accepted_evidence:
+  - 明确的Markdown标题‘### 引言’
+  - 位于正文‘第1章’之前
+  - 内容为书籍导读
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 444
+  confidence: 0.99
+  final_reason: ‘## 第 1 章 - 编程基础：如何制作电子游戏’是全书第一个正式编号章节。序号从1开始，符合分章特征。
+  accepted_evidence:
+  - 最高层级编号‘第 1 章’
+  - 序号连贯性起点
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 1596
+  confidence: 0.99
+  final_reason: ‘## 第 2 章’是正式编号章节，序号连贯（2）。前文是第1章总结，符合章节边界特征。
+  accepted_evidence:
+  - 最高层级编号‘第 2 章’
+  - 序号连贯
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 2618
+  confidence: 0.99
+  final_reason: ‘## 第 3 章’是正式编号章节，序号连贯（3）。前文是第2章总结，符合章节边界特征。
+  accepted_evidence:
+  - 最高层级编号‘第 3 章’
+  - 序号连贯
+  rejected_evidence: []
+  need_human_review: false
+rejected_lines:
+- 'no': 44
+  reason: 复核方指出其为前置内容中的噪声或误判，且前置内容应合并或归入已有标题（如28行致谢），此处非独立章节标题。
+  need_human_review: false
+- 'no': 47
+  reason: 依据‘前置内容统一划分为一章’的严格解释，目录属于前置内容块的一部分，不应单独作为新章起点，尤其当其紧随前置内容其他部分时。为避免碎片化，将其归入前置内容大章。
+  need_human_review: false

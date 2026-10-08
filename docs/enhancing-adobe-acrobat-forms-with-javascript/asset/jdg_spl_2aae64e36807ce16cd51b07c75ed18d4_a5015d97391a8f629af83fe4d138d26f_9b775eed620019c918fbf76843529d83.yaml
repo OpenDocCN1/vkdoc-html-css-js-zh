@@ -1,0 +1,48 @@
+chapter_starts:
+- 'no': 3271
+  confidence: 0.98
+  final_reason: 双方一致。Markdown一级标题，编号连贯（前接第7章内容，后接第9章），语义概括性强，符合顶级章节特征。
+  accepted_evidence:
+  - '格式特征：以 # 开头，Markdown一级标题'
+  - 编号特征：'8.' 序号连贯
+  - 语义特征：统领后续关于警报、注释的内容
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 3723
+  confidence: 0.98
+  final_reason: 双方一致。Markdown一级标题，编号连贯（前接第8章，后接第10章），语义概括性强，符合顶级章节特征。
+  accepted_evidence:
+  - '格式特征：以 # 开头，Markdown一级标题'
+  - 编号特征：'9.' 序号连贯
+  - 语义特征：统领后续关于悬停文本和帮助的内容
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 4344
+  confidence: 0.98
+  final_reason: 双方一致。Markdown一级标题，编号连贯（前接第9章，后接第11章及第三部分），语义概括性强，符合顶级章节特征。
+  accepted_evidence:
+  - '格式特征：以 # 开头，Markdown一级标题'
+  - 编号特征：'10.' 序号连贯
+  - 语义特征：统领后续关于JavaScript格式化的内容
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 5284
+  confidence: 0.9
+  final_reason: 双方一致判定为章节开始。尽管复核方提示该部分标题与紧随其后的第11章标题间隔极近，但依据规则'如果存在标题为“第 X 部分”...都要划分新章'，且该部分标题具有独立的统领性，故采纳为章节开始。
+  accepted_evidence:
+  - '格式特征：以 # 开头，Markdown一级标题'
+  - 规则依据：明确识别出'第 X 部分'模式，需单独分章
+  - 语义特征：概括第三部分所有主题
+  rejected_evidence:
+  - 复核方关于'逻辑块层级切换'的顾虑被规则明确覆盖
+  need_human_review: false
+- 'no': 5286
+  confidence: 0.98
+  final_reason: 双方一致。Markdown一级标题，编号连贯（位于第10章之后，第三部分标题之下），语义概括性强，符合顶级章节特征。
+  accepted_evidence:
+  - '格式特征：以 # 开头，Markdown一级标题'
+  - 编号特征：'11.' 序号连贯
+  - 语义特征：统领后续关于验证的内容
+  rejected_evidence: []
+  need_human_review: false
+rejected_lines: []

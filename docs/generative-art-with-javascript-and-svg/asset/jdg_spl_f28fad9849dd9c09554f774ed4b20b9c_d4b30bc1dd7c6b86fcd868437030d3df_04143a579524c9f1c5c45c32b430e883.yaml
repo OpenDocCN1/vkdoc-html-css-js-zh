@@ -1,0 +1,48 @@
+chapter_starts:
+- 'no': 3139
+  confidence: 0.95
+  final_reason: 双方一致。行内容为 `# 6. 全功能路径`，符合Markdown H1章节标题特征，序号连贯（紧接第5章内容），前文为第5章总结，后文为该章正文，语义具有统领性。
+  accepted_evidence:
+  - 格式特征：Markdown H1 标记 `#` + 章节序号 `6.` + 标题文本，无句号，长度短。
+  - 上下文特征：前文第3137行提到“在下一章中...”，后文第3141行开始阐述路径基础，符合章末过渡与章首介绍的规律。
+  - 序号连贯性：第5章（推测前文有`# 5.`）之后接第6章，序号连续。
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 3736
+  confidence: 0.95
+  final_reason: 双方一致。行内容为 `# 7. 运动与交互性`，符合Markdown H1章节标题特征，序号连贯（紧接第6章内容），前文为第6章总结，后文为该章正文。
+  accepted_evidence:
+  - 格式特征：Markdown H1 标记 `#` + 章节序号 `7.` + 标题文本。
+  - 上下文特征：前文第3734行提到“在下一章中...”，后文第3738行为该章子节标题，符合章首特征。
+  - 序号连贯性：第6章之后接第7章，序号连续。
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 4483
+  confidence: 0.95
+  final_reason: 双方一致。行内容为 `# 8. 滤镜效果`，符合Markdown H1章节标题特征，序号连贯（紧接第7章内容），前文为第7章总结，后文为该章正文。
+  accepted_evidence:
+  - 格式特征：Markdown H1 标记 `#` + 章节序号 `8.` + 标题文本。
+  - 上下文特征：前文第4481行提到“在下一章也是最后一章中...”，后文第4485行开始介绍SVG滤镜。
+  - 序号连贯性：第7章之后接第8章，序号连续。
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 5120
+  confidence: 0.95
+  final_reason: 双方一致。行内容为 `# 9. 生成之道`，符合Markdown H1章节标题特征，序号连贯（紧接第8章内容），前文为第8章总结，后文为该章正文（回顾与扩展）。
+  accepted_evidence:
+  - 格式特征：Markdown H1 标记 `#` + 章节序号 `9.` + 标题文本。
+  - 上下文特征：前文第5118行提到“在下一章中，我们将进行总结...”，后文第5122行开始回顾全书内容。
+  - 序号连贯性：第8章之后接第9章，序号连续。
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 5232
+  confidence: 0.95
+  final_reason: '双方一致。行内容为 `# 索引`，根据规则“文末索引也划分为一章”，且该行为Markdown H1格式，后文为标准的字母索引列表（##
+    A, ## B...），应划分为独立章节。'
+  accepted_evidence:
+  - 规则匹配：明确包含“文末索引划分为一章”的规则。
+  - 格式特征：Markdown H1 标记 `#` + 标题 `索引`。
+  - 上下文特征：前文为第9章结语，后文为索引列表（`## A` 开始），结构清晰。
+  rejected_evidence: []
+  need_human_review: false
+rejected_lines: []

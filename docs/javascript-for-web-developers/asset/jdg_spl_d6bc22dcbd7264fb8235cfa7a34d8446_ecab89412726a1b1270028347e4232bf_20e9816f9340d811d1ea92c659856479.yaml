@@ -1,0 +1,45 @@
+chapter_starts:
+- 'no': 0
+  confidence: 0.95
+  final_reason: 文档起始，包含封面、版权等前置元数据。依据规则，正文前的内容统一划分为一章。
+  accepted_evidence:
+  - 规则：前言、序言等正文之前的内容，统一划分为一章。
+  - 行0为封面图片，后续行包含ISBN、版权声明等典型前置内容。
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 22
+  confidence: 0.95
+  final_reason: 一级标题“# 引言”，语义上为独立章节，且位于前置元数据之后，正文开始之前。
+  accepted_evidence:
+  - Markdown格式为一级标题 `#`。
+  - 语义为“引言”，通常作为独立章节或前置部分的核心内容。
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 116
+  confidence: 0.95
+  final_reason: 一级标题“# 环境搭建”，属于教程类书籍常见的独立前置章节。
+  accepted_evidence:
+  - Markdown格式为一级标题 `#`。
+  - 内容涵盖开发环境设置，具有独立章节结构特征。
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 203
+  confidence: 0.95
+  final_reason: 一级标题“# 1. 使用 JavaScript 工作”，编号明确为第1章，标志正文正式开始。
+  accepted_evidence:
+  - Markdown格式为一级标题 `#`。
+  - 包含章节编号“1.”，符合全书最高层级章节特征。
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 2655
+  confidence: 0.95
+  final_reason: 一级标题“# 第 3 章 操作 HTML 元素”，编号为3，格式标准，语义清晰。
+  accepted_evidence:
+  - Markdown格式为一级标题 `#`。
+  - 包含明确章节标识“第 3 章”。
+  rejected_evidence: []
+  need_human_review: false
+rejected_lines:
+- 'no': 1824
+  reason: '复核方指出该行为二级标题 `## 2. ...`，而第1章和第3章均为一级标题 `#`。尽管语义编号为2，但格式层级降级（## vs #）表明其可能为第1章下的子节或文档转换错误，不宜单独作为最高层级章节起点。根据“宁可漏分”原则，暂不采纳。'
+  need_human_review: true

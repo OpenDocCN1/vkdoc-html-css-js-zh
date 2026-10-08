@@ -1,0 +1,7 @@
+chapter_starts:
+- 'no': 6582
+  confidence: 0.95
+  reason: Markdown一级标题 '# 8. 显示和隐藏内容'，带有章节序号8，且前文为第7章的“展望未来”部分，符合大章起始特征。
+- 'no': 7540
+  confidence: 0.95
+  reason: Markdown一级标题 '# 9. 项目：构建灯箱画廊'，带有章节序号9，紧随第8章结尾之后，符合大章起始特征。

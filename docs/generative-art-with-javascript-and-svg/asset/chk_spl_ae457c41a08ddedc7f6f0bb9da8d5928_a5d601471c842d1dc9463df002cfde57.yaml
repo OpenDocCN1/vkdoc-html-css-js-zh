@@ -1,0 +1,43 @@
+reviews:
+- 'no': 42
+  overturn_probability: 0.0
+  alternative: 前言/序言部分标题
+  counter_evidence:
+  - 该行 '## 引言' 是 Markdown 二级标题，但根据判断规则，“前言、序言、致谢、关于作者等正文之前的内容，统一划分为一章”。
+  - 在书籍排版惯例中，引言（Introduction/Preface）属于前置内容，不等同于正文的第一章，因此将其划分为一个新章是符合规则的。
+  keep_split: true
+- 'no': 108
+  overturn_probability: 0.0
+  alternative: 正文第一章标题
+  counter_evidence:
+  - 该行 '# 1. 初学者的路径' 是一级标题，且带有明确的数字编号 '1.'，符合“最高层级大章”的编号特征。
+  - 上下文中，第 42 行是 '## 引言'（前置内容），第 108 行开始的内容涵盖了 SVG 基础、工具设置等，具有统领性，且后续第 428 行是 '# 2'，序号连贯，确认为新章。
+  keep_split: true
+- 'no': 428
+  overturn_probability: 0.0
+  alternative: 正文第二章标题
+  counter_evidence:
+  - 该行 '# 2. 编程入门' 是一级标题，编号 '2' 紧随 '1' 之后，序号连贯。
+  - 内容涉及 JavaScript 基础语法，与前一章的 SVG 引入区分明显，具有独立的章节语义。
+  keep_split: true
+- 'no': 1359
+  overturn_probability: 0.0
+  alternative: 正文第三章标题
+  counter_evidence:
+  - 该行 '# 3. 关于 SVG 的一切' 是一级标题，编号 '3' 承接 '2'，序号连贯。
+  - 标题语义明确，概括了后续关于 SVG 元素、形状、颜色等内容，符合章标题特征。
+  keep_split: true
+- 'no': 2046
+  overturn_probability: 0.0
+  alternative: 正文第四章标题
+  counter_evidence:
+  - 该行 '# 4. 随机性与规律性' 是一级标题，编号 '4' 承接 '3'，序号连贯。
+  - 内容讨论随机数生成、网格等高级概念，是独立的知识模块，符合新章判断。
+  keep_split: true
+- 'no': 2788
+  overturn_probability: 0.0
+  alternative: 正文第五章标题
+  counter_evidence:
+  - 该行 '# 5. 对噪声的需求' 是一级标题，编号 '5' 承接 '4'，序号连贯。
+  - 内容专门讲解噪声（Noise）在生成艺术中的应用，具有独立的统领性，确认为新章。
+  keep_split: true

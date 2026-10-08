@@ -1,0 +1,79 @@
+chapter_starts:
+- 'no': 2959
+  confidence: 0.98
+  final_reason: 双方一致认定。格式为一级标题 '# 6. 创建与应用样式'，具备章节序号，语义统领后续 6.1-6.9 小节，符合最高层级大章特征。
+  accepted_evidence:
+  - Markdown 一级标题标记 `#`
+  - 章节序号 `6.`
+  - 后续紧跟 `## 6.1` 等子章节
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 3835
+  confidence: 0.95
+  final_reason: 双方一致认定。内容为 '## 第三部分'，属于部分-章节结构中的部分标题。根据规则，部分标题需划分新章。
+  accepted_evidence:
+  - 语义为“部分”标题（Part Header）
+  - 规则规定部分-章节模式下部分标题需分章
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 3839
+  confidence: 0.98
+  final_reason: 双方一致认定。格式为一级标题 '# 7. 创建超链接'，紧随第三部分标题，为新的正文章节。
+  accepted_evidence:
+  - Markdown 一级标题标记 `#`
+  - 章节序号 `7.`
+  - 位于部分标题之后，上下文连贯
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 4031
+  confidence: 0.98
+  final_reason: 双方一致认定。格式为一级标题 '# 8. 处理动画'，前文第7章有总结，本章开始新话题，结构清晰。
+  accepted_evidence:
+  - Markdown 一级标题标记 `#`
+  - 章节序号 `8.`
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 4518
+  confidence: 0.98
+  final_reason: 双方一致认定。格式为一级标题 '# 9. 使用多状态对象更改对象视图'，具备章节序号，后续有 9.1, 9.2 等子节。
+  accepted_evidence:
+  - Markdown 一级标题标记 `#`
+  - 章节序号 `9.`
+  - 后续存在子章节
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 4860
+  confidence: 0.98
+  final_reason: 双方一致认定。格式为一级标题 '# 10. 使用富媒体'，前文第9章有总结，本章开始新话题。
+  accepted_evidence:
+  - Markdown 一级标题标记 `#`
+  - 章节序号 `10.`
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 5174
+  confidence: 0.95
+  final_reason: 双方一致认定。内容为 '# 第四部分'，属于部分标题。根据规则，部分标题需划分新章。
+  accepted_evidence:
+  - 语义为“部分”标题（Part Header）
+  - 规则规定部分标题需分章
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 5177
+  confidence: 0.98
+  final_reason: 双方一致认定。格式为一级标题 '# 11. 上传和下载文件'，位于第四部分标题之后，为新的正文章节。
+  accepted_evidence:
+  - Markdown 一级标题标记 `#`
+  - 章节序号 `11.`
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 5373
+  confidence: 0.9
+  final_reason: 双方一致认定。内容为 '# 创建可重排 EPUB'，虽无数字序号，但使用一级标题标记。结合上下文（第11章总结后），且后续出现 '##
+    12.2' 等子节（暗示这是第12章的开始，12.1可能缺失或隐含），语义统领性强，判定为新章。
+  accepted_evidence:
+  - Markdown 一级标题标记 `#`
+  - 上下文承接第11章总结
+  - 后续出现 '## 12.2' 等第12章子节，证明其为第12章起始
+  rejected_evidence: []
+  need_human_review: false
+rejected_lines: []
