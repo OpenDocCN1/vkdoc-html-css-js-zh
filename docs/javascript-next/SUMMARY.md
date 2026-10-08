@@ -13,7 +13,7 @@
 +   [9. 使用生成器与迭代器的可迭代序列](javascript-next_12.md)
 +   [10. 用 Promise 避免回调](javascript-next_13.md)
 +   [11. 使用类实现多重同类对象](javascript-next_14.md)
-+   [使用模块进行命名空间管理](javascript-next_15.md)
++   [12. 使用模块进行命名空间管理](javascript-next_15.md)
 +   [13. 利用 Proxy 和 Reflect 实现变形](javascript-next_16.md)
 +   [14. 看似命令式的 `async` 与 `await`](javascript-next_17.md)
 +   [15. 异步迭代器和生成器——思想的碰撞](javascript-next_18.md)
