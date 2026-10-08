@@ -1,6 +1,4 @@
-# 第 5 章
-
-## 理解 Intent
+# 第 5 章 理解 Intent
 
 Android 引入了一个称为 *intent* 的概念来调用组件。Android 的组件列表包括 `Activity`（UI 组件）、`Service`（后台代码）、`Broadcast Receiver`（响应广播消息的代码）和 `Content Provider`（抽象数据的代码）。
 
