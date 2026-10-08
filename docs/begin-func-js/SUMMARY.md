@@ -1,5 +1,5 @@
 +   [JavaScript 函数式入门指南](README.md)
-+   [函数式编程简介](01_fmt.md)
++   [一、函数式编程简介](01_fmt.md)
 +   [二、JavaScript 函数的基础](02_fmt.md)
 +   [三、高阶函数](03_fmt.md)
 +   [四、闭包和高阶函数](04_fmt.md)
