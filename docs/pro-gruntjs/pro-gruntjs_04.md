@@ -1,8 +1,4 @@
-# 第 4 章
-
-![image](img/00005.jpeg)
-
-## 使用 Grunt 处理 JavaScript
+# 第 4 章 使用 Grunt 处理 JavaScript
 
 ### Grunt 与 JavaScript 模块化开发
 

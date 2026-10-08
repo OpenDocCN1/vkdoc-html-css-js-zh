@@ -1,7 +1,4 @@
-# 第 2 章
-![image](img/00005.jpeg)
-
-# 如何在项目中使用 Grunt
+# 第 2 章 如何在项目中使用 Grunt
 
 在上一章中，你简要了解了 `Grunt` 以及在项目中使用 `Grunt` 的好处。本章将更详细地介绍 `Grunt`、如何安装 `Grunt`，以及如何在你的项目中使用 `Grunt`。在了解 `Grunt` 本身之前，充分理解 `Node.js` 非常重要。`Grunt` 构建在 `Node.js` 之上，因此，充分理解 `Node.js` 以及模块在 `Node.js` 中的运作方式，将使学习和理解 `Grunt` 变得更加容易。
 
