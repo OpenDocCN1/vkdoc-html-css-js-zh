@@ -1,6 +1,5 @@
 +   [高级游戏开发者工具包](README.md)
 +   [高级游戏开发者工具包](the-advanced-game-developers-toolkit_01.md)
-+   [目录](the-advanced-game-developers-toolkit_02.md)
 +   [关于作者与关于技术审校者](the-advanced-game-developers-toolkit_03.md)
 +   [1. 入门指南](the-advanced-game-developers-toolkit_04.md)
 +   [2. 使用 Tiled Editor](the-advanced-game-developers-toolkit_05.md)
@@ -9,5 +8,4 @@
 +   [5. 寻路基础](the-advanced-game-developers-toolkit_08.md)
 +   [6. 寻找最短路径](the-advanced-game-developers-toolkit_09.md)
 +   [7. 基于瓦片的游戏：更多乐趣](the-advanced-game-developers-toolkit_10.md)
-+   [宽相位与窄相位碰撞](the-advanced-game-developers-toolkit_11.md)
 +   [索引](the-advanced-game-developers-toolkit_12.md)
