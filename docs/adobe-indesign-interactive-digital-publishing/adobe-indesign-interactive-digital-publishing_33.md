@@ -1,4 +1,4 @@
-# 创建可重排 EPUB
+# 12. 创建可重排 EPUB
 
 EPUB 分为两种类型：可重排版式和固定版式。可重排 EPUB 通常用于长文档，例如小说和篇幅较长的阅读材料。固定版式 EPUB 则是看起来类似于 PDF 文件的文档。其文字和对象的版式与组织在很大程度上模仿了版式设计。
 
@@ -643,3 +643,105 @@ InDesign 在创建 `HTML` 和 `CSS` 文件方面表现出色，但在将样式�
 > [`www.idpf.org`](http://www.idpf.org)（国际数字出版论坛）网站是 EPUB 作者和爱好者获取信息的绝佳来源。在那里你可以找到文章、新闻、公告、EPUB 标准等。请定期查看该网站上的帖子，以了解更多关于 EPUB 出版的信息。
 
 你还可以找到其他用于验证 EPUB 的商业应用程序和在线服务。只需在 Google 上搜索 EPUB 验证器即可。
+
+# 12.9 在设备上阅读 EPUB
+
+在第 11 章中，我讨论了如何将文件从电脑上传到设备。在大多数情况下，我发现最好的方法是使用 Dropbox。如果你通过 USB 将电脑连接到安卓设备，也可以将出版物直接复制到设备上，但在多数情况下，Dropbox 效果最佳。使用 Dropbox 时，你可以选择想要用来打开出版物的阅读器类型。
+
+目前有多种不同的阅读器可用于打开 EPUB。当你通过内容提供商托管出版物时，你希望尽可能多地让各种电子阅读器都能访问你的出版物。因此，你应当计划在多种设备上打开 EPUB。
+
+## 12.9.1 使用苹果 iBooks
+
+复制到 Dropbox 的文件是别名，在你查看出版物之前并不会下载到设备上。在 iPad 或 iPhone 上，打开 Dropbox 并点击文件列表中的某个文档。此时，Dropbox 列表中的文件便会下载到你的设备上。点击屏幕顶部的“共享”按钮，如图 12-37 所示。
+
+![A432409_1_En_12_Fig37_HTML.jpg](img/A432409_1_En_12_Fig37_HTML.jpg)
+
+图 12-37. 点击 AirDrop 共享按钮
+
+在第一行图标的下方，你会找到“在...中打开”按钮。点击此按钮，屏幕会显示能够打开你出版物的应用程序，如图 12-38 所示。点击“拷贝到 iBooks”按钮，出版物便会在苹果 iBooks 中打开。
+
+![A432409_1_En_12_Fig38_HTML.jpg](img/A432409_1_En_12_Fig38_HTML.jpg)
+
+图 12-38. 点击“拷贝到 iBooks”以在 iBooks 中查看出版物
+
+## 12.9.2 使用 Kindle KF8 格式
+
+电子书市场的绝大部分份额由 `Amazon.com` 占据。如果你想销售电子书，就不能忽视亚马逊。早期的 Kindle 电子阅读器使用亚马逊专有的 `MOBI` 格式。如今，Kindle 设备使用亚马逊所谓的 `KF8` 格式。有点令人困惑的是，当你为 Kindle 导出文件时，文件扩展名仍然显示为 `.mobi`。不过不用担心，如果你使用更新的 Kindle 工具来创建可在 Kindle 阅读器上阅读的 EPUB，生成的文件实际上是 `KF8` 格式。
+
+要将 EPUB 转换为 `KF8` (`MOBI`)，请下载并安装 `Kindle Previewer`。你可以从 [`http://www.amazon.com/gp/feature.html?docId=1000765261`](http://www.amazon.com/gp/feature.html?docId=1000765261) 下载 `Kindle Previewer`，或者通过谷歌搜索“Kindle Previewer”获取。
+
+你还需要从 [`http://www.amazon.com/gp/feature.html?docId=1000765211`](http://www.amazon.com/gp/feature.html?docId=1000765211) 下载 `KindleGen`，或者搜索“KindleGen”并跟随链接到下载页面。当你在 `Kindle Previewer` 中打开文件时，该文件会被 `KindleGen` 转换并以 `.mobi` 扩展名保存，但如果你使用的是较新版本的 `Kindle Previewer`，它会被转换为 `KF8` 格式。
+
+安装 `Kindle Previewer` 后，启动该应用程序，你会看到一个欢迎屏幕。欢迎屏幕上有许多链接，指向亚马逊托管的帮助文档，你可以在“帮助”部分看到这些链接。点击“打开图书”按钮，在 Previewer 中打开一个 EPUB。支持的文件类型包括 `MOBI`、`EPUB`、`HTML` 和 `OFP`。你会看到 `MOBI` 被列为支持格式，是因为你可以将旧的 `.mobi` 文件转换为新的 `KF8` 格式。
+
+截至撰写本文时，`Kindle Previewer 3` 应用程序仍处于测试阶段。`Kindle Previewer 3` 在将 EPUB 转换为 `KF8` 格式方面表现出色。在图 12-39 中，你可以看到一个 EPUB 的预览以及 `Kindle Previewer 3` 应用程序的偏好设置对话框。
+
+![A432409_1_En_12_Fig39_HTML.jpg](img/A432409_1_En_12_Fig39_HTML.jpg)
+
+图 12-39. 使用 `Kindle Previewer 3` 转换的 EPUB
+
+右键点击桌面上的文件，然后从上下文菜单中选择“打开方式”。如果你的电脑上安装了 Kindle 电子阅读器，Kindle 应用程序会显示为默认阅读器。
+
+要将电子书发送到设备并在 Kindle 电子阅读器或设备上的 Kindle 阅读器应用中查看，请使用“发送到 Kindle”应用程序，你可以从 `Amazon.com` 的 [`http://www.amazon.com/gp/sendtokindle/pc`](http://www.amazon.com/gp/sendtokindle/pc) 下载。启动“发送到 Kindle”应用，然后将 EPUB 文件拖放至应用程序窗口。
+
+## 12.9.3 使用专用 EPUB 阅读器
+
+市面上有许多软件应用程序和专用电子阅读器可供选择。通常，你可以下载各种电子阅读器和应用的桌面版。`Kobo` 阅读器在加拿大和欧洲很受欢迎。你可以从 [`https://store.kobobooks.com`](https://store.kobobooks.com) 为你的桌面电脑下载 `Kobo` 阅读器。
+
+各种设备的电子阅读器应用均可下载。你可以获取 `Stanza` 或 `Calibre` 作为桌面和设备的电子阅读器，此外还有许多其他应用。你可以下载几个来测试你的 EPUB，并验证它们在多种阅读器中是否正常工作。
+
+电子阅读器和数字出版的世界在不断变化。请定期搜索互联网，了解 EPUB 格式的趋势、流行应用和发展动态。
+
+# 12.10 营销 EPUB
+
+如果你想销售 EPUB，你需要一个在线托管商。最受欢迎的托管商是面向 Kindle 电子阅读器的亚马逊和面向 iOS 设备的苹果。为了覆盖最广泛的潜在买家，你需要同时考虑这两个内容托管商。
+
+在你采取任何行动之前，甚至在创建 EPUB 之前，你都需要彻底审查提供商对其销售图书的要求。你需要了解 EPUB 中可以包含什么、不能包含什么、特定的格式规则以及一长串其他要求。
+
+## 12.10.1 通过亚马逊分发
+
+像亚马逊和苹果这样的大型内容提供商要求你遵循其出版指南中规定的标准。对于亚马逊，你可以通过 [`www.kdp.amazon.com`](http://www.kdp.amazon.com) 查找出版指南和帮助信息。
+
+你必须创建一个亚马逊账户。如果你已有用于购物的账户，可以使用相同的登录名和密码。如果你没有账户，则需要注册一个新账户。如果你想将现有账户与用于出版的账户分开，可以创建第二个账户。
+
+遗憾的是，KDP 网页上没有指向 KF8 网页的链接。要查看有关 KF8 格式的指南和帮助信息，请访问 [`http://www.amazon.com/gp/feature.html?docId=1000729511`](http://www.amazon.com/gp/feature.html?docId=1000729511)，或者直接在谷歌搜索窗口中输入“KF8”。在谷歌中看到的第一个链接是指向 KF8 格式页面的链接，如图 12-40 所示。
+
+![A432409_1_En_12_Fig40_HTML.jpg](img/A432409_1_En_12_Fig40_HTML.jpg)
+
+图 12-40. Kindle KF8 网页
+
+在该网页的右侧，你会找到许多帮助页面的链接。其中有一个是“Kindle 出版指南”的链接。点击该链接，会打开一个 PDF 文档。该文档有 91 页，包含了大量关于亚马逊为 Kindle 设备制作图书所制定的标准和要求的信息。在为在 `Amazon.com` 上分发而创建 EPUB 之前，请务必彻底审阅该文档。
+
+请注意，在 KF8 网页上，你会看到一个 Adobe InDesign 插件的链接。不必费心下载这个插件。它一直处于测试阶段，并且只支持到 InDesign CS6。它不支持 InDesign CC。
+
+要通过亚马逊分发图书，你需要仔细查看 Kindle 直接出版网页上概述的步骤。在网页浏览器中输入“Kindle Direct Publishing”以搜索指向亚马逊网页的链接。你看到的第一个结果就是亚马逊详细介绍如何在 `Amazon.com` 上上传和出版电子书信息的链接。
+
+### 12.10.2 通过 Apple iTunes 发布
+
+Apple 也有发布指南，你需要遵守这些指南才能在 Apple iTunes 商店中托管书籍。同样，你需要在 `http://developer.apple.com` 注册一个 Apple 账户。创建账户是免费的，你需要先创建账户，才能继续查找有关通过 iTunes 发布的信息。
+
+创建账户后，登录 `www.itunesconnect.apple.com`。点击 iTunes Connect 网页上的 `Resources and Help`（资源与帮助）按钮，即可找到指南和帮助信息。点击 `iBooks Store Formatting Guidelines`（iBooks Store 格式指南）和 `iBooks Publisher User Guide`（iBooks 出版商用户指南）链接。在创建打算通过 Apple iTunes 分发的 EPUB 之前，请彻底审阅这些文档。在 Apple 的网站上，你可以找到格式化出版物并上传至 Apple 所需的所有信息。
+
+首次登录 Apple 的 iTunes Connect 网页时，除了 `Resources and Help`（资源与帮助）按钮外，你还会看到 `My Books`（我的书籍）和 `Sales and Trends`（销售与趋势）按钮。Apple 让你可以在 `Sales and Trends`（销售与趋势）网页上轻松跟踪出版物的销售情况，如图 12-41 所示，在该网页的 `My Books`（我的书籍）页面上可以看到你的出版物列表。
+
+![A432409_1_En_12_Fig41_HTML.jpg](img/A432409_1_En_12_Fig41_HTML.jpg)
+
+图 12-41. 销售与趋势网页
+
+在每个书名下方，你可以看到下拉菜单，分别显示按国家/地区统计的、销售你书籍的商店数量，以及未销售你书籍的商店数量。我在 Apple 上发布的一本书显示有 51 家商店在售，1 家商店未售。当我点击 `Not in 1 Store`（1 家商店未售）按钮时，下拉菜单显示该书在中国地区不可用。
+
+在 Apple iTunes 上发布书籍后，务必定期访问 iTunes Connect 网站。你可以查看销售进度以及按国家/地区统计的销售商店数量。
+
+### 12.10.3 使用其他电子书经销商
+
+你可能希望将书籍分发到 Amazon 和 Apple 之外的其他渠道。一旦创建了有效的 EPUB，大部分工作就完成了。不同电子书经销商之间的差异可能包括：是否将封面作为单独文件包含、是否添加前言和/或致谢页、是否需要获取 ISBN 编号或由托管方获取 ISBN 编号、段落样式是否需要 HTML 标签等。
+
+每家电子书经销商都在其网站上提供了帮助页面，说明你需要准备的内容以及如何上传文件。要探索其他电子书经销商，可以搜索 Kobo、Nook Press、Smashwords，或直接搜索电子书经销商以找到小型出版商列表。当你浏览不同网站时，请查找每家出版商要求的发布指南和标准。
+
+## 12.11 总结
+
+本章全部关于可重排 EPUB。你学习了如何创建可重排 EPUB、正确创建 EPUB 的一些最佳实践、如何打开 EPUB 归档并查看其内容，以及从 InDesign 导出到可重排 EPUB 格式时的各种注意事项。
+
+你还了解了向可重排 EPUB 添加交互性的局限性，以及一些允许你添加交互性的变通方法。
+
+就交互式 EPUB 而言，可重排 EPUB 的限制非常大。当你向文档添加交互性并导出为固定版式 EPUB 时，束缚就解开了。在下一章中，你将学习创建固定版式 EPUB 的所有优势。
