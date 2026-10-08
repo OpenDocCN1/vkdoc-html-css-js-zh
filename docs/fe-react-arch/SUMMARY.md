@@ -4,5 +4,5 @@
 +   [三、反应式编程](3_fmt.md)
 +   [四、Cycle.js 和 MVI](4_fmt.md)
 +   [五、MobX：简单状态管理](5_fmt.md)
-+   [SAM：函数式反应式模式](6_fmt.md)
++   [六、SAM：函数式反应式模式](6_fmt.md)
 +   [七、反应式的未来](7_fmt.md)
