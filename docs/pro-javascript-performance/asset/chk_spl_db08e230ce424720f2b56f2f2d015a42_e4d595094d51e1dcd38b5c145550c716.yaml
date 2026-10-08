@@ -1,0 +1,16 @@
+reviews:
+- 'no': 6047
+  overturn_probability: 0.0
+  alternative: 真正的章节标题（第 8 章）
+  counter_evidence:
+  - 行 6047 内容为 '## 第 8 章'，符合'第 X 章'的最高层级编号特征，且单独成行、无标点、长度短。前文 6033-6045 为第 7 章的总结，上下文连贯性支持此处开启新章。
+  - 尽管有 Markdown 标记 `##`，但根据规则，带有明确'第 X 章'序号的标题通常被识别为顶级章节划分点，即使层级符号可能因编辑器习惯存在差异。
+  keep_split: true
+- 'no': 6838
+  overturn_probability: 0.0
+  alternative: 文末索引章节标题
+  counter_evidence:
+  - 行 6838 内容为 '## 索引'，后续行 6840 开始为 '### A' 及其对应的索引条目（如 Android Virtual Device Manager
+    等），这是典型的书籍末尾索引结构。
+  - 根据判断规则'文末索引也划分为一章'，此行作为索引部分的起始标志，必须分章。
+  keep_split: true

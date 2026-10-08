@@ -1,0 +1,40 @@
+chapter_starts:
+- 'no': 12486
+  confidence: 0.9
+  reason: 一级标题“文档排版”，标志着主题从装饰器模式切换至文档排版，具有统领性。
+- 'no': 12665
+  confidence: 0.95
+  reason: 一级标题“飞桨框架的安装与配置”，主题切换至具体框架安装，独立章节。
+- 'no': 12893
+  confidence: 0.95
+  reason: 一级标题“对象池模式”，开始新的设计模式章节。
+- 'no': 13026
+  confidence: 0.9
+  reason: 一级标题“概述”，结合上下文（ParentMonth类），开启新的技术组件说明章节。
+- 'no': 13104
+  confidence: 0.95
+  reason: 一级标题“Tooltip 类与事件系统”，开始新的UI组件讲解章节。
+- 'no': 13828
+  confidence: 0.95
+  reason: 一级标题“享元模式”，开始新的设计模式章节。
+- 'no': 13862
+  confidence: 0.95
+  reason: 一级标题“飞行器模式”（Flyweight Pattern的另一种译法），开始新的设计模式章节。
+- 'no': 13902
+  confidence: 0.95
+  reason: 一级标题“代理模式”，开始新的设计模式章节。
+- 'no': 14211
+  confidence: 0.9
+  reason: 一级标题“代理模式”，虽然与前文主题相同，但此处以“#”开始新的独立块，且后续内容重复了模式定义和示例，视为新的一章（或重复章节）。
+- 'no': 14513
+  confidence: 0.85
+  reason: 一级标题“REST API 与代理模式”，开始新的技术实现章节。
+- 'no': 14571
+  confidence: 0.9
+  reason: 一级标题“代理模式”，再次出现一级标题，内容涉及具体的类实现（ProxyPatternExample），视为新章节。
+- 'no': 14712
+  confidence: 0.95
+  reason: 一级标题“目录”，通常作为独立章节或附录部分。
+- 'no': 14714
+  confidence: 0.95
+  reason: 一级标题“概述”，结合“版本 1.0.0”和后续安装步骤，视为一个新的项目文档章节。

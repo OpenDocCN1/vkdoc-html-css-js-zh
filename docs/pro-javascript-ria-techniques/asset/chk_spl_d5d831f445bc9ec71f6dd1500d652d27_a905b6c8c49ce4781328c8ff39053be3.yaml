@@ -1,0 +1,57 @@
+reviews:
+- 'no': 16092
+  overturn_probability: 0.0
+  alternative: 书籍前言章节标题
+  counter_evidence:
+  - 该行格式为 '# 前言'，属于 Markdown 一级标题。
+  - 根据规则，前言、序言等正文之前的内容统一划分为一章，因此该判断是正确的，无法推翻。
+  keep_split: true
+- 'no': 16102
+  overturn_probability: 0.0
+  alternative: 正文第一章标题
+  counter_evidence:
+  - 该行格式为 '# 构建坚实基础'，语义上标志着正文部分的开始。
+  - 前文 16092-16101 为前言目录，后续内容均为该章的子节（##），符合章标题特征。
+  keep_split: true
+- 'no': 16219
+  overturn_probability: 0.0
+  alternative: 正文后续大章标题
+  counter_evidence:
+  - 该行格式为 '# 面向富互联网应用的 JavaScript'，是一级标题。
+  - 前一章在 16217 '## 总结' 处结束，此处开启新的大章节，结构连贯。
+  keep_split: true
+- 'no': 16301
+  overturn_probability: 0.0
+  alternative: 正文后续大章标题
+  counter_evidence:
+  - 该行格式为 '# Page Performance'，是一级标题。
+  - 内容从 JS 章节切换到性能优化章节，语义清晰，符合分章逻辑。
+  keep_split: true
+- 'no': 16455
+  overturn_probability: 0.0
+  alternative: 正文后续大章标题
+  counter_evidence:
+  - 该行格式为 '# 障眼法：感知响应速度'，是一级标题。
+  - 位于 'Page Performance' 章节结束后的新主题开始，具有统领性。
+  keep_split: true
+- 'no': 16473
+  overturn_probability: 0.0
+  alternative: 正文后续大章标题
+  counter_evidence:
+  - 该行格式为 '# 优雅排版'，是一级标题。
+  - 后续包含 '## 挑战'、'## 字体基本结构' 等子节，结构完整。
+  keep_split: true
+- 'no': 16541
+  overturn_probability: 0.0
+  alternative: 正文后续大章标题
+  counter_evidence:
+  - 该行格式为 '# 多媒体播放'，是一级标题。
+  - 主题从排版切换到多媒体，符合章节划分。
+  keep_split: true
+- 'no': 16581
+  overturn_probability: 0.0
+  alternative: 正文后续大章标题
+  counter_evidence:
+  - 该行格式为 '# 表单控件'，是一级标题。
+  - 后续包含 '## 自定义现有表单控件' 等子节，是独立的大章节。
+  keep_split: true

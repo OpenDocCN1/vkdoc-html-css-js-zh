@@ -1,0 +1,19 @@
+chapter_starts:
+- 'no': 17775
+  confidence: 0.9
+  reason: 一级标题 '# 排版后的内容'，标志文档主要部分的开始。
+- 'no': 18598
+  confidence: 0.9
+  reason: 一级标题 '# 排版后文本'，标志新的主要章节或文档部分。
+- 'no': 19211
+  confidence: 0.95
+  reason: 一级标题 '# 责任链模式'，明确的主题章节，后续内容围绕该模式展开。
+- 'no': 19469
+  confidence: 0.95
+  reason: 一级标题 '# JavaScript 类'，新的技术主题章节开始。
+- 'no': 19685
+  confidence: 0.95
+  reason: 一级标题 '# 深入探究 Java 对象'，新的技术主题章节开始。
+- 'no': 19838
+  confidence: 0.9
+  reason: 一级标题 '# 标题：高级文档工程师排版任务'，标志一个新的大任务或章节。

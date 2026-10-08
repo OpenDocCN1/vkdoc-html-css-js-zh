@@ -1,0 +1,25 @@
+chapter_starts:
+- 'no': 16092
+  confidence: 1.0
+  reason: 标记为一级标题 '# 前言'，属于书籍前部分的标准章节，需单独划分为一章。
+- 'no': 16102
+  confidence: 1.0
+  reason: 标记为一级标题 '# 构建坚实基础'，是全书第一个大章（正文开始），具有统领性。
+- 'no': 16219
+  confidence: 1.0
+  reason: 标记为一级标题 '# 面向富互联网应用的 JavaScript'，开启新的大章节。
+- 'no': 16301
+  confidence: 1.0
+  reason: 标记为一级标题 '# Page Performance'，开启新的大章节。
+- 'no': 16455
+  confidence: 1.0
+  reason: 标记为一级标题 '# 障眼法：感知响应速度'，开启新的大章节。
+- 'no': 16473
+  confidence: 1.0
+  reason: 标记为一级标题 '# 优雅排版'，开启新的大章节。
+- 'no': 16541
+  confidence: 1.0
+  reason: 标记为一级标题 '# 多媒体播放'，开启新的大章节。
+- 'no': 16581
+  confidence: 1.0
+  reason: 标记为一级标题 '# 表单控件'，开启新的大章节。

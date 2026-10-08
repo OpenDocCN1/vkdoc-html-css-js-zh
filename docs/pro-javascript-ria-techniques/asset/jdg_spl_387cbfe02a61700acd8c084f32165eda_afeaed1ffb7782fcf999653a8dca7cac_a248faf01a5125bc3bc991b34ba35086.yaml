@@ -1,0 +1,174 @@
+chapter_starts:
+- 'no': 0
+  confidence: 0.95
+  final_reason: 书名页/封面，作为前置内容的第一章
+  accepted_evidence:
+  - 该行是书名
+  - 位于文本最开头
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 667
+  confidence: 0.9
+  final_reason: 索引章节起始
+  accepted_evidence:
+  - 标题为'## 索引'
+  - 通常作为独立章节处理
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 671
+  confidence: 0.9
+  final_reason: 关于作者章节
+  accepted_evidence:
+  - 标题为'## 关于作者'
+  - 属于前置或附录内容，独立成章
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 681
+  confidence: 0.9
+  final_reason: 关于技术审校章节
+  accepted_evidence:
+  - 标题为'## 关于技术审校者'
+  - 属于前置或附录内容，独立成章
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 691
+  confidence: 0.9
+  final_reason: 致谢章节
+  accepted_evidence:
+  - 标题为'## 致谢'
+  - 属于前置或附录内容，独立成章
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 703
+  confidence: 0.9
+  final_reason: 引言章节
+  accepted_evidence:
+  - 标题为'## 引言'
+  - 属于正文前的引言部分，独立成章
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 721
+  confidence: 0.95
+  final_reason: 第一部分：最佳实践，正文部分的起始
+  accepted_evidence:
+  - 标题为'# 第一部分：最佳实践'
+  - 书籍采用部分-章节模式，部分标题需分章
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 725
+  confidence: 0.95
+  final_reason: 第 1 章：奠定坚实基础，正文中该章节的起始
+  accepted_evidence:
+  - 标题为'## 第 1 章：奠定坚实基础'
+  - 最高层级章节标题
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 2191
+  confidence: 0.95
+  final_reason: 第 2 章：面向富互联网应用的 JavaScript，正文中该章节的起始
+  accepted_evidence:
+  - 标题为'## 第 2 章：面向富互联网应用的 JavaScript'
+  - 位于第1章小结之后，符合新章节开始的逻辑位置
+  - 复核方确认应分章
+  rejected_evidence: []
+  need_human_review: false
+rejected_lines:
+- 'no': 91
+  reason: 目录项，非正文标题
+  need_human_review: false
+- 'no': 93
+  reason: 目录项，非正文标题
+  need_human_review: false
+- 'no': 95
+  reason: 目录项，非正文标题
+  need_human_review: false
+- 'no': 97
+  reason: 目录项，非正文标题
+  need_human_review: false
+- 'no': 99
+  reason: 目录中的部分标题，非正文起始
+  need_human_review: false
+- 'no': 101
+  reason: 目录中的章节标题，非正文起始
+  need_human_review: false
+- 'no': 105
+  reason: 目录中的章节标题，非正文起始
+  need_human_review: false
+- 'no': 109
+  reason: 目录中的部分标题，非正文起始
+  need_human_review: false
+- 'no': 111
+  reason: 目录中的章节标题，非正文起始
+  need_human_review: false
+- 'no': 115
+  reason: 目录中的章节标题，非正文起始
+  need_human_review: false
+- 'no': 119
+  reason: 目录中的章节标题，非正文起始
+  need_human_review: false
+- 'no': 123
+  reason: 目录中的部分标题，非正文起始
+  need_human_review: false
+- 'no': 125
+  reason: 目录中的章节标题，非正文起始
+  need_human_review: false
+- 'no': 129
+  reason: 目录中的章节标题，非正文起始
+  need_human_review: false
+- 'no': 133
+  reason: 目录中的章节标题，非正文起始
+  need_human_review: false
+- 'no': 137
+  reason: 目录中的章节标题，非正文起始
+  need_human_review: false
+- 'no': 141
+  reason: 目录中的章节标题，非正文起始
+  need_human_review: false
+- 'no': 145
+  reason: 目录中的章节标题，非正文起始
+  need_human_review: false
+- 'no': 149
+  reason: 目录中的章节标题，非正文起始
+  need_human_review: false
+- 'no': 153
+  reason: 目录中的索引项，非正文起始
+  need_human_review: false
+- 'no': 253
+  reason: 目录中的章节标题，非正文起始
+  need_human_review: false
+- 'no': 323
+  reason: 目录中的部分标题，非正文起始
+  need_human_review: false
+- 'no': 325
+  reason: 目录中的章节标题，非正文起始
+  need_human_review: false
+- 'no': 353
+  reason: 目录中的章节标题，非正文起始
+  need_human_review: false
+- 'no': 437
+  reason: 目录中的章节标题，非正文起始
+  need_human_review: false
+- 'no': 469
+  reason: 目录中的部分标题，非正文起始
+  need_human_review: false
+- 'no': 471
+  reason: 目录中的章节标题，非正文起始
+  need_human_review: false
+- 'no': 505
+  reason: 目录中的章节标题，非正文起始
+  need_human_review: false
+- 'no': 533
+  reason: 目录中的章节标题，非正文起始
+  need_human_review: false
+- 'no': 561
+  reason: 目录中的章节标题，非正文起始
+  need_human_review: false
+- 'no': 593
+  reason: 目录中的章节标题，非正文起始
+  need_human_review: false
+- 'no': 609
+  reason: 目录中的章节标题，非正文起始
+  need_human_review: false
+- 'no': 623
+  reason: 目录中的章节标题，非正文起始
+  need_human_review: false

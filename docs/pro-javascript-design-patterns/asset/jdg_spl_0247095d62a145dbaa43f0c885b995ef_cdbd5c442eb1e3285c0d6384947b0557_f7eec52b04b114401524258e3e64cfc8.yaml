@@ -1,0 +1,41 @@
+chapter_starts:
+- 'no': 19211
+  confidence: 0.85
+  final_reason: 双方一致认可为一级标题，语义上统领后续关于责任链模式的完整章节内容，且符合格式特征。
+  accepted_evidence:
+  - 以 '#' 开头，是一级标题。
+  - 后续内容（摘要、简介、概念、示例等）均围绕'责任链模式'展开，具有明确的统领性。
+  - 前文是大量重复的代码块和结论，此处是一个清晰的主题切换点。
+  rejected_evidence:
+  - 复核方认为可能是子主题或索引标记，但鉴于其一级标题层级及内容完整性，作为新章处理更合理。
+  need_human_review: false
+- 'no': 19469
+  confidence: 0.85
+  final_reason: 双方一致认可为一级标题，主题从设计模式切换到JavaScript类语言特性，构成新的知识模块。
+  accepted_evidence:
+  - 以 '#' 开头，是一级标题。
+  - 标题语义'JavaScript 类'概括性强，后续内容涵盖语法、模式、优化等完整体系。
+  - 与前文'责任链模式'相比，领域发生了显著切换。
+  rejected_evidence:
+  - 无有效反驳证据。
+  need_human_review: false
+- 'no': 19685
+  confidence: 0.85
+  final_reason: 双方一致认可为一级标题，主题从JavaScript切换到Java，标志新的语言领域章节。
+  accepted_evidence:
+  - 以 '#' 开头，是一级标题。
+  - 标题'深入探究 Java 对象'明确指出了新的技术栈和主题。
+  - 后续内容结构完整，涵盖对象创建、初始化、多态等Java核心概念。
+  rejected_evidence:
+  - 无有效反驳证据。
+  need_human_review: false
+rejected_lines:
+- 'no': 17775
+  reason: 复核方指出其为排版噪声或元数据标记，缺乏章节统领性语义，判断方未提供强力反驳，故不划章。
+  need_human_review: false
+- 'no': 18598
+  reason: 复核方指出其为重复的排版噪声或元数据标记，且语义无法统领后续目录和概述内容，故不划章。
+  need_human_review: false
+- 'no': 19838
+  reason: 复核方指出其包含'标题：'前缀，疑似任务指令或元数据，且后续内容为编号子层级，不符合正式书籍章节特征，故不划章。
+  need_human_review: false

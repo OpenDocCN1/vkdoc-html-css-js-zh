@@ -1,0 +1,142 @@
+chapter_starts:
+- 'no': 6310
+  confidence: 0.95
+  final_reason: 双方一致认定为章标题。Markdown一级标题“# 单例模式”，语义独立且统领后续关于单例模式的详细说明，符合格式与语义特征。
+  accepted_evidence:
+  - Markdown一级标题格式
+  - 语义具有统领性，覆盖后续单例模式相关内容
+  - 双方均无反驳证据，复核方支持保留
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 7032
+  confidence: 0.95
+  final_reason: 双方一致认定为章标题。Markdown一级标题“# 继承与原型链”，主题清晰，统领后续关于JavaScript原型链和继承机制的讨论。
+  accepted_evidence:
+  - Markdown一级标题格式
+  - 语义概括性强，涵盖继承与原型链核心概念
+  - 复核方确认keep_split
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 7075
+  confidence: 0.95
+  final_reason: 双方一致认定为章标题。Markdown一级标题“# 类（ES6 引入）”，明确界定主题范围，统领后续关于ES6 Class语法的讲解。
+  accepted_evidence:
+  - Markdown一级标题格式
+  - 主题明确（ES6 Class），后续内容紧扣该主题
+  - 复核方确认keep_split
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 7140
+  confidence: 0.95
+  final_reason: 双方一致认定为章标题。Markdown一级标题“# 对象的使用场景”，具有良好概括性，后续列举字典、配置等具体场景，结构清晰。
+  accepted_evidence:
+  - Markdown一级标题格式
+  - 语义统领后续多个二级场景小节
+  - 复核方确认keep_split
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 7713
+  confidence: 0.95
+  final_reason: 双方一致认定为章标题。Markdown一级标题“# 使用设计模式创建对象”，主题明确，统领后续关于工厂模式等设计模式的内容。
+  accepted_evidence:
+  - Markdown一级标题格式
+  - 语义统领性强，后续展开多种设计模式
+  - 复核方确认keep_split
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 8286
+  confidence: 0.9
+  final_reason: 双方一致认定为章标题。标题为“# 前言”，属于正文之前的内容，根据规则“前言、序言...统一划分为一章”，应作为独立章节。
+  accepted_evidence:
+  - 标题语义为“前言”，属于前置说明内容
+  - 符合规则中关于前言类内容独立分章的要求
+  - 复核方虽提到位置靠后，但仍支持keep_split
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 8499
+  confidence: 0.99
+  final_reason: 双方一致认定为章标题。带有明确编号“# 第一章：理解 RPC”，属于全书最高层级大章，序号连贯且语义清晰。
+  accepted_evidence:
+  - 明确的书级章节编号（第一章）
+  - 格式符合一级标题规范
+  - 复核方确认keep_split，无反对证据
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 8525
+  confidence: 0.99
+  final_reason: 双方一致认定为章标题。带有明确编号“# 第二章：理解 Bridger”，序号连贯（紧接第一章），语义独立。
+  accepted_evidence:
+  - 明确的书级章节编号（第二章）
+  - 序号与前一章连贯
+  - 复核方确认keep_split
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 8542
+  confidence: 0.99
+  final_reason: 双方一致认定为章标题。带有明确编号“# 第三章：Bridger 中的桥接类”，序号连贯，主题明确。
+  accepted_evidence:
+  - 明确的书级章节编号（第三章）
+  - 序号与前一章连贯
+  - 复核方确认keep_split
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 8591
+  confidence: 0.99
+  final_reason: 双方一致认定为章标题。带有明确编号“# 第四章：实战：构建一个简单的 RPC 系统”，序号连贯，内容独立。
+  accepted_evidence:
+  - 明确的书级章节编号（第四章）
+  - 序号与前一章连贯
+  - 复核方确认keep_split
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 8633
+  confidence: 0.99
+  final_reason: 双方一致认定为章标题。带有明确编号“# 第五章：桥接类的高级用法”，序号连贯，主题清晰。
+  accepted_evidence:
+  - 明确的书级章节编号（第五章）
+  - 序号与前一章连贯
+  - 复核方确认keep_split
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 8663
+  confidence: 0.85
+  final_reason: 双方一致认定为章标题。虽然编号“第五章”与前一行8633重复，但根据规则“序号连贯性：如果候选序号明显跳跃...只需要划分新的章节，无视其它”，且内容主题（桥接类与私有实现）与前一章（高级用法）不同，视为独立章节。
+  accepted_evidence:
+  - 格式为一级标题
+  - 内容主题独立，不同于前一“第五章”
+  - 规则允许在序号异常时仍按格式划分新章
+  - 复核方虽指出编号重复风险，但仍支持keep_split
+  rejected_evidence:
+  - 编号与前一章重复，可能存在排版错误，但证据不足以否定其作为新章节的结构意图
+  need_human_review: false
+- 'no': 8673
+  confidence: 0.99
+  final_reason: 双方一致认定为章标题。带有明确编号“# 第六章：Bridger 的限制与注意事项”，序号正常，主题独立。
+  accepted_evidence:
+  - 明确的书级章节编号（第六章）
+  - 序号与前一章（尽管前一章编号有重）在逻辑上是新的部分
+  - 复核方确认keep_split
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 8717
+  confidence: 0.95
+  final_reason: 双方一致认定为章标题。Markdown一级标题“# 使用 async 和 await 进行异步编程”，主题明确，统领后续异步编程相关内容。
+  accepted_evidence:
+  - Markdown一级标题格式
+  - 语义统领性强，涵盖C#和JavaScript的异步编程
+  - 复核方确认keep_split
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 8824
+  confidence: 0.95
+  final_reason: 双方一致认定为章标题。Markdown一级标题“# 函数示例”，统领后续关于函数声明、调用及Memo函数的示例代码，符合章节特征。
+  accepted_evidence:
+  - Markdown一级标题格式
+  - 语义概括后续示例内容
+  - 复核方确认keep_split
+  rejected_evidence: []
+  need_human_review: false
+rejected_lines:
+- 'no': 6947
+  reason: 复核方强烈建议驳回（overturn_probability 0.9）。标题内容为“# 标题”，语义极度模糊，缺乏概括性，更像未填写的占位符或排版噪声，而非正式章节名。根据“宁可漏分，不可误分”原则，不予分章。
+  need_human_review: false

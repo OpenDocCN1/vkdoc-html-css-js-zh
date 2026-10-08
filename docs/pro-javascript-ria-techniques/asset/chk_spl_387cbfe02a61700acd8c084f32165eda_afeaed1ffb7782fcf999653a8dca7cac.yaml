@@ -1,0 +1,9 @@
+reviews:
+- 'no': 2191
+  overturn_probability: 0.15
+  alternative: 正文小标题/章节起始标记
+  counter_evidence:
+  - 该行是 Markdown 中的二级标题 `##`，在书籍结构中通常对应章节层级，且后续内容确实围绕 JavaScript 展开
+  - 该行出现在“第 1 章”结束（行 2185-2189 为小结）之后，符合新章节开始的逻辑位置
+  - 原判断理由提到“正文中该章节的起始”，这与书籍“部分-章节”结构中第 2 章开始的位置相符
+  keep_split: true

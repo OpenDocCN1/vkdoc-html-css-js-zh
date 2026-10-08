@@ -1,0 +1,94 @@
+chapter_starts:
+- 'no': 9208
+  confidence: 0.9
+  reason: 一级标题（#），内容为“文档排版”，具有统领性，后续内容涉及文本排版相关概念。
+- 'no': 9216
+  confidence: 0.85
+  reason: 二级标题（##）但结合上下文看，此处开启了新的主题“事件传递与监听”，前文为排版总结，语义上属于新章节起始。考虑到该书似乎没有严格的一级标题区分，且此标题概括性强，判定为新章。
+- 'no': 9290
+  confidence: 0.95
+  reason: 一级标题（#），“构建与组合：从零开始制作组合模式”，明确的主题切换，标志新章节开始。
+- 'no': 9379
+  confidence: 0.9
+  reason: 一级标题（#），“组件树”，前文是组合模式示例，此处开启新的数据结构主题。
+- 'no': 9531
+  confidence: 0.9
+  reason: 一级标题（#），“CompositeFormatter 使用指南”，明确的主题切换。
+- 'no': 9714
+  confidence: 0.85
+  reason: 一级标题（#），“文档排版”，尽管与前文9208标题相同，但位于不同位置，且内容涉及Vue组件创建，视为新章节或独立部分。
+- 'no': 9957
+  confidence: 0.9
+  reason: 一级标题（#），“Lambda 表达式：像函数一样编程”，主题切换。
+- 'no': 9965
+  confidence: 0.85
+  reason: 一级标题（#），“了解 Java Lambda 表达式与事件监听”，虽然与上一个标题主题相关，但作为独立的一级标题段落，且内容结构完整，划分为新章。
+- 'no': 10061
+  confidence: 0.9
+  reason: 一级标题（#），“React 组件与 CSS 样式”，明确的主题切换。
+- 'no': 10170
+  confidence: 0.9
+  reason: 一级标题（#），“Facade 模式 (Facade Pattern)”，设计模式主题切换。
+- 'no': 10178
+  confidence: 0.85
+  reason: 一级标题（#），“Facade 与 Prop Drilling”，主题切换。
+- 'no': 10504
+  confidence: 0.9
+  reason: 一级标题（#），“适配器模式详解”，设计模式主题切换。
+- 'no': 10779
+  confidence: 0.9
+  reason: 一级标题（#），“VueUse 使用指南”，新工具库主题。
+- 'no': 10866
+  confidence: 0.85
+  reason: 一级标题（#），“VueUse 简介”，与上一个标题相关但结构独立，视为新章节。
+- 'no': 10870
+  confidence: 0.9
+  reason: 一级标题（#），“Lambda 函数”，主题切换。
+- 'no': 10876
+  confidence: 0.85
+  reason: 一级标题（#），“函数与参数”，子主题独立成章。
+- 'no': 10884
+  confidence: 0.85
+  reason: 一级标题（#），“事件与响应”，子主题独立成章。
+- 'no': 10890
+  confidence: 0.85
+  reason: 一级标题（#），“接口与实现”，子主题独立成章。
+- 'no': 10894
+  confidence: 0.85
+  reason: 一级标题（#），“HTML 结构”，子主题独立成章。
+- 'no': 10914
+  confidence: 0.85
+  reason: 一级标题（#），“命名约定与代码优化”，子主题独立成章。
+- 'no': 10946
+  confidence: 0.9
+  reason: 一级标题（#），“APISIX 和 Nacos 微服务架构中的适配器模式”，明确的主题切换。
+- 'no': 11060
+  confidence: 0.9
+  reason: 一级标题（#），“JavaScript 异步编程演进：从回调到 async/await”，明确的主题切换。
+- 'no': 11111
+  confidence: 0.85
+  reason: 一级标题（#），“选项”，结合上下文，这是关于装饰器模式选项的讨论，作为新章节起始。
+- 'no': 11191
+  confidence: 0.85
+  reason: 一级标题（#），“选项”，重复出现的一级标题，但内容侧重于具体实现类的介绍，视为新章节。
+- 'no': 11255
+  confidence: 0.85
+  reason: 一级标题（#），“如何使用”，操作指南类新章节。
+- 'no': 11299
+  confidence: 0.85
+  reason: 一级标题（#），“选项类”，具体类介绍新章节。
+- 'no': 11357
+  confidence: 0.85
+  reason: 一级标题（#），“结论”，本章总结，通常独立成节。
+- 'no': 11361
+  confidence: 0.9
+  reason: 一级标题（#），“装饰器模式”，设计模式主题切换。
+- 'no': 11499
+  confidence: 0.9
+  reason: 一级标题（#），“装饰器模式”，再次出现，可能是对不同语言或更详细的模式解析，视为新章节。
+- 'no': 11682
+  confidence: 0.9
+  reason: 一级标题（#），“关于 RingBell 的说明”，工具说明新章节。
+- 'no': 11782
+  confidence: 0.9
+  reason: 一级标题（#），“装饰器”，通用装饰器概念新章节。

@@ -1,0 +1,168 @@
+reviews:
+- 'no': 3176
+  overturn_probability: 0.1
+  alternative: 正文小标题或文档分节标记
+  counter_evidence:
+  - 该文档为混合编程教程，包含Java、JavaScript、PHP等多种语言片段，结构非传统书籍章节模式
+  - 一级标题（#）在此处可能仅作为视觉分隔符，而非严格的逻辑大章
+  keep_split: true
+- 'no': 3212
+  overturn_probability: 0.1
+  alternative: 正文小标题
+  counter_evidence:
+  - 上下文显示该内容紧接在上一节代码之后，属于同一主题下的细分讨论
+  - 缺乏典型的“第X章”编号，更像是教程中的独立小节
+  keep_split: true
+- 'no': 3264
+  overturn_probability: 0.2
+  alternative: 功能模块说明标题
+  counter_evidence:
+  - “辅助函数”作为标题较短，可能仅是代码块前后的解释性标题，而非统领全书的大章
+  keep_split: true
+- 'no': 3272
+  overturn_probability: 0.3
+  alternative: 排版噪声或文档结构标记
+  counter_evidence:
+  - “排版后的文档”语义模糊，不像标准章节标题，可能是元数据或格式转换产生的残留标记
+  - 随后内容重复了之前讨论过的接口概念，暗示这可能是文档拼接或附录部分，而非新章
+  keep_split: true
+- 'no': 3357
+  overturn_probability: 0.2
+  alternative: 小节总结标题
+  counter_evidence:
+  - “结论”通常出现在章节末尾，若前文已有大章标题，此处仅为小结
+  - 上下文中没有明显的章节跳跃，更像是当前主题下的收尾
+  keep_split: true
+- 'no': 3913
+  overturn_probability: 0.4
+  alternative: 示例部分总结
+  counter_evidence:
+  - 位于一系列代码示例（ISBN验证）之后，作为该示例块的结尾
+  - 并非统领后续新内容，而是对前述示例的总结
+  keep_split: false
+- 'no': 3925
+  overturn_probability: 0.3
+  alternative: 示例变体标题
+  counter_evidence:
+  - “更好的解决方案”通常是对前一方案的改进说明，属于同一逻辑单元
+  - 并非独立的大章，而是示例部分的延续
+  keep_split: true
+- 'no': 3983
+  overturn_probability: 0.4
+  alternative: 示例变体标题
+  counter_evidence:
+  - “另一个示例”明显是示例集合中的一项，不具备统领性
+  - 后续内容重复了之前的代码逻辑，确认为示例罗列而非新章
+  keep_split: false
+- 'no': 4029
+  overturn_probability: 0.4
+  alternative: 示例部分总结
+  counter_evidence:
+  - 与3913行类似，位于代码示例后，作为局部总结
+  - 不具备开启新大章的特征
+  keep_split: false
+- 'no': 4295
+  overturn_probability: 0.1
+  alternative: 技术专题标题
+  counter_evidence:
+  - 该标题明确指向JavaScript闭包与私有成员，技术跨度大，可作为大章
+  keep_split: true
+- 'no': 4399
+  overturn_probability: 0.1
+  alternative: API文档章节标题
+  counter_evidence:
+  - “Book类API文档”具有极强的结构性标志，明显区分了教程正文与API参考
+  keep_split: true
+- 'no': 4548
+  overturn_probability: 0.2
+  alternative: 设计模式示例标题
+  counter_evidence:
+  - 该标题包含具体实现细节（创建或检索对象实例），可能只是大章“静态工厂模式”下的一个子节示例
+  keep_split: true
+- 'no': 4578
+  overturn_probability: 0.5
+  alternative: 演示步骤标题
+  counter_evidence:
+  - 标题文本“如果你有大量常量...”更像是一个假设场景的引导语，而非正式的章节名称
+  - 缺乏正式的标题格式（如纯名词短语），可能是正文中的加粗小标题
+  keep_split: false
+- 'no': 4597
+  overturn_probability: 0.5
+  alternative: 演示步骤标题
+  counter_evidence:
+  - “然后你可以通过...”是叙述性语句，非标准章节标题
+  - 属于代码演示过程的中间步骤描述
+  keep_split: false
+- 'no': 4601
+  overturn_probability: 0.1
+  alternative: 设计模式章节标题
+  counter_evidence:
+  - “单例与工厂对象”是经典设计模式术语，结构清晰，适合作为大章
+  keep_split: true
+- 'no': 4607
+  overturn_probability: 0.1
+  alternative: 核心概念章节标题
+  counter_evidence:
+  - “封装与访问控制”是OOP核心概念，统领性强，确认为大章
+  keep_split: true
+- 'no': 4651
+  overturn_probability: 0.1
+  alternative: 语言引言章节标题
+  counter_evidence:
+  - “Java 引言”明确标记语言部分的开始，符合大章特征
+  keep_split: true
+- 'no': 4663
+  overturn_probability: 0.1
+  alternative: 设计原则章节标题
+  counter_evidence:
+  - “为什么需要继承性？”是经典教学大纲结构，作为大章合理
+  keep_split: true
+- 'no': 4677
+  overturn_probability: 0.1
+  alternative: 操作指南章节标题
+  counter_evidence:
+  - “如何使用继承性”指导性强，与前一章（为什么）形成逻辑递进，确认为大章
+  keep_split: true
+- 'no': 4737
+  overturn_probability: 0.1
+  alternative: 概念分类章节标题
+  counter_evidence:
+  - “继承性的类型”涵盖单继承、多层继承等，具有高度概括性
+  keep_split: true
+- 'no': 4770
+  overturn_probability: 0.2
+  alternative: 概念辨析章节标题
+  counter_evidence:
+  - 标题包含代码标识符 `is-a` 和 `has-a`，风格偏向笔记或幻灯片，可能仅为小节
+  keep_split: true
+- 'no': 4785
+  overturn_probability: 0.1
+  alternative: 核心机制章节标题
+  counter_evidence:
+  - “继承与多态”是OOP两大支柱，作为大章统领后续详细内容合理
+  keep_split: true
+- 'no': 5005
+  overturn_probability: 0.1
+  alternative: 语言特性章节标题
+  counter_evidence:
+  - “原型继承”是JavaScript核心特性，独立成章合理
+  keep_split: true
+- 'no': 5384
+  overturn_probability: 0.1
+  alternative: 设计模式章节标题
+  counter_evidence:
+  - “Mixin 模式与 augment 函数”主题明确，符合大章特征
+  keep_split: true
+- 'no': 5523
+  overturn_probability: 0.2
+  alternative: 框架应用章节标题
+  counter_evidence:
+  - 标题较长，且涉及具体框架（Prototype Web），可能为子章节
+  keep_split: true
+- 'no': 5760
+  overturn_probability: 0.3
+  alternative: 排版噪声或文档结构标记
+  counter_evidence:
+  - 与3272行相同，“排版后的文档”语义不明，疑似元数据或格式残留
+  - 后续内容为语法、标准库等结构化列表，可能是附录或参考手册部分
+  keep_split: true

@@ -1,0 +1,177 @@
+chapter_starts:
+- 'no': 0
+  confidence: 0.95
+  final_reason: 双方一致。封面及前置内容（版权页、出版社信息等）统一划分为第一章。
+  accepted_evidence:
+  - 行0为封面图片
+  - 后续行包含出版社、ISBN、版权信息，属于典型的前置部分
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 82
+  confidence: 0.95
+  final_reason: 双方一致。Markdown一级标题“类型转换”，后续包含完整的子章节结构，语义独立，符合章标题特征。
+  accepted_evidence:
+  - 一级标题“# 类型转换”
+  - 后续有“## 隐式类型转换”等子标题
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 177
+  confidence: 0.95
+  final_reason: 双方一致。Markdown一级标题“使用接口进行编程”，语义独立，统领后续关于Java接口的所有讲解，符合章标题特征。
+  accepted_evidence:
+  - 一级标题“# 使用接口进行编程”
+  - 内容涵盖接口定义、优势、变更问题等完整主题
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 587
+  confidence: 0.85
+  final_reason: 双方一致（尽管复核方指出其可能为小节总结，但判断方坚持且复核方未强力推翻，且其为一级标题）。作为一级标题，且位于新主题（克隆训练）之前，暂定为章起始。
+  accepted_evidence:
+  - 一级标题“# 结论”
+  - 位于前一大主题结束，新主题开始之前
+  rejected_evidence:
+  - 复核方认为可能是前章小结，但格式为H1，且后续无对应H1包裹，故保留
+  need_human_review: false
+- 'no': 591
+  confidence: 0.85
+  final_reason: 双方一致（复核方指出内容疑似噪声/SEO堆砌，但格式为H1，且语义上开启了“克隆训练”列表，依据机械规则保留分章）。
+  accepted_evidence:
+  - 一级标题“# 克隆 训练”
+  - 后续内容为列表项，虽质量低，但结构上起始了一个独立部分
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 759
+  confidence: 0.85
+  final_reason: 双方一致（复核方指出语义关联低，但格式为H1，且前文已结束，开启新主题“文档排版”，依据机械规则保留分章）。
+  accepted_evidence:
+  - 一级标题“# 文档排版”
+  - 后续内容为Pipeline模式等，与前文克隆训练无直接逻辑延续
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 873
+  confidence: 0.85
+  final_reason: 双方一致（复核方指出似API文档，但格式为H1，且为独立模块，依据机械规则保留分章）。
+  accepted_evidence:
+  - 一级标题“# 排版后的文本”
+  - 后续内容为API接口、终端命令等独立文档结构
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 991
+  confidence: 0.95
+  final_reason: 双方一致。一级标题“目录”，属于独立的前置/后置索引章节，规则明确要求分章。
+  accepted_evidence:
+  - 一级标题“# 目录”
+  - 内容为标准的目录列表
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 1030
+  confidence: 0.95
+  final_reason: 双方一致。一级标题“关于技术审校”，属于书籍附属说明，规则要求此类内容独立分章。
+  accepted_evidence:
+  - 一级标题“# 关于技术审校”
+  - 内容为审校者介绍
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 1038
+  confidence: 0.95
+  final_reason: 双方一致。一级标题“关于作者”，属于书籍附属说明，规则要求此类内容独立分章。
+  accepted_evidence:
+  - 一级标题“# 关于作者”
+  - 内容为作者介绍
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 1044
+  confidence: 0.85
+  final_reason: 双方一致。一级标题，虽然标题较长且为句子形式，但开启了JavaScript介绍部分，且前文为“关于作者”，此处为正文/新主题起始。
+  accepted_evidence:
+  - 一级标题“# JavaScript 是一种高级、解释型、多范式的编程语言。”
+  - 后续内容为JS特性、设计模式引言等
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 1094
+  confidence: 0.95
+  final_reason: 双方一致。一级标题，类似书名或主章节标题，统领后续的“第一部分”、“第二部分”等结构，符合分章特征。
+  accepted_evidence:
+  - 一级标题“# Java 面向对象编程与设计模式指南”
+  - 后续出现“## 第一部分”、“### 第 1 章”等层级结构
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 1164
+  confidence: 0.9
+  final_reason: 双方一致。一级标题“第五部分”，在部分-章节模式下，部分标题需划分新章。
+  accepted_evidence:
+  - 一级标题“# 第五部分”
+  - 后续为“## 第 13 章”等
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 1442
+  confidence: 0.95
+  final_reason: 双方一致。一级标题，语义独立，讲解Java宏脚本框架，与前文设计模式章节主题不同。
+  accepted_evidence:
+  - 一级标题“# 关于 Java 宏脚本框架”
+  - 后续包含“第一部分：核心原理”等子结构
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 1525
+  confidence: 0.95
+  final_reason: 双方一致。一级标题“观察者模式”，典型的技术教程章节，结构完整。
+  accepted_evidence:
+  - 一级标题“# 观察者模式”
+  - 包含意图、问题、解决方案、代码示例等标准章节结构
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 1780
+  confidence: 0.85
+  final_reason: 双方一致。一级标题“第五部分”，虽然与前文1164行标题重复，但内容主题（对象、对象化编程）与1164行后的内容（设计模式）不同，视为新的部分起始。
+  accepted_evidence:
+  - 一级标题“# 第五部分”
+  - 后续内容为“## 对象”、“## 对象化编程”，与前文设计模式部分无关
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 2018
+  confidence: 0.85
+  final_reason: 双方一致。一级标题“排版后的文档”，开启新的协议方法讲解部分，语义独立。
+  accepted_evidence:
+  - 一级标题“# 排版后的文档”
+  - 后续内容为“## 关于协议方法”等
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 2507
+  confidence: 0.8
+  final_reason: 双方一致（复核方置信度低但保留）。一级标题“总结”，位于大量方法相关细节之后，作为该部分（方法详解）的独立总结章节，依据H1规则分章。
+  accepted_evidence:
+  - 一级标题“# 总结”
+  - 后续仍有“## 方法类型总结”等内容，说明该H1统领了后续总结性内容
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 2632
+  confidence: 0.95
+  final_reason: 双方一致。一级标题“Java 类”，标准的Java基础章节，讲解封装、类定义等。
+  accepted_evidence:
+  - 一级标题“# Java 类”
+  - 后续内容为封装、访问修饰符等
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 2806
+  confidence: 0.95
+  final_reason: 双方一致。一级标题，讲解编程原则，语义独立。
+  accepted_evidence:
+  - 一级标题“# Java 中使用接口而非具体实现的编程原则”
+  - 后续内容为该原则的详细解释
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 2846
+  confidence: 0.85
+  final_reason: 双方一致（复核方指出可能为子部分，但格式为H1且语义独立性强，保留分章）。
+  accepted_evidence:
+  - 一级标题“# 核心原则”
+  - 后续内容为“## 接口与实现”、“## 无需方法声明”等
+  rejected_evidence: []
+  need_human_review: false
+rejected_lines:
+- 'no': 1056
+  reason: 复核方指出其为二级标题“## 致谢”，而全书存在一级标题，依据“只划分最高层级”规则，H2不单独分章。它应归属于其所在的上级章节（如1044或1094所在的块，或视为前置内容的一部分但不单独作为新章起始，除非前置内容整体已分章。此处因已有1044作为H1起始，1056仅为该章内的子节或附属部分，故驳回分章建议。注：若1044未被分章，则1056可能成为前置内容的起始，但判断方已分1044，且1056层级低，故不单独分章。实际上，前置内容通常归为一章，这里判断方将1044分章，导致1056被驳回。若严格遵循“前置内容统一一章”，则1044可能不该分章，但既然判断方分了且复核方未强烈反对1044，则1056作为H2不再分章。
+  need_human_review: false
+- 'no': 2886
+  reason: 复核方指出其为重复标题/噪声。行2886“# 核心原则”与行2846内容高度重复或为拼接错误，且上下文显示它是前文的延续或错误重复，不应作为新章起始。
+  need_human_review: false

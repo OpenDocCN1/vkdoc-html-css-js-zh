@@ -1,0 +1,130 @@
+chapter_starts:
+- 'no': 14925
+  confidence: 0.95
+  final_reason: 双方一致认定为一级标题，语义上为独立的 API 参考章节，符合分章标准。
+  accepted_evidence:
+  - 'Markdown 一级标题 # API 参考'
+  - 内容涵盖构造函数、方法、事件等完整接口定义
+  - 上下文为独立的技术文档章节
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 14972
+  confidence: 0.95
+  final_reason: 双方一致认定为一级标题，语义上为独立的配置说明章节。
+  accepted_evidence:
+  - 'Markdown 一级标题 # 配置'
+  - 内容涵盖配置属性详解及示例
+  - 结构独立，统领后续配置相关内容
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 15000
+  confidence: 0.95
+  final_reason: 双方一致认定为一级标题，语义上为独立的错误处理章节。
+  accepted_evidence:
+  - 'Markdown 一级标题 # 错误处理'
+  - 内容涵盖常见错误类型及处理示例
+  - 结构独立
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 15025
+  confidence: 0.95
+  final_reason: 双方一致认定为一级标题，语义上为独立的常见问题解答（FAQ）章节。
+  accepted_evidence:
+  - 'Markdown 一级标题 # 常见问题 FAQ'
+  - 内容采用问答形式，覆盖多个独立问题
+  - 结构独立，符合 FAQ 章节特征
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 15049
+  confidence: 0.95
+  final_reason: 双方一致认定为一级标题，语义上为独立的发布说明章节。
+  accepted_evidence:
+  - 'Markdown 一级标题 # 发布说明'
+  - 内容记录版本历史
+  - 结构独立
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 16130
+  confidence: 0.9
+  final_reason: 双方一致认定为一级标题，引入全新的设计模式主题（发布者与订阅者模式），与前述代理模式等章节并列。
+  accepted_evidence:
+  - 'Markdown 一级标题 # 发布者与订阅者模式'
+  - 内容涵盖该模式的核心概念、区别、示例及实现
+  - 主题跳跃明显，具备统领性
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 16720
+  confidence: 0.85
+  final_reason: 双方一致认定为一级标题，引入观察者模式主题。尽管与前文发布者-订阅者模式有关联，但作为经典设计模式独立章节，结构上具备分章特征。
+  accepted_evidence:
+  - 'Markdown 一级标题 # 观察者模式'
+  - 内容涵盖概述、意图及总结
+  - 经典设计模式通常独立成章
+  rejected_evidence:
+  - 复核方指出可能存在重复论述
+  - 判断方认为其语义独立性足以支撑新章
+  need_human_review: false
+- 'no': 16738
+  confidence: 0.9
+  final_reason: 双方一致认定为一级标题，引入全新的设计模式主题（命令模式）。
+  accepted_evidence:
+  - 'Markdown 一级标题 # 命令模式'
+  - 内容涵盖命令结构、用法及示例
+  - 主题与前文观察者模式完全不同，具备统领性
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 17689
+  confidence: 0.9
+  final_reason: 双方一致认定为一级标题，语义上为独立的常见问题解答章节，通常位于文档末尾或独立附录部分。
+  accepted_evidence:
+  - 'Markdown 一级标题 # 常见问题解答'
+  - 内容涵盖会话恢复、命令行使用等独立问答
+  - 结构独立，符合 FAQ 章节特征
+  rejected_evidence: []
+  need_human_review: false
+rejected_lines:
+- 'no': 14825
+  reason: 复核方指出“# 结论”通常为一章的末尾总结，而非开启新章；结合上下文，它可能是前文某章节的结尾部分，不宜单独分章。
+  need_human_review: false
+- 'no': 14829
+  reason: “## 附录”为二级标题。根据规则“只划分全书最高层级的大章”，且判断方仅将其视为附录标记而非独立顶级章节，予以排除。
+  need_human_review: false
+- 'no': 15055
+  reason: 复核方指出该标题位于发布说明之后，内容紧密围绕代码实现，结构不连贯，疑为 Markdown 层级误用，非全书最高层级章节。
+  need_human_review: true
+- 'no': 15458
+  reason: 复核方指出“# 动态代理”为同一主题下的子话题，非独立大章，采信复核方意见。
+  need_human_review: false
+- 'no': 15978
+  reason: 复核方指出该标题位于文档后段，系对代理模式的回顾或总结，非全书结构性新章起点。
+  need_human_review: false
+- 'no': 16038
+  reason: 复核方指出“# 代理模式概述”位于文档后段，系对前文内容的概括，非独立顶级章节。
+  need_human_review: false
+- 'no': 16064
+  reason: 复核方指出“# 关于代理模式的深入剖析”为长段落或子章节标题，非独立 Book Chapter。
+  need_human_review: false
+- 'no': 16213
+  reason: 复核方指出与 16130 内容高度重叠，疑为 Markdown 层级混乱导致的子部分，非新章。
+  need_human_review: false
+- 'no': 16530
+  reason: 复核方指出“# 动画生命周期”为具体应用场景示例，篇幅短，应归属于前置模式章节内的子节。
+  need_human_review: false
+- 'no': 16572
+  reason: 复核方指出“# 标题”为明显的占位符或模板残留，非真实语义章节标题。
+  need_human_review: false
+- 'no': 16839
+  reason: 复核方指出“# 概述”为通用引导性标题，在此处系 CompletableFuture 专题内部结构，非全书最高层级章节。
+  need_human_review: false
+- 'no': 17002
+  reason: 复核方指出此为同一主题（CompletableFuture）的重复或深入部分，非独立顶级章节。
+  need_human_review: false
+- 'no': 17544
+  reason: 复核方指出“# 总结”通常为章节结尾，结合后文占位符标题，此处结构混乱，不宜分章。
+  need_human_review: true
+- 'no': 17548
+  reason: 复核方指出“# 标题”再次出现，系模板占位符或错误，非有效章节起点。
+  need_human_review: false
+- 'no': 17605
+  reason: 复核方指出“# `Unga` 类介绍”为具体类名介绍，属代码实现细节，非独立顶级大章。
+  need_human_review: false

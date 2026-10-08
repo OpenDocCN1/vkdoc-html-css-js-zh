@@ -1,0 +1,73 @@
+chapter_starts:
+- 'no': 14825
+  confidence: 0.9
+  reason: Markdown 一级标题 '# 结论'，具有总结性质，通常作为章节末尾或独立附录部分的起始。
+- 'no': 14829
+  confidence: 0.85
+  reason: Markdown 二级标题 '## 附录'，根据规则，附录通常划分为独立章节。
+- 'no': 14925
+  confidence: 0.95
+  reason: Markdown 一级标题 '# API 参考'，属于最高层级大章，内容涵盖构造函数、方法等，语义具有统领性。
+- 'no': 14972
+  confidence: 0.95
+  reason: Markdown 一级标题 '# 配置'，属于最高层级大章，专门介绍配置属性及示例。
+- 'no': 15000
+  confidence: 0.95
+  reason: Markdown 一级标题 '# 错误处理'，属于最高层级大章，涵盖常见错误及处理示例。
+- 'no': 15025
+  confidence: 0.95
+  reason: Markdown 一级标题 '# 常见问题 FAQ'，属于最高层级大章，内容为问答形式。
+- 'no': 15049
+  confidence: 0.9
+  reason: Markdown 一级标题 '# 发布说明'，属于最高层级大章，通常用于记录版本历史。
+- 'no': 15055
+  confidence: 0.95
+  reason: Markdown 一级标题 '# DirectoryProxy 类'，属于最高层级大章，开始介绍特定类的实现细节。
+- 'no': 15458
+  confidence: 0.95
+  reason: Markdown 一级标题 '# 动态代理'，属于最高层级大章，主题从静态代理转向动态代理。
+- 'no': 15978
+  confidence: 0.95
+  reason: Markdown 一级标题 '# 代理模式'，属于最高层级大章，虽然前文已涉及代理，但此处为概念性总结或新视角的章节起始。
+- 'no': 16038
+  confidence: 0.9
+  reason: Markdown 一级标题 '# 代理模式概述'，属于最高层级大章，对代理模式进行宏观概述。
+- 'no': 16064
+  confidence: 0.9
+  reason: Markdown 一级标题 '# 关于代理模式的深入剖析'，属于最高层级大章，深入分析代理模式。
+- 'no': 16130
+  confidence: 0.95
+  reason: Markdown 一级标题 '# 发布者与订阅者模式'，属于最高层级大章，引入新设计模式。
+- 'no': 16213
+  confidence: 0.95
+  reason: Markdown 一级标题 '# 发布者-订阅者模式'，属于最高层级大章，提供代码实现示例。
+- 'no': 16530
+  confidence: 0.85
+  reason: Markdown 一级标题 '# 动画生命周期'，属于最高层级大章，结合具体场景（动画）演示模式。
+- 'no': 16572
+  confidence: 0.95
+  reason: Markdown 一级标题 '# 标题'（内容为'事件与监听器'），属于最高层级大章，虽然标题名占位符，但结构上为一级标题，且后续内容独立完整。
+- 'no': 16720
+  confidence: 0.95
+  reason: Markdown 一级标题 '# 观察者模式'，属于最高层级大章，明确引入观察者模式主题。
+- 'no': 16738
+  confidence: 0.95
+  reason: Markdown 一级标题 '# 命令模式'，属于最高层级大章，明确引入命令模式主题。
+- 'no': 16839
+  confidence: 0.9
+  reason: Markdown 一级标题 '# 概述'（内容为 CompletableFuture），属于最高层级大章，开始介绍 Java 异步编程工具。
+- 'no': 17002
+  confidence: 0.9
+  reason: Markdown 一级标题 '# 概述'（内容为 CompletableFuture 详细展开），属于最高层级大章，进一步深入。
+- 'no': 17544
+  confidence: 0.85
+  reason: Markdown 一级标题 '# 总结'，属于最高层级大章，对前文内容（ReverseCalling等）进行总结。
+- 'no': 17548
+  confidence: 0.85
+  reason: Markdown 一级标题 '# 标题'（内容为 Cursor 示例），属于最高层级大章，虽然标题名占位符，但结构上为一级标题，且后续内容涉及具体的代码演示。
+- 'no': 17605
+  confidence: 0.95
+  reason: Markdown 一级标题 '# `Unga` 类介绍'，属于最高层级大章，介绍特定类的移除和替代。
+- 'no': 17689
+  confidence: 0.9
+  reason: Markdown 一级标题 '# 常见问题解答'，属于最高层级大章，通常作为独立章节。

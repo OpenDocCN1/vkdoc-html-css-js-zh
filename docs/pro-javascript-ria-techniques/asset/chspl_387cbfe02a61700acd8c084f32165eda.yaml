@@ -1,0 +1,127 @@
+chapter_starts:
+- 'no': 0
+  confidence: 0.95
+  reason: 书名/封面页，作为前置内容的第一章
+- 'no': 91
+  confidence: 0.9
+  reason: 关于作者，属于正文前的前置内容，独立划分
+- 'no': 93
+  confidence: 0.9
+  reason: 关于技术审校，属于正文前的前置内容，独立划分
+- 'no': 95
+  confidence: 0.9
+  reason: 致谢，属于正文前的前置内容，独立划分
+- 'no': 97
+  confidence: 0.9
+  reason: 引言，属于正文前的前置内容，独立划分
+- 'no': 99
+  confidence: 0.95
+  reason: 第一部分标题，该书为部分-章节模式，部分标题需分章
+- 'no': 101
+  confidence: 0.95
+  reason: 第 1 章标题，最高层级章节
+- 'no': 105
+  confidence: 0.95
+  reason: 第 2 章标题，最高层级章节
+- 'no': 109
+  confidence: 0.95
+  reason: 第二部分标题，该书为部分-章节模式，部分标题需分章
+- 'no': 111
+  confidence: 0.95
+  reason: 第 3 章标题，最高层级章节
+- 'no': 115
+  confidence: 0.95
+  reason: 第 4 章标题，最高层级章节
+- 'no': 119
+  confidence: 0.95
+  reason: 第 5 章标题，最高层级章节
+- 'no': 123
+  confidence: 0.95
+  reason: 第三部分标题，该书为部分-章节模式，部分标题需分章
+- 'no': 125
+  confidence: 0.95
+  reason: 第 6 章标题，最高层级章节
+- 'no': 129
+  confidence: 0.95
+  reason: 第 7 章标题，最高层级章节
+- 'no': 133
+  confidence: 0.95
+  reason: 第 8 章标题，最高层级章节
+- 'no': 137
+  confidence: 0.95
+  reason: 第 9 章标题，最高层级章节
+- 'no': 141
+  confidence: 0.95
+  reason: 第 10 章标题，最高层级章节
+- 'no': 145
+  confidence: 0.95
+  reason: 第 11 章标题，最高层级章节
+- 'no': 149
+  confidence: 0.95
+  reason: 第 12 章标题，最高层级章节
+- 'no': 153
+  confidence: 0.9
+  reason: 索引，属于文末内容，独立划分
+- 'no': 253
+  confidence: 0.95
+  reason: 正文中第 2 章的起始标题（此前为目录，从行253开始进入正文第2章）
+- 'no': 323
+  confidence: 0.95
+  reason: 正文中第二部分的起始标题
+- 'no': 325
+  confidence: 0.95
+  reason: 正文中第 3 章的起始标题
+- 'no': 353
+  confidence: 0.95
+  reason: 正文中第 4 章的起始标题
+- 'no': 437
+  confidence: 0.95
+  reason: 正文中第 5 章的起始标题
+- 'no': 469
+  confidence: 0.95
+  reason: 正文中第三部分的起始标题
+- 'no': 471
+  confidence: 0.95
+  reason: 正文中第 6 章的起始标题
+- 'no': 505
+  confidence: 0.95
+  reason: 正文中第 7 章的起始标题
+- 'no': 533
+  confidence: 0.95
+  reason: 正文中第 8 章的起始标题
+- 'no': 561
+  confidence: 0.95
+  reason: 正文中第 9 章的起始标题
+- 'no': 593
+  confidence: 0.95
+  reason: 正文中第 10 章的起始标题
+- 'no': 609
+  confidence: 0.95
+  reason: 正文中第 11 章的起始标题
+- 'no': 623
+  confidence: 0.95
+  reason: 正文中第 12 章的起始标题
+- 'no': 667
+  confidence: 0.9
+  reason: 索引，属于文末内容，独立划分
+- 'no': 671
+  confidence: 0.9
+  reason: 关于作者，作为单独的前置/附录章节
+- 'no': 681
+  confidence: 0.9
+  reason: 关于技术审校者，作为单独的前置/附录章节
+- 'no': 691
+  confidence: 0.9
+  reason: 致谢，作为单独的章节
+- 'no': 703
+  confidence: 0.9
+  reason: 引言，作为单独的章节
+- 'no': 721
+  confidence: 0.95
+  reason: 第一部分：最佳实践，正文中该部分的起始
+- 'no': 725
+  confidence: 0.95
+  reason: 第 1 章：奠定坚实基础，正文中该章节的起始
+- 'no': 2191
+  confidence: 0.95
+  reason: 第 2 章：面向富互联网应用的 JavaScript，正文中该章节的起始

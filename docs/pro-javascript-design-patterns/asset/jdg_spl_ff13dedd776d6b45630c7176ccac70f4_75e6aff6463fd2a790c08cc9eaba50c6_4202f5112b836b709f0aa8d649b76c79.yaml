@@ -1,0 +1,121 @@
+chapter_starts:
+- 'no': 12486
+  confidence: 0.95
+  final_reason: 双方一致。该行是一级标题“文档排版”，且前文结束于装饰器代码示例，此处开始全新的MethodProfiler/Builder主题，语义上标志新章节。
+  accepted_evidence:
+  - 一级标题#文档排版
+  - 主题从装饰器切换至文档排版工具
+  - 前文为代码结束
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 12665
+  confidence: 0.95
+  final_reason: 双方一致。一级标题“飞桨框架的安装与配置”，内容完整独立，属于典型的技术教程新章节。
+  accepted_evidence:
+  - 一级标题
+  - 主题完全切换至PaddlePaddle
+  - 结构独立完整
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 12893
+  confidence: 0.95
+  final_reason: 双方一致。一级标题“对象池模式”，是新的设计模式章节，与前文单例模式等并列。
+  accepted_evidence:
+  - 一级标题
+  - 新设计模式主题
+  - 上下文为分隔线---
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 13026
+  confidence: 0.95
+  final_reason: 双方一致。一级标题“概述”，结合后续ParentMonth类内容，标志着新文档或新章节的开始。
+  accepted_evidence:
+  - 一级标题
+  - 主题切换至ParentMonth API
+  - 前有分隔线
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 13104
+  confidence: 0.95
+  final_reason: 双方一致。一级标题“Tooltip 类与事件系统”，深入讲解UI组件，篇幅长且独立。
+  accepted_evidence:
+  - 一级标题
+  - 主题切换至Tooltip
+  - 前有分隔线
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 13828
+  confidence: 0.95
+  final_reason: 双方一致。一级标题“享元模式”，新设计模式章节。
+  accepted_evidence:
+  - 一级标题
+  - 新设计模式主题
+  - 前有分隔线
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 13862
+  confidence: 0.9
+  final_reason: 双方一致。一级标题“飞行器模式”（Flyweight Pattern的另一种译法或误译），虽命名怪异但结构独立，视为新章节。
+  accepted_evidence:
+  - 一级标题
+  - 独立结构
+  - 与前文享元模式并列
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 13902
+  confidence: 0.95
+  final_reason: 双方一致。一级标题“代理模式”，新设计模式章节。
+  accepted_evidence:
+  - 一级标题
+  - 新设计模式主题
+  - 内容完整
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 14211
+  confidence: 0.85
+  final_reason: 双方倾向分章。虽与前文代理模式重复，但作为独立的一级标题块，且内容侧重具体示例（图书馆），在松散拼接的文档中视为新章节以保持粒度一致。
+  accepted_evidence:
+  - 一级标题
+  - 内容侧重具体示例
+  - 独立代码块
+  rejected_evidence:
+  - 可能是排版错误导致的重复标题
+  need_human_review: false
+- 'no': 14513
+  confidence: 0.9
+  final_reason: 双方一致。一级标题“REST API 与代理模式”，讨论REST作为代理模式应用场景，视角独特，视为新章节。
+  accepted_evidence:
+  - 一级标题
+  - 新视角/新主题
+  - 有独立内容
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 14571
+  confidence: 0.85
+  final_reason: 双方倾向分章。一级标题“代理模式”第三次出现，涉及ProxyPatternExample具体实现，视为独立的小教程章节。
+  accepted_evidence:
+  - 一级标题
+  - 涉及具体类实现
+  - 独立讨论
+  rejected_evidence:
+  - 重复标题
+  need_human_review: false
+- 'no': 14712
+  confidence: 0.95
+  final_reason: 双方一致。一级标题“目录”，通常作为文档的起始部分（此处可能是新文档PersonDirectory的开始），视为独立章节/部分。
+  accepted_evidence:
+  - 一级标题
+  - 目录通常独立
+  - 后续为新工具文档
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 14714
+  confidence: 0.95
+  final_reason: 双方一致。一级标题“概述”，紧接着目录，是PersonDirectory文档的正文开始，视为新章节。
+  accepted_evidence:
+  - 一级标题
+  - 新工具文档开始
+  - 版本号特征
+  rejected_evidence: []
+  need_human_review: false
+rejected_lines: []

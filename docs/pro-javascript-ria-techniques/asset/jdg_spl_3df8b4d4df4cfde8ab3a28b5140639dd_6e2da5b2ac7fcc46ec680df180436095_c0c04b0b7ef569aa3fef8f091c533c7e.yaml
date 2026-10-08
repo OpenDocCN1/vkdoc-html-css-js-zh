@@ -1,0 +1,38 @@
+chapter_starts:
+- 'no': 12225
+  confidence: 0.98
+  final_reason: 双方一致：行 12225 “# 第 10 章：二进制 Ajax” 是最高层级章标题，位于第 9 章总结（12219-12223）之后，符合章节分界特征。
+  accepted_evidence:
+  - 编号特征：'第 10 章' 为最高层级大章标题
+  - 上下文特征：前文 12221-12223 为第 9 章总结，后文 12227 开始第 10 章内容
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 13068
+  confidence: 0.98
+  final_reason: 双方一致：行 13068 “# 第 11 章 ■ 在浏览器中绘图” 是最高层级章标题，位于第 10 章总结（13062-13066）之后，符合章节分界特征。
+  accepted_evidence:
+  - 编号特征：'第 11 章' 为最高层级大章标题
+  - 上下文特征：前文 13062-13066 为第 10 章总结，后文 13070 开始第 11 章内容
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 13640
+  confidence: 0.98
+  final_reason: 双方一致：行 13640 “# 第 12 章：富互联网应用程序中的可访问性” 是最高层级章标题，位于第 11 章总结（13636-13638）之后，符合章节分界特征。
+  accepted_evidence:
+  - 编号特征：'第 12 章' 为最高层级大章标题
+  - 上下文特征：前文 13636-13638 为第 11 章总结，后文 13642 开始第 12 章内容
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 14403
+  confidence: 0.95
+  final_reason: 双方一致：行 14403 “## 索引” 为书末索引，根据规则“文末索引也划分为一章”，应作为独立章节。
+  accepted_evidence:
+  - 语义特征：'索引' 是书末标准组成部分
+  - 规则：文末索引划分为一章
+  rejected_evidence: []
+  need_human_review: false
+rejected_lines:
+- 'no': 11957
+  reason: 复核方明确指出该行位于第 9 章内容中间（11953 已是 '### 创建跨浏览器本地数据存储 API'），'## 第 9 章：离线存储——当网络中断时'
+    出现在章节后段而非起始位置，极可能是排版错误导致的章标题重复或页眉残留，而非新的章节开始。判断方无有力反驳，采纳复核方意见。
+  need_human_review: false

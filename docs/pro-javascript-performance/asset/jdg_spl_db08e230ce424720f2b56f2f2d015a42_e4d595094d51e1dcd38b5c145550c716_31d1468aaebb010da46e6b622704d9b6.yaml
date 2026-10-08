@@ -1,0 +1,20 @@
+chapter_starts:
+- 'no': 6047
+  confidence: 0.99
+  final_reason: 双方一致认定。行 6047 内容为 '## 第 8 章'，符合“第 X 章”最高层级编号特征，单独成行且无末尾标点。前文为第 7 章总结，此处开启新章，上下文逻辑连贯。
+  accepted_evidence:
+  - 编号特征：包含'第 8 章'，为全书最高层级大章。
+  - 格式特征：单独成行，无句号，长度短。
+  - 上下文特征：前文为第 7 章结束，后文为第 8 章开头，逻辑清晰。
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 6838
+  confidence: 0.99
+  final_reason: '双方一致认定。行 6838 内容为 ''## 索引''，后续内容为字母排序的索引条目（如 ### A, Android...），符合“文末索引也划分为一章”的规则。'
+  accepted_evidence:
+  - 语义特征：'索引'是典型的非正文部分标题。
+  - 规则匹配：明确属于“文末索引”类别。
+  - 上下文特征：后续行包含大量索引条目，结构一致。
+  rejected_evidence: []
+  need_human_review: false
+rejected_lines: []

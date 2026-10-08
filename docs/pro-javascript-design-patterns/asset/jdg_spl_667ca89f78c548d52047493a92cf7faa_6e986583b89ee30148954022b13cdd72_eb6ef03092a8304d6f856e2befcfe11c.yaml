@@ -1,0 +1,190 @@
+chapter_starts:
+- 'no': 3176
+  confidence: 0.95
+  final_reason: 一级标题（#），语义为“接口与实现分离”，统领后续关于接口声明、权衡等内容，符合大章特征。复核方虽指出可能是分隔符，但鉴于其后的内容独立且篇幅较长，视为新章更合理。
+  accepted_evidence:
+  - 一级标题格式
+  - 语义统领性强
+  - 上下文结构支持
+  rejected_evidence:
+  - 复核方认为可能是视觉分隔符
+  need_human_review: false
+- 'no': 3212
+  confidence: 0.95
+  final_reason: 一级标题（#），语义为“类型检查与类型推断”，统领后续关于类型检查、推断的内容，符合大章特征。
+  accepted_evidence:
+  - 一级标题格式
+  - 独立的主题模块
+  rejected_evidence:
+  - 复核方认为缺乏编号，似教程小节
+  need_human_review: false
+- 'no': 3264
+  confidence: 0.9
+  final_reason: 一级标题（#），语义为“辅助函数”，统领后续关于ensureImplements函数的说明，符合大章特征。
+  accepted_evidence:
+  - 一级标题格式
+  - 内容独立
+  rejected_evidence:
+  - 复核方认为标题较短，可能仅是解释性标题
+  need_human_review: false
+- 'no': 3272
+  confidence: 0.85
+  final_reason: 一级标题（#），语义为“排版后的文档”，提示文档结构的变化或新部分的开始。尽管复核方质疑其语义模糊，但在分章任务中，此类结构性标记通常被视为章节边界。
+  accepted_evidence:
+  - 一级标题格式
+  - 结构性标记
+  rejected_evidence:
+  - 复核方认为可能是元数据残留
+  need_human_review: false
+- 'no': 3357
+  confidence: 0.9
+  final_reason: 一级标题（#），语义为“结论”，通常作为该部分内容的总结或新部分的开始，符合大章特征。
+  accepted_evidence:
+  - 一级标题格式
+  - 总结性标题
+  rejected_evidence:
+  - 复核方认为可能是小节总结
+  need_human_review: false
+- 'no': 4295
+  confidence: 0.95
+  final_reason: 一级标题（#），语义为“JavaScript 闭包与私有成员”，统领后续关于闭包实现私有成员的详细内容，符合大章特征。
+  accepted_evidence:
+  - 一级标题格式
+  - 核心概念标题
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 4399
+  confidence: 0.95
+  final_reason: 一级标题（#），语义为“Book类API文档”，明确标识出API文档部分的开始，符合大章特征。
+  accepted_evidence:
+  - 一级标题格式
+  - 文档类型明确
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 4548
+  confidence: 0.9
+  final_reason: 一级标题（#），语义为“静态工厂模式（创建或检索对象实例）”，引出新的设计模式讲解，符合大章特征。
+  accepted_evidence:
+  - 一级标题格式
+  - 设计模式名称
+  rejected_evidence:
+  - 复核方认为可能只是子节示例
+  need_human_review: false
+- 'no': 4601
+  confidence: 0.9
+  final_reason: 一级标题（#），语义为“单例与工厂对象”，引出单例和工厂模式，符合大章特征。
+  accepted_evidence:
+  - 一级标题格式
+  - 经典设计模式术语
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 4607
+  confidence: 0.95
+  final_reason: 一级标题（#），语义为“封装与访问控制”，统领后续关于封装原则、优势及实现的内容，符合大章特征。
+  accepted_evidence:
+  - 一级标题格式
+  - OOP核心概念
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 4651
+  confidence: 0.95
+  final_reason: 一级标题（#），语义为“Java 引言”，作为Java部分的新起始，符合大章特征。
+  accepted_evidence:
+  - 一级标题格式
+  - 语言部分引言
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 4663
+  confidence: 0.95
+  final_reason: 一级标题（#），语义为“为什么需要继承性？”，引出继承性的讨论，符合大章特征。
+  accepted_evidence:
+  - 一级标题格式
+  - 教学大纲结构
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 4677
+  confidence: 0.95
+  final_reason: 一级标题（#），语义为“如何使用继承性”，引领后续关于extends关键字和继承用法的讲解，符合大章特征。
+  accepted_evidence:
+  - 一级标题格式
+  - 操作指南标题
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 4737
+  confidence: 0.95
+  final_reason: 一级标题（#），语义为“继承性的类型”，区分单继承、多层继承等，符合大章特征。
+  accepted_evidence:
+  - 一级标题格式
+  - 概念分类
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 4770
+  confidence: 0.9
+  final_reason: 一级标题（#），语义为“is-a 与 has-a 关系”，解释两种基本对象关系，符合大章特征。
+  accepted_evidence:
+  - 一级标题格式
+  - 关系辨析
+  rejected_evidence:
+  - 复核方认为风格偏向笔记
+  need_human_review: false
+- 'no': 4785
+  confidence: 0.95
+  final_reason: 一级标题（#），语义为“继承与多态”，统领后续关于继承、原型链、多态的综合讲解，符合大章特征。
+  accepted_evidence:
+  - 一级标题格式
+  - 核心机制标题
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 5005
+  confidence: 0.95
+  final_reason: 一级标题（#），语义为“原型继承”，专门讲解JavaScript的原型继承机制，符合大章特征。
+  accepted_evidence:
+  - 一级标题格式
+  - 语言特性标题
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 5384
+  confidence: 0.95
+  final_reason: 一级标题（#），语义为“JavaScript 中的 Mixin 模式与 augment 函数”，引出Mixin模式讲解，符合大章特征。
+  accepted_evidence:
+  - 一级标题格式
+  - 设计模式标题
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 5523
+  confidence: 0.9
+  final_reason: 一级标题（#），语义为“使用 Prototype Web 框架构建动态用户界面”，作为特定框架使用的章节，符合大章特征。
+  accepted_evidence:
+  - 一级标题格式
+  - 框架应用标题
+  rejected_evidence:
+  - 复核方认为标题较长，可能为子章节
+  need_human_review: false
+- 'no': 5760
+  confidence: 0.85
+  final_reason: 一级标题（#），语义为“排版后的文档”，类似于前面的3272行，可能标记文档的新排版部分或附录，符合大章特征。
+  accepted_evidence:
+  - 一级标题格式
+  - 结构性标记
+  rejected_evidence:
+  - 复核方认为疑似元数据残留
+  need_human_review: false
+rejected_lines:
+- 'no': 3913
+  reason: 复核方指出其为示例部分总结，不具备统领性，判断方无有力反驳
+  need_human_review: false
+- 'no': 3925
+  reason: 复核方指出其为示例变体标题，属于同一逻辑单元，判断方无有力反驳
+  need_human_review: false
+- 'no': 3983
+  reason: 复核方指出其为示例变体标题，后续内容重复，确认为示例罗列而非新章
+  need_human_review: false
+- 'no': 4029
+  reason: 复核方指出其为示例部分总结，不具备开启新大章的特征
+  need_human_review: false
+- 'no': 4578
+  reason: 复核方指出其为演示步骤标题，缺乏正式标题格式，可能是正文中的加粗小标题
+  need_human_review: false
+- 'no': 4597
+  reason: 复核方指出其为叙述性语句，属于代码演示过程的中间步骤描述
+  need_human_review: false

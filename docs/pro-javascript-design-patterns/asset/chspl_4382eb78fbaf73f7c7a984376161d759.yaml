@@ -1,0 +1,71 @@
+chapter_starts:
+- 'no': 0
+  confidence: 0.95
+  reason: 封面图片起始，属于前言/版权页等前置内容，统一划分为一章。
+- 'no': 82
+  confidence: 0.9
+  reason: Markdown 一级标题 '# 类型转换'，语义上具有统领性，且后续内容为子章节，符合章标题特征。
+- 'no': 177
+  confidence: 0.9
+  reason: Markdown 一级标题 '# 使用接口进行编程'，语义独立，开始新的主题内容。
+- 'no': 587
+  confidence: 0.85
+  reason: Markdown 一级标题 '# 结论'，通常作为全书或某大部分内容的总结章节。
+- 'no': 591
+  confidence: 0.9
+  reason: Markdown 一级标题 '# 克隆 训练'，语义独立，开始新的练习或技术章节。
+- 'no': 759
+  confidence: 0.85
+  reason: Markdown 一级标题 '# 文档排版'，语义独立，开始新的主题。
+- 'no': 873
+  confidence: 0.85
+  reason: Markdown 一级标题 '# 排版后的文本'，语义独立，开始新的主题。
+- 'no': 991
+  confidence: 0.9
+  reason: Markdown 一级标题 '# 目录'，属于前置内容（目录页），应划分为独立章节。
+- 'no': 1030
+  confidence: 0.9
+  reason: Markdown 一级标题 '# 关于技术审校'，属于前置内容（关于审校者），应划分为独立章节。
+- 'no': 1038
+  confidence: 0.9
+  reason: Markdown 一级标题 '# 关于作者'，属于前置内容（关于作者），应划分为独立章节。
+- 'no': 1044
+  confidence: 0.85
+  reason: Markdown 一级标题 '# JavaScript 是一种高级...'，虽然标题较长，但语义上开启了关于 JavaScript 的基础介绍章节。
+- 'no': 1056
+  confidence: 0.9
+  reason: Markdown 二级标题 '## 致谢'，虽然级别较低，但在书籍结构中通常视为独立的附录或前置部分，且规则指向前言/致谢统一划分。此处结合上下文，它标志着主体技术章节前的结束或附录的开始。*修正：根据规则“前言、序言、致谢...统一划分为一章”，此处虽为##级，但语义上是独立的致谢部分，且前文已无对应的一级章节标题包裹它，故视为新章。*
+    但观察前文，1044是JS介绍，1056是致谢，1064是JS特点。通常致谢在后。若全书结构是：前置->正文->附录。这里看起来是混排。鉴于规则强调“前置内容统一划分为一章”，而致谢通常算前置或后置独立部分。此处暂判为独立章节。
+- 'no': 1094
+  confidence: 0.9
+  reason: Markdown 一级标题 '# Java 面向对象编程与设计模式指南'，书名/主标题，标志正文开始或新的大章节。
+- 'no': 1164
+  confidence: 0.9
+  reason: Markdown 一级标题 '# 第五部分'，规则明确指出若存在部分标题，需划分新章。
+- 'no': 1442
+  confidence: 0.9
+  reason: Markdown 一级标题 '# 关于 Java 宏脚本框架'，语义独立，开始新的主题章节。
+- 'no': 1525
+  confidence: 0.9
+  reason: Markdown 一级标题 '# 观察者模式'，设计模式章节，语义独立。
+- 'no': 1780
+  confidence: 0.9
+  reason: Markdown 一级标题 '# 第五部分'，重复出现的部分标题（或另一本书的部分），规则要求遇到部分标题划分新章。
+- 'no': 2018
+  confidence: 0.85
+  reason: Markdown 一级标题 '# 排版后的文档'，语义独立，开始新的主题。
+- 'no': 2507
+  confidence: 0.9
+  reason: Markdown 一级标题 '# 总结'，语义上作为章节或全书总结。
+- 'no': 2632
+  confidence: 0.9
+  reason: Markdown 一级标题 '# Java 类'，语义独立，开始新的主题。
+- 'no': 2806
+  confidence: 0.9
+  reason: Markdown 一级标题 '# Java 中使用接口而非具体实现的编程原则'，语义独立。
+- 'no': 2846
+  confidence: 0.9
+  reason: Markdown 一级标题 '# 核心原则'，语义独立，开始新的主题章节。
+- 'no': 2886
+  confidence: 0.8
+  reason: Markdown 一级标题 '# 核心原则'，与前文2846重复，可能是分页或章节重复，依规则划分新章。

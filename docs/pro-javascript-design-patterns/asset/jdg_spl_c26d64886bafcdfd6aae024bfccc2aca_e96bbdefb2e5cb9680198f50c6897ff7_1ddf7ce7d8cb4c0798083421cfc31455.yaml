@@ -1,0 +1,272 @@
+chapter_starts:
+- 'no': 9208
+  confidence: 0.85
+  final_reason: 一级标题（#），尽管复核方提出可能是排版噪声或重复，但其作为独立的一级标题行，且前文结束于总结，符合Markdown章节划分特征。根据'宁可漏分不可误分'原则，存在不确定性但倾向于保留，因一级标题通常具有强统领性。
+  accepted_evidence:
+  - 一级标题（#）格式明显
+  - 前文为上一章节的总结与参考链接
+  - 后续内容涉及文本排版相关概念
+  rejected_evidence:
+  - 复核方指出与第8933行标题语义重叠
+  - 可能为OCR或转换错误导致的冗余
+  need_human_review: true
+- 'no': 9290
+  confidence: 0.95
+  final_reason: 一级标题（#），'构建与组合：从零开始制作组合模式'，主题切换明确，前文有分隔符，双方一致认可。
+  accepted_evidence:
+  - 一级标题（#）格式
+  - 具有统领性的新主题：组合模式
+  - 双方均无有效反驳
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 9379
+  confidence: 0.9
+  final_reason: 一级标题（#），'组件树'。虽然复核方认为可能是重复或延续，但一级标题在Markdown结构中通常代表最高层级章节。前文虽讨论了组件树，但此处以一级标题重新开启，且后续内容独立展开，符合新章特征。
+  accepted_evidence:
+  - 一级标题（#）格式
+  - 后续内容独立且完整
+  - 在文档结构中作为顶级节点存在
+  rejected_evidence:
+  - 复核方指出前文9337行已有二级标题讨论该主题
+  - 可能是同一部分的延续或噪声
+  need_human_review: false
+- 'no': 9531
+  confidence: 0.95
+  final_reason: 一级标题（#），'CompositeFormatter 使用指南'，主题从通用组件树切换到具体工具使用指南，双方一致认可。
+  accepted_evidence:
+  - 一级标题（#）格式
+  - 主题明确切换
+  - 双方均无有效反驳
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 9714
+  confidence: 0.9
+  final_reason: 一级标题（#），'文档排版'。尽管标题与9208相同，但所在上下文内容完全不同（此处涉及Vue组件创建），表明这是不同文档片段或章节的起始。
+  accepted_evidence:
+  - 一级标题（#）格式
+  - 后续内容与前一次出现该标题时的内容截然不同
+  - 复核方认可其为独立章节
+  rejected_evidence:
+  - 标题名称重复可能引起混淆
+  need_human_review: false
+- 'no': 9957
+  confidence: 0.95
+  final_reason: 一级标题（#），'Lambda 表达式：像函数一样编程'，主题从Vue排版切换到Java/编程概念，双方一致认可。
+  accepted_evidence:
+  - 一级标题（#）格式
+  - 主题切换明显
+  - 双方均无有效反驳
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 9965
+  confidence: 0.9
+  final_reason: 一级标题（#），'了解 Java Lambda 表达式与事件监听'。虽然与9957主题相关，但作为独立的一级标题，且后续内容结构完整（包含简介、语法、简化事件监听等），符合新章特征。复核方认为可能是误标，但根据格式规则，一级标题优先视为新章。
+  accepted_evidence:
+  - 一级标题（#）格式
+  - 内容结构独立且完整
+  - 与上一标题虽相关但侧重点略有不同（侧重事件监听）
+  rejected_evidence:
+  - 复核方指出与9957间隔短且主题高度重合，可能是同一章内的小节
+  need_human_review: true
+- 'no': 10061
+  confidence: 0.95
+  final_reason: 一级标题（#），'React 组件与 CSS 样式'，主题从Java Lambda切换到React前端开发，双方一致认可。
+  accepted_evidence:
+  - 一级标题（#）格式
+  - 主题切换明确
+  - 双方均无有效反驳
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 10170
+  confidence: 0.95
+  final_reason: 一级标题（#），'Facade 模式 (Facade Pattern)'，设计模式主题切换，双方一致认可。
+  accepted_evidence:
+  - 一级标题（#）格式
+  - 主题切换明确
+  - 双方均无有效反驳
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 10504
+  confidence: 0.95
+  final_reason: 一级标题（#），'适配器模式详解'，主题从React/Facade切换到适配器模式，双方一致认可。
+  accepted_evidence:
+  - 一级标题（#）格式
+  - 主题切换明确
+  - 双方均无有效反驳
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 10779
+  confidence: 0.95
+  final_reason: 一级标题（#），'VueUse 使用指南'，主题从设计模式切换到VueUse工具库，双方一致认可。
+  accepted_evidence:
+  - 一级标题（#）格式
+  - 主题切换明确
+  - 双方均无有效反驳
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 10866
+  confidence: 0.9
+  final_reason: 一级标题（#），'VueUse 简介'。虽然复核方认为可能是冗余，但作为独立的一级标题行，且前文是详细的指南，此处重新以简介开头，符合新文档片段或章节起始特征。
+  accepted_evidence:
+  - 一级标题（#）格式
+  - 内容独立，作为VueUse的另一个起始点
+  - 格式规则优先
+  rejected_evidence:
+  - 复核方指出与10779主题重合，可能是文档碎片
+  need_human_review: true
+- 'no': 10870
+  confidence: 0.95
+  final_reason: 一级标题（#），'Lambda 函数'，主题从VueUse切换到Lambda函数（JS/通用），双方一致认可。
+  accepted_evidence:
+  - 一级标题（#）格式
+  - 主题切换明确
+  - 双方均无有效反驳
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 10876
+  confidence: 0.85
+  final_reason: 一级标题（#），'函数与参数'。尽管复核方认为可能是正文小标题，但其使用了'#'一级标题语法。在无明确证据证明其为误标的情况下，依据格式特征（单独成行、一级标题）判定为新章。
+  accepted_evidence:
+  - 一级标题（#）格式
+  - 单独成行
+  - 语义上具有概括性（函数与参数）
+  rejected_evidence:
+  - 复核方指出与上一章节间隔短，可能是子节
+  need_human_review: true
+- 'no': 10884
+  confidence: 0.85
+  final_reason: 一级标题（#），'事件与响应'。同前，依据一级标题格式特征判定为新章，尽管可能是子节。
+  accepted_evidence:
+  - 一级标题（#）格式
+  - 单独成行
+  rejected_evidence:
+  - 复核方指出间隔短，属于细分子节
+  need_human_review: true
+- 'no': 10890
+  confidence: 0.85
+  final_reason: 一级标题（#），'接口与实现'。依据一级标题格式特征判定为新章。
+  accepted_evidence:
+  - 一级标题（#）格式
+  - 单独成行
+  rejected_evidence:
+  - 复核方指出间隔短，属于技术细分
+  need_human_review: true
+- 'no': 10894
+  confidence: 0.85
+  final_reason: 一级标题（#），'HTML 结构'。依据一级标题格式特征判定为新章。
+  accepted_evidence:
+  - 一级标题（#）格式
+  - 单独成行
+  rejected_evidence:
+  - 复核方指出过于琐碎，应归并为子节
+  need_human_review: true
+- 'no': 10914
+  confidence: 0.85
+  final_reason: 一级标题（#），'命名约定与代码优化'。依据一级标题格式特征判定为新章。
+  accepted_evidence:
+  - 一级标题（#）格式
+  - 单独成行
+  rejected_evidence:
+  - 复核方指出通常为文档附注或子节
+  need_human_review: true
+- 'no': 10946
+  confidence: 0.95
+  final_reason: 一级标题（#），'APISIX 和 Nacos 微服务架构中的适配器模式'，主题跨越大，双方一致认可。
+  accepted_evidence:
+  - 一级标题（#）格式
+  - 主题切换明确（从JS到微服务架构）
+  - 双方均无有效反驳
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 11060
+  confidence: 0.95
+  final_reason: 一级标题（#），'JavaScript 异步编程演进：从回调到 async/await'，主题清晰，双方一致认可。
+  accepted_evidence:
+  - 一级标题（#）格式
+  - 主题切换明确
+  - 双方均无有效反驳
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 11111
+  confidence: 0.85
+  final_reason: 一级标题（#），'选项'。尽管语义宽泛，但依据格式特征（一级标题）判定为新章。复核方认为可能是装饰器模式部分的子标题。
+  accepted_evidence:
+  - 一级标题（#）格式
+  - 单独成行
+  rejected_evidence:
+  - 复核方指出语义宽泛，可能是子部分
+  need_human_review: true
+- 'no': 11191
+  confidence: 0.85
+  final_reason: 一级标题（#），'选项'。再次出现的一级标题。依据格式特征判定为新章，尽管可能是重复或排版噪声。
+  accepted_evidence:
+  - 一级标题（#）格式
+  - 单独成行
+  rejected_evidence:
+  - 复核方指出重复出现不合理，可能是排版错误
+  need_human_review: true
+- 'no': 11255
+  confidence: 0.85
+  final_reason: 一级标题（#），'如何使用'。依据格式特征判定为新章。
+  accepted_evidence:
+  - 一级标题（#）格式
+  - 单独成行
+  rejected_evidence:
+  - 复核方指出这是操作性小节，不具备独立大章体量
+  need_human_review: true
+- 'no': 11299
+  confidence: 0.85
+  final_reason: 一级标题（#），'选项类'。依据格式特征判定为新章。
+  accepted_evidence:
+  - 一级标题（#）格式
+  - 单独成行
+  rejected_evidence:
+  - 复核方指出属于内部细节，非独立章节
+  need_human_review: true
+- 'no': 11361
+  confidence: 0.95
+  final_reason: 一级标题（#），'装饰器模式'，设计模式核心主题，双方一致认可。
+  accepted_evidence:
+  - 一级标题（#）格式
+  - 主题明确
+  - 双方均无有效反驳
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 11499
+  confidence: 0.85
+  final_reason: 一级标题（#），'装饰器模式'。再次出现。依据格式特征判定为新章，可能涉及不同语言或深入探讨。
+  accepted_evidence:
+  - 一级标题（#）格式
+  - 单独成行
+  rejected_evidence:
+  - 复核方指出可能是重复或子节
+  need_human_review: true
+- 'no': 11682
+  confidence: 0.95
+  final_reason: 一级标题（#），'关于 RingBell 的说明'，主题切换到具体工具，双方一致认可。
+  accepted_evidence:
+  - 一级标题（#）格式
+  - 主题切换明确
+  - 双方均无有效反驳
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 11782
+  confidence: 0.95
+  final_reason: 一级标题（#），'装饰器'，主题从工具说明切回编程概念，双方一致认可。
+  accepted_evidence:
+  - 一级标题（#）格式
+  - 主题切换明确
+  - 双方均无有效反驳
+  rejected_evidence: []
+  need_human_review: false
+rejected_lines:
+- 'no': 9216
+  reason: 复核方指出该书存在多个一级标题（#），因此二级标题（##）'事件传递与监听'应视为子章节，而非最高层级大章。
+  need_human_review: false
+- 'no': 10178
+  reason: 复核方指出'Facade 与 Prop Drilling'紧随'Facade 模式'之后，间隔短，且Prop Drilling通常与React
+    Props相关，此处作为独立一级大章过于琐碎，更可能是同一技术点的细分。
+  need_human_review: false
+- 'no': 11357
+  reason: 复核方指出'结论'通常是章节的结尾部分，而非新章节的开始。其后紧跟新的主题'装饰器模式'，说明'结论'属于前文收尾。
+  need_human_review: false

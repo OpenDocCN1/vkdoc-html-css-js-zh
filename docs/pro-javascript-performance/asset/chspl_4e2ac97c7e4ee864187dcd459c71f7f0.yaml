@@ -1,0 +1,25 @@
+chapter_starts:
+- 'no': 0
+  confidence: 0.9
+  reason: 书籍起始位置，包含封面及前言/版权信息，统一划分为一章。
+- 'no': 204
+  confidence: 0.95
+  reason: “作者简介”属于正文前的前置内容，按规则统一划分为一章。
+- 'no': 208
+  confidence: 0.95
+  reason: “关于技术审校者”属于正文前的前置内容，按规则统一划分为一章。
+- 'no': 212
+  confidence: 0.98
+  reason: “## 第 1 章”为最高层级章标题，且序号起始，后接正文内容。
+- 'no': 467
+  confidence: 0.98
+  reason: “## 第 2 章”为最高层级章标题，序号连贯。
+- 'no': 1342
+  confidence: 0.98
+  reason: “## 第 3 章”为最高层级章标题，序号连贯。
+- 'no': 2118
+  confidence: 0.98
+  reason: “# 第四章”为最高层级章标题，序号连贯（虽格式略异，但语义明确为第四部分）。
+- 'no': 2827
+  confidence: 0.98
+  reason: “## 第 5 章”为最高层级章标题，序号连贯。

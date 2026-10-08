@@ -1,0 +1,191 @@
+reviews:
+- 'no': 9208
+  overturn_probability: 0.3
+  alternative: 排版噪声/重复标题
+  counter_evidence:
+  - 该行标题'文档排版'与第8933行的'## 文本排版'及第9208行本身存在高度语义重叠，且紧随其后的是'## 总结'，通常总结属于前一章节的结尾，而非新章节的开始。
+  - 在Markdown文档中，'# 文档排版'若出现在'总结'之后，极有可能是文档结构混乱或OCR/转换错误导致的冗余标题，而非实质性的内容分章。
+  keep_split: true
+- 'no': 9216
+  overturn_probability: 0.4
+  alternative: 二级标题（子章节）
+  counter_evidence:
+  - 根据规则，二级标题（##）通常不应作为最高层级的大章划分依据，除非全书没有一级标题（#）或一级标题极少。
+  - 上下文中存在多个'#'级标题（如9290, 9379等），说明本书结构中存在一级标题。因此，'## 事件传递与监听'更可能只是一个子节，而非独立的大章。
+  keep_split: false
+- 'no': 9290
+  overturn_probability: 0.0
+  alternative: 无法推翻
+  counter_evidence:
+  - 一级标题（#），具有明确的主题'构建与组合'，前文有'---'分隔符，符合新章特征。
+  keep_split: true
+- 'no': 9379
+  overturn_probability: 0.5
+  alternative: 重复标题/排版错误
+  counter_evidence:
+  - '''组件树''这一主题在9337行（''## 组件树''）已经作为二级标题出现过，内容涵盖了组件树的结构、实现等。'
+  - 9379行的'# 组件树'紧随9378行的代码块结束，且前文9337已详细讨论组件树，此处再次出现一级标题可能是文档结构冗余或转换错误，倾向于视为同一部分的延续或噪声，而非全新的大章。
+  keep_split: false
+- 'no': 9531
+  overturn_probability: 0.0
+  alternative: 无法推翻
+  counter_evidence:
+  - 一级标题（#），主题'CompositeFormatter 使用指南'，与前面的'组件树'等主题明显不同，且结构完整。
+  keep_split: true
+- 'no': 9714
+  overturn_probability: 0.1
+  alternative: 无法推翻
+  counter_evidence:
+  - 一级标题（#），虽名为'文档排版'，但内容涉及Vue组件创建，与9208处的'文档排版'内容完全不同，属于不同文档片段或章节，维持分章。
+  keep_split: true
+- 'no': 9957
+  overturn_probability: 0.0
+  alternative: 无法推翻
+  counter_evidence:
+  - 一级标题（#），主题切换明显。
+  keep_split: true
+- 'no': 9965
+  overturn_probability: 0.4
+  alternative: 同一主题下的细分/二级标题误判
+  counter_evidence:
+  - 与9957'Lambda 表达式：像函数一样编程'主题高度重合，仅8行间隔。通常如此紧密的同主题一级标题可能是文档碎片化，或者9965应为二级标题（##）但被误标为一级，或者是同一章内的小节。鉴于9957已开启该主题，9965作为独立新章的依据较弱。
+  keep_split: false
+- 'no': 10061
+  overturn_probability: 0.0
+  alternative: 无法推翻
+  counter_evidence:
+  - 一级标题（#），主题'React 组件与 CSS 样式'，与前文Java/Lambda主题不同。
+  keep_split: true
+- 'no': 10170
+  overturn_probability: 0.0
+  alternative: 无法推翻
+  counter_evidence:
+  - 一级标题（#），'Facade 模式'，设计模式主题，前文是React，主题切换明确。
+  keep_split: true
+- 'no': 10178
+  overturn_probability: 0.5
+  alternative: 同一主题下的延伸/排版冗余
+  counter_evidence:
+  - '''Facade 与 Prop Drilling''仅间隔8行跟随在''Facade 模式''之后。Prop Drilling通常与Props/State相关，而Facade是设计模式。虽然涉及UI，但如此短促的两个一级标题极可能是同一技术点（React中的Facade设计思想）的细分，或者其中一个是误标的二级标题。作为独立大章显得过碎。'
+  keep_split: false
+- 'no': 10504
+  overturn_probability: 0.0
+  alternative: 无法推翻
+  counter_evidence:
+  - 一级标题（#），'适配器模式详解'，前文是VueUse/JavaScript，主题切换明确。
+  keep_split: true
+- 'no': 10779
+  overturn_probability: 0.0
+  alternative: 无法推翻
+  counter_evidence:
+  - 一级标题（#），'VueUse 使用指南'，主题从设计模式切回VueUse工具库。
+  keep_split: true
+- 'no': 10866
+  overturn_probability: 0.4
+  alternative: 同一主题下的重复/冗余标题
+  counter_evidence:
+  - '''VueUse 简介''与10779''VueUse 使用指南''间隔仅87行，且10779已包含VueUse的详细介绍。10866很可能是文档结构中的冗余标题或子节被误标为一级，不具备划分新大章的必要性和独立性。'
+  keep_split: false
+- 'no': 10870
+  overturn_probability: 0.0
+  alternative: 无法推翻
+  counter_evidence:
+  - 一级标题（#），'Lambda 函数'，从VueUse切回Lambda函数，主题切换。
+  keep_split: true
+- 'no': 10876
+  overturn_probability: 0.6
+  alternative: 正文小标题/列表项
+  counter_evidence:
+  - '''函数与参数''紧随''Lambda 函数''之后，间隔仅6行。如此短的一级标题通常不具备统领性，更像是''Lambda 函数''章节内的一个子标题（应为##或###），被误判为一级标题。'
+  keep_split: false
+- 'no': 10884
+  overturn_probability: 0.6
+  alternative: 正文小标题
+  counter_evidence:
+  - '''事件与响应''同样紧邻前文，间隔仅8行，属于Lambda或JS事件处理的细分子节，不应独立为大章。'
+  keep_split: false
+- 'no': 10890
+  overturn_probability: 0.6
+  alternative: 正文小标题
+  counter_evidence:
+  - '''接口与实现''间隔极短，属于对前述概念的技术细分，非独立章节。'
+  keep_split: false
+- 'no': 10894
+  overturn_probability: 0.6
+  alternative: 正文小标题
+  counter_evidence:
+  - '''HTML 结构''是Lambda/JS应用的具体场景，作为一级标题过于琐碎，应归并为子节。'
+  keep_split: false
+- 'no': 10914
+  overturn_probability: 0.5
+  alternative: 正文小标题/建议部分
+  counter_evidence:
+  - '''命名约定与代码优化''是开发最佳实践的子项，通常在文档末尾作为附注或子节，独立成一级大章依据不足。'
+  keep_split: false
+- 'no': 10946
+  overturn_probability: 0.0
+  alternative: 无法推翻
+  counter_evidence:
+  - 一级标题（#），'APISIX 和 Nacos...'，主题从JavaScript切换到微服务架构，跨越较大。
+  keep_split: true
+- 'no': 11060
+  overturn_probability: 0.0
+  alternative: 无法推翻
+  counter_evidence:
+  - 一级标题（#），'JavaScript 异步编程演进...'，主题清晰切换。
+  keep_split: true
+- 'no': 11111
+  overturn_probability: 0.5
+  alternative: 排版噪声/重复标题
+  counter_evidence:
+  - '''选项''作为一个一级标题，语义过于宽泛。结合上下文，这更像是装饰器模式（Decorator Pattern）介绍中的一个子部分（如''选项 1'',
+    ''选项 2''的汇总），被错误提取为一级标题。'
+  keep_split: false
+- 'no': 11191
+  overturn_probability: 0.6
+  alternative: 重复标题/排版噪声
+  counter_evidence:
+  - 再次出现'# 选项'，间隔仅80行。同一文档中两个语义模糊的'# 选项'独立成章极不合理，第二个很可能是排版错误或子标题误标。
+  keep_split: false
+- 'no': 11255
+  overturn_probability: 0.6
+  alternative: 正文小标题
+  counter_evidence:
+  - '''如何使用''是一个典型的操作性小节标题，通常隶属于前面的''选项''或''装饰器''章节，不具备独立大章的体量。'
+  keep_split: false
+- 'no': 11299
+  overturn_probability: 0.6
+  alternative: 正文小标题
+  counter_evidence:
+  - '''选项类''是对特定代码类的介绍，属于''如何使用''或''装饰器模式''内部的细节，非独立章节。'
+  keep_split: false
+- 'no': 11357
+  overturn_probability: 0.7
+  alternative: 章节总结段落
+  counter_evidence:
+  - '''结论''通常是一个章节的结尾部分，而非一个新章节的开始。在文档中，''结论''后紧跟''装饰器模式''（11361），说明''结论''属于前文（装饰器/选项部分）的收尾，不应单独划为新章。'
+  keep_split: false
+- 'no': 11361
+  overturn_probability: 0.0
+  alternative: 无法推翻
+  counter_evidence:
+  - 一级标题（#），'装饰器模式'，这是设计模式的核心主题，前文虽讨论过类似概念，但此处作为系统性的模式介绍，具有统领性。
+  keep_split: true
+- 'no': 11499
+  overturn_probability: 0.4
+  alternative: 重复标题/深入探讨
+  counter_evidence:
+  - '''装饰器模式''再次出现为一级标题，间隔138行。这可能是对装饰器模式的深入（如Java实现vs JS实现），或者文档重复。鉴于前文已完整介绍，此处更可能是子节或重复内容，分章必要性降低。但考虑到可能涉及不同语言对比，维持分章也有一定道理，但推翻概率较高。'
+  keep_split: false
+- 'no': 11682
+  overturn_probability: 0.0
+  alternative: 无法推翻
+  counter_evidence:
+  - 一级标题（#），'关于 RingBell 的说明'，主题从设计模式切换到具体工具RingBell，切换明显。
+  keep_split: true
+- 'no': 11782
+  overturn_probability: 0.0
+  alternative: 无法推翻
+  counter_evidence:
+  - 一级标题（#），'装饰器'，从工具说明切回编程概念，主题切换。
+  keep_split: true

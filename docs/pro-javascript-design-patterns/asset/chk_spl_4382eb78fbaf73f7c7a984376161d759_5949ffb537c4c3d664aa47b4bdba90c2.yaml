@@ -1,0 +1,141 @@
+reviews:
+- 'no': 0
+  overturn_probability: 0.0
+  alternative: 封面/前置内容
+  counter_evidence:
+  - 规则规定前言、序言等正文之前的内容统一划分为一章，行0为封面图片，处于文件起始位置，符合前置内容特征。
+  keep_split: true
+- 'no': 82
+  overturn_probability: 0.0
+  alternative: 章标题
+  counter_evidence:
+  - 行82为一级标题，后续包含大量二级、三级子标题及代码示例，具有明显的统领性，且未出现在其他章节内部，符合最高层级章节特征。
+  keep_split: true
+- 'no': 177
+  overturn_probability: 0.0
+  alternative: 章标题
+  counter_evidence:
+  - 行177为一级标题“使用接口进行编程”，后续内容为关于Java接口的详细讲解、代码示例及子标题，语义独立且结构完整，符合章标题特征。
+  keep_split: true
+- 'no': 587
+  overturn_probability: 0.1
+  alternative: 小节总结
+  counter_evidence:
+  - 行587为“# 结论”，位于“使用接口进行编程”章节的末尾（行177-586），通常“结论”是某一章节或部分的结尾小结，而非开启一个新的大章节。若全书结构严谨，它可能是前一章的附录部分。但鉴于其标记为一级标题且后续紧跟新的主题（行591），作为分章界限处理也可接受，存在一定误判可能。
+  keep_split: true
+- 'no': 591
+  overturn_probability: 0.1
+  alternative: 练习列表/噪声
+  counter_evidence:
+  - 行591标题“# 克隆 训练”措辞非常不规范，且其后续内容（行593-757）是一长串“### 链接 克隆...”、“### 文本 选择”等极其生硬、类似机器翻译或SEO关键词堆砌的列表，缺乏实际技术内容的连贯性，极有可能是文档中的索引、附录或排版噪声，而非真正的正文大章。但规则要求对一级标题保持敏感，故保留。
+  keep_split: true
+- 'no': 759
+  overturn_probability: 0.2
+  alternative: 无关标题/噪声
+  counter_evidence:
+  - 行759“# 文档排版”与其后内容（Pipeline模式、Lifetim模式等PHP/Java混排内容）语义关联度低，且前文是“克隆训练”的列表。这里的标题可能是文档拼接错误产生的噪声，但其作为一级标题，按照机械规则仍需划分。
+  keep_split: true
+- 'no': 873
+  overturn_probability: 0.1
+  alternative: API文档/示例
+  counter_evidence:
+  - 行873“# 排版后的文本”作为一级标题，后续内容为API接口定义、终端命令、代码示例，看起来像是某个特定模块（可能是文档生成或排版工具）的示例输出或API文档，而非图书的正式章节。但一级标题通常作为分章依据。
+  keep_split: true
+- 'no': 991
+  overturn_probability: 0.0
+  alternative: 目录
+  counter_evidence:
+  - 行991为“# 目录”，且后续内容为列表形式的目录项。规则明确指出“文末索引也划分为一章”，目录属于前置或后置的独立部分，必须分章。
+  keep_split: true
+- 'no': 1030
+  overturn_probability: 0.0
+  alternative: 关于技术审校
+  counter_evidence:
+  - 行1030为“# 关于技术审校”，属于书籍的附属说明信息（About the Technical Reviewer）。规则指出“前言、序言、致谢、关于作者等正文之前的内容...文末索引也划分为一章”，此类说明性章节通常独立成章。
+  keep_split: true
+- 'no': 1038
+  overturn_probability: 0.0
+  alternative: 关于作者
+  counter_evidence:
+  - 行1038为“# 关于作者”，明确属于规则中指定的“关于作者”类前置/附属内容，应独立分章。
+  keep_split: true
+- 'no': 1044
+  overturn_probability: 0.1
+  alternative: 正文章节
+  counter_evidence:
+  - 行1044标题过长且以“#”开头，内容为JavaScript简介。虽然在逻辑上可能是新章节，但其标题形式（完整句子）不太符合常规章标题（通常简短名词）。不过，考虑到后续有“##
+    致谢”、“## 设计模式与本书”等，它确实开启了关于JavaScript设计模式书籍的介绍部分，故保留分章判断。
+  keep_split: true
+- 'no': 1056
+  overturn_probability: 0.9
+  alternative: 小节标题
+  counter_evidence:
+  - 行1056为“## 致谢”（二级标题）。规则明确指出“只划分全书最高层级的大章”，且“如果遇到‘X.Y’、‘第 X 节’等子层级，不划分新的章节”。在Markdown中，`##`属于子层级。除非全书没有一级标题且`##`被视为最高层级，否则不应分章。在此文件中，存在多个`#`一级标题（如1044,
+    1094），因此`##`不应被视为章起始。原判断将其强行分章是误报。
+  keep_split: false
+- 'no': 1094
+  overturn_probability: 0.0
+  alternative: 书名/主标题
+  counter_evidence:
+  - 行1094为“# Java 面向对象编程与设计模式指南”，作为一级标题，且后续内容为“这本书的结构”、“第一部分”等，明显是整本书或该部分的主标题，符合分章特征。
+  keep_split: true
+- 'no': 1164
+  overturn_probability: 0.0
+  alternative: 部分标题
+  counter_evidence:
+  - 行1164为“# 第五部分”。规则指出“如果存在标题为‘第 X 部分’，那么该书为部分-章节模式，遇到部分和章标题时，都要划分新章”。虽然此处是Markdown一级标题，但语义上是“部分”，在部分-章节模式下，部分标题应分章。
+  keep_split: true
+- 'no': 1442
+  overturn_probability: 0.0
+  alternative: 章标题
+  counter_evidence:
+  - 行1442为“# 关于 Java 宏脚本框架”，一级标题，后续内容详细讲解该框架的核心原理、组件等，语义独立，符合章标题特征。
+  keep_split: true
+- 'no': 1525
+  overturn_probability: 0.0
+  alternative: 章标题
+  counter_evidence:
+  - 行1525为“# 观察者模式”，一级标题，后续包含该模式的意图、问题、解决方案、代码示例等完整结构，是典型的教程/技术书籍章节，符合分章特征。
+  keep_split: true
+- 'no': 1780
+  overturn_probability: 0.1
+  alternative: 部分标题/重复
+  counter_evidence:
+  - 行1780再次出现“# 第五部分”。这可能意味着文档是拼接的，或者前面的“第五部分”是子文档的。规则要求遇到部分标题分章。但需注意，如果前文已有“第五部分”（行1164），这里可能是另一本书的内容或附录。无论如何，作为一级标题和语义上的“部分”，分章是合理的，尽管可能存在文档结构混乱。
+  keep_split: true
+- 'no': 2018
+  overturn_probability: 0.1
+  alternative: 示例/模板
+  counter_evidence:
+  - 行2018“# 排版后的文档”是一级标题，但内容看起来像是Golang/Java混合的协议方法文档，与全书主题（Java设计模式）略有偏差，可能是附录或示例代码。但作为一级标题，仍应分章。
+  keep_split: true
+- 'no': 2507
+  overturn_probability: 0.1
+  alternative: 总结
+  counter_evidence:
+  - 行2507“# 总结”又是一级标题。它位于“方法学习建议”之后，“方法在Java中的重要性”之前（实际上后面还有更多内容）。这里的“总结”可能是指“方法”这一大章的总结，而非全书总结。如果它是某章的小结，则不应分章。但鉴于其级别为`#`，且后续仍有大量`##`内容（如方法类型总结、方法相关概念等），它更像是将“方法”内容分成了两部分（详细讲解和总结/补充）。考虑到规则对一级标题的倾向性，保留分章，但置信度较低，因为它可能只是一个小节标题被误标为一级。
+  keep_split: true
+- 'no': 2632
+  overturn_probability: 0.0
+  alternative: 章标题
+  counter_evidence:
+  - 行2632“# Java 类”，一级标题，后续讲解封装、访问修饰符、Getter/Setter等，是标准的Java基础章节，符合分章特征。
+  keep_split: true
+- 'no': 2806
+  overturn_probability: 0.0
+  alternative: 章标题
+  counter_evidence:
+  - 行2806“# Java 中使用接口而非具体实现的编程原则”，一级标题，内容围绕该原则展开，符合分章特征。
+  keep_split: true
+- 'no': 2846
+  overturn_probability: 0.2
+  alternative: 小节标题
+  counter_evidence:
+  - 行2846“# 核心原则”与行2806的章节内容紧密相关，可能是该章节下的一个子部分被误标为一级标题，或者是另一篇独立短文。若视为独立短文，则分章正确；若视为子部分，则不应分章。鉴于标题简短且无编号，且前文已有明确的章标题，此处存在作为“大标题下的子主题”被错误提升为一级标题的可能，但按机械规则（一级标题即章）仍分章。
+  keep_split: true
+- 'no': 2886
+  overturn_probability: 0.9
+  alternative: 重复标题/正文断行
+  counter_evidence:
+  - 行2886再次出现“# 核心原则”，且其下内容“## 接口与实现”与行2846下的内容高度相似（都在讨论DataOutput接口）。这极有可能是文档拼接错误、OCR重复或分页符导致的标题重复。它不是一个新的章节，而是同一章节的延续或重复。因此，不应划分新章，应视为同一章内的重复标记或噪声。
+  keep_split: false

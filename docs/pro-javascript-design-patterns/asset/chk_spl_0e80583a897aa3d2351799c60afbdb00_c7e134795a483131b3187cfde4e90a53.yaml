@@ -1,0 +1,160 @@
+reviews:
+- 'no': 14825
+  overturn_probability: 0.2
+  alternative: 章节末尾的总结段落标题
+  counter_evidence:
+  - “# 结论”通常出现在一章的末尾，用于总结当前章节内容，而非开启新章。
+  - 在技术文档中，“结论”往往作为“附录”或“主要功能”等长章节的结束部分，不单独构成顶级章节。
+  keep_split: false
+- 'no': 14829
+  overturn_probability: 0.1
+  alternative: 附录起始标记
+  counter_evidence:
+  - 虽然“## 附录”是二级标题，但根据规则“附录通常划分为独立章节”，此处作为附录部分的开始，维持分章是合理的。
+  keep_split: true
+- 'no': 14925
+  overturn_probability: 0.05
+  alternative: API 参考章节标题
+  counter_evidence:
+  - “# API 参考”是典型的技术文档顶级章节，具有明确的统领性。
+  keep_split: true
+- 'no': 14972
+  overturn_probability: 0.1
+  alternative: 配置说明章节
+  counter_evidence:
+  - “# 配置”是独立的一级标题，内容涵盖配置属性和示例，符合分章特征。
+  keep_split: true
+- 'no': 15000
+  overturn_probability: 0.1
+  alternative: 错误处理章节
+  counter_evidence:
+  - “# 错误处理”是独立的一级标题，专门讨论错误场景，符合分章特征。
+  keep_split: true
+- 'no': 15025
+  overturn_probability: 0.1
+  alternative: FAQ 章节
+  counter_evidence:
+  - “# 常见问题 FAQ”是独立的一级标题，问答形式通常独立成章。
+  keep_split: true
+- 'no': 15049
+  overturn_probability: 0.1
+  alternative: 发布说明章节
+  counter_evidence:
+  - “# 发布说明”是独立的一级标题，记录版本历史，符合分章特征。
+  keep_split: true
+- 'no': 15055
+  overturn_probability: 0.9
+  alternative: 正文中的类定义小标题
+  counter_evidence:
+  - “# DirectoryProxy 类”虽然是一级标题，但在前文“# 发布说明”之后突然出现，且内容紧密围绕代码实现细节，更像是“附录”或“主要功能”章节下的子部分，而非全书最高层级的独立大章。
+  - 全书逻辑流：前面是 API 参考、配置、错误处理、FAQ、发布说明，突然插入一个具体的类介绍作为顶级章节，结构不连贯，可能是 Markdown 层级使用不规范导致的误判。
+  keep_split: false
+- 'no': 15458
+  overturn_probability: 0.8
+  alternative: 动态代理模式的小节标题
+  counter_evidence:
+  - “# 动态代理”紧跟在大量关于 DirectoryProxy 的代码解释之后，语境上属于对代理模式的具体实现深入讨论，而非全书结构性的新大章。
+  - 前文已经涵盖了静态代理相关内容，此处更可能是同一主题下的子话题，而非独立章节。
+  keep_split: false
+- 'no': 15978
+  overturn_probability: 0.9
+  alternative: 代理模式概念回顾小节
+  counter_evidence:
+  - “# 代理模式”在文本中反复出现（如 15978, 16038），且位置分散。在 15978 处，它位于大量代码片段之后，更像是文章内部的回顾或总结段落，而非全书结构性的新章节起点。
+  - 如果“# 代理模式”是顶级章节，它应该在全书靠前位置，而不是在附录和多个具体类介绍之后。
+  keep_split: false
+- 'no': 16038
+  overturn_probability: 0.85
+  alternative: 代理模式概述小节
+  counter_evidence:
+  - 与 15978 类似，“# 代理模式概述”出现在文档后段，且距离前一个一级标题很近，极有可能是对前文内容的概括性总结，而非新章。
+  - 标题命名带有“概述”字样，常作为引言或结尾，而非中间独立的顶级章节。
+  keep_split: false
+- 'no': 16064
+  overturn_probability: 0.8
+  alternative: 深入剖析小节
+  counter_evidence:
+  - “# 关于代理模式的深入剖析”紧跟在概述之后，语义上是连续的论述，不具备顶级章节的跳跃性。
+  - 该标题更像是一个长段落或子章节的标题，而非独立的 Book Chapter。
+  keep_split: false
+- 'no': 16130
+  overturn_probability: 0.3
+  alternative: 观察者模式新章节
+  counter_evidence:
+  - “# 发布者与订阅者模式”引入了新的设计模式主题，与之前的代理模式有明显区别，具备作为新章的语义特征。
+  keep_split: true
+- 'no': 16213
+  overturn_probability: 0.7
+  alternative: 发布者-订阅者模式代码示例小节
+  counter_evidence:
+  - “# 发布者-订阅者模式”与 16130 的“# 发布者与订阅者模式”内容高度重叠，仅用词略有不同。
+  - 在短短几十行内出现两个同名/近名的一级标题，极大概率是 Markdown 层级混乱，16213 其实是 16130 章节下的子部分（如代码实现部分），而非新章。
+  keep_split: false
+- 'no': 16530
+  overturn_probability: 0.6
+  alternative: 动画示例小节
+  counter_evidence:
+  - “# 动画生命周期”是一个具体的应用场景示例，通常归属于“发布者-订阅者模式”或“观察者模式”章节内部的子节，而非独立的顶级大章。
+  - 其内容篇幅较短，不足以支撑一个独立的顶级章节。
+  keep_split: false
+- 'no': 16572
+  overturn_probability: 0.9
+  alternative: 占位符标题或排版错误
+  counter_evidence:
+  - “# 标题”是一个明显的占位符或模板残留，而非真实语义的章节标题。
+  - 其后内容“事件与监听器”是二级标题“## 核心概念”下的内容，因此“# 标题”极有可能是误标的子标题，不应分章。
+  keep_split: false
+- 'no': 16720
+  overturn_probability: 0.4
+  alternative: 观察者模式章节
+  counter_evidence:
+  - “# 观察者模式”是经典设计模式，通常独立成章。但鉴于前文已有“发布者与订阅者模式”，此处可能是对观察者模式的进一步独立讨论，维持分章有一定合理性，但存在重复论述的可能。
+  keep_split: true
+- 'no': 16738
+  overturn_probability: 0.2
+  alternative: 命令模式章节
+  counter_evidence:
+  - “# 命令模式”引入了一个全新的设计模式主题，与前文的观察者/发布者模式不同，具备作为新章的强烈语义特征。
+  keep_split: true
+- 'no': 16839
+  overturn_probability: 0.8
+  alternative: CompletableFuture 概述小节
+  counter_evidence:
+  - “# 概述”是通用的引导性标题，通常位于章节内部开头。
+  - 在此处，它紧接命令模式的内容，开始介绍 CompletableFuture，这更像是“异步编程”大章下的子节，或者是一个专题的内部结构，而非全书最高层级的“第
+    X 章”。
+  keep_split: false
+- 'no': 17002
+  overturn_probability: 0.7
+  alternative: CompletableFuture 详解小节
+  counter_evidence:
+  - 与 16839 类似，另一个“# 概述”出现，进一步证明文档结构中存在层级混用。
+  - 这是同一主题（CompletableFuture）的重复或深入部分，不应视为独立的顶级章节。
+  keep_split: false
+- 'no': 17544
+  overturn_probability: 0.5
+  alternative: ReverseCalling 类总结
+  counter_evidence:
+  - “# 总结”通常是一章的结尾。
+  - 如果前文是关于 ReverseCalling 类的介绍，这个“总结”可能是该小节的结束，而非新章的开始。结合其后的“# 标题”占位符，此处结构混乱，可能不应分章。
+  keep_split: false
+- 'no': 17548
+  overturn_probability: 0.95
+  alternative: 占位符标题
+  counter_evidence:
+  - “# 标题”再次出现，显然是模板占位符或错误。
+  - 其后内容是 Cursor 示例，这应该是一个具体的例子章节或子节，而非由一个无意义的“标题”字引导的顶级章节。
+  keep_split: false
+- 'no': 17605
+  overturn_probability: 0.8
+  alternative: Unga 类介绍小节
+  counter_evidence:
+  - “# `Unga` 类介绍”是一个具体的类名介绍，属于代码实现细节。
+  - 在文档后段，这更可能是“命令模式”或“异步编程”章节下的一个子话题，而非独立的顶级大章。
+  keep_split: false
+- 'no': 17689
+  overturn_probability: 0.2
+  alternative: FAQ 章节
+  counter_evidence:
+  - “# 常见问题解答”是典型的独立章节标题，用于回答用户疑虑。
+  keep_split: true

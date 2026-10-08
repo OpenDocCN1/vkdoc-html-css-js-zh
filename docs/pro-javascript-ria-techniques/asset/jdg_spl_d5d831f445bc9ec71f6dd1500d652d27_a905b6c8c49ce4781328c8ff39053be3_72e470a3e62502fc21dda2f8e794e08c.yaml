@@ -1,0 +1,74 @@
+chapter_starts:
+- 'no': 16092
+  confidence: 1.0
+  final_reason: 双方一致确认。该行格式为 '# 前言'，属于 Markdown 一级标题。根据规则，前言、序言等正文之前的内容统一划分为一章。
+  accepted_evidence:
+  - 格式为一级标题 '#'
+  - 语义为前言，属于前置内容
+  - 复核方支持保留分章
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 16102
+  confidence: 1.0
+  final_reason: 双方一致确认。该行格式为 '# 构建坚实基础'，是全书第一个大章标题，语义具有统领性，后续跟随子节（##）。
+  accepted_evidence:
+  - 格式为一级标题 '#'
+  - 语义为正文第一章
+  - 复核方支持保留分章
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 16219
+  confidence: 1.0
+  final_reason: 双方一致确认。该行格式为 '# 面向富互联网应用的 JavaScript'，是一级标题，开启新的大章节，前文上一章已结束。
+  accepted_evidence:
+  - 格式为一级标题 '#'
+  - 语义清晰，标志主题转换
+  - 复核方支持保留分章
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 16301
+  confidence: 1.0
+  final_reason: 双方一致确认。该行格式为 '# Page Performance'，是一级标题，内容从 JavaScript 章节切换到性能优化章节。
+  accepted_evidence:
+  - 格式为一级标题 '#'
+  - 主题转换明确
+  - 复核方支持保留分章
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 16455
+  confidence: 1.0
+  final_reason: 双方一致确认。该行格式为 '# 障眼法：感知响应速度'，是一级标题，位于性能章节之后，开启新主题。
+  accepted_evidence:
+  - 格式为一级标题 '#'
+  - 具有统领性
+  - 复核方支持保留分章
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 16473
+  confidence: 1.0
+  final_reason: 双方一致确认。该行格式为 '# 优雅排版'，是一级标题，后续包含多个子节，结构完整。
+  accepted_evidence:
+  - 格式为一级标题 '#'
+  - 后续有子节支撑
+  - 复核方支持保留分章
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 16541
+  confidence: 1.0
+  final_reason: 双方一致确认。该行格式为 '# 多媒体播放'，是一级标题，主题从排版切换到多媒体。
+  accepted_evidence:
+  - 格式为一级标题 '#'
+  - 主题切换明确
+  - 复核方支持保留分章
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 16581
+  confidence: 1.0
+  final_reason: 双方一致确认。该行格式为 '# 表单控件'，是一级标题，后续包含自定义控件等子节，是独立大章节。
+  accepted_evidence:
+  - 格式为一级标题 '#'
+  - 后续有子节支撑
+  - 复核方支持保留分章
+  rejected_evidence: []
+  need_human_review: false
+rejected_lines: []

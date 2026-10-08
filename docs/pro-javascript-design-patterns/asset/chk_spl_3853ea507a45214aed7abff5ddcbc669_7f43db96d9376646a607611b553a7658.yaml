@@ -1,0 +1,102 @@
+reviews:
+- 'no': 6310
+  overturn_probability: 0.1
+  alternative: 正文小标题或文档章节
+  counter_evidence:
+  - 该行是 Markdown 一级标题 `# 单例模式`，格式上独立成行，语义上具有统领性，符合章标题特征。
+  - 上下文显示这是一个技术文档，通常一级标题对应主要章节。
+  keep_split: true
+- 'no': 6947
+  overturn_probability: 0.9
+  alternative: 排版噪声或占位符标题
+  counter_evidence:
+  - 标题内容为 `# 标题`，语义极度模糊，缺乏概括性，不符合真正章标题应具有“统领性、概括性”的特征。
+  - 前文（行 6931-6945）讨论的是“懒加载单例”，紧接着行 6949 开始讨论“创建和分配对象”，中间的 `# 标题` 更像是一个未填写的占位符或排版错误，而非正式章节名。
+  keep_split: false
+- 'no': 7032
+  overturn_probability: 0.1
+  alternative: 正文小标题或文档章节
+  counter_evidence:
+  - '`# 继承与原型链` 是一级标题，内容涉及 JavaScript 核心概念，语义清晰，统领后续关于原型链和继承的讨论。'
+  keep_split: true
+- 'no': 7075
+  overturn_probability: 0.1
+  alternative: 正文小标题或文档章节
+  counter_evidence:
+  - '`# 类（ES6 引入）` 是一级标题，明确指出了主题范围（ES6 Class），语义清晰，统领后续类语法的内容。'
+  keep_split: true
+- 'no': 7140
+  overturn_probability: 0.1
+  alternative: 正文小标题或文档章节
+  counter_evidence:
+  - '`# 对象的使用场景` 是一级标题，语义概括性强，后续内容列举了字典、配置对象等具体场景，符合章标题特征。'
+  keep_split: true
+- 'no': 7713
+  overturn_probability: 0.1
+  alternative: 正文小标题或文档章节
+  counter_evidence:
+  - '`# 使用设计模式创建对象` 是一级标题，主题明确，统领后续关于工厂模式等设计模式的内容。'
+  keep_split: true
+- 'no': 8286
+  overturn_probability: 0.2
+  alternative: 正文前内容（前言/序言）
+  counter_evidence:
+  - '`# 前言` 通常作为文档的起始部分，根据规则“前言、序言...统一划分为一章”，此判断合理。'
+  - 虽然位置稍显靠后（行号 8286），但在长文档中可能作为独立的前置章节存在。
+  keep_split: true
+- 'no': 8499
+  overturn_probability: 0.0
+  alternative: 正式章节标题
+  counter_evidence:
+  - '`# 第一章：理解 RPC` 带有明确的书级编号（第一章），完全符合“全书最高层级的大章”定义。'
+  keep_split: true
+- 'no': 8525
+  overturn_probability: 0.0
+  alternative: 正式章节标题
+  counter_evidence:
+  - '`# 第二章：理解 Bridger` 带有明确的章节编号，语义连贯，确认为新章。'
+  keep_split: true
+- 'no': 8542
+  overturn_probability: 0.0
+  alternative: 正式章节标题
+  counter_evidence:
+  - '`# 第三章：Bridger 中的桥接类` 带有明确的章节编号，确认为新章。'
+  keep_split: true
+- 'no': 8591
+  overturn_probability: 0.0
+  alternative: 正式章节标题
+  counter_evidence:
+  - '`# 第四章：实战：构建一个简单的 RPC 系统` 带有明确的章节编号，确认为新章。'
+  keep_split: true
+- 'no': 8633
+  overturn_probability: 0.0
+  alternative: 正式章节标题
+  counter_evidence:
+  - '`# 第五章：桥接类的高级用法` 带有明确的章节编号，确认为新章。'
+  keep_split: true
+- 'no': 8663
+  overturn_probability: 0.3
+  alternative: 重复编号的章节标题或排版错误
+  counter_evidence:
+  - 标题为 `# 第五章：桥接类与私有实现`，但前文已有 `# 第五章`（行 8633）。
+  - 规则指出“如果候选序号明显跳跃...只需要划分新的章节，无视其它”，且“序号连贯性”允许处理异常编号。
+  - 尽管编号重复，但语义上是新的主题块，且格式符合一级标题，倾向于维持分章以反映文档结构的变更，除非该重复被视为纯噪声。但在严格审查中，编号重复可能暗示这是同一章的子节被误标为一级标题，或者是文档结构混乱。考虑到内容确实不同（从高级用法转为私有实现），作为独立章节处理的风险较低，但存在被归并到上一个第五章的可能性。
+  keep_split: true
+- 'no': 8673
+  overturn_probability: 0.0
+  alternative: 正式章节标题
+  counter_evidence:
+  - '`# 第六章：Bridger 的限制与注意事项` 带有明确的章节编号，确认为新章。'
+  keep_split: true
+- 'no': 8717
+  overturn_probability: 0.1
+  alternative: 正文小标题或文档章节
+  counter_evidence:
+  - '`# 使用 async 和 await 进行异步编程` 是一级标题，主题明确，统领后续内容。'
+  keep_split: true
+- 'no': 8824
+  overturn_probability: 0.1
+  alternative: 正文小标题或文档章节
+  counter_evidence:
+  - '`# 函数示例` 是一级标题，虽内容较简短，但作为独立章节统领示例代码，符合格式特征。'
+  keep_split: true

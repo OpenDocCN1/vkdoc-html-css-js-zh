@@ -1,0 +1,73 @@
+chapter_starts:
+- 'no': 0
+  confidence: 0.9
+  final_reason: 书籍起始位置，包含封面及前言/版权信息，统一划分为一章。
+  accepted_evidence:
+  - 行0为封面图片，后续为版权信息、ISBN等前置内容
+  - 根据规则，前言、序言等正文之前的内容统一划分为一章
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 204
+  confidence: 0.95
+  final_reason: “作者简介”属于正文前的前置内容，按规则统一划分为一章。
+  accepted_evidence:
+  - 行204为“## 作者简介”，位于目录之后、第1章之前
+  - 前置内容通常作为独立章节处理
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 208
+  confidence: 0.95
+  final_reason: “关于技术审校者”属于正文前的前置内容，按规则统一划分为一章。
+  accepted_evidence:
+  - 行208为“## 关于技术审校者”，紧随作者简介之后
+  - 前置内容通常作为独立章节处理
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 212
+  confidence: 0.98
+  final_reason: “## 第 1 章”为最高层级章标题，且序号起始，后接正文内容。
+  accepted_evidence:
+  - 格式为Markdown二级标题，符合最高层级章节特征
+  - 行212后紧跟章节正文内容（行216“### 什么是性能”等）
+  - 前文（行204-211）为前置内容，逻辑上第1章应在此处开始
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 467
+  confidence: 0.98
+  final_reason: “## 第 2 章”为最高层级章标题，序号连贯。
+  accepted_evidence:
+  - 格式为Markdown二级标题，与第1章格式一致
+  - 前文（行447-466）为第1章的“本章小结”，符合章节结束特征
+  - 后文（行471）为第2章的具体小节标题，逻辑连贯
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 1342
+  confidence: 0.98
+  final_reason: “## 第 3 章”为最高层级章标题，序号连贯。
+  accepted_evidence:
+  - 格式为Markdown二级标题，与前几章格式一致
+  - 前文（行1328-1341）为第2章的“总结”，符合章节结束特征
+  - 后文（行1346）为第3章的具体小节标题，逻辑连贯
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 2118
+  confidence: 0.95
+  final_reason: “# 第四章”为最高层级章标题，序号连贯（中文数字），尽管格式略异但语义明确。
+  accepted_evidence:
+  - 行2118内容为“# 第四章”，语义明确指代第4章
+  - 前文（行2037-2117）为第3章的访谈部分，结束于第3章内容
+  - 后文（行2122）为“## perfLogger...”，是第4章的具体小节标题，逻辑上第4章在此开始
+  - 虽然使用一级标题且中文数字，但在缺乏其他候选时，此为唯一合理的第4章起始点
+  rejected_evidence:
+  - 复核方指出格式不一致（其他为## 第X章，此为# 第四章），但考虑到语义和上下文连贯性，仍判定为章标题
+  need_human_review: false
+- 'no': 2827
+  confidence: 0.98
+  final_reason: “## 第 5 章”为最高层级章标题，序号连贯。
+  accepted_evidence:
+  - 格式为Markdown二级标题，与第1、2、3章格式一致
+  - 前文（行2819-2826）为第4章的“总结”，符合章节结束特征
+  - 后文（行2831）为第5章的具体小节标题，逻辑连贯
+  rejected_evidence: []
+  need_human_review: false
+rejected_lines: []

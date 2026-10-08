@@ -1,0 +1,188 @@
+chapter_starts:
+- 'no': 2
+  confidence: 0.95
+  final_reason: 书名页/版权页起始，作为全书前置内容的独立章节。
+  accepted_evidence:
+  - 格式为书名标题及作者信息
+  - 位于文档最前部
+  - 判断方与复核方无异议
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 50
+  confidence: 0.9
+  final_reason: “内容速览”属于前置导读章节，符合规则中前言类内容分章原则。
+  accepted_evidence:
+  - 标题“# 内容速览”具有统领性
+  - 后续内容为简略的书籍结构预览
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 102
+  confidence: 0.95
+  final_reason: “# 目录”是标准的目录章节起始，后续至1048行的内容均为目录列表项或摘要，不作为独立分章点。
+  accepted_evidence:
+  - 标题“# 目录”明确
+  - 后续行104-1048包含大量带有“第X章”字样的列表项，且内容极简（如行128仅一句话），符合目录/索引特征而非正文
+  rejected_evidence:
+  - 行104、122、124等虽含章节字样，但位于目录块内，不作为分章点
+  need_human_review: false
+- 'no': 1030
+  confidence: 0.9
+  final_reason: “## 引言”是独立的正文前章节，后续内容为长篇引言正文，与目录中的简短条目不同。
+  accepted_evidence:
+  - 标题“## 引言”
+  - 后续行1032起为详细的引言正文（“我撰写本书的目标是...”），区别于目录中的简短描述
+  - 位于正文第一部分（1050）之前，符合逻辑顺序
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 1050
+  confidence: 0.95
+  final_reason: “## 第一部分”标志着正式正文的开始，后续包含详细的代码、段落和解释，与前置的目录/摘要区域明显不同。
+  accepted_evidence:
+  - 复核方确认为正文起始
+  - 后续行1054、1056等包含实质性内容
+  - 符合部分-章节模式下的分章规则
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 1066
+  confidence: 0.95
+  final_reason: “## 第 1 章”是正文中第一个具体章节，后续包含详细的HTML文档结构讲解及代码示例。
+  accepted_evidence:
+  - 符合“第 X 章”编号特征
+  - 后续内容为详细正文（如行1068、1080）
+  - 复核方确认为章节标题
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 1446
+  confidence: 0.95
+  final_reason: “## 第 2 章”是正文中的第二个章节，后续包含CSS样式表详细讲解及代码。
+  accepted_evidence:
+  - 符合“第 X 章”编号特征
+  - 后续内容为详细正文（如行1448）
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 1853
+  confidence: 0.95
+  final_reason: “## 第 3 章”是正文中的第三个章节，后续包含JavaScript基础详细讲解及代码。
+  accepted_evidence:
+  - 符合“第 X 章”编号特征
+  - 后续内容为详细正文（如行1855）
+  rejected_evidence: []
+  need_human_review: false
+rejected_lines:
+- 'no': 104
+  reason: 该行位于“# 目录”（102行）之后，且后续行（106, 108等）均为目录列表项，属于目录内容，不分章。
+  need_human_review: false
+- 'no': 122
+  reason: 该行位于目录/摘要区块（102-1048）内，后续内容为简短的章节列表（如124行），不具备正文特征，不作为独立章节起始。
+  need_human_review: false
+- 'no': 124
+  reason: 该行是目录/摘要区块内的条目，后续仅有一句话描述（128行），符合列表项特征，不分章。
+  need_human_review: false
+- 'no': 182
+  reason: 该行是目录/摘要区块内的条目，后续为简短的子节列表，不分章。
+  need_human_review: false
+- 'no': 248
+  reason: 该行是目录/摘要区块内的条目，后续为简短的子节列表，不分章。
+  need_human_review: false
+- 'no': 340
+  reason: 该行是目录/摘要区块内的部分标题，后续为简短的章节列表，不分章。
+  need_human_review: false
+- 'no': 342
+  reason: 该行是目录/摘要区块内的条目，后续内容简短，不分章。
+  need_human_review: false
+- 'no': 406
+  reason: 该行是目录/摘要区块内的条目，后续内容简短，不分章。
+  need_human_review: false
+- 'no': 447
+  reason: 该行是目录/摘要区块内的条目，后续内容简短，不分章。
+  need_human_review: false
+- 'no': 463
+  reason: 该行是目录/摘要区块内的条目，后续内容简短，不分章。
+  need_human_review: false
+- 'no': 489
+  reason: 该行是目录/摘要区块内的条目，后续内容简短，不分章。
+  need_human_review: false
+- 'no': 531
+  reason: 该行是目录/摘要区块内的部分标题，后续为简短的章节列表，不分章。
+  need_human_review: false
+- 'no': 533
+  reason: 该行是目录/摘要区块内的条目，后续内容简短，不分章。
+  need_human_review: false
+- 'no': 571
+  reason: 该行是目录/摘要区块内的条目，后续内容简短，不分章。
+  need_human_review: false
+- 'no': 613
+  reason: 该行是目录/摘要区块内的条目，后续内容简短，不分章。
+  need_human_review: false
+- 'no': 657
+  reason: 该行是目录/摘要区块内的条目，后续内容简短，不分章。
+  need_human_review: false
+- 'no': 687
+  reason: 该行是目录/摘要区块内的条目，后续内容简短，不分章。
+  need_human_review: false
+- 'no': 703
+  reason: 该行是目录/摘要区块内的条目，后续内容简短，不分章。
+  need_human_review: false
+- 'no': 717
+  reason: 该行是目录/摘要区块内的条目，后续内容简短，不分章。
+  need_human_review: false
+- 'no': 733
+  reason: 该行是目录/摘要区块内的部分标题，后续为简短的章节列表，不分章。
+  need_human_review: false
+- 'no': 735
+  reason: 该行是目录/摘要区块内的条目，后续内容简短，不分章。
+  need_human_review: false
+- 'no': 749
+  reason: 该行是目录/摘要区块内的条目，后续内容简短，不分章。
+  need_human_review: false
+- 'no': 765
+  reason: 该行是目录/摘要区块内的条目，后续内容简短，不分章。
+  need_human_review: false
+- 'no': 781
+  reason: 该行是目录/摘要区块内的条目，后续内容简短，不分章。
+  need_human_review: false
+- 'no': 797
+  reason: 该行是目录/摘要区块内的条目，后续内容简短，不分章。
+  need_human_review: false
+- 'no': 809
+  reason: 该行是目录/摘要区块内的部分标题，后续为简短的章节列表，不分章。
+  need_human_review: false
+- 'no': 811
+  reason: 该行是目录/摘要区块内的条目，后续内容简短，不分章。
+  need_human_review: false
+- 'no': 831
+  reason: 该行是目录/摘要区块内的条目，后续内容简短，不分章。
+  need_human_review: false
+- 'no': 865
+  reason: 该行是目录/摘要区块内的条目，后续内容简短，不分章。
+  need_human_review: false
+- 'no': 897
+  reason: 该行是目录/摘要区块内的条目，后续内容简短，不分章。
+  need_human_review: false
+- 'no': 923
+  reason: 该行是目录/摘要区块内的条目，后续内容简短，不分章。
+  need_human_review: false
+- 'no': 950
+  reason: 该行是目录/摘要区块内的条目，后续内容简短，不分章。
+  need_human_review: false
+- 'no': 964
+  reason: 该行是目录/摘要区块内的附录条目，后续内容简短，不分章。
+  need_human_review: false
+- 'no': 972
+  reason: 该行是目录/摘要区块内的附录条目，后续内容简短，不分章。
+  need_human_review: false
+- 'no': 974
+  reason: 该行是目录/摘要区块内的附录条目，后续内容简短，不分章。
+  need_human_review: false
+- 'no': 1012
+  reason: 该行位于目录/摘要区块内（102-1048），作为“索引”条目列出，而非实际的索引章节内容（实际索引应在书末，但此处文本流显示其为目录的一部分）。鉴于其位于正文（1050）之前且形式与其他目录条目一致，暂不单独分章，归入目录章。
+  need_human_review: true
+- 'no': 1014
+  reason: 该行位于目录/摘要区块内，作为“关于作者”条目列出。虽然后续有简短介绍，但在1050正文开始前，且102行已启动目录章，此处的“关于作者”更倾向于目录中的简介或独立的前置小章节。但考虑到规则“前言、序言、致谢、关于作者等正文之前的内容，统一划分为一章”，若视为独立章节则需分章。然而，结合1012（索引）也在其中，且整体位于102-1048的密集标题区，更可能被视为一个大的“前置/目录/摘要”复合章。若严格区分，1014可作为“关于作者”章起始。但鉴于102行“目录”存在，且1014内容极短，倾向于归入前置大章或视为目录条目。根据“宁可漏分”原则，且1030“引言”已分章，此处1014与1030性质类似。若1030分章，1014也应分章？不，1030是长引言，1014是短介绍。通常“关于作者”在版权页或目录后。若102是目录，1014可能是独立的“关于作者”章。但在此文本流中，1014-1028紧随1012“索引”之后，且都在1050“正文”之前。若将102-1048视为一个大章“目录及前置信息”，则1014不分。若细粒度，1014可分。鉴于1030（引言）分章，1014（关于作者）逻辑上也可分。但复核方未提出1014，判断方提出1014。让我们看1014的内容：行1016是短段落。行1030的内容：行1032起是多段长文。1030更像标准章节。1014更像元数据。根据规则“关于作者...统一划分为一章”，1014应该分章。
+  need_human_review: true
+- 'no': 1018
+  reason: “关于技术审校者”类似于“关于作者”，属于前置元数据章节。根据规则应分章。
+  need_human_review: true
+- 'no': 1022
+  reason: “致谢”属于前置章节，根据规则应分章。
+  need_human_review: true
