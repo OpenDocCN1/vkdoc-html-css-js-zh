@@ -14,7 +14,7 @@
 +   [10. 使用 JavaScript 进行各种类型的格式化](enhancing-adobe-acrobat-forms-with-javascript_14.md)
 +   [第三部分：处理更复杂的表单](enhancing-adobe-acrobat-forms-with-javascript_15.md)
 +   [11. 文本框、提示框和单选按钮的验证](enhancing-adobe-acrobat-forms-with-javascript_16.md)
-+   [第 12 章：使用下拉列表](enhancing-adobe-acrobat-forms-with-javascript_17.md)
++   [12. 使用下拉列表](enhancing-adobe-acrobat-forms-with-javascript_17.md)
 +   [13. 使用列表框](enhancing-adobe-acrobat-forms-with-javascript_18.md)
 +   [14. 高级导航：弹出菜单](enhancing-adobe-acrobat-forms-with-javascript_19.md)
 +   [第四部分：进阶内容](enhancing-adobe-acrobat-forms-with-javascript_20.md)
