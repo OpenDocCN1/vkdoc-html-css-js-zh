@@ -1,5 +1,5 @@
 +   [JavaScript ESP32 和 ESP8266 物联网开发教程](README.md)
-+   [入门指南](01_fmt.md)
++   [一、入门指南](01_fmt.md)
 +   [二、面向嵌入式 C 和 C++程序员的 JavaScript](02_fmt.md)
 +   [三、网络](03_fmt.md)
 +   [四、蓝牙低能耗（BLE）](04_fmt.md)
